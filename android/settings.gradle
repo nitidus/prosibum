@@ -1,0 +1,3 @@
+rootProject.name = 'prosibum'
+
+include ':app'
