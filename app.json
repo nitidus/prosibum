@@ -1,4 +1,5 @@
 {
-  "name": "prosibum",
-  "displayName": "Prosibum"
+  "alias": "prosibum",
+  "name": "distro",
+  "displayName": "Distro",
 }

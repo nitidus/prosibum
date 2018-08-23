@@ -39,9 +39,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSAppTransportSecurity</key>
-	<!--See http://ste.vn/2015/06/10/configuring-app-transport-security-ios-9-osx-10-11/ -->
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
@@ -52,5 +51,38 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-Pro-Display-Black.ttf</string>
+		<string>SF-Pro-Display-BlackItalic.ttf</string>
+		<string>SF-Pro-Display-Bold.ttf</string>
+		<string>SF-Pro-Display-BoldItalic.ttf</string>
+		<string>SF-Pro-Display-Heavy.ttf</string>
+		<string>SF-Pro-Display-HeavyItalic.ttf</string>
+		<string>SF-Pro-Display-Light.ttf</string>
+		<string>SF-Pro-Display-LightItalic.ttf</string>
+		<string>SF-Pro-Display-Medium.ttf</string>
+		<string>SF-Pro-Display-MediumItalic.ttf</string>
+		<string>SF-Pro-Display-Regular.ttf</string>
+		<string>SF-Pro-Display-RegularItalic.ttf</string>
+		<string>SF-Pro-Display-Semibold.ttf</string>
+		<string>SF-Pro-Display-SemiboldItalic.ttf</string>
+		<string>SF-Pro-Display-Thin.ttf</string>
+		<string>SF-Pro-Display-ThinItalic.ttf</string>
+		<string>SF-Pro-Display-Ultralight.ttf</string>
+		<string>SF-Pro-Display-UltralightItalic.ttf</string>
+		<string>SF-Pro-Text-Bold.ttf</string>
+		<string>SF-Pro-Text-BoldItalic.ttf</string>
+		<string>SF-Pro-Text-Heavy.ttf</string>
+		<string>SF-Pro-Text-HeavyItalic.ttf</string>
+		<string>SF-Pro-Text-Light.ttf</string>
+		<string>SF-Pro-Text-LightItalic.ttf</string>
+		<string>SF-Pro-Text-Medium.ttf</string>
+		<string>SF-Pro-Text-MediumItalic.ttf</string>
+		<string>SF-Pro-Text-Regular.ttf</string>
+		<string>SF-Pro-Text-RegularItalic.ttf</string>
+		<string>SF-Pro-Text-Semibold.ttf</string>
+		<string>SF-Pro-Text-SemiboldItalic.ttf</string>
+	</array>
 </dict>
 </plist>
