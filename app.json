@@ -2,4 +2,25 @@
   "alias": "prosibum",
   "name": "distro",
   "displayName": "Distro",
+  "content": {
+    "pages": {
+      "authorization": {
+        "login": {
+          "name": {
+            "en": "Login"
+          },
+          "content": {
+            "headline": {
+              "title": {
+                "en": "Welcome"
+              },
+              "subtitle": {
+                "en": "Please login to\nyour account."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

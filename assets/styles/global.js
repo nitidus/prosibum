@@ -13,7 +13,8 @@ module.exports = {
       lavenderGray: '#BBBCC5',
       mercury: '#E2E2E2',
       wildSand: '#F2F2F2',
-      romance: '#FDFDFD'
+      romance: '#FDFDFD',
+      transparent: 'transparent'
     },
     pair: {
       ongerine: { //Tenth

@@ -35,6 +35,15 @@ const RootStack = createSwitchNavigator(
 
 type Props = {};
 
+// function setHeadline(payload){
+//   return {
+//     type: 'HEADLINE/SET',
+//     payload
+//   }
+// }
+// store.dispatch(setHeadline({title: 'help', subtitle: 'me'}))
+console.log(store.getState('COMPONENTS'))
+
 export default class App extends Component<Props> {
   render() {
     return (

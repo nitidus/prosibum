@@ -8,7 +8,7 @@ import Certification from './views/authentication/certification';
 /*** Modules ***/
 
 //Components
-// import Components from './modules/components';
+import Components from './modules/components';
 
 module.exports = {
   Global: Global,
@@ -17,7 +17,7 @@ module.exports = {
       Certification: Certification
     }
   },
-  // Modules: {
-    // Components: Components
-  // }
+  Modules: {
+    Components: Components
+  }
 };

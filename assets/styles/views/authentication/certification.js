@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { colors, fonts } from '../../global';
-console.log(fonts.sanFrancisco.textHeavy)
+
 module.exports = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: colors.single.blackSqueeze
+    backgroundColor: colors.single.blackSqueeze,
+    alignItems: 'center'
   },
-  helloWorld: {
-    fontFamily: fonts.sanFrancisco.textHeavy,
-    fontSize: 24,
-    color: colors.single.rangoonGreen
+  Content: {
+    width: 311
+  },
+  Headline: {
+    marginTop: 239
+  },
+  firstInput: {
+    marginTop: 44
   }
 });
