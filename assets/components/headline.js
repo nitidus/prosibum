@@ -19,6 +19,10 @@ class Headline extends Component<{}> {
 
   }
 
+  componentWillReceiveProps(props) {
+
+  }
+
   componentWillMount() {
     const { props } = this;
 
@@ -32,7 +36,10 @@ class Headline extends Component<{}> {
 
       if (typeof localState.style == 'object' && Array.isArray(localState.style)){
         localState.style = localState.style.reduce((total, item) => {
-          total.concat(itam);
+          return {
+            ...total,
+            ...item
+          };
         })
       }
     }else{
@@ -59,7 +66,11 @@ class Headline extends Component<{}> {
 
 Headline.propTypes = {
   title: PropTypes.string,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
+  style: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.object)
+  ])
 };
 
 export default Headline;

@@ -1,7 +1,8 @@
 import Headline from './headline';
-import Input from './input';
+import { Input, InputGroup } from './input';
 
 module.exports = {
   Headline,
-  Input
+  Input,
+  InputGroup
 };

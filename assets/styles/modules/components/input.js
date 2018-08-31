@@ -45,6 +45,40 @@ module.exports = StyleSheet.create({
     paddingVertical: 20,
     height: 59
   },
+  InnerInputContainer: {
+    color: colors.single.rangoonGreen,
+    fontFamily: fonts.sanFrancisco.textBold,
+    fontSize: 18,
+    height: 59,
+    borderWidth: 0,
+    borderColor: colors.single.mercury,
+    backgroundColor: colors.single.romance,
+    borderRadius: 0
+  },
+  MasterContainer: {
+    borderWidth: 2,
+    borderColor: colors.single.mercury,
+    backgroundColor: colors.single.romance,
+    borderRadius: 5,
+    overflow: 'hidden'
+  },
+  ButtonContainer: {
+    borderRadius: 5,
+    height: 59,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  GradientTypeButtonContainer: {
+
+  },
+  RegularTypeButtonContainer: {
+    backgroundColor: colors.single.chetwodeBlue
+  },
+  ButtonTitle: {
+    color: colors.single.rangoonGreen,
+    fontFamily: fonts.sanFrancisco.textBold,
+    fontSize: 18
+  },
   RTL: {
     direction: 'rtl',
     textAlign: 'right'

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StatusBar, View, TouchableHighlight, Text, Animated, Easing } from 'react-native';
+import { StatusBar, View } from 'react-native';
 
 import { Global, Views } from '../../assets/styles/index';
 
-import { Headline, Input } from '../../assets/components/index';
+import { Headline, Input, InputGroup } from '../../assets/components/index';
 
 import { content as target } from '../../app.json';
 
@@ -16,6 +16,10 @@ export default class Authentication extends Component<{}> {
   };
 
   componentDidMount() {
+
+  }
+
+  componentWillReceiveProps(props) {
 
   }
 
@@ -34,12 +38,28 @@ export default class Authentication extends Component<{}> {
             title={Contents.headline.title.en}
             subtitle={Contents.headline.subtitle.en} />
 
+          <InputGroup
+            style={Styles.InputGroup}>
+            <Input
+              type="EMAIL"
+              name="email"
+              placeholder="Email" />
+            <Input
+              type="PASSWORD-LINK"
+              name="password"
+              placeholder="Password"
+              link="Forgot it?"
+              onPress={() => {
+                alert('ok')
+              }} />
+          </InputGroup>
+
           <Input
-            style={Styles.firstInput}
-            type="TEXT"
-            name="password"
-            placeholder="Password"
-            link="Forgot it?"
+            style={Styles.SubmitButton}
+            type="BUTTON"
+            name="signin"
+            value="Sign In"
+            gradient={Global.colors.pair.ongerine}
             onPress={() => {
               alert('ok')
             }} />

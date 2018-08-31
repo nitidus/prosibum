@@ -15,7 +15,10 @@ module.exports = StyleSheet.create({
   Headline: {
     marginTop: 239
   },
-  firstInput: {
+  InputGroup: {
     marginTop: 44
+  },
+  SubmitButton: {
+    marginTop: 15
   }
 });
