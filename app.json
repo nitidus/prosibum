@@ -17,6 +17,110 @@
               "subtitle": {
                 "en": "Please login to\nyour account."
               }
+            },
+            "inputGroup": {
+              "email": {
+                "placeholder": {
+                  "en": "Email"
+                }
+              },
+              "passwordLink": {
+                "placeholder": {
+                  "en": "Password"
+                },
+                "link": {
+                  "en": "Forgot it?"
+                }
+              }
+            },
+            "submitButton": {
+              "value": {
+                "en": "Sign In"
+              }
+            },
+            "quickLink": {
+              "value": {
+                "en": "Don't have an account?"
+              }
+            }
+          }
+        },
+        "signup": {
+          "name": {
+            "en": "Signup"
+          },
+          "content": {
+            "headline": {
+              "title": {
+                "en": "Dear User"
+              },
+              "subtitle": {
+                "en": "Please enter your\nuser accoun details."
+              }
+            },
+            "firstInputGroup": {
+              "firstName": {
+                "placeholder": {
+                  "en": "First Name"
+                }
+              },
+              "lastName": {
+                "placeholder": {
+                  "en": "Last Name"
+                }
+              }
+            },
+            "secondInputGroup": {
+              "phoneNumber": {
+                "placeholder": {
+                  "en": "Phone Number"
+                }
+              },
+              "email": {
+                "placeholder": {
+                  "en": "Email"
+                }
+              },
+              "password": {
+                "placeholder": {
+                  "en": "Password"
+                }
+              }
+            },
+            "submitButton": {
+              "value": {
+                "en": "Signup"
+              }
+            },
+            "quickLink": {
+              "value": {
+                "en": "Already have an account?"
+              }
+            }
+          }
+        },
+        "forgottenPassword": {
+          "name": {
+            "en": "Forgotten Password"
+          },
+          "content": {
+            "headline": {
+              "title": {
+                "en": "Dear User"
+              },
+              "subtitle": {
+                "en": "To change your password\nuse the form below."
+              }
+            },
+            "submitButton": {
+              "value": {
+                "en": "Send"
+              }
+            },
+            "quickLink": {
+              "value": {
+                "en": "Remember your password?"
+              }
             }
           }
         }

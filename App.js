@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import getStore from './assets/flows/states/reducer';
-import {
-  createSwitchNavigator,
-  createStackNavigator
-} from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 
 import {
-  HomeScreen,
-  AuthenticationScreen,
-  AuthorizationScreen
-} from './views/index'
+ DashboardScreen,
+ LoginScreen, SignupScreen, ForgottenPasswordScreen,
+ AuthorizationScreen
+ } from './views/index'
 
 const store = getStore();
 
 const ProfileStack = createStackNavigator({
-  Home: HomeScreen
+  Dashboard: DashboardScreen
 });
 
 const AuthenticationStack = createStackNavigator({
-  Authentication: AuthenticationScreen
+  Login: LoginScreen,
+  Signup: SignupScreen,
+  ForgottenPassword: ForgottenPasswordScreen
 });
 
 const RootStack = createSwitchNavigator(
@@ -33,8 +32,6 @@ const RootStack = createSwitchNavigator(
   }
 );
 
-type Props = {};
-
 // function setHeadline(payload){
 //   return {
 //     type: 'HEADLINE/SET',
@@ -42,9 +39,8 @@ type Props = {};
 //   }
 // }
 // store.dispatch(setHeadline({title: 'help', subtitle: 'me'}))
-console.log(store.getState('COMPONENTS'))
 
-export default class App extends Component<Props> {
+export default class App extends Component<> {
   render() {
     return (
       <Provider store={store}>

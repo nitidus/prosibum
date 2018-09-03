@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 
 import { View, Text, Animated, Easing } from 'react-native';
 
-import {
-  Global,
-  Modules
-} from '../../assets/styles/index';
+import { Global, Modules } from '../styles/index';
 
 const Styles = Modules.Components.Headline;
 

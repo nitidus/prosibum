@@ -3,14 +3,14 @@ import { StatusBar, View } from 'react-native';
 
 import { Global, Views } from '../../assets/styles/index';
 
-import { Headline, Input, InputGroup } from '../../assets/components/index';
+import { Headline, Input, InputGroup, Link } from '../../assets/components/index';
 
 import { content as target } from '../../app.json';
 
 const Contents = target.pages.authorization.login.content;
-const Styles = Views.Authentication.Certification;
+const Styles = Views.Authentication.Login;
 
-export default class Authentication extends Component<{}> {
+export default class Login extends Component<{}> {
   static navigationOptions = {
     header: null
   };
@@ -25,6 +25,12 @@ export default class Authentication extends Component<{}> {
 
   componentWillMount() {
 
+  }
+
+  _navigateToSignupPage() {
+    const { navigation } = this.props;
+
+    navigation.navigate('Signup');
   }
 
   render() {
@@ -43,14 +49,16 @@ export default class Authentication extends Component<{}> {
             <Input
               type="EMAIL"
               name="email"
-              placeholder="Email" />
+              placeholder={Contents.inputGroup.email.placeholder.en} />
             <Input
               type="PASSWORD-LINK"
               name="password"
-              placeholder="Password"
-              link="Forgot it?"
+              placeholder={Contents.inputGroup.passwordLink.placeholder.en}
+              link={Contents.inputGroup.passwordLink.link.en}
               onPress={() => {
-                alert('ok')
+                const { navigation } = this.props;
+
+                navigation.navigate('ForgottenPassword');
               }} />
           </InputGroup>
 
@@ -58,10 +66,19 @@ export default class Authentication extends Component<{}> {
             style={Styles.SubmitButton}
             type="BUTTON"
             name="signin"
-            value="Sign In"
+            value={Contents.submitButton.value.en}
             gradient={Global.colors.pair.ongerine}
             onPress={() => {
               alert('ok')
+            }} />
+
+          <Link
+            containerStyle={Styles.QuickLink}
+            value={Contents.quickLink.value.en}
+            onPress={() => {
+              const { navigation } = this.props;
+
+              navigation.navigate('Signup');
             }} />
         </View>
       </View>

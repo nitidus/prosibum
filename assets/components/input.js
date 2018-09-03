@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { StatusBar, View, TouchableHighlight, TextInput, Text, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, TextInput, Text, Animated, Easing } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
-import {
-  Global,
-  Modules
-} from '../../assets/styles/index';
+import Link from './link';
+import { Global, Modules } from '../styles/index';
 
 const Styles = Modules.Components.Input;
 
@@ -164,24 +162,20 @@ class Input extends Component<{}> {
               Styles.ContainerWithButton,
               state.style
             ]}>
-            <TextInput
-              style={[
-                Styles.TextInputConatiner,
-                { width: '72%' }
-              ]}
-              placeholder={state.placeholder}
-              placeholderTextColor={Global.colors.single.mercury}
-              selectionColor={Global.colors.single.mercury}
-              underlineColorAndroid={Global.colors.single.transparent} />
-            <TouchableHighlight
-              style={Styles.RTL_TextInputLinkContainer}
-              underlayColor={Global.colors.single.transparent}
-              onPress={state.onPress}>
-                <Text
-                  style={Styles.TextInputLink}>
-                    {state.link}
-                </Text>
-            </TouchableHighlight>
+              <TextInput
+                style={[
+                  Styles.TextInputConatiner,
+                  { width: '72%' }
+                ]}
+                placeholder={state.placeholder}
+                placeholderTextColor={Global.colors.single.mercury}
+                selectionColor={Global.colors.single.mercury}
+                underlineColorAndroid={Global.colors.single.transparent} />
+              <Link
+                containerStyle={Styles.RTL_TextInputLinkContainer}
+                style={Styles.TextInputLink}
+                value={state.link}
+                onPress={state.onPress} />
           </View>
         )
         break;
@@ -194,26 +188,22 @@ class Input extends Component<{}> {
               Styles.ContainerWithButton,
               state.style
             ]}>
-            <TextInput
-              style={[
-                Styles.TextInputConatiner,
-                { width: '72%' }
-              ]}
-              autoCapitalize="none"
-              keyboardType="email-address"
-              placeholder={state.placeholder}
-              placeholderTextColor={Global.colors.single.mercury}
-              selectionColor={Global.colors.single.mercury}
-              underlineColorAndroid={Global.colors.single.transparent} />
-            <TouchableHighlight
-              style={Styles.RTL_TextInputLinkContainer}
-              underlayColor={Global.colors.single.transparent}
-              onPress={state.onPress}>
-                <Text
-                  style={Styles.TextInputLink}>
-                    {state.link}
-                </Text>
-            </TouchableHighlight>
+              <TextInput
+                style={[
+                  Styles.TextInputConatiner,
+                  { width: '72%' }
+                ]}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                placeholder={state.placeholder}
+                placeholderTextColor={Global.colors.single.mercury}
+                selectionColor={Global.colors.single.mercury}
+                underlineColorAndroid={Global.colors.single.transparent} />
+              <Link
+                containerStyle={Styles.RTL_TextInputLinkContainer}
+                style={Styles.TextInputLink}
+                value={state.link}
+                onPress={state.onPress} />
           </View>
         )
         break;
@@ -226,26 +216,22 @@ class Input extends Component<{}> {
               Styles.ContainerWithButton,
               state.style
             ]}>
-            <TextInput
-              style={[
-                Styles.TextInputConatiner,
-                { width: '72%' }
-              ]}
-              autoCapitalize="none"
-              secureTextEntry={true}
-              placeholder={state.placeholder}
-              placeholderTextColor={Global.colors.single.mercury}
-              selectionColor={Global.colors.single.mercury}
-              underlineColorAndroid={Global.colors.single.transparent} />
-            <TouchableHighlight
-              style={Styles.RTL_TextInputLinkContainer}
-              underlayColor={Global.colors.single.transparent}
-              onPress={state.onPress}>
-                <Text
-                  style={Styles.TextInputLink}>
-                    {state.link}
-                </Text>
-            </TouchableHighlight>
+              <TextInput
+                style={[
+                  Styles.TextInputConatiner,
+                  { width: '72%' }
+                ]}
+                autoCapitalize="none"
+                secureTextEntry={true}
+                placeholder={state.placeholder}
+                placeholderTextColor={Global.colors.single.mercury}
+                selectionColor={Global.colors.single.mercury}
+                underlineColorAndroid={Global.colors.single.transparent} />
+              <Link
+                containerStyle={Styles.RTL_TextInputLinkContainer}
+                style={Styles.TextInputLink}
+                value={state.link}
+                onPress={state.onPress} />
           </View>
         )
         break;
@@ -270,31 +256,31 @@ class Input extends Component<{}> {
 
           return (
             <LinearGradient
+              key={state.key}
               style={[
                 Styles.ButtonContainer,
                 state.style
               ]}
               start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
               colors={restructredRange}>
-                <TouchableHighlight
-                  underlayColor={Global.colors.single.transparent}
+                <TouchableOpacity
                   onPress={state.onPress}>
                     {buttonContent}
-                </TouchableHighlight>
+                </TouchableOpacity>
             </LinearGradient>
           );
         }else{
           return (
-            <TouchableHighlight
+            <TouchableOpacity
+              key={state.key}
               style={[
                 Styles.ButtonContainer,
                 Styles.RegularTypeButtonContainer,
                 state.style
               ]}
-              underlayColor={Global.colors.single.transparent}
               onPress={state.onPress}>
                 {buttonContent}
-            </TouchableHighlight>
+            </TouchableOpacity>
           );
         }
         break;
@@ -307,7 +293,8 @@ Input.propTypes = {
     'TEXT', 'EMAIL', 'NUMERIC', 'PASSWORD',
     'LINK', 'TEXT-LINK', 'EMAIL-LINK', 'NUMERIC-LINK', 'PASSWORD-LINK',
     'BUTTON'
-  ]),
+  ]).isRequired,
+  key: PropTypes.string,
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   link: PropTypes.string,

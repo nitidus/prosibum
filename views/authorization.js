@@ -10,16 +10,17 @@ export default class Authorization extends Component<{}> {
     this._checkAuthority();
   }
 
-  _checkAuthority = async () => {
-    const userAuthorizationToken = await AsyncStorage.getItem('AuthorizationToken');
+  async _checkAuthority() {
+    const { navigation } = this.props,
+          userAuthorizationToken = await AsyncStorage.getItem('AuthorizationToken');
 
-    this.props.navigation.navigate(userAuthorizationToken? 'Profile': 'Authentication')
+    navigation.navigate(userAuthorizationToken? 'Profile': 'Authentication');
   }
 
   render() {
     return (
       <View>
-        <Text>Autherization!!!!!!!!!</Text>
+        <Text>Authorization!!!!!!!!!</Text>
       </View>
     )
   }

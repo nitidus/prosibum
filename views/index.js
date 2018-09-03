@@ -1,9 +1,15 @@
-import Home from './profile/home';
-import Authentication from './authentication/certification';
+import Dashboard from './profile/dashboard';
+
+import Login from './authentication/login';
+import Signup from './authentication/signup';
+import ForgottenPassword from './authentication/forgotten-password';
+
 import Authorization from './authorization';
 
 module.exports = {
-  HomeScreen: Home,
-  AuthenticationScreen: Authentication,
+  DashboardScreen: Dashboard,
+  LoginScreen: Login,
+  SignupScreen: Signup,
+  ForgottenPasswordScreen: ForgottenPassword,
   AuthorizationScreen: Authorization
 };

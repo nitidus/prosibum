@@ -3,7 +3,9 @@ import Global from './global';
 /*** Views ***/
 
 //Authentication
-import Certification from './views/authentication/certification';
+import Login from './views/authentication/login';
+import Signup from './views/authentication/signup';
+import ForgottenPassword from './views/authentication/forgotten-password';
 
 /*** Modules ***/
 
@@ -14,10 +16,12 @@ module.exports = {
   Global: Global,
   Views: {
     Authentication: {
-      Certification: Certification
+      Login,
+      Signup,
+      ForgottenPassword
     }
   },
   Modules: {
-    Components: Components
+    Components
   }
 };

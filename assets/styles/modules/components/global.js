@@ -6,9 +6,12 @@ import {
 } from '../../global';
 
 module.exports = StyleSheet.create({
-  TextInputLink: {
-    fontFamily: fonts.sanFrancisco.textBold,
-    color: colors.single.lavenderGray,
-    fontSize: 16
+  RTL: {
+    direction: 'rtl',
+    textAlign: 'right'
   },
+  LTR: {
+    direction: 'ltr',
+    textAlign: 'left'
+  }
 });

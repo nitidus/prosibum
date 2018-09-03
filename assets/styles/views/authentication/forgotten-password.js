@@ -10,15 +10,24 @@ module.exports = StyleSheet.create({
     alignItems: 'center'
   },
   Content: {
+    position: 'absolute',
+    bottom: 0,
     width: 311
   },
   Headline: {
-    marginTop: 239
+    marginTop: 47
   },
-  InputGroup: {
+  Segment: {
     marginTop: 44
+  },
+  SecondInputGroup: {
+    marginTop: 15
   },
   SubmitButton: {
     marginTop: 15
+  },
+  QuickLink: {
+    marginVertical: 38,
+    alignItems: 'center'
   }
 });

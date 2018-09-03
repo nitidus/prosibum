@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -333,6 +334,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = RCTLinking;
 		};
+		7A77BA91213C3C2A00ED8911 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5AD0DFFC1054E48A1D82BAA /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = BVLinearGradient;
+		};
+		7A77BA93213C3C2A00ED8911 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5AD0DFFC1054E48A1D82BAA /* BVLinearGradient.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 64AA15081EF7F30100718508;
+			remoteInfo = "BVLinearGradient-tvOS";
+		};
 		832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
@@ -370,53 +385,53 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = prosibum/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		15FE865ADB863615A1AFA2AB /* Pods-prosibum-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum-tvOSTests/Pods-prosibum-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		1E8BA7A866204C7DB42B7CCA /* SF-Pro-Display-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Semibold.ttf"; path = "../assets/fonts/SF-Pro-Display-Semibold.ttf"; sourceTree = "<group>"; };
+		1E8BA7A866204C7DB42B7CCA /* SF-Pro-Display-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Semibold.ttf"; path = "../assets/fonts/SF-Pro-Display-Semibold.ttf"; sourceTree = "<group>"; };
 		203659A771854461211CF157 /* Pods-prosibum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum.release.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum/Pods-prosibum.release.xcconfig"; sourceTree = "<group>"; };
-		2069C08EAA92417B8E83A73C /* SF-Pro-Display-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-MediumItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-MediumItalic.ttf"; sourceTree = "<group>"; };
-		2092B21CDF9B4E558DD59428 /* SF-Pro-Text-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Heavy.ttf"; path = "../assets/fonts/SF-Pro-Text-Heavy.ttf"; sourceTree = "<group>"; };
+		2069C08EAA92417B8E83A73C /* SF-Pro-Display-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-MediumItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-MediumItalic.ttf"; sourceTree = "<group>"; };
+		2092B21CDF9B4E558DD59428 /* SF-Pro-Text-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Heavy.ttf"; path = "../assets/fonts/SF-Pro-Text-Heavy.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* prosibum-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "prosibum-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* prosibum-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "prosibum-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D6E74DED4284BD38943FE18 /* SF-Pro-Display-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Black.ttf"; path = "../assets/fonts/SF-Pro-Display-Black.ttf"; sourceTree = "<group>"; };
-		31673A78277040EA9CBA5102 /* SF-Pro-Display-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-ThinItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-ThinItalic.ttf"; sourceTree = "<group>"; };
-		3D6A30E08F434E66ADE9EF86 /* SF-Pro-Display-UltralightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-UltralightItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-UltralightItalic.ttf"; sourceTree = "<group>"; };
-		3DC5D2114D50418AA99B9E5E /* SF-Pro-Display-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Bold.ttf"; path = "../assets/fonts/SF-Pro-Display-Bold.ttf"; sourceTree = "<group>"; };
-		5529EED3D535455E81E66A9B /* SF-Pro-Text-SemiboldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-SemiboldItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		2D6E74DED4284BD38943FE18 /* SF-Pro-Display-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Black.ttf"; path = "../assets/fonts/SF-Pro-Display-Black.ttf"; sourceTree = "<group>"; };
+		31673A78277040EA9CBA5102 /* SF-Pro-Display-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-ThinItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-ThinItalic.ttf"; sourceTree = "<group>"; };
+		3D6A30E08F434E66ADE9EF86 /* SF-Pro-Display-UltralightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-UltralightItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-UltralightItalic.ttf"; sourceTree = "<group>"; };
+		3DC5D2114D50418AA99B9E5E /* SF-Pro-Display-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Bold.ttf"; path = "../assets/fonts/SF-Pro-Display-Bold.ttf"; sourceTree = "<group>"; };
+		5529EED3D535455E81E66A9B /* SF-Pro-Text-SemiboldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-SemiboldItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		5769610493253A7BEE2F87DE /* Pods-prosibum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum/Pods-prosibum.debug.xcconfig"; sourceTree = "<group>"; };
-		579440E7DB0E4AE6A216F868 /* SF-Pro-Display-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-BoldItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-BoldItalic.ttf"; sourceTree = "<group>"; };
-		596789CD4183493D94BD1AFB /* SF-Pro-Display-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Thin.ttf"; path = "../assets/fonts/SF-Pro-Display-Thin.ttf"; sourceTree = "<group>"; };
+		579440E7DB0E4AE6A216F868 /* SF-Pro-Display-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-BoldItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-BoldItalic.ttf"; sourceTree = "<group>"; };
+		596789CD4183493D94BD1AFB /* SF-Pro-Display-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Thin.ttf"; path = "../assets/fonts/SF-Pro-Display-Thin.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		649DF8297EE74E40A8B2A1AE /* SF-Pro-Text-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-BoldItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-BoldItalic.ttf"; sourceTree = "<group>"; };
-		6BE5FC9293434C5AA9245617 /* SF-Pro-Text-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-MediumItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-MediumItalic.ttf"; sourceTree = "<group>"; };
+		649DF8297EE74E40A8B2A1AE /* SF-Pro-Text-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-BoldItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-BoldItalic.ttf"; sourceTree = "<group>"; };
+		6BE5FC9293434C5AA9245617 /* SF-Pro-Text-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-MediumItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-MediumItalic.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		82E7A7C80A6242BB95D6C684 /* SF-Pro-Text-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Bold.ttf"; path = "../assets/fonts/SF-Pro-Text-Bold.ttf"; sourceTree = "<group>"; };
+		82E7A7C80A6242BB95D6C684 /* SF-Pro-Text-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Bold.ttf"; path = "../assets/fonts/SF-Pro-Text-Bold.ttf"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		840353414F5F45C991F8AF68 /* SF-Pro-Display-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Medium.ttf"; path = "../assets/fonts/SF-Pro-Display-Medium.ttf"; sourceTree = "<group>"; };
+		840353414F5F45C991F8AF68 /* SF-Pro-Display-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Medium.ttf"; path = "../assets/fonts/SF-Pro-Display-Medium.ttf"; sourceTree = "<group>"; };
 		841BD9690D2ADD001E936773 /* libPods-prosibum-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-prosibum-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8EB18D566A624C53B8A1CEB1 /* SF-Pro-Display-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-LightItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-LightItalic.ttf"; sourceTree = "<group>"; };
+		8EB18D566A624C53B8A1CEB1 /* SF-Pro-Display-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-LightItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-LightItalic.ttf"; sourceTree = "<group>"; };
 		8EDC13E8A8F75C1DFEE04EA7 /* Pods-prosibumTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibumTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-prosibumTests/Pods-prosibumTests.release.xcconfig"; sourceTree = "<group>"; };
-		90655498794A442D85F386DC /* SF-Pro-Text-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Regular.ttf"; path = "../assets/fonts/SF-Pro-Text-Regular.ttf"; sourceTree = "<group>"; };
-		988CDB6AB1194BC1947FF291 /* SF-Pro-Text-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Semibold.ttf"; path = "../assets/fonts/SF-Pro-Text-Semibold.ttf"; sourceTree = "<group>"; };
-		9F72FA0FA0BC4D62993AF58F /* SF-Pro-Text-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-RegularItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-RegularItalic.ttf"; sourceTree = "<group>"; };
+		90655498794A442D85F386DC /* SF-Pro-Text-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Regular.ttf"; path = "../assets/fonts/SF-Pro-Text-Regular.ttf"; sourceTree = "<group>"; };
+		988CDB6AB1194BC1947FF291 /* SF-Pro-Text-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Semibold.ttf"; path = "../assets/fonts/SF-Pro-Text-Semibold.ttf"; sourceTree = "<group>"; };
+		9F72FA0FA0BC4D62993AF58F /* SF-Pro-Text-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-RegularItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-RegularItalic.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		B36626ADEE2946F2AE9EEBF7 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = archive.ar; name = libBVLinearGradient.a; path = libBVLinearGradient.a; sourceTree = "<group>"; };
-		BCCB6DE655F74BF9A8F368AF /* SF-Pro-Display-HeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-HeavyItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-HeavyItalic.ttf"; sourceTree = "<group>"; };
-		C0A04816EFD34DB4851ED0DC /* SF-Pro-Text-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Light.ttf"; path = "../assets/fonts/SF-Pro-Text-Light.ttf"; sourceTree = "<group>"; };
-		C229B27E1DE84B1C9081CBF4 /* SF-Pro-Display-Ultralight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Ultralight.ttf"; path = "../assets/fonts/SF-Pro-Display-Ultralight.ttf"; sourceTree = "<group>"; };
-		C50087DB7E314289A302D4CE /* SF-Pro-Display-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Regular.ttf"; path = "../assets/fonts/SF-Pro-Display-Regular.ttf"; sourceTree = "<group>"; };
+		B36626ADEE2946F2AE9EEBF7 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = "<group>"; };
+		BCCB6DE655F74BF9A8F368AF /* SF-Pro-Display-HeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-HeavyItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-HeavyItalic.ttf"; sourceTree = "<group>"; };
+		C0A04816EFD34DB4851ED0DC /* SF-Pro-Text-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Light.ttf"; path = "../assets/fonts/SF-Pro-Text-Light.ttf"; sourceTree = "<group>"; };
+		C229B27E1DE84B1C9081CBF4 /* SF-Pro-Display-Ultralight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Ultralight.ttf"; path = "../assets/fonts/SF-Pro-Display-Ultralight.ttf"; sourceTree = "<group>"; };
+		C50087DB7E314289A302D4CE /* SF-Pro-Display-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Regular.ttf"; path = "../assets/fonts/SF-Pro-Display-Regular.ttf"; sourceTree = "<group>"; };
 		C7317CA3C84192174F21ED1C /* Pods-prosibumTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibumTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-prosibumTests/Pods-prosibumTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CCD23984201A41E09836A590 /* SF-Pro-Text-HeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-HeavyItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-HeavyItalic.ttf"; sourceTree = "<group>"; };
-		D2C5CC88E5AE4F7FAAFB48E6 /* SF-Pro-Text-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Medium.ttf"; path = "../assets/fonts/SF-Pro-Text-Medium.ttf"; sourceTree = "<group>"; };
+		CCD23984201A41E09836A590 /* SF-Pro-Text-HeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-HeavyItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-HeavyItalic.ttf"; sourceTree = "<group>"; };
+		D2C5CC88E5AE4F7FAAFB48E6 /* SF-Pro-Text-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Medium.ttf"; path = "../assets/fonts/SF-Pro-Text-Medium.ttf"; sourceTree = "<group>"; };
 		D7B2459EDF8E92EF747FD901 /* libPods-prosibum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-prosibum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD4D9043C74F4F118599A78C /* SF-Pro-Display-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Light.ttf"; path = "../assets/fonts/SF-Pro-Display-Light.ttf"; sourceTree = "<group>"; };
-		DFCDF62FFCF4490DB664DD98 /* SF-Pro-Display-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Heavy.ttf"; path = "../assets/fonts/SF-Pro-Display-Heavy.ttf"; sourceTree = "<group>"; };
+		DD4D9043C74F4F118599A78C /* SF-Pro-Display-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Light.ttf"; path = "../assets/fonts/SF-Pro-Display-Light.ttf"; sourceTree = "<group>"; };
+		DFCDF62FFCF4490DB664DD98 /* SF-Pro-Display-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Heavy.ttf"; path = "../assets/fonts/SF-Pro-Display-Heavy.ttf"; sourceTree = "<group>"; };
 		E5EF6DC4686B3EE92F963B66 /* libPods-prosibumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-prosibumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2AF2A3860947033C528E1F /* Pods-prosibum-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum-tvOSTests/Pods-prosibum-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		EC31182A7E3144198AD38648 /* SF-Pro-Display-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-RegularItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-RegularItalic.ttf"; sourceTree = "<group>"; };
-		ECCEA5A8BFCD4254A24F9ABE /* SF-Pro-Display-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-BlackItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-BlackItalic.ttf"; sourceTree = "<group>"; };
-		F3C5D85E4F7E445A982F03B8 /* SF-Pro-Text-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-LightItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-LightItalic.ttf"; sourceTree = "<group>"; };
-		F5AD0DFFC1054E48A1D82BAA /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
-		FC43B67EF21C4C47A580B380 /* SF-Pro-Display-SemiboldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-SemiboldItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		EC31182A7E3144198AD38648 /* SF-Pro-Display-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-RegularItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-RegularItalic.ttf"; sourceTree = "<group>"; };
+		ECCEA5A8BFCD4254A24F9ABE /* SF-Pro-Display-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-BlackItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-BlackItalic.ttf"; sourceTree = "<group>"; };
+		F3C5D85E4F7E445A982F03B8 /* SF-Pro-Text-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-LightItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-LightItalic.ttf"; sourceTree = "<group>"; };
+		F5AD0DFFC1054E48A1D82BAA /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
+		FC43B67EF21C4C47A580B380 /* SF-Pro-Display-SemiboldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-SemiboldItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -623,6 +638,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7A77BA67213C3C2800ED8911 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B36626ADEE2946F2AE9EEBF7 /* libBVLinearGradient.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		7A77BA8D213C3C2A00ED8911 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A77BA92213C3C2A00ED8911 /* libBVLinearGradient.a */,
+				7A77BA94213C3C2A00ED8911 /* libBVLinearGradient.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +694,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				CED450D0BC304D8D91A27D76 /* Resources */,
 				F61C5ED5F39D163672412924 /* Pods */,
+				7A77BA67213C3C2800ED8911 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -858,6 +891,10 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 7A77BA8D213C3C2A00ED8911 /* Products */;
+					ProjectRef = F5AD0DFFC1054E48A1D82BAA /* BVLinearGradient.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1161,6 +1198,20 @@
 			fileType = archive.ar;
 			path = libRCTLinking.a;
 			remoteRef = 78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7A77BA92213C3C2A00ED8911 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 7A77BA91213C3C2A00ED8911 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7A77BA94213C3C2A00ED8911 /* libBVLinearGradient.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libBVLinearGradient.a;
+			remoteRef = 7A77BA93213C3C2A00ED8911 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		832341B51AAA6A8300B99B32 /* libRCTText.a */ = {

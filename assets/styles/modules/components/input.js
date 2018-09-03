@@ -39,9 +39,6 @@ module.exports = StyleSheet.create({
     left: 20
   },
   TextInputLink: {
-    fontFamily: fonts.sanFrancisco.textBold,
-    color: colors.single.lavenderGray,
-    fontSize: 16,
     paddingVertical: 20,
     height: 59
   },
@@ -78,13 +75,5 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     fontSize: 18
-  },
-  RTL: {
-    direction: 'rtl',
-    textAlign: 'right'
-  },
-  LTR: {
-    direction: 'ltr',
-    textAlign: 'left'
   }
 });
