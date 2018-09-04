@@ -1,73 +1,59 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import { View, Text, Animated, Easing } from 'react-native';
 
 import { Global, Modules } from '../styles/index';
-
 const Styles = Modules.Components.Headline;
 
-class Headline extends Component<{}> {
-  constructor(props) {
-    super(props);
+export const Headline = (props) => {
+  var attitude = {};
+
+  if ((typeof props.title != 'undefined') && (typeof props.subtitle != 'undefined')){
+    attitude.title = props.title;
+    attitude.subtitle = props.subtitle;
   }
 
-  componentDidMount() {
-
-  }
-
-  componentWillReceiveProps(props) {
-
-  }
-
-  componentWillMount() {
-    const { props } = this;
-
-    var localState = {
-      title: props.title,
-      subtitle: props.subtitle
-    };
-
-    if (typeof props.style != 'undefined'){
-      localState.style = props.style;
-
-      if (typeof localState.style == 'object' && Array.isArray(localState.style)){
-        localState.style = localState.style.reduce((total, item) => {
-          return {
-            ...total,
-            ...item
-          };
-        })
-      }
+  if (typeof props.key != 'undefined'){
+    attitude.key = props.key;
+  }else{
+    if (typeof props.name != 'undefined'){
+      attitude.key = props.name;
     }else{
-      localState.style = {};
+      const today = new Date(),
+            randomToken = Math.random();
+
+      attitude.key = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
     }
-
-    this.setState(localState);
   }
 
-  render() {
-    const { state } = this;
+  if (typeof props.style != 'undefined'){
+    attitude.style = props.style;
 
-    return (
-      <View style={[
+    if (typeof attitude.style == 'object' && Array.isArray(attitude.style)){
+      attitude.style = attitude.style.reduce((total, item) => {
+        return {
+          ...total,
+          ...item
+        };
+      })
+    }
+  }
+
+  return (
+    <View
+      key={attitude.key}
+      style={[
         Styles.Container,
-        state.style
+        attitude.style
       ]}>
-        <Text style={Styles.Title}>{state.title}</Text>
-        <Text style={Styles.Subtitle}>{state.subtitle}</Text>
-      </View>
-    )
-  }
+        <Text
+          style={Styles.Title}>
+            {attitude.title}
+        </Text>
+        <Text
+          style={Styles.Subtitle}>
+            {attitude.subtitle}
+        </Text>
+    </View>
+  )
 }
-
-Headline.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  style: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.object)
-  ])
-};
-
-export default Headline;

@@ -5,9 +5,6 @@ import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Container, Input, InputGroup, Segment, Link } from '../../assets/components/index';
 
-import { content as target } from '../../app.json';
-
-const Contents = target.pages.authorization.forgottenPassword.content;
 const Styles = Views.Authentication.ForgottenPassword;
 
 export default class ForgottenPassword extends Component<{}> {
@@ -35,8 +32,8 @@ export default class ForgottenPassword extends Component<{}> {
         <View style={Styles.Content}>
           <Headline
             style={Styles.Headline}
-            title={Contents.headline.title.en}
-            subtitle={Contents.headline.subtitle.en} />
+            title="Dear User"
+            subtitle={"To change your password\nuse the form below."} />
 
           <Segment
             style={Styles.Segment}
@@ -64,7 +61,7 @@ export default class ForgottenPassword extends Component<{}> {
             style={Styles.SubmitButton}
             type="BUTTON"
             name="send"
-            value={Contents.submitButton.value.en}
+            value="Send"
             gradient={Global.colors.pair.ongerine}
             onPress={() => {
               alert('ok')
@@ -72,7 +69,7 @@ export default class ForgottenPassword extends Component<{}> {
 
           <Link
             containerStyle={Styles.QuickLink}
-            value={Contents.quickLink.value.en}
+            value="Remember your password?"
             onPress={() => {
               const { navigation } = this.props;
 

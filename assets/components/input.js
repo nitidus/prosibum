@@ -5,430 +5,406 @@ import { View, TouchableOpacity, TextInput, Text, Animated, Easing } from 'react
 
 import LinearGradient from 'react-native-linear-gradient';
 
-import Link from './link';
+import { Link } from './link';
 import { Global, Modules } from '../styles/index';
 
 const Styles = Modules.Components.Input;
 
-class Input extends Component<{}> {
-  constructor(props) {
-    super(props);
-  }
+export const Input = (props) => {
+  var attitude = {};
 
-  componentDidMount() {
+  if (typeof props.type != 'undefined'){
+    attitude.type = props.type.toLowerCase();
 
-  }
-
-  componentWillReceiveProps(props) {
-
-  }
-
-  componentWillMount() {
-    const { props } = this;
-
-    var localState = {
-      type: props.type
-    };
-
-    if (typeof props.key != 'undefined'){
-      localState.key = props.key;
-    }else{
-      if (typeof props.name != 'undefined'){
-        localState.key = props.name;
-      }else{
-        const today = new Date(),
-              randomToken = Math.random();
-
-        localState.key = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
-      }
-    }
-
-    if (typeof props.name != 'undefined'){
-      localState.name = props.name;
-    }
-
-    if (typeof props.style != 'undefined'){
-      localState.style = props.style;
-
-      if (typeof localState.style == 'object' && Array.isArray(localState.style)){
-        localState.style = localState.style.reduce((total, item) => {
-          return {
-            ...total,
-            ...item
-          };
-        })
-      }
-    }else{
-      localState.style = {};
-    }
-
-    if (typeof props.link != 'undefined'){
-      localState.link = props.link;
-    }
-
-    switch (localState.type.toLowerCase()) {
+    switch (attitude.type) {
       case 'text':
       case 'email':
       case 'numeric':
       case 'password':
-        localState.placeholder = props.placeholder;
+        if (typeof props.placeholder != 'undefined'){
+          attitude.placeholder = props.placeholder;
+        }
         break;
       case 'link':
       case 'text-link':
       case 'email-link':
       case 'numeric-link':
       case 'password-link':
-        localState.placeholder = props.placeholder;
-        localState.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
+        if (typeof props.placeholder != 'undefined'){
+          attitude.placeholder = props.placeholder;
+        }
+
+        if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined')){
+          attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
+        }
         break;
       case 'button':
-        localState.value = props.value;
-        localState.onPress = props.onPress || props.onButtonPress || props.buttonOnPress;
+        if (typeof props.value != 'undefined'){
+          attitude.value = props.value;
+        }
+
+        if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined')){
+          attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
+        }
 
         if (typeof props.gradient != 'undefined'){
-          localState.gradient = props.gradient;
+          attitude.gradient = props.gradient;
         }
 
         if (typeof props.children != 'undefined'){
-          localState.children = props.children;
-        }
-        break;
-    }
+          attitude.children = [];
 
-    this.setState(localState);
-  }
-
-  render() {
-    const { state } = this;
-
-    switch (state.type.toLowerCase()) {
-      case 'text':
-        return (
-          <TextInput
-            key={state.key}
-            name={state.name}
-            style={[
-              Styles.ContainerWithoutButton,
-              state.style
-            ]}
-            placeholder={state.placeholder}
-            placeholderTextColor={Global.colors.single.mercury}
-            selectionColor={Global.colors.single.mercury}
-            underlineColorAndroid={Global.colors.single.transparent} />
-        )
-        break;
-      case 'email':
-        return (
-          <TextInput
-            key={state.key}
-            name={state.name}
-            autoCapitalize="none"
-            keyboardType="email-address"
-            style={[
-              Styles.ContainerWithoutButton,
-              state.style
-            ]}
-            placeholder={state.placeholder}
-            placeholderTextColor={Global.colors.single.mercury}
-            selectionColor={Global.colors.single.mercury}
-            underlineColorAndroid={Global.colors.single.transparent} />
-        )
-        break;
-      case 'password':
-        return (
-          <TextInput
-            key={state.key}
-            name={state.name}
-            autoCapitalize="none"
-            returnKeyType="go"
-            secureTextEntry={true}
-            style={[
-              Styles.ContainerWithoutButton,
-              state.style
-            ]}
-            placeholder={state.placeholder}
-            placeholderTextColor={Global.colors.single.mercury}
-            selectionColor={Global.colors.single.mercury}
-            underlineColorAndroid={Global.colors.single.transparent} />
-        )
-        break;
-      case 'link':
-      case 'text-link':
-        return (
-          <View
-            key={state.key}
-            name={state.name}
-            style={[
-              Styles.ContainerWithButton,
-              state.style
-            ]}>
-              <TextInput
-                style={[
-                  Styles.TextInputConatiner,
-                  { width: '72%' }
-                ]}
-                placeholder={state.placeholder}
-                placeholderTextColor={Global.colors.single.mercury}
-                selectionColor={Global.colors.single.mercury}
-                underlineColorAndroid={Global.colors.single.transparent} />
-              <Link
-                containerStyle={Styles.RTL_TextInputLinkContainer}
-                style={Styles.TextInputLink}
-                value={state.link}
-                onPress={state.onPress} />
-          </View>
-        )
-        break;
-      case 'email-link':
-        return (
-          <View
-            key={state.key}
-            name={state.name}
-            style={[
-              Styles.ContainerWithButton,
-              state.style
-            ]}>
-              <TextInput
-                style={[
-                  Styles.TextInputConatiner,
-                  { width: '72%' }
-                ]}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                placeholder={state.placeholder}
-                placeholderTextColor={Global.colors.single.mercury}
-                selectionColor={Global.colors.single.mercury}
-                underlineColorAndroid={Global.colors.single.transparent} />
-              <Link
-                containerStyle={Styles.RTL_TextInputLinkContainer}
-                style={Styles.TextInputLink}
-                value={state.link}
-                onPress={state.onPress} />
-          </View>
-        )
-        break;
-      case 'password-link':
-        return (
-          <View
-            key={state.key}
-            name={state.name}
-            style={[
-              Styles.ContainerWithButton,
-              state.style
-            ]}>
-              <TextInput
-                style={[
-                  Styles.TextInputConatiner,
-                  { width: '72%' }
-                ]}
-                autoCapitalize="none"
-                secureTextEntry={true}
-                placeholder={state.placeholder}
-                placeholderTextColor={Global.colors.single.mercury}
-                selectionColor={Global.colors.single.mercury}
-                underlineColorAndroid={Global.colors.single.transparent} />
-              <Link
-                containerStyle={Styles.RTL_TextInputLinkContainer}
-                style={Styles.TextInputLink}
-                value={state.link}
-                onPress={state.onPress} />
-          </View>
-        )
-        break;
-      case 'button':
-        var buttonContent;
-
-        if (typeof state.children != 'undefined'){
-          buttonContent = state.children.map((child) => {
-            return React.cloneElement(child);
-          });
-        }else if (typeof state.value != 'undefined') {
-          buttonContent = <Text
-            style={Styles.ButtonTitle}>
-            {state.value}
-          </Text>;
-        }
-
-        if (typeof state.gradient != 'undefined'){
-          const restructredRange = Object.keys(state.gradient).map((stepName) => {
-            return state.gradient[stepName];
-          });
-
-          return (
-            <LinearGradient
-              key={state.key}
-              style={[
-                Styles.ButtonContainer,
-                state.style
-              ]}
-              start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-              colors={restructredRange}>
-                <TouchableOpacity
-                  onPress={state.onPress}>
-                    {buttonContent}
-                </TouchableOpacity>
-            </LinearGradient>
-          );
-        }else{
-          return (
-            <TouchableOpacity
-              key={state.key}
-              style={[
-                Styles.ButtonContainer,
-                Styles.RegularTypeButtonContainer,
-                state.style
-              ]}
-              onPress={state.onPress}>
-                {buttonContent}
-            </TouchableOpacity>
-          );
-        }
-        break;
-    }
-  }
-}
-
-Input.propTypes = {
-  type: PropTypes.oneOf([
-    'TEXT', 'EMAIL', 'NUMERIC', 'PASSWORD',
-    'LINK', 'TEXT-LINK', 'EMAIL-LINK', 'NUMERIC-LINK', 'PASSWORD-LINK',
-    'BUTTON'
-  ]).isRequired,
-  key: PropTypes.string,
-  name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  link: PropTypes.string,
-  onPress: PropTypes.func,
-  style: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
-  gradient: PropTypes.object
-};
-
-class InputGroup extends Component<{}> {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-
-  }
-
-  componentWillMount() {
-    const { props } = this;
-
-    var localState = {
-      children: []
-    };
-
-    if (typeof props.children != 'undefined'){
-      if (Array.isArray(props.children)){
-        localState.children = localState.children.concat(props.children);
-      }else{
-        localState.children.push(props.children);
-      }
-
-      localState.children = localState.children.filter((child, i) => {
-        var childDisplayName = child.type.displayName;
-
-        if (typeof childDisplayName != 'undefined' && childDisplayName.toLowerCase() == 'input'){
-          if (typeof child.props.type != 'undefined'){
-            switch (child.props.type.toLowerCase()) {
-              case 'text':
-              case 'email':
-              case 'numeric':
-              case 'password':
-              case 'link':
-              case 'text-link':
-              case 'email-link':
-              case 'numeric-link':
-              case 'password-link':
-                return child;
-                break;
-            }
+          if (Array.isArray(props.children)){
+            attitude.children = attitude.children.concat(props.children);
+          }else{
+            attitude.children.push(props.children);
           }
         }
-      });
+        break;
     }
-
-    if (typeof props.style != 'undefined'){
-      localState.style = props.style;
-
-      if (typeof localState.style == 'object' && Array.isArray(localState.style)){
-        localState.style = localState.style.reduce((total, item) => {
-          return {
-            ...total,
-            ...item
-          };
-        })
-      }
-    }else{
-      localState.style = {};
-    }
-
-    this.setState(localState);
   }
 
-  render() {
-    const { state } = this;
+  if (typeof props.key != 'undefined'){
+    attitude.key = props.key;
+  }else{
+    if (typeof props.name != 'undefined'){
+      attitude.key = props.name;
+    }else{
+      const today = new Date(),
+            randomToken = Math.random();
 
-    var childrenContent;
+      attitude.key = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+    }
+  }
 
-    childrenContent = state.children.map((child, i, children) => {
-      var childStyle = [
-        Styles.InnerInputContainer,
-        child.props.style
-      ];
+  if ((typeof props.name != 'undefined') || (typeof props.title != 'undefined')){
+    attitude.name = props.name || props.title;
+  }
 
-      if (i > 0){
-        childStyle = [
-          Styles.InnerInputContainer,
-          {
-            borderTopWidth: 2
-          },
-          child.props.style
-        ];
+  if (typeof props.style != 'undefined'){
+    attitude.style = props.style;
+
+    if (typeof attitude.style == 'object' && Array.isArray(attitude.style)){
+      attitude.style = attitude.style.reduce((total, item) => {
+        return {
+          ...total,
+          ...item
+        };
+      })
+    }
+  }
+
+  if (typeof props.link != 'undefined'){
+    attitude.link = props.link;
+  }
+
+  switch (attitude.type) {
+    case 'text':
+      return (
+        <TextInput
+          key={attitude.key}
+          name={attitude.name}
+          style={[
+            Styles.ContainerWithoutButton,
+            attitude.style
+          ]}
+          placeholder={attitude.placeholder}
+          placeholderTextColor={Global.colors.single.mercury}
+          selectionColor={Global.colors.single.mercury}
+          underlineColorAndroid={Global.colors.single.transparent} />
+      )
+      break;
+    case 'email':
+      return (
+        <TextInput
+          key={attitude.key}
+          name={attitude.name}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          style={[
+            Styles.ContainerWithoutButton,
+            attitude.style
+          ]}
+          placeholder={attitude.placeholder}
+          placeholderTextColor={Global.colors.single.mercury}
+          selectionColor={Global.colors.single.mercury}
+          underlineColorAndroid={Global.colors.single.transparent} />
+      )
+      break;
+    case 'password':
+      return (
+        <TextInput
+          key={attitude.key}
+          name={attitude.name}
+          autoCapitalize="none"
+          returnKeyType="go"
+          secureTextEntry={true}
+          style={[
+            Styles.ContainerWithoutButton,
+            attitude.style
+          ]}
+          placeholder={attitude.placeholder}
+          placeholderTextColor={Global.colors.single.mercury}
+          selectionColor={Global.colors.single.mercury}
+          underlineColorAndroid={Global.colors.single.transparent} />
+      )
+      break;
+    case 'link':
+    case 'text-link':
+      return (
+        <View
+          key={attitude.key}
+          name={attitude.name}
+          style={[
+            Styles.ContainerWithButton,
+            attitude.style
+          ]}>
+            <TextInput
+              style={[
+                Styles.TextInputConatiner,
+                { width: '72%' }
+              ]}
+              placeholder={attitude.placeholder}
+              placeholderTextColor={Global.colors.single.mercury}
+              selectionColor={Global.colors.single.mercury}
+              underlineColorAndroid={Global.colors.single.transparent} />
+            <Link
+              containerStyle={Styles.RTL_TextInputLinkContainer}
+              style={Styles.TextInputLink}
+              value={attitude.link}
+              onPress={attitude.onPress} />
+        </View>
+      )
+      break;
+    case 'email-link':
+      return (
+        <View
+          key={attitude.key}
+          name={attitude.name}
+          style={[
+            Styles.ContainerWithButton,
+            attitude.style
+          ]}>
+            <TextInput
+              style={[
+                Styles.TextInputConatiner,
+                { width: '72%' }
+              ]}
+              autoCapitalize="none"
+              keyboardType="email-address"
+              placeholder={attitude.placeholder}
+              placeholderTextColor={Global.colors.single.mercury}
+              selectionColor={Global.colors.single.mercury}
+              underlineColorAndroid={Global.colors.single.transparent} />
+            <Link
+              containerStyle={Styles.RTL_TextInputLinkContainer}
+              style={Styles.TextInputLink}
+              value={attitude.link}
+              onPress={attitude.onPress} />
+        </View>
+      )
+      break;
+    case 'password-link':
+      return (
+        <View
+          key={attitude.key}
+          name={attitude.name}
+          style={[
+            Styles.ContainerWithButton,
+            attitude.style
+          ]}>
+            <TextInput
+              style={[
+                Styles.TextInputConatiner,
+                { width: '72%' }
+              ]}
+              autoCapitalize="none"
+              secureTextEntry={true}
+              placeholder={attitude.placeholder}
+              placeholderTextColor={Global.colors.single.mercury}
+              selectionColor={Global.colors.single.mercury}
+              underlineColorAndroid={Global.colors.single.transparent} />
+            <Link
+              containerStyle={Styles.RTL_TextInputLinkContainer}
+              style={Styles.TextInputLink}
+              value={attitude.link}
+              onPress={attitude.onPress} />
+        </View>
+      )
+      break;
+    case 'button':
+      var buttonContent;
+
+      if (typeof attitude.children != 'undefined' && attitude.children.length > 0){
+        buttonContent = attitude.children.map((child) => {
+          var childProps = {...child.props};
+
+          const today = new Date(),
+                randomToken = Math.random();
+
+          const ultimateKey = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+
+          childProps.key = childProps.name || ultimateKey;
+
+          return React.cloneElement(child, childProps);
+        });
+      }else if (typeof attitude.value != 'undefined') {
+        buttonContent = <Text
+          style={Styles.ButtonTitle}>
+          {attitude.value}
+        </Text>;
       }
 
-      /*if (typeof child.props.link != 'undefined'){
-        childStyle.push({
-          paddingHorizontal: 0
+      if (typeof attitude.gradient != 'undefined'){
+        const restructredRange = Object.keys(attitude.gradient).map((stepName) => {
+          return attitude.gradient[stepName];
         });
+
+        return (
+          <LinearGradient
+            key={attitude.key}
+            name={attitude.name}
+            style={[
+              Styles.ButtonContainer,
+              attitude.style
+            ]}
+            start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
+            colors={restructredRange}>
+              <TouchableOpacity
+                onPress={attitude.onPress}>
+                  {buttonContent}
+              </TouchableOpacity>
+          </LinearGradient>
+        );
       }else{
-        childStyle.push({
-          paddingHorizontal: 16
-        });
-      }*/
-
-      return React.cloneElement(child, {
-        key: child.props.name,
-        style: childStyle
-      });
-    });
-
-    return (
-      <View style={[
-        Styles.MasterContainer,
-        state.style
-      ]}>
-        {childrenContent}
-      </View>
-    )
+        return (
+          <TouchableOpacity
+            key={attitude.key}
+            name={attitude.name}
+            style={[
+              Styles.ButtonContainer,
+              Styles.RegularTypeButtonContainer,
+              attitude.style
+            ]}
+            onPress={attitude.onPress}>
+              {buttonContent}
+          </TouchableOpacity>
+        );
+      }
+      break;
   }
 }
 
-InputGroup.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.arrayOf(PropTypes.element)
-  ]),
-  style: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.object)
-  ])
-};
+export const InputGroup = (props) => {
+  var attitude = {};
 
-module.exports = {
-  Input, InputGroup
-};
+  if (typeof props.children != 'undefined'){
+    attitude.children = [];
+
+    if (Array.isArray(props.children)){
+      attitude.children = attitude.children.concat(props.children);
+    }else{
+      attitude.children.push(props.children);
+    }
+
+    attitude.children = attitude.children.filter((child, i) => {
+      var childName = child.type.name;
+
+      if (typeof childName != 'undefined' && childName.toLowerCase() == 'input'){
+        if (typeof child.props.type != 'undefined'){
+          switch (child.props.type.toLowerCase()) {
+            case 'text':
+            case 'email':
+            case 'numeric':
+            case 'password':
+            case 'link':
+            case 'text-link':
+            case 'email-link':
+            case 'numeric-link':
+            case 'password-link':
+              return child;
+              break;
+          }
+        }
+      }
+    });
+  }
+
+  if (typeof props.key != 'undefined'){
+    attitude.key = props.key;
+  }else{
+    if (typeof props.name != 'undefined'){
+      attitude.key = props.name;
+    }else{
+      const today = new Date(),
+            randomToken = Math.random();
+
+      attitude.key = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+    }
+  }
+
+  if ((typeof props.name != 'undefined') || (typeof props.title != 'undefined')){
+    attitude.name = props.name || props.title;
+  }
+
+  if (typeof props.style != 'undefined'){
+    attitude.style = props.style;
+
+    if (typeof attitude.style == 'object' && Array.isArray(attitude.style)){
+      attitude.style = attitude.style.reduce((total, item) => {
+        return {
+          ...total,
+          ...item
+        };
+      })
+    }
+  }
+
+  return (
+    <View style={[
+      Styles.MasterContainer,
+      attitude.style
+    ]}>
+      {
+        attitude.children.map((child, i) => {
+          var childProps = {...child.props};
+
+          var childStyle = [
+            Styles.InnerInputContainer,
+            childProps.style
+          ];
+
+          if (i > 0){
+            childStyle = [
+              Styles.InnerInputContainer,
+              {
+                borderTopWidth: 2
+              },
+              childProps.style
+            ];
+          }
+
+          /*if (typeof childProps.link != 'undefined'){
+            childStyle.push({
+              paddingHorizontal: 0
+            });
+          }else{
+            childStyle.push({
+              paddingHorizontal: 16
+            });
+          }*/
+
+          const today = new Date(),
+                randomToken = Math.random();
+
+          const ultimateKey = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+
+          childProps.key = childProps.name || ultimateKey;
+          childProps.style = childStyle;
+
+          return React.cloneElement(child, childProps);
+        })
+      }
+    </View>
+  )
+}

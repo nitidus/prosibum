@@ -5,9 +5,6 @@ import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Input, InputGroup, Link } from '../../assets/components/index';
 
-import { content as target } from '../../app.json';
-
-const Contents = target.pages.authorization.login.content;
 const Styles = Views.Authentication.Login;
 
 export default class Login extends Component<{}> {
@@ -27,12 +24,6 @@ export default class Login extends Component<{}> {
 
   }
 
-  _navigateToSignupPage() {
-    const { navigation } = this.props;
-
-    navigation.navigate('Signup');
-  }
-
   render() {
     return (
       <View style={Styles.Container}>
@@ -41,20 +32,20 @@ export default class Login extends Component<{}> {
         <View style={Styles.Content}>
           <Headline
             style={Styles.Headline}
-            title={Contents.headline.title.en}
-            subtitle={Contents.headline.subtitle.en} />
+            title="Welcome"
+            subtitle={"Please login to\n your account."} />
 
           <InputGroup
             style={Styles.InputGroup}>
             <Input
               type="EMAIL"
               name="email"
-              placeholder={Contents.inputGroup.email.placeholder.en} />
+              placeholder="Email" />
             <Input
               type="PASSWORD-LINK"
               name="password"
-              placeholder={Contents.inputGroup.passwordLink.placeholder.en}
-              link={Contents.inputGroup.passwordLink.link.en}
+              placeholder="Password"
+              link="Forgot it?"
               onPress={() => {
                 const { navigation } = this.props;
 
@@ -66,7 +57,7 @@ export default class Login extends Component<{}> {
             style={Styles.SubmitButton}
             type="BUTTON"
             name="signin"
-            value={Contents.submitButton.value.en}
+            value="Sign In"
             gradient={Global.colors.pair.ongerine}
             onPress={() => {
               alert('ok')
@@ -74,7 +65,7 @@ export default class Login extends Component<{}> {
 
           <Link
             containerStyle={Styles.QuickLink}
-            value={Contents.quickLink.value.en}
+            value="Don't have an account?"
             onPress={() => {
               const { navigation } = this.props;
 

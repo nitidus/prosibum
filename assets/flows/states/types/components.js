@@ -1,5 +1,5 @@
-// export const COMPONENTS = {
-//   HEADLINE: {
-//     SET: 'HEADLINE/SET'
-//   }
-// };
+export const COMPONENTS = {
+  SEGMENT: {
+    SET_CHILDREN_VISIBILITY: 'SEGMENT/SET_CHILDREN_VISIBILITY'
+  }
+};

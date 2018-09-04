@@ -5,9 +5,6 @@ import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Input, InputGroup, Link } from '../../assets/components/index';
 
-import { content as target } from '../../app.json';
-
-const Contents = target.pages.authorization.signup.content;
 const Styles = Views.Authentication.Signup;
 
 export default class Signup extends Component<{}> {
@@ -35,19 +32,19 @@ export default class Signup extends Component<{}> {
         <View style={Styles.Content}>
           <Headline
             style={Styles.Headline}
-            title={Contents.headline.title.en}
-            subtitle={Contents.headline.subtitle.en} />
+            title="Dear User"
+            subtitle={"Please enter your\nuser accoun details."} />
 
           <InputGroup
             style={Styles.FirstInputGroup}>
             <Input
               type="TEXT"
               name="firstName"
-              placeholder={Contents.firstInputGroup.firstName.placeholder.en} />
+              placeholder="First Name" />
             <Input
               type="TEXT"
               name="lastName"
-              placeholder={Contents.firstInputGroup.lastName.placeholder.en} />
+              placeholder="Last Name" />
           </InputGroup>
 
           <InputGroup
@@ -55,22 +52,22 @@ export default class Signup extends Component<{}> {
             <Input
               type="TEXT"
               name="phoneNumber"
-              placeholder={Contents.secondInputGroup.phoneNumber.placeholder.en} />
+              placeholder="Phone Number" />
             <Input
               type="EMAIL"
               name="email"
-              placeholder={Contents.secondInputGroup.email.placeholder.en} />
+              placeholder="Email" />
             <Input
               type="PASSWORD"
               name="password"
-              placeholder={Contents.secondInputGroup.password.placeholder.en} />
+              placeholder="Password" />
           </InputGroup>
 
           <Input
             style={Styles.SubmitButton}
             type="BUTTON"
             name="signup"
-            value={Contents.submitButton.value.en}
+            value="Signup"
             gradient={Global.colors.pair.ongerine}
             onPress={() => {
               alert('ok')
@@ -78,7 +75,7 @@ export default class Signup extends Component<{}> {
 
           <Link
             containerStyle={Styles.QuickLink}
-            value={Contents.quickLink.value.en}
+            value="Already have an account?"
             onPress={() => {
               const { navigation } = this.props;
 

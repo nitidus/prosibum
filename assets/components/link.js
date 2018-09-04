@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import { TouchableOpacity, Text, Animated, Easing } from 'react-native';
 
@@ -9,90 +8,54 @@ import { Global, Modules } from '../styles/index';
 
 const Styles = Modules.Components.Link;
 
-class Link extends Component<{}> {
-  constructor(props) {
-    super(props);
+export const Link = (props) => {
+  var attitude = {};
+
+  if (typeof props.value != 'undefined'){
+    attitude.value = props.value;
   }
 
-  componentDidMount() {
+  if (typeof props.containerStyle != 'undefined'){
+    attitude.containerStyle = props.containerStyle;
 
-  }
-
-  componentWillReceiveProps(props) {
-
-  }
-
-  componentWillMount() {
-    const { props } = this;
-
-    var localState = {
-      value: props.value,
-      onPress: props.onPress || props.onLinkPress || props.linkOnPress
-    };
-
-    if (typeof props.style != 'undefined'){
-      localState.style = props.style;
-
-      if (typeof localState.style == 'object' && Array.isArray(localState.style)){
-        localState.style = localState.style.reduce((total, item) => {
-          return {
-            ...total,
-            ...item
-          };
-        })
-      }
-    }else{
-      localState.style = {};
+    if (typeof attitude.containerStyle == 'object' && Array.isArray(attitude.containerStyle)){
+      attitude.containerStyle = attitude.containerStyle.reduce((total, item) => {
+        return {
+          ...total,
+          ...item
+        };
+      })
     }
+  }
 
-    if (typeof props.containerStyle != 'undefined'){
-      localState.containerStyle = props.containerStyle;
+  if (typeof props.style != 'undefined'){
+    attitude.style = props.style;
 
-      if (typeof localState.containerStyle == 'object' && Array.isArray(localState.containerStyle)){
-        localState.containerStyle = localState.containerStyle.reduce((total, item) => {
-          return {
-            ...total,
-            ...item
-          };
-        })
-      }
-    }else{
-      localState.containerStyle = {};
+    if (typeof attitude.style == 'object' && Array.isArray(attitude.style)){
+      attitude.style = attitude.style.reduce((total, item) => {
+        return {
+          ...total,
+          ...item
+        };
+      })
     }
-
-    this.setState(localState);
   }
 
-  render() {
-    const { state } = this;
-
-    return (
-      <TouchableOpacity
-        style={state.containerStyle}
-        onPress={state.onPress}>
-          <Text
-            style={[
-              Styles.TextInputLink,
-              state.style
-            ]}>
-              {state.value}
-          </Text>
-      </TouchableOpacity>
-    );
+  if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined')){
+    attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
   }
+
+  return (
+    <TouchableOpacity
+      style={attitude.containerStyle}
+      onPress={attitude.onPress}>
+        <Text
+          style={[
+            Styles.TextInputLink,
+            attitude.style
+          ]}>
+            {attitude.value}
+        </Text>
+    </TouchableOpacity>
+  );
 }
-
-Link.propTypes = {
-  value: PropTypes.string.isRequired,
-  onPress: PropTypes.func,
-  containerStyle: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.object)
-  ]),
-  style: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.arrayOf(PropTypes.object)
-  ])
-};
-
-export default Link;
