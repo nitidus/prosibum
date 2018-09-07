@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { StatusBar, View } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Input, InputGroup, Link } from '../../assets/components/index';
-
 const Styles = Views.Authentication.Login;
 
-export default class Login extends Component<{}> {
+import { Views as ViewsActions } from '../../assets/flows/states/actions';
+const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.Login;
+
+class Login extends Component<{}> {
   static navigationOptions = {
     header: null
   };
@@ -25,6 +29,8 @@ export default class Login extends Component<{}> {
   }
 
   render() {
+    const { props } = this;
+
     return (
       <View style={Styles.Container}>
         <StatusBar hidden={true}/>
@@ -40,17 +46,24 @@ export default class Login extends Component<{}> {
             <Input
               type="EMAIL"
               name="email"
-              placeholder="Email" />
+              placeholder="Email"
+              value={props.login.email}
+              onChangeText={(currentValue) => props.setEmail(currentValue)} />
             <Input
               type="PASSWORD-LINK"
               name="password"
               placeholder="Password"
+              value={props.login.password}
               link="Forgot it?"
               onPress={() => {
-                const { navigation } = this.props;
+                const { navigation } = props;
+
+                props.setEmail('');
+                // props.setPassword('');
 
                 navigation.navigate('ForgottenPassword');
-              }} />
+              }}
+              onChangeText={(currentValue) => props.setPassword(currentValue)} />
           </InputGroup>
 
           <Input
@@ -67,7 +80,10 @@ export default class Login extends Component<{}> {
             containerStyle={Styles.QuickLink}
             value="Don't have an account?"
             onPress={() => {
-              const { navigation } = this.props;
+              const { navigation } = props;
+
+              // props.setEmail('');
+              // props.setPassword('');
 
               navigation.navigate('Signup');
             }} />
@@ -76,3 +92,5 @@ export default class Login extends Component<{}> {
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -10,8 +10,8 @@ import { Input } from './input';
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Components.Segment;
 
-import { COMPONENTS } from '../flows/states/types/components';
-const { SEGMENT } = COMPONENTS;
+import { Components as ComponentsActions } from '../../assets/flows/states/actions';
+const { mapStateToProps, mapDispatchToProps } = ComponentsActions.Segment;
 
 const Segment = (props) => {
   var attitude = {};
@@ -69,6 +69,10 @@ const Segment = (props) => {
     attitude.name = props.name || props.title;
   }
 
+  if ((typeof props.onChangeTab != 'undefined') || (typeof props.onChange != 'undefined')){
+    attitude.onChangeTab = props.onChangeTab || props.onChange;
+  }
+
   if (typeof props.style != 'undefined'){
     attitude.style = props.style;
 
@@ -121,6 +125,8 @@ const Segment = (props) => {
                           disableSegmentStyle
                         ]}
                         onPress={() => {
+                          attitude.onChangeTab(child.name);
+
                           var localChildrenVisibility = childrenVisibility.map((singleChild, j) => {
                             if (singleChild.value){
                               singleChild.value = false;
@@ -197,23 +203,6 @@ const Segment = (props) => {
         </View>
     </View>
   )
-}
-
-const mapStateToProps = (state) => {
-  return {
-    segment: state.Segment
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setChildrenVisibility: (childrenVisibility) => {
-      dispatch({
-        type: SEGMENT.SET_CHILDREN_VISIBILITY,
-        payload: childrenVisibility
-      })
-    }
-  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Segment);

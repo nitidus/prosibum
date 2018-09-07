@@ -24,6 +24,14 @@ export const Input = (props) => {
         if (typeof props.placeholder != 'undefined'){
           attitude.placeholder = props.placeholder;
         }
+
+        if (typeof props.value != 'undefined'){
+          attitude.value = props.value || '';
+        }
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
+        }
         break;
       case 'link':
       case 'text-link':
@@ -34,8 +42,16 @@ export const Input = (props) => {
           attitude.placeholder = props.placeholder;
         }
 
+        if (typeof props.value != 'undefined'){
+          attitude.value = props.value || '';
+        }
+
         if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined')){
           attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
+        }
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
         }
         break;
       case 'button':
@@ -108,10 +124,12 @@ export const Input = (props) => {
             Styles.ContainerWithoutButton,
             attitude.style
           ]}
+          value={attitude.value}
           placeholder={attitude.placeholder}
           placeholderTextColor={Global.colors.single.mercury}
           selectionColor={Global.colors.single.mercury}
-          underlineColorAndroid={Global.colors.single.transparent} />
+          underlineColorAndroid={Global.colors.single.transparent}
+          onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
       )
       break;
     case 'email':
@@ -125,10 +143,12 @@ export const Input = (props) => {
             Styles.ContainerWithoutButton,
             attitude.style
           ]}
+          value={attitude.value}
           placeholder={attitude.placeholder}
           placeholderTextColor={Global.colors.single.mercury}
           selectionColor={Global.colors.single.mercury}
-          underlineColorAndroid={Global.colors.single.transparent} />
+          underlineColorAndroid={Global.colors.single.transparent}
+          onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
       )
       break;
     case 'password':
@@ -143,10 +163,12 @@ export const Input = (props) => {
             Styles.ContainerWithoutButton,
             attitude.style
           ]}
+          value={attitude.value}
           placeholder={attitude.placeholder}
           placeholderTextColor={Global.colors.single.mercury}
           selectionColor={Global.colors.single.mercury}
-          underlineColorAndroid={Global.colors.single.transparent} />
+          underlineColorAndroid={Global.colors.single.transparent}
+          onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
       )
       break;
     case 'link':
@@ -164,10 +186,12 @@ export const Input = (props) => {
                 Styles.TextInputConatiner,
                 { width: '72%' }
               ]}
+              value={attitude.value}
               placeholder={attitude.placeholder}
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
-              underlineColorAndroid={Global.colors.single.transparent} />
+              underlineColorAndroid={Global.colors.single.transparent}
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
             <Link
               containerStyle={Styles.RTL_TextInputLinkContainer}
               style={Styles.TextInputLink}
@@ -192,10 +216,12 @@ export const Input = (props) => {
               ]}
               autoCapitalize="none"
               keyboardType="email-address"
+              value={attitude.value}
               placeholder={attitude.placeholder}
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
-              underlineColorAndroid={Global.colors.single.transparent} />
+              underlineColorAndroid={Global.colors.single.transparent}
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
             <Link
               containerStyle={Styles.RTL_TextInputLinkContainer}
               style={Styles.TextInputLink}
@@ -220,10 +246,12 @@ export const Input = (props) => {
               ]}
               autoCapitalize="none"
               secureTextEntry={true}
+              value={attitude.value}
               placeholder={attitude.placeholder}
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
-              underlineColorAndroid={Global.colors.single.transparent} />
+              underlineColorAndroid={Global.colors.single.transparent}
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
             <Link
               containerStyle={Styles.RTL_TextInputLinkContainer}
               style={Styles.TextInputLink}
