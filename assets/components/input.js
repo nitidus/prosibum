@@ -59,6 +59,10 @@ export const Input = (props) => {
           attitude.value = props.value;
         }
 
+        if (typeof props.disable != 'undefined'){
+          attitude.disable = props.disable;
+        }
+
         if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined')){
           attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
         }
@@ -261,7 +265,7 @@ export const Input = (props) => {
       )
       break;
     case 'button':
-      var buttonContent;
+      var touchablePortion, buttonContent;
 
       if (typeof attitude.children != 'undefined' && attitude.children.length > 0){
         buttonContent = attitude.children.map((child) => {
@@ -288,6 +292,18 @@ export const Input = (props) => {
           return attitude.gradient[stepName];
         });
 
+        if (attitude.disable){
+          touchablePortion = <TouchableOpacity
+            activeOpacity={1}>
+              {buttonContent}
+          </TouchableOpacity>;
+        }else{
+          touchablePortion = <TouchableOpacity
+            onPress={attitude.onPress}>
+              {buttonContent}
+          </TouchableOpacity>;
+        }
+
         return (
           <LinearGradient
             key={attitude.key}
@@ -298,26 +314,37 @@ export const Input = (props) => {
             ]}
             start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
             colors={restructredRange}>
-              <TouchableOpacity
-                onPress={attitude.onPress}>
-                  {buttonContent}
-              </TouchableOpacity>
+              {touchablePortion}
           </LinearGradient>
         );
       }else{
-        return (
-          <TouchableOpacity
-            key={attitude.key}
-            name={attitude.name}
-            style={[
-              Styles.ButtonContainer,
-              Styles.RegularTypeButtonContainer,
-              attitude.style
-            ]}
-            onPress={attitude.onPress}>
-              {buttonContent}
-          </TouchableOpacity>
-        );
+        if (attitude.disable){
+          touchablePortion = <TouchableOpacity
+              key={attitude.key}
+              name={attitude.name}
+              style={[
+                Styles.ButtonContainer,
+                Styles.RegularTypeButtonContainer,
+                attitude.style
+              ]}
+              activeOpacity={1}>
+                {buttonContent}
+            </TouchableOpacity>;
+        }else{
+          touchablePortion = <TouchableOpacity
+              key={attitude.key}
+              name={attitude.name}
+              style={[
+                Styles.ButtonContainer,
+                Styles.RegularTypeButtonContainer,
+                attitude.style
+              ]}
+              onPress={attitude.onPress}>
+                {buttonContent}
+            </TouchableOpacity>;
+        }
+
+        return touchablePortion;
       }
       break;
   }

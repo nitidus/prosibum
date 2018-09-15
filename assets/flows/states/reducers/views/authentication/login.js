@@ -1,5 +1,4 @@
-import { VIEWS } from '../../../types/views';
-
+import { VIEWS } from '../../../types/index';
 const { LOGIN } = VIEWS.AUTHENTICATION;
 
 const initialState = {

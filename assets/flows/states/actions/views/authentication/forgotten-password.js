@@ -1,4 +1,4 @@
-import { VIEWS } from '../../../types/views';
+import { VIEWS } from '../../../types/index';
 const { FORGOTTEN_PASSWORD } = VIEWS.AUTHENTICATION;
 
 const mapStateToProps = (state) => {

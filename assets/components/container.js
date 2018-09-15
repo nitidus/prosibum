@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { View, Animated, Easing } from 'react-native';
 
 import { Global, Modules } from '../styles/index';
-
 const Styles = Modules.Components.Container;
+
+import { Functions } from '../modules/index';
 
 export const Container = (props) => {
   var attitude = {};
@@ -15,10 +16,7 @@ export const Container = (props) => {
     if (typeof props.name != 'undefined'){
       attitude.key = props.name;
     }else{
-      const today = new Date(),
-            randomToken = Math.random();
-
-      attitude.key = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+      attitude.key = Functions._generateNewUniqueObjectKey()
     }
   }
 

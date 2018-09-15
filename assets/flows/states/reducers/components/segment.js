@@ -1,5 +1,4 @@
-import { COMPONENTS } from '../../types/components';
-
+import { COMPONENTS } from '../../types/index';
 const { SEGMENT } = COMPONENTS;
 
 const initialState = {

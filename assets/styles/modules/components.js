@@ -4,6 +4,7 @@ import Headline from './components/headline';
 import Input from './components/input';
 import Container from './components/container';
 import Segment from './components/segment';
+import Carousel from './components/carousel';
 
 module.exports = {
   Global,
@@ -11,5 +12,6 @@ module.exports = {
   Headline,
   Input,
   Container,
-  Segment
+  Segment,
+  Carousel
 };

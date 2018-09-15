@@ -5,6 +5,8 @@ import { View, Text, Animated, Easing } from 'react-native';
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Components.Headline;
 
+import { Functions } from '../modules/index';
+
 export const Headline = (props) => {
   var attitude = {};
 
@@ -19,10 +21,7 @@ export const Headline = (props) => {
     if (typeof props.name != 'undefined'){
       attitude.key = props.name;
     }else{
-      const today = new Date(),
-            randomToken = Math.random();
-
-      attitude.key = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+      attitude.key = Functions._generateNewUniqueObjectKey()
     }
   }
 

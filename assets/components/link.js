@@ -5,7 +5,6 @@ import { TouchableOpacity, Text, Animated, Easing } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { Global, Modules } from '../styles/index';
-
 const Styles = Modules.Components.Link;
 
 export const Link = (props) => {

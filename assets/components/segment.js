@@ -10,6 +10,8 @@ import { Input } from './input';
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Components.Segment;
 
+import { Functions } from '../modules/index';
+
 import { Components as ComponentsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ComponentsActions.Segment;
 
@@ -58,10 +60,7 @@ const Segment = (props) => {
     if (typeof props.name != 'undefined'){
       attitude.key = props.name;
     }else{
-      const today = new Date(),
-            randomToken = Math.random();
-
-      attitude.key = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+      attitude.key = Functions._generateNewUniqueObjectKey()
     }
   }
 
@@ -185,10 +184,7 @@ const Segment = (props) => {
                   child.props.style
                 ];
 
-                const today = new Date(),
-                      randomToken = Math.random();
-
-                const ultimateKey = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+                const ultimateKey = Functions._generateNewUniqueObjectKey();
 
                 childProps.key = childProps.name || ultimateKey;
                 childProps.style = childStyle;

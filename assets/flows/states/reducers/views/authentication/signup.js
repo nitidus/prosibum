@@ -1,13 +1,15 @@
-import { VIEWS } from '../../../types/views';
-
+import { VIEWS } from '../../../types/index';
 const { SIGNUP } = VIEWS.AUTHENTICATION;
 
 const initialState = {
   firstName: '',
   lastName: '',
+  userGroup: '',
   phoneNumber: '',
   email: '',
-  password: ''
+  password: '',
+  userGroups: [],
+  loading: false
 };
 
 export default (state = initialState, action) => {
@@ -22,6 +24,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         lastName: action.payload
+      };
+      break;
+    case SIGNUP.SET_USER_GROUP:
+      return {
+        ...state,
+        userGroup: action.payload
       };
       break;
     case SIGNUP.SET_PHONE_NUMBER:
@@ -42,8 +50,20 @@ export default (state = initialState, action) => {
         password: action.payload
       };
       break;
+    case SIGNUP.FETCH_AVAILABLE_USER_GROUPS:
+      return {
+        ...state,
+        userGroups: action.payload
+      };
+      break;
     case SIGNUP.SUBSCRIBE_THE_USER:
       return state;
+      break;
+    case SIGNUP.SET_LOADING_STATUS:
+      return {
+        ...state,
+        loading: action.payload
+      };
       break;
 
     default:
