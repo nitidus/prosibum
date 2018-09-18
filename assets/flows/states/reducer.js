@@ -4,6 +4,9 @@ import logger from 'redux-logger';
 /* Components Reducers */
 import Segment from './reducers/components/segment';
 
+/* Layouts Reducers */
+
+
 /* Views Reducers */
 import Login from './reducers/views/authentication/login';
 import ForgottenPassword from './reducers/views/authentication/fogotten-password';

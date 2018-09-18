@@ -7,6 +7,7 @@ module.exports = {
   colors: {
     single: {
       lightCoral: '#FC726F',
+      carminePink: '#F64848',
       chetwodeBlue: '#6C76D8',
       blackSqueeze: '#F3F8FB',
       rangoonGreen: '#171717',

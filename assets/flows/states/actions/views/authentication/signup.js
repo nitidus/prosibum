@@ -56,10 +56,10 @@ const mapDispatchToProps = (dispatch) => {
       axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${group_type}`)
         .then((response) => {
           if (response.status === 200){
-            const _FINAL_REPONSE = response.data;
+            const _FINAL_RESPONSE = response.data;
 
-            if (_FINAL_REPONSE.meta.code === 200){
-              const _DATA = _FINAL_REPONSE.data;
+            if (_FINAL_RESPONSE.meta.code === 200){
+              const _DATA = _FINAL_RESPONSE.data;
 
               dispatch({
                 type: SIGNUP.FETCH_AVAILABLE_USER_GROUPS,
@@ -75,19 +75,46 @@ const mapDispatchToProps = (dispatch) => {
                 type: SIGNUP.SET_LOADING_STATUS,
                 payload: false
               })
+
+              dispatch({
+                type: SIGNUP.SET_CONNECTED_STATUS,
+                payload: {
+                  status: true
+                }
+              })
             }else{
               dispatch({
                 type: SIGNUP.SET_LOADING_STATUS,
                 payload: false
               })
+
+              dispatch({
+                type: SIGNUP.SET_CONNECTED_STATUS,
+                payload: {
+                  status: false,
+                  content: _FINAL_RESPONSE.meta.error_message
+                }
+              })
             }
           }
         })
         .catch((error) => {
-          dispatch({
-            type: SIGNUP.SET_LOADING_STATUS,
-            payload: false
-          })
+          if (error){
+            const _ERROR_MESSAGE = error.message || error.request._response;
+
+            dispatch({
+              type: SIGNUP.SET_LOADING_STATUS,
+              payload: false
+            })
+
+            dispatch({
+              type: SIGNUP.SET_CONNECTED_STATUS,
+              payload: {
+                status: false,
+                content: _ERROR_MESSAGE
+              }
+            })
+          }
         });
     },
     subscribeTheUser: () => {

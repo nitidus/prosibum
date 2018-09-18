@@ -11,6 +11,7 @@ import ForgottenPassword from './views/authentication/forgotten-password';
 
 //Components
 import Components from './modules/components';
+import Layouts from './modules/layouts';
 
 module.exports = {
   Global: Global,
@@ -22,6 +23,7 @@ module.exports = {
     }
   },
   Modules: {
-    Components
+    Components,
+    Layouts
   }
 };

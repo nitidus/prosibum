@@ -9,7 +9,11 @@ const initialState = {
   email: '',
   password: '',
   userGroups: [],
-  loading: false
+  loading: false,
+  connected: {
+    status: true,
+    content: ''
+  }
 };
 
 export default (state = initialState, action) => {
@@ -63,6 +67,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload
+      };
+      break;
+    case SIGNUP.SET_CONNECTED_STATUS:
+      return {
+        ...state,
+        connected: {
+          ...state.connected,
+          status: action.payload.status,
+          content: action.payload.content || ''
+        }
       };
       break;
 

@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
 
-import { Headline, Container, Input, InputGroup, Segment, Link } from '../../assets/components/index';
+import { Headline, Input, InputGroup, Segment, Link } from '../../assets/components/index';
+import { Container } from '../../assets/layouts/index';
 const Styles = Views.Authentication.ForgottenPassword;
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Animated, Easing } from 'react-native';
 
 import { Global, Modules } from '../styles/index';
-const Styles = Modules.Components.Container;
+const Styles = Modules.Layouts.Container;
 
 import { Functions } from '../modules/index';
 

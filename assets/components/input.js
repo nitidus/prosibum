@@ -7,8 +7,9 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { Link } from './link';
 import { Global, Modules } from '../styles/index';
-
 const Styles = Modules.Components.Input;
+
+import { Functions } from '../modules/index';
 
 export const Input = (props) => {
   var attitude = {};
@@ -59,8 +60,12 @@ export const Input = (props) => {
           attitude.value = props.value;
         }
 
-        if (typeof props.disable != 'undefined'){
-          attitude.disable = props.disable;
+        attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
+
+        if ((typeof props.forcedDisable != 'undefined' && props.forcedDisable === true) || (typeof props.forcedDisableAppearence != 'undefined' && props.forcedDisableAppearence === true)){
+          if (attitude.disable === true){
+            attitude.forcedDisable = props.forcedDisable || props.forcedDisableAppearence;
+          }
         }
 
         if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined')){
@@ -90,10 +95,7 @@ export const Input = (props) => {
     if (typeof props.name != 'undefined'){
       attitude.key = props.name;
     }else{
-      const today = new Date(),
-            randomToken = Math.random();
-
-      attitude.key = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+      attitude.key = Functions._generateNewUniqueObjectKey();
     }
   }
 
@@ -271,10 +273,7 @@ export const Input = (props) => {
         buttonContent = attitude.children.map((child) => {
           var childProps = {...child.props};
 
-          const today = new Date(),
-                randomToken = Math.random();
-
-          const ultimateKey = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+          const ultimateKey = Functions._generateNewUniqueObjectKey();
 
           childProps.key = childProps.name || ultimateKey;
 
@@ -287,64 +286,91 @@ export const Input = (props) => {
         </Text>;
       }
 
+      var _ACTIVE_OPACITY = 0.7;
+
       if (typeof attitude.gradient != 'undefined'){
         const restructredRange = Object.keys(attitude.gradient).map((stepName) => {
           return attitude.gradient[stepName];
         });
 
-        if (attitude.disable){
-          touchablePortion = <TouchableOpacity
-            activeOpacity={1}>
-              {buttonContent}
-          </TouchableOpacity>;
-        }else{
-          touchablePortion = <TouchableOpacity
-            onPress={attitude.onPress}>
-              {buttonContent}
-          </TouchableOpacity>;
-        }
+        var _GRADIENT_INPUT_BUTTON_CONTENT = <TouchableOpacity
+          activeOpacity={_ACTIVE_OPACITY}
+          onPress={attitude.onPress}>
+            <LinearGradient
+              key={attitude.key}
+              name={attitude.name}
+              style={[
+                Styles.ButtonContainer,
+                attitude.style
+              ]}
+              start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
+              colors={restructredRange}>
+                {buttonContent}
+            </LinearGradient>
+        </TouchableOpacity>;
 
-        return (
-          <LinearGradient
-            key={attitude.key}
-            name={attitude.name}
-            style={[
-              Styles.ButtonContainer,
-              attitude.style
-            ]}
-            start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
-            colors={restructredRange}>
-              {touchablePortion}
-          </LinearGradient>
-        );
+        if (attitude.disable){
+          if ((typeof attitude.forcedDisable != 'undefined') && (attitude.forcedDisable === true)) {
+            _ACTIVE_OPACITY = 1;
+
+            return (
+              <TouchableOpacity
+                  activeOpacity={_ACTIVE_OPACITY}
+                  style={[
+                    Styles.ButtonContainer,
+                    attitude.style,
+                    Styles.DisableTypeButtonContainer
+                  ]}>
+                    {buttonContent}
+              </TouchableOpacity>
+            );
+          }else{
+            return _GRADIENT_INPUT_BUTTON_CONTENT;
+          }
+        }else{
+          return _GRADIENT_INPUT_BUTTON_CONTENT;
+        }
       }else{
         if (attitude.disable){
-          touchablePortion = <TouchableOpacity
-              key={attitude.key}
-              name={attitude.name}
-              style={[
-                Styles.ButtonContainer,
-                Styles.RegularTypeButtonContainer,
-                attitude.style
-              ]}
-              activeOpacity={1}>
-                {buttonContent}
-            </TouchableOpacity>;
-        }else{
-          touchablePortion = <TouchableOpacity
-              key={attitude.key}
-              name={attitude.name}
-              style={[
-                Styles.ButtonContainer,
-                Styles.RegularTypeButtonContainer,
-                attitude.style
-              ]}
-              onPress={attitude.onPress}>
-                {buttonContent}
-            </TouchableOpacity>;
-        }
+          _ACTIVE_OPACITY = 1;
 
-        return touchablePortion;
+          var _DISABLE_BUTTON_STYLE = [
+            Styles.ButtonContainer,
+            Styles.RegularTypeButtonContainer,
+            attitude.style
+          ];
+
+          if ((typeof attitude.forcedDisable != 'undefined') && (attitude.forcedDisable === true)) {
+            _DISABLE_BUTTON_STYLE = [
+              Styles.ButtonContainer,
+              attitude.style,
+              Styles.DisableTypeButtonContainer
+            ];
+          }
+
+          return (
+            <TouchableOpacity
+                activeOpacity={_ACTIVE_OPACITY}
+                style={_DISABLE_BUTTON_STYLE}>
+                  {buttonContent}
+            </TouchableOpacity>
+          );
+        }else{
+          return (
+            <TouchableOpacity
+                key={attitude.key}
+                name={attitude.name}
+                style={[
+                  Styles.ButtonContainer,
+                  Styles.RegularTypeButtonContainer,
+                  attitude.style
+                ]}
+                activeOpacity={_ACTIVE_OPACITY}
+                onPress={attitude.onPress}>
+                  {buttonContent}
+              </TouchableOpacity>
+          );
+        }
       }
       break;
   }

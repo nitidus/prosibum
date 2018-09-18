@@ -20,26 +20,12 @@ module.exports = StyleSheet.create({
   Headline: {
     marginTop: 47
   },
-  CarouselItemContainer: {
-    borderRadius: 5,
-    height: 59,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  GradientTypeCarouselItemContainer: {
-
-  },
-  RegularTypeCarouselItemContainer: {
-    backgroundColor: colors.single.chetwodeBlue
-  },
-  CarouselItemTitle: {
-    color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
-    fontSize: 18
-  },
   FirstCarousel: {
     marginTop: 44,
     flexDirection: 'row'
+  },
+  FirstCarouselLoading: {
+    marginHorizontal: 32
   },
   FirstInputGroup: {
     marginTop: 15

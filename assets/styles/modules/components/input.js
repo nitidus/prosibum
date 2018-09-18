@@ -71,6 +71,9 @@ module.exports = StyleSheet.create({
   RegularTypeButtonContainer: {
     backgroundColor: colors.single.chetwodeBlue
   },
+  DisableTypeButtonContainer: {
+    backgroundColor: colors.single.mercury
+  },
   ButtonTitle: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
