@@ -62,6 +62,10 @@ export const Carousel = (props) => {
     attitude.onSnap = props.onSnap || props.onSnapToItem || props.onSnapItem || props.onItemSnap
   }
 
+  attitude.layout = (props.layoutType || props.layout || props.type || 'stack').toLowerCase();
+
+  const _LAYOUT_TYPE = (attitude.layout == 'stack' || attitude.layout == 'tinder' || attitude.layout == 'default')? attitude.layout: 'stack';
+
   return (
     <View
       key={attitude.key}
@@ -71,7 +75,7 @@ export const Carousel = (props) => {
         attitude.style
       ]}>
         <Carrousel
-          layout='stack'
+          layout={_LAYOUT_TYPE}
           data={attitude.data}
           renderItem={attitude.onLayout}
           sliderWidth={attitude.width}

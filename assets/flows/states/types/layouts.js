@@ -1,3 +1,5 @@
 export const LAYOUTS = {
-  
+  MODAL: {
+    SET_MODAL_VISIBILITY: 'MODAL/SET_MODAL_VISIBILITY'
+  }
 };

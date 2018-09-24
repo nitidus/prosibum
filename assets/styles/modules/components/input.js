@@ -78,5 +78,8 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     fontSize: 18
+  },
+  RTL_Direction: {
+    direction: 'rtl'
   }
 });

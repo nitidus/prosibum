@@ -7,5 +7,37 @@ module.exports = {
           randomToken = Math.random();
 
     return parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+  },
+  _convertHexColorToRGBA: (hex, opacity) => {
+      var c;
+
+      opacity = (typeof opacity != 'undefined')? ((opacity >= 0 && opacity <= 1)? opacity: 1): 1;
+
+      if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+          c = hex.substring(1).split('');
+
+          if (c.length == 3){
+              c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+          }
+
+          c= '0x' + c.join('');
+
+          return 'rgba(' + [(c>>16)&255, (c>>8)&255, c&255].join(',') + ',' + opacity + ')';
+      }
+  },
+  _checkIsAValidEmail: (email) => {
+    const _IS_EMAIL_VALID = email.match(/[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/);
+
+    return (_IS_EMAIL_VALID !== null)? true: false;
+  },
+  _checkIsAValidPhoneNumber: (phoneNumber) => {
+    const _IS_PHONE_NUMBER_VALID = phoneNumber.match(/^(?=.*\d)[0-9]{6,12}$/);
+
+    return (_IS_PHONE_NUMBER_VALID !== null)? true: false;
+  },
+  _checkIsAValidPassword: (password) => {
+    const _IS_PASSWORD_VALID = password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\$%&#!~`\^*\(\)_\-\+\=\?><])[0-9a-zA-Z\$%&#!~`\^*\(\)_\-\+\=\?><]{8,}$/);
+
+    return (_IS_PASSWORD_VALID !== null)? true: false;
   }
 };

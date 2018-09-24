@@ -13,9 +13,16 @@ target 'prosibum' do
 
     pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
 
-    pod 'React', :path => '../node_modules/react-native'
+    pod 'React', :path => '../node_modules/react-native', :subspecs => [
+        'RCTImage'
+    ]
 
     pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+    pod 'react-native-blur', :path => '../node_modules/react-native-blur'
+
+    pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   end
 
   target 'prosibumTests' do

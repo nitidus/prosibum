@@ -31,6 +31,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: FORGOTTEN_PASSWORD.SEND_RECOVERY_LINK
       })
+    },
+    setCountriesCodesModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: FORGOTTEN_PASSWORD.SET_COUNTRIES_CODES_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
     }
   };
 }

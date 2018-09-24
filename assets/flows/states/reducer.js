@@ -5,7 +5,7 @@ import logger from 'redux-logger';
 import Segment from './reducers/components/segment';
 
 /* Layouts Reducers */
-
+import Modal from './reducers/layouts/modal';
 
 /* Views Reducers */
 import Login from './reducers/views/authentication/login';
@@ -15,6 +15,7 @@ import Signup from './reducers/views/authentication/signup';
 export default () => {
   const reducer = combineReducers({
           Segment,
+          Modal,
           Login, ForgottenPassword, Signup
         }),
         middeware = applyMiddleware(logger);

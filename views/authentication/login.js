@@ -8,12 +8,14 @@ import { Global, Views } from '../../assets/styles/index';
 import { Headline, Input, InputGroup, Link } from '../../assets/components/index';
 const Styles = Views.Authentication.Login;
 
+import { Functions } from '../../assets/modules/index';
+
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.Login;
 
 class Login extends Component<{}> {
   static navigationOptions = {
-    header: null
+
   };
 
   componentDidMount() {
@@ -28,8 +30,26 @@ class Login extends Component<{}> {
 
   }
 
+  _componentWillCheckValidation(props) {
+    const _PROPS = props.login;
+
+    var _FORM_FIELDS_VALIDITY = false;
+
+    if (_PROPS.email != '' && _PROPS.password != ''){
+      const _IS_EMAIL_VALID = Functions._checkIsAValidEmail(_PROPS.email);
+
+      if (_IS_EMAIL_VALID){
+        _FORM_FIELDS_VALIDITY = true;  
+      }
+    }
+
+    return !_FORM_FIELDS_VALIDITY;
+  }
+
   render() {
     const { props } = this;
+
+    const _VALIDATED = this._componentWillCheckValidation(props);
 
     return (
       <View style={Styles.Container}>
@@ -74,7 +94,8 @@ class Login extends Component<{}> {
             gradient={Global.colors.pair.ongerine}
             onPress={() => {
               alert('ok')
-            }} />
+            }}
+            forcedDisable={_VALIDATED} />
 
           <Link
             containerStyle={Styles.QuickLink}

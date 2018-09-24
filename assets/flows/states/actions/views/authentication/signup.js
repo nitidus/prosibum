@@ -127,6 +127,12 @@ const mapDispatchToProps = (dispatch) => {
         type: SIGNUP.SET_LOADING_STATUS,
         payload: loadingStatus
       })
+    },
+    setCountriesCodesModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: SIGNUP.SET_COUNTRIES_CODES_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
     }
   };
 }

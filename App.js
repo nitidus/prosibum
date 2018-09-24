@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import getStore from './assets/flows/states/reducer';
-import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'react-navigation';
 
 import {
  DashboardScreen,
@@ -19,30 +19,28 @@ const ProfileStack = createStackNavigator({
   Dashboard: DashboardScreen
 });
 
-const AuthenticationStack = createStackNavigator({
-  Login: LoginScreen,
-  Signup: SignupScreen,
-  ForgottenPassword: ForgottenPasswordScreen
-});
-
-const RootStack = createSwitchNavigator(
+const AuthenticationStack = createStackNavigator(
   {
-    Authorization: AuthorizationScreen,
-    Profile: ProfileStack,
-    Authentication: AuthenticationStack
+    Login: LoginScreen,
+    Signup: SignupScreen,
+    ForgottenPassword: ForgottenPasswordScreen
   },
   {
-    initialRouteName: 'Authorization'
+    headerMode: 'none'
   }
 );
 
-// function setHeadline(payload){
-//   return {
-//     type: 'HEADLINE/SET',
-//     payload
-//   }
-// }
-// store.dispatch(setHeadline({title: 'help', subtitle: 'me'}))
+const RootStack = createSwitchNavigator(
+  {
+    Profile: ProfileStack,
+    Authentication: AuthenticationStack,
+    Authorization: AuthorizationScreen
+  },
+  {
+    initialRouteName: 'Authorization',
+    headerMode: 'none'
+  }
+);
 
 export default class App extends Component<> {
   render() {

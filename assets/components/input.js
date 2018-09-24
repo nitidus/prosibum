@@ -38,6 +38,8 @@ export const Input = (props) => {
       case 'text-link':
       case 'email-link':
       case 'numeric-link':
+      case 'phone-link':
+      case 'phone-number-link':
       case 'password-link':
         if (typeof props.placeholder != 'undefined'){
           attitude.placeholder = props.placeholder;
@@ -145,6 +147,7 @@ export const Input = (props) => {
           name={attitude.name}
           autoCapitalize="none"
           keyboardType="email-address"
+          autoCorrect={false}
           style={[
             Styles.ContainerWithoutButton,
             attitude.style
@@ -222,6 +225,7 @@ export const Input = (props) => {
               ]}
               autoCapitalize="none"
               keyboardType="email-address"
+              autoCorrect={false}
               value={attitude.value}
               placeholder={attitude.placeholder}
               placeholderTextColor={Global.colors.single.mercury}
@@ -236,6 +240,68 @@ export const Input = (props) => {
         </View>
       )
       break;
+
+    case 'numeric-link':
+      return (
+        <View
+          key={attitude.key}
+          name={attitude.name}
+          style={[
+            Styles.ContainerWithButton,
+            attitude.style
+          ]}>
+            <TextInput
+              style={[
+                Styles.TextInputConatiner,
+                { width: '72%' }
+              ]}
+              keyboardType="numeric"
+              value={attitude.value}
+              placeholder={attitude.placeholder}
+              placeholderTextColor={Global.colors.single.mercury}
+              selectionColor={Global.colors.single.mercury}
+              underlineColorAndroid={Global.colors.single.transparent}
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+            <Link
+              containerStyle={Styles.RTL_TextInputLinkContainer}
+              style={Styles.TextInputLink}
+              value={attitude.link}
+              onPress={attitude.onPress} />
+        </View>
+      )
+      break;
+    case 'phone-link':
+    case 'phone-number-link':
+      return (
+        <View
+          key={attitude.key}
+          name={attitude.name}
+          style={[
+            Styles.ContainerWithButton,
+            Styles.RTL_Direction,
+            attitude.style
+          ]}>
+            <TextInput
+              style={[
+                Styles.TextInputConatiner,
+                { width: '72%' }
+              ]}
+              keyboardType="phone-pad"
+              value={attitude.value}
+              placeholder={attitude.placeholder}
+              placeholderTextColor={Global.colors.single.mercury}
+              selectionColor={Global.colors.single.mercury}
+              underlineColorAndroid={Global.colors.single.transparent}
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+            <Link
+              containerStyle={Styles.RTL_TextInputLinkContainer}
+              style={Styles.TextInputLink}
+              value={attitude.link}
+              onPress={attitude.onPress} />
+        </View>
+      )
+      break;
+
     case 'password-link':
       return (
         <View
@@ -402,6 +468,8 @@ export const InputGroup = (props) => {
             case 'text-link':
             case 'email-link':
             case 'numeric-link':
+            case 'phone-link':
+            case 'phone-number-link':
             case 'password-link':
               return child;
               break;

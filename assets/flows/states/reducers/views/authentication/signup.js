@@ -1,20 +1,31 @@
 import { VIEWS } from '../../../types/index';
 const { SIGNUP } = VIEWS.AUTHENTICATION;
 
-const initialState = {
-  firstName: '',
-  lastName: '',
-  userGroup: '',
-  phoneNumber: '',
-  email: '',
-  password: '',
-  userGroups: [],
-  loading: false,
-  connected: {
-    status: true,
-    content: ''
-  }
-};
+import { countries } from '../../../../knowledge/countries.json';
+
+const _SELECTED_DIAL_CODE = countries.find((country) => {
+        if (country.code == 'US'){
+          return country;
+        }
+      }),
+      initialState = {
+        firstName: '',
+        lastName: '',
+        userGroup: '',
+        phone: {
+          number: '',
+          dial_code: _SELECTED_DIAL_CODE
+        },
+        email: '',
+        password: '',
+        userGroups: [],
+        loading: false,
+        connected: {
+          status: true,
+          content: ''
+        },
+        countries_codes_modal_visibility: false
+      };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -39,7 +50,11 @@ export default (state = initialState, action) => {
     case SIGNUP.SET_PHONE_NUMBER:
       return {
         ...state,
-        phoneNumber: action.payload
+        phone: {
+          ...state.phone,
+          number: action.payload.number || state.phone.number,
+          dial_code: action.payload.dial_code || action.payload.dial || action.payload.code || state.phone.dial_code
+        }
       };
       break;
     case SIGNUP.SET_EMAIL:
@@ -77,6 +92,12 @@ export default (state = initialState, action) => {
           status: action.payload.status,
           content: action.payload.content || ''
         }
+      };
+      break;
+    case SIGNUP.SET_COUNTRIES_CODES_MODAL_VISIBILITY:
+      return {
+        ...state,
+        countries_codes_modal_visibility: action.payload
       };
       break;
 

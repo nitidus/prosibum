@@ -1,11 +1,22 @@
 import { VIEWS } from '../../../types/index';
 const { FORGOTTEN_PASSWORD } = VIEWS.AUTHENTICATION;
 
-const initialState = {
-  requestType: '',
-  email: '',
-  phoneNumber: ''
-};
+import { countries } from '../../../../knowledge/countries.json';
+
+const _SELECTED_DIAL_CODE = countries.find((country) => {
+        if (country.code == 'US'){
+          return country;
+        }
+      }),
+      initialState = {
+        requestType: '',
+        email: '',
+        phone: {
+          number: '',
+          dial_code: _SELECTED_DIAL_CODE
+        },
+        countries_codes_modal_visibility: false
+      };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -24,11 +35,21 @@ export default (state = initialState, action) => {
     case FORGOTTEN_PASSWORD.SET_PHONE_NUMBER:
       return {
         ...state,
-        phoneNumber: action.payload
+        phone: {
+          ...state.phone,
+          number: action.payload.number || state.phone.number,
+          dial_code: action.payload.dial_code || action.payload.dial || action.payload.code || state.phone.dial_code
+        }
       };
       break;
     case FORGOTTEN_PASSWORD.SEND_RECOVERY_LINK:
       return state;
+      break;
+    case FORGOTTEN_PASSWORD.SET_COUNTRIES_CODES_MODAL_VISIBILITY:
+      return {
+        ...state,
+        countries_codes_modal_visibility: action.payload
+      };
       break;
 
     default:

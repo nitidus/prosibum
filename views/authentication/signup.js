@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Dimensions } from 'react-native';
+import { StatusBar, View, Dimensions, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Input, InputGroup, Link, Carousel } from '../../assets/components/index';
-import { ActivityIndicator, Toast } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, CountriesCodesModal } from '../../assets/layouts/index';
 const Styles = Views.Authentication.Signup;
 
 import { Functions } from '../../assets/modules/index';
@@ -18,7 +18,7 @@ const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.Sign
 
 class Signup extends Component<{}> {
   static navigationOptions = {
-    header: null
+
   };
 
   componentDidMount() {
@@ -33,6 +33,25 @@ class Signup extends Component<{}> {
     const { props } = this;
 
     props.fetchAvailableUserGroups('Wholesaler');
+  }
+
+  _componentWillCheckValidation(props) {
+    const _PROPS = props.signup,
+          _CONNECTED_STATUS = _PROPS.connected.status;
+
+    var _FORM_FIELDS_VALIDITY = false;
+
+    if (_PROPS.firstName != '' && _PROPS.lastName != '' && _PROPS.userGroup != '' && _PROPS.phone.number != '' && _PROPS.phone.dial_code.area_code != '' && _PROPS.email != '' && _PROPS.password != ''){
+      const _IS_EMAIL_VALID = Functions._checkIsAValidEmail(_PROPS.email),
+            _IS_PHONE_NUMBER_VALID = Functions._checkIsAValidPhoneNumber(_PROPS.phone.number),
+            _IS_PASSWORD_VALID = Functions._checkIsAValidPassword(_PROPS.password);
+
+      if (_IS_EMAIL_VALID && _IS_PHONE_NUMBER_VALID && _IS_PASSWORD_VALID){
+        _FORM_FIELDS_VALIDITY = true;
+      }
+    }
+
+    return !(_CONNECTED_STATUS && _FORM_FIELDS_VALIDITY);
   }
 
   render() {
@@ -72,19 +91,18 @@ class Signup extends Component<{}> {
       }
 
       _CAROUSEL_CONTENT = <Carousel
-        name="group"
+        name="user-group"
         data={props.signup.userGroups}
-        currentCard={props.signup.userGroup}
         style={Styles.FirstCarousel}
         itemWidth={_SCREEN.width - (Styles.InnerContent.marginHorizontal * 2)}
         firstItem={_CURRENT_USER_GROUP}
         onLayout={({ item, i }) => {
           var _CURRENT_USER_GROUP = props.signup.userGroup,
-                _INACTIVE_STYLE = {
-                  backgroundColor: Global.colors.single.wildSand
-                },
-                _ITEM_NAME = item.role.toLowerCase(),
-                _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
+              _INACTIVE_STYLE = {
+                backgroundColor: Global.colors.single.wildSand
+              },
+              _ITEM_NAME = item.role.toLowerCase(),
+              _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
 
           if (_CURRENT_USER_GROUP.role === item.role){
             return (
@@ -107,16 +125,26 @@ class Signup extends Component<{}> {
           }
         }}
         onSnap={(selectedItemIndex) => {
-          props.setUserGroup(props.signup.userGroups[selectedItemIndex])
+          props.setUserGroup(props.signup.userGroups[selectedItemIndex]);
         }}/>;
     }
 
+    const _VALIDATED = this._componentWillCheckValidation(props);
 
     return (
       <View style={Styles.Container}>
         <StatusBar hidden={true}/>
 
         {_TOP_PINNED_TOAST}
+
+        <CountriesCodesModal
+          name="countries-codes-modal"
+          visible={props.signup.countries_codes_modal_visibility}
+          onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
+          selectedItem={props.signup.phone.dial_code}
+          onPress={(currentValue) => props.setPhoneNumber({
+            dial_code: currentValue
+          })} />
 
         <View style={Styles.Content}>
           <Headline
@@ -147,11 +175,15 @@ class Signup extends Component<{}> {
               <InputGroup
                 style={Styles.SecondInputGroup}>
                 <Input
-                  type="TEXT"
+                  type="PHONE-LINK"
                   name="phoneNumber"
                   placeholder="Phone Number"
-                  value={props.signup.phoneNumber}
-                  onChangeText={(currentValue) => props.setPhoneNumber(currentValue)} />
+                  value={props.signup.phone.number}
+                  link={props.signup.phone.dial_code.area_code}
+                  onPress={() => props.setCountriesCodesModalVisibility(true)}
+                  onChangeText={(currentValue) => props.setPhoneNumber({
+                    number: currentValue
+                  })} />
                 <Input
                   type="EMAIL"
                   name="email"
@@ -173,9 +205,16 @@ class Signup extends Component<{}> {
                 value="Signup"
                 gradient={Global.colors.pair.ongerine}
                 onPress={() => {
-                  alert('ok')
+                  const _SEED = {
+                    firstName: props.signup.firstName,
+                    lastName: props.signup.lastName,
+                    userGroup: props.signup.userGroup._id,
+                    phoneNumber: props.signup.phoneNumber,
+                    email: props.signup.email,
+                    password: props.signup.password
+                  };
                 }}
-                forcedDisable={!props.signup.connected.status} />
+                forcedDisable={_VALIDATED} />
 
               <Link
                 containerStyle={Styles.QuickLink}

@@ -1,0 +1,967 @@
+{
+  "countries": [{
+    "name": "Afghanistan",
+    "area_code": "+93",
+    "code": "AF"
+  }, {
+    "name": "Albania",
+    "area_code": "+355",
+    "code": "AL"
+  }, {
+    "name": "Algeria",
+    "area_code": "+213",
+    "code": "DZ"
+  }, {
+    "name": "AmericanSamoa",
+    "area_code": "+1 684",
+    "code": "AS"
+  }, {
+    "name": "Andorra",
+    "area_code": "+376",
+    "code": "AD"
+  }, {
+    "name": "Angola",
+    "area_code": "+244",
+    "code": "AO"
+  }, {
+    "name": "Anguilla",
+    "area_code": "+1 264",
+    "code": "AI"
+  }, {
+    "name": "Antigua and Barbuda",
+    "area_code": "+1268",
+    "code": "AG"
+  }, {
+    "name": "Argentina",
+    "area_code": "+54",
+    "code": "AR"
+  }, {
+    "name": "Armenia",
+    "area_code": "+374",
+    "code": "AM"
+  }, {
+    "name": "Aruba",
+    "area_code": "+297",
+    "code": "AW"
+  }, {
+    "name": "Australia",
+    "area_code": "+61",
+    "code": "AU"
+  }, {
+    "name": "Austria",
+    "area_code": "+43",
+    "code": "AT"
+  }, {
+    "name": "Azerbaijan",
+    "area_code": "+994",
+    "code": "AZ"
+  }, {
+    "name": "Bahamas",
+    "area_code": "+1 242",
+    "code": "BS"
+  }, {
+    "name": "Bahrain",
+    "area_code": "+973",
+    "code": "BH"
+  }, {
+    "name": "Bangladesh",
+    "area_code": "+880",
+    "code": "BD"
+  }, {
+    "name": "Barbados",
+    "area_code": "+1 246",
+    "code": "BB"
+  }, {
+    "name": "Belarus",
+    "area_code": "+375",
+    "code": "BY"
+  }, {
+    "name": "Belgium",
+    "area_code": "+32",
+    "code": "BE"
+  }, {
+    "name": "Belize",
+    "area_code": "+501",
+    "code": "BZ"
+  }, {
+    "name": "Benin",
+    "area_code": "+229",
+    "code": "BJ"
+  }, {
+    "name": "Bermuda",
+    "area_code": "+1 441",
+    "code": "BM"
+  }, {
+    "name": "Bhutan",
+    "area_code": "+975",
+    "code": "BT"
+  }, {
+    "name": "Bosnia and Herzegovina",
+    "area_code": "+387",
+    "code": "BA"
+  }, {
+    "name": "Botswana",
+    "area_code": "+267",
+    "code": "BW"
+  }, {
+    "name": "Brazil",
+    "area_code": "+55",
+    "code": "BR"
+  }, {
+    "name": "British Indian Ocean Territory",
+    "area_code": "+246",
+    "code": "IO"
+  }, {
+    "name": "Bulgaria",
+    "area_code": "+359",
+    "code": "BG"
+  }, {
+    "name": "Burkina Faso",
+    "area_code": "+226",
+    "code": "BF"
+  }, {
+    "name": "Burundi",
+    "area_code": "+257",
+    "code": "BI"
+  }, {
+    "name": "Cambodia",
+    "area_code": "+855",
+    "code": "KH"
+  }, {
+    "name": "Cameroon",
+    "area_code": "+237",
+    "code": "CM"
+  }, {
+    "name": "Canada",
+    "area_code": "+1",
+    "code": "CA"
+  }, {
+    "name": "Cape Verde",
+    "area_code": "+238",
+    "code": "CV"
+  }, {
+    "name": "Cayman Islands",
+    "area_code": "+ 345",
+    "code": "KY"
+  }, {
+    "name": "Central African Republic",
+    "area_code": "+236",
+    "code": "CF"
+  }, {
+    "name": "Chad",
+    "area_code": "+235",
+    "code": "TD"
+  }, {
+    "name": "Chile",
+    "area_code": "+56",
+    "code": "CL"
+  }, {
+    "name": "China",
+    "area_code": "+86",
+    "code": "CN"
+  }, {
+    "name": "Christmas Island",
+    "area_code": "+61",
+    "code": "CX"
+  }, {
+    "name": "Colombia",
+    "area_code": "+57",
+    "code": "CO"
+  }, {
+    "name": "Comoros",
+    "area_code": "+269",
+    "code": "KM"
+  }, {
+    "name": "Congo",
+    "area_code": "+242",
+    "code": "CG"
+  }, {
+    "name": "Cook Islands",
+    "area_code": "+682",
+    "code": "CK"
+  }, {
+    "name": "Costa Rica",
+    "area_code": "+506",
+    "code": "CR"
+  }, {
+    "name": "Croatia",
+    "area_code": "+385",
+    "code": "HR"
+  }, {
+    "name": "Cuba",
+    "area_code": "+53",
+    "code": "CU"
+  }, {
+    "name": "Cyprus",
+    "area_code": "+537",
+    "code": "CY"
+  }, {
+    "name": "Czech Republic",
+    "area_code": "+420",
+    "code": "CZ"
+  }, {
+    "name": "Denmark",
+    "area_code": "+45",
+    "code": "DK"
+  }, {
+    "name": "Djibouti",
+    "area_code": "+253",
+    "code": "DJ"
+  }, {
+    "name": "Dominica",
+    "area_code": "+1 767",
+    "code": "DM"
+  }, {
+    "name": "Dominican Republic",
+    "area_code": "+1 849",
+    "code": "DO"
+  }, {
+    "name": "Ecuador",
+    "area_code": "+593",
+    "code": "EC"
+  }, {
+    "name": "Egypt",
+    "area_code": "+20",
+    "code": "EG"
+  }, {
+    "name": "El Salvador",
+    "area_code": "+503",
+    "code": "SV"
+  }, {
+    "name": "Equatorial Guinea",
+    "area_code": "+240",
+    "code": "GQ"
+  }, {
+    "name": "Eritrea",
+    "area_code": "+291",
+    "code": "ER"
+  }, {
+    "name": "Estonia",
+    "area_code": "+372",
+    "code": "EE"
+  }, {
+    "name": "Ethiopia",
+    "area_code": "+251",
+    "code": "ET"
+  }, {
+    "name": "Faroe Islands",
+    "area_code": "+298",
+    "code": "FO"
+  }, {
+    "name": "Fiji",
+    "area_code": "+679",
+    "code": "FJ"
+  }, {
+    "name": "Finland",
+    "area_code": "+358",
+    "code": "FI"
+  }, {
+    "name": "France",
+    "area_code": "+33",
+    "code": "FR"
+  }, {
+    "name": "French Guiana",
+    "area_code": "+594",
+    "code": "GF"
+  }, {
+    "name": "French Polynesia",
+    "area_code": "+689",
+    "code": "PF"
+  }, {
+    "name": "Gabon",
+    "area_code": "+241",
+    "code": "GA"
+  }, {
+    "name": "Gambia",
+    "area_code": "+220",
+    "code": "GM"
+  }, {
+    "name": "Georgia",
+    "area_code": "+995",
+    "code": "GE"
+  }, {
+    "name": "Germany",
+    "area_code": "+49",
+    "code": "DE"
+  }, {
+    "name": "Ghana",
+    "area_code": "+233",
+    "code": "GH"
+  }, {
+    "name": "Gibraltar",
+    "area_code": "+350",
+    "code": "GI"
+  }, {
+    "name": "Greece",
+    "area_code": "+30",
+    "code": "GR"
+  }, {
+    "name": "Greenland",
+    "area_code": "+299",
+    "code": "GL"
+  }, {
+    "name": "Grenada",
+    "area_code": "+1 473",
+    "code": "GD"
+  }, {
+    "name": "Guadeloupe",
+    "area_code": "+590",
+    "code": "GP"
+  }, {
+    "name": "Guam",
+    "area_code": "+1 671",
+    "code": "GU"
+  }, {
+    "name": "Guatemala",
+    "area_code": "+502",
+    "code": "GT"
+  }, {
+    "name": "Guinea",
+    "area_code": "+224",
+    "code": "GN"
+  }, {
+    "name": "Guinea-Bissau",
+    "area_code": "+245",
+    "code": "GW"
+  }, {
+    "name": "Guyana",
+    "area_code": "+595",
+    "code": "GY"
+  }, {
+    "name": "Haiti",
+    "area_code": "+509",
+    "code": "HT"
+  }, {
+    "name": "Honduras",
+    "area_code": "+504",
+    "code": "HN"
+  }, {
+    "name": "Hungary",
+    "area_code": "+36",
+    "code": "HU"
+  }, {
+    "name": "Iceland",
+    "area_code": "+354",
+    "code": "IS"
+  }, {
+    "name": "India",
+    "area_code": "+91",
+    "code": "IN"
+  }, {
+    "name": "Indonesia",
+    "area_code": "+62",
+    "code": "ID"
+  }, {
+    "name": "Iraq",
+    "area_code": "+964",
+    "code": "IQ"
+  }, {
+    "name": "Ireland",
+    "area_code": "+353",
+    "code": "IE"
+  }, {
+    "name": "Israel",
+    "area_code": "+972",
+    "code": "IL"
+  }, {
+    "name": "Italy",
+    "area_code": "+39",
+    "code": "IT"
+  }, {
+    "name": "Jamaica",
+    "area_code": "+1 876",
+    "code": "JM"
+  }, {
+    "name": "Japan",
+    "area_code": "+81",
+    "code": "JP"
+  }, {
+    "name": "Jordan",
+    "area_code": "+962",
+    "code": "JO"
+  }, {
+    "name": "Kazakhstan",
+    "area_code": "+7 7",
+    "code": "KZ"
+  }, {
+    "name": "Kenya",
+    "area_code": "+254",
+    "code": "KE"
+  }, {
+    "name": "Kiribati",
+    "area_code": "+686",
+    "code": "KI"
+  }, {
+    "name": "Kuwait",
+    "area_code": "+965",
+    "code": "KW"
+  }, {
+    "name": "Kyrgyzstan",
+    "area_code": "+996",
+    "code": "KG"
+  }, {
+    "name": "Latvia",
+    "area_code": "+371",
+    "code": "LV"
+  }, {
+    "name": "Lebanon",
+    "area_code": "+961",
+    "code": "LB"
+  }, {
+    "name": "Lesotho",
+    "area_code": "+266",
+    "code": "LS"
+  }, {
+    "name": "Liberia",
+    "area_code": "+231",
+    "code": "LR"
+  }, {
+    "name": "Liechtenstein",
+    "area_code": "+423",
+    "code": "LI"
+  }, {
+    "name": "Lithuania",
+    "area_code": "+370",
+    "code": "LT"
+  }, {
+    "name": "Luxembourg",
+    "area_code": "+352",
+    "code": "LU"
+  }, {
+    "name": "Madagascar",
+    "area_code": "+261",
+    "code": "MG"
+  }, {
+    "name": "Malawi",
+    "area_code": "+265",
+    "code": "MW"
+  }, {
+    "name": "Malaysia",
+    "area_code": "+60",
+    "code": "MY"
+  }, {
+    "name": "Maldives",
+    "area_code": "+960",
+    "code": "MV"
+  }, {
+    "name": "Mali",
+    "area_code": "+223",
+    "code": "ML"
+  }, {
+    "name": "Malta",
+    "area_code": "+356",
+    "code": "MT"
+  }, {
+    "name": "Marshall Islands",
+    "area_code": "+692",
+    "code": "MH"
+  }, {
+    "name": "Martinique",
+    "area_code": "+596",
+    "code": "MQ"
+  }, {
+    "name": "Mauritania",
+    "area_code": "+222",
+    "code": "MR"
+  }, {
+    "name": "Mauritius",
+    "area_code": "+230",
+    "code": "MU"
+  }, {
+    "name": "Mayotte",
+    "area_code": "+262",
+    "code": "YT"
+  }, {
+    "name": "Mexico",
+    "area_code": "+52",
+    "code": "MX"
+  }, {
+    "name": "Monaco",
+    "area_code": "+377",
+    "code": "MC"
+  }, {
+    "name": "Mongolia",
+    "area_code": "+976",
+    "code": "MN"
+  }, {
+    "name": "Montenegro",
+    "area_code": "+382",
+    "code": "ME"
+  }, {
+    "name": "Montserrat",
+    "area_code": "+1664",
+    "code": "MS"
+  }, {
+    "name": "Morocco",
+    "area_code": "+212",
+    "code": "MA"
+  }, {
+    "name": "Myanmar",
+    "area_code": "+95",
+    "code": "MM"
+  }, {
+    "name": "Namibia",
+    "area_code": "+264",
+    "code": "NA"
+  }, {
+    "name": "Nauru",
+    "area_code": "+674",
+    "code": "NR"
+  }, {
+    "name": "Nepal",
+    "area_code": "+977",
+    "code": "NP"
+  }, {
+    "name": "Netherlands",
+    "area_code": "+31",
+    "code": "NL"
+  }, {
+    "name": "Netherlands Antilles",
+    "area_code": "+599",
+    "code": "AN"
+  }, {
+    "name": "New Caledonia",
+    "area_code": "+687",
+    "code": "NC"
+  }, {
+    "name": "New Zealand",
+    "area_code": "+64",
+    "code": "NZ"
+  }, {
+    "name": "Nicaragua",
+    "area_code": "+505",
+    "code": "NI"
+  }, {
+    "name": "Niger",
+    "area_code": "+227",
+    "code": "NE"
+  }, {
+    "name": "Nigeria",
+    "area_code": "+234",
+    "code": "NG"
+  }, {
+    "name": "Niue",
+    "area_code": "+683",
+    "code": "NU"
+  }, {
+    "name": "Norfolk Island",
+    "area_code": "+672",
+    "code": "NF"
+  }, {
+    "name": "Northern Mariana Islands",
+    "area_code": "+1 670",
+    "code": "MP"
+  }, {
+    "name": "Norway",
+    "area_code": "+47",
+    "code": "NO"
+  }, {
+    "name": "Oman",
+    "area_code": "+968",
+    "code": "OM"
+  }, {
+    "name": "Pakistan",
+    "area_code": "+92",
+    "code": "PK"
+  }, {
+    "name": "Palau",
+    "area_code": "+680",
+    "code": "PW"
+  }, {
+    "name": "Panama",
+    "area_code": "+507",
+    "code": "PA"
+  }, {
+    "name": "Papua New Guinea",
+    "area_code": "+675",
+    "code": "PG"
+  }, {
+    "name": "Paraguay",
+    "area_code": "+595",
+    "code": "PY"
+  }, {
+    "name": "Peru",
+    "area_code": "+51",
+    "code": "PE"
+  }, {
+    "name": "Philippines",
+    "area_code": "+63",
+    "code": "PH"
+  }, {
+    "name": "Poland",
+    "area_code": "+48",
+    "code": "PL"
+  }, {
+    "name": "Portugal",
+    "area_code": "+351",
+    "code": "PT"
+  }, {
+    "name": "Puerto Rico",
+    "area_code": "+1 939",
+    "code": "PR"
+  }, {
+    "name": "Qatar",
+    "area_code": "+974",
+    "code": "QA"
+  }, {
+    "name": "Romania",
+    "area_code": "+40",
+    "code": "RO"
+  }, {
+    "name": "Rwanda",
+    "area_code": "+250",
+    "code": "RW"
+  }, {
+    "name": "Samoa",
+    "area_code": "+685",
+    "code": "WS"
+  }, {
+    "name": "San Marino",
+    "area_code": "+378",
+    "code": "SM"
+  }, {
+    "name": "Saudi Arabia",
+    "area_code": "+966",
+    "code": "SA"
+  }, {
+    "name": "Senegal",
+    "area_code": "+221",
+    "code": "SN"
+  }, {
+    "name": "Serbia",
+    "area_code": "+381",
+    "code": "RS"
+  }, {
+    "name": "Seychelles",
+    "area_code": "+248",
+    "code": "SC"
+  }, {
+    "name": "Sierra Leone",
+    "area_code": "+232",
+    "code": "SL"
+  }, {
+    "name": "Singapore",
+    "area_code": "+65",
+    "code": "SG"
+  }, {
+    "name": "Slovakia",
+    "area_code": "+421",
+    "code": "SK"
+  }, {
+    "name": "Slovenia",
+    "area_code": "+386",
+    "code": "SI"
+  }, {
+    "name": "Solomon Islands",
+    "area_code": "+677",
+    "code": "SB"
+  }, {
+    "name": "South Africa",
+    "area_code": "+27",
+    "code": "ZA"
+  }, {
+    "name": "South Georgia and the South Sandwich Islands",
+    "area_code": "+500",
+    "code": "GS"
+  }, {
+    "name": "Spain",
+    "area_code": "+34",
+    "code": "ES"
+  }, {
+    "name": "Sri Lanka",
+    "area_code": "+94",
+    "code": "LK"
+  }, {
+    "name": "Sudan",
+    "area_code": "+249",
+    "code": "SD"
+  }, {
+    "name": "Suriname",
+    "area_code": "+597",
+    "code": "SR"
+  }, {
+    "name": "Swaziland",
+    "area_code": "+268",
+    "code": "SZ"
+  }, {
+    "name": "Sweden",
+    "area_code": "+46",
+    "code": "SE"
+  }, {
+    "name": "Switzerland",
+    "area_code": "+41",
+    "code": "CH"
+  }, {
+    "name": "Tajikistan",
+    "area_code": "+992",
+    "code": "TJ"
+  }, {
+    "name": "Thailand",
+    "area_code": "+66",
+    "code": "TH"
+  }, {
+    "name": "Togo",
+    "area_code": "+228",
+    "code": "TG"
+  }, {
+    "name": "Tokelau",
+    "area_code": "+690",
+    "code": "TK"
+  }, {
+    "name": "Tonga",
+    "area_code": "+676",
+    "code": "TO"
+  }, {
+    "name": "Trinidad and Tobago",
+    "area_code": "+1 868",
+    "code": "TT"
+  }, {
+    "name": "Tunisia",
+    "area_code": "+216",
+    "code": "TN"
+  }, {
+    "name": "Turkey",
+    "area_code": "+90",
+    "code": "TR"
+  }, {
+    "name": "Turkmenistan",
+    "area_code": "+993",
+    "code": "TM"
+  }, {
+    "name": "Turks and Caicos Islands",
+    "area_code": "+1 649",
+    "code": "TC"
+  }, {
+    "name": "Tuvalu",
+    "area_code": "+688",
+    "code": "TV"
+  }, {
+    "name": "Uganda",
+    "area_code": "+256",
+    "code": "UG"
+  }, {
+    "name": "Ukraine",
+    "area_code": "+380",
+    "code": "UA"
+  }, {
+    "name": "United Arab Emirates",
+    "area_code": "+971",
+    "code": "AE"
+  }, {
+    "name": "United Kingdom",
+    "area_code": "+44",
+    "code": "GB"
+  }, {
+    "name": "United States",
+    "area_code": "+1",
+    "code": "US"
+  }, {
+    "name": "Uruguay",
+    "area_code": "+598",
+    "code": "UY"
+  }, {
+    "name": "Uzbekistan",
+    "area_code": "+998",
+    "code": "UZ"
+  }, {
+    "name": "Vanuatu",
+    "area_code": "+678",
+    "code": "VU"
+  }, {
+    "name": "Wallis and Futuna",
+    "area_code": "+681",
+    "code": "WF"
+  }, {
+    "name": "Yemen",
+    "area_code": "+967",
+    "code": "YE"
+  }, {
+    "name": "Zambia",
+    "area_code": "+260",
+    "code": "ZM"
+  }, {
+    "name": "Zimbabwe",
+    "area_code": "+263",
+    "code": "ZW"
+  }, {
+    "name": "land Islands",
+    "area_code": "",
+    "code": "AX"
+  }, {
+    "name": "Antarctica",
+    "area_code": null,
+    "code": "AQ"
+  }, {
+    "name": "Bolivia, Plurinational State of",
+    "area_code": "+591",
+    "code": "BO"
+  }, {
+    "name": "Brunei Darussalam",
+    "area_code": "+673",
+    "code": "BN"
+  }, {
+    "name": "Cocos (Keeling) Islands",
+    "area_code": "+61",
+    "code": "CC"
+  }, {
+    "name": "Congo, The Democratic Republic of the",
+    "area_code": "+243",
+    "code": "CD"
+  }, {
+    "name": "Cote d'Ivoire",
+    "area_code": "+225",
+    "code": "CI"
+  }, {
+    "name": "Falkland Islands (Malvinas)",
+    "area_code": "+500",
+    "code": "FK"
+  }, {
+    "name": "Guernsey",
+    "area_code": "+44",
+    "code": "GG"
+  }, {
+    "name": "Holy See (Vatican City State)",
+    "area_code": "+379",
+    "code": "VA"
+  }, {
+    "name": "Hong Kong",
+    "area_code": "+852",
+    "code": "HK"
+  }, {
+    "name": "Iran, Islamic Republic of",
+    "area_code": "+98",
+    "code": "IR"
+  }, {
+    "name": "Isle of Man",
+    "area_code": "+44",
+    "code": "IM"
+  }, {
+    "name": "Jersey",
+    "area_code": "+44",
+    "code": "JE"
+  }, {
+    "name": "Korea, Democratic People's Republic of",
+    "area_code": "+850",
+    "code": "KP"
+  }, {
+    "name": "Korea, Republic of",
+    "area_code": "+82",
+    "code": "KR"
+  }, {
+    "name": "Lao People's Democratic Republic",
+    "area_code": "+856",
+    "code": "LA"
+  }, {
+    "name": "Libyan Arab Jamahiriya",
+    "area_code": "+218",
+    "code": "LY"
+  }, {
+    "name": "Macao",
+    "area_code": "+853",
+    "code": "MO"
+  }, {
+    "name": "Macedonia, The Former Yugoslav Republic of",
+    "area_code": "+389",
+    "code": "MK"
+  }, {
+    "name": "Micronesia, Federated States of",
+    "area_code": "+691",
+    "code": "FM"
+  }, {
+    "name": "Moldova, Republic of",
+    "area_code": "+373",
+    "code": "MD"
+  }, {
+    "name": "Mozambique",
+    "area_code": "+258",
+    "code": "MZ"
+  }, {
+    "name": "Palestinian Territory, Occupied",
+    "area_code": "+970",
+    "code": "PS"
+  }, {
+    "name": "Pitcairn",
+    "area_code": "+872",
+    "code": "PN"
+  }, {
+    "name": "Réunion",
+    "area_code": "+262",
+    "code": "RE"
+  }, {
+    "name": "Russia",
+    "area_code": "+7",
+    "code": "RU"
+  }, {
+    "name": "Saint Barthélemy",
+    "area_code": "+590",
+    "code": "BL"
+  }, {
+    "name": "Saint Helena, Ascension and Tristan Da Cunha",
+    "area_code": "+290",
+    "code": "SH"
+  }, {
+    "name": "Saint Kitts and Nevis",
+    "area_code": "+1 869",
+    "code": "KN"
+  }, {
+    "name": "Saint Lucia",
+    "area_code": "+1 758",
+    "code": "LC"
+  }, {
+    "name": "Saint Martin",
+    "area_code": "+590",
+    "code": "MF"
+  }, {
+    "name": "Saint Pierre and Miquelon",
+    "area_code": "+508",
+    "code": "PM"
+  }, {
+    "name": "Saint Vincent and the Grenadines",
+    "area_code": "+1 784",
+    "code": "VC"
+  }, {
+    "name": "Sao Tome and Principe",
+    "area_code": "+239",
+    "code": "ST"
+  }, {
+    "name": "Somalia",
+    "area_code": "+252",
+    "code": "SO"
+  }, {
+    "name": "Svalbard and Jan Mayen",
+    "area_code": "+47",
+    "code": "SJ"
+  }, {
+    "name": "Syrian Arab Republic",
+    "area_code": "+963",
+    "code": "SY"
+  }, {
+    "name": "Taiwan, Province of China",
+    "area_code": "+886",
+    "code": "TW"
+  }, {
+    "name": "Tanzania, United Republic of",
+    "area_code": "+255",
+    "code": "TZ"
+  }, {
+    "name": "Timor-Leste",
+    "area_code": "+670",
+    "code": "TL"
+  }, {
+    "name": "Venezuela, Bolivarian Republic of",
+    "area_code": "+58",
+    "code": "VE"
+  }, {
+    "name": "Viet Nam",
+    "area_code": "+84",
+    "code": "VN"
+  }, {
+    "name": "Virgin Islands, British",
+    "area_code": "+1 284",
+    "code": "VG"
+  }, {
+    "name": "Virgin Islands, U.S.",
+    "area_code": "+1 340",
+    "code": "VI"
+  }]
+}

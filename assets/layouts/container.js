@@ -65,11 +65,8 @@ export const Container = (props) => {
         {
           attitude.children.map((child, i) => {
             var childProps = {...child.props};
-
-            const today = new Date(),
-                  randomToken = Math.random();
-
-            const ultimateKey = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+            
+            const ultimateKey = Functions._generateNewUniqueObjectKey();
 
             childProps.key = childProps.name || ultimateKey;
 

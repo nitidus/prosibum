@@ -3,13 +3,24 @@ PODS:
     - React
   - React (0.56.0):
     - React/Core (= 0.56.0)
+  - react-native-blur (0.8.0):
+    - React
   - React/Core (0.56.0):
     - yoga (= 0.56.0.React)
+  - React/RCTImage (0.56.0):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTNetwork (0.56.0):
+    - React/Core
+  - RNSVG (7.0.3):
+    - React
   - yoga (0.56.0.React)
 
 DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
-  - React (from `../node_modules/react-native`)
+  - react-native-blur (from `../node_modules/react-native-blur`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
@@ -17,14 +28,20 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-linear-gradient
   React:
     :path: ../node_modules/react-native
+  react-native-blur:
+    :path: ../node_modules/react-native-blur
+  RNSVG:
+    :path: ../node_modules/react-native-svg
   yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga
 
 SPEC CHECKSUMS:
   BVLinearGradient: 38cd36b3a65918ad3d8374afca44d45337ed9dc5
   React: bdb39c05e2eed10a43056cff89a68bc9ebe7f232
+  react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
+  RNSVG: 5e59688752986880ace09daecb8d64bc7a910db8
   yoga: 2418c171de153cbe3c94dc28c3bf691b1695ae17
 
-PODFILE CHECKSUM: f2baf4a690e4a2f09b89cf5fa62f58ee6fe042d3
+PODFILE CHECKSUM: c65f2cbc1c02765cf65a1a9af22c193d51d3ab44
 
 COCOAPODS: 1.3.1
