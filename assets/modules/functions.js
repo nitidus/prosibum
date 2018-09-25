@@ -1,12 +1,14 @@
+import { countries as __COUNTRIES } from '../flows/knowledge/index';
+
 module.exports = {
   _convertKeywordToToken: (keyword) => {
     return keyword.replace(/_/ig, ' ').replace(/\b\w/ig, char => char.toUpperCase());
   },
   _generateNewUniqueObjectKey: () => {
     const today = new Date(),
-          randomToken = Math.random();
+          randomToken = Math.floor((Math.random() * 999999999999) + 100000000000);
 
-    return parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+    return today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString();
   },
   _convertHexColorToRGBA: (hex, opacity) => {
       var c;
@@ -39,5 +41,27 @@ module.exports = {
     const _IS_PASSWORD_VALID = password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\$%&#!~`\^*\(\)_\-\+\=\?><])[0-9a-zA-Z\$%&#!~`\^*\(\)_\-\+\=\?><]{8,}$/);
 
     return (_IS_PASSWORD_VALID !== null)? true: false;
+  },
+  _getCountryDetailWithCode: (code) => {
+    const _CODE = (code || "AF").toUpperCase();
+
+    return __COUNTRIES.find((country) => {
+      if (country.code == _CODE){
+        return country;
+      }
+    })
+  },
+  _generateNextOffset: (offset, limit) => {
+    if (typeof offset == 'object'){
+      return {
+        from: offset.from + limit,
+        to: (offset.from === 0)? offset.to + limit + 1: offset.to + limit
+      };
+    }else{
+      return {
+        from: offset,
+        to: offset + limit + 1
+      };
+    }
   }
 };

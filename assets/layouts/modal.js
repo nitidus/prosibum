@@ -4,18 +4,13 @@ import { View, Text, Animated, Easing } from 'react-native';
 import PrimaryModal from "react-native-modal";
 import { BlurView } from 'react-native-blur';
 
-import { connect } from 'react-redux';
-
 import { Global, Modules } from '../styles/index';
 import { Icon } from './icon';
 const Styles = Modules.Layouts.Modal;
 
 import { Functions } from '../modules/index';
 
-import { Layouts as LayoutsActions } from '../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = LayoutsActions.Modal;
-
-const Modal = (props) => {
+export const Modal = (props) => {
   var attitude = {};
 
   if (typeof props.key != 'undefined'){
@@ -42,7 +37,7 @@ const Modal = (props) => {
     attitude.name = props.name || props.title;
   }
 
-  attitude.visibility = props.visibility || props.visible || props.isVisible || props.modal.visibility;
+  attitude.visibility = props.visibility || props.visible || props.isVisible || false;
 
   if (typeof props.style != 'undefined'){
     attitude.style = props.style;
@@ -71,10 +66,6 @@ const Modal = (props) => {
     attitude.onBlur = props.onBlur || props.onModalBlur || props.modalOnBlur || props.onClose || props.onModalClose || props.modalOnClose;
   }
 
-  if (attitude.visibility !== props.modal.visibility){
-    props.setModalVisibility(attitude.visibility);
-  }
-
   const MODAL = {
     BACKDROP: {
       COLOR: Global.colors.single.rangoonGreen,
@@ -86,7 +77,6 @@ const Modal = (props) => {
     },
     ON_BLUR: (status) => {
       attitude.onBlur(status);
-      props.setModalVisibility(status);
     }
   };
 
@@ -97,7 +87,7 @@ const Modal = (props) => {
 
     _PRIMARY_MODAL_CONTENT = (
       <PrimaryModal
-        isVisible={props.modal.visibility}
+        isVisible={attitude.visibility}
         backdropColor={MODAL.BACKDROP.COLOR}
         backdropOpacity={MODAL.BACKDROP.OPACITY}
         swipeDirection={_SWIPE_DIRECTION}
@@ -134,7 +124,7 @@ const Modal = (props) => {
   }else{
     _PRIMARY_MODAL_CONTENT = (
       <PrimaryModal
-        isVisible={props.modal.visibility}
+        isVisible={attitude.visibility}
         backdropColor={MODAL.BACKDROP.COLOR}
         backdropOpacity={MODAL.BACKDROP.OPACITY}
         style={Styles.BottomModal}
@@ -178,5 +168,3 @@ const Modal = (props) => {
     </View>
   )
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Modal);

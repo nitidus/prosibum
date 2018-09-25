@@ -1,7 +1,7 @@
-import Modal from './layouts/modal';
+import CountriesCodesModal from './layouts/countries-codes-modal';
 
 const Layouts = {
-  Modal
+  CountriesCodesModal
 };
 
 module.exports = Layouts;

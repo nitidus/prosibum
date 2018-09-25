@@ -62,6 +62,10 @@ export const Carousel = (props) => {
     attitude.onSnap = props.onSnap || props.onSnapToItem || props.onSnapItem || props.onItemSnap
   }
 
+  attitude.useScrollView = props.useScrollView || props.enableScrollView || false;
+
+  attitude.enableMomentum = props.enableMomentum || props.useMomentum || props.momentum || false;
+
   attitude.layout = (props.layoutType || props.layout || props.type || 'stack').toLowerCase();
 
   const _LAYOUT_TYPE = (attitude.layout == 'stack' || attitude.layout == 'tinder' || attitude.layout == 'default')? attitude.layout: 'stack';
@@ -81,7 +85,9 @@ export const Carousel = (props) => {
           sliderWidth={attitude.width}
           itemWidth={attitude.itemWidth}
           firstItem={attitude.firstItem}
-          onSnapToItem={attitude.onSnap} />
+          onSnapToItem={attitude.onSnap}
+          useScrollView={attitude.useScrollView}
+          enableMomentum={attitude.enableMomentum} />
     </View>
   )
 }

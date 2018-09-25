@@ -1,13 +1,9 @@
 import { VIEWS } from '../../../types/index';
 const { SIGNUP } = VIEWS.AUTHENTICATION;
 
-import { countries } from '../../../../knowledge/countries.json';
+import { Functions } from '../../../../../modules/index';
 
-const _SELECTED_DIAL_CODE = countries.find((country) => {
-        if (country.code == 'US'){
-          return country;
-        }
-      }),
+const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
       initialState = {
         firstName: '',
         lastName: '',

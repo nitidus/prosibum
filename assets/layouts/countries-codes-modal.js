@@ -7,18 +7,18 @@ import { connect } from 'react-redux';
 
 import { Global, Modules } from '../styles/index';
 import { Icon } from './icon';
-import Modal from './modal';
+import { Modal } from './modal';
 import { Input, Carousel } from '../components/index';
 const Styles = Modules.Layouts.CountriesCodesModal;
 
 import { Functions } from '../modules/index';
 
 import { Layouts as LayoutsActions } from '../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = LayoutsActions.Modal;
+const { mapStateToProps, mapDispatchToProps } = LayoutsActions.CountriesCodesModal;
 
-import { countries } from '../flows/knowledge/countries.json';
+import { countries as __COUNTRIES } from '../flows/knowledge/countries.json';
 
-export const CountriesCodesModal = (props) => {
+const CountriesCodesModal = (props) => {
   var attitude = {};
 
   if (typeof props.key != 'undefined'){
@@ -64,9 +64,14 @@ export const CountriesCodesModal = (props) => {
     attitude.onBlur = props.onBlur || props.onModalBlur || props.modalOnBlur || props.onClose || props.onModalClose || props.modalOnClose;
   }
 
-  const _SELECTED_INDEX = countries.findIndex((country) => {
+  if (attitude.visibility !== props.countriesCodesModal.visibility){
+    props.setModalVisibility(attitude.visibility);
+  }
+
+  const _SELECTED_INDEX = __COUNTRIES.findIndex((country) => {
           const _SELECTED_COUNTRY_CODE = attitude.selectedItem.code,
                 _COUNTRY_CODE = country.code;
+
           return (_COUNTRY_CODE === _SELECTED_COUNTRY_CODE);
         }),
         MODAL = {
@@ -76,10 +81,16 @@ export const CountriesCodesModal = (props) => {
           }
         };
 
+  if (props.countriesCodesModal.restricted_data.length === 0){
+    var _RESTRICTED_COUNTRIES = __COUNTRIES.slice(props.countriesCodesModal.offset.from, (props.countriesCodesModal.offset.to + 1));
+
+    props.mergeDataWithCarouselRestrictedData(_RESTRICTED_COUNTRIES);
+  }
+
   return (
     <Modal
       name="countries-codes-modal"
-      visible={attitude.visibility}
+      visible={props.countriesCodesModal.visibility}
       onBlur={attitude.onBlur}
       onPress={attitude.onPress}
       style={Styles.ModalContainer}>
@@ -87,7 +98,7 @@ export const CountriesCodesModal = (props) => {
           style={Styles.Container}>
             <Carousel
               name="group"
-              data={countries}
+              data={props.countriesCodesModal.restricted_data}
               style={Styles.CarouselContainer}
               itemWidth={_Screen.width - (Styles.changeButton.marginHorizontal * 2)}
               firstItem={_SELECTED_INDEX}
@@ -136,7 +147,18 @@ export const CountriesCodesModal = (props) => {
                 }
               }}
               onSnap={(selectedItemIndex) => {
-                attitude.onPress(countries[selectedItemIndex]);
+                attitude.onPress(props.countriesCodesModal.restricted_data[selectedItemIndex]);
+
+                const _OFFSET_LIMIT_COMBINATION = props.countriesCodesModal.offset.to - 2;
+
+                if (selectedItemIndex == _OFFSET_LIMIT_COMBINATION){
+                  var _NEXT_OFFSET = Functions._generateNextOffset(props.countriesCodesModal.offset, props.countriesCodesModal.limit);
+
+                  const _LOCAL_RESTRICTED_COUNTRIES = __COUNTRIES.slice(_NEXT_OFFSET.from, _NEXT_OFFSET.to);
+
+                  props.setCarouselOffset(_NEXT_OFFSET);
+                  props.mergeDataWithCarouselRestrictedData(_LOCAL_RESTRICTED_COUNTRIES);
+                }
               }}/>
             <Input
               style={Styles.changeButton}
