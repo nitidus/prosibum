@@ -785,11 +785,11 @@
     "code": "ZW"
   }, {
     "name": "land Islands",
-    "area_code": "",
+    "area_code": "+1",
     "code": "AX"
   }, {
     "name": "Antarctica",
-    "area_code": null,
+    "area_code": "+1",
     "code": "AQ"
   }, {
     "name": "Bolivia, Plurinational State of",

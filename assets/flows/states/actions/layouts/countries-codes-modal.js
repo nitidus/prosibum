@@ -15,6 +15,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: visibility
       })
     },
+    setCarouselCurrentIndex: (currentIndex) => {
+      dispatch({
+        type: COUNTRIES_CODES_MODAL.SET_CAROUSEL_CURRENT_INDEX,
+        payload: currentIndex
+      })
+    },
     setCarouselOffset: (offset) => {
       dispatch({
         type: COUNTRIES_CODES_MODAL.SET_CAROUSEL_OFFSET,

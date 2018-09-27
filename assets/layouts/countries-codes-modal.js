@@ -81,9 +81,10 @@ const CountriesCodesModal = (props) => {
           }
         };
 
-  if (props.countriesCodesModal.restricted_data.length === 0){
+  if (props.countriesCodesModal.restrictedData.length === 0){
     var _RESTRICTED_COUNTRIES = __COUNTRIES.slice(props.countriesCodesModal.offset.from, (props.countriesCodesModal.offset.to + 1));
-
+    
+    props.setCarouselCurrentIndex(_SELECTED_INDEX);
     props.mergeDataWithCarouselRestrictedData(_RESTRICTED_COUNTRIES);
   }
 
@@ -91,17 +92,20 @@ const CountriesCodesModal = (props) => {
     <Modal
       name="countries-codes-modal"
       visible={props.countriesCodesModal.visibility}
-      onBlur={attitude.onBlur}
+      onBlur={() => {
+        attitude.onPress(Functions._getCountryDetailWithCode());
+        MODAL.ON_BLUR(false);
+      }}
       onPress={attitude.onPress}
       style={Styles.ModalContainer}>
         <View
           style={Styles.Container}>
             <Carousel
               name="group"
-              data={props.countriesCodesModal.restricted_data}
+              data={props.countriesCodesModal.restrictedData}
               style={Styles.CarouselContainer}
               itemWidth={_Screen.width - (Styles.changeButton.marginHorizontal * 2)}
-              firstItem={_SELECTED_INDEX}
+              firstItem={props.countriesCodesModal.currentIndex}
               onLayout={({ item, i }) => {
                 var _SELECTED_COUNTRY_CODE = attitude.selectedItem || 0,
                     _ITEM_NAME = item.code.toLowerCase(),
@@ -147,7 +151,8 @@ const CountriesCodesModal = (props) => {
                 }
               }}
               onSnap={(selectedItemIndex) => {
-                attitude.onPress(props.countriesCodesModal.restricted_data[selectedItemIndex]);
+                props.setCarouselCurrentIndex(selectedItemIndex);
+                attitude.onPress(props.countriesCodesModal.restrictedData[selectedItemIndex]);
 
                 const _OFFSET_LIMIT_COMBINATION = props.countriesCodesModal.offset.to - 2;
 

@@ -60,7 +60,7 @@ module.exports = {
     }else{
       return {
         from: offset,
-        to: offset + limit + 1
+        to: (offset === 0)? offset + limit + 1: offset + limit
       };
     }
   }
