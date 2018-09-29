@@ -1,4 +1,7 @@
+import { AsyncStorage } from 'react-native';
+
 import { countries as __COUNTRIES } from '../flows/knowledge/index';
+import { name as __APP_NAME } from '../../app.json';
 
 module.exports = {
   _convertKeywordToToken: (keyword) => {
@@ -43,7 +46,7 @@ module.exports = {
     return (_IS_PASSWORD_VALID !== null)? true: false;
   },
   _getCountryDetailWithCode: (code) => {
-    const _CODE = (code || "AF").toUpperCase();
+    const _CODE = (code || "IR").toUpperCase();
 
     return __COUNTRIES.find((country) => {
       if (country.code == _CODE){
@@ -62,6 +65,63 @@ module.exports = {
         from: offset,
         to: (offset === 0)? offset + limit + 1: offset + limit
       };
+    }
+  },
+  _getRidOfZerosFromPhoneNumber: (phoneNumber) => {
+    return phoneNumber.replace(/\b[0]+/, '');
+  },
+  _prepareSignupSeed: (inputProps) => {
+    return {
+      personal: {
+        first_name: inputProps.firstName,
+        last_name: inputProps.lastName
+      },
+      user_group_id: inputProps.userGroup._id,
+      phone: {
+        mobile: `${inputProps.phone.dialCode.area_code}${module.exports._getRidOfZerosFromPhoneNumber(inputProps.phone.number)}`
+      },
+      email: inputProps.email,
+      password: inputProps.password
+    };
+  },
+  _storeDataWithKey: async (key, value) => {
+    try {
+      await AsyncStorage.setItem(`@${__APP_NAME}:${key}`, value);
+
+      return true;
+    } catch (error) {
+      //Error saving data
+    }
+  },
+  _retrieveDataWithKey: async (key) => {
+    try {
+      const _DATA = await AsyncStorage.getItem(`@${__APP_NAME}:${key}`);
+
+      if (_DATA !== null){
+        return _DATA;
+      }else{
+        return false;
+      }
+    } catch (error) {
+      //Error retrieving data
+    }
+  },
+  _removeDataWithKey: async (key) => {
+    try {
+      await AsyncStorage.removeItem(`@${__APP_NAME}:${key}`);
+
+      return true;
+    } catch (error) {
+      //Error retrieving data
+    }
+  },
+  _retrieveAllKeys: async () => {
+    try {
+      const _KEYS = await AsyncStorage.getAllKeys();
+
+      return _KEYS;
+    } catch (error) {
+      //Error retrieving all keys
     }
   }
 };

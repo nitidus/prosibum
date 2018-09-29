@@ -9,9 +9,9 @@ const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
         email: '',
         phone: {
           number: '',
-          dial_code: _SELECTED_DIAL_CODE
+          dialCode: _SELECTED_DIAL_CODE
         },
-        countries_codes_modal_visibility: false
+        countriesCodesModalVisibility: false
       };
 
 export default (state = initialState, action) => {
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
         phone: {
           ...state.phone,
           number: action.payload.number || state.phone.number,
-          dial_code: action.payload.dial_code || action.payload.dial || action.payload.code || state.phone.dial_code
+          dialCode: action.payload.dialCode || action.payload.dial_code || action.payload.dial || action.payload.code || state.phone.dialCode
         }
       };
       break;
@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
     case FORGOTTEN_PASSWORD.SET_COUNTRIES_CODES_MODAL_VISIBILITY:
       return {
         ...state,
-        countries_codes_modal_visibility: action.payload
+        countriesCodesModalVisibility: action.payload
       };
       break;
 

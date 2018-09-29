@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, TouchableOpacity, TextInput, Text, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, TextInput, Keyboard, Text, Animated, Easing } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -33,6 +33,13 @@ export const Input = (props) => {
         if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
           attitude.onChangeText = props.onChangeText || props.onChange;
         }
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
+        }
+
+        attitude.onBlur = props.onBlur || function (){};
+        attitude.onFocus = props.onFocus || function (){};
         break;
       case 'link':
       case 'text-link':
@@ -56,6 +63,9 @@ export const Input = (props) => {
         if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
           attitude.onChangeText = props.onChangeText || props.onChange;
         }
+
+          attitude.onBlur = props.onBlur || function (){};
+          attitude.onFocus = props.onFocus || function (){};
         break;
       case 'button':
         if (typeof props.value != 'undefined'){
@@ -137,7 +147,31 @@ export const Input = (props) => {
           placeholderTextColor={Global.colors.single.mercury}
           selectionColor={Global.colors.single.mercury}
           underlineColorAndroid={Global.colors.single.transparent}
-          onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+          onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+          onBlur={attitude.onBlur}
+          onFocus={attitude.onFocus}
+          onSubmitEditing={Keyboard.dismiss} />
+      )
+      break;
+    case 'numeric':
+      return (
+        <TextInput
+          key={attitude.key}
+          name={attitude.name}
+          keyboardType="numeric"
+          style={[
+            Styles.ContainerWithoutButton,
+            attitude.style
+          ]}
+          value={attitude.value}
+          placeholder={attitude.placeholder}
+          placeholderTextColor={Global.colors.single.mercury}
+          selectionColor={Global.colors.single.mercury}
+          underlineColorAndroid={Global.colors.single.transparent}
+          onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+          onBlur={attitude.onBlur}
+          onFocus={attitude.onFocus}
+          onSubmitEditing={Keyboard.dismiss} />
       )
       break;
     case 'email':
@@ -157,7 +191,10 @@ export const Input = (props) => {
           placeholderTextColor={Global.colors.single.mercury}
           selectionColor={Global.colors.single.mercury}
           underlineColorAndroid={Global.colors.single.transparent}
-          onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+          onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+          onBlur={attitude.onBlur}
+          onFocus={attitude.onFocus}
+          onSubmitEditing={Keyboard.dismiss} />
       )
       break;
     case 'password':
@@ -177,7 +214,10 @@ export const Input = (props) => {
           placeholderTextColor={Global.colors.single.mercury}
           selectionColor={Global.colors.single.mercury}
           underlineColorAndroid={Global.colors.single.transparent}
-          onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+          onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+          onBlur={attitude.onBlur}
+          onFocus={attitude.onFocus}
+          onSubmitEditing={Keyboard.dismiss} />
       )
       break;
     case 'link':
@@ -200,7 +240,10 @@ export const Input = (props) => {
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
               underlineColorAndroid={Global.colors.single.transparent}
-              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+              onBlur={attitude.onBlur}
+              onFocus={attitude.onFocus}
+              onSubmitEditing={Keyboard.dismiss} />
             <Link
               containerStyle={Styles.RTL_TextInputLinkContainer}
               style={Styles.TextInputLink}
@@ -231,7 +274,10 @@ export const Input = (props) => {
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
               underlineColorAndroid={Global.colors.single.transparent}
-              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+              onBlur={attitude.onBlur}
+              onFocus={attitude.onFocus}
+              onSubmitEditing={Keyboard.dismiss} />
             <Link
               containerStyle={Styles.RTL_TextInputLinkContainer}
               style={Styles.TextInputLink}
@@ -261,7 +307,10 @@ export const Input = (props) => {
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
               underlineColorAndroid={Global.colors.single.transparent}
-              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+              onBlur={attitude.onBlur}
+              onFocus={attitude.onFocus}
+              onSubmitEditing={Keyboard.dismiss} />
             <Link
               containerStyle={Styles.RTL_TextInputLinkContainer}
               style={Styles.TextInputLink}
@@ -292,7 +341,10 @@ export const Input = (props) => {
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
               underlineColorAndroid={Global.colors.single.transparent}
-              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+              onBlur={attitude.onBlur}
+              onFocus={attitude.onFocus}
+              onSubmitEditing={Keyboard.dismiss} />
             <Link
               containerStyle={Styles.RTL_TextInputLinkContainer}
               style={Styles.TextInputLink}
@@ -323,7 +375,10 @@ export const Input = (props) => {
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
               underlineColorAndroid={Global.colors.single.transparent}
-              onChangeText={(currentValue) => attitude.onChangeText(currentValue)} />
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+              onBlur={attitude.onBlur}
+              onFocus={attitude.onFocus}
+              onSubmitEditing={Keyboard.dismiss} />
             <Link
               containerStyle={Styles.RTL_TextInputLinkContainer}
               style={Styles.TextInputLink}

@@ -10,17 +10,19 @@ const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
         userGroup: '',
         phone: {
           number: '',
-          dial_code: _SELECTED_DIAL_CODE
+          dialCode: _SELECTED_DIAL_CODE
         },
         email: '',
         password: '',
         userGroups: [],
-        loading: false,
+        loadingUserGroups: false,
+        loadingSubscribe: false,
         connected: {
           status: true,
           content: ''
         },
-        countries_codes_modal_visibility: false
+        subscribedUser: {},
+        countriesCodesModalVisibility: false
       };
 
 export default (state = initialState, action) => {
@@ -49,7 +51,7 @@ export default (state = initialState, action) => {
         phone: {
           ...state.phone,
           number: action.payload.number || state.phone.number,
-          dial_code: action.payload.dial_code || action.payload.dial || action.payload.code || state.phone.dial_code
+          dialCode: action.payload.dialCode || action.payload.dial_code || action.payload.dial || action.payload.code || state.phone.dialCode
         }
       };
       break;
@@ -74,10 +76,17 @@ export default (state = initialState, action) => {
     case SIGNUP.SUBSCRIBE_THE_USER:
       return state;
       break;
-    case SIGNUP.SET_LOADING_STATUS:
+
+    case SIGNUP.SET_USER_GROUP_LOADING_STATUS:
       return {
         ...state,
-        loading: action.payload
+        loadingUserGroups: action.payload
+      };
+      break;
+    case SIGNUP.SET_SUBSCRIBE_LOADING_STATUS:
+      return {
+        ...state,
+        loadingSubscribe: action.payload
       };
       break;
     case SIGNUP.SET_CONNECTED_STATUS:
@@ -93,8 +102,17 @@ export default (state = initialState, action) => {
     case SIGNUP.SET_COUNTRIES_CODES_MODAL_VISIBILITY:
       return {
         ...state,
-        countries_codes_modal_visibility: action.payload
+        countriesCodesModalVisibility: action.payload
       };
+      break;
+
+    case SIGNUP.REINITILIZE_THE_STATE:
+      return {
+        ...initialState
+      };
+      break;
+    case SIGNUP.REGENERATE_THE_USER_PHONE_NUMBER_VALIDATION_TOKEN:
+      return state;
       break;
 
     default:

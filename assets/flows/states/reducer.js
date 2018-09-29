@@ -11,14 +11,15 @@ import CountriesCodesModal from './reducers/layouts/countries-codes-modal';
 import Login from './reducers/views/authentication/login';
 import ForgottenPassword from './reducers/views/authentication/fogotten-password';
 import Signup from './reducers/views/authentication/signup';
+import VerifyPhoneNumber from './reducers/views/authentication/verify-phone-number';
 
 export default () => {
   const reducer = combineReducers({
           Segment,
           CountriesCodesModal,
-          Login, ForgottenPassword, Signup
+          Login, ForgottenPassword, Signup, VerifyPhoneNumber
         }),
         middeware = applyMiddleware(logger);
 
-  return createStore(reducer, {}, middeware)
+  return createStore(reducer, {})
 }

@@ -54,7 +54,7 @@ class ForgottenPassword extends Component<{}> {
           }
           break;
         case 'phone':
-          if (_PROPS.phone.number != '' && _PROPS.phone.dial_code.area_code != ''){
+          if (_PROPS.phone.number != '' && _PROPS.phone.dialCode.area_code != ''){
             const _IS_PHONE_NUMBER_VALID = Functions._checkIsAValidPhoneNumber(_PROPS.phone.number);
 
             if (_IS_PHONE_NUMBER_VALID){
@@ -79,11 +79,11 @@ class ForgottenPassword extends Component<{}> {
 
         <CountriesCodesModal
           name="countries-codes-modal"
-          visible={props.forgottenPassword.countries_codes_modal_visibility}
+          visible={props.forgottenPassword.countriesCodesModalVisibility}
           onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
-          selectedItem={props.forgottenPassword.phone.dial_code}
+          selectedItem={props.forgottenPassword.phone.dialCode}
           onPress={(currentValue) => props.setPhoneNumber({
-            dial_code: currentValue
+            dialCode: currentValue
           })}/>
 
         <View style={Styles.Content}>
@@ -115,7 +115,7 @@ class ForgottenPassword extends Component<{}> {
                     name="phone-number"
                     placeholder="Phone Number"
                     value={props.forgottenPassword.phone.number}
-                    link={props.forgottenPassword.phone.dial_code.area_code}
+                    link={props.forgottenPassword.phone.dialCode.area_code}
                     onPress={() => props.setCountriesCodesModalVisibility(true)}
                     onChangeText={(currentValue) => props.setPhoneNumber({
                       number: currentValue

@@ -39,7 +39,7 @@ class Login extends Component<{}> {
       const _IS_EMAIL_VALID = Functions._checkIsAValidEmail(_PROPS.email);
 
       if (_IS_EMAIL_VALID){
-        _FORM_FIELDS_VALIDITY = true;  
+        _FORM_FIELDS_VALIDITY = true;
       }
     }
 

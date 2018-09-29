@@ -5,14 +5,14 @@ import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'rea
 
 import {
  DashboardScreen,
- LoginScreen, SignupScreen, ForgottenPasswordScreen,
+ LoginScreen, SignupScreen, ForgottenPasswordScreen, VerifyPhoneNumberScreen,
  AuthorizationScreen
  } from './views/index'
 
 const store = getStore();
 
 store.subscribe(() => {
-  console.log("Store updated!", store.getState());
+  // console.log("Store updated!", store.getState());
 })
 
 const ProfileStack = createStackNavigator({
@@ -23,7 +23,8 @@ const AuthenticationStack = createStackNavigator(
   {
     Login: LoginScreen,
     Signup: SignupScreen,
-    ForgottenPassword: ForgottenPasswordScreen
+    ForgottenPassword: ForgottenPasswordScreen,
+    VerifyPhoneNumber: VerifyPhoneNumberScreen
   },
   {
     headerMode: 'none'
