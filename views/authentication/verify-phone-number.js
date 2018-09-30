@@ -10,6 +10,7 @@ import { ActivityIndicator, Toast } from '../../assets/layouts/index';
 const Styles = Views.Authentication.VerifyPhoneNumber;
 
 import { Functions } from '../../assets/modules/index';
+const { Preparation } = Functions;
 
 const _SCREEN = Dimensions.get('window');
 
@@ -24,10 +25,17 @@ class VerifyPhoneNumber extends Component<{}> {
   };
 
   async componentDidMount() {
-    Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER)
-    .then((didRetrieve) => {
-      console.log(didRetrieve)
-    })
+    const { props } = this;
+
+    const _SUBSCRIBED_USER = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);
+
+    if (_SUBSCRIBED_USER !== false){
+      const _PARSED_SUBSCRIBED_USER = JSON.parse(_SUBSCRIBED_USER),
+            _TOKEN = _PARSED_SUBSCRIBED_USER.phone.mobile.validation.token;
+
+      console.log(_TOKEN)
+      props.setSecretKey(_TOKEN);
+    }
   }
 
   componentWillReceiveProps(props) {
@@ -83,13 +91,7 @@ class VerifyPhoneNumber extends Component<{}> {
           message={props.verifyPhoneNumber.connected.content}
           launched={!props.verifyPhoneNumber.connected.status}
           color={Global.colors.single.carminePink}
-          onPress={() => {
-            const _SEED = Functions._prepareSignupSeed(props.verifyPhoneNumber);
-
-            props.subscribeTheUser(_SEED);
-
-
-          }} />;
+          onPress={() => Preparation._prepareVerifyPhoneNumberComponentToSubmit(props)} />;
       }
 
       _SUBMIT_BUTTON_CONTENT = <Input
@@ -98,19 +100,7 @@ class VerifyPhoneNumber extends Component<{}> {
         name="verify-phone-number"
         value="Verify Phone Number"
         gradient={Global.colors.pair.ongerine}
-        onPress={() => {
-          // const _SEED = Functions._prepareSignupSeed(props.verifyPhoneNumber);
-          //
-          // props.subscribeTheUser(_SEED);
-          //
-          // Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER)
-          // .then((didStore) => {
-          //
-          // })
-          // .catch((didErrorOccureOnStore) => {
-          //
-          // })
-        }}
+        onPress={() => Preparation._prepareVerifyPhoneNumberComponentToSubmit(props)}
         forcedDisable={_VALIDATED} />;
     }
 

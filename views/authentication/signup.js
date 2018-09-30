@@ -10,13 +10,12 @@ import { ActivityIndicator, Toast, CountriesCodesModal } from '../../assets/layo
 const Styles = Views.Authentication.Signup;
 
 import { Functions } from '../../assets/modules/index';
+const { Preparation } = Functions;
 
 const _SCREEN = Dimensions.get('window');
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.Signup;
-
-import { GLOBAL } from '../../assets/flows/states/types/index';
 
 class Signup extends Component<{}> {
   static navigationOptions = {
@@ -54,84 +53,6 @@ class Signup extends Component<{}> {
     }
 
     return !(_CONNECTED_STATUS && _FORM_FIELDS_VALIDITY);
-  }
-
-  async __prepareComponentToSubscribeTheUser() {
-    const { props } = this,
-          { navigation } = props,
-          _SEED = Functions._prepareSignupSeed(props.signup);
-
-    await props.subscribeTheUser(_SEED);
-
-    navigation.navigate('VerifyPhoneNumber');
-  }
-
-  async __prepareComponentToRegenerateTheUserPhoneNumberValidationToken(sentProps) {
-    const { props } = this,
-          { navigation } = props;
-
-    var _SEED = {
-      user_id: sentProps._id
-    },
-    _CURRENT_PHONE_NUMBER = `${props.signup.phone.dialCode.area_code}${Functions._getRidOfZerosFromPhoneNumber(props.signup.phone.number)}`;
-
-    if (sentProps.phone.mobile.content !== _CURRENT_PHONE_NUMBER){
-      _SEED.phone_number = _CURRENT_PHONE_NUMBER;
-    }
-
-    await props.regenerateTheUserPhoneNumberValidationToken(_SEED);
-
-    navigation.navigate('VerifyPhoneNumber');
-  }
-
-  async _prepareComponentToSubmit() {
-    const { props } = this,
-          { navigation } = props;
-
-    Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER)
-    .then((didRetrieve) => {
-      if (didRetrieve === false){
-        this.__prepareComponentToSubscribeTheUser();
-      }else{
-        const _TOKEN = JSON.parse(didRetrieve);
-
-        if (typeof _TOKEN.phone != 'undefined'){
-          const _TOKEN_MOBILE_PHONE = _TOKEN.phone.mobile;
-
-          if (typeof _TOKEN_MOBILE_PHONE != 'undefined'){
-            const _TOKEN_MOBILE_PHONE_VALIDATION_VALUE = _TOKEN_MOBILE_PHONE.validation.value;
-
-            if (_TOKEN_MOBILE_PHONE_VALIDATION_VALUE === true){
-              navigation.goBack();
-            }else{
-              const _TODAY = new Date(),
-                    _VALIDATION_DATE = new Date(_TOKEN_MOBILE_PHONE.validation.modified_at),
-                    _TWO_MINUTES = (1000 * 60 * 2),
-                    _VALIDATION_TOKEN_TIME_LEFT = _TODAY.getTime() - _VALIDATION_DATE.getTime();
-
-              if (_VALIDATION_TOKEN_TIME_LEFT > _TWO_MINUTES){
-                Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER)
-                .then((secondDidRetrieve) => {
-                  if (secondDidRetrieve !== false){
-                    const _TARGET = JSON.parse(secondDidRetrieve);
-
-                    this.__prepareComponentToRegenerateTheUserPhoneNumberValidationToken(_TARGET);
-                  }
-                })
-                .catch((secondDidErrorOccureOnRetrieve) => {
-
-                })
-              }else{
-                navigation.navigate('VerifyPhoneNumber');
-              }
-            }
-          }
-        }
-      }
-    })
-    .catch((didErrorOccureOnRetrieve) => {
-
-    })
   }
 
   render() {
@@ -229,7 +150,7 @@ class Signup extends Component<{}> {
           message={props.signup.connected.content}
           launched={!props.signup.connected.status}
           color={Global.colors.single.carminePink}
-          onPress={() => () => this._prepareComponentToSubmit()} />;
+          onPress={() => Preparation._prepareSignupComponentToSubmit(props)} />;
       }
 
       _SUBMIT_BUTTON_CONTENT = <Input
@@ -238,7 +159,7 @@ class Signup extends Component<{}> {
         name="signup"
         value="Signup"
         gradient={Global.colors.pair.ongerine}
-        onPress={() => this._prepareComponentToSubmit()}
+        onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
         forcedDisable={_VALIDATED} />;
     }
 

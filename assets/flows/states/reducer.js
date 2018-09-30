@@ -21,5 +21,5 @@ export default () => {
         }),
         middeware = applyMiddleware(logger);
 
-  return createStore(reducer, {})
+  return createStore(reducer, {}, middeware)
 }

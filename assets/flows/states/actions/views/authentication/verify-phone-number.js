@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: loadingStatus
       })
     },
-    verifyTheUserPhoneNumber: (userDetail) => CMD._verifyPhoneNumber(userDetail, dispatch)
+    verifyTheUserPhoneNumber: async (userDetail) => CMD._verifyPhoneNumber(userDetail, dispatch)
   };
 }
 

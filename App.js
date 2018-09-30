@@ -12,7 +12,7 @@ import {
 const store = getStore();
 
 store.subscribe(() => {
-  // console.log("Store updated!", store.getState());
+  console.log("Store updated!", store.getState());
 })
 
 const ProfileStack = createStackNavigator({

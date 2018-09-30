@@ -48,9 +48,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: password
       })
     },
-    fetchAvailableUserGroups: (groupType) => CMD._getUserGroupsWithType(groupType, dispatch),
-    subscribeTheUser: (userDetail) => CMD._subscribeUserWithDetail(userDetail, dispatch),
-    regenerateTheUserPhoneNumberValidationToken: (validation) => CMD._regenerateValidationToken(validation, dispatch),
+    fetchAvailableUserGroups: async (groupType) => CMD._getUserGroupsWithType(groupType, dispatch),
+    subscribeTheUser: async (userDetail) => CMD._subscribeUserWithDetail(userDetail, dispatch),
+    regenerateTheUserPhoneNumberValidationToken: async (validation) => CMD._regenerateValidationToken(validation, dispatch),
     setLoadingStatus: (loadingStatus) => {
       dispatch({
         type: SIGNUP.SET_USER_GROUP_LOADING_STATUS,
