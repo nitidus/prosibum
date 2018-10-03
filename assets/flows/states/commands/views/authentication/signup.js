@@ -92,7 +92,7 @@ module.exports = {
         if (_FINAL_RESPONSE.meta.code === 200){
           const _DATA = _FINAL_RESPONSE.data,
                 _SERIALIZED_DATA = JSON.stringify(_DATA)
-                _DID_SUBSCRIBED_USER_STORE = Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _SERIALIZED_DATA);
+                _DID_SUBSCRIBED_USER_STORE = await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _SERIALIZED_DATA);
 
           if (_DID_SUBSCRIBED_USER_STORE === true){
             dispatch({
@@ -141,84 +141,32 @@ module.exports = {
       }
     }
   },
-  _regenerateValidationToken: (validation, dispatch) => {
+  _regenerateValidationToken: async (validation, dispatch) => {
     SIGNUP.REGENERATE_THE_USER_PHONE_NUMBER_VALIDATION_TOKEN
     dispatch({
       type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
       payload: true
     })
 
-    axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/regenerate/phone-number`, validation)
-      .then((response) => {
-        if (response.status === 200){
-          const _FINAL_RESPONSE = response.data;
+    try {
+      const _DID_VALIDATE = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/regenerate/phone-number`, validation);
 
-          if (_FINAL_RESPONSE.meta.code === 200){
-            const _DATA = _FINAL_RESPONSE.data,
-                  _SERIALIZED_DATA = JSON.stringify(_DATA);
+      if (_DID_VALIDATE === 200){
+        const _DATA = _DID_VALIDATE.data,
+              _SERIALIZED_DATA = JSON.stringify(_DATA),
+              _DID_RETRIEVE_SUBSCRIBED_USER = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);
 
-            Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER)
-            .then((response) => {
-              var _UNSERIALIZED_DATA = JSON.parse(response);
+        if (_DID_RETRIEVE_SUBSCRIBED_USER !== false){
+          var _UNSERIALIZED_DATA = JSON.parse(_DID_RETRIEVE_SUBSCRIBED_USER);
 
-              _UNSERIALIZED_DATA.phone.mobile.validation.token = _DATA.token;
-              _UNSERIALIZED_DATA.phone.mobile.validation.modified_at = _DATA.modified_at;
+          _UNSERIALIZED_DATA.phone.mobile.validation.token = _DATA.token;
+          _UNSERIALIZED_DATA.phone.mobile.validation.modified_at = _DATA.modified_at;
 
-              if (_DATA.phone_number){
-                _UNSERIALIZED_DATA.phone.mobile.content = _DATA.phone_number;
-              }
-
-              Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _UNSERIALIZED_DATA);
-
-              dispatch({
-                type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-                payload: false
-              })
-
-              dispatch({
-                type: SIGNUP.SET_CONNECTED_STATUS,
-                payload: {
-                  status: true
-                }
-              })
-            })
-            .catch((didErrorOccureOnRetrieve) => {
-              if (didErrorOccureOnRetrieve){
-                const _ERROR_MESSAGE = didErrorOccureOnRetrieve.message || didErrorOccureOnRetrieve.request._response;
-
-                dispatch({
-                  type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-                  payload: false
-                })
-
-                dispatch({
-                  type: SIGNUP.SET_CONNECTED_STATUS,
-                  payload: {
-                    status: false,
-                    content: _ERROR_MESSAGE
-                  }
-                })
-              }
-            })
-          }else{
-            dispatch({
-              type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-              payload: false
-            })
-
-            dispatch({
-              type: SIGNUP.SET_CONNECTED_STATUS,
-              payload: {
-                status: false,
-                content: _FINAL_RESPONSE.meta.error_message
-              }
-            })
+          if (_DATA.phone_number){
+            _UNSERIALIZED_DATA.phone.mobile.content = _DATA.phone_number;
           }
-        }
-      })
-      .catch((error) => {
-        if (error){
-          const _ERROR_MESSAGE = error.message || error.request._response;
+
+          await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _UNSERIALIZED_DATA);
 
           dispatch({
             type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
@@ -228,11 +176,28 @@ module.exports = {
           dispatch({
             type: SIGNUP.SET_CONNECTED_STATUS,
             payload: {
-              status: false,
-              content: _ERROR_MESSAGE
+              status: true
             }
           })
         }
-      });
+      }
+    } catch (error) {
+      if (error){
+        const _ERROR_MESSAGE = error.message || error.request._response;
+
+        dispatch({
+          type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+          payload: false
+        })
+
+        dispatch({
+          type: SIGNUP.SET_CONNECTED_STATUS,
+          payload: {
+            status: false,
+            content: _ERROR_MESSAGE
+          }
+        })
+      }
+    }
   }
 };

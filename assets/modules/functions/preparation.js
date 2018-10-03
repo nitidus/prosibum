@@ -17,12 +17,23 @@ module.exports = {
       password: inputProps.password
     };
   },
+  _prepareVerifyPhoneNumberSeed: (inputProps) => {
+    return {
+      user_id: inputProps
+    };
+  },
+  _prepareLoginSeed: (inputProps) => {
+    return {
+      email: inputProps.email,
+      password: inputProps.password
+    };
+  },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
           _SUBSCRIBED_USER = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);
 
     if (_SUBSCRIBED_USER === false){
-      _SEED = module.exports._prepareSignupSeed(signup);
+      const _SEED = module.exports._prepareSignupSeed(signup);
 
       await props.subscribeTheUser(_SEED);
 
@@ -70,13 +81,26 @@ module.exports = {
 
     if (_SUBSCRIBED_USER !== false){
       const _TOKEN = JSON.parse(_SUBSCRIBED_USER),
-            _USER_ID = _TOKEN._id;
+            _USER_ID = _TOKEN._id,
+            _SEED = module.exports._prepareVerifyPhoneNumberSeed(_USER_ID);
 
-      await props.verifyTheUserPhoneNumber({
-        user_id: _USER_ID
-      });
+      await props.verifyTheUserPhoneNumber(_SEED);
 
       navigation.navigate('Login');
+    }
+  },
+  _prepareVerifyPhoneNumberComponentToSubmit: async (props) => {
+    const { navigation, login } = props,
+          _SEED = module.exports._prepareLoginSeed(login);
+
+    await props.verifyAuthentication(_SEED);
+
+    const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
+
+    if (_DID_TOKEN_CREATED !== false){
+      const _PARSED_TOKEN = JSON.parse(_DID_TOKEN_CREATED);
+
+      navigation.navigate('Dashboard');
     }
   }
 };

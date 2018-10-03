@@ -3,7 +3,12 @@ const { LOGIN } = VIEWS.AUTHENTICATION;
 
 const initialState = {
   email: '',
-  password: ''
+  password: '',
+  loading: false,
+  connected: {
+    status: true,
+    content: ''
+  }
 };
 
 export default (state = initialState, action) => {
@@ -22,6 +27,22 @@ export default (state = initialState, action) => {
       break;
     case LOGIN.VERIFY_AUTHENTICATION:
       return state;
+      break;
+    case LOGIN.SET_LOADING_STATUS:
+      return {
+        ...state,
+        loading: action.payload
+      };
+      break;
+    case LOGIN.SET_CONNECTED_STATUS:
+      return {
+        ...state,
+        connected: {
+          ...state.connected,
+          status: action.payload.status,
+          content: action.payload.content || ''
+        }
+      };
       break;
 
     default:

@@ -1,6 +1,9 @@
 import { VIEWS } from '../../../types/index';
 const { LOGIN } = VIEWS.AUTHENTICATION;
 
+import { Views as ViewsCMD } from '../../../commands';
+const CMD = ViewsCMD.Authentication.Login;
+
 const mapStateToProps = (state) => {
   return {
     login: state.Login
@@ -21,11 +24,13 @@ const mapDispatchToProps = (dispatch) => {
         payload: password
       })
     },
-    verifyAuthentication: () => {
+    setLoadingStatus: (loadingStatus) => {
       dispatch({
-        type: LOGIN.VERIFY_AUTHENTICATION
+        type: LOGIN.SET_LOADING_STATUS,
+        payload: loadingStatus
       })
-    }
+    },
+    verifyAuthentication: async (token) => CMD._authecticateUser(token, dispatch)
   };
 }
 

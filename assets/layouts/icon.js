@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { View, Animated, Easing } from 'react-native';
-import Svg, { G, Path, Rect, Circle } from 'react-native-svg';
+import Svg, { G, Path, Rect, Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Layouts.Container;
@@ -81,9 +81,43 @@ export const Icon = (props) => {
     }
   }
 
+  if (typeof props.gradient != 'undefined'){
+    attitude.gradient = props.gradient;
+  }
+
   attitude.name = (props.name || props.title || '_SIDE_GUIDE').toUpperCase();
 
-  const _SELECTED_ICON = _getIconWithName(attitude.name);
+  var _SELECTED_ICON, _ICON_DEFS_CONTENT;
+
+  if (typeof attitude.gradient != 'undefined'){
+    const restructredRange = Object.keys(attitude.gradient).map((stepName) => {
+      return attitude.gradient[stepName];
+    });
+
+    _SELECTED_ICON = _getIconWithName(attitude.name, 'url(#gradient)');
+
+    _ICON_DEFS_CONTENT = <Defs>
+        <LinearGradient id="gradient" x1="0" y1="0" x2="100%" y2="100%">
+          {
+            restructredRange.map((range, i) => {
+              const _INDEX = i.toString();
+
+              return (
+                <Stop offset={_INDEX} stopColor={range} stopOpacity={_INDEX} />
+              );
+            })
+          }
+        </LinearGradient>
+    </Defs>;
+  }else{
+    if (typeof props.color != 'undefined'){
+      attitude.color = props.color;
+
+      _SELECTED_ICON = _getIconWithName(attitude.name, attitude.color);
+    }else{
+      _SELECTED_ICON = _getIconWithName(attitude.name);
+    }
+  }
 
   attitude.viewBox = _SELECTED_ICON.view_box;
   attitude.content = _SELECTED_ICON.content;
@@ -100,6 +134,7 @@ export const Icon = (props) => {
       style={[
         attitude.style
       ]}>
+        {_ICON_DEFS_CONTENT}
         {attitude.content}
     </Svg>
   )

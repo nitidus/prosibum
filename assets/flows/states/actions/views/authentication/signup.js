@@ -51,7 +51,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchAvailableUserGroups: async (groupType) => CMD._getUserGroupsWithType(groupType, dispatch),
     subscribeTheUser: async (userDetail) => CMD._subscribeUserWithDetail(userDetail, dispatch),
     regenerateTheUserPhoneNumberValidationToken: async (validation) => CMD._regenerateValidationToken(validation, dispatch),
-    setLoadingStatus: (loadingStatus) => {
+    setUserGroupLoadingStatus: (loadingStatus) => {
       dispatch({
         type: SIGNUP.SET_USER_GROUP_LOADING_STATUS,
         payload: loadingStatus
