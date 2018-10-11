@@ -28,6 +28,13 @@ module.exports = {
       password: inputProps.password
     };
   },
+  _prepareAuthority: async (self) => {
+    const { props } = self,
+          { navigation } = props,
+          _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
+
+    navigation.navigate(_DID_TOKEN_CREATED? 'Profile': 'Authentication');
+  },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
           _SUBSCRIBED_USER = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);

@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 
 import { colors, fonts } from '../../global';
+
+const { width, height } = Dimensions.get('window'),
+      _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
+
+var _CONTENT = {};
+
+if (width >= 1000 || height >= 1000){
+  _CONTENT = {
+    width: (Platform.OS === 'ios')? width - (162 * 2): width - (202 * 2)
+  };
+}else{
+  _CONTENT = {
+    width: width - (32 * 2)
+  };
+}
 
 module.exports = StyleSheet.create({
   Container: {
@@ -11,8 +26,8 @@ module.exports = StyleSheet.create({
   },
   Content: {
     position: 'absolute',
-    width: 311,
-    bottom: 0
+    bottom: 0,
+    ..._CONTENT
   },
   FirstInput: {
     marginTop: 44

@@ -2,13 +2,18 @@ import React, { Component } from 'react';
 
 import { View, Animated, Easing, Text } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import { Global, Modules } from '../styles/index';
 import { Link } from '../components/index';
 const Styles = Modules.Layouts.Toast;
 
 import { Functions } from '../modules/index';
 
-export const Toast = (props) => {
+import { Layouts as LayoutsActions } from '../../assets/flows/states/actions';
+const { mapStateToProps, mapDispatchToProps } = LayoutsActions.Toast;
+
+const Toast = (props) => {
   var attitude = {
         animations: {
           yPosition: new Animated.Value(-1 * Styles.Container.height)
@@ -21,10 +26,22 @@ export const Toast = (props) => {
 
   attitude.message = props.message || props.messageContent || '';
 
+  if (attitude.message !== props.toast.message){
+    props.setMessage(attitude.message);
+  }
+
   attitude.link = props.link || 'Retry';
+
+  if (attitude.link !== props.toast.link){
+    props.setLinkText(attitude.link);
+  }
 
   if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.onPressLink != 'undefined')){
     attitude.onPress = props.onPress || props.onLinkPress || props.onPressLink;
+  }
+
+  if (attitude.onPress !== props.toast.onPress){
+    props.setOnLinkPress(attitude.onPress);
   }
 
   if ((typeof props.duration != 'undefined') || (typeof props.durationTime != 'undefined')){
@@ -36,6 +53,10 @@ export const Toast = (props) => {
   }
 
   attitude.launched = props.launched || props.triggered || props.visible || props.visibled || false;
+
+  if (attitude.launched !== props.toast.visibility){
+    props.setVisibility(attitude.launched);
+  }
 
   if (typeof attitude.duration != 'undefined'){
     Animated.timing(attitude.animations.yPosition, {
@@ -108,3 +129,5 @@ export const Toast = (props) => {
     </Animated.View>
   )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Toast);

@@ -107,6 +107,16 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            if (project.hasProperty('PROSIBUM_RELEASE_STORE_FILE')) {
+                storeFile file(PROSIBUM_RELEASE_STORE_FILE)
+                storePassword PROSIBUM_RELEASE_STORE_PASSWORD
+                keyAlias PROSIBUM_RELEASE_KEY_ALIAS
+                keyPassword PROSIBUM_RELEASE_KEY_PASSWORD
+            }
+        }
+    }
     splits {
         abi {
             reset()

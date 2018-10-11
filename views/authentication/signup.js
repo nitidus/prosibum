@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Dimensions, Text } from 'react-native';
+import { StatusBar, View, Dimensions, Platform, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 

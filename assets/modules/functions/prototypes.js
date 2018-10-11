@@ -46,7 +46,7 @@ module.exports = {
     return (_IS_PASSWORD_VALID !== null)? true: false;
   },
   _getCountryDetailWithCode: (code) => {
-    const _CODE = (code || "IR").toUpperCase();
+    const _CODE = (code || "AF").toUpperCase();
 
     return __COUNTRIES.find((country) => {
       if (country.code == _CODE){

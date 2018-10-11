@@ -6,17 +6,36 @@ import {
 } from '../../global';
 
 const { width, height } = Dimensions.get('window'),
-      _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812)),
-      _CONTAINER_DEPENDED_HEIGHT = (_IS_IPHONE_X)? {
-        height: 80,
-        paddingTop: 45,
-        paddingBottom: 15,
-        paddingHorizontal: 15
-      }: {
-        height: 50,
-        paddingVertical: 15,
-        paddingHorizontal: 15
-      };
+      _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
+
+var _CONTAINER_DEPENDED_HEIGHT = {
+      height: 50,
+      paddingVertical: 15,
+      paddingHorizontal: 15
+    },
+    _CUSTOM_MESSAGE_TEXT = {
+      fontSize: 16
+    };
+
+if (Platform.OS !== 'ios'){
+  if (width >= 1000 || height >= 1000){
+    _CONTAINER_DEPENDED_HEIGHT.height += 15;
+    _CONTAINER_DEPENDED_HEIGHT.paddingTop += 45;
+    _CONTAINER_DEPENDED_HEIGHT.paddingBottom += 15;
+    _CONTAINER_DEPENDED_HEIGHT.paddingHorizontal += 15;
+
+    _CUSTOM_MESSAGE_TEXT.fontSize += 6;
+  }
+
+  _CUSTOM_MESSAGE_TEXT.fontWeight = '400';
+}else{
+  if (_IS_IPHONE_X){
+    _CONTAINER_DEPENDED_HEIGHT.height += 30;
+    _CONTAINER_DEPENDED_HEIGHT.paddingTop += 45;
+    _CONTAINER_DEPENDED_HEIGHT.paddingBottom += 15;
+    _CONTAINER_DEPENDED_HEIGHT.paddingHorizontal += 15;
+  }
+}
 
 module.exports = StyleSheet.create({
   Container: {
@@ -32,8 +51,8 @@ module.exports = StyleSheet.create({
   },
   MessageText: {
     fontFamily: fonts.sanFrancisco.textBold,
-    fontSize: 16,
-    color: colors.single.romance
+    color: colors.single.romance,
+    ..._CUSTOM_MESSAGE_TEXT
   },
   ToastLink: {
     alignSelf: 'flex-end',

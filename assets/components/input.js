@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, TouchableOpacity, TextInput, Keyboard, Text, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, TextInput, Keyboard, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -10,6 +10,9 @@ import { Global, Modules } from '../styles/index';
 const Styles = Modules.Components.Input;
 
 import { Functions } from '../modules/index';
+
+const _SCREEN = Dimensions.get('window'),
+      _IS_IPHONE_X = (Platform.OS === 'ios') && ((_SCREEN.height === 812 || _SCREEN.width === 812));
 
 export const Input = (props) => {
   var attitude = {};
@@ -327,13 +330,12 @@ export const Input = (props) => {
           name={attitude.name}
           style={[
             Styles.ContainerWithButton,
-            Styles.RTL_Direction,
             attitude.style
           ]}>
             <TextInput
               style={[
                 Styles.TextInputConatiner,
-                { width: '72%' }
+                Styles.RTL_Pinned
               ]}
               keyboardType="phone-pad"
               value={attitude.value}
@@ -346,7 +348,7 @@ export const Input = (props) => {
               onFocus={attitude.onFocus}
               onSubmitEditing={Keyboard.dismiss} />
             <Link
-              containerStyle={Styles.RTL_TextInputLinkContainer}
+              containerStyle={Styles.LTR_TextInputLinkContainer}
               style={Styles.TextInputLink}
               value={attitude.link}
               onPress={attitude.onPress} />
@@ -579,10 +581,16 @@ export const InputGroup = (props) => {
           ];
 
           if (i > 0){
+            var _BORDER_TOP_WIDTH = 2;
+
+            if ((Platform.OS !== 'ios') && (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)){
+              _BORDER_TOP_WIDTH += 1;
+            }
+
             childStyle = [
               Styles.InnerInputContainer,
               {
-                borderTopWidth: 2
+                borderTopWidth: _BORDER_TOP_WIDTH
               },
               childProps.style
             ];

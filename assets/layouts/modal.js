@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text, Animated, Easing } from 'react-native';
+import { View, Text, Animated, Platform, Easing } from 'react-native';
 import PrimaryModal from "react-native-modal";
 import { BlurView } from 'react-native-blur';
 
@@ -69,7 +69,7 @@ export const Modal = (props) => {
   const MODAL = {
     BACKDROP: {
       COLOR: Global.colors.single.rangoonGreen,
-      OPACITY: 0.4
+      OPACITY: (Platform.OS === 'ios')? 0.4: 0.7
     },
     SWIPE: {
       DIRECTION: "down",
@@ -83,7 +83,14 @@ export const Modal = (props) => {
   var _PRIMARY_MODAL_CONTENT;
 
   if (attitude.swipeDirection){
-    const _SWIPE_DIRECTION = (attitude.swipeDirection == 'up' || attitude.swipeDirection == 'down' || attitude.swipeDirection == 'left' || attitude.swipeDirection == 'right')? attitude.swipeDirection: MODAL.SWIPE.DIRECTION;
+    const _SWIPE_DIRECTION = (attitude.swipeDirection == 'up' || attitude.swipeDirection == 'down' || attitude.swipeDirection == 'left' || attitude.swipeDirection == 'right')? attitude.swipeDirection: MODAL.SWIPE.DIRECTION,
+          _PRIMARY_MODAL_CONTENT_OVERLAY = (Platform.OS === 'ios')? (
+            <BlurView
+              style={Styles.ModalContentBlurOverlay} />
+          ): (
+            <View
+              style={Styles.ModalContentBlurOverlay} />
+          );
 
     _PRIMARY_MODAL_CONTENT = (
       <PrimaryModal
@@ -100,8 +107,8 @@ export const Modal = (props) => {
               Styles.ModalContent,
               attitude.style
             ]}>
-              <BlurView
-                style={Styles.ModalContentBlurOverlay} />
+              {_PRIMARY_MODAL_CONTENT_OVERLAY}
+
               <Icon
                 name="indicator"
                 style={Styles.ModalIndicator} />
@@ -122,6 +129,14 @@ export const Modal = (props) => {
       </PrimaryModal>
     );
   }else{
+    const _PRIMARY_MODAL_CONTENT_OVERLAY = (Platform.OS === 'ios')? (
+      <BlurView
+        style={Styles.ModalContentBlurOverlay} />
+    ): (
+      <View
+        style={Styles.ModalContentBlurOverlay} />
+    );
+
     _PRIMARY_MODAL_CONTENT = (
       <PrimaryModal
         isVisible={attitude.visibility}
@@ -134,8 +149,8 @@ export const Modal = (props) => {
               Styles.ModalContent,
               attitude.style
             ]}>
-              <BlurView
-                style={Styles.ModalContentBlurOverlay} />
+              {_PRIMARY_MODAL_CONTENT_OVERLAY}
+
               <Icon
                 name="indicator"
                 style={Styles.ModalIndicator} />
