@@ -41,6 +41,7 @@ module.exports = StyleSheet.create({
   Container: {
     position: 'absolute',
     width: '100%',
+    zIndex: 1,
     ..._CONTAINER_DEPENDED_HEIGHT
   },
   Content: {

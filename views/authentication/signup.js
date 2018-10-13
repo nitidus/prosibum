@@ -80,10 +80,7 @@ class Signup extends Component<{}> {
           <ActivityIndicator />
         </Input>;
     }else{
-      if (props.signup.connected.status){
-        _TOP_PINNED_TOAST = <Toast
-          launched={!props.signup.connected.status} />;
-      }else{
+      if (!props.signup.connected.status){
         _TOP_PINNED_TOAST = <Toast
           message={props.signup.connected.content}
           launched={!props.signup.connected.status}
@@ -142,10 +139,7 @@ class Signup extends Component<{}> {
           <ActivityIndicator />
         </Input>;
     }else{
-      if (props.signup.connected.status){
-        _TOP_PINNED_TOAST = <Toast
-          launched={!props.signup.connected.status} />;
-      }else{
+      if (!props.signup.connected.status && !_VALIDATED){
         _TOP_PINNED_TOAST = <Toast
           message={props.signup.connected.content}
           launched={!props.signup.connected.status}

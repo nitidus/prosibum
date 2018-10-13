@@ -33,7 +33,7 @@ class VerifyPhoneNumber extends Component<{}> {
       const _PARSED_SUBSCRIBED_USER = JSON.parse(_SUBSCRIBED_USER),
             _TOKEN = _PARSED_SUBSCRIBED_USER.phone.mobile.validation.token;
 
-      console.log(_TOKEN)
+      console.log(_TOKEN);
       props.setSecretKey(_TOKEN);
     }
   }

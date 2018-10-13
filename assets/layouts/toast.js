@@ -73,7 +73,7 @@ const Toast = (props) => {
       }).start();
     }, attitude.duration);
   }else{
-    if (attitude.launched){
+    if (props.toast.visibility){
       Animated.timing(attitude.animations.yPosition, {
         toValue: 0,
         duration: 300,
@@ -100,21 +100,21 @@ const Toast = (props) => {
       style={Styles.Content}>
       <Text
         style={Styles.MessageText}>
-          {attitude.message}
+          {props.toast.message}
       </Text>
       <Link
-        value={attitude.link}
+        value={props.toast.link}
         activeOpacity={_ACTIVE_OPACITY}
         style={[
           Styles.ToastLink,
           Styles.LTR_ToastLink
         ]}
-        onPress={attitude.onPress} />
+        onPress={props.toast.onPress} />
     </View>;
   }else{
     _TOAST_CONTENT = <Text
       style={Styles.MessageText}>
-        {attitude.message}
+        {props.toast.message}
     </Text>;
   }
 
