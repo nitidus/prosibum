@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
-import { View, Animated, Easing } from 'react-native';
+import { View, Dimensions, Platform, Animated, Easing } from 'react-native';
 import Svg, { G, Path, Rect, Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Layouts.Container;
 
 import { Functions } from '../modules/index';
+
+const { width, height } = Dimensions.get('window'),
+      _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
 const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
   const _ICONS = {
@@ -43,12 +46,20 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
       </G>
     },
     INDICATOR: {
-      width: 33,
-      height: 5,
+      width: (Platform.OS !== 'ios')? ((width >= 1000 || height >= 1000)? 46.2: 33): 33,
+      height: (Platform.OS !== 'ios')? ((width >= 1000 || height >= 1000)? 7: 5): 5,
       view_box: "0 0 33 5",
       content: <Path
         fill={color}
         d="M30.5,0h-28C1.1,0,0,1.1,0,2.5S1.1,5,2.5,5h28C31.9,5,33,3.9,33,2.5S31.9,0,30.5,0z"/>
+    },
+    FOR_YOU: {
+      width: 24,
+      height: 24,
+      view_box: "0 0 24 24",
+      content: <Path
+        fill={color}
+        d="M1.7,0h20.7C23.3,0,24,0.7,24,1.7v20.7c0,0.9-0.7,1.7-1.7,1.7H1.7C0.7,24,0,23.3,0,22.3V1.7C0,0.7,0.7,0,1.7,0zM3,13v1h8v-1H3z M13,13v1h8v-1H13z M13,10v1h8v-1H13z M13,7v1h8V7H13z M13,4v1h8V4H13z M3,16v1h8v-1H3z M13,16v1h8v-1H13z M3,19v1h8v-1H3z M13,19v1h8v-1H13z M7,5.3c-0.4-0.6-1.1-1-1.8-1c-1,0-1.9,0.9-1.9,2C3.2,7.7,4.4,9.3,7,11c2.6-1.7,3.8-3.3,3.7-4.7h0c0-1.1-0.9-2-1.9-2C8.1,4.3,7.4,4.7,7,5.3z"/>
     }
   };
 
@@ -85,7 +96,7 @@ export const Icon = (props) => {
     attitude.gradient = props.gradient;
   }
 
-  attitude.name = (props.name || props.title || '_SIDE_GUIDE').toUpperCase();
+  attitude.name = (props.name || props.title || '_SIDE_GUIDE').toUpperCase().replace(/( |-)+/g, '_');
 
   var _SELECTED_ICON, _ICON_DEFS_CONTENT;
 

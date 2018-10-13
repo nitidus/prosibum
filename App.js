@@ -7,7 +7,7 @@ import {
  DashboardScreen,
  LoginScreen, SignupScreen, ForgottenPasswordScreen, VerifyPhoneNumberScreen,
  AuthorizationScreen
- } from './views/index'
+} from './views/index';
 
 const store = getStore();
 
