@@ -8,8 +8,8 @@ import { Navigation } from '../../assets/layouts/index';
 export default class Dashboard extends Component<{}> {
   static navigationOptions = {
     header: props => <Navigation
-    title="Dashboard"
-    {...props} />
+      type="regular-dashboard"
+      {...props} />
   };
 
   render() {
@@ -17,7 +17,7 @@ export default class Dashboard extends Component<{}> {
       <View>
         <StatusBar />
 
-        <Text>Home!</Text>
+        <Text>Dashboard page.</Text>
       </View>
     )
   }

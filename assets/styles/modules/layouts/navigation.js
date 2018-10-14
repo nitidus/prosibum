@@ -78,14 +78,19 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: colors.single.romance,
     shadowColor: colors.single.rangoonGreen,
+    alignItems: 'center',
     ..._CUSTOM_CONTAINER
   },
   HeaderTitle: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
-    textAlign: 'center',
     flexGrow: 1,
     flex: 1,
+    textAlign: 'center',
     ..._CUSTOM_HEADER_TITLE
+  },
+  PinnedSide: {
+    minWidth: 62,
+    alignItems: 'center'
   }
 });

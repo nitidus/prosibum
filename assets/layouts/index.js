@@ -4,7 +4,7 @@ import Toast from './toast';
 import { Modal } from './modal';
 import CountriesCodesModal from './countries-codes-modal';
 import { Icon } from './icon';
-import { Navigation } from './navigation';
+import { Navigation, TopBar } from './navigation';
 
 module.exports = {
   Container,
@@ -13,5 +13,6 @@ module.exports = {
   Modal,
   CountriesCodesModal,
   Icon,
-  Navigation
+  Navigation,
+  TopBar
 };
