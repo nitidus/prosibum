@@ -20,6 +20,9 @@ var _CUSTOM_CONTAINER = {
     },
     _CUSTOM_HEADER_TITLE = {
       fontSize: 32
+    },
+    _CUSTOM_PINNED_SIDE = {
+      minWidth: 62
     };
 
 if (Platform.OS === 'ios'){
@@ -60,6 +63,8 @@ if (Platform.OS === 'ios'){
     };
 
     _CUSTOM_HEADER_TITLE.fontSize += 15;
+
+    _CUSTOM_PINNED_SIDE.minWidth += 20;
   }else{
     _CUSTOM_CONTAINER = {
       ..._CUSTOM_CONTAINER,
@@ -90,7 +95,7 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_HEADER_TITLE
   },
   PinnedSide: {
-    minWidth: 62,
-    alignItems: 'center'
+    alignItems: 'center',
+    ..._CUSTOM_PINNED_SIDE
   }
 });
