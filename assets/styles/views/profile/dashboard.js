@@ -21,13 +21,7 @@ module.exports = StyleSheet.create({
   },
   Container: {
     flex: 1,
-    shadowColor: colors.single.rangoonGreen,
-    shadowOpacity: 0.15,
-    shadowRadius: 30,
-    shadowOffset: {
-      width: 0,
-      height: 30
-    }
+    shadowColor: colors.single.rangoonGreen
   },
   MajorContent: {
     flex: 1,

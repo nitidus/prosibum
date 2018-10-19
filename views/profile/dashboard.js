@@ -18,7 +18,9 @@ export default class Dashboard extends Component<{}> {
   }
 
   render() {
-    const { props } = this;
+    const { props } = this,
+          _LAUNCHED_MENU_SCREEN_X_POSITION = (_Screen.width * 72) / 100,
+          _X_POSITION_ANIMATION_RANGE = [0, _LAUNCHED_MENU_SCREEN_X_POSITION];
 
     return (
       <View
@@ -29,9 +31,34 @@ export default class Dashboard extends Component<{}> {
               {
                 transform: [
                   { translateX: this.animations.xPosition },
-                  // { scaleX: 0.85 },
-                  // { scaleY: 0.85 }
-                ]
+                  {
+                    scaleX: this.animations.xPosition.interpolate({
+                      inputRange: _X_POSITION_ANIMATION_RANGE,
+                      outputRange: [1, 0.85]
+                    })
+                  },
+                    {
+                      scaleY: this.animations.xPosition.interpolate({
+                      inputRange: _X_POSITION_ANIMATION_RANGE,
+                      outputRange: [1, 0.85]
+                    })
+                  }
+                ],
+                shadowOpacity: this.animations.xPosition.interpolate({
+                  inputRange: _X_POSITION_ANIMATION_RANGE,
+                  outputRange: [0, 0.15]
+                }),
+                shadowRadius: this.animations.xPosition.interpolate({
+                  inputRange: _X_POSITION_ANIMATION_RANGE,
+                  outputRange: [0, 30]
+                }),
+                shadowOffset: {
+                  width: 0,
+                  height: this.animations.xPosition.interpolate({
+                    inputRange: _X_POSITION_ANIMATION_RANGE,
+                    outputRange: [0, 30]
+                  })
+                }
               }
           ]}>
             <View
@@ -48,12 +75,13 @@ export default class Dashboard extends Component<{}> {
                             _TARGET_X_POSITION_VALUE = 0;
 
                         if (animations.xPosition._value === animations.xPosition._startingValue){
-                          _TARGET_X_POSITION_VALUE = (_Screen.width * 72) / 100;
+                          _TARGET_X_POSITION_VALUE = _LAUNCHED_MENU_SCREEN_X_POSITION;
                         }
 
                         Animated.spring(animations.xPosition, {
                           toValue: _TARGET_X_POSITION_VALUE,
-                          duration: 1200,
+                          friction: 10,
+                          tension: 25,
                           easing: Easing.quad
                         }).start();
                       }}>
