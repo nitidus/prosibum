@@ -573,12 +573,11 @@ export const InputGroup = (props) => {
     ]}>
       {
         attitude.children.map((child, i) => {
-          var childProps = {...child.props};
-
-          var childStyle = [
-            Styles.InnerInputContainer,
-            childProps.style
-          ];
+          var childProps = {...child.props},
+              childStyle = [
+                Styles.InnerInputContainer,
+                childProps.style
+              ];
 
           if (i > 0){
             var _BORDER_TOP_WIDTH = 2;

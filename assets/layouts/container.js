@@ -65,7 +65,7 @@ export const Container = (props) => {
         {
           attitude.children.map((child, i) => {
             var childProps = {...child.props};
-            
+
             const ultimateKey = Functions._generateNewUniqueObjectKey();
 
             childProps.key = childProps.name || ultimateKey;

@@ -17,31 +17,27 @@ store.subscribe(() => {
 
 const ProfileStack = createStackNavigator({
   Dashboard: DashboardScreen
+}, {
+  headerMode: 'none'
 });
 
-const AuthenticationStack = createStackNavigator(
-  {
-    Login: LoginScreen,
-    Signup: SignupScreen,
-    ForgottenPassword: ForgottenPasswordScreen,
-    VerifyPhoneNumber: VerifyPhoneNumberScreen
-  },
-  {
-    headerMode: 'none'
-  }
-);
+const AuthenticationStack = createStackNavigator({
+  Login: LoginScreen,
+  Signup: SignupScreen,
+  ForgottenPassword: ForgottenPasswordScreen,
+  VerifyPhoneNumber: VerifyPhoneNumberScreen
+}, {
+  headerMode: 'none'
+});
 
-const RootStack = createSwitchNavigator(
-  {
-    Profile: ProfileStack,
-    Authentication: AuthenticationStack,
-    Authorization: AuthorizationScreen
-  },
-  {
-    initialRouteName: 'Authorization',
-    headerMode: 'none'
-  }
-);
+const RootStack = createSwitchNavigator({
+  Profile: ProfileStack,
+  Authentication: AuthenticationStack,
+  Authorization: AuthorizationScreen
+}, {
+  initialRouteName: 'Authorization',
+  headerMode: 'none'
+});
 
 export default class App extends Component<> {
   render() {

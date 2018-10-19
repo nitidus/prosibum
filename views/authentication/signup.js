@@ -4,7 +4,6 @@ import { StatusBar, View, Dimensions, Platform, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
-
 import { Headline, Input, InputGroup, Link, Carousel } from '../../assets/components/index';
 import { ActivityIndicator, Toast, CountriesCodesModal } from '../../assets/layouts/index';
 const Styles = Views.Authentication.Signup;

@@ -9,7 +9,7 @@ const Styles = Modules.Layouts.Navigation;
 
 import { Functions } from '../modules/index';
 
-const PinnedSide = (props) => {
+export const PinnedSide = (props) => {
   const { navigation } = props;
 
   var attitude = {};
@@ -182,34 +182,40 @@ export const TopBar = (props) => {
 export const Navigation = (props) => {
   var attitude = {};
 
-  attitude.type = props.type || props.id || props._id || props.token || props.navigation_type || props.navType || props.NavType || props.nav_type || props.navigationType || props.NavigationType;
+  attitude.type = props.type || props.title || props.name || props.id || props._id || props.token || props.navigation_type || props.navType || props.NavType || props.nav_type || props.navigationType || props.NavigationType || 'Title';
+
+  if (typeof props.children != 'undefined'){
+    attitude.children = [];
+
+    if (Array.isArray(props.children)){
+      attitude.children = attitude.children.concat(props.children);
+    }else{
+      attitude.children.push(props.children);
+    }
+  }
 
   if (attitude.type != 'undefined'){
-    const _NAVIGATION_TYPE = attitude.type.toLowerCase().replace(/( |_)/gi, '-');
+    return (
+      <TopBar
+        title={attitude.type}
+        {...props}>
+          {
+            attitude.children.map((child, i) => {
+              var childProps = {...child.props},
+                  childStyle = [
+                    Styles.PinnedSide,
+                    childProps.style
+                  ];
 
-    switch (_NAVIGATION_TYPE) {
-      case 'regular-dashboard':
-      default:
-        return (
-          <TopBar
-            title="Dashboard"
-            {...props}>
-              <PinnedSide type="left"
-                style={Styles.PinnedSide}
-                onPress={() => alert('ok 1')}>
-                  <Icon
-                    name="for-you" />
-              </PinnedSide>
+              const ultimateKey = Functions._generateNewUniqueObjectKey();
 
-              <PinnedSide type="right"
-                style={Styles.PinnedSide}
-                onPress={() => alert('ok 2')}>
-                  <Icon
-                    name="bar" />
-              </PinnedSide>
-          </TopBar>
-        );
-        break;
-    }
+              childProps.key = childProps.name || ultimateKey;
+              childProps.style = childStyle;
+
+              return React.cloneElement(child, childProps);
+            })
+          }
+      </TopBar>
+    );
   }
 }
