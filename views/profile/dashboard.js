@@ -6,55 +6,93 @@ import { Navigation, PinnedSide, Icon } from '../../assets/layouts/index';
 const Styles = Views.Profile.Dashboard,
       _Screen = Dimensions.get('window');
 
-export default class Dashboard extends Component<{}> {
-  static navigationOptions = {
+import { Functions } from '../../assets/modules/index';
 
-  };
+const DashboardContainer = (props) => {
+  var attitude = {},
+      animations = {
+        xPosition: new Animated.Value(0)
+      };
 
-  componentWillMount() {
-    this.animations = {
-      xPosition: new Animated.Value(0)
-    };
+  if (typeof props.children != 'undefined'){
+    attitude.children = [];
+
+    if (Array.isArray(props.children)){
+      attitude.children = attitude.children.concat(props.children);
+    }else{
+      attitude.children.push(props.children);
+    }
   }
 
-  render() {
-    const { props } = this,
-          _LAUNCHED_MENU_SCREEN_X_POSITION = (_Screen.width * 72) / 100,
-          _X_POSITION_ANIMATION_RANGE = [0, _LAUNCHED_MENU_SCREEN_X_POSITION];
+  const _LAUNCHED_MENU_SCREEN_X_POSITION = (_Screen.width * 72) / 100,
+        _X_POSITION_ANIMATION_RANGE = [0, _LAUNCHED_MENU_SCREEN_X_POSITION];
 
-    return (
-      <View
-        style={Styles.MajorContainer}>
+  let _MENU_TRANSFORMATION = {
+    transform: [
+      { translateX: animations.xPosition },
+      {
+        scaleX: animations.xPosition.interpolate({
+          inputRange: _X_POSITION_ANIMATION_RANGE,
+          outputRange: [1, 0.85]
+        })
+      },
+        {
+          scaleY: animations.xPosition.interpolate({
+          inputRange: _X_POSITION_ANIMATION_RANGE,
+          outputRange: [1, 0.85]
+        })
+      }
+    ]
+  };
 
-          <Animated.View style={[
+  return (
+    <View
+      style={Styles.MajorContainer}>
+        <Animated.View
+          style={[
+            Styles.ContainerOverlay,
+            {
+              ..._MENU_TRANSFORMATION,
+              zIndex: animations.xPosition.interpolate({
+                inputRange: _X_POSITION_ANIMATION_RANGE,
+                outputRange: [-1, 10000]
+              })
+            }
+          ]}>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                var _TARGET_X_POSITION_VALUE = 0;
+
+                if (animations.xPosition._value !== animations.xPosition._startingValue){
+                  Animated.spring(animations.xPosition, {
+                    toValue: _TARGET_X_POSITION_VALUE,
+                    friction: 10,
+                    tension: 25,
+                    easing: Easing.quad
+                  }).start();
+                }
+              }}>
+              <View
+                style={Styles.ContainerOverlayContent}/>
+            </TouchableWithoutFeedback>
+        </Animated.View>
+
+        <Animated.View
+          style={[
               Styles.Container,
               {
-                transform: [
-                  { translateX: this.animations.xPosition },
-                  {
-                    scaleX: this.animations.xPosition.interpolate({
-                      inputRange: _X_POSITION_ANIMATION_RANGE,
-                      outputRange: [1, 0.85]
-                    })
-                  },
-                    {
-                      scaleY: this.animations.xPosition.interpolate({
-                      inputRange: _X_POSITION_ANIMATION_RANGE,
-                      outputRange: [1, 0.85]
-                    })
-                  }
-                ],
-                shadowOpacity: this.animations.xPosition.interpolate({
+                ..._MENU_TRANSFORMATION,
+                shadowOpacity: animations.xPosition.interpolate({
                   inputRange: _X_POSITION_ANIMATION_RANGE,
                   outputRange: [0, 0.15]
                 }),
-                shadowRadius: this.animations.xPosition.interpolate({
+                shadowRadius: animations.xPosition.interpolate({
                   inputRange: _X_POSITION_ANIMATION_RANGE,
                   outputRange: [0, 30]
                 }),
                 shadowOffset: {
                   width: 0,
-                  height: this.animations.xPosition.interpolate({
+                  height: animations.xPosition.interpolate({
                     inputRange: _X_POSITION_ANIMATION_RANGE,
                     outputRange: [0, 30]
                   })
@@ -71,15 +109,8 @@ export default class Dashboard extends Component<{}> {
                     <PinnedSide
                       type="left"
                       onPress={() => {
-                        var { _IS_MENU_LAUNCHED, animations } = this,
-                            _TARGET_X_POSITION_VALUE = 0;
-
-                        if (animations.xPosition._value === animations.xPosition._startingValue){
-                          _TARGET_X_POSITION_VALUE = _LAUNCHED_MENU_SCREEN_X_POSITION;
-                        }
-
                         Animated.spring(animations.xPosition, {
-                          toValue: _TARGET_X_POSITION_VALUE,
+                          toValue: _LAUNCHED_MENU_SCREEN_X_POSITION,
                           friction: 10,
                           tension: 25,
                           easing: Easing.quad
@@ -97,10 +128,35 @@ export default class Dashboard extends Component<{}> {
                     </PinnedSide>
                 </Navigation>
 
-                <Text>Dashboard page.</Text>
+                {
+                  attitude.children.map((child, i) => {
+                    var childProps = {...child.props};
+
+                    const ultimateKey = Functions._generateNewUniqueObjectKey();
+
+                    childProps.key = childProps.name || ultimateKey;
+
+                    return React.cloneElement(child, childProps);
+                  })
+                }
             </View>
-          </Animated.View>
-      </View>
+        </Animated.View>
+    </View>
+  );
+};
+
+export default class Dashboard extends Component<{}> {
+  static navigationOptions = {
+
+  };
+
+  render() {
+    const { props } = this;
+
+    return (
+      <DashboardContainer>
+        <Text>Dashboard page.</Text>
+      </DashboardContainer>
     )
   }
 }

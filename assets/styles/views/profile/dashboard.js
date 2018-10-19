@@ -19,6 +19,18 @@ module.exports = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.single.rangoonGreen
   },
+  ContainerOverlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderRadius: 5,
+    overflow: 'hidden'
+  },
+  ContainerOverlayContent: {
+    flex: 1
+  },
   Container: {
     flex: 1,
     shadowColor: colors.single.rangoonGreen
