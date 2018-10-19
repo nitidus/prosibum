@@ -55,7 +55,7 @@ const DashboardContainer = (props) => {
               ..._MENU_TRANSFORMATION,
               zIndex: animations.xPosition.interpolate({
                 inputRange: _X_POSITION_ANIMATION_RANGE,
-                outputRange: [-1, 10000]
+                outputRange: [-1, 1000000]
               })
             }
           ]}>
