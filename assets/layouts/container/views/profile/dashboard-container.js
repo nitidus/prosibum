@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, View, Text, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
-import { Navigation, PinnedSide, Icon } from '../../../../layouts/index';
+import { Navigation, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
 const Styles = Views.Profile.Dashboard;
 
 import { Functions, Utils } from '../../../../modules/index';
@@ -31,6 +31,8 @@ export const DashboardContainer = (props) => {
   return (
     <View
       style={Styles.MajorContainer}>
+        <DrawerMenu />
+
         <Animated.View
           style={[
             Styles.ContainerOverlay,
