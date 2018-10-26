@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, Animated, Easing } from 'react-native';
 
 import { Global, Modules } from '../styles/index';
+import { Link } from '../components/index';
 const Styles = Modules.Layouts.DrawerMenu;
 
 import { Functions } from '../modules/index';
@@ -32,31 +33,18 @@ export const DrawerMenuPinnedItem = (props) => {
   }
 
   return (
-    <Text
-      key={attitude.key}
-      name={attitude.name}
+    <Link
       style={[
         Styles.PinnedItem,
         attitude.style
       ]}
-      onPress={attitude.onPress}>
-        {attitude.name}
-    </Text>
+      value={attitude.name}
+      onPress={attitude.onPress} />
   )
 }
 
 export const DrawerMenuItem = (props) => {
   var attitude = {};
-
-  if (typeof props.key != 'undefined'){
-    attitude.key = props.key;
-  }else{
-    if (typeof props.name != 'undefined'){
-      attitude.key = props.name;
-    }else{
-      attitude.key = Functions._generateNewUniqueObjectKey()
-    }
-  }
 
   if ((typeof props.name != 'undefined') || (typeof props.title != 'undefined') || (typeof props.value != 'undefined')){
     attitude.name = props.name || props.title || props.value;
@@ -80,16 +68,13 @@ export const DrawerMenuItem = (props) => {
   }
 
   return (
-    <Text
-      key={attitude.key}
-      name={attitude.name}
+    <Link
       style={[
         Styles.SingleItemContent,
         attitude.style
       ]}
-      onPress={attitude.onPress}>
-        {attitude.name}
-    </Text>
+      value={attitude.name}
+      onPress={attitude.onPress} />
   )
 }
 
