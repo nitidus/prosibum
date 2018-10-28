@@ -82,7 +82,7 @@ export const DrawerMenu = (props) => {
   return (
     <View
       style={Styles.Container}>
-        <View>
+        <View style={Styles.MenuItemsContainer}>
           <DrawerMenuItem
             name="Dashboard"
             onPress={() => alert('ok 1')} />

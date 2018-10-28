@@ -19,6 +19,9 @@ module.exports = StyleSheet.create({
     color: colors.single.romance,
     marginBottom: 30
   },
+  MenuItemsContainer: {
+
+  },
   PinnedItemsContainer: {
     flex: 1,
     justifyContent: 'flex-end'
