@@ -5,7 +5,7 @@ import { Modal } from './modal';
 import CountriesCodesModal from './countries-codes-modal';
 import { Icon } from './icon';
 import { Navigation, TopBar, PinnedSide } from './navigation';
-import { DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem } from './drawer-menu';
+import { DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile } from './drawer-menu';
 
 module.exports = {
   Container,
@@ -15,5 +15,5 @@ module.exports = {
   CountriesCodesModal,
   Icon,
   Navigation, TopBar, PinnedSide,
-  DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem
+  DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile
 };
