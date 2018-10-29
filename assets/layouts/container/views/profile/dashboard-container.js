@@ -34,6 +34,7 @@ export const DashboardContainer = (props) => {
     <View
       style={Styles.MajorContainer}>
         <DrawerMenu
+          onDismiss={() => Events._Dismiss(animations.xPosition)}
           {...props} />
 
         <Animated.View

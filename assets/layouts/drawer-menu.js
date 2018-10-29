@@ -138,6 +138,12 @@ export const DrawerMenuItem = (props) => {
 }
 
 export const DrawerMenu = (props) => {
+  var attitude = {};
+
+  if ((typeof props.onDismiss != 'undefined') || (typeof props.onDrawerMenuDismiss != 'undefined') || (typeof props.drawerMenuOnDismiss != 'undefined') || (typeof props.onMenuDismiss != 'undefined') || (typeof props.menuOnDismiss != 'undefined')){
+    attitude.onDismiss = props.onDismiss || props.onDrawerMenuDismiss || props.drawerMenuOnDismiss || props.onMenuDismiss || props.menuOnDismiss;
+  }
+
   return (
     <View
       style={Styles.Container}>
@@ -160,6 +166,10 @@ export const DrawerMenu = (props) => {
             onPress={() => {
               const { navigation } = props;
 
+              setTimeout(() => {
+                attitude.onDismiss();
+              }, 1000);
+              
               navigation.navigate('Profile');
             }}
             {...props} />

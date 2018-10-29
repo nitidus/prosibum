@@ -32,9 +32,13 @@ export const ProfileContainer = (props) => {
           {...props}>
             <PinnedSide
               type="left"
-              onPress={() => alert('ok 7')}>
+              onPress={() => {
+                const { navigation } = props;
+
+                navigation.goBack()
+              }}>
                 <Icon
-                  name="bar" />
+                  name="arrow left" />
             </PinnedSide>
         </Navigation>
 
