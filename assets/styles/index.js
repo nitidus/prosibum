@@ -10,6 +10,7 @@ import VerifyPhoneNumber from './views/authentication/verify-phone-number';
 
 //Profile
 import Dashboard from './views/profile/dashboard';
+import Profile from './views/profile/profile';
 
 /*** Modules ***/
 

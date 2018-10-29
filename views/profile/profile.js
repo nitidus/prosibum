@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 import { Global, Views } from '../../assets/styles/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
-const Styles = Views.Profile.Dashboard,
+const Styles = Views.Profile.Profile,
       Container = ViewsContainer.Profile.ProfileContainer;
 
 export default class Dashboard extends Component<{}> {
