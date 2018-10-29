@@ -143,18 +143,30 @@ export const DrawerMenu = (props) => {
       style={Styles.Container}>
         <DrawerMenuPinnedProfile
           src="https://www.morpht.com/sites/morpht/files/styles/landscape_medium/public/dalibor-matura_1.jpg?itok=Wskh0jNP"
-          onPress={() => alert('ok 0')} />
+          onPress={() => {
+            const { navigation } = props;
+
+            navigation.navigate('Profile');
+          }}
+          {...props} />
 
         <View style={Styles.MenuItemsContainer}>
           <DrawerMenuItem
             name="Dashboard"
-            onPress={() => alert('ok 1')} />
+            onPress={() => alert('ok 1')}
+            {...props} />
           <DrawerMenuItem
             name="Profile"
-            onPress={() => alert('ok 2')} />
+            onPress={() => {
+              const { navigation } = props;
+
+              navigation.navigate('Profile');
+            }}
+            {...props} />
           <DrawerMenuItem
             name="Settings"
-            onPress={() => alert('ok 3')} />
+            onPress={() => alert('ok 3')}
+            {...props} />
         </View>
 
         <View
@@ -163,10 +175,12 @@ export const DrawerMenu = (props) => {
               style={Styles.PinnedItemGroup}>
                 <DrawerMenuPinnedItem
                   name="Privacy"
-                  onPress={() => alert('ok 4')} />
+                  onPress={() => alert('ok 4')}
+                  {...props} />
                 <DrawerMenuPinnedItem
                   name="Terms & Conds"
-                  onPress={() => alert('ok 5')} />
+                  onPress={() => alert('ok 5')}
+                  {...props} />
             </View>
         </View>
     </View>

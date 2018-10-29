@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 import { Global, Views } from '../../assets/styles/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Profile.Dashboard,
-      Container = ViewsContainer.Profile.DashboardContainer;
+      Container = ViewsContainer.Profile.ProfileContainer;
 
 export default class Dashboard extends Component<{}> {
   static navigationOptions = {
@@ -16,9 +16,9 @@ export default class Dashboard extends Component<{}> {
 
     return (
       <Container
-        title="Dashboard"
+        title="Profile"
         {...props}>
-          <Text>Dashboard page.</Text>
+          <Text>Profile page.</Text>
       </Container>
     )
   }

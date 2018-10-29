@@ -2,6 +2,7 @@ import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'rea
 
 //Profile Screens
 import Dashboard from './profile/dashboard';
+import Profile from './profile/profile';
 
 //Authentication Screens
 import Login from './authentication/login';
@@ -13,7 +14,8 @@ import VerifyPhoneNumber from './authentication/verify-phone-number';
 import Authorization from './authorization';
 
 const ProfileStack = createStackNavigator({
-  Dashboard
+  Dashboard,
+  Profile
 }, {
   headerMode: 'none'
 });
@@ -28,8 +30,8 @@ const AuthenticationStack = createStackNavigator({
 });
 
 const RootStack = createSwitchNavigator({
-  Profile: ProfileStack,
-  Authentication: AuthenticationStack,
+  ProfileStack: ProfileStack,
+  AuthenticationStack: AuthenticationStack,
   Authorization
 }, {
   initialRouteName: 'Authorization',

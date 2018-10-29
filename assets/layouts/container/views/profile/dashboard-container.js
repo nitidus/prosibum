@@ -14,6 +14,8 @@ export const DashboardContainer = (props) => {
         xPosition: new Animated.Value(0)
       };
 
+  attitude.title = props.title || props.name;
+
   if (typeof props.children != 'undefined'){
     attitude.children = [];
 
@@ -31,7 +33,8 @@ export const DashboardContainer = (props) => {
   return (
     <View
       style={Styles.MajorContainer}>
-        <DrawerMenu />
+        <DrawerMenu
+          {...props} />
 
         <Animated.View
           style={[
@@ -55,7 +58,7 @@ export const DashboardContainer = (props) => {
                 <StatusBar hidden={true} />
 
                 <Navigation
-                  title="Dashoard"
+                  title={attitude.title}
                   {...props}>
                     <PinnedSide
                       type="left"
