@@ -25,8 +25,8 @@ export const DashboardContainer = (props) => {
   }
 
   const { Interpolation, Events } = MenuCardPulling,
-        _CONTAINER_ANIMATION = Interpolation._Container(animations.xPosition)
-        _OVERLAY_ANIMATION = Interpolation._Overlay(animations.xPosition)
+        _CONTAINER_ANIMATION = Interpolation._Container(animations.xPosition),
+        _OVERLAY_ANIMATION = Interpolation._Overlay(animations.xPosition);
 
   return (
     <View

@@ -1,43 +1,14 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import getStore from './assets/flows/states/reducer';
-import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'react-navigation';
 
-import {
- DashboardScreen,
- LoginScreen, SignupScreen, ForgottenPasswordScreen, VerifyPhoneNumberScreen,
- AuthorizationScreen
-} from './views/index';
+import RootStack from './views/index';
 
 const store = getStore();
 
 store.subscribe(() => {
-  console.log("Store updated!", store.getState());
+  console.log("Store updated.", store.getState());
 })
-
-const ProfileStack = createStackNavigator({
-  Dashboard: DashboardScreen
-}, {
-  headerMode: 'none'
-});
-
-const AuthenticationStack = createStackNavigator({
-  Login: LoginScreen,
-  Signup: SignupScreen,
-  ForgottenPassword: ForgottenPasswordScreen,
-  VerifyPhoneNumber: VerifyPhoneNumberScreen
-}, {
-  headerMode: 'none'
-});
-
-const RootStack = createSwitchNavigator({
-  Profile: ProfileStack,
-  Authentication: AuthenticationStack,
-  Authorization: AuthorizationScreen
-}, {
-  initialRouteName: 'Authorization',
-  headerMode: 'none'
-});
 
 export default class App extends Component<> {
   render() {

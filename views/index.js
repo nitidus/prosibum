@@ -1,17 +1,39 @@
+import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'react-navigation';
+
+//Profile Screens
 import Dashboard from './profile/dashboard';
 
+//Authentication Screens
 import Login from './authentication/login';
 import Signup from './authentication/signup';
 import ForgottenPassword from './authentication/forgotten-password';
 import VerifyPhoneNumber from './authentication/verify-phone-number';
 
+//Authorization Screen
 import Authorization from './authorization';
 
-module.exports = {
-  DashboardScreen: Dashboard,
-  LoginScreen: Login,
-  SignupScreen: Signup,
-  ForgottenPasswordScreen: ForgottenPassword,
-  VerifyPhoneNumberScreen: VerifyPhoneNumber,
-  AuthorizationScreen: Authorization
-};
+const ProfileStack = createStackNavigator({
+  Dashboard
+}, {
+  headerMode: 'none'
+});
+
+const AuthenticationStack = createStackNavigator({
+  Login,
+  Signup,
+  ForgottenPassword,
+  VerifyPhoneNumber
+}, {
+  headerMode: 'none'
+});
+
+const RootStack = createSwitchNavigator({
+  Profile: ProfileStack,
+  Authentication: AuthenticationStack,
+  Authorization
+}, {
+  initialRouteName: 'Authorization',
+  headerMode: 'none'
+});
+
+module.exports = RootStack;

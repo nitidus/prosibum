@@ -142,7 +142,8 @@ export const DrawerMenu = (props) => {
     <View
       style={Styles.Container}>
         <DrawerMenuPinnedProfile
-          src="https://www.morpht.com/sites/morpht/files/styles/landscape_medium/public/dalibor-matura_1.jpg?itok=Wskh0jNP" />
+          src="https://www.morpht.com/sites/morpht/files/styles/landscape_medium/public/dalibor-matura_1.jpg?itok=Wskh0jNP"
+          onPress={() => alert('ok 0')} />
 
         <View style={Styles.MenuItemsContainer}>
           <DrawerMenuItem
