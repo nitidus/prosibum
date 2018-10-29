@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dimensions, Platform, Animated, Easing } from 'react-native';
 
 const _Screen = Dimensions.get('window'),
-      _LAUNCHED_MENU_SCREEN_X_POSITION_IN_PERCENTAGE_FORMAT = (Platform.OS === 'ios')? ((_Screen.width >= 1000 || _Screen.height >= 1000)? 82: 72): ((_Screen.width >= 1000 || _Screen.height >= 1000)? 82: 72),
+      _LAUNCHED_MENU_SCREEN_X_POSITION_IN_PERCENTAGE_FORMAT = (Platform.OS === 'ios')? ((_Screen.width >= 1000 || _Screen.height >= 1000)? 35: 72): ((_Screen.width >= 1000 || _Screen.height >= 1000)? 37.3: 72),
       _LAUNCHED_MENU_SCREEN_X_POSITION = (_Screen.width * _LAUNCHED_MENU_SCREEN_X_POSITION_IN_PERCENTAGE_FORMAT) / 100,
       _X_POSITION_ANIMATION_RANGE = [0, _LAUNCHED_MENU_SCREEN_X_POSITION];
 

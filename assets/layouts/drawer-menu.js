@@ -169,7 +169,7 @@ export const DrawerMenu = (props) => {
               setTimeout(() => {
                 attitude.onDismiss();
               }, 1000);
-              
+
               navigation.navigate('Profile');
             }}
             {...props} />
