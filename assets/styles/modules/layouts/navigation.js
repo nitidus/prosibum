@@ -23,6 +23,13 @@ var _CUSTOM_CONTAINER = {
     },
     _CUSTOM_PINNED_SIDE = {
       minWidth: 62
+    },
+    _CUSTOM_SINGLE_TAB_ITEM_CONTAINER = {
+      height: 38,
+      paddingHorizontal: 25
+    },
+    _CUSTOM_SINGLE_TAB_ITEM_CONTENT = {
+      fontSize: 17
     };
 
 if (Platform.OS === 'ios'){
@@ -39,6 +46,11 @@ if (Platform.OS === 'ios'){
     };
 
     _CUSTOM_HEADER_TITLE.fontSize += 2;
+
+    _CUSTOM_SINGLE_TAB_ITEM_CONTAINER.height += 4;
+    _CUSTOM_SINGLE_TAB_ITEM_CONTAINER.paddingHorizontal += 3;
+
+    _CUSTOM_SINGLE_TAB_ITEM_CONTENT.fontSize += 1;
   }else{
     if (_IS_IPHONE_X){
       _CUSTOM_CONTAINER = {
@@ -65,6 +77,11 @@ if (Platform.OS === 'ios'){
     _CUSTOM_HEADER_TITLE.fontSize += 15;
 
     _CUSTOM_PINNED_SIDE.minWidth += 20;
+
+    _CUSTOM_SINGLE_TAB_ITEM_CONTAINER.height += 14;
+    _CUSTOM_SINGLE_TAB_ITEM_CONTAINER.paddingHorizontal += 10;
+
+    _CUSTOM_SINGLE_TAB_ITEM_CONTENT.fontSize += 5;
   }else{
     _CUSTOM_CONTAINER = {
       ..._CUSTOM_CONTAINER,
@@ -76,6 +93,8 @@ if (Platform.OS === 'ios'){
 
   _CUSTOM_CONTAINER.elevation = 2;
   _CUSTOM_HEADER_TITLE.fontWeight = 'bold';
+
+  _CUSTOM_SINGLE_TAB_ITEM_CONTENT.fontWeight = '500';
 }
 
 module.exports = StyleSheet.create({
@@ -107,13 +126,12 @@ module.exports = StyleSheet.create({
   },
   SingleTabItemContainer: {
     backgroundColor: colors.single.rangoonGreen,
-    height: 38,
-    paddingHorizontal: 25
+    ..._CUSTOM_SINGLE_TAB_ITEM_CONTAINER
   },
   SingleTabItemContent: {
     fontFamily: fonts.sanFrancisco.textBold,
-    fontSize: 17,
-    color: colors.single.romance
+    color: colors.single.romance,
+    ..._CUSTOM_SINGLE_TAB_ITEM_CONTENT
   },
   TabItemContainer: {
     marginRight: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
