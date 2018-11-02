@@ -3,7 +3,7 @@ import { StatusBar, View, Text, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
 import { Input } from '../../../../components/index';
-import { Navigation, PinnedSide, Icon } from '../../../../layouts/index';
+import { Pilot, PinnedSide, Icon } from '../../../../layouts/index';
 const Styles = Views.Profile.Dashboard;
 
 import { Functions } from '../../../../modules/index';
@@ -28,7 +28,7 @@ export const ProfileContainer = (props) => {
       style={Styles.MajorContent}>
         <StatusBar />
 
-        <Navigation
+        <Pilot
           title={attitude.title}
           {...props}>
             <PinnedSide
@@ -54,7 +54,7 @@ export const ProfileContainer = (props) => {
               onPress={() => {
                 alert('CURRENT')
               }} />
-        </Navigation>
+        </Pilot>
 
         {
           attitude.children.map((child, i) => {

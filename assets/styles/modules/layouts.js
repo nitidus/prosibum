@@ -3,7 +3,7 @@ import ActivityIndicator from './layouts/activity-indicator';
 import Toast from './layouts/toast';
 import Modal from './layouts/modal';
 import CountriesCodesModal from './layouts/countries-codes-modal';
-import Navigation from './layouts/navigation';
+import Pilot from './layouts/pilot';
 import DrawerMenu from './layouts/drawer-menu';
 
 module.exports = {
@@ -12,6 +12,6 @@ module.exports = {
   Toast,
   Modal,
   CountriesCodesModal,
-  Navigation,
+  Pilot,
   DrawerMenu
 };

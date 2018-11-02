@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, View, Text, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
-import { Navigation, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
+import { Pilot, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
 const Styles = Views.Profile.Dashboard;
 
 import { Functions, Utils } from '../../../../modules/index';
@@ -58,7 +58,7 @@ export const DashboardContainer = (props) => {
               style={Styles.MajorContent}>
                 <StatusBar hidden={true} />
 
-                <Navigation
+                <Pilot
                   title={attitude.title}
                   {...props}>
                     <PinnedSide
@@ -74,7 +74,7 @@ export const DashboardContainer = (props) => {
                         <Icon
                           name="for-you" />
                     </PinnedSide>
-                </Navigation>
+                </Pilot>
 
                 {
                   attitude.children.map((child, i) => {

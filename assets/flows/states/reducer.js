@@ -7,6 +7,7 @@ import Segment from './reducers/components/segment';
 /* Layouts Reducers */
 import CountriesCodesModal from './reducers/layouts/countries-codes-modal';
 import Toast from './reducers/layouts/toast';
+import Pilot from './reducers/layouts/pilot';
 
 /* Views Reducers */
 import Login from './reducers/views/authentication/login';
@@ -17,7 +18,7 @@ import VerifyPhoneNumber from './reducers/views/authentication/verify-phone-numb
 export default () => {
   const reducer = combineReducers({
           Segment,
-          Toast, CountriesCodesModal,
+          Toast, CountriesCodesModal, Pilot,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber
         }),
         middeware = applyMiddleware(logger);

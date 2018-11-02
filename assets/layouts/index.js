@@ -4,7 +4,8 @@ import Toast from './toast';
 import { Modal } from './modal';
 import CountriesCodesModal from './countries-codes-modal';
 import { Icon } from './icon';
-import { Navigation, TopBar, PinnedSide, TabItem } from './navigation';
+import { TopBar, PinnedSide, TabItem } from './container/layouts/pilot/top-bar';
+import Pilot from './pilot';
 import { DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile } from './drawer-menu';
 
 module.exports = {
@@ -14,6 +15,6 @@ module.exports = {
   Modal,
   CountriesCodesModal,
   Icon,
-  Navigation, TopBar, PinnedSide, TabItem,
+  Pilot, TopBar, PinnedSide, TabItem,
   DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile
 };
