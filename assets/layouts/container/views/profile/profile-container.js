@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StatusBar, View, Text, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
+import { Input } from '../../../../components/index';
 import { Navigation, PinnedSide, Icon } from '../../../../layouts/index';
 const Styles = Views.Profile.Dashboard;
 
@@ -40,6 +41,16 @@ export const ProfileContainer = (props) => {
                 <Icon
                   name="arrow left" />
             </PinnedSide>
+            <PinnedSide
+              type="right"
+              onPress={() => alert('ok 2')}>
+                <Icon
+                  name="for-you" />
+            </PinnedSide>
+            <PinnedSide
+              type="bottom"
+              items={["Technical", "Pesonal", "Histories", "Certifications", "Postal"]}
+              current="Technical" />
         </Navigation>
 
         {

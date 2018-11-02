@@ -1,13 +1,76 @@
 import React, { Component } from 'react';
 
-import { View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, Animated, Easing } from 'react-native';
 
-import { Link } from '../components/index';
+import { Link, Input } from '../components/index';
 import { Icon } from '../layouts/icon';
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Layouts.Navigation;
 
 import { Functions } from '../modules/index';
+
+export const TabItem = (props) => {
+  const { navigation } = props;
+
+  var attitude = {};
+
+  if (typeof props.key != 'undefined'){
+    attitude.key = props.key;
+  }else{
+    if (typeof props.name != 'undefined'){
+      attitude.key = props.name;
+    }else{
+      attitude.key = Functions._generateNewUniqueObjectKey()
+    }
+  }
+
+  if ((typeof props.name != 'undefined') || (typeof props.title != 'undefined')){
+    attitude.name = props.name || props.title;
+  }
+
+  if (typeof props.style != 'undefined'){
+    attitude.style = props.style;
+
+    if (typeof attitude.style == 'object' && Array.isArray(attitude.style)){
+      attitude.style = attitude.style.reduce((total, item) => {
+        return {
+          ...total,
+          ...item
+        };
+      })
+    }
+  }
+
+  if (typeof props.children != 'undefined'){
+    attitude.children = [];
+
+    if (Array.isArray(props.children)){
+      attitude.children = attitude.children.concat(props.children);
+    }else{
+      attitude.children.push(props.children);
+    }
+  }
+
+  if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined') || (typeof props.iconOnPress != 'undefined') || (typeof props.onIconPress != 'undefined')){
+    attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress || props.onIconPress || props.iconOnPress;
+  }
+
+  const _TAB_NAME = attitude.name.toLowerCase().replace(/ +/ig, '-');
+
+  return (
+    <Input
+      type="BUTTON"
+      name={_TAB_NAME}
+      value={attitude.name}
+      style={[
+        Styles.SingleTabItemContainer,
+        attitude.style
+      ]}
+      onPress={() => {
+        alert('ok')
+      }}/>
+  );
+}
 
 export const PinnedSide = (props) => {
   const { navigation } = props;
@@ -127,6 +190,7 @@ export const TopBar = (props) => {
               switch (child.props.type.toLowerCase()) {
                 case 'left':
                 case 'right':
+                case 'bottom':
                   return child;
                   break;
               }
@@ -138,9 +202,10 @@ export const TopBar = (props) => {
   }
 
   var _LEFT_SIDE_CONTENT = <View style={Styles.PinnedSide} />,
-      _RIGHT_SIDE_CONTENT = <View style={Styles.PinnedSide} />;
+      _RIGHT_SIDE_CONTENT = <View style={Styles.PinnedSide} />,
+      _BOTTOM_WIDE_CONTENT;
 
-  if ((typeof attitude.children != 'undefined') && (attitude.children.length <= 2)){
+  if ((typeof attitude.children != 'undefined') && ((attitude.children.length <= 2) || (attitude.children.length <= 3))){
     for (var i = 0; i < attitude.children.length; i++) {
       var _CHILD = attitude.children[i],
           _CHILD_PROPS = {..._CHILD.props, navigation},
@@ -157,6 +222,45 @@ export const TopBar = (props) => {
         case 'right':
           _RIGHT_SIDE_CONTENT = React.cloneElement(_CHILD, _CHILD_PROPS);
           break;
+        case 'bottom':
+          var _TAB_ATTITUDE = {};
+
+          if (typeof _CHILD_PROPS.children != 'undefined'){
+            _BOTTOM_WIDE_CONTENT = <View
+              style={[
+                Styles.SecondRowContainer,
+                Styles.LTR_Items
+              ]}>
+                {React.cloneElement(_CHILD, _CHILD_PROPS)}
+            </View>;
+          }else{
+            if ((typeof _CHILD_PROPS.data != 'undefined') || typeof _CHILD_PROPS.items != 'undefined'){
+              _TAB_ATTITUDE.data = _CHILD_PROPS.data || _CHILD_PROPS.items;
+            }
+
+            _BOTTOM_WIDE_CONTENT = <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={Styles.SecondRowContainer}>
+                {
+                  _TAB_ATTITUDE.data.map((tabItemName, w, tabItems) => {
+                    var _ITEM_STYLE;
+
+                    if (w < tabItems.length - 1){
+                      _ITEM_STYLE = Styles.TabItemContainer;
+                    }
+
+                    return (
+                      <TabItem
+                        key={w}
+                        title={tabItemName}
+                        style={_ITEM_STYLE} />
+                    );
+                  })
+                }
+            </ScrollView>;
+          }
+          break;
       }
     }
   }
@@ -164,17 +268,22 @@ export const TopBar = (props) => {
   return (
     <View
       style={[
-        Styles.Container,
+        Styles.MainContainer,
         attitude.style
       ]}>
-        {_LEFT_SIDE_CONTENT}
+        <View
+          style={Styles.FirstRowContainer}>
+            {_LEFT_SIDE_CONTENT}
 
-        <Text
-          style={Styles.HeaderTitle}>
-            {props.title}
-        </Text>
+            <Text
+              style={Styles.HeaderTitle}>
+                {props.title}
+            </Text>
 
-        {_RIGHT_SIDE_CONTENT}
+            {_RIGHT_SIDE_CONTENT}
+        </View>
+
+        {_BOTTOM_WIDE_CONTENT}
     </View>
   )
 }

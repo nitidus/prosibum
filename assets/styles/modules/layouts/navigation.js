@@ -79,12 +79,19 @@ if (Platform.OS === 'ios'){
 }
 
 module.exports = StyleSheet.create({
-  Container: {
-    flexDirection: 'row',
+  MainContainer: {
     backgroundColor: colors.single.romance,
     shadowColor: colors.single.rangoonGreen,
-    alignItems: 'center',
     ..._CUSTOM_CONTAINER
+  },
+  FirstRowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  SecondRowContainer: {
+    marginTop: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
+    paddingHorizontal: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
+    justifyContent: 'space-between'
   },
   HeaderTitle: {
     fontFamily: fonts.sanFrancisco.textBold,
@@ -97,5 +104,19 @@ module.exports = StyleSheet.create({
   PinnedSide: {
     alignItems: 'center',
     ..._CUSTOM_PINNED_SIDE
+  },
+  SingleTabItemContainer: {
+    height: 38,
+    paddingHorizontal: 25
+  },
+  TabItemContainer: {
+    marginRight: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
+    flexGrow: 1
+  },
+  LTR_Items: {
+    alignItems: 'flex-start'
+  },
+  RTL_Items: {
+    alignItems: 'flex-end'
   }
 });

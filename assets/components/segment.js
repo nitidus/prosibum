@@ -6,7 +6,6 @@ import { View, Animated, TouchableOpacity, Text, Easing } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 
-import { Input } from './input';
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Components.Segment;
 
