@@ -14,16 +14,6 @@ export const TabItem = (props) => {
 
   var attitude = {};
 
-  if (typeof props.key != 'undefined'){
-    attitude.key = props.key;
-  }else{
-    if (typeof props.name != 'undefined'){
-      attitude.key = props.name;
-    }else{
-      attitude.key = Functions._generateNewUniqueObjectKey()
-    }
-  }
-
   if ((typeof props.name != 'undefined') || (typeof props.title != 'undefined')){
     attitude.name = props.name || props.title;
   }
@@ -61,14 +51,18 @@ export const TabItem = (props) => {
     <Input
       type="BUTTON"
       name={_TAB_NAME}
-      value={attitude.name}
       style={[
         Styles.SingleTabItemContainer,
         attitude.style
       ]}
       onPress={() => {
         alert('ok')
-      }}/>
+      }}>
+        <Text
+          style={Styles.SingleTabItemContent}>
+            {attitude.name}
+        </Text>
+    </Input>
   );
 }
 
@@ -250,10 +244,12 @@ export const TopBar = (props) => {
                       _ITEM_STYLE = Styles.TabItemContainer;
                     }
 
+                    const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w);
+
                     return (
                       <TabItem
-                        key={w}
-                        title={tabItemName}
+                        key={_ITEM_KEY}
+                        name={tabItemName}
                         style={_ITEM_STYLE} />
                     );
                   })

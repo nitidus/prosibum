@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import Lodash from 'lodash';
 
 import { countries as __COUNTRIES } from '../../flows/knowledge/index';
 import { name as __APP_NAME } from '../../../app.json';
@@ -7,11 +8,18 @@ module.exports = {
   _convertKeywordToToken: (keyword) => {
     return keyword.replace(/_/ig, ' ').replace(/\b\w/ig, char => char.toUpperCase());
   },
-  _generateNewUniqueObjectKey: () => {
-    const today = new Date(),
-          randomToken = Math.floor((Math.random() * 999999999999) + 100000000000);
+  _generateNewUniqueObjectKey: (seedKey) => {
+    const _TODAY = new Date(),
+          _TODAY_IN_TIME_FORMAT = Lodash.shuffle(_TODAY.getTime().toString(16)).reduce((totalChars, char) => {
+            return `${totalChars}${char}`;
+          }),
+          _RANDOM_TOKEN = Lodash.shuffle((Math.floor((Math.random() * 999999999999) + 100000000000)).toString(16)).reduce((totalChars, char) => {
+            return `${totalChars}${char}`;
+          }),
+          _TIME_LIMITED_RANDOM_TOKEN = `${_TODAY_IN_TIME_FORMAT}${_RANDOM_TOKEN}`,
+          SECRET_SEED_KEY = `${(seedKey || '')}${_TIME_LIMITED_RANDOM_TOKEN}`;
 
-    return today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString();
+    return `${_TIME_LIMITED_RANDOM_TOKEN}${SECRET_SEED_KEY}`;
   },
   _convertHexColorToRGBA: (hex, opacity) => {
       var c;

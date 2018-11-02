@@ -106,8 +106,14 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_PINNED_SIDE
   },
   SingleTabItemContainer: {
+    backgroundColor: colors.single.rangoonGreen,
     height: 38,
     paddingHorizontal: 25
+  },
+  SingleTabItemContent: {
+    fontFamily: fonts.sanFrancisco.textBold,
+    fontSize: 17,
+    color: colors.single.romance
   },
   TabItemContainer: {
     marginRight: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
