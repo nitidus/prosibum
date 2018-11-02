@@ -41,29 +41,61 @@ export const TabItem = (props) => {
     }
   }
 
+  attitude.disable = props.disable || false;
+
+  if (typeof props.gradient != 'undefined'){
+    attitude.gradient = props.gradient;
+  }
+
   if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined') || (typeof props.iconOnPress != 'undefined') || (typeof props.onIconPress != 'undefined')){
     attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress || props.onIconPress || props.iconOnPress;
   }
 
   const _TAB_NAME = attitude.name.toLowerCase().replace(/ +/ig, '-');
 
-  return (
-    <Input
-      type="BUTTON"
-      name={_TAB_NAME}
-      style={[
-        Styles.SingleTabItemContainer,
-        attitude.style
-      ]}
-      onPress={() => {
-        alert('ok')
-      }}>
-        <Text
-          style={Styles.SingleTabItemContent}>
-            {attitude.name}
-        </Text>
-    </Input>
+  var _ITEM_TEXT_STYLE = [
+    Styles.SingleTabItemContent
+  ];
+
+  if ((typeof attitude.disable != 'undefined' && attitude.disable) || (typeof attitude.gradient != 'undefined')){
+    _ITEM_TEXT_STYLE.push(Styles.DisabledSingleTabItemContent);
+  }
+
+  var _MAIN_TEXT_COTNENT = (
+    <Text
+      style={_ITEM_TEXT_STYLE}>
+        {attitude.name}
+    </Text>
   );
+
+  if (typeof attitude.gradient != 'undefined'){
+    return (
+      <Input
+        type="BUTTON"
+        name={_TAB_NAME}
+        style={[
+          Styles.SingleTabItemContainer,
+          attitude.style
+        ]}
+        gradient={attitude.gradient}>
+          {_MAIN_TEXT_COTNENT}
+      </Input>
+    );
+  }else{
+    return (
+      <Input
+        type="BUTTON"
+        name={_TAB_NAME}
+        style={[
+          Styles.SingleTabItemContainer,
+          attitude.style
+        ]}
+        disable={attitude.disable}
+        onPress={attitude.onPress}>
+          {_MAIN_TEXT_COTNENT}
+      </Input>
+    );
+  }
 }
 
 export const PinnedSide = (props) => {
@@ -232,6 +264,10 @@ export const TopBar = (props) => {
               _TAB_ATTITUDE.data = _CHILD_PROPS.data || _CHILD_PROPS.items;
             }
 
+            if ((typeof _CHILD_PROPS.current != 'undefined') || typeof _CHILD_PROPS.currentItem != 'undefined' || typeof _CHILD_PROPS.current_item != 'undefined'){
+              _TAB_ATTITUDE.current = _CHILD_PROPS.current || _CHILD_PROPS.currentItem || _CHILD_PROPS.current_item;
+            }
+
             _BOTTOM_WIDE_CONTENT = <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -244,14 +280,31 @@ export const TopBar = (props) => {
                       _ITEM_STYLE = Styles.TabItemContainer;
                     }
 
-                    const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w);
+                    const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w),
+                          _ITEM_NAME = tabItemName,
+                          _SCAPED_ITEM_NAME = _ITEM_NAME.toLowerCase().replace(/( |_)+/ig, '-'),
+                          _SCAPED_CURRENT_ITEM = _TAB_ATTITUDE.current.toLowerCase().replace(/( |_)+/ig, '-');
 
-                    return (
-                      <TabItem
-                        key={_ITEM_KEY}
-                        name={tabItemName}
-                        style={_ITEM_STYLE} />
-                    );
+                    if (_SCAPED_ITEM_NAME === _SCAPED_CURRENT_ITEM){
+                      return (
+                        <TabItem
+                          key={_ITEM_KEY}
+                          name={tabItemName}
+                          style={_ITEM_STYLE}
+                          gradient={Global.colors.pair.ongerine} />
+                      );
+                    }else{
+                      return (
+                        <TabItem
+                          key={_ITEM_KEY}
+                          name={tabItemName}
+                          style={[
+                            _ITEM_STYLE,
+                            Styles.DisabledSingleTabItemContainer
+                          ]}
+                          disable={true} />
+                      );
+                    }
                   })
                 }
             </ScrollView>;

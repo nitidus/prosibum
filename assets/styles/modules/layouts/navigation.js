@@ -133,6 +133,12 @@ module.exports = StyleSheet.create({
     color: colors.single.romance,
     ..._CUSTOM_SINGLE_TAB_ITEM_CONTENT
   },
+  DisabledSingleTabItemContainer: {
+    backgroundColor: colors.single.wildSand
+  },
+  DisabledSingleTabItemContent: {
+    color: colors.single.rangoonGreen
+  },
   TabItemContainer: {
     marginRight: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
     flexGrow: 1
