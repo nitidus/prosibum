@@ -90,7 +90,6 @@ export const TabItem = (props) => {
           Styles.SingleTabItemContainer,
           attitude.style
         ]}
-        disable={attitude.disable}
         onPress={attitude.onPress}>
           {_MAIN_TEXT_COTNENT}
       </Input>
@@ -268,6 +267,10 @@ export const TopBar = (props) => {
               _TAB_ATTITUDE.current = _CHILD_PROPS.current || _CHILD_PROPS.currentItem || _CHILD_PROPS.current_item;
             }
 
+            if ((typeof _CHILD_PROPS.onPress != 'undefined') || (typeof _CHILD_PROPS.onTabPress != 'undefined') || (typeof _CHILD_PROPS.tabOnPress != 'undefined') || (typeof _CHILD_PROPS.onTabItemPress != 'undefined') || (typeof _CHILD_PROPS.tabItemOnPress != 'undefined')){
+              _TAB_ATTITUDE.onPress = _CHILD_PROPS.onPress || _CHILD_PROPS.onTabPress || _CHILD_PROPS.tabOnPress || _CHILD_PROPS.onTabItemPress || _CHILD_PROPS.tabItemOnPress;
+            }
+
             _BOTTOM_WIDE_CONTENT = <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -291,7 +294,8 @@ export const TopBar = (props) => {
                           key={_ITEM_KEY}
                           name={tabItemName}
                           style={_ITEM_STYLE}
-                          gradient={Global.colors.pair.ongerine} />
+                          gradient={Global.colors.pair.ongerine}
+                          onPress={_TAB_ATTITUDE.onPress} />
                       );
                     }else{
                       return (
@@ -302,7 +306,8 @@ export const TopBar = (props) => {
                             _ITEM_STYLE,
                             Styles.DisabledSingleTabItemContainer
                           ]}
-                          disable={true} />
+                          disable={true}
+                          onPress={_TAB_ATTITUDE.onPress} />
                       );
                     }
                   })

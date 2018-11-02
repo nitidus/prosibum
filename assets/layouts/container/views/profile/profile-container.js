@@ -50,7 +50,10 @@ export const ProfileContainer = (props) => {
             <PinnedSide
               type="bottom"
               items={["Technical", "Pesonal", "Histories", "Certifications", "Postal"]}
-              current="Technical" />
+              current="Technical"
+              onPress={() => {
+                alert('CURRENT')
+              }} />
         </Navigation>
 
         {
