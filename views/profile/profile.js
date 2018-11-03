@@ -11,15 +11,23 @@ const Styles = Views.Profile.Profile,
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.UserProfile;
 
+import { views_constants } from '../../assets/flows/knowledge/index';
+const __CONSTANTS = views_constants.profile.user_profile;
+
 class Profile extends Component<{}> {
   static navigationOptions = {
 
   };
 
   componentDidMount() {
-    const { props } = this;
+    const { props } = this,
+          { tabs } = __CONSTANTS.pilot,
+          __TABS = tabs.map((tabItem, i) => {
+            return tabItem.en;
+          });
 
-    props.setPilotCurrentTab('hello')
+    props.setPilotTabs(__TABS);
+    props.setPilotCurrentTab(__TABS[0]);
   }
 
   render() {
@@ -27,7 +35,12 @@ class Profile extends Component<{}> {
 
     return (
       <Container
-        title="Profile"
+        title={__CONSTANTS.pilot.title.en}
+        pilotItems={props.userProfile.tabs}
+        currentPilotItem={props.userProfile.currentTab}
+        onPilotTabItemPress={(item) => {
+          props.setPilotCurrentTab(item);
+        }}
         {...props}>
           <Text>Profile page.</Text>
       </Container>

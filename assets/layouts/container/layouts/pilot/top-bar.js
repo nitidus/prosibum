@@ -90,7 +90,9 @@ export const TabItem = (props) => {
           Styles.SingleTabItemContainer,
           attitude.style
         ]}
-        onPress={attitude.onPress}>
+        onPress={() => {
+          attitude.onPress(attitude.name);
+        }}>
           {_MAIN_TEXT_COTNENT}
       </Input>
     );

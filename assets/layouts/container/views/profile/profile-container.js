@@ -23,6 +23,18 @@ export const ProfileContainer = (props) => {
     }
   }
 
+  if ((typeof props.pilotData != 'undefined') || (typeof props.pilot_data != 'undefined') || (typeof props.pilotItems != 'undefined') || (typeof props.pilot_items != 'undefined')){
+    attitude.pilotData = props.pilotData || props.pilot_data || props.pilotItems || props.pilot_items
+  }
+
+  if ((typeof props.currentPilotItem != 'undefined') || (typeof props.current_pilot_item != 'undefined')){
+    attitude.currentPilotItem = props.currentPilotItem || props.current_pilot_item;
+  }
+
+  if ((typeof props.onPilotTabItemPress != 'undefined') || (typeof props.pilotTabItemOnPress != 'undefined') || (typeof props.navigationTabItemOnPress != 'undefined') || (typeof props.onNavigationTabItemPress != 'undefined')){
+    props.onPilotTabItemPress = props.onPilotTabItemPress || props.pilotTabItemOnPress || props.onNavigationTabItemPress || props.navigationTabItemOnPress;
+  }
+
   return (
     <View
       style={Styles.MajorContent}>
@@ -49,11 +61,9 @@ export const ProfileContainer = (props) => {
             </PinnedSide>
             <PinnedSide
               type="bottom"
-              items={["Technical", "Pesonal", "Histories", "Certifications", "Postal"]}
-              current="Technical"
-              onPress={() => {
-                alert('CURRENT')
-              }} />
+              items={attitude.pilotData}
+              current={attitude.currentPilotItem}
+              onPress={props.onPilotTabItemPress} />
         </Pilot>
 
         {

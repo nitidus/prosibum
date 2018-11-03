@@ -1,0 +1,21 @@
+{
+  "pilot": {
+    "title": {
+      "en": "Profile"
+    },
+    "tabs": [
+      {
+        "en": "Technical"
+      },
+      {
+        "en": "Certification"
+      },
+      {
+        "en": "History"
+      },
+      {
+        "en": "Postal"
+      }
+    ]
+  }
+}
