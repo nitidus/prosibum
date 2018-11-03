@@ -1,7 +1,9 @@
 import Authentication from './views/authentication';
+import Profile from './views/profile';
 
 const Views = {
-  Authentication
+  Authentication,
+  Profile
 };
 
 module.exports = Views;
