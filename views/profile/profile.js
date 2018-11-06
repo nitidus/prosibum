@@ -42,7 +42,9 @@ class Profile extends Component<{}> {
           props.setPilotCurrentTab(item);
         }}
         {...props}>
-          <Text>Profile page.</Text>
+          <Text>
+            Profile page. ({props.userProfile.currentTab})
+          </Text>
       </Container>
     )
   }

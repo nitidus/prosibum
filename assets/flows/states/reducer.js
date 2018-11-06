@@ -7,7 +7,6 @@ import Segment from './reducers/components/segment';
 /* Layouts Reducers */
 import CountriesCodesModal from './reducers/layouts/countries-codes-modal';
 import Toast from './reducers/layouts/toast';
-import Pilot from './reducers/layouts/pilot';
 
 /* Views Reducers */
 
@@ -23,7 +22,7 @@ import UserProfile from './reducers/views/profile/user-profile';
 export default () => {
   const reducer = combineReducers({
           Segment,
-          Toast, CountriesCodesModal, Pilot,
+          Toast, CountriesCodesModal,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber,
           UserProfile
         }),
