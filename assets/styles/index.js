@@ -28,7 +28,8 @@ module.exports = {
       VerifyPhoneNumber
     },
     Profile: {
-      Dashboard
+      Dashboard,
+      Profile
     }
   },
   Modules: {

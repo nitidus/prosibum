@@ -8,6 +8,8 @@ import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Profile.Profile,
       Container = ViewsContainer.Profile.ProfileContainer;
 
+import { PersonalTab } from './profile/tabs';
+
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.UserProfile;
 
@@ -31,8 +33,23 @@ class Profile extends Component<{}> {
   }
 
   render() {
-    const { props } = this;
+    const { props } = this,
+          _CURRENT_TAB = props.userProfile.currentTab.toLowerCase().replace(/( |_)/ig, '-');
 
+    var _TAB_CONTENT;
+
+    switch (_CURRENT_TAB) {
+      case 'personal':
+        _TAB_CONTENT = <PersonalTab/>;
+        break;
+      default:
+        _TAB_CONTENT = (
+          <Text>
+            Profile page. ({props.userProfile.currentTab})
+          </Text>
+        );
+        break;
+    }
     return (
       <Container
         title={__CONSTANTS.pilot.title.en}
@@ -42,9 +59,7 @@ class Profile extends Component<{}> {
           props.setPilotCurrentTab(item);
         }}
         {...props}>
-          <Text>
-            Profile page. ({props.userProfile.currentTab})
-          </Text>
+          {_TAB_CONTENT}
       </Container>
     )
   }

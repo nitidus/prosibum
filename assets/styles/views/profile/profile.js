@@ -15,8 +15,9 @@ if (width >= 1000 || height >= 1000){
 }
 
 module.exports = StyleSheet.create({
-  MajorContainer: {
-    flex: 1,
-    backgroundColor: colors.single.rangoonGreen
+  ScrollableContainer: {
+    marginTop: 15,
+    paddingHorizontal: 32.5,
+    justifyContent: 'space-between'
   }
 });
