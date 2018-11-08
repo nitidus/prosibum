@@ -19,12 +19,18 @@ import VerifyPhoneNumber from './reducers/views/authentication/verify-phone-numb
 //Profile
 import UserProfile from './reducers/views/profile/user-profile';
 
+/* Sub Views Reducers */
+
+//User Profile
+import TechnicalTab from './reducers/sub-views/user-profile/technical-tab';
+
 export default () => {
   const reducer = combineReducers({
           Segment,
           Toast, CountriesCodesModal,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber,
-          UserProfile
+          UserProfile,
+          TechnicalTab
         }),
         middeware = applyMiddleware(logger);
 

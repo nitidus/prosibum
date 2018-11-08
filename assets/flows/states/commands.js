@@ -1,7 +1,9 @@
 import Views from './commands/views';
+import SubViews from './commands/sub-views';
 
 const Commands = {
-  Views
+  Views,
+  SubViews
 };
 
 module.exports = Commands;
