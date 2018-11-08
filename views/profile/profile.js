@@ -8,7 +8,7 @@ import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Profile.Profile,
       Container = ViewsContainer.Profile.ProfileContainer;
 
-import { PersonalTab } from './profile/tabs';
+import { PersonalTab, TechnicalTab, CertificationTab, HistoryTab, PostalTab } from './profile/tabs';
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.UserProfile;
@@ -40,16 +40,22 @@ class Profile extends Component<{}> {
 
     switch (_CURRENT_TAB) {
       case 'personal':
-        _TAB_CONTENT = <PersonalTab/>;
+        _TAB_CONTENT = <PersonalTab />;
         break;
-      default:
-        _TAB_CONTENT = (
-          <Text>
-            Profile page. ({props.userProfile.currentTab})
-          </Text>
-        );
+      case 'technical':
+        _TAB_CONTENT = <TechnicalTab />;
+        break;
+      case 'certification':
+        _TAB_CONTENT = <CertificationTab />
+        break;
+      case 'history':
+        _TAB_CONTENT = <HistoryTab />
+        break;
+      case 'postal':
+        _TAB_CONTENT = <PostalTab />
         break;
     }
+    
     return (
       <Container
         title={__CONSTANTS.pilot.title.en}

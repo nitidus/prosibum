@@ -35,6 +35,22 @@ export const ProfileContainer = (props) => {
     props.onPilotTabItemPress = props.onPilotTabItemPress || props.pilotTabItemOnPress || props.onNavigationTabItemPress || props.navigationTabItemOnPress;
   }
 
+  var _CHILDREN_CONTENT;
+
+  if (typeof attitude.children != 'undefined'){
+    if (attitude.children.length > 0){
+      _CHILDREN_CONTENT = attitude.children.map((child, i) => {
+        var childProps = {...child.props};
+
+        const ultimateKey = Functions._generateNewUniqueObjectKey();
+
+        childProps.key = childProps.name || ultimateKey;
+
+        return React.cloneElement(child, childProps);
+      });
+    }
+  }
+
   return (
     <View
       style={Styles.MajorContent}>
@@ -66,17 +82,7 @@ export const ProfileContainer = (props) => {
               onPress={props.onPilotTabItemPress} />
         </Pilot>
 
-        {
-          attitude.children.map((child, i) => {
-            var childProps = {...child.props};
-
-            const ultimateKey = Functions._generateNewUniqueObjectKey();
-
-            childProps.key = childProps.name || ultimateKey;
-
-            return React.cloneElement(child, childProps);
-          })
-        }
+        {_CHILDREN_CONTENT}
     </View>
   );
 };

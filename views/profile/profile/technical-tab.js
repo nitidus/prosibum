@@ -8,13 +8,15 @@ const Styles = Views.Profile.Profile;
 import { views_constants } from '../../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.user_profile;
 
-export const PersonalTab = (props) => {
+export const TechnicalTab = (props) => {
   return (
     <ScrollView
       contentContainerStyle={Styles.ScrollableContainer}>
-        <Text>
-          Profile page. (Personal)
-        </Text>
+        <Input
+          type="TEXT"
+          name="brand"
+          placeholder="Brand"
+          onChangeText={(currentValue) => {}} />
     </ScrollView>
   );
 }
