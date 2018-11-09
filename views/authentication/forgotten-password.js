@@ -14,6 +14,9 @@ import { Functions } from '../../assets/modules/index';
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.ForgottenPassword;
 
+import { views_constants } from '../../assets/flows/knowledge/index';
+const __CONSTANTS = views_constants.authentication.forgotten_password;
+
 class ForgottenPassword extends Component<{}> {
   static navigationOptions = {
 
@@ -78,7 +81,7 @@ class ForgottenPassword extends Component<{}> {
         <StatusBar hidden={true}/>
 
         <CountriesCodesModal
-          name="countries-codes-modal"
+          name={__CONSTANTS.modals.first.title.en}
           visible={props.forgottenPassword.countriesCodesModalVisibility}
           onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
           selectedItem={props.forgottenPassword.phone.dialCode}
@@ -89,31 +92,31 @@ class ForgottenPassword extends Component<{}> {
         <View style={Styles.Content}>
           <Headline
             style={Styles.Headline}
-            title="Dear User"
-            subtitle={"To change your password\nuse the form below."} />
+            title={__CONSTANTS.headline.title.en}
+            subtitle={__CONSTANTS.headline.subtitle.en} />
 
           <Segment
             style={Styles.Segment}
-            name="forgotten-options"
+            name={__CONSTANTS.firstSegment.title.en}
             onChange={(currentValue) => props.setRequestType(currentValue)}>
               <Container
                 active={true}
-                name="email"
-                title="Email">
+                name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.title.en)}
+                title={__CONSTANTS.firstSegment.content.firstSegmentContainer.title.en}>
                   <Input
-                    type="EMAIL"
-                    name="email"
-                    placeholder="Email"
+                    type={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title.en)}
+                    placeholder={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title.en}
                     value={props.forgottenPassword.email}
                     onChangeText={(currentValue) => props.setEmail(currentValue)} />
               </Container>
               <Container
-                name="phone-number"
-                title="Phone">
+                name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.title.en)}
+                title={__CONSTANTS.firstSegment.content.secondSegmentContainer.title.en}>
                   <Input
-                    type="PHONE-LINK"
-                    name="phone-number"
-                    placeholder="Phone Number"
+                    type={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title.en)}
+                    placeholder={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title.en}
                     value={props.forgottenPassword.phone.number}
                     link={props.forgottenPassword.phone.dialCode.area_code}
                     onPress={() => props.setCountriesCodesModalVisibility(true)}
@@ -125,9 +128,9 @@ class ForgottenPassword extends Component<{}> {
 
           <Input
             style={Styles.SubmitButton}
-            type="BUTTON"
-            name="send"
-            value="Send"
+            type={__CONSTANTS.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+            value={__CONSTANTS.submitInput.state.normal.title.en}
             gradient={Global.colors.pair.ongerine}
             onPress={() => {
               alert('ok')
@@ -136,7 +139,7 @@ class ForgottenPassword extends Component<{}> {
 
           <Link
             containerStyle={Styles.QuickLink}
-            value="Remember your password?"
+            value={__CONSTANTS.quickLink.title.en}
             onPress={() => {
               const { navigation } = props;
 

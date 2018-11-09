@@ -15,6 +15,9 @@ const { Preparation } = Functions;
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.Login;
 
+import { views_constants } from '../../assets/flows/knowledge/index';
+const __CONSTANTS = views_constants.authentication.login;
+
 class Login extends Component<{}> {
   static navigationOptions = {
 
@@ -56,8 +59,8 @@ class Login extends Component<{}> {
     if (props.login.loading){
       _SUBMIT_BUTTON_CONTENT = <Input
         style={Styles.SubmitButton}
-        type="BUTTON"
-        name="signin-loading"
+        type={__CONSTANTS.submitInput.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
         gradient={Global.colors.pair.ongerine}
         disable={true}>
           <ActivityIndicator />
@@ -76,9 +79,9 @@ class Login extends Component<{}> {
 
       _SUBMIT_BUTTON_CONTENT = <Input
         style={Styles.SubmitButton}
-        type="BUTTON"
-        name="signin"
-        value="Sign In"
+        type={__CONSTANTS.submitInput.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+        value={__CONSTANTS.submitInput.state.normal.title.en}
         gradient={Global.colors.pair.ongerine}
         onPress={() => Preparation._prepareVerifyPhoneNumberComponentToSubmit(props)}
         forcedDisable={_VALIDATED} />;
@@ -93,23 +96,23 @@ class Login extends Component<{}> {
         <View style={Styles.Content}>
           <Headline
             style={Styles.Headline}
-            title="Welcome"
-            subtitle={"Please login to\n your account."} />
+            title={__CONSTANTS.headline.title.en}
+            subtitle={__CONSTANTS.headline.subtitle.en} />
 
           <InputGroup
             style={Styles.InputGroup}>
             <Input
-              type="EMAIL"
-              name="email"
-              placeholder="Email"
+              type={__CONSTANTS.firstInputGroup.first.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
+              placeholder={__CONSTANTS.firstInputGroup.first.title.en}
               value={props.login.email}
               onChangeText={(currentValue) => props.setEmail(currentValue)} />
             <Input
-              type="PASSWORD-LINK"
-              name="password"
-              placeholder="Password"
+              type={__CONSTANTS.firstInputGroup.second.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.second.title.en)}
+              placeholder={__CONSTANTS.firstInputGroup.second.title.en}
               value={props.login.password}
-              link="Forgot it?"
+              link={__CONSTANTS.firstInputGroup.second.link.en}
               onPress={() => {
                 const { navigation } = props;
 
@@ -125,7 +128,7 @@ class Login extends Component<{}> {
 
           <Link
             containerStyle={Styles.QuickLink}
-            value="Don't have an account?"
+            value={__CONSTANTS.quickLink.title.en}
             onPress={() => {
               const { navigation } = props;
 

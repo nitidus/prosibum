@@ -1,0 +1,29 @@
+{
+  "modalContainer": {
+    "tilte": {
+      "en": "Countries Codes Modal"
+    },
+    "content": {
+      "firstCarouselContainer": {
+        "title": {
+          "en": "Countriees Group"
+        },
+        "content": {
+          "self": {
+            "type": "BUTTON"
+          }
+        }
+      },
+      "submitInput": {
+        "type": "BUTTON",
+        "state": {
+          "normal": {
+            "title": {
+              "en": "Change"
+            }
+          }
+        }
+      }
+    }
+  }
+}

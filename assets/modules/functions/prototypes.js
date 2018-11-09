@@ -100,7 +100,15 @@ module.exports = {
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
   },
   _convertKeywordToToken: (keyword) => {
-    return keyword.replace(/_/ig, ' ').replace(/\b\w/ig, char => char.toUpperCase());
+    return keyword.replace(/(_|-| )/ig, ' ').replace(/\b\w/ig, char => char.toUpperCase());
+  },
+  _convertTokenToKeyword: (token) => {
+    return token.replace(/(_|-| )+/ig, '-').toLowerCase();
+  },
+  _convertTokenToIconName: (token) => {
+    const __KEYWORD = module.exports._convertTokenToKeyword(token).toUpperCase();
+
+    return __KEYWORD.replace(/-+/ig, '_');
   },
   _generateNewUniqueObjectKey: (seedKey) => {
     const _TODAY = new Date(),

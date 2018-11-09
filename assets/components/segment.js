@@ -32,8 +32,10 @@ const Segment = (props) => {
       var childName = child.type.name;
 
       if (typeof childName != 'undefined' && childName.toLowerCase() == 'container'){
+        const _SEGMENT_SELECTED_NAME = child.props.name || child.props.title;
+
         var localChildVisibility = {
-          name: child.props.name || child.props.title.toLowerCase().replace(/ /ig, '-')
+          name: Functions._convertTokenToKeyword(_SEGMENT_SELECTED_NAME)
         };
 
         if ((typeof child.props.active != 'undefined') && child.props.active){
@@ -100,7 +102,9 @@ const Segment = (props) => {
           style={Styles.DualSegmentTabs}>
             {
               childrenVisibility.map((child, i) => {
-                var childTitle = children[i].props.title || child.name.replace(/-/ig, ' ');
+                const _SELECTED_CHILD_TITLE = children[i].props.title || child.name;
+
+                var childTitle = Functions._convertKeywordToToken(_SELECTED_CHILD_TITLE);
 
                 if (typeof childTitle != 'undefined'){
                   var disableSegmentStyle = {};

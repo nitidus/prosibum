@@ -16,7 +16,8 @@ import { Functions } from '../modules/index';
 import { Layouts as LayoutsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.CountriesCodesModal;
 
-import { countries as __COUNTRIES } from '../flows/knowledge/countries.json';
+import { countries as __COUNTRIES, layouts_constants } from '../flows/knowledge/index';
+const __CONSTANTS = layouts_constants.countries_codes_modal;
 
 const CountriesCodesModal = (props) => {
   var attitude = {};
@@ -97,7 +98,7 @@ const CountriesCodesModal = (props) => {
 
   return (
     <Modal
-      name="countries-codes-modal"
+      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.tilte.en)}
       visible={props.countriesCodesModal.visibility}
       onBlur={() => {
         attitude.onPress(Functions._getCountryDetailWithCode());
@@ -108,7 +109,7 @@ const CountriesCodesModal = (props) => {
         <View
           style={Styles.Container}>
             <Carousel
-              name="group"
+              name={__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en}
               data={props.countriesCodesModal.restrictedData}
               style={Styles.CarouselContainer}
               itemWidth={_Screen.width - (Styles.changeButton.marginHorizontal * 2)}
@@ -122,7 +123,7 @@ const CountriesCodesModal = (props) => {
                 if (_SELECTED_COUNTRY_CODE.code === item.code){
                   return (
                     <Input
-                      type="BUTTON"
+                      type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
                       name={_ITEM_NAME}
                       gradient={Global.colors.pair.aqrulean}
                       disable={true}
@@ -140,7 +141,7 @@ const CountriesCodesModal = (props) => {
                 }else{
                   return (
                     <Input
-                      type="BUTTON"
+                      type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
                       name={_ITEM_NAME}
                       gradient={Global.colors.pair.ongerine}
                       disable={true}
@@ -171,12 +172,13 @@ const CountriesCodesModal = (props) => {
                   props.setCarouselOffset(_NEXT_OFFSET);
                   props.mergeDataWithCarouselRestrictedData(_LOCAL_RESTRICTED_COUNTRIES);
                 }
-              }}/>
+              }} />
+
             <Input
               style={Styles.changeButton}
-              type="BUTTON"
-              name="change-country-code"
-              value="Change"
+              type={__CONSTANTS.modalContainer.content.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+              value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
               gradient={Global.colors.pair.ongerine}
               onPress={() => MODAL.ON_BLUR(false)} />
         </View>

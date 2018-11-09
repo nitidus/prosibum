@@ -16,6 +16,8 @@ const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.UserProfile
 import { views_constants } from '../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.user_profile;
 
+import { Functions } from '../../assets/modules/index';
+
 class Profile extends Component<{}> {
   static navigationOptions = {
 
@@ -34,7 +36,7 @@ class Profile extends Component<{}> {
 
   render() {
     const { props } = this,
-          _CURRENT_TAB = props.userProfile.currentTab.toLowerCase().replace(/( |_)/ig, '-');
+          _CURRENT_TAB = Functions._convertTokenToKeyword(props.userProfile.currentTab);
 
     var _TAB_CONTENT;
 

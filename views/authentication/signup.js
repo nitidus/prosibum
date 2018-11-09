@@ -16,6 +16,9 @@ const _SCREEN = Dimensions.get('window');
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.Signup;
 
+import { views_constants } from '../../assets/flows/knowledge/index';
+const __CONSTANTS = views_constants.authentication.signup;
+
 class Signup extends Component<{}> {
   static navigationOptions = {
 
@@ -68,8 +71,8 @@ class Signup extends Component<{}> {
 
     if (props.signup.loadingUserGroups){
       _CAROUSEL_CONTENT = <Input
-        type="BUTTON"
-        name="carrousel-loading"
+        type={__CONSTANTS.firstCarouselContainer.content.self.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.content.self.state.loading.title.en)}
         gradient={Global.colors.pair.ongerine}
         style={[
           Styles.FirstCarousel,
@@ -88,7 +91,7 @@ class Signup extends Component<{}> {
       }
 
       _CAROUSEL_CONTENT = <Carousel
-        name="user-group"
+        name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.title.en)}
         data={props.signup.userGroups}
         style={Styles.FirstCarousel}
         itemWidth={_SCREEN.width - (Styles.InnerContent.marginHorizontal * 2)}
@@ -104,7 +107,7 @@ class Signup extends Component<{}> {
           if (_CURRENT_USER_GROUP.role === item.role){
             return (
               <Input
-                type="BUTTON"
+                type={__CONSTANTS.firstCarouselContainer.content.self.type}
                 name={_ITEM_NAME}
                 value={_ITEM_VALUE}
                 gradient={Global.colors.pair.ongerine}
@@ -113,7 +116,7 @@ class Signup extends Component<{}> {
           }else{
             return (
               <Input
-                type="BUTTON"
+                type={__CONSTANTS.firstCarouselContainer.content.self.type}
                 name={_ITEM_NAME}
                 value={_ITEM_VALUE}
                 style={_INACTIVE_STYLE}
@@ -130,8 +133,8 @@ class Signup extends Component<{}> {
 
     if (props.signup.loadingSubscribe){
       _SUBMIT_BUTTON_CONTENT = <Input
-        type="BUTTON"
-        name="signup-loading"
+        type={__CONSTANTS.submitInput.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
         gradient={Global.colors.pair.ongerine}
         style={Styles.SubmitButton}
         disable={true}>
@@ -148,9 +151,9 @@ class Signup extends Component<{}> {
 
       _SUBMIT_BUTTON_CONTENT = <Input
         style={Styles.SubmitButton}
-        type="BUTTON"
-        name="signup"
-        value="Signup"
+        type={__CONSTANTS.submitInput.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+        value={__CONSTANTS.submitInput.state.normal.title.en}
         gradient={Global.colors.pair.ongerine}
         onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
         forcedDisable={_VALIDATED} />;
@@ -163,7 +166,7 @@ class Signup extends Component<{}> {
         {_TOP_PINNED_TOAST}
 
         <CountriesCodesModal
-          name="countries-codes-modal"
+          name={__CONSTANTS.modals.first.title.en}
           visible={props.signup.countriesCodesModalVisibility}
           onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
           selectedItem={props.signup.phone.dialCode}
@@ -174,8 +177,8 @@ class Signup extends Component<{}> {
         <View style={Styles.Content}>
           <Headline
             style={Styles.Headline}
-            title="Dear User"
-            subtitle={"Please enter your\nuser account details."} />
+            title={__CONSTANTS.headline.title.en}
+            subtitle={__CONSTANTS.headline.subtitle.en} />
 
           {_CAROUSEL_CONTENT}
 
@@ -184,15 +187,15 @@ class Signup extends Component<{}> {
               <InputGroup
                 style={Styles.FirstInputGroup}>
                   <Input
-                    type="TEXT"
-                    name="firstName"
-                    placeholder="First Name"
+                    type={__CONSTANTS.firstInputGroup.first.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
+                    placeholder={__CONSTANTS.firstInputGroup.first.title.en}
                     value={props.signup.firstName}
                     onChangeText={(currentValue) => props.setFirstName(currentValue)} />
                   <Input
-                    type="TEXT"
-                    name="lastName"
-                    placeholder="Last Name"
+                    type={__CONSTANTS.firstInputGroup.second.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.second.title.en)}
+                    placeholder={__CONSTANTS.firstInputGroup.second.title.en}
                     value={props.signup.lastName}
                     onChangeText={(currentValue) => props.setLastName(currentValue)} />
               </InputGroup>
@@ -200,9 +203,9 @@ class Signup extends Component<{}> {
               <InputGroup
                 style={Styles.SecondInputGroup}>
                 <Input
-                  type="PHONE-LINK"
-                  name="phoneNumber"
-                  placeholder="Phone Number"
+                  type={__CONSTANTS.secondInputGroup.first.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.secondInputGroup.first.title.en)}
+                  placeholder={__CONSTANTS.secondInputGroup.first.title.en}
                   value={props.signup.phone.number}
                   link={props.signup.phone.dialCode.area_code}
                   onPress={() => props.setCountriesCodesModalVisibility(true)}
@@ -210,15 +213,15 @@ class Signup extends Component<{}> {
                     number: currentValue
                   })} />
                 <Input
-                  type="EMAIL"
-                  name="email"
-                  placeholder="Email"
+                  type={__CONSTANTS.secondInputGroup.second.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.secondInputGroup.second.title.en)}
+                  placeholder={__CONSTANTS.secondInputGroup.second.title.en}
                   value={props.signup.email}
                   onChangeText={(currentValue) => props.setEmail(currentValue)} />
                 <Input
-                  type="PASSWORD"
-                  name="password"
-                  placeholder="Password"
+                  type={__CONSTANTS.secondInputGroup.third.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.secondInputGroup.third.title.en)}
+                  placeholder={__CONSTANTS.secondInputGroup.third.title.en}
                   value={props.signup.password}
                   onChangeText={(currentValue) => props.setPassword(currentValue)} />
               </InputGroup>
@@ -227,7 +230,7 @@ class Signup extends Component<{}> {
 
               <Link
                 containerStyle={Styles.QuickLink}
-                value="Already have an account?"
+                value={__CONSTANTS.quickLink.title.en}
                 onPress={() => {
                   const { navigation } = this.props;
 

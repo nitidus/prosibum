@@ -17,6 +17,9 @@ const _SCREEN = Dimensions.get('window');
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.VerifyPhoneNumber;
 
+import { views_constants } from '../../assets/flows/knowledge/index';
+const __CONSTANTS = views_constants.authentication.verify_phone_number;
+
 import { GLOBAL } from '../../assets/flows/states/types/index';
 
 class VerifyPhoneNumber extends Component<{}> {
@@ -72,8 +75,8 @@ class VerifyPhoneNumber extends Component<{}> {
 
     if (props.verifyPhoneNumber.loadingFinalSubscribe){
       _SUBMIT_BUTTON_CONTENT = <Input
-        type="BUTTON"
-        name="verify-phone-number"
+        type={__CONSTANTS.submitInput.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
         gradient={Global.colors.pair.ongerine}
         style={[
           Styles.FirstCarousel,
@@ -96,9 +99,9 @@ class VerifyPhoneNumber extends Component<{}> {
 
       _SUBMIT_BUTTON_CONTENT = <Input
         style={Styles.SubmitButton}
-        type="BUTTON"
-        name="verify-phone-number"
-        value="Verify Phone Number"
+        type={__CONSTANTS.submitInput.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+        value={__CONSTANTS.submitInput.state.normal.title.en}
         gradient={Global.colors.pair.ongerine}
         onPress={() => Preparation._prepareVerifyPhoneNumberComponentToSubmit(props)}
         forcedDisable={_VALIDATED} />;
@@ -113,13 +116,13 @@ class VerifyPhoneNumber extends Component<{}> {
         <View style={Styles.Content}>
           <Headline
             style={Styles.Headline}
-            title="Dear User"
-            subtitle={"Please enter the\nsent confirmation code."} />
+            title={__CONSTANTS.headline.title.en}
+            subtitle={__CONSTANTS.headline.subtitle.en} />
 
             <Input
-              type="NUMERIC"
-              name="confirmation-code"
-              placeholder="Confirmation Code"
+              type={__CONSTANTS.firstInputGroup.first.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
+              placeholder={__CONSTANTS.firstInputGroup.first.title.en}
               value={props.verifyPhoneNumber.validationToken}
               style={Styles.FirstInput}
               onChangeText={(currentValue) => props.setValidationToken(currentValue)} />
@@ -128,7 +131,7 @@ class VerifyPhoneNumber extends Component<{}> {
 
             <Link
               containerStyle={Styles.QuickLink}
-              value="Wrong Number?"
+              value={__CONSTANTS.quickLink.title.en}
               onPress={() => {
                 const { navigation } = this.props;
 

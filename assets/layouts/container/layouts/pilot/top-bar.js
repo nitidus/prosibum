@@ -51,7 +51,7 @@ export const TabItem = (props) => {
     attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress || props.onIconPress || props.iconOnPress;
   }
 
-  const _TAB_NAME = attitude.name.toLowerCase().replace(/ +/ig, '-');
+  const _TAB_NAME = Functions._convertTokenToKeyword(attitude.name);
 
   var _ITEM_TEXT_STYLE = [
     Styles.SingleTabItemContent
@@ -287,8 +287,8 @@ export const TopBar = (props) => {
 
                     const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w),
                           _ITEM_NAME = tabItemName,
-                          _SCAPED_ITEM_NAME = _ITEM_NAME.toLowerCase().replace(/( |_)+/ig, '-'),
-                          _SCAPED_CURRENT_ITEM = _TAB_ATTITUDE.current.toLowerCase().replace(/( |_)+/ig, '-');
+                          _SCAPED_ITEM_NAME = Functions._convertTokenToKeyword(_ITEM_NAME),
+                          _SCAPED_CURRENT_ITEM = Functions._convertTokenToKeyword(_TAB_ATTITUDE.current);
 
                     if (_SCAPED_ITEM_NAME === _SCAPED_CURRENT_ITEM){
                       return (

@@ -1,0 +1,47 @@
+{
+  "headline": {
+    "title": {
+      "en": "Welcome"
+    },
+    "subtitle": {
+      "en": "Please login to\n your account."
+    }
+  },
+  "firstInputGroup": {
+    "first": {
+      "type": "EMAIL",
+      "title": {
+        "en": "Email"
+      }
+    },
+    "second": {
+      "type": "PASSWORD-LINK",
+      "title": {
+        "en": "Password"
+      },
+      "link": {
+        "en": "Forgot it?"
+      }
+    }
+  },
+  "submitInput": {
+    "type": "BUTTON",
+    "state": {
+      "normal": {
+        "title": {
+          "en": "Sign In"
+        }
+      },
+      "loading": {
+        "title": {
+          "en": "Sign In Loading"
+        }
+      }
+    }
+  },
+  "quickLink": {
+    "title": {
+      "en": "Don't have an account?"
+    }
+  }
+}

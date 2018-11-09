@@ -120,8 +120,10 @@ export const Icon = (props) => {
     attitude.gradient = props.gradient;
   }
 
-  attitude.name = (props.name || props.title || '_SIDE_GUIDE').toUpperCase().replace(/( |-)+/g, '_');
+  const _ICON_SELECTED_NAME = (props.name || props.title || '_SIDE_GUIDE');
 
+  attitude.name = Functions._convertTokenToIconName(_ICON_SELECTED_NAME);
+console.log(attitude.name)
   var _SELECTED_ICON, _ICON_DEFS_CONTENT;
 
   if (typeof attitude.gradient != 'undefined'){

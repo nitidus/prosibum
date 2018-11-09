@@ -1,0 +1,88 @@
+{
+  "headline": {
+    "title": {
+      "en": "Dear User"
+    },
+    "subtitle": {
+      "en": "Please enter your\nuser account details."
+    }
+  },
+  "firstCarouselContainer": {
+    "title": {
+      "en": "User Group"
+    },
+    "content": {
+      "self": {
+        "type": "BUTTON",
+        "state": {
+          "loading": {
+            "title": {
+              "en": "Carrousel Loading"
+            }
+          }
+        }
+      }
+    }
+  },
+  "firstInputGroup": {
+    "first": {
+      "type": "TEXT",
+      "title": {
+        "en": "First Name"
+      }
+    },
+    "second": {
+      "type": "TEXT",
+      "title": {
+        "en": "Last Name"
+      }
+    }
+  },
+  "secondInputGroup": {
+    "first": {
+      "type": "PHONE-LINK",
+      "title": {
+        "en": "Phone Number"
+      }
+    },
+    "second": {
+      "type": "EMAIL",
+      "title": {
+        "en": "Email"
+      }
+    },
+    "third": {
+      "type": "PASSWORD",
+      "title": {
+        "en": "Password"
+      }
+    }
+  },
+  "submitInput": {
+    "type": "BUTTON",
+    "state": {
+      "normal": {
+        "title": {
+          "en": "Signup"
+        }
+      },
+      "loading": {
+        "title": {
+          "en": "Signup Loading"
+        }
+      }
+    }
+  },
+  "quickLink": {
+    "title": {
+      "en": "Already have an account?"
+    }
+  },
+  "modals": {
+    "first": {
+      "title": {
+        "en": "Countries Codes Modal"
+      }
+    }
+  }
+}
