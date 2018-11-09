@@ -3,7 +3,7 @@ import { View, ScrollView, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { Input } from '../../../assets/components/index';
+import { Input, InputGroup } from '../../../assets/components/index';
 import { Global, Views } from '../../../assets/styles/index';
 const Styles = Views.Profile.Profile;
 
@@ -17,6 +17,12 @@ const TechnicalTab = (props) => {
   return (
     <ScrollView
       contentContainerStyle={Styles.ScrollableContainer}>
+        <Input
+          type="PHOTO"
+          name="brand-profile-photo"
+          value="Brand Photo"
+          style={Styles.SingleInput}
+          onPress={() => alert('ok')} />
         <Input
           type="TEXT"
           name="brand-name"

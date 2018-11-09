@@ -49,7 +49,7 @@ export const DrawerMenuPinnedProfile = (props) => {
       ]}>
         <Icon
           name="person"
-          color={Global.colors.single.lavenderGray}
+          color={Global.colors.single.mercury}
           width={Styles.PinnedProfileContainer.width - 15}
           height={Styles.PinnedProfileContainer.height - 15} />
     </View>;

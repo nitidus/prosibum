@@ -6,18 +6,21 @@ import { colors, fonts } from '../../global';
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
-var _INNER_CONTENT = {};
+var _CUSTOM_SCROLLABLE_CONTAINER = {
+      paddingHorizontal: 32
+    };
 
 if (width >= 1000 || height >= 1000){
-
-}else{
-
+  _CUSTOM_SCROLLABLE_CONTAINER.paddingHorizontal = (Platform.OS === 'ios')? 162: 202;
 }
 
 module.exports = StyleSheet.create({
   ScrollableContainer: {
     marginTop: 15,
-    paddingHorizontal: 32.5,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    ..._CUSTOM_SCROLLABLE_CONTAINER
+  },
+  SingleInput: {
+    marginBottom: 15
   }
 });

@@ -28,11 +28,28 @@ var _CUSTOM_TEXT_INPUT_LINK = {
       fontSize: 18,
       height: 59,
       borderWidth: 2,
-      borderRadius: 5
+      borderRadius: 5,
+      paddingHorizontal: 16
     },
     _CUSTOM_CONTAINER_WITH_BUTTON = {
       borderWidth: 2,
       borderRadius: 5
+    },
+    _CUSTOM_CONTAINER_WITH_PHOTO = {
+      borderWidth: 2,
+      borderRadius: 5
+    },
+    _CUSTOM_PHOTO_CONTAINER = {
+      margin: 17,
+      width: 107,
+      height: 107,
+      borderRadius: 5
+    },
+    _CUSTOM_PHOTO_INPUT_LABEL_CONTAINER = {
+      width: 148
+    },
+    _CUSTOM_PHOTO_INPUT_LABEL_CONTENT = {
+      fontSize: 18
     },
     _CUSTOM_BUTTON_CONTAINER = {
       borderRadius: 5,
@@ -57,9 +74,24 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.fontSize += 6;
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.borderWidth += 1;
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.borderRadius += 2;
+    _CUSTOM_CONTAINER_WITHOUT_BUTTON.paddingHorizontal += 10;
 
     _CUSTOM_CONTAINER_WITH_BUTTON.borderWidth += 1;
     _CUSTOM_CONTAINER_WITH_BUTTON.borderRadius += 2;
+
+    _CUSTOM_CONTAINER_WITH_PHOTO.borderWidth += 1;
+    _CUSTOM_CONTAINER_WITH_PHOTO.borderRadius += 2;
+
+    _CUSTOM_CONTAINER_WITH_PHOTO.borderRadius += 2;
+
+    _CUSTOM_PHOTO_CONTAINER.borderRadius += 2;
+    _CUSTOM_PHOTO_CONTAINER.width += 38;
+    _CUSTOM_PHOTO_CONTAINER.height += 38;
+    _CUSTOM_PHOTO_CONTAINER.margin += 5;
+
+    _CUSTOM_PHOTO_INPUT_LABEL_CONTAINER.width += 130;
+
+    _CUSTOM_PHOTO_INPUT_LABEL_CONTENT.fontSize += 6;
 
     _CUSTOM_BUTTON_CONTAINER.height += 20;
     _CUSTOM_BUTTON_CONTAINER.borderRadius += 2;
@@ -76,23 +108,41 @@ if (Platform.OS !== 'ios'){
   }else{
     _CUSTOM_TEXT_INPUT_CONTAINER.width = '85%';
 
+    _CUSTOM_CONTAINER_WITHOUT_BUTTON.paddingHorizontal += 3;
+
     _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 20;
     _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 20;
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical -= 2;
     _CUSTOM_TEXT_INPUT_LINK.height += 3;
+
+    _CUSTOM_PHOTO_CONTAINER.width += 4;
+    _CUSTOM_PHOTO_CONTAINER.height += 4;
+
+    _CUSTOM_PHOTO_INPUT_LABEL_CONTAINER.width += 38;
   }
 
   _CUSTOM_INNER_INPUT_CONTAINER.fontWeight = '500';
   _CUSTOM_TEXT_INPUT_CONTAINER.fontWeight = '500';
   _CUSTOM_CONTAINER_WITHOUT_BUTTON.fontWeight = '500';
   _CUSTOM_BUTTON_TITLE.fontWeight = '500';
+  _CUSTOM_PHOTO_INPUT_LABEL_CONTENT.fontWeight = '500';
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_TEXT_INPUT_CONTAINER.width = '86%';
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical -= 2;
     _CUSTOM_TEXT_INPUT_LINK.height += 3;
+
+    _CUSTOM_CONTAINER_WITH_PHOTO.borderRadius += 1;
+
+    _CUSTOM_PHOTO_CONTAINER.borderRadius += 1;
+    _CUSTOM_PHOTO_CONTAINER.width += 10;
+    _CUSTOM_PHOTO_CONTAINER.height += 10;
+
+    _CUSTOM_PHOTO_INPUT_LABEL_CONTAINER.width += 125;
+
+    _CUSTOM_PHOTO_INPUT_LABEL_CONTENT.fontSize += 1;
   }else{
     _CUSTOM_TEXT_INPUT_CONTAINER.width = '81.5%';
   }
@@ -105,7 +155,6 @@ module.exports = StyleSheet.create({
   ContainerWithoutButton: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
-    paddingHorizontal: 16,
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
     ..._CUSTOM_CONTAINER_WITHOUT_BUTTON
@@ -114,6 +163,42 @@ module.exports = StyleSheet.create({
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
     ..._CUSTOM_CONTAINER_WITH_BUTTON
+  },
+  PhotoInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  ContainerWithPhoto: {
+    borderColor: colors.single.mercury,
+    backgroundColor: colors.single.romance,
+    ..._CUSTOM_CONTAINER_WITH_PHOTO
+  },
+  PhotoContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    ..._CUSTOM_PHOTO_CONTAINER
+  },
+  PhotoContainerWithPhoto: {
+
+  },
+  PhotoContainerWithoutPhoto: {
+    backgroundColor: colors.single.mercury
+  },
+  PhotoContainerOverlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  PhotoInputLabelContainer: {
+    ..._CUSTOM_PHOTO_INPUT_LABEL_CONTAINER
+  },
+  PhotoInputLabelContent: {
+    fontFamily: fonts.sanFrancisco.textBold,
+    color: colors.single.lavenderGray,
+    ..._CUSTOM_PHOTO_INPUT_LABEL_CONTENT
   },
   TextInputConatiner: {
     color: colors.single.rangoonGreen,

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, TouchableOpacity, TextInput, Keyboard, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Image, ImageBackground, TextInput, Keyboard, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
 import { Link } from './link';
+import { Icon } from '../layouts/icon';
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Components.Input;
 
@@ -69,6 +70,25 @@ export const Input = (props) => {
 
           attitude.onBlur = props.onBlur || function (){};
           attitude.onFocus = props.onFocus || function (){};
+        break;
+      case 'photo':
+      case 'photo-picker':
+      case 'cameraroll':
+      case 'cameraroll-picker':
+      case 'camera-roll':
+      case 'camera-roll-picker':
+        if (typeof props.value != 'undefined'){
+          attitude.value = props.value || '';
+        }
+
+        if (typeof props.onPress != 'undefined'){
+          attitude.onPress = props.onPress;
+        }
+
+        attitude.photo = props.photo || props.photoURL || props.photo_url || props.photoUrl || props.photoURI || props.photo_uri || props.photoUri || '';
+
+        attitude.onBlur = props.onBlur || function (){};
+        attitude.onFocus = props.onFocus || function (){};
         break;
       case 'button':
         if (typeof props.value != 'undefined'){
@@ -389,6 +409,76 @@ export const Input = (props) => {
         </View>
       )
       break;
+
+    case 'photo':
+    case 'photo-picker':
+    case 'cameraroll':
+    case 'cameraroll-picker':
+    case 'camera-roll':
+    case 'camera-roll-picker':
+      var _ACTIVE_OPACITY = 0.7,
+          _CAMERAROLL_CONTENT,
+          _CAMERAROLL_CONTENT_VERB_MODE = 'Choose';
+
+      if (typeof attitude.photo != 'undefined' && attitude.photo != ''){
+        const _PHOTO_OVERLAY_RANGE = [Global.colors.single.transparent, Functions._convertHexColorToRGBA(Global.colors.single.rangoonGreen, 0.35)];
+
+        _CAMERAROLL_CONTENT = (
+          <ImageBackground
+          source={{
+            uri: attitude.photo
+          }}
+          style={[
+            Styles.PhotoContainer,
+            Styles.PhotoContainerWithoutPhoto
+          ]}>
+            <LinearGradient
+              style={Styles.PhotoContainerOverlay}
+              colors={_PHOTO_OVERLAY_RANGE}/>
+          </ImageBackground>
+        );
+
+        _CAMERAROLL_CONTENT_VERB_MODE = 'Edit';
+      }else{
+        _CAMERAROLL_CONTENT = (
+          <View
+            style={[
+              Styles.PhotoContainer,
+              Styles.PhotoContainerWithoutPhoto
+            ]}>
+            <Icon
+              name="gallery" />
+          </View>
+        );
+
+        _CAMERAROLL_CONTENT_VERB_MODE = 'Choose';
+      }
+
+      return (
+        <TouchableOpacity
+          key={attitude.key}
+          name={attitude.name}
+          activeOpacity={_ACTIVE_OPACITY}
+          style={[
+            Styles.ContainerWithPhoto,
+            attitude.style
+          ]}
+          onPress={attitude.onPress}>
+          <View
+            style={Styles.PhotoInputContainer}>
+              {_CAMERAROLL_CONTENT}
+
+              <View style={Styles.PhotoInputLabelContainer}>
+                <Text
+                  style={Styles.PhotoInputLabelContent}>
+                    {_CAMERAROLL_CONTENT_VERB_MODE} The {Functions._convertKeywordToToken(attitude.value)}
+                </Text>
+              </View>
+          </View>
+        </TouchableOpacity>
+      );
+      break;
+
     case 'button':
       var touchablePortion, buttonContent;
 

@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { View, Dimensions, Platform, Animated, Easing } from 'react-native';
 import Svg, { G, Path, Rect, Circle, Defs, LinearGradient, Stop } from 'react-native-svg';
 
-import { Global, Modules } from '../styles/index';
-const Styles = Modules.Layouts.Container;
+import { Global } from '../styles/index';
 
 import { Functions } from '../modules/index';
 
@@ -84,6 +83,27 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
       content: <Path
         fill={color}
         d="M4.5,12.5l10-9.5c0.7-0.7,0.7-1.8,0-2.5s-1.9-0.7-2.7,0L0.5,11.2c-0.7,0.7-0.7,1.8,0,2.5l11.2,10.7c0.7,0.7,1.9,0.7,2.7,0s0.7-1.8,0-2.5L4.5,12.5z"/>
+    },
+    GALLERY: {
+      width: 36.5,
+      height: 32,
+      view_box: "0 0 36.5 32",
+      content: <G>
+      	<Path
+          fill={color}
+          d="M18.5,11.3c-2.1,0-3.7,1.7-3.7,3.7c0,2.1,1.7,3.7,3.7,3.7c2.1,0,3.7-1.7,3.7-3.7C22.2,13,20.5,11.3,18.5,11.3z"/>
+      	<Path
+          fill={color}
+          d="M33.3,2.8L9.1,0C8.2-0.1,7.2,0.2,6.5,0.8C5.8,1.3,5.3,2.2,5.2,3.1L4.8,6.7H3.4c-2,0-3.4,1.7-3.4,3.7v18.1c0,1.9,1.4,3.4,3.3,3.5c0,0,0.1,0,0.1,0h24.3c2,0,3.7-1.5,3.7-3.5v-0.7c0.6-0.1,1.2-0.4,1.7-0.7c0.7-0.6,1.2-1.5,1.3-2.4l2-18C36.7,4.8,35.3,3,33.3,2.8z M29.7,17.9L20,23.5c-0.8,0.5-1.9,0.4-2.6-0.2L12.5,19c-1.4-1.2-3.4-1.3-4.9-0.2L1.8,23V10.4c0-1,0.7-1.9,1.6-1.9h24.3c1,0,1.9,0.9,2,1.9V17.9z M34.7,6.5l-2.1,18c0,0.5-0.2,0.9-0.6,1.2c-0.2,0.2-0.6,0.3-0.6,0.4V10.4c-0.1-2-1.7-3.6-3.7-3.7H6.6L7,3.3C7,2.8,7.3,2.4,7.6,2.1C8,1.8,8.5,1.7,9,1.8l24.2,2.8C34.1,4.6,34.8,5.5,34.7,6.5C34.7,6.5,34.7,6.5,34.7,6.5z"/>
+      </G>
+    },
+    PLUS: {
+      width: 24,
+      height: 24,
+      view_box: "0 0 24 24",
+      content: <Path
+        fill={color}
+        d="M22,10h-8V2c0-1.1-0.9-2-2-2s-2,0.9-2,2v8H2c-1.1,0-2,0.9-2,2s0.9,2,2,2h8v8c0,1.1,0.9,2,2,2s2-0.9,2-2v-8h8c1.1,0,2-0.9,2-2S23.1,10,22,10z"/>
     }
   };
 
@@ -123,7 +143,7 @@ export const Icon = (props) => {
   const _ICON_SELECTED_NAME = (props.name || props.title || '_SIDE_GUIDE');
 
   attitude.name = Functions._convertTokenToIconName(_ICON_SELECTED_NAME);
-console.log(attitude.name)
+
   var _SELECTED_ICON, _ICON_DEFS_CONTENT;
 
   if (typeof attitude.gradient != 'undefined'){

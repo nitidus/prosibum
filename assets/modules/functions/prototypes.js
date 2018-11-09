@@ -106,9 +106,7 @@ module.exports = {
     return token.replace(/(_|-| )+/ig, '-').toLowerCase();
   },
   _convertTokenToIconName: (token) => {
-    const __KEYWORD = module.exports._convertTokenToKeyword(token).toUpperCase();
-
-    return __KEYWORD.replace(/-+/ig, '_');
+    return token.replace(/(_|-| )+/ig, '_').toUpperCase();
   },
   _generateNewUniqueObjectKey: (seedKey) => {
     const _TODAY = new Date(),
