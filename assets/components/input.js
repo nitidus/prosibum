@@ -85,6 +85,8 @@ export const Input = (props) => {
           attitude.onPress = props.onPress;
         }
 
+        attitude.icon = props.icon || props.icon_name || props.icon_title|| props.iconName || props.iconTitle || 'GALLERY';
+
         attitude.photo = props.photo || props.photoURL || props.photo_url || props.photoUrl || props.photoURI || props.photo_uri || props.photoUri || '';
 
         attitude.onBlur = props.onBlur || function (){};
@@ -447,7 +449,7 @@ export const Input = (props) => {
               Styles.PhotoContainerWithoutPhoto
             ]}>
             <Icon
-              name="gallery" />
+              name={attitude.icon} />
           </View>
         );
 
