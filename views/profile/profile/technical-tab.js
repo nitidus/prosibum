@@ -4,6 +4,7 @@ import { View, ScrollView, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { Input, InputGroup } from '../../../assets/components/index';
+import { Modal } from '../../../assets/layouts/index';
 import { Global, Views } from '../../../assets/styles/index';
 const Styles = Views.Profile.Profile;
 
@@ -17,6 +18,18 @@ const TechnicalTab = (props) => {
   return (
     <ScrollView
       contentContainerStyle={Styles.ScrollableContainer}>
+        <Modal
+          name="camera-roll-picker"
+          visible={true}
+          onBlur={() => {
+            alert('ok 1')
+          }}
+          onPress={() => {
+            alert('ok 2')
+          }}>
+          <Text>hello</Text>
+        </Modal>
+
         <Input
           type="PHOTO"
           name="brand-profile-photo"
