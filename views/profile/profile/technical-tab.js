@@ -21,6 +21,7 @@ const TechnicalTab = (props) => {
         <Modal
           name="camera-roll-picker"
           visible={true}
+          backdropBlurType="dark"
           onBlur={() => {
             alert('ok 1')
           }}

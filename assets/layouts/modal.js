@@ -58,9 +58,10 @@ export const Modal = (props) => {
     attitude.swipeDirection = (props.swipeDirection || props.directionSwipe).toLowerCase();
   }
 
-  if ((typeof props.backdropColor != 'undefined') || (typeof props.backdrop_color != 'undefined') || (typeof props.backdrop != 'undefined')){
-    attitude.backdropColor = props.backdropColor || props.backdrop_color || props.backdrop;
-  }
+    attitude.backdropColor = props.backdropColor || props.backdrop_color || ((Platform.OS === 'ios')? Functions._convertHexColorToRGBA(Global.colors.single.rangoonGreen, 0.4): Global.colors.single.rangoonGreen);
+
+    attitude.backdropBlurType = props.backdropBlurType || props.backdrop_blur_type || "dark";
+    attitude.backdropBlurAmount = props.backdropBlurAmount || props.backdrop_blur_amount || 10;
 
   if ((typeof props.swipeThreshold != 'undefined') || (typeof props.threshold != 'undefined')){
     attitude.swipeThreshold = props.swipeThreshold || props.threshold;
@@ -72,8 +73,7 @@ export const Modal = (props) => {
 
   const MODAL = {
     BACKDROP: {
-      COLOR: attitude.backdropColor || Global.colors.single.transparent,
-      OPACITY: (Platform.OS === 'ios')? 0.4: 0.7
+      COLOR: attitude.backdropColor
     },
     SWIPE: {
       DIRECTION: "down",
@@ -100,9 +100,10 @@ export const Modal = (props) => {
       <PrimaryModal
         isVisible={attitude.visibility}
         backdropColor={MODAL.BACKDROP.COLOR}
-        backdropOpacity={MODAL.BACKDROP.OPACITY}
         swipeDirection={_SWIPE_DIRECTION}
         swipeThreshold={MODAL.SWIPE.THRESHOLD}
+        backdropBlurType={attitude.backdropBlurType}
+        backdropBlurAmount={attitude.backdropBlurAmount}
         style={Styles.BottomModal}
         onBackdropPress={() => MODAL.ON_BLUR(false)}
         onSwipe={() => MODAL.ON_BLUR(false)}>
@@ -145,7 +146,8 @@ export const Modal = (props) => {
       <PrimaryModal
         isVisible={attitude.visibility}
         backdropColor={MODAL.BACKDROP.COLOR}
-        backdropOpacity={MODAL.BACKDROP.OPACITY}
+        backdropBlurType={attitude.backdropBlurType}
+        backdropBlurAmount={attitude.backdropBlurAmount}
         style={Styles.BottomModal}
         onBackdropPress={() => MODAL.ON_BLUR(false)}>
           <View
