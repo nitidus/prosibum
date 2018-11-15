@@ -58,6 +58,10 @@ export const Modal = (props) => {
     attitude.swipeDirection = (props.swipeDirection || props.directionSwipe).toLowerCase();
   }
 
+  if ((typeof props.backdropColor != 'undefined') || (typeof props.backdrop_color != 'undefined') || (typeof props.backdrop != 'undefined')){
+    attitude.backdropColor = props.backdropColor || props.backdrop_color || props.backdrop;
+  }
+
   if ((typeof props.swipeThreshold != 'undefined') || (typeof props.threshold != 'undefined')){
     attitude.swipeThreshold = props.swipeThreshold || props.threshold;
   }
@@ -68,7 +72,7 @@ export const Modal = (props) => {
 
   const MODAL = {
     BACKDROP: {
-      COLOR: Global.colors.single.rangoonGreen,
+      COLOR: attitude.backdropColor || Global.colors.single.transparent,
       OPACITY: (Platform.OS === 'ios')? 0.4: 0.7
     },
     SWIPE: {
