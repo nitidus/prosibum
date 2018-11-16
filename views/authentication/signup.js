@@ -166,7 +166,6 @@ class Signup extends Component<{}> {
         {_TOP_PINNED_TOAST}
 
         <CountriesCodesModal
-          name={__CONSTANTS.modals.first.title.en}
           visible={props.signup.countriesCodesModalVisibility}
           onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
           selectedItem={props.signup.phone.dialCode}

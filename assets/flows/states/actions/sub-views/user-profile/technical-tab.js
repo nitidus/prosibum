@@ -24,6 +24,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: profilePhoto
       })
     },
+    setCameraRollPickerModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: TECHNICAL_TAB.SET_CAMERA_ROLL_PICKER_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
     setBrandRole: (role) => {
       dispatch({
         type: TECHNICAL_TAB.SET_BRAND_ROLE,

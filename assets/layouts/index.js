@@ -2,7 +2,7 @@ import { Container } from './container';
 import { ActivityIndicator } from './activity-indicator';
 import Toast from './toast';
 import { Modal } from './modal';
-import CountriesCodesModal from './countries-codes-modal';
+import { CountriesCodesModal, CameraRollPickerModal } from './modals/index';
 import { Icon } from './icon';
 import { TopBar, PinnedSide, TabItem } from './container/layouts/pilot/top-bar';
 import { Pilot } from './pilot';
@@ -13,7 +13,7 @@ module.exports = {
   ActivityIndicator,
   Toast,
   Modal,
-  CountriesCodesModal,
+  CountriesCodesModal, CameraRollPickerModal,
   Icon,
   Pilot, TopBar, PinnedSide, TabItem,
   DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile

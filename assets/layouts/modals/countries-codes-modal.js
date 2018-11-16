@@ -5,18 +5,18 @@ const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
 
-import { Global, Modules } from '../styles/index';
-import { Icon } from './icon';
-import { Modal } from './modal';
-import { Input, Carousel } from '../components/index';
+import { Global, Modules } from '../../styles/index';
+import { Icon } from '../icon';
+import { Modal } from '../modal';
+import { Input, Carousel } from '../../components/index';
 const Styles = Modules.Layouts.CountriesCodesModal;
 
-import { Functions } from '../modules/index';
+import { Functions } from '../../modules/index';
 
-import { Layouts as LayoutsActions } from '../../assets/flows/states/actions';
+import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.CountriesCodesModal;
 
-import { countries as __COUNTRIES, layouts_constants } from '../flows/knowledge/index';
+import { countries as __COUNTRIES, layouts_constants } from '../../flows/knowledge/index';
 const __CONSTANTS = layouts_constants.countries_codes_modal;
 
 const CountriesCodesModal = (props) => {

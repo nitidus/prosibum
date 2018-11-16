@@ -5,6 +5,7 @@ const initialState = {
         brandName: '',
         brandProfilePhoto: '',
         brandRole: '',
+        cameraRollPickerModalVisibility: false,
         loading: false,
         connected: {
           status: true,
@@ -24,6 +25,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         brandProfilePhoto: action.payload
+      };
+      break;
+    case TECHNICAL_TAB.SET_CAMERA_ROLL_PICKER_MODAL_VISIBILITY:
+      return {
+        ...state,
+        cameraRollPickerModalVisibility: action.payload
       };
       break;
     case TECHNICAL_TAB.SET_BRAND_ROLE:
