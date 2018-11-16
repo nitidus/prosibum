@@ -31,7 +31,7 @@ class Profile extends Component<{}> {
           });
 
     props.setPilotTabs(__TABS);
-    props.setPilotCurrentTab(__TABS[1]);
+    props.setPilotCurrentTab(__TABS[0]);
   }
 
   render() {

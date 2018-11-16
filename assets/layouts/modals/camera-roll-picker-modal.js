@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
-import { View, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, Image, CameraRoll, Platform, Dimensions, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
+
+import { connect } from 'react-redux';
 
 import { Global, Modules } from '../../styles/index';
 import { Icon } from '../icon';
@@ -11,7 +13,10 @@ const Styles = Modules.Layouts.CountriesCodesModal;
 
 import { Functions } from '../../modules/index';
 
-export const CameraRollPickerModal = (props) => {
+import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions';
+const { mapStateToProps, mapDispatchToProps } = LayoutsActions.CameraRollPickerModal;
+
+const CameraRollPickerModal = (props) => {
   var attitude = {};
 
   if (typeof props.key != 'undefined'){
@@ -64,6 +69,44 @@ export const CameraRollPickerModal = (props) => {
           }
         };
 
+  if (props.cameraRollPickerModal.cameraRollItems.length === 0){
+    var _CAMERA_ROLL_OPTIONS = {
+        first: 20,
+        mimeTypes: [
+          'image/jpeg', 'image/png'
+        ],
+        assetType: 'Photos'
+      };
+
+    if (Platform.OS === 'ios'){
+      _CAMERA_ROLL_OPTIONS.groupTypes = 'All';
+    }
+
+    CameraRoll.getPhotos(_CAMERA_ROLL_OPTIONS)
+    .then((recentItemsOnCameraRoll) => {
+      props.setCameraRollItems(recentItemsOnCameraRoll.edges)
+    })
+    .catch((err) => {
+
+    })
+  }
+
+  var content;
+
+  if (props.cameraRollPickerModal.cameraRollItems.length > 0){
+    content = props.cameraRollPickerModal.cameraRollItems.map((photo, i) => {
+      return (
+        <Image
+          key={i}
+          style={{
+            width: 100,
+            height: 100
+          }}
+          source={{ uri: photo.node.image.uri }}/>
+      );
+    });
+  }
+
   return (
     <Modal
       visible={attitude.visibility}
@@ -73,8 +116,10 @@ export const CameraRollPickerModal = (props) => {
       style={Styles.ModalContainer}>
         <View
           style={Styles.Container}>
-            <Text>okok</Text>
+            {content}
         </View>
     </Modal>
   )
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(CameraRollPickerModal);
