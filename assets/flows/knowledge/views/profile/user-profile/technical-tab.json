@@ -1,0 +1,19 @@
+{
+  "modalContainer": {
+    "tilte": {
+      "en": "Camera Roll Picker Modal"
+    }
+  },
+  "firstInput": {
+    "type": "PHOTO",
+    "title": {
+      "en": "Brand Photo"
+    }
+  },
+  "secondInput": {
+    "type": "TEXT",
+    "title": {
+      "en": "Brand Name"
+    }
+  }
+}

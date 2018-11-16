@@ -13,8 +13,8 @@ const { mapStateToProps, mapDispatchToProps } = SubViewsActions.UserProfile.Tech
 
 import { Functions } from '../../../assets/modules/index';
 
-import { layouts_constants } from '../../../assets/flows/knowledge/index';
-const __CONSTANTS = layouts_constants.camera_roll_picker_modal;
+import { views_constants } from '../../../assets/flows/knowledge/index';
+const __CONSTANTS = views_constants.profile.user_profile_sub_views.technical_tab;
 
 const TechnicalTab = (props) => {
   return (
@@ -29,15 +29,15 @@ const TechnicalTab = (props) => {
           }}/>
 
         <Input
-          type="PHOTO"
-          name="brand-profile-photo"
-          value="Brand Photo"
+          type={__CONSTANTS.firstInput.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.firstInput.title.en)}
+          value={__CONSTANTS.firstInput.title.en}
           style={Styles.SingleInput}
           onPress={() => props.setCameraRollPickerModalVisibility(true)} />
         <Input
-          type="TEXT"
-          name="brand-name"
-          placeholder="Brand Name"
+          type={__CONSTANTS.secondInput.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.secondInput.title.en)}
+          placeholder={__CONSTANTS.secondInput.title.en}
           value={props.technicalTab.brandName}
           onChangeText={(currentValue) => props.setBrandName(currentValue)} />
     </ScrollView>

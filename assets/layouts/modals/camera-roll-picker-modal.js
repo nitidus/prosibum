@@ -11,9 +11,6 @@ const Styles = Modules.Layouts.CountriesCodesModal;
 
 import { Functions } from '../../modules/index';
 
-import { layouts_constants } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.camera_roll_picker_modal;
-
 export const CameraRollPickerModal = (props) => {
   var attitude = {};
 
@@ -69,7 +66,6 @@ export const CameraRollPickerModal = (props) => {
 
   return (
     <Modal
-      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.tilte.en)}
       visible={attitude.visibility}
       backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
       onBlur={() => MODAL.ON_BLUR(false)}
