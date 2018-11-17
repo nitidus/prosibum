@@ -9,7 +9,7 @@ import { Global, Modules } from '../../styles/index';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
 import { Input, Carousel } from '../../components/index';
-const Styles = Modules.Layouts.CountriesCodesModal;
+const Styles = Modules.Layouts.CameraRollPickerModal;
 
 import { Functions } from '../../modules/index';
 
@@ -91,18 +91,12 @@ const CameraRollPickerModal = (props) => {
     })
   }
 
-  var content;
+  var _CAMERA_ROLL_ITEMS_CONTENT;
 
   if (props.cameraRollPickerModal.cameraRollItems.length > 0){
-    content = props.cameraRollPickerModal.cameraRollItems.map((photo, i) => {
+    _CAMERA_ROLL_ITEMS_CONTENT = props.cameraRollPickerModal.cameraRollItems.map((photo, i) => {
       return (
-        <Image
-          key={i}
-          style={{
-            width: 100,
-            height: 100
-          }}
-          source={{ uri: photo.node.image.uri }}/>
+        <Text>hello {i}</Text>
       );
     });
   }
@@ -115,8 +109,8 @@ const CameraRollPickerModal = (props) => {
       onPress={attitude.onPress}
       style={Styles.ModalContainer}>
         <View
-          style={Styles.Container}>
-            {content}
+          style={Styles.CameraRollContainer}>
+            {_CAMERA_ROLL_ITEMS_CONTENT}
         </View>
     </Modal>
   )
