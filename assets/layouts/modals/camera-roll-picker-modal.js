@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Image, CameraRoll, Platform, Dimensions, Animated, Easing } from 'react-native';
+import { View, ScrollView, TouchableOpacity, Image, Dimensions, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -66,23 +66,14 @@ const CameraRollPickerModal = (props) => {
           BACKDROP_BLUR_TYPE: "dark",
           ON_BLUR: (status) => {
             attitude.onBlur(status);
+          },
+          ITEMS: {
+            ACTIVE_OPACITY: 0.7
           }
-        };
+        }
 
-  if (props.cameraRollPickerModal.cameraRollItems.length === 0){
-    var _CAMERA_ROLL_OPTIONS = {
-        first: 20,
-        mimeTypes: [
-          'image/jpeg', 'image/png'
-        ],
-        assetType: 'Photos'
-      };
-
-    if (Platform.OS === 'ios'){
-      _CAMERA_ROLL_OPTIONS.groupTypes = 'All';
-    }
-
-    CameraRoll.getPhotos(_CAMERA_ROLL_OPTIONS)
+  if (props.cameraRollPickerModal.cameraRollItems.length === 0 /*check differences*/){
+    Functions._retrieveLocalStoragePhotosWithOptions()
     .then((recentItemsOnCameraRoll) => {
       props.setCameraRollItems(recentItemsOnCameraRoll.edges)
     })
@@ -91,13 +82,48 @@ const CameraRollPickerModal = (props) => {
     })
   }
 
-  var _CAMERA_ROLL_ITEMS_CONTENT;
+  var _ROW_CHUNK_SIZE = (_Screen.width >= 1000 || _Screen.height >= 1000)? 5:3,
+      _CAMERA_ROLL_ITEMS = Functions._chunkArray(props.cameraRollPickerModal.cameraRollItems, _ROW_CHUNK_SIZE),
+      _CAMERA_ROLL_ITEMS_CONTENT;
 
-  if (props.cameraRollPickerModal.cameraRollItems.length > 0){
-    _CAMERA_ROLL_ITEMS_CONTENT = props.cameraRollPickerModal.cameraRollItems.map((photo, i) => {
+  if (_CAMERA_ROLL_ITEMS.length > 0){
+    _CAMERA_ROLL_ITEMS_CONTENT = _CAMERA_ROLL_ITEMS.map((photosRow, i) => {
       return (
-        <Text>hello {i}</Text>
-      );
+        <View
+          style={Styles.CameraRollRowContainer}
+          key={i}>
+            {
+              photosRow.map((photo, j) => {
+                var _SINGLE_IMAGE_STYLES = [
+                  Styles.CameraRollItemContainer
+                ];
+
+                if ((j + 1) % _ROW_CHUNK_SIZE === 0){
+                  _SINGLE_IMAGE_STYLES.push({
+                    marginRight: 0
+                  });
+                }
+
+                const _PHOTO_URI = photo.node.image.uri;
+
+                return (
+                  <TouchableOpacity
+                    key={j}
+                    activeOpacity={MODAL.ITEMS.ACTIVE_OPACITY}
+                    style={_SINGLE_IMAGE_STYLES}
+                    onPress={() => {
+                      MODAL.ON_BLUR(false);
+                      attitude.onPress(_PHOTO_URI);
+                    }}>
+                      <Image
+                        style={Styles.CameraRollItemContent}
+                        source={{ uri: _PHOTO_URI }} />
+                  </TouchableOpacity>
+                );
+              })
+            }
+        </View>
+      )
     });
   }
 
@@ -109,8 +135,12 @@ const CameraRollPickerModal = (props) => {
       onPress={attitude.onPress}
       style={Styles.ModalContainer}>
         <View
-          style={Styles.CameraRollContainer}>
-            {_CAMERA_ROLL_ITEMS_CONTENT}
+          style={Styles.CameraRollMajorContainer}>
+            <ScrollView
+              style={Styles.CameraRollContainer}
+              showsVerticalScrollIndicator={false}>
+                {_CAMERA_ROLL_ITEMS_CONTENT}
+            </ScrollView>
         </View>
     </Modal>
   )

@@ -24,15 +24,14 @@ const TechnicalTab = (props) => {
           name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.tilte.en)}
           visible={props.technicalTab.cameraRollPickerModalVisibility}
           onBlur={(status) => props.setCameraRollPickerModalVisibility(status)}
-          onPress={() => {
-            alert('ok 2')
-          }}/>
+          onPress={(photoURI) => props.setBrandProfilePhoto(photoURI)}/>
 
         <Input
           type={__CONSTANTS.firstInput.type}
           name={Functions._convertTokenToKeyword(__CONSTANTS.firstInput.title.en)}
           value={__CONSTANTS.firstInput.title.en}
           style={Styles.SingleInput}
+          photoURI={props.technicalTab.brandProfilePhoto}
           onPress={() => props.setCameraRollPickerModalVisibility(true)} />
         <Input
           type={__CONSTANTS.secondInput.type}

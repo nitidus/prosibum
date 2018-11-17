@@ -16,7 +16,7 @@ export const Link = (props) => {
     attitude.value = props.value;
   }
 
-  attitude.activeOpacity = props.activeOpacity || 0.2;
+  attitude.activeOpacity = props.activeOpacity || 0.7;
 
   if (typeof props.containerStyle != 'undefined'){
     attitude.containerStyle = props.containerStyle;

@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, CameraRoll, PermissionsAndroid, Platform } from 'react-native';
 import Lodash from 'lodash';
 
 import { countries as __COUNTRIES } from '../../flows/knowledge/index';
@@ -178,6 +178,19 @@ module.exports = {
   _getRidOfZerosFromPhoneNumber: (phoneNumber) => {
     return phoneNumber.replace(/\b[0]+/, '');
   },
+  _chunkArray: (selectedArray, chunkSize) => {
+    var index = 0,
+        arrayLength = selectedArray.length,
+        finalResult = [];
+
+    for (i = 0; i < arrayLength; i += chunkSize) {
+        var myChunk = selectedArray.slice(i, (i + chunkSize));
+
+        finalResult.push(myChunk);
+    }
+
+    return finalResult;
+  },
   _storeDataWithKey: async (key, value) => {
     try {
       await AsyncStorage.setItem(`@${__APP_NAME}:${key}`, value);
@@ -216,6 +229,56 @@ module.exports = {
       return _KEYS;
     } catch (error) {
       //Error retrieving all keys
+    }
+  },
+  _fetchPrivatelyLocalStoragePhotoWithOptions: (options) => {
+    return CameraRoll.getPhotos(options);
+  },
+  _retrieveLocalStoragePhotosWithOptions: async (options) => {
+    var _CAMERA_ROLL_OPTIONS = {
+        first: 20,
+        mimeTypes: [
+          'image/jpeg', 'image/png'
+        ],
+        assetType: 'Photos'
+      };
+
+    if (typeof options != 'undefined'){
+      if (typeof options.first != 'undefined' && options.first > 0){
+        _CAMERA_ROLL_OPTIONS.first = options.first;
+      }
+
+      if (typeof options.mimeTypes != 'undefined' && options.mimeTypes.length > 0){
+        _CAMERA_ROLL_OPTIONS.mimeTypes = options.mimeTypes;
+      }
+
+      if (typeof options.assetType != 'undefined' && options.assetType != ''){
+        _CAMERA_ROLL_OPTIONS.assetType = options.assetType;
+      }
+    }
+
+    if (Platform.OS === 'ios'){
+      _CAMERA_ROLL_OPTIONS.groupTypes = (typeof options != 'undefined')? options.groupTypes : 'All';
+
+      return module.exports._fetchPrivatelyLocalStoragePhotoWithOptions(_CAMERA_ROLL_OPTIONS);
+    }else if (Platform.OS === 'android'){
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+          {
+            'title': `${module.exports._convertKeywordToToken(__APP_NAME)} Read External Storage Permission`,
+            'message': `${module.exports._convertKeywordToToken(__APP_NAME)} app needs access to your external storage.`
+          }
+        );
+
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          return module.exports._fetchPrivatelyLocalStoragePhotoWithOptions(_CAMERA_ROLL_OPTIONS);
+        }else{
+          return false;
+        }
+      } catch (err) {
+        throw err;
+      }
     }
   }
 };
