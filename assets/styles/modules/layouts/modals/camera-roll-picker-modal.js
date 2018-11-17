@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform, Dimensions } from 'react-native';
 
-import { Functions } from '../../../modules/index';
+import { Functions } from '../../../../modules/index';
 
 import {
   colors, fonts
-} from '../../global';
+} from '../../../global';
 
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
