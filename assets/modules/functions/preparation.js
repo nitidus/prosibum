@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import Prototypes from './prototypes';
 
 import { GLOBAL } from '../../flows/states/types/index';
@@ -108,6 +109,16 @@ module.exports = {
       const _PARSED_TOKEN = JSON.parse(_DID_TOKEN_CREATED);
 
       navigation.navigate('Dashboard');
+    }
+  },
+  _prepareCameraRoll: async (props) => {
+    const { navigation } = props;
+
+    const _FETCHED_CAMERA_ROLL_ITEMS = await Prototypes._retrieveLocalStoragePhotosWithOptions(),
+          _CHECK_CRITERIA_ON_FETCHED_ITEMS = ((_FETCHED_CAMERA_ROLL_ITEMS !== null) && (typeof _FETCHED_CAMERA_ROLL_ITEMS != 'undefined') && (_FETCHED_CAMERA_ROLL_ITEMS !== false));
+
+    if (_CHECK_CRITERIA_ON_FETCHED_ITEMS){
+      props.setCameraRollItems(_FETCHED_CAMERA_ROLL_ITEMS.edges);
     }
   }
 };

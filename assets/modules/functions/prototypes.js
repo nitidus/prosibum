@@ -231,8 +231,10 @@ module.exports = {
       //Error retrieving all keys
     }
   },
-  _fetchPrivatelyLocalStoragePhotoWithOptions: (options) => {
-    return CameraRoll.getPhotos(options);
+  _fetchPrivatelyLocalStoragePhotoWithOptions: async (options) => {
+    const cameraRollPhotos = await CameraRoll.getPhotos(options);
+
+    return cameraRollPhotos;
   },
   _retrieveLocalStoragePhotosWithOptions: async (options) => {
     var _CAMERA_ROLL_OPTIONS = {
@@ -260,7 +262,9 @@ module.exports = {
     if (Platform.OS === 'ios'){
       _CAMERA_ROLL_OPTIONS.groupTypes = (typeof options != 'undefined')? options.groupTypes : 'All';
 
-      return module.exports._fetchPrivatelyLocalStoragePhotoWithOptions(_CAMERA_ROLL_OPTIONS);
+      const fetchedCameraRollPhotos = await module.exports._fetchPrivatelyLocalStoragePhotoWithOptions(_CAMERA_ROLL_OPTIONS);
+
+      return fetchedCameraRollPhotos;
     }else if (Platform.OS === 'android'){
       try {
         const granted = await PermissionsAndroid.request(
@@ -272,7 +276,9 @@ module.exports = {
         );
 
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          return module.exports._fetchPrivatelyLocalStoragePhotoWithOptions(_CAMERA_ROLL_OPTIONS);
+          const fetchedCameraRollPhotos = await module.exports._fetchPrivatelyLocalStoragePhotoWithOptions(_CAMERA_ROLL_OPTIONS);
+
+          return fetchedCameraRollPhotos;
         }else{
           return false;
         }

@@ -12,6 +12,7 @@ import { Input, Carousel } from '../../components/index';
 const Styles = Modules.Layouts.CameraRollPickerModal;
 
 import { Functions } from '../../modules/index';
+const { Preparation } = Functions;
 
 import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.CameraRollPickerModal;
@@ -73,13 +74,7 @@ const CameraRollPickerModal = (props) => {
         }
 
   if (props.cameraRollPickerModal.cameraRollItems.length === 0 /*check differences*/){
-    Functions._retrieveLocalStoragePhotosWithOptions()
-    .then((recentItemsOnCameraRoll) => {
-      props.setCameraRollItems(recentItemsOnCameraRoll.edges)
-    })
-    .catch((err) => {
-
-    })
+    Preparation._prepareCameraRoll(props);
   }
 
   var _ROW_CHUNK_SIZE = (_Screen.width >= 1000 || _Screen.height >= 1000)? 5:3,
