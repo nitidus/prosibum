@@ -129,6 +129,45 @@ const CameraRollPickerModal = (props) => {
       onBlur={() => MODAL.ON_BLUR(false)}
       onPress={attitude.onPress}
       style={Styles.ModalContainer}>
+        <Carousel
+          name="camera-roll-types"
+          data={[
+            'Album',
+            'All',
+            'Event',
+            'Faces',
+            'Library',
+            'PhotoStream',
+            'SavedPhotos'
+          ]}
+          style={[
+            Styles.CameraRolliOSGroupTypesCarousel,
+            { width: (Styles.CameraRollItemContainer.width * _ROW_CHUNK_SIZE + (Styles.CameraRollItemContainer.marginRight * (_ROW_CHUNK_SIZE - 1))) }
+          ]}
+          itemWidth={(Styles.CameraRollItemContainer.width * _ROW_CHUNK_SIZE + (Styles.CameraRollItemContainer.marginRight * (_ROW_CHUNK_SIZE - 1)))}
+          firstItem={0}
+          onLayout={({ item, i }) => {
+            return (
+              <Input
+                type="BUTTON"
+                name="camera-roll-types-item"
+                value={item}
+                gradient={Global.colors.pair.ongerine}
+                disable={true}/>
+            );
+
+            // return (
+            //   <Input
+            //     type={__CONSTANTS.firstCarouselContainer.content.self.type}
+            //     name={_ITEM_NAME}
+            //     value={_ITEM_VALUE}
+            //     style={_INACTIVE_STYLE}
+            //     disable={true}/>
+            // );
+          }}
+          onSnap={(selectedItemIndex) => {
+            //
+          }}/>
         <View
           style={Styles.CameraRollMajorContainer}>
             <ScrollView

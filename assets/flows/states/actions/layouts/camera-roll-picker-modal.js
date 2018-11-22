@@ -9,6 +9,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setCameraRollCurrentGroupType: (groupType) => {
+      dispatch({
+        type: CAMERA_ROLL_PICKER_MODAL.SET_CAMERA_ROLL_GROUP_TYPE,
+        payload: groupType
+      })
+    },
     setCameraRollItems: (data) => {
       dispatch({
         type: CAMERA_ROLL_PICKER_MODAL.SET_CAMERA_ROLL_ITEMS,
