@@ -6,6 +6,8 @@ const initialState = {
         brandProfilePhoto: '',
         brandRole: '',
         cameraRollPickerModalVisibility: false,
+        brandRoles: [],
+        loadingBrandRole: false,
         loading: false,
         connected: {
           status: true,
@@ -39,10 +41,22 @@ export default (state = initialState, action) => {
         brandRole: action.payload
       };
       break;
+    case TECHNICAL_TAB.FETCH_AVAILABLE_BRAND_ROLES:
+      return {
+        ...state,
+        brandRoles: action.payload
+      };
+      break;
     case TECHNICAL_TAB.SET_LOADING_STATUS:
       return {
         ...state,
         loading: action.payload
+      };
+      break;
+    case TECHNICAL_TAB.SET_BRAND_ROLE_LOADING_STATUS:
+      return {
+        ...state,
+        loadingBrandRole: action.payload
       };
       break;
     case TECHNICAL_TAB.SET_CONNECTED_STATUS:

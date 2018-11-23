@@ -68,9 +68,6 @@ module.exports = StyleSheet.create({
     paddingHorizontal: 0,
     paddingBottom: 0
   },
-  CameraRolliOSGroupTypesCarousel: {
-    marginBottom: _CUSTOM_CAMERA_ROLL_ROW_CONTAINER.marginBottom
-  },
   CameraRollMajorContainer: {
     alignItems: 'center'
   },

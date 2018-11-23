@@ -120,5 +120,26 @@ module.exports = {
     if (_CHECK_CRITERIA_ON_FETCHED_ITEMS){
       props.setCameraRollItems(_FETCHED_CAMERA_ROLL_ITEMS.edges);
     }
+  },
+  _prepareTechnicalTabInProfile: async (self) => {
+    const { props } = self,
+          { navigation } = props,
+          _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
+
+    props.fetchAvailableBrandRoles('Wholesaler');
+
+    var _BRAND_PROFILE_PHOTO = '',
+        _BRAND_NAME = '',
+        _BRAND_ROLE = '';
+
+    if (_DID_TOKEN_CREATED){
+      // _BRAND_PROFILE_PHOTO
+      // _BRAND_NAME
+      // _BRAND_ROLE
+    }
+
+    props.setBrandProfilePhoto(_BRAND_PROFILE_PHOTO);
+    props.setBrandName(_BRAND_NAME);
+    props.setBrandRole(_BRAND_ROLE);
   }
 };

@@ -36,6 +36,13 @@ const mapDispatchToProps = (dispatch) => {
         payload: role
       })
     },
+    fetchAvailableBrandRoles: async (groupType) => CMD._getBrandRolesWithType(groupType, dispatch),
+    setBrandRoleLoadingStatus: (loadingStatus) => {
+      dispatch({
+        type: TECHNICAL_TAB.SET_BRAND_ROLE_LOADING_STATUS,
+        payload: loadingStatus
+      })
+    },
     setLoadingStatus: (loadingStatus) => {
       dispatch({
         type: TECHNICAL_TAB.SET_LOADING_STATUS,

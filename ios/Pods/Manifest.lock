@@ -5,6 +5,14 @@ PODS:
     - React/Core (= 0.56.0)
   - react-native-blur (0.8.0):
     - React
+  - react-native-camera (1.4.3):
+    - React
+    - react-native-camera/RCT (= 1.4.3)
+    - react-native-camera/RN (= 1.4.3)
+  - react-native-camera/RCT (1.4.3):
+    - React
+  - react-native-camera/RN (1.4.3):
+    - React
   - React/Core (0.56.0):
     - yoga (= 0.56.0.React)
   - React/RCTImage (0.56.0):
@@ -19,29 +27,33 @@ PODS:
 DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - react-native-blur (from `../node_modules/react-native-blur`)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - React/RCTImage (from `../node_modules/react-native`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
   BVLinearGradient:
-    :path: ../node_modules/react-native-linear-gradient
+    :path: "../node_modules/react-native-linear-gradient"
   React:
-    :path: ../node_modules/react-native
+    :path: "../node_modules/react-native"
   react-native-blur:
-    :path: ../node_modules/react-native-blur
+    :path: "../node_modules/react-native-blur"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   RNSVG:
-    :path: ../node_modules/react-native-svg
+    :path: "../node_modules/react-native-svg"
   yoga:
-    :path: ../node_modules/react-native/ReactCommon/yoga
+    :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  BVLinearGradient: 38cd36b3a65918ad3d8374afca44d45337ed9dc5
-  React: bdb39c05e2eed10a43056cff89a68bc9ebe7f232
-  react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
-  RNSVG: 5e59688752986880ace09daecb8d64bc7a910db8
-  yoga: 2418c171de153cbe3c94dc28c3bf691b1695ae17
+  BVLinearGradient: 6d8909e3fc6b089defa4b89d967441fa6827a2ee
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-blur: c35c1f6c2c76db7108bde7ed343bd2b01d64e0c0
+  react-native-camera: eac1e8cc7523273a2a11956d0e5dac08296cf4b0
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: c65f2cbc1c02765cf65a1a9af22c193d51d3ab44
+PODFILE CHECKSUM: 5d6003f425820974b63b97f28bd30c48b07df15d
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3
