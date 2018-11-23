@@ -15,5 +15,22 @@
     "title": {
       "en": "Brand Name"
     }
+  },
+  "firstCarouselContainer": {
+    "title": {
+      "en": "Brand Role"
+    },
+    "content": {
+      "self": {
+        "type": "BUTTON",
+        "state": {
+          "loading": {
+            "title": {
+              "en": "Brand Role Loading"
+            }
+          }
+        }
+      }
+    }
   }
 }

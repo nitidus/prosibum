@@ -25,7 +25,7 @@ class TechnicalTab extends Component<{}> {
 
   render() {
     const { props } = this;
-    var _CAROUSEL_CONTENT, _TOP_PINNED_TOAST;
+    var _BRAND_ROLE_CAROUSEL_CONTENT, _TOP_PINNED_TOAST;
 
     const _CURRENT_BRAND_ROLE = props.technicalTab.brandRoles.findIndex((brandRole) => {
       const _BRAND_ROLE = brandRole.role,
@@ -35,9 +35,9 @@ class TechnicalTab extends Component<{}> {
     });
 
     if (props.technicalTab.loadingBrandRole){
-      _CAROUSEL_CONTENT = <Input
-        type="BUTTON"
-        name="somthing-loading"
+      _BRAND_ROLE_CAROUSEL_CONTENT = <Input
+        type={__CONSTANTS.firstCarouselContainer.content.self.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.content.self.state.loading.title.en)}
         gradient={Global.colors.pair.ongerine}
         style={[
           Styles.BrandRoleCarouselContainer,
@@ -55,8 +55,8 @@ class TechnicalTab extends Component<{}> {
           onPress={() => props.fetchAvailableBrandRoles('Wholesaler')} />;
       }
 
-      _CAROUSEL_CONTENT = <Carousel
-        name="hello"
+      _BRAND_ROLE_CAROUSEL_CONTENT = <Carousel
+        name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.title.en)}
         data={props.technicalTab.brandRoles}
         style={Styles.BrandRoleCarouselContainer}
         itemWidth={_SCREEN.width - (Styles.GlobalMeasurements.marginHorizontal * 2)}
@@ -72,7 +72,7 @@ class TechnicalTab extends Component<{}> {
           if (_CURRENT_USER_GROUP.role === item.role){
             return (
               <Input
-                type="BUTTON"
+                type={__CONSTANTS.firstCarouselContainer.content.self.type}
                 name={_ITEM_NAME}
                 value={_ITEM_VALUE}
                 gradient={Global.colors.pair.ongerine}
@@ -81,7 +81,7 @@ class TechnicalTab extends Component<{}> {
           }else{
             return (
               <Input
-                type="BUTTON"
+                type={__CONSTANTS.firstCarouselContainer.content.self.type}
                 name={_ITEM_NAME}
                 value={_ITEM_VALUE}
                 style={_INACTIVE_STYLE}
@@ -118,7 +118,7 @@ class TechnicalTab extends Component<{}> {
             style={Styles.SingleInput}
             onChangeText={(currentValue) => props.setBrandName(currentValue)} />
 
-          {_CAROUSEL_CONTENT}
+          {_BRAND_ROLE_CAROUSEL_CONTENT}
       </ScrollView>
     );
   }
