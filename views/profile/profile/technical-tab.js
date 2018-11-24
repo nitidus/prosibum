@@ -25,13 +25,13 @@ class TechnicalTab extends Component<{}> {
 
   render() {
     const { props } = this;
-    var _BRAND_ROLE_CAROUSEL_CONTENT;
+    var _BRAND_ROLE_CAROUSEL_CONTENT, _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT;
 
     const _CURRENT_BRAND_ROLE = props.technicalTab.brandRoles.findIndex((brandRole) => {
       const _BRAND_ROLE = brandRole.role,
-            _CURRENT_BRAND_ROLE = props.technicalTab.brandRole.role;
+            _LOCAL_CURRENT_BRAND_ROLE = props.technicalTab.brandRole.role;
 
-      return (_CURRENT_BRAND_ROLE === _BRAND_ROLE)
+      return (_LOCAL_CURRENT_BRAND_ROLE === _BRAND_ROLE)
     });
 
     if (props.technicalTab.loadingBrandRole){
@@ -74,14 +74,14 @@ class TechnicalTab extends Component<{}> {
           itemWidth={_SCREEN.width - (Styles.GlobalMeasurements.marginHorizontal * 2)}
           firstItem={_CURRENT_BRAND_ROLE}
           onLayout={({ item, i }) => {
-            var _CURRENT_USER_GROUP = props.technicalTab.brandRole,
+            var __LOCAL_CURRENT_RAND_ROLE = props.technicalTab.brandRole,
                 _INACTIVE_STYLE = {
                   backgroundColor: Global.colors.single.wildSand
                 },
                 _ITEM_NAME = item.role.toLowerCase(),
                 _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
 
-            if (_CURRENT_USER_GROUP.role === item.role){
+            if (__LOCAL_CURRENT_RAND_ROLE.role === item.role){
               return (
                 <Input
                   type={__CONSTANTS.firstCarouselContainer.content.self.type}
@@ -104,6 +104,21 @@ class TechnicalTab extends Component<{}> {
           onSnap={(selectedItemIndex) => {
             props.setBrandRole(props.technicalTab.brandRoles[selectedItemIndex]);
           }}/>;
+
+        if (typeof props.technicalTab.brandRoles[_CURRENT_BRAND_ROLE] != 'undefined'){
+          const _CURRENT_BRAND_ROLE_CONTENT = props.technicalTab.brandRoles[_CURRENT_BRAND_ROLE].role.toLowerCase();
+
+          if (Functions._convertKeywordToToken(_CURRENT_BRAND_ROLE_CONTENT) !== "Sales Chairman"){
+            _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT = <Link
+              containerStyle={Styles.QuickLink}
+              value={__CONSTANTS.quickLink.title.en}
+              onPress={() => {
+                const { navigation } = this.props;
+
+                alert('ok')
+              }} />;
+          }
+        }
       }
     }
 
@@ -133,14 +148,7 @@ class TechnicalTab extends Component<{}> {
 
           {_BRAND_ROLE_CAROUSEL_CONTENT}
 
-          <Link
-            containerStyle={Styles.QuickLink}
-            value={__CONSTANTS.quickLink.title.en}
-            onPress={() => {
-              const { navigation } = this.props;
-
-              alert('ok')
-            }} />
+          {_BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT}
       </ScrollView>
     );
   }
