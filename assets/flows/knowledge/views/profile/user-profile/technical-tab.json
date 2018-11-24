@@ -28,6 +28,14 @@
             "title": {
               "en": "Brand Role Loading"
             }
+          },
+          "error": {
+            "title": {
+              "en": "Brand Role Error"
+            },
+            "content": {
+              "en": "Retry To Fetch"
+            }
           }
         }
       }
