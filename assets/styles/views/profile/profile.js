@@ -52,5 +52,9 @@ module.exports = StyleSheet.create({
     color: colors.single.romance,
     fontFamily: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BUTTON_TITLE
+  },
+  QuickLink: {
+    marginVertical: 38,
+    alignItems: 'center'
   }
 });

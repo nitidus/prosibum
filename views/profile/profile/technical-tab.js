@@ -3,7 +3,7 @@ import { View, ScrollView, Text, Dimensions } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import { Input, InputGroup, Carousel } from '../../../assets/components/index';
+import { Input, InputGroup, Carousel, Link } from '../../../assets/components/index';
 import { CameraRollPickerModal, ActivityIndicator } from '../../../assets/layouts/index';
 import { Global, Views } from '../../../assets/styles/index';
 const Styles = Views.Profile.Profile;
@@ -132,6 +132,15 @@ class TechnicalTab extends Component<{}> {
             onChangeText={(currentValue) => props.setBrandName(currentValue)} />
 
           {_BRAND_ROLE_CAROUSEL_CONTENT}
+
+          <Link
+            containerStyle={Styles.QuickLink}
+            value={__CONSTANTS.quickLink.title.en}
+            onPress={() => {
+              const { navigation } = this.props;
+
+              alert('ok')
+            }} />
       </ScrollView>
     );
   }

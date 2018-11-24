@@ -40,5 +40,10 @@
         }
       }
     }
+  },
+  "quickLink": {
+    "title": {
+      "en": "You've not specified your subsets?"
+    }
   }
 }
