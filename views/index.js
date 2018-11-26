@@ -17,8 +17,8 @@ import VerifyPhoneNumber from './authentication/verify-phone-number';
 import Authorization from './authorization';
 
 const ProfileStack = createStackNavigator({
-  // Dashboard,
-  // Profile,
+  Dashboard,
+  Profile,
   BrandRolesSubsets
 }, {
   headerMode: 'none'
