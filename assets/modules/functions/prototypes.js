@@ -100,7 +100,7 @@ module.exports = {
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
   },
   _convertKeywordToToken: (keyword) => {
-    return keyword.replace(/(_|-| )/ig, ' ').replace(/\b\w/ig, char => char.toUpperCase());
+    return keyword.toLowerCase().replace(/(_|-| )/ig, ' ').replace(/\b\w/ig, char => char.toUpperCase());
   },
   _convertTokenToKeyword: (token) => {
     return token.replace(/(_|-| )+/ig, '-').toLowerCase();

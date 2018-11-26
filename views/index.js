@@ -4,6 +4,9 @@ import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'rea
 import Dashboard from './profile/dashboard';
 import Profile from './profile/profile';
 
+  //Profile Subsets
+  import BrandRolesSubsets from './profile/profile/brand-roles-subsets';
+
 //Authentication Screens
 import Login from './authentication/login';
 import Signup from './authentication/signup';
@@ -14,8 +17,9 @@ import VerifyPhoneNumber from './authentication/verify-phone-number';
 import Authorization from './authorization';
 
 const ProfileStack = createStackNavigator({
-  Dashboard,
-  Profile
+  // Dashboard,
+  // Profile,
+  BrandRolesSubsets
 }, {
   headerMode: 'none'
 });

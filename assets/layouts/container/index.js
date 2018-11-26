@@ -8,6 +8,7 @@ import { TopBar, PinnedSide, TabItem } from './layouts/pilot/top-bar'
 //Profile
 import { DashboardContainer } from './views/profile/dashboard-container';
 import { ProfileContainer } from './views/profile/profile-container';
+import { BrandRolesSubsetsContainer } from './views/profile/brand-roles-subsets-container'
 
 module.exports = {
   Layouts: {
@@ -20,7 +21,8 @@ module.exports = {
   Views: {
     Profile: {
       DashboardContainer,
-      ProfileContainer
+      ProfileContainer,
+      BrandRolesSubsetsContainer
     }
   }
 };
