@@ -31,7 +31,7 @@ class Profile extends Component<{}> {
           });
 
     props.setPilotTabs(__TABS);
-    props.setPilotCurrentTab(__TABS[0]);
+    props.setPilotCurrentTab(__TABS[1]);
   }
 
   render() {
@@ -42,19 +42,24 @@ class Profile extends Component<{}> {
 
     switch (_CURRENT_TAB) {
       case 'personal':
-        _TAB_CONTENT = <PersonalTab />;
+        _TAB_CONTENT = <PersonalTab
+          {...props} />;
         break;
       case 'technical':
-        _TAB_CONTENT = <TechnicalTab />;
+        _TAB_CONTENT = <TechnicalTab
+          {...props} />;
         break;
       case 'certification':
-        _TAB_CONTENT = <CertificationTab />
+        _TAB_CONTENT = <CertificationTab
+          {...props} />
         break;
       case 'history':
-        _TAB_CONTENT = <HistoryTab />
+        _TAB_CONTENT = <HistoryTab
+          {...props} />
         break;
       case 'postal':
-        _TAB_CONTENT = <PostalTab />
+        _TAB_CONTENT = <PostalTab
+          {...props} />
         break;
     }
 
