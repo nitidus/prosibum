@@ -66,7 +66,9 @@ class BrandRolesSubsets extends Component<{}> {
               _CURRENT_TAB_CONTENT = (typeof props.brandRolesSubsets.currentTab.role != 'undefined')? props.brandRolesSubsets.currentTab.role: '',
               _CURRENT_TAB = Functions._convertKeywordToToken(_CURRENT_TAB_CONTENT);
 
-        const _TAB_CONTENT = (<Text>Hello {_CURRENT_TAB}</Text>);
+        const _TAB_CONTENT = (
+          <Text>Hello {_CURRENT_TAB}</Text>
+        );
 
         return (
           <Container

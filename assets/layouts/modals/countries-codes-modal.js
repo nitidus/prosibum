@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, FlatList, Text, Dimensions, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -83,13 +83,6 @@ const CountriesCodesModal = (props) => {
 
     props.setCarouselCurrentIndex(props.countriesCodesModal.offset.from);
     props.mergeDataWithCarouselRestrictedData(_RESTRICTED_COUNTRIES);
-    // var _NEXT_OFFSET = Functions._generateNextOffset(_SELECTED_INDEX, props.countriesCodesModal.limit);
-    //
-    // const _RESTRICTED_COUNTRIES = __COUNTRIES.slice(_NEXT_OFFSET.from, _NEXT_OFFSET.to);
-    //
-    // props.setCarouselOffset(_NEXT_OFFSET);
-    // props.setCarouselCurrentIndex(props.countriesCodesModal.offset.from);
-    // props.mergeDataWithCarouselRestrictedData(_RESTRICTED_COUNTRIES);
   }
 
   if (attitude.visibility !== props.countriesCodesModal.visibility){
@@ -106,82 +99,68 @@ const CountriesCodesModal = (props) => {
       }}
       onPress={attitude.onPress}
       style={Styles.ModalContainer}>
-        <View
-          style={Styles.Container}>
-            <Carousel
-              name={__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en}
-              data={props.countriesCodesModal.restrictedData}
-              style={Styles.CarouselContainer}
-              itemWidth={_Screen.width - (Styles.changeButton.marginHorizontal * 2)}
-              firstItem={props.countriesCodesModal.currentIndex}
-              onLayout={({ item, i }) => {
-                var _SELECTED_COUNTRY_CODE = attitude.selectedItem || 0,
-                    _ITEM_NAME = item.code.toLowerCase(),
-                    _ITEM_VALUE = (item.name.length > 21)? `${item.name.slice(0, 20)}...`: item.name,
-                    _ITEM_AREA_CODE = item.area_code;
+        <FlatList
+          name={__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en}
+          data={props.countriesCodesModal.restrictedData}
+          contentContainerStyle={Styles.MajorContainer}
+          style={Styles.Container}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }, i) => {
+            var _SELECTED_COUNTRY_CODE = attitude.selectedItem || 0,
+                _ITEM_NAME = item.code.toLowerCase(),
+                _ITEM_VALUE = (item.name.length > 21)? `${item.name.slice(0, 20)}...`: item.name,
+                _ITEM_AREA_CODE = item.area_code;
 
-                if (_SELECTED_COUNTRY_CODE.code === item.code){
-                  return (
-                    <Input
-                      type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                      name={_ITEM_NAME}
-                      gradient={Global.colors.pair.aqrulean}
-                      disable={true}
-                      style={Styles.CarouselItemContainer}>
-                        <Text
-                          style={Styles.CarouselItemTitle}>
-                          {_ITEM_VALUE}
-                        </Text>
-                        <Text
-                          style={Styles.CarouselItemSubtitle}>
-                          {_ITEM_AREA_CODE}
-                        </Text>
-                    </Input>
-                  );
-                }else{
-                  return (
-                    <Input
-                      type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                      name={_ITEM_NAME}
-                      gradient={Global.colors.pair.ongerine}
-                      disable={true}
-                      style={Styles.CarouselItemContainer}>
-                        <Text
-                          style={Styles.CarouselItemTitle}>
-                          {_ITEM_VALUE}
-                        </Text>
-                        <Text
-                          style={Styles.CarouselItemSubtitle}>
-                          {_ITEM_AREA_CODE}
-                        </Text>
-                    </Input>
-                  );
-                }
-              }}
-              onSnap={(selectedItemIndex) => {
-                props.setCarouselCurrentIndex(selectedItemIndex);
-                attitude.onPress(props.countriesCodesModal.restrictedData[selectedItemIndex]);
+            if (_SELECTED_COUNTRY_CODE.code === item.code){
+              return (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                  name={_ITEM_NAME}
+                  gradient={Global.colors.pair.aqrulean}
+                  disable={true}
+                  style={Styles.CarouselItemContainer}>
+                    <Text
+                      style={Styles.CarouselItemTitle}>
+                      {_ITEM_VALUE}
+                    </Text>
+                    <Text
+                      style={Styles.CarouselItemSubtitle}>
+                      {_ITEM_AREA_CODE}
+                    </Text>
+                </Input>
+              );
+            }else{
+              return (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                  name={_ITEM_NAME}
+                  gradient={Global.colors.pair.ongerine}
+                  style={Styles.CarouselItemContainer}
+                  onPress={() => {
+                    props.setCarouselCurrentIndex(props.countriesCodesModal.offset.from + props.countriesCodesModal.limit);
+                    attitude.onPress(item);
+                    MODAL.ON_BLUR(false);
+                  }}>
+                    <Text
+                      style={Styles.CarouselItemTitle}>
+                      {_ITEM_VALUE}
+                    </Text>
+                    <Text
+                      style={Styles.CarouselItemSubtitle}>
+                      {_ITEM_AREA_CODE}
+                    </Text>
+                </Input>
+              );
+            }
+          }}
+          onEndReached={() => {
+            var _NEXT_OFFSET = Functions._generateNextOffset(props.countriesCodesModal.offset, props.countriesCodesModal.limit);
 
-                const _OFFSET_LIMIT_COMBINATION = props.countriesCodesModal.offset.to - 2;
+            const _LOCAL_RESTRICTED_COUNTRIES = __COUNTRIES.slice(_NEXT_OFFSET.from, _NEXT_OFFSET.to);
 
-                if (selectedItemIndex == _OFFSET_LIMIT_COMBINATION){
-                  var _NEXT_OFFSET = Functions._generateNextOffset(props.countriesCodesModal.offset, props.countriesCodesModal.limit);
-
-                  const _LOCAL_RESTRICTED_COUNTRIES = __COUNTRIES.slice(_NEXT_OFFSET.from, _NEXT_OFFSET.to);
-
-                  props.setCarouselOffset(_NEXT_OFFSET);
-                  props.mergeDataWithCarouselRestrictedData(_LOCAL_RESTRICTED_COUNTRIES);
-                }
-              }} />
-
-            <Input
-              style={Styles.changeButton}
-              type={__CONSTANTS.modalContainer.content.submitInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-              value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
-              gradient={Global.colors.pair.ongerine}
-              onPress={() => MODAL.ON_BLUR(false)} />
-        </View>
+            props.setCarouselOffset(_NEXT_OFFSET);
+            props.mergeDataWithCarouselRestrictedData(_LOCAL_RESTRICTED_COUNTRIES);
+          }} />
     </Modal>
   )
 };

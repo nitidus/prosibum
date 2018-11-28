@@ -1,4 +1,4 @@
-import { countries } from './countries.json';
+import countries from './countries.json';
 
 import views_constants from './views-constants';
 import layouts_constants from './layouts-constants';

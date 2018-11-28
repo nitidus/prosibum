@@ -48,18 +48,21 @@ if (Platform.OS !== 'ios'){
 
 module.exports = StyleSheet.create({
   ModalContainer: {
-    paddingHorizontal: 0
+    paddingHorizontal: 0,
+    paddingBottom: 0
+  },
+  MajorContainer: {
+    alignItems: 'center'
   },
   Container: {
-
-  },
-  CarouselContainer: {
-    flexDirection: 'row'
+    height: 210
   },
   CarouselItemContainer: {
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     paddingVertical: 18,
+    marginBottom: 15,
+    width: width - (19 * 2),
     ..._CUSTOM_CAROUSEL_ITEM_CONTAINER
   },
   CarouselItemTitle: {
