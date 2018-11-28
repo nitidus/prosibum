@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 
 const __LOCALHOST = (Platform.OS === 'ios')? 'localhost': '192.168.0.101',
       GLOBAL = {
+        TARGET: 'Wholesaler',
         URLS: {
           INTERFAS: {
             HOST_NAME: `http://${__LOCALHOST}:16374`

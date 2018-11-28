@@ -3,6 +3,8 @@ import { View, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
+import { GLOBAL } from '../../../assets/flows/states/types/index';
+
 import { Global, Views } from '../../../assets/styles/index';
 import { ActivityIndicator, Toast } from '../../../assets/layouts/index';
 import { Views as ViewsContainer } from '../../../assets/layouts/container/index';
@@ -27,7 +29,7 @@ class BrandRolesSubsets extends Component<{}> {
   async componentDidMount() {
     const { props } = this;
 
-    await props.fetchAvailableBrandRoles('Wholesaler');
+    await props.fetchAvailableBrandRoles(GLOBAL.TARGET);
   }
 
   render() {
@@ -47,7 +49,7 @@ class BrandRolesSubsets extends Component<{}> {
             message={props.brandRolesSubsets.connected.content}
             launched={!props.brandRolesSubsets.connected.status}
             color={Global.colors.single.carminePink}
-            onPress={() => props.fetchAvailableBrandRoles('Wholesaler')} />
+            onPress={() => props.fetchAvailableBrandRoles(GLOBAL.TARGET)} />
         );
 
         return (

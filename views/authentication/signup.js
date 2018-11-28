@@ -3,6 +3,8 @@ import { StatusBar, View, Dimensions, Platform, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
+import { GLOBAL } from '../../assets/flows/states/types/index';
+
 import { Global, Views } from '../../assets/styles/index';
 import { Headline, Input, InputGroup, Link, Carousel } from '../../assets/components/index';
 import { ActivityIndicator, Toast, CountriesCodesModal } from '../../assets/layouts/index';
@@ -35,7 +37,7 @@ class Signup extends Component<{}> {
   componentWillMount() {
     const { props } = this;
 
-    props.fetchAvailableUserGroups('Wholesaler');
+    props.fetchAvailableUserGroups(GLOBAL.TARGET);
   }
 
   _componentWillCheckValidation(props) {
@@ -87,7 +89,7 @@ class Signup extends Component<{}> {
           message={props.signup.connected.content}
           launched={!props.signup.connected.status}
           color={Global.colors.single.carminePink}
-          onPress={() => props.fetchAvailableUserGroups('Wholesaler')} />;
+          onPress={() => props.fetchAvailableUserGroups(GLOBAL.TARGET)} />;
       }
 
       _CAROUSEL_CONTENT = <Carousel

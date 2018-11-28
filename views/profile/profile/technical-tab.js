@@ -3,6 +3,8 @@ import { View, ScrollView, Text, Dimensions } from 'react-native';
 
 import { connect } from 'react-redux';
 
+import { GLOBAL } from '../../../assets/flows/states/types/index';
+
 import { Input, InputGroup, Carousel, Link } from '../../../assets/components/index';
 import { CameraRollPickerModal, ActivityIndicator } from '../../../assets/layouts/index';
 import { Global, Views } from '../../../assets/styles/index';
@@ -60,7 +62,7 @@ class TechnicalTab extends Component<{}> {
               color: Global.colors.single.romance
             }
           ]}
-          onPress={() => props.fetchAvailableBrandRoles('Wholesaler')}>
+          onPress={() => props.fetchAvailableBrandRoles(GLOBAL.TARGET)}>
             <Text
               style={Styles.BrandRoleCarouselErrorContent}>
                 {`${__CONSTANTS.firstCarouselContainer.content.self.state.error.content.en} ${__CONSTANTS.firstCarouselContainer.title.en}`}

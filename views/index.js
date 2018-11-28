@@ -25,7 +25,7 @@ const ProfileStack = createStackNavigator({
 });
 
 const AuthenticationStack = createStackNavigator({
-  // Login,
+  Login,
   Signup,
   ForgottenPassword,
   VerifyPhoneNumber
