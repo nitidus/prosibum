@@ -11,7 +11,7 @@ import VerifyPhoneNumber from './views/authentication/verify-phone-number';
 //Profile
 import Dashboard from './views/profile/dashboard';
 import Profile from './views/profile/profile';
-import BrandRolesSubsets from './views/profile/brand-roles-subsets';
+import Roles from './views/profile/roles';
 
 /*** Modules ***/
 
@@ -31,7 +31,7 @@ module.exports = {
     Profile: {
       Dashboard,
       Profile,
-      BrandRolesSubsets
+      Roles
     }
   },
   Modules: {

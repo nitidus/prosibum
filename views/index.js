@@ -5,7 +5,7 @@ import Dashboard from './profile/dashboard';
 import Profile from './profile/profile';
 
   //Profile Subsets
-  import BrandRolesSubsets from './profile/profile/brand-roles-subsets';
+  import Roles from './profile/profile/roles';
 
 //Authentication Screens
 import Login from './authentication/login';
@@ -17,9 +17,9 @@ import VerifyPhoneNumber from './authentication/verify-phone-number';
 import Authorization from './authorization';
 
 const ProfileStack = createStackNavigator({
-  Dashboard,
-  Profile,
-  BrandRolesSubsets
+  // Dashboard,
+  // Profile,
+  Roles
 }, {
   headerMode: 'none'
 });

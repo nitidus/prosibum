@@ -1,10 +1,10 @@
 import { VIEWS } from '../../../types/index';
-const { BRAND_ROLES_SUBSETS } = VIEWS.PROFILE;
+const { ROLES } = VIEWS.PROFILE;
 
 const initialState = {
         currentTab: {},
         tabs: [],
-        loadingBrandRole: false,
+        loadingRoles: false,
         connected: {
           status: true,
           content: ''
@@ -13,31 +13,31 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case BRAND_ROLES_SUBSETS.SET_PILOT_CURRENT_TAB:
+    case ROLES.SET_PILOT_CURRENT_TAB:
       return {
         ...state,
         currentTab: action.payload
       };
       break;
-    case BRAND_ROLES_SUBSETS.SET_PILOT_TABS:
+    case ROLES.SET_PILOT_TABS:
       return {
         ...state,
         tabs: action.payload
       };
       break;
-    case BRAND_ROLES_SUBSETS.FETCH_AVAILABLE_BRAND_ROLES:
+    case ROLES.FETCH_AVAILABLE_ROLES:
           return {
             ...state,
             tabs: action.payload
           };
           break;
-    case BRAND_ROLES_SUBSETS.SET_BRAND_ROLE_LOADING_STATUS:
+    case ROLES.SET_ROLES_LOADING_STATUS:
           return {
             ...state,
-            loadingBrandRole: action.payload
+            loadingRoles: action.payload
           };
           break;
-    case BRAND_ROLES_SUBSETS.SET_CONNECTED_STATUS:
+    case ROLES.SET_CONNECTED_STATUS:
           return {
             ...state,
             connected: {

@@ -117,7 +117,7 @@ class TechnicalTab extends Component<{}> {
               onPress={() => {
                 const { navigation } = this.props;
 
-                navigation.navigate('BrandRolesSubsets');
+                navigation.navigate('Roles');
               }} />;
           }
         }

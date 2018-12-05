@@ -1,9 +1,9 @@
 import UserProfile from './profile/user-profile';
-import BrandRolesSubsets from './profile/brand-roles-subsets';
+import Roles from './profile/roles';
 
 const Profile = {
   UserProfile,
-  BrandRolesSubsets
+  Roles
 };
 
 module.exports = Profile;

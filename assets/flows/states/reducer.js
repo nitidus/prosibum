@@ -19,7 +19,7 @@ import VerifyPhoneNumber from './reducers/views/authentication/verify-phone-numb
 
 //Profile
 import UserProfile from './reducers/views/profile/user-profile';
-import BrandRolesSubsets from './reducers/views/profile/brand-roles-subsets';
+import Roles from './reducers/views/profile/roles';
 
 /* Sub Views Reducers */
 
@@ -31,7 +31,7 @@ export default () => {
           Segment,
           Toast, CountriesCodesModal, CameraRollPickerModal,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber,
-          UserProfile, BrandRolesSubsets,
+          UserProfile, Roles,
           TechnicalTab
         }),
         middeware = applyMiddleware(logger);

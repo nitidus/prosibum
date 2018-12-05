@@ -1,55 +1,55 @@
 import axios from 'axios';
 
 import { VIEWS, GLOBAL } from '../../../types/index';
-const { BRAND_ROLES_SUBSETS } = VIEWS.PROFILE;
+const { ROLES } = VIEWS.PROFILE;
 
 import { Functions } from '../../../../../modules/index';
 
 module.exports = {
-  _getBrandRolesWithType: async (groupType, dispatch) => {
+  _getRolesWithType: async (groupType, dispatch) => {
     dispatch({
-      type: BRAND_ROLES_SUBSETS.SET_BRAND_ROLE_LOADING_STATUS,
+      type: ROLES.SET_ROLES_LOADING_STATUS,
       payload: true
     })
 
     try {
-      const _BRAND_ROLES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${groupType}`);
+      const _ROLES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${groupType}`);
 
-      if (_BRAND_ROLES.status === 200){
-        const _FINAL_RESPONSE = _BRAND_ROLES.data;
+      if (_ROLES.status === 200){
+        const _FINAL_RESPONSE = _ROLES.data;
 
         if (_FINAL_RESPONSE.meta.code === 200){
           const _DATA = _FINAL_RESPONSE.data;
 
           dispatch({
-            type: BRAND_ROLES_SUBSETS.FETCH_AVAILABLE_BRAND_ROLES,
+            type: ROLES.FETCH_AVAILABLE_ROLES,
             payload: _DATA
           })
 
           dispatch({
-            type: BRAND_ROLES_SUBSETS.SET_PILOT_CURRENT_TAB,
+            type: ROLES.SET_PILOT_CURRENT_TAB,
             payload: _DATA[0]
           })
 
           dispatch({
-            type: BRAND_ROLES_SUBSETS.SET_BRAND_ROLE_LOADING_STATUS,
+            type: ROLES.SET_ROLES_LOADING_STATUS,
             payload: false
           })
 
           dispatch({
-            type: BRAND_ROLES_SUBSETS.SET_CONNECTED_STATUS,
+            type: ROLES.SET_CONNECTED_STATUS,
             payload: {
               status: true
             }
           })
         }else{
           dispatch({
-            type: BRAND_ROLES_SUBSETS.SET_BRAND_ROLE_LOADING_STATUS,
+            type: ROLES.SET_ROLES_LOADING_STATUS,
             payload: false
           })
 
           dispatch({
-            type: BRAND_ROLES_SUBSETS.SET_CONNECTED_STATUS,
+            type: ROLES.SET_CONNECTED_STATUS,
             payload: {
               status: false,
               content: _FINAL_RESPONSE.meta.error_message
@@ -62,12 +62,12 @@ module.exports = {
         const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
-          type: BRAND_ROLES_SUBSETS.SET_BRAND_ROLE_LOADING_STATUS,
+          type: ROLES.SET_ROLES_LOADING_STATUS,
           payload: false
         })
 
         dispatch({
-          type: BRAND_ROLES_SUBSETS.SET_CONNECTED_STATUS,
+          type: ROLES.SET_CONNECTED_STATUS,
           payload: {
             status: false,
             content: _ERROR_MESSAGE

@@ -1,12 +1,12 @@
 import { VIEWS } from '../../../types/index';
-const { BRAND_ROLES_SUBSETS } = VIEWS.PROFILE;
+const { ROLES } = VIEWS.PROFILE;
 
 import { Views as ViewsCMD } from '../../../commands';
-const CMD = ViewsCMD.Profile.BrandRolesSubsets;
+const CMD = ViewsCMD.Profile.Roles;
 
 const mapStateToProps = (state) => {
   return {
-    brandRolesSubsets: state.BrandRolesSubsets
+    roles: state.Roles
   };
 }
 
@@ -14,29 +14,29 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setPilotCurrentTab: (pilotCurrentTab) => {
       dispatch({
-        type: BRAND_ROLES_SUBSETS.SET_PILOT_CURRENT_TAB,
+        type: ROLES.SET_PILOT_CURRENT_TAB,
         payload: pilotCurrentTab
       })
     },
     setPilotTabs: (pilotTabs) => {
       dispatch({
-        type: BRAND_ROLES_SUBSETS.SET_PILOT_TABS,
+        type: ROLES.SET_PILOT_TABS,
         payload: pilotTabs
       })
     },
-    fetchAvailableBrandRoles: async (groupType) => CMD._getBrandRolesWithType(groupType, dispatch),
-    setBrandRoleLoadingStatus: (loadingStatus) => {
+    fetchAvailableRoles: async (groupType) => CMD._getRolesWithType(groupType, dispatch),
+    setRolesLoadingStatus: (loadingStatus) => {
       dispatch({
-        type: BRAND_ROLES_SUBSETS.SET_BRAND_ROLE_LOADING_STATUS,
+        type: ROLES.SET_ROLES_LOADING_STATUS,
         payload: loadingStatus
       })
     }
   };
 }
 
-const BrandRolesSubsets = {
+const Roles = {
   mapStateToProps,
   mapDispatchToProps
 };
 
-module.exports = BrandRolesSubsets;
+module.exports = Roles;

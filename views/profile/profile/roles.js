@@ -8,20 +8,20 @@ import { GLOBAL } from '../../../assets/flows/states/types/index';
 import { Global, Views } from '../../../assets/styles/index';
 import { ActivityIndicator, Toast } from '../../../assets/layouts/index';
 import { Views as ViewsContainer } from '../../../assets/layouts/container/index';
-const Styles = Views.Profile.BrandRolesSubsets,
+const Styles = Views.Profile.Roles,
       Container = ViewsContainer.Profile.BrandRolesSubsetsContainer;
 
 import { PersonalTab, TechnicalTab, CertificationTab, HistoryTab, PostalTab } from '../profile/tabs';
 
 import { Views as ViewsActions } from '../../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.BrandRolesSubsets;
+const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.Roles;
 
 import { views_constants } from '../../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.brand_roles_subsets;
 
 import { Functions } from '../../../assets/modules/index';
 
-class BrandRolesSubsets extends Component<{}> {
+class Roles extends Component<{}> {
   static navigationOptions = {
 
   };
@@ -29,13 +29,13 @@ class BrandRolesSubsets extends Component<{}> {
   async componentDidMount() {
     const { props } = this;
 
-    await props.fetchAvailableBrandRoles(GLOBAL.TARGET);
+    await props.fetchAvailableRoles(GLOBAL.TARGET);
   }
 
   render() {
     const { props } = this;
 
-    if (props.brandRolesSubsets.loadingBrandRole){
+    if (props.roles.loadingRoles){
       return (
         <View
           style={Styles.Container}>
@@ -43,13 +43,13 @@ class BrandRolesSubsets extends Component<{}> {
         </View>
       );
     }else{
-      if (!props.brandRolesSubsets.connected.status){
+      if (!props.roles.connected.status){
         const _TOP_PINNED_TOAST = (
           <Toast
-            message={props.brandRolesSubsets.connected.content}
-            launched={!props.brandRolesSubsets.connected.status}
+            message={props.roles.connected.content}
+            launched={!props.roles.connected.status}
             color={Global.colors.single.carminePink}
-            onPress={() => props.fetchAvailableBrandRoles(GLOBAL.TARGET)} />
+            onPress={() => props.fetchAvailableRoles(GLOBAL.TARGET)} />
         );
 
         return (
@@ -59,13 +59,13 @@ class BrandRolesSubsets extends Component<{}> {
           </View>
         );
       }else{
-        const __TABS = props.brandRolesSubsets.tabs.map((tabItem, i) => {
+        const __TABS = props.roles.tabs.map((tabItem, i) => {
                 const _ROW = tabItem,
                       _ROLE = _ROW.role;
 
                 return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
               }),
-              _CURRENT_TAB_CONTENT = (typeof props.brandRolesSubsets.currentTab.role != 'undefined')? props.brandRolesSubsets.currentTab.role: '',
+              _CURRENT_TAB_CONTENT = (typeof props.roles.currentTab.role != 'undefined')? props.roles.currentTab.role: '',
               _CURRENT_TAB = Functions._convertKeywordToToken(_CURRENT_TAB_CONTENT);
 
         const _TAB_CONTENT = (
@@ -80,7 +80,7 @@ class BrandRolesSubsets extends Component<{}> {
             onPilotTabItemPress={(item) => {
               const _SELECTED_ITEM_INDEX = __TABS.indexOf(item);
 
-              props.setPilotCurrentTab(props.brandRolesSubsets.tabs[_SELECTED_ITEM_INDEX]);
+              props.setPilotCurrentTab(props.roles.tabs[_SELECTED_ITEM_INDEX]);
             }}
             {...props}>
               {_TAB_CONTENT}
@@ -91,4 +91,4 @@ class BrandRolesSubsets extends Component<{}> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrandRolesSubsets);
+export default connect(mapStateToProps, mapDispatchToProps)(Roles);
