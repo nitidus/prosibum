@@ -21,9 +21,7 @@ const { width, height } = Dimensions.get('window'),
 
 module.exports = StyleSheet.create({
   Container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    
   },
   BottomModal: {
     justifyContent: 'flex-end',

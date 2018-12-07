@@ -7,6 +7,7 @@ import Segment from './reducers/components/segment';
 /* Layouts Reducers */
 import CountriesCodesModal from './reducers/layouts/countries-codes-modal';
 import CameraRollPickerModal from './reducers/layouts/camera-roll-picker-modal';
+import RolesModal from './reducers/layouts/roles-modal';
 import Toast from './reducers/layouts/toast';
 
 /* Views Reducers */
@@ -29,7 +30,7 @@ import TechnicalTab from './reducers/sub-views/user-profile/technical-tab';
 export default () => {
   const reducer = combineReducers({
           Segment,
-          Toast, CountriesCodesModal, CameraRollPickerModal,
+          Toast, CountriesCodesModal, CameraRollPickerModal, RolesModal,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber,
           UserProfile, Roles,
           TechnicalTab

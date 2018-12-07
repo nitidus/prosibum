@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text, Animated, Platform, Easing } from 'react-native';
+import { KeyboardAvoidingView, View, Text, Animated, Platform, Easing } from 'react-native';
 import PrimaryModal from "react-native-modal";
 import { BlurView } from 'react-native-blur';
 
@@ -107,7 +107,7 @@ export const Modal = (props) => {
         style={Styles.BottomModal}
         onBackdropPress={() => MODAL.ON_BLUR(false)}
         onSwipe={() => MODAL.ON_BLUR(false)}>
-          <View
+          <KeyboardAvoidingView
             style={[
               Styles.ModalContent,
               attitude.style
@@ -130,7 +130,7 @@ export const Modal = (props) => {
                   })
                 }
               </View>
-          </View>
+          </KeyboardAvoidingView>
       </PrimaryModal>
     );
   }else{
@@ -150,7 +150,7 @@ export const Modal = (props) => {
         backdropBlurAmount={attitude.backdropBlurAmount}
         style={Styles.BottomModal}
         onBackdropPress={() => MODAL.ON_BLUR(false)}>
-          <View
+          <KeyboardAvoidingView
             style={[
               Styles.ModalContent,
               attitude.style
@@ -173,19 +173,10 @@ export const Modal = (props) => {
                   })
                 }
               </View>
-          </View>
+          </KeyboardAvoidingView>
       </PrimaryModal>
     );
   }
 
-  return (
-    <View
-      key={attitude.key}
-      name={attitude.name}
-      style={[
-        Styles.Container
-      ]}>
-        {_PRIMARY_MODAL_CONTENT}
-    </View>
-  )
+  return _PRIMARY_MODAL_CONTENT;
 }

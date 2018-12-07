@@ -65,14 +65,17 @@ export const DashboardContainer = (props) => {
                       type="left"
                       onPress={() => Events._Launch(animations.xPosition)}>
                         <Icon
-                          name="bar" />
+                          name="bar"
+                          width={Styles.__Gobal_Icons_In_Pilot.height} />
                     </PinnedSide>
 
                     <PinnedSide
                       type="right"
                       onPress={() => alert('ok 2')}>
                         <Icon
-                          name="for-you" />
+                          name="for-you"
+                          style={Styles.ForYouButton}
+                          height={Styles.__Gobal_Icons_In_Pilot.height} />
                     </PinnedSide>
                 </Pilot>
 

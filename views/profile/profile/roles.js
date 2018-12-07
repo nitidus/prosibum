@@ -9,7 +9,7 @@ import { Global, Views } from '../../../assets/styles/index';
 import { ActivityIndicator, Toast } from '../../../assets/layouts/index';
 import { Views as ViewsContainer } from '../../../assets/layouts/container/index';
 const Styles = Views.Profile.Roles,
-      Container = ViewsContainer.Profile.BrandRolesSubsetsContainer;
+      Container = ViewsContainer.Profile.RolesContainer;
 
 import { PersonalTab, TechnicalTab, CertificationTab, HistoryTab, PostalTab } from '../profile/tabs';
 
@@ -82,6 +82,8 @@ class Roles extends Component<{}> {
 
               props.setPilotCurrentTab(props.roles.tabs[_SELECTED_ITEM_INDEX]);
             }}
+            onAddRolePress={(visibilityStatus) => props.setRolesModalVisibility(visibilityStatus)}
+            rolesModalvisibility={props.roles.rolesModalVisibility}
             {...props}>
               {_TAB_CONTENT}
           </Container>

@@ -3,12 +3,12 @@ import { StatusBar, View, Text, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
 import { Input } from '../../../../components/index';
-import { Pilot, PinnedSide, Icon } from '../../../../layouts/index';
-const Styles = Views.Profile.Dashboard;
+import { Pilot, PinnedSide, Icon, RolesModal } from '../../../../layouts/index';
+const Styles = Views.Profile.Roles;
 
 import { Functions } from '../../../../modules/index';
 
-export const BrandRolesSubsetsContainer = (props) => {
+export const RolesContainer = (props) => {
   var attitude = {};
 
   attitude.title = props.title || props.name;
@@ -35,6 +35,12 @@ export const BrandRolesSubsetsContainer = (props) => {
     props.onPilotTabItemPress = props.onPilotTabItemPress || props.pilotTabItemOnPress || props.onNavigationTabItemPress || props.navigationTabItemOnPress;
   }
 
+  if ((typeof props.onAddRolePress != 'undefined') || (typeof props.onRightPinnedPress != 'undefined') || (typeof props.onLeftPinnedPress != 'undefined')){
+    props.onAddRolePress = props.onAddRolePress || props.onRightPinnedPress || props.onLeftPinnedPress;
+  }
+
+  attitude.rolesModalvisibility = props.rolesModalvisibility || props.rolesModalVisible || props.rolesModalIsVisible || false;
+
   var _CHILDREN_CONTENT;
 
   if (typeof attitude.children != 'undefined'){
@@ -53,7 +59,7 @@ export const BrandRolesSubsetsContainer = (props) => {
 
   return (
     <View
-      style={Styles.MajorContent}>
+      style={Styles.Container}>
         <StatusBar />
 
         <Pilot
@@ -67,7 +73,16 @@ export const BrandRolesSubsetsContainer = (props) => {
                 navigation.goBack()
               }}>
                 <Icon
-                  name="arrow left" />
+                  name="arrow left"
+                  height={Styles.__Gobal_Icons_In_Pilot.height} />
+            </PinnedSide>
+            <PinnedSide
+              type="right"
+              onPress={props.onAddRolePress}>
+                <Icon
+                  name="roles"
+                  style={Styles.AddRoleButton}
+                  height={Styles.__Gobal_Icons_In_Pilot.height} />
             </PinnedSide>
             <PinnedSide
               type="bottom"
@@ -75,6 +90,12 @@ export const BrandRolesSubsetsContainer = (props) => {
               current={attitude.currentPilotItem}
               onPress={props.onPilotTabItemPress} />
         </Pilot>
+
+        <RolesModal
+          visibility={attitude.rolesModalvisibility}
+          data={attitude.pilotData}
+          currentRolesItem={attitude.currentPilotItem}
+          onBlur={() => props.onAddRolePress(false)}  />
 
         {_CHILDREN_CONTENT}
     </View>

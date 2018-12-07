@@ -20,7 +20,7 @@ var _CONTAINER_DEPENDED_HEIGHT = {
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
     _CONTAINER_DEPENDED_HEIGHT.height += 15;
-    _CONTAINER_DEPENDED_HEIGHT.paddingTop = 45;
+    _CONTAINER_DEPENDED_HEIGHT.paddingTop = 15;
     _CONTAINER_DEPENDED_HEIGHT.paddingBottom = 15;
     _CONTAINER_DEPENDED_HEIGHT.paddingHorizontal += 15;
 

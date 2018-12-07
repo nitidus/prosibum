@@ -6,12 +6,24 @@ import { colors, fonts } from '../../global';
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
-var _INNER_CONTENT = {};
+var _INNER_CONTENT = {},
+    _CUSTOM_FOR_YOU_BUTTON = {
+      marginRight: 15
+    },
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
+      height: 23,
+    };
 
-if (width >= 1000 || height >= 1000){
-
+if (Platform.OS !== 'ios'){
+  if (width >= 1000 || height >= 1000){
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 10;
+  }else{
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
+  }
 }else{
-
+  if (width >= 1000 || height >= 1000){
+    _CUSTOM_FOR_YOU_BUTTON.marginRight += 5;
+  }
 }
 
 module.exports = StyleSheet.create({
@@ -40,5 +52,11 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.single.blackSqueeze,
     borderRadius: 5,
     overflow: 'hidden'
+  },
+  ForYouButton: {
+    ..._CUSTOM_FOR_YOU_BUTTON
+  },
+  __Gobal_Icons_In_Pilot: {
+    ..._CUSTOM___GLOBAL_ICONS_IN_PILOT
   }
 });

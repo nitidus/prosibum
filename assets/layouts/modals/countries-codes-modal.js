@@ -91,7 +91,7 @@ const CountriesCodesModal = (props) => {
 
   return (
     <Modal
-      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.tilte.en)}
+      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
       visible={props.countriesCodesModal.visibility}
       onBlur={() => {
         attitude.onPress(Functions._getCountryDetailWithCode());

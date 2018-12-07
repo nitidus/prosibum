@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-const __LOCALHOST = (Platform.OS === 'ios')? 'localhost': '192.168.0.101',
+const __LOCALHOST = (Platform.OS === 'ios')? 'localhost': '192.168.0.103',
       GLOBAL = {
         TARGET: 'Wholesaler',
         URLS: {

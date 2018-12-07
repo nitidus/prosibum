@@ -4,7 +4,7 @@ import { StatusBar, View, Text, Animated, Easing } from 'react-native';
 import { Global, Views } from '../../../../styles/index';
 import { Input } from '../../../../components/index';
 import { Pilot, PinnedSide, Icon } from '../../../../layouts/index';
-const Styles = Views.Profile.Dashboard;
+const Styles = Views.Profile.Profile;
 
 import { Functions } from '../../../../modules/index';
 
@@ -53,7 +53,7 @@ export const ProfileContainer = (props) => {
 
   return (
     <View
-      style={Styles.MajorContent}>
+      style={Styles.Container}>
         <StatusBar />
 
         <Pilot
@@ -67,13 +67,16 @@ export const ProfileContainer = (props) => {
                 navigation.goBack()
               }}>
                 <Icon
-                  name="arrow left" />
+                  name="arrow left"
+                  height={Styles.__Gobal_Icons_In_Pilot.height} />
             </PinnedSide>
             <PinnedSide
               type="right"
               onPress={() => alert('ok 2')}>
                 <Icon
-                  name="for-you" />
+                  name="for-you"
+                  style={Styles.ForYouButton}
+                  height={Styles.__Gobal_Icons_In_Pilot.height} />
             </PinnedSide>
             <PinnedSide
               type="bottom"

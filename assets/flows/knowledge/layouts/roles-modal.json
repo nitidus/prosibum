@@ -1,12 +1,12 @@
 {
   "modalContainer": {
     "title": {
-      "en": "Countries Codes Modal"
+      "en": "Roles Modal"
     },
     "content": {
       "firstCarouselContainer": {
         "title": {
-          "en": "Countriees Group"
+          "en": "End User Roles"
         },
         "content": {
           "self": {
@@ -14,12 +14,21 @@
           }
         }
       },
+      "firstInput": {
+        "type": "NUMERIC",
+        "title": {
+          "en": "Number of Role Instance"
+        }
+      },
       "submitInput": {
         "type": "BUTTON",
         "state": {
           "normal": {
             "title": {
-              "en": "Change"
+              "en": "Append"
+            },
+            "preposition": {
+              "en": "s"
             }
           }
         }

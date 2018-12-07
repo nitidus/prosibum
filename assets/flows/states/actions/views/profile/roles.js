@@ -24,6 +24,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: pilotTabs
       })
     },
+    setRolesModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: ROLES.SET_ROLES_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
     fetchAvailableRoles: async (groupType) => CMD._getRolesWithType(groupType, dispatch),
     setRolesLoadingStatus: (loadingStatus) => {
       dispatch({
