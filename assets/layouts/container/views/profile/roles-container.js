@@ -78,7 +78,7 @@ export const RolesContainer = (props) => {
             </PinnedSide>
             <PinnedSide
               type="right"
-              onPress={props.onAddRolePress}>
+              onPress={() => props.onAddRolePress(true)}>
                 <Icon
                   name="roles"
                   style={Styles.AddRoleButton}
