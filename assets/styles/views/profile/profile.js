@@ -35,7 +35,7 @@ if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
     _CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal = 162;
 
-    _CUSTOM_ADD_ROLE_BUTTON.marginRight += 5;
+    _CUSTOM_FOR_YOU_BUTTON.marginRight += 5;
   }
 }
 

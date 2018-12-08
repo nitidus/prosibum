@@ -105,60 +105,57 @@ const RolesModal = (props) => {
       onBlur={() => MODAL.ON_BLUR(false)}
       onPress={attitude.onPress}
       style={Styles.ModalContainer}>
-        <View
-          style={Styles.RolesMajorContainer}>
-            <ScrollView
-              style={Styles.CameraRollContainer}
-              showsVerticalScrollIndicator={false}>
-                <Carousel
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
-                  data={props.rolesModal.roles}
-                  style={Styles.RolesContainer}
-                  itemWidth={_Screen.width - (19 * 2)}
-                  firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
-                  onLayout={({ item, i }) => {
-                    var _CURRENT_USER_GROUP = props.rolesModal.currentRole,
-                        _ITEM_NAME = item.toLowerCase(),
-                        _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
+        <Carousel
+          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
+          data={props.rolesModal.roles}
+          style={Styles.RolesContainer}
+          itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
+          firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
+          onLayout={({ item, i }) => {
+            var _CURRENT_USER_GROUP = props.rolesModal.currentRole,
+                _ITEM_NAME = item.toLowerCase(),
+                _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
 
-                    if (_CURRENT_USER_GROUP === item){
-                      return (
-                        <Input
-                          type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                          name={_ITEM_NAME}
-                          value={_ITEM_VALUE}
-                          gradient={Global.colors.pair.aqrulean}
-                          disable={true}/>
-                      );
-                    }else{
-                      return (
-                        <Input
-                          type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                          name={_ITEM_NAME}
-                          value={_ITEM_VALUE}
-                          gradient={Global.colors.pair.ongerine}
-                          disable={true}/>
-                      );
-                    }
-                  }}
-                  onSnap={(selectedItemIndex) => props.setCurrentRole(props.rolesModal.roles[selectedItemIndex])}/>
+            if (_CURRENT_USER_GROUP === item){
+              return (
                 <Input
-                  type={__CONSTANTS.modalContainer.content.firstInput.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
-                  placeholder={__CONSTANTS.modalContainer.content.firstInput.title.en}
-                  value={_ROLE_COUNT}
-                  style={Styles.RolesCountInput}
-                  onChangeText={(currentValue) => props.setRoleCount(currentValue)} />
+                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                  name={_ITEM_NAME}
+                  value={_ITEM_VALUE}
+                  gradient={Global.colors.pair.aqrulean}
+                  disable={true}/>
+              );
+            }else{
+              return (
                 <Input
-                  type={__CONSTANTS.modalContainer.content.submitInput.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-                  value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en} ${props.rolesModal.currentRole}${_ROLE_COUNT_DEPENDED_NOUN}`}
+                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                  name={_ITEM_NAME}
+                  value={_ITEM_VALUE}
                   gradient={Global.colors.pair.ongerine}
-                  style={Styles.AppendRolesButton}
-                  onPress={() => {
-                    //append role as initialized end user
-                  }}/>
-            </ScrollView>
+                  disable={true}/>
+              );
+            }
+          }}
+          onSnap={(selectedItemIndex) => props.setCurrentRole(props.rolesModal.roles[selectedItemIndex])}/>
+
+        <View
+          style={Styles.ModalMajorContent}>
+            <Input
+              type={__CONSTANTS.modalContainer.content.firstInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
+              placeholder={__CONSTANTS.modalContainer.content.firstInput.title.en}
+              value={_ROLE_COUNT}
+              style={Styles.RolesCountInput}
+              onChangeText={(currentValue) => props.setRoleCount(currentValue)} />
+            <Input
+              type={__CONSTANTS.modalContainer.content.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+              value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en} ${props.rolesModal.currentRole}${_ROLE_COUNT_DEPENDED_NOUN}`}
+              gradient={Global.colors.pair.ongerine}
+              style={Styles.AppendRolesButton}
+              onPress={() => {
+                //append role as initialized end user
+              }}/>
         </View>
     </Modal>
   )

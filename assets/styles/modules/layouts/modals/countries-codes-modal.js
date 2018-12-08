@@ -25,6 +25,7 @@ if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CAROUSEL_ITEM_CONTAINER.height += 25;
     _CUSTOM_CAROUSEL_ITEM_CONTAINER.paddingHorizontal += 7;
+    _CUSTOM_CAROUSEL_ITEM_CONTAINER.width = width - (202 * 2);
 
     _CUSTOM_CAROUSEL_ITEM_TITLE.fontSize += 6;
     _CUSTOM_CAROUSEL_ITEM_SUBTITLE.fontSize += 6;
@@ -41,6 +42,7 @@ if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CAROUSEL_ITEM_CONTAINER.height += 5;
     _CUSTOM_CAROUSEL_ITEM_CONTAINER.paddingHorizontal += 3;
+    _CUSTOM_CAROUSEL_ITEM_CONTAINER.width = width - (162 * 2);
 
     _CUSTOM_CAROUSEL_ITEM_SUBTITLE.fontSize += 2;
   }
