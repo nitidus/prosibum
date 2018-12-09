@@ -22,6 +22,10 @@ var _CUSTOM_CAMERA_ROLL_CONTAINER = {
       height: 99,
       marginRight: 19,
       borderRadius: 5
+    },
+    _CUSTOM___GLOBAL = {
+      width: width,
+      marginHorizontal: 19
     };
 
 if (Platform.OS !== 'ios'){
@@ -35,6 +39,11 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_CAMERA_ROLL_ITEM_CONTAINER.height += 38;
     _CUSTOM_CAMERA_ROLL_ITEM_CONTAINER.borderRadius += 2;
     _CUSTOM_CAMERA_ROLL_ITEM_CONTAINER.marginRight += 12;
+
+    _CUSTOM___GLOBAL = {
+      width: width - (202 * 2),
+      marginHorizontal: 202
+    };
   }else{
     _CUSTOM_CAMERA_ROLL_CONTAINER.height += 10;
 
@@ -54,6 +63,11 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_CAMERA_ROLL_ITEM_CONTAINER.width += 6;
     _CUSTOM_CAMERA_ROLL_ITEM_CONTAINER.height += 6;
     _CUSTOM_CAMERA_ROLL_ITEM_CONTAINER.marginRight += 6;
+
+    _CUSTOM___GLOBAL = {
+      width: width - (162 * 2),
+      marginHorizontal: 162
+    };
   }else{
     if (!_IS_IPHONE_X){
       _CUSTOM_CAMERA_ROLL_CONTAINER.height += 2;
@@ -67,6 +81,9 @@ module.exports = StyleSheet.create({
   ModalContainer: {
     paddingHorizontal: 0,
     paddingBottom: 0
+  },
+  CameraRollGroupTypesContainer: {
+    marginBottom: _CUSTOM_CAMERA_ROLL_ROW_CONTAINER.marginBottom
   },
   CameraRollMajorContainer: {
     alignItems: 'center'
@@ -86,5 +103,8 @@ module.exports = StyleSheet.create({
   },
   CameraRollItemContent: {
     flex: 1
+  },
+  __Global: {
+    ..._CUSTOM___GLOBAL
   }
 });

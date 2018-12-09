@@ -17,6 +17,9 @@ const { Preparation } = Functions;
 import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.CameraRollPickerModal;
 
+import { layouts_constants } from '../../flows/knowledge/index';
+const __CONSTANTS = layouts_constants.camera_roll_picker_modal;
+
 const CameraRollPickerModal = (props) => {
   var attitude = {};
 
@@ -73,8 +76,19 @@ const CameraRollPickerModal = (props) => {
           }
         }
 
-  if (props.cameraRollPickerModal.cameraRollItems.length === 0){
-    Preparation._prepareCameraRoll(props);
+  if (attitude.visibility === true){
+    if (props.cameraRollPickerModal.groupTypes.length === 0 && props.cameraRollPickerModal.currentGroupType === ''){
+      const _GROUP_TYPES = __CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.context.map((item, i) => {
+        return Functions._convertKeywordToToken(item.en);
+      });
+
+      props.setCameraRollGroupTypes(_GROUP_TYPES);
+      props.setCurrentCameraRollGroupType(_GROUP_TYPES[0]);
+    }
+
+    if (props.cameraRollPickerModal.cameraRollItems.length === 0){
+      Preparation._prepareCameraRoll(props);
+    }
   }
 
   var _ROW_CHUNK_SIZE = (_Screen.width >= 1000 || _Screen.height >= 1000)? 5:3,
@@ -122,13 +136,54 @@ const CameraRollPickerModal = (props) => {
     });
   }
 
+  const _CURRENT_GROUP_TYPE_INDEX = props.cameraRollPickerModal.groupTypes.findIndex((item) => {
+          const _GROUP_TYPE = item,
+                _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType;
+
+          return (_CURRENT_GROUP_TYPE === _GROUP_TYPE)
+        });
+
   return (
     <Modal
+      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
       visible={attitude.visibility}
       backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
       onBlur={() => MODAL.ON_BLUR(false)}
       onPress={attitude.onPress}
       style={Styles.ModalContainer}>
+        <Carousel
+          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
+          data={props.cameraRollPickerModal.groupTypes}
+          style={Styles.CameraRollGroupTypesContainer}
+          itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
+          firstItem={_CURRENT_GROUP_TYPE_INDEX}
+          onLayout={({ item, i }) => {
+            var _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType,
+                _ITEM_NAME = item.toLowerCase(),
+                _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
+
+            if (_CURRENT_GROUP_TYPE === item){
+              return (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                  name={_ITEM_NAME}
+                  value={_ITEM_VALUE}
+                  gradient={Global.colors.pair.aqrulean}
+                  disable={true}/>
+              );
+            }else{
+              return (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                  name={_ITEM_NAME}
+                  value={_ITEM_VALUE}
+                  gradient={Global.colors.pair.ongerine}
+                  disable={true}/>
+              );
+            }
+          }}
+          onSnap={(selectedItemIndex) => props.setCurrentCameraRollGroupType(props.cameraRollPickerModal.groupTypes[selectedItemIndex])}/>
+
         <View
           style={Styles.CameraRollMajorContainer}>
             <ScrollView

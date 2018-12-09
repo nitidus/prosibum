@@ -1,0 +1,42 @@
+{
+  "modalContainer": {
+    "title": {
+      "en": "Camera Roll Picker Modal"
+    },
+    "content": {
+      "firstCarouselContainer": {
+        "title": {
+          "en": "Camera Roll Picker Group Types"
+        },
+        "content": {
+          "self": {
+            "type": "BUTTON",
+            "context": [
+              {
+                "en": "Album"
+              },
+              {
+                "en": "All"
+              },
+              {
+                "en": "Event"
+              },
+              {
+                "en": "Faces"
+              },
+              {
+                "en": "Library"
+              },
+              {
+                "en": "Photo Stream"
+              },
+              {
+                "en": "Saved Photos"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -64,6 +64,8 @@ export const Carousel = (props) => {
 
   attitude.useScrollView = props.useScrollView || props.enableScrollView || false;
 
+  attitude.loop = props.loop || props.enableLoop || props.useLoop || false;
+
   attitude.enableMomentum = props.enableMomentum || props.useMomentum || props.momentum || false;
 
   attitude.layout = (props.layoutType || props.layout || props.type || 'stack').toLowerCase();
@@ -87,7 +89,8 @@ export const Carousel = (props) => {
           firstItem={attitude.firstItem}
           onSnapToItem={attitude.onSnap}
           useScrollView={attitude.useScrollView}
-          enableMomentum={attitude.enableMomentum} />
+          enableMomentum={attitude.enableMomentum}
+          loop={attitude.loop} />
     </View>
   )
 }

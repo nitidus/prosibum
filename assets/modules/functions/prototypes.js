@@ -108,6 +108,9 @@ module.exports = {
   _convertTokenToIconName: (token) => {
     return token.replace(/(_|-| )+/ig, '_').toUpperCase();
   },
+  _convertKeywordToBlockToken: (keyword) => {
+    return module.exports._convertKeywordToToken(keyword).replace(/ /ig, '');
+  },
   _generateNewUniqueObjectKey: (seedKey) => {
     const _TODAY = new Date(),
           _TODAY_IN_TIME_FORMAT = Lodash.shuffle(_TODAY.getTime().toString(16)).reduce((totalChars, char) => {
@@ -260,7 +263,7 @@ module.exports = {
     }
 
     if (Platform.OS === 'ios'){
-      _CAMERA_ROLL_OPTIONS.groupTypes = (typeof options != 'undefined')? options.groupTypes : 'All';
+      _CAMERA_ROLL_OPTIONS.groupTypes = (typeof options != 'undefined')? ((options.groupTypes != '')? module.exports._convertKeywordToBlockToken(options.groupTypes): 'All') : 'All';
 
       const fetchedCameraRollPhotos = await module.exports._fetchPrivatelyLocalStoragePhotoWithOptions(_CAMERA_ROLL_OPTIONS);
 

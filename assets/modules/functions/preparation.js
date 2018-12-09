@@ -112,10 +112,13 @@ module.exports = {
     }
   },
   _prepareCameraRoll: async (props) => {
-    const { navigation } = props;
+    const { navigation } = props,
+          _SEED = {
+            groupTypes: props.cameraRollPickerModal.currentGroupType
+          };
 
-    const _FETCHED_CAMERA_ROLL_ITEMS = await Prototypes._retrieveLocalStoragePhotosWithOptions(),
-          _CHECK_CRITERIA_ON_FETCHED_ITEMS = ((_FETCHED_CAMERA_ROLL_ITEMS !== null) && (typeof _FETCHED_CAMERA_ROLL_ITEMS != 'undefined') && (_FETCHED_CAMERA_ROLL_ITEMS !== false));
+    const _FETCHED_CAMERA_ROLL_ITEMS = await Prototypes._retrieveLocalStoragePhotosWithOptions(_SEED),
+          _CHECK_CRITERIA_ON_FETCHED_ITEMS = ((_FETCHED_CAMERA_ROLL_ITEMS.edges.length > 0) && (_FETCHED_CAMERA_ROLL_ITEMS !== null) && (typeof _FETCHED_CAMERA_ROLL_ITEMS != 'undefined') && (_FETCHED_CAMERA_ROLL_ITEMS !== false));
 
     if (_CHECK_CRITERIA_ON_FETCHED_ITEMS){
       props.setCameraRollItems(_FETCHED_CAMERA_ROLL_ITEMS.edges);
