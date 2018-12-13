@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { KeyboardAvoidingView, View, Text, Animated, Platform, Easing } from 'react-native';
-import PrimaryModal from "react-native-modal";
+import PrimaryModal from 'react-native-modal-with-blur-support-background';
 import { BlurView } from 'react-native-blur';
 
 import { Global, Modules } from '../styles/index';
