@@ -8,6 +8,7 @@ import { Icon } from '../layouts/icon';
 const Styles = Modules.Layouts.DrawerMenu;
 
 import { Functions } from '../modules/index';
+const { Preparation } = Functions;
 
 export const DrawerMenuPinnedProfile = (props) => {
   var attitude = {};
@@ -176,6 +177,10 @@ export const DrawerMenu = (props) => {
           <DrawerMenuItem
             name="Settings"
             onPress={() => alert('ok 3')}
+            {...props} />
+          <DrawerMenuItem
+            name="Logout"
+            onPress={() => Preparation._prepareLogout(props)}
             {...props} />
         </View>
 

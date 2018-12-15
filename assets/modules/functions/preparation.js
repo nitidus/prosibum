@@ -29,10 +29,32 @@ module.exports = {
       password: inputProps.password
     };
   },
+  _prepareLogout: async (props) => {
+    const { navigation } = props,
+          _KEYS_LISTENING_TO_REMOVE = [
+            GLOBAL.STORAGE.AUTH,
+            GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER
+          ],
+          _DID_TOKENS_REMOVED = await Prototypes._removeDataWithKeys(_KEYS_LISTENING_TO_REMOVE);
+
+    navigation.navigate(_DID_TOKENS_REMOVED? 'AuthenticationStack': 'ProfileStack');
+  },
+  _prepareLogin: async (props) => {
+    const { navigation } = props,
+          _LOGIN_SEED = module.exports._prepareLoginSeed(props.login);
+
+    await props.verifyAuthentication(_LOGIN_SEED);
+
+    props.setEmail('');
+    props.setPassword('');
+
+    navigation.navigate('Authorization');
+  },
   _prepareAuthority: async (self) => {
     const { props } = self,
-          { navigation } = props,
-          _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
+          { navigation } = props;
+
+    const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
     navigation.navigate(_DID_TOKEN_CREATED? 'ProfileStack': 'AuthenticationStack');
   },

@@ -203,6 +203,27 @@ module.exports = {
       //Error saving data
     }
   },
+  _storeDataWithKeys: async (keyValuePairs) => {
+    if ((typeof keyValuePairs != 'object') && (Array.isArray(keyValuePairs))){
+      throw new Error('You should define Key value pairs of array.');
+    }else{
+      for (var i = 0; i < keyValuePairs.length; i++) {
+        const _KEY_VALUE_PAIR = keyValuePairs[i];
+
+        if (_KEY_VALUE_PAIR.length !== 2){
+          throw new Error('You should define key value pair set.');
+        }else{
+          try {
+            await AsyncStorage.multiSet(`@${__APP_NAME}:${_KEY_VALUE_PAIR[0]}`, _KEY_VALUE_PAIR[1]);
+
+            return true;
+          } catch (error) {
+            //Error saving data
+          }
+        }
+      }
+    }
+  },
   _retrieveDataWithKey: async (key) => {
     try {
       const _DATA = await AsyncStorage.getItem(`@${__APP_NAME}:${key}`);
@@ -216,13 +237,60 @@ module.exports = {
       //Error retrieving data
     }
   },
+  _retrieveDataWithKeys: async (keys) => {
+    if ((typeof keys != 'object') && (Array.isArray(keys))){
+      throw new Error('You should define keys as an array.');
+    }else{
+      const _KEYS = keys.map((key, i) => {
+        return `@${__APP_NAME}:${key}`;
+      });
+
+      try {
+        const _DATA = await AsyncStorage.multiGet(_KEYS, (err, stores) => {
+          return stores.map((result, i, store) => {
+            const _ROW_KEY = store[i][0],
+                  _ROW_VALUE = store[i][1];
+
+            return _ROW_VALUE;
+          });
+        });
+
+        if (_DATA !== null){
+          return _DATA;
+        }else{
+          return false;
+        }
+      } catch (error) {
+        //Error saving data
+      }
+    }
+  },
   _removeDataWithKey: async (key) => {
     try {
       await AsyncStorage.removeItem(`@${__APP_NAME}:${key}`);
 
       return true;
     } catch (error) {
-      //Error retrieving data
+      //Error removing data
+    }
+  },
+  _removeDataWithKeys: async (keys) => {
+    if ((typeof keys != 'object') && (Array.isArray(keys))){
+      throw new Error('You should define keys as an array.');
+    }else{
+      const _KEYS = keys.map((key, i) => {
+        return `@${__APP_NAME}:${key}`;
+      });
+
+      try {
+        await AsyncStorage.multiRemove(_KEYS, (err) => {
+          //Error removing data
+        });
+
+        return true;
+      } catch (error) {
+        //Error saving data
+      }
     }
   },
   _retrieveAllKeys: async () => {
@@ -230,6 +298,15 @@ module.exports = {
       const _KEYS = await AsyncStorage.getAllKeys();
 
       return _KEYS;
+    } catch (error) {
+      //Error retrieving all keys
+    }
+  },
+  _removeAllKeys: async () => {
+    try {
+      const _KEYS = await AsyncStorage.clear();
+
+      return true;
     } catch (error) {
       //Error retrieving all keys
     }

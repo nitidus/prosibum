@@ -74,7 +74,9 @@ class Login extends Component<{}> {
           message={props.login.connected.content}
           launched={!props.login.connected.status}
           color={Global.colors.single.carminePink}
-          onPress={() => Preparation._prepareVerifyPhoneNumberComponentToSubmit(props)} />;
+          onPress={() => {
+            Preparation._prepareLogin(props)
+          }} />;
       }
 
       _SUBMIT_BUTTON_CONTENT = <Input
@@ -83,7 +85,9 @@ class Login extends Component<{}> {
         name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
         value={__CONSTANTS.submitInput.state.normal.title.en}
         gradient={Global.colors.pair.ongerine}
-        onPress={() => Preparation._prepareVerifyPhoneNumberComponentToSubmit(props)}
+        onPress={() => {
+          Preparation._prepareLogin(props)
+        }}
         forcedDisable={_VALIDATED} />;
     }
 
