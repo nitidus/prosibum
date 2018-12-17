@@ -105,8 +105,11 @@ module.exports = {
   _convertTokenToKeyword: (token) => {
     return token.replace(/(_|-| )+/ig, '-').toLowerCase();
   },
-  _convertTokenToIconName: (token) => {
+  _convertTokenToKey: (token) => {
     return token.replace(/(_|-| )+/ig, '_').toUpperCase();
+  },
+  _convertTokenToIconName: (token) => {
+    return module.exports._convertTokenToKey(token);
   },
   _convertKeywordToBlockToken: (keyword) => {
     return module.exports._convertKeywordToToken(keyword).replace(/ /ig, '');

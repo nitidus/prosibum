@@ -75,8 +75,8 @@ class Roles extends Component<{}> {
         return (
           <Container
             title={__CONSTANTS.pilot.title.en}
-            pilotItems={__TABS}
-            currentPilotItem={_CURRENT_TAB}
+            pilotItems={props.roles.tabs}
+            currentPilotItem={props.roles.currentTab}
             onPilotTabItemPress={(item) => {
               const _SELECTED_ITEM_INDEX = __TABS.indexOf(item);
 

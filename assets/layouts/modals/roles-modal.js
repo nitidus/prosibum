@@ -65,7 +65,7 @@ const RolesModal = (props) => {
   if ((typeof props.currentRolesItem != 'undefined') || (typeof props.current_roles_item != 'undefined')){
     attitude.currentRolesItem = props.currentRolesItem || props.current_roles_item;
 
-    if (props.rolesModal.currentRole === ''){
+    if (!props.rolesModal.currentRole.hasOwnProperty('role')){
       props.setCurrentRole(attitude.currentRolesItem);
     }
   }
@@ -88,14 +88,29 @@ const RolesModal = (props) => {
           }
         }
 
-  const _CURRENT_USER_GROUP_ROLE_INDEX = props.rolesModal.roles.findIndex((item) => {
-          const _USER_GROUP_ROLE = item,
-                _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole;
+  var _USER_GROUP_ROLES = [],
+      _CURRENT_USER_GROUP_ROLE = '',
+      _CURRENT_USER_GROUP_ROLE_INDEX = -1,
+      _ROLE_COUNT = '',
+      _ROLE_COUNT_DEPENDED_NOUN = '';
 
-          return (_CURRENT_USER_GROUP_ROLE === _USER_GROUP_ROLE)
-        }),
-        _ROLE_COUNT = props.rolesModal.roleCount.toString(),
-        _ROLE_COUNT_DEPENDED_NOUN = (props.rolesModal.roleCount > 1)? __CONSTANTS.modalContainer.content.submitInput.state.normal.preposition.en: '';
+  if (attitude.visibility === true){
+    _USER_GROUP_ROLES = props.rolesModal.roles.map((item, i) => {
+      const _ROW = item,
+            _ROLE = _ROW.role;
+
+      return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
+    }),
+    _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role,
+    _CURRENT_USER_GROUP_ROLE_INDEX = props.rolesModal.roles.findIndex((item) => {
+      const _USER_GROUP_ROLE = item.role,
+            _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role;
+
+      return (_CURRENT_USER_GROUP_ROLE === _USER_GROUP_ROLE);
+    }),
+    _ROLE_COUNT = props.rolesModal.roleCount.toString(),
+    _ROLE_COUNT_DEPENDED_NOUN = (props.rolesModal.roleCount > 1)? __CONSTANTS.modalContainer.content.submitInput.state.normal.preposition.en: '';
+  }
 
   return (
     <Modal
@@ -107,12 +122,12 @@ const RolesModal = (props) => {
       style={Styles.ModalContainer}>
         <Carousel
           name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
-          data={props.rolesModal.roles}
+          data={_USER_GROUP_ROLES}
           style={Styles.RolesContainer}
           itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
           firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
           onLayout={({ item, i }) => {
-            var _CURRENT_USER_GROUP = props.rolesModal.currentRole,
+            var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.rolesModal.currentRole.role),
                 _ITEM_NAME = item.toLowerCase(),
                 _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
 
@@ -150,11 +165,18 @@ const RolesModal = (props) => {
             <Input
               type={__CONSTANTS.modalContainer.content.submitInput.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-              value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en} ${props.rolesModal.currentRole}${_ROLE_COUNT_DEPENDED_NOUN}`}
+              value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en} ${Functions._convertKeywordToToken(_CURRENT_USER_GROUP_ROLE)}${_ROLE_COUNT_DEPENDED_NOUN}`}
               gradient={Global.colors.pair.ongerine}
               style={Styles.AppendRolesButton}
               onPress={() => {
-                //append role as initialized end user
+                const _SEED = {
+                  user_group_id: props.rolesModal.currentRole._id,
+                  roles_count: props.rolesModal.roleCount
+                };
+
+                // console.log(_SEED)
+
+                // MODAL.ON_BLUR(false);
               }}/>
         </View>
     </Modal>

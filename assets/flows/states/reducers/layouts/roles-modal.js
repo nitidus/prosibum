@@ -4,7 +4,7 @@ const { ROLES_MODAL } = LAYOUTS;
 
 const initialState = {
   roles: [],
-  currentRole: '',
+  currentRole: {},
   roleCount: 1
 };
 

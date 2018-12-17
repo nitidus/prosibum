@@ -32,11 +32,11 @@ export const RolesContainer = (props) => {
   }
 
   if ((typeof props.onPilotTabItemPress != 'undefined') || (typeof props.pilotTabItemOnPress != 'undefined') || (typeof props.navigationTabItemOnPress != 'undefined') || (typeof props.onNavigationTabItemPress != 'undefined')){
-    props.onPilotTabItemPress = props.onPilotTabItemPress || props.pilotTabItemOnPress || props.onNavigationTabItemPress || props.navigationTabItemOnPress;
+    attitude.onPilotTabItemPress = props.onPilotTabItemPress || props.pilotTabItemOnPress || props.onNavigationTabItemPress || props.navigationTabItemOnPress;
   }
 
   if ((typeof props.onAddRolePress != 'undefined') || (typeof props.onRightPinnedPress != 'undefined') || (typeof props.onLeftPinnedPress != 'undefined')){
-    props.onAddRolePress = props.onAddRolePress || props.onRightPinnedPress || props.onLeftPinnedPress;
+    attitude.onAddRolePress = props.onAddRolePress || props.onRightPinnedPress || props.onLeftPinnedPress;
   }
 
   attitude.rolesModalvisibility = props.rolesModalvisibility || props.rolesModalVisible || props.rolesModalIsVisible || false;
@@ -56,6 +56,15 @@ export const RolesContainer = (props) => {
       });
     }
   }
+
+  const _TABS = attitude.pilotData.map((tabItem, i) => {
+          const _ROW = tabItem,
+                _ROLE = _ROW.role;
+
+          return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
+        }),
+        _CURRENT_TAB_CONTENT = (typeof attitude.currentPilotItem != 'undefined')? ((typeof attitude.currentPilotItem.role != 'undefined')? attitude.currentPilotItem.role: ''): '',
+        _CURRENT_TAB = Functions._convertKeywordToToken(_CURRENT_TAB_CONTENT);
 
   return (
     <View
@@ -86,16 +95,16 @@ export const RolesContainer = (props) => {
             </PinnedSide>
             <PinnedSide
               type="bottom"
-              items={attitude.pilotData}
-              current={attitude.currentPilotItem}
-              onPress={props.onPilotTabItemPress} />
+              items={_TABS}
+              current={_CURRENT_TAB}
+              onPress={attitude.onPilotTabItemPress} />
         </Pilot>
 
         <RolesModal
           visibility={attitude.rolesModalvisibility}
           data={attitude.pilotData}
           currentRolesItem={attitude.currentPilotItem}
-          onBlur={() => props.onAddRolePress(false)}  />
+          onBlur={() => attitude.onAddRolePress(false)}  />
 
         {_CHILDREN_CONTENT}
     </View>
