@@ -4,7 +4,9 @@ const { ROLES } = VIEWS.PROFILE;
 const initialState = {
         currentTab: {},
         tabs: [],
+        roles: [],
         rolesModalVisibility: false,
+        loadingRolesType: false,
         loadingRoles: false,
         connected: {
           status: true,
@@ -35,6 +37,12 @@ export default (state = initialState, action) => {
     case ROLES.FETCH_AVAILABLE_ROLES:
           return {
             ...state,
+            roles: action.payload
+          };
+          break;
+    case ROLES.FETCH_AVAILABLE_ROLES_TYPE:
+          return {
+            ...state,
             tabs: action.payload
           };
           break;
@@ -42,6 +50,12 @@ export default (state = initialState, action) => {
           return {
             ...state,
             loadingRoles: action.payload
+          };
+          break;
+    case ROLES.SET_ROLES_TYPE_LOADING_STATUS:
+          return {
+            ...state,
+            loadingRolesType: action.payload
           };
           break;
     case ROLES.SET_CONNECTED_STATUS:

@@ -1,0 +1,24 @@
+{
+  "pilot": {
+    "title": {
+      "en": "Roles"
+    }
+  },
+  "content": {
+    "scrollViewItem": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Roles"
+          }
+        },
+        "loading": {
+          "title": {
+            "en": "Roles Loading"
+          }
+        }
+      }
+    }
+  }
+}

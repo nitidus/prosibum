@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { AsyncStorage } from 'react-native';
 
 import { VIEWS, GLOBAL } from '../../../types/index';
 const { LOGIN } = VIEWS.AUTHENTICATION;

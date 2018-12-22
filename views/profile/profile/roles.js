@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -7,6 +7,7 @@ import { GLOBAL } from '../../../assets/flows/states/types/index';
 
 import { Global, Views } from '../../../assets/styles/index';
 import { ActivityIndicator, Toast } from '../../../assets/layouts/index';
+import { Input } from '../../../assets/components/index';
 import { Views as ViewsContainer } from '../../../assets/layouts/container/index';
 const Styles = Views.Profile.Roles,
       Container = ViewsContainer.Profile.RolesContainer;
@@ -17,7 +18,7 @@ import { Views as ViewsActions } from '../../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.Roles;
 
 import { views_constants } from '../../../assets/flows/knowledge/index';
-const __CONSTANTS = views_constants.profile.brand_roles_subsets;
+const __CONSTANTS = views_constants.profile.roles;
 
 import { Functions } from '../../../assets/modules/index';
 
@@ -29,13 +30,13 @@ class Roles extends Component<{}> {
   async componentDidMount() {
     const { props } = this;
 
-    await props.fetchAvailableRoles(GLOBAL.TARGET);
+    await props.fetchAvailableRolesType(GLOBAL.TARGET);
   }
 
   render() {
     const { props } = this;
 
-    if (props.roles.loadingRoles){
+    if (props.roles.loadingRolesType){
       return (
         <View
           style={Styles.Container}>
@@ -49,7 +50,7 @@ class Roles extends Component<{}> {
             message={props.roles.connected.content}
             launched={!props.roles.connected.status}
             color={Global.colors.single.carminePink}
-            onPress={() => props.fetchAvailableRoles(GLOBAL.TARGET)} />
+            onPress={() => props.fetchAvailableRolesType(GLOBAL.TARGET)} />
         );
 
         return (
@@ -68,19 +69,56 @@ class Roles extends Component<{}> {
               _CURRENT_TAB_CONTENT = (typeof props.roles.currentTab.role != 'undefined')? props.roles.currentTab.role: '',
               _CURRENT_TAB = Functions._convertKeywordToToken(_CURRENT_TAB_CONTENT);
 
-        const _TAB_CONTENT = (
-          <Text>Hello {_CURRENT_TAB}</Text>
-        );
+        var _TAB_CONTENT;
+
+        if ((props.roles.loadingRoles) || (props.roles.roles.length === 0)){
+          _TAB_CONTENT = (
+            <View
+              style={Styles.Content}>
+              <Input
+                type={__CONSTANTS.content.scrollViewItem.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.loading.title.en)}
+                style={Styles.RoleItem}
+                disable={true}>
+                  <ActivityIndicator />
+              </Input>
+            </View>
+          );
+        }else{
+          _TAB_CONTENT = (
+            <ScrollView
+              showsVerticalScrollIndicator={true}
+              contentContainerStyle={Styles.Content}>
+                {
+                  props.roles.roles.map((role, i) => {
+                    console.log(role)
+                    return (
+                      <Input
+                        type={__CONSTANTS.content.scrollViewItem.type}
+                        name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}
+                        style={Styles.RoleItem}
+                        disable={true}
+                        key={`${Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}-${i}`}>
+                          <Text>{Functions._convertKeywordToToken(role.usergroup.role)}</Text>
+                      </Input>
+                    );
+                  })
+                }
+            </ScrollView>
+          );
+        }
 
         return (
           <Container
             title={__CONSTANTS.pilot.title.en}
             pilotItems={props.roles.tabs}
             currentPilotItem={props.roles.currentTab}
-            onPilotTabItemPress={(item) => {
+            onPilotTabItemPress={async (item) => {
               const _SELECTED_ITEM_INDEX = __TABS.indexOf(item);
 
               props.setPilotCurrentTab(props.roles.tabs[_SELECTED_ITEM_INDEX]);
+
+              await props.fetchAvailableRoles(props.roles.tabs[_SELECTED_ITEM_INDEX]);
             }}
             onAddRolePress={(visibilityStatus) => props.setRolesModalVisibility(visibilityStatus)}
             rolesModalvisibility={props.roles.rolesModalVisibility}
