@@ -149,7 +149,7 @@ export const DrawerMenu = (props) => {
     <View
       style={Styles.Container}>
         <DrawerMenuPinnedProfile
-          src="https://www.morpht.com/sites/morpht/files/styles/landscape_medium/public/dalibor-matura_1.jpg?itok=Wskh0jNP"
+          src="https://vignette.wikia.nocookie.net/mr-robot/images/0/0a/Elliot_Alderson.jpg/revision/latest?cb=20161109092325&path-prefix=de"
           onPress={() => {
             const { navigation } = props;
 

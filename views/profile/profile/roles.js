@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { GLOBAL } from '../../../assets/flows/states/types/index';
 
 import { Global, Views } from '../../../assets/styles/index';
-import { ActivityIndicator, Toast } from '../../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon } from '../../../assets/layouts/index';
 import { Input } from '../../../assets/components/index';
 import { Views as ViewsContainer } from '../../../assets/layouts/container/index';
 const Styles = Views.Profile.Roles,
@@ -78,7 +78,7 @@ class Roles extends Component<{}> {
               <Input
                 type={__CONSTANTS.content.scrollViewItem.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.loading.title.en)}
-                style={Styles.RoleItem}
+                style={Styles.RoleItemContainer}
                 disable={true}>
                   <ActivityIndicator />
               </Input>
@@ -96,10 +96,31 @@ class Roles extends Component<{}> {
                       <Input
                         type={__CONSTANTS.content.scrollViewItem.type}
                         name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}
-                        style={Styles.RoleItem}
+                        style={Styles.RoleItemContainer}
                         disable={true}
                         key={`${Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}-${i}`}>
-                          <Text>{Functions._convertKeywordToToken(role.usergroup.role)}</Text>
+                          <View
+                            style={Styles.RoleItemContent}>
+                              <View
+                                style={[
+                                  Styles.ProfileContainer,
+                                  Styles.ProfileContainerWithNoPhoto,
+                                  Styles.LTR_ProfileContainer
+                                ]}>
+                                <Icon
+                                  name="person"
+                                  color={Global.colors.single.mercury}
+                                  height={Styles.__Global_Icons_In_Role.height}
+                                  style={Styles.ProfileContentWithNoPhoto} />
+                              </View>
+                              <View
+                                style={Styles.RoleDetailContent}>
+                                  <Text
+                                    style={Styles.RoleWithEmptyPosition}>
+                                      {Functions._convertKeywordToToken(role.usergroup.role)}
+                                  </Text>
+                              </View>
+                          </View>
                       </Input>
                     );
                   })

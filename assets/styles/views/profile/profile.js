@@ -16,7 +16,7 @@ var _CUSTOM_SCROLLABLE_CONTAINER = {
       marginRight: 15
     },
     _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
-      height: 23,
+      height: 23
     };
 
 if (Platform.OS !== 'ios'){

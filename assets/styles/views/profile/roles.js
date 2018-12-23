@@ -13,6 +13,9 @@ var _CUSTOM_ADD_ROLE_BUTTON = {
     },
     _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
       height: 23,
+    },
+    _CUSTOM___GLOBAL_ICONS_IN_ROLE = {
+      height: 32
     };
 
 if (Platform.OS !== 'ios'){
@@ -40,19 +43,55 @@ module.exports = StyleSheet.create({
   Content: {
     margin: 15
   },
-  RoleItem: {
+  RoleItemContainer: {
     height: 70,
     backgroundColor: colors.single.romance,
     shadowColor: colors.single.rangoonGreen,
+    alignItems: 'flex-start',
     shadowOpacity: 0.15,
     shadowRadius: 30,
     shadowOffset: {
       width: 0,
       height: 15
     },
-    marginBottom: 15
+    marginBottom: 15,
+    paddingHorizontal: 15
+  },
+  RoleItemContent: {
+    flexDirection: 'row'
+  },
+  ProfileContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 5,
+    overflow: 'hidden'
+  },
+  ProfileContainerWithNoPhoto: {
+    backgroundColor: colors.single.wildSand,
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  ProfileContentWithNoPhoto: {
+
+  },
+  RoleWithEmptyPosition: {
+    fontFamily: fonts.sanFrancisco.textBold,
+    color: colors.single.rangoonGreen,
+    fontSize: 17
+  },
+  RoleDetailContent: {
+    justifyContent: 'center'
+  },
+  LTR_ProfileContainer: {
+    marginRight: 15
+  },
+  RTL_ProfileContainer: {
+    marginLeft: 15
   },
   __Gobal_Icons_In_Pilot: {
     ..._CUSTOM___GLOBAL_ICONS_IN_PILOT
+  },
+  __Global_Icons_In_Role: {
+    ..._CUSTOM___GLOBAL_ICONS_IN_ROLE
   }
 });

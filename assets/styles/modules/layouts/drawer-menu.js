@@ -86,7 +86,7 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_PINNED_PROFILE_CONTAINER
   },
   NoImagePinnedProfileContainer: {
-    backgroundColor: colors.single.romance,
+    backgroundColor: colors.single.wildSand,
     alignItems: 'center',
     justifyContent: 'flex-end'
   },
