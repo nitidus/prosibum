@@ -78,7 +78,10 @@ class Roles extends Component<{}> {
               <Input
                 type={__CONSTANTS.content.scrollViewItem.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.loading.title.en)}
-                style={Styles.RoleItemContainer}
+                style={[
+                  Styles.RoleItemContainer,
+                  Styles.RoleItemContainerWithEmptyPositionContent
+                ]}
                 disable={true}>
                   <ActivityIndicator />
               </Input>
@@ -91,38 +94,59 @@ class Roles extends Component<{}> {
               contentContainerStyle={Styles.Content}>
                 {
                   props.roles.roles.map((role, i) => {
-                    console.log(role)
-                    return (
-                      <Input
-                        type={__CONSTANTS.content.scrollViewItem.type}
-                        name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}
-                        style={Styles.RoleItemContainer}
-                        disable={true}
-                        key={`${Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}-${i}`}>
-                          <View
-                            style={Styles.RoleItemContent}>
-                              <View
-                                style={[
-                                  Styles.ProfileContainer,
-                                  Styles.ProfileContainerWithNoPhoto,
-                                  Styles.LTR_ProfileContainer
-                                ]}>
-                                <Icon
-                                  name="person"
-                                  color={Global.colors.single.mercury}
-                                  height={Styles.__Global_Icons_In_Role.height}
-                                  style={Styles.ProfileContentWithNoPhoto} />
-                              </View>
-                              <View
-                                style={Styles.RoleDetailContent}>
-                                  <Text
-                                    style={Styles.RoleWithEmptyPosition}>
-                                      {Functions._convertKeywordToToken(role.usergroup.role)}
-                                  </Text>
-                              </View>
-                          </View>
-                      </Input>
-                    );
+                    var _SINGLE_ROW_CONTENT;
+
+                    if (typeof role.user != 'undefined'){
+                      //role with content
+                      _SINGLE_ROW_CONTENT = (
+                        <Input
+                          type={__CONSTANTS.content.scrollViewItem.type}
+                          name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}
+                          style={Styles.RoleItemContainer}
+                          gradient={Global.colors.pair.aqrulean}
+                          disable={true}
+                          key={`${Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}-${i}`}>
+
+                        </Input>
+                      );
+                    }else{
+                      _SINGLE_ROW_CONTENT = (
+                        <Input
+                          type={__CONSTANTS.content.scrollViewItem.type}
+                          name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}
+                          style={[
+                            Styles.RoleItemContainer,
+                            Styles.RoleItemContainerWithEmptyPositionContent
+                          ]}
+                          disable={true}
+                          key={`${Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}-${i}`}>
+                            <View
+                              style={Styles.RoleItemContent}>
+                                <View
+                                  style={[
+                                    Styles.ProfileContainer,
+                                    Styles.ProfileContainerWithNoPhoto,
+                                    Styles.LTR_ProfileContainer
+                                  ]}>
+                                  <Icon
+                                    name="person"
+                                    color={Global.colors.single.mercury}
+                                    height={Styles.__Global_Icons_In_Role.height}
+                                    style={Styles.ProfileContentWithNoPhoto} />
+                                </View>
+                                <View
+                                  style={Styles.RoleDetailContent}>
+                                    <Text
+                                      style={Styles.RoleWithEmptyPosition}>
+                                        {Functions._convertKeywordToToken(role.usergroup.role)}
+                                    </Text>
+                                </View>
+                            </View>
+                        </Input>
+                      );
+                    }
+
+                    return _SINGLE_ROW_CONTENT;
                   })
                 }
             </ScrollView>

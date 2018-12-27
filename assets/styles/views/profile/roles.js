@@ -45,7 +45,6 @@ module.exports = StyleSheet.create({
   },
   RoleItemContainer: {
     height: 70,
-    backgroundColor: colors.single.romance,
     shadowColor: colors.single.rangoonGreen,
     alignItems: 'flex-start',
     shadowOpacity: 0.15,
@@ -56,6 +55,9 @@ module.exports = StyleSheet.create({
     },
     marginBottom: 15,
     paddingHorizontal: 15
+  },
+  RoleItemContainerWithEmptyPositionContent: {
+    backgroundColor: colors.single.romance
   },
   RoleItemContent: {
     flexDirection: 'row'
