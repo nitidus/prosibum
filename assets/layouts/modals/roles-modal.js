@@ -78,11 +78,14 @@ const RolesModal = (props) => {
     attitude.onBlur = props.onBlur || props.onModalBlur || props.modalOnBlur || props.onClose || props.onModalClose || props.modalOnClose;
   }
 
+  if ((typeof props.onProgressSuccess != 'undefined') ||(typeof props.onProgressComplete != 'undefined') ||(typeof props.onProgressDone != 'undefined') ||(typeof props.onTaskSuccess != 'undefined') ||(typeof props.onTaskComplete != 'undefined') ||(typeof props.onTaskDone != 'undefined') ||(typeof props.onDutySuccess != 'undefined') ||(typeof props.onDutyComplete != 'undefined') ||(typeof props.onDutyDone != 'undefined') ||(typeof props.onObligationSuccess != 'undefined') ||(typeof props.onObligationComplete != 'undefined') ||(typeof props.onObligationDone != 'undefined') ||(typeof props.onSuccessProgress != 'undefined') ||(typeof props.onCompleteProgress != 'undefined') ||(typeof props.onDoneProgress != 'undefined') ||(typeof props.onSuccessTask != 'undefined') ||(typeof props.onCompleteTask != 'undefined') ||(typeof props.onDoneTask != 'undefined') ||(typeof props.onSuccessDuty != 'undefined') ||(typeof props.onCompleteDuty != 'undefined') ||(typeof props.onDoneDuty != 'undefined') ||(typeof props.onSuccessObligation != 'undefined') ||(typeof props.onCompleteObligation != 'undefined') ||(typeof props.onDoneObligation != 'undefined')){
+    attitude.onProgressSuccess = props.onProgressSuccess || props.onProgressComplete || props.onProgressDone || props.onTaskSuccess || props.onTaskComplete || props.onTaskDone || props.onDutySuccess || props.onDutyComplete || props.onDutyDone || props.onObligationSuccess || props.onObligationComplete || props.onObligationDone || props.onSuccessProgress || props.onCompleteProgress || props.onDoneProgress || props.onSuccessTask || props.onCompleteTask || props.onDoneTask || props.onSuccessDuty || props.onCompleteDuty || props.onDoneDuty || props.onSuccessObligation || props.onCompleteObligation || props.onDoneObligation;
+  }
+
   const MODAL = {
           BACKDROP_BLUR_TYPE: "dark",
-          ON_BLUR: (status) => {
-            attitude.onBlur(status);
-          },
+          ON_BLUR: (status) => attitude.onBlur(status),
+          ON_PROGRESS_SUCCESS: async (response) => attitude.onProgressSuccess(response),
           ITEMS: {
             ACTIVE_OPACITY: 0.7
           }
@@ -168,15 +171,16 @@ const RolesModal = (props) => {
               value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en} ${Functions._convertKeywordToToken(_CURRENT_USER_GROUP_ROLE)}${_ROLE_COUNT_DEPENDED_NOUN}`}
               gradient={Global.colors.pair.ongerine}
               style={Styles.AppendRolesButton}
-              onPress={() => {
-                const _SEED = {
+              onPress={async () => {
+                const _RULES = {
                   user_group_id: props.rolesModal.currentRole._id,
                   roles_count: props.rolesModal.roleCount
                 };
 
-                // console.log(_SEED)
-
-                // MODAL.ON_BLUR(false);
+                await props.appendRolesToResource(_RULES, (response, state) => {
+                  MODAL.ON_PROGRESS_SUCCESS(response);
+                  MODAL.ON_BLUR(state);
+                });
               }}/>
         </View>
     </Modal>

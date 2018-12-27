@@ -5,7 +5,13 @@ const { ROLES_MODAL } = LAYOUTS;
 const initialState = {
   roles: [],
   currentRole: {},
-  roleCount: 1
+  roleCount: 1,
+  appendRolesToResources: false,
+  appendedResources: [],
+  connected: {
+    status: true,
+    content: ''
+  }
 };
 
 
@@ -27,6 +33,28 @@ export default (state = initialState, action) => {
       return {
         ...state,
         roleCount: action.payload
+      };
+      break;
+    case ROLES_MODAL.APPEND_ROLES_TO_RESOURCE:
+      return {
+        ...state,
+        appendedResources: action.payload
+      };
+      break;
+    case ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS:
+      return {
+        ...state,
+        appendRolesToResources: action.payload
+      };
+      break;
+    case ROLES_MODAL.SET_CONNECTED_STATUS:
+      return {
+        ...state,
+        connected: {
+          ...state.connected,
+          status: action.payload.status,
+          content: action.payload.content || ''
+        }
       };
       break;
 

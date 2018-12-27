@@ -166,6 +166,10 @@ class Roles extends Component<{}> {
               await props.fetchAvailableRoles(props.roles.tabs[_SELECTED_ITEM_INDEX]);
             }}
             onAddRolePress={(visibilityStatus) => props.setRolesModalVisibility(visibilityStatus)}
+            onRolesAbsorb={async (response) => {
+              //We can use response later
+              await props.fetchAvailableRoles(props.roles.currentTab);
+            }}
             rolesModalvisibility={props.roles.rolesModalVisibility}
             {...props}>
               {_TAB_CONTENT}

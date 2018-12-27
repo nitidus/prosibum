@@ -39,6 +39,10 @@ export const RolesContainer = (props) => {
     attitude.onAddRolePress = props.onAddRolePress || props.onRightPinnedPress || props.onLeftPinnedPress;
   }
 
+  if ((typeof props.onRolesAbsorb != 'undefined') || (typeof props.onRolesAppend != 'undefined') || (typeof props.onRolesMerge != 'undefined') || (typeof props.onRolesimbibe != 'undefined') || (typeof props.onAbsorbRoles != 'undefined') || (typeof props.onAppendRoles != 'undefined') || (typeof props.onMergeRoles != 'undefined') || (typeof props.onimbibeRoles != 'undefined')){
+    attitude.onRolesAbsorb = props.onRolesAbsorb || props.onRolesAppend || props.onRolesMerge || props.onRolesimbibe || props.onAbsorbRoles || props.onAppendRoles || props.onMergeRoles || props.onimbibeRoles;
+  }
+
   attitude.rolesModalvisibility = props.rolesModalvisibility || props.rolesModalVisible || props.rolesModalIsVisible || false;
 
   var _CHILDREN_CONTENT;
@@ -104,7 +108,8 @@ export const RolesContainer = (props) => {
           visibility={attitude.rolesModalvisibility}
           data={attitude.pilotData}
           currentRolesItem={attitude.currentPilotItem}
-          onBlur={() => attitude.onAddRolePress(false)}  />
+          onBlur={attitude.onAddRolePress}
+          onProgressSuccess={attitude.onRolesAbsorb} />
 
         {_CHILDREN_CONTENT}
     </View>
