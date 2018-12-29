@@ -138,7 +138,10 @@ class Roles extends Component<{}> {
                           disable={true}>
                             <View
                               style={Styles.RoleItemContent}>
-                                {_PROFILE_CONTENT}
+                                <View
+                                  style={Styles.RoleDetailContent}>
+                                    {_PROFILE_CONTENT}
+                                </View>
 
                                 <View
                                   style={Styles.RoleDetailContent}>
