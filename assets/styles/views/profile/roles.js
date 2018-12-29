@@ -76,13 +76,22 @@ module.exports = StyleSheet.create({
   ProfileContentWithNoPhoto: {
 
   },
-  RoleWithEmptyPosition: {
+  RoleDetailContent: {
+    justifyContent: 'center'
+  },
+  RoleTitle: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     fontSize: 17
   },
-  RoleDetailContent: {
-    justifyContent: 'center'
+  RoleSubtitle: {
+    fontFamily: fonts.sanFrancisco.textBold,
+    color: colors.single.romance,
+    fontSize: 13,
+    marginTop: 3
+  },
+  ProfileContainerWithPhoto: {
+
   },
   LTR_ProfileContainer: {
     marginRight: 15

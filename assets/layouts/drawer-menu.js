@@ -149,7 +149,7 @@ export const DrawerMenu = (props) => {
     <View
       style={Styles.Container}>
         <DrawerMenuPinnedProfile
-          src="https://vignette.wikia.nocookie.net/mr-robot/images/0/0a/Elliot_Alderson.jpg/revision/latest?cb=20161109092325&path-prefix=de"
+          src="https://bit.ly/2LJj1V2"
           onPress={() => {
             const { navigation } = props;
 
