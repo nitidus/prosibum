@@ -6,7 +6,7 @@ const { ROLES } = VIEWS.PROFILE;
 import { Functions } from '../../../../../modules/index';
 
 module.exports = {
-  _getRolesTypeWithGroupType: async (groupType, dispatch) => {
+  _getRolesTypeWithGroupType: async (groupType, usergroup, dispatch) => {
     dispatch({
       type: ROLES.SET_ROLES_TYPE_LOADING_STATUS,
       payload: true
@@ -15,7 +15,8 @@ module.exports = {
     try {
       const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
             _AUTH = JSON.parse(_SERIALIZED_AUTH),
-            _ROLES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${groupType}?priority=${_AUTH.usergroup.priority}`);
+            _REFERENCE_PRIORITY = (typeof usergroup != 'undefined')? usergroup.priority: _AUTH.usergroup.priority,
+            _ROLES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${groupType}?priority=${_REFERENCE_PRIORITY}`);
 
       if (_ROLES.status === 200){
         const _FINAL_RESPONSE = _ROLES.data;

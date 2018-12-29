@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
       })
     },
     fetchAvailableRoles: async (usergroup) => CMD._getRolesWithUsergroup(usergroup, dispatch),
-    fetchAvailableRolesType: async (groupType) => CMD._getRolesTypeWithGroupType(groupType, dispatch),
+    fetchAvailableRolesType: async (groupType, usergroup) => CMD._getRolesTypeWithGroupType(groupType, usergroup, dispatch),
     setRolesLoadingStatus: (loadingStatus) => {
       dispatch({
         type: ROLES.SET_ROLES_LOADING_STATUS,

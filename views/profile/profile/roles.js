@@ -28,9 +28,17 @@ class Roles extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this;
+    const { props } = this,
+          { navigation } = props,
+          { params } = navigation.state;
 
-    await props.fetchAvailableRolesType(GLOBAL.TARGET);
+    if ((typeof params.currentRole != 'undefined') || (typeof params.current_role != 'undefined') || (typeof params.brandRole != 'undefined') || (typeof params.brand_ole != 'undefined') || (typeof params.selectedRole != 'undefined') || (typeof params.selected_role != 'undefined')){
+      const _CURRENT_ROLE = params.currentRole || params.current_role || params.brandRole || params.brand_ole || params.selectedRole || params.selected_role;
+
+      await props.fetchAvailableRolesType(GLOBAL.TARGET, _CURRENT_ROLE);
+    }else{
+      await props.fetchAvailableRolesType(GLOBAL.TARGET);
+    }
   }
 
   render() {

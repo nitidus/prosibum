@@ -110,14 +110,16 @@ class TechnicalTab extends Component<{}> {
         if (typeof props.technicalTab.brandRoles[_CURRENT_BRAND_ROLE] != 'undefined'){
           const _CURRENT_BRAND_ROLE_CONTENT = props.technicalTab.brandRoles[_CURRENT_BRAND_ROLE].role.toLowerCase();
 
-          if (Functions._convertKeywordToToken(_CURRENT_BRAND_ROLE_CONTENT) !== "Sales Chairman"){
+          if (Functions._convertKeywordToToken(_CURRENT_BRAND_ROLE_CONTENT) !== Functions._convertKeywordToToken(props.technicalTab.brandRoles[props.technicalTab.brandRoles.length - 1].role)){
             _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT = <Link
               containerStyle={Styles.QuickLink}
               value={__CONSTANTS.quickLink.title.en}
               onPress={() => {
                 const { navigation } = this.props;
 
-                navigation.navigate('Roles');
+                navigation.navigate('Roles', {
+                  currentRole: props.technicalTab.brandRole
+                });
               }} />;
           }
         }
