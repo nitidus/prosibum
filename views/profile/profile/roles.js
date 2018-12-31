@@ -32,10 +32,14 @@ class Roles extends Component<{}> {
           { navigation } = props,
           { params } = navigation.state;
 
-    if ((typeof params.currentRole != 'undefined') || (typeof params.current_role != 'undefined') || (typeof params.brandRole != 'undefined') || (typeof params.brand_ole != 'undefined') || (typeof params.selectedRole != 'undefined') || (typeof params.selected_role != 'undefined')){
-      const _CURRENT_ROLE = params.currentRole || params.current_role || params.brandRole || params.brand_ole || params.selectedRole || params.selected_role;
+    if (typeof params != 'undefined'){
+      if ((typeof params.currentRole != 'undefined') || (typeof params.current_role != 'undefined') || (typeof params.brandRole != 'undefined') || (typeof params.brand_ole != 'undefined') || (typeof params.selectedRole != 'undefined') || (typeof params.selected_role != 'undefined')){
+        const _CURRENT_ROLE = params.currentRole || params.current_role || params.brandRole || params.brand_ole || params.selectedRole || params.selected_role;
 
-      await props.fetchAvailableRolesType(GLOBAL.TARGET, _CURRENT_ROLE);
+        await props.fetchAvailableRolesType(GLOBAL.TARGET, _CURRENT_ROLE);
+      }else{
+        await props.fetchAvailableRolesType(GLOBAL.TARGET);
+      }
     }else{
       await props.fetchAvailableRolesType(GLOBAL.TARGET);
     }
