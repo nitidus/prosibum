@@ -5,14 +5,6 @@ PODS:
     - React/Core (= 0.56.0)
   - react-native-blur (0.8.0):
     - React
-  - react-native-camera (1.4.3):
-    - React
-    - react-native-camera/RCT (= 1.4.3)
-    - react-native-camera/RN (= 1.4.3)
-  - react-native-camera/RCT (1.4.3):
-    - React
-  - react-native-camera/RN (1.4.3):
-    - React
   - React/Core (0.56.0):
     - yoga (= 0.56.0.React)
   - React/RCTImage (0.56.0):
@@ -20,15 +12,17 @@ PODS:
     - React/RCTNetwork
   - React/RCTNetwork (0.56.0):
     - React/Core
-  - RNSVG (7.0.3):
+  - rn-fetch-blob (0.10.6):
+    - React/Core
+  - RNSVG (7.2.0):
     - React
   - yoga (0.56.0.React)
 
 DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - react-native-blur (from `../node_modules/react-native-blur`)
-  - react-native-camera (from `../node_modules/react-native-camera`)
   - React/RCTImage (from `../node_modules/react-native`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -39,8 +33,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   react-native-blur:
     :path: "../node_modules/react-native-blur"
-  react-native-camera:
-    :path: "../node_modules/react-native-camera"
+  rn-fetch-blob:
+    :path: "../node_modules/rn-fetch-blob"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   yoga:
@@ -50,10 +44,10 @@ SPEC CHECKSUMS:
   BVLinearGradient: 6d8909e3fc6b089defa4b89d967441fa6827a2ee
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-blur: c35c1f6c2c76db7108bde7ed343bd2b01d64e0c0
-  react-native-camera: eac1e8cc7523273a2a11956d0e5dac08296cf4b0
+  rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
   RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 5d6003f425820974b63b97f28bd30c48b07df15d
+PODFILE CHECKSUM: d6675cf8becd417093d17d6704912e0aef7fdba7
 
 COCOAPODS: 1.5.3

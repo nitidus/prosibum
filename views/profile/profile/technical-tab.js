@@ -25,9 +25,34 @@ class TechnicalTab extends Component<{}> {
     Preparation._prepareTechnicalTabInProfile(this);
   }
 
+  _componentWillCheckValidation(props) {
+    const _PROPS = props.technicalTab,
+          _CONNECTED_STATUS = _PROPS.connected.status;
+
+    var _FORM_FIELDS_VALIDITY = false;
+
+    if (_PROPS.brandRole != null){
+      const _PRIORITY_TOKEN = Preparation._prepareBrandRolePriority(props);
+
+      if (_PRIORITY_TOKEN.current === _PRIORITY_TOKEN.range.min){
+        if (_PROPS.brandName != ''){
+          _FORM_FIELDS_VALIDITY = true;
+        }
+      }else{
+        _FORM_FIELDS_VALIDITY = true;
+      }
+
+      // if (_PRIORITY_TOKEN.current !== _PRIORITY_TOKEN.range.max){
+      //
+      // }
+    }
+
+    return !(_CONNECTED_STATUS && _FORM_FIELDS_VALIDITY);
+  }
+
   render() {
     const { props } = this;
-    var _BRAND_ROLE_CAROUSEL_CONTENT, _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT;
+    var _BRAND_ROLE_CAROUSEL_CONTENT, _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT, _BRAND_NAME_DEPENDED_HANDLER_CONTENT;
 
     const _CURRENT_BRAND_ROLE = props.technicalTab.brandRoles.findIndex((brandRole) => {
       const _BRAND_ROLE = brandRole.role,
@@ -40,7 +65,7 @@ class TechnicalTab extends Component<{}> {
       _BRAND_ROLE_CAROUSEL_CONTENT = <Input
         type={__CONSTANTS.firstCarouselContainer.content.self.type}
         name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.content.self.state.loading.title.en)}
-        gradient={Global.colors.pair.ongerine}
+        gradient={Global.colors.pair.aqrulean}
         style={[
           Styles.BrandRoleCarouselContainer,
           { marginHorizontal: Styles.GlobalMeasurements.marginHorizontal }
@@ -89,7 +114,7 @@ class TechnicalTab extends Component<{}> {
                   type={__CONSTANTS.firstCarouselContainer.content.self.type}
                   name={_ITEM_NAME}
                   value={_ITEM_VALUE}
-                  gradient={Global.colors.pair.ongerine}
+                  gradient={Global.colors.pair.aqrulean}
                   disable={true}/>
               );
             }else{
@@ -108,9 +133,19 @@ class TechnicalTab extends Component<{}> {
           }}/>;
 
         if (typeof props.technicalTab.brandRoles[_CURRENT_BRAND_ROLE] != 'undefined'){
-          const _CURRENT_BRAND_ROLE_CONTENT = props.technicalTab.brandRoles[_CURRENT_BRAND_ROLE].role.toLowerCase();
+          const _PRIORITY_TOKEN = Preparation._prepareBrandRolePriority(props);
 
-          if (Functions._convertKeywordToToken(_CURRENT_BRAND_ROLE_CONTENT) !== Functions._convertKeywordToToken(props.technicalTab.brandRoles[props.technicalTab.brandRoles.length - 1].role)){
+          if (_PRIORITY_TOKEN.current === _PRIORITY_TOKEN.range.min){
+            _BRAND_NAME_DEPENDED_HANDLER_CONTENT = <Input
+              type={__CONSTANTS.secondInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.secondInput.title.en)}
+              placeholder={__CONSTANTS.secondInput.title.en}
+              value={props.technicalTab.brandName}
+              style={Styles.SingleInput}
+              onChangeText={(currentValue) => props.setBrandName(currentValue)} />;
+          }
+
+          if (_PRIORITY_TOKEN.current !== _PRIORITY_TOKEN.range.max){
             _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT = <Link
               containerStyle={Styles.QuickLink}
               value={__CONSTANTS.quickLink.title.en}
@@ -126,6 +161,14 @@ class TechnicalTab extends Component<{}> {
       }
     }
 
+    const _VALIDATED = this._componentWillCheckValidation(props);
+
+    var _PHOTO_URI;
+
+    if ((props.technicalTab.brandProfilePhoto != null) && (typeof props.technicalTab.brandProfilePhoto.image != 'undefined')){
+      _PHOTO_URI = props.technicalTab.brandProfilePhoto.image.uri;
+    }
+
     return (
       <ScrollView
         contentContainerStyle={Styles.ScrollableContainer}>
@@ -133,24 +176,37 @@ class TechnicalTab extends Component<{}> {
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.tilte.en)}
             visible={props.technicalTab.cameraRollPickerModalVisibility}
             onBlur={(status) => props.setCameraRollPickerModalVisibility(status)}
-            onPress={(photoURI) => props.setBrandProfilePhoto(photoURI)}/>
+            onPress={(photo) => props.setBrandProfilePhoto(photo)}/>
 
           <Input
             type={__CONSTANTS.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.firstInput.title.en)}
             value={__CONSTANTS.firstInput.title.en}
             style={Styles.SingleInput}
-            photoURI={props.technicalTab.brandProfilePhoto}
+            photoURI={_PHOTO_URI}
             onPress={() => props.setCameraRollPickerModalVisibility(true)} />
-          <Input
-            type={__CONSTANTS.secondInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.secondInput.title.en)}
-            placeholder={__CONSTANTS.secondInput.title.en}
-            value={props.technicalTab.brandName}
-            style={Styles.SingleInput}
-            onChangeText={(currentValue) => props.setBrandName(currentValue)} />
+
+          {_BRAND_NAME_DEPENDED_HANDLER_CONTENT}
 
           {_BRAND_ROLE_CAROUSEL_CONTENT}
+
+          <Input
+            style={Styles.SubmitInput}
+            type={__CONSTANTS.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+            value={__CONSTANTS.submitInput.state.normal.title.en}
+            gradient={Global.colors.pair.ongerine}
+            onPress={() => {
+              if (props.technicalTab.brandProfilePhoto != ''){
+                Functions._fetchBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto, (photoURI) => {
+                  // use photoURI
+                  console.log(photoURI)
+                });
+              }else{
+
+              }
+            }}
+            forcedDisable={_VALIDATED} />
 
           {_BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT}
       </ScrollView>

@@ -113,7 +113,8 @@ const CameraRollPickerModal = (props) => {
                   });
                 }
 
-                const _PHOTO_URI = photo.node.image.uri;
+                const _PHOTO_NODE = photo.node,
+                      _PHOTO_URI = _PHOTO_NODE.image.uri;
 
                 return (
                   <TouchableOpacity
@@ -122,7 +123,7 @@ const CameraRollPickerModal = (props) => {
                     style={_SINGLE_IMAGE_STYLES}
                     onPress={() => {
                       MODAL.ON_BLUR(false);
-                      attitude.onPress(_PHOTO_URI);
+                      attitude.onPress(_PHOTO_NODE);
                     }}>
                       <Image
                         style={Styles.CameraRollItemContent}

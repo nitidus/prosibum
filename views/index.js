@@ -18,7 +18,7 @@ import Authorization from './authorization';
 
 const ProfileStack = createStackNavigator({
   // Dashboard,
-  // Profile,
+  Profile,
   Roles
 }, {
   headerMode: 'none'

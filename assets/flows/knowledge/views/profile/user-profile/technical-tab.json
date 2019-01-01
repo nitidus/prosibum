@@ -45,5 +45,20 @@
     "title": {
       "en": "You've not specified your subsets?"
     }
+  },
+  "submitInput": {
+    "type": "BUTTON",
+    "state": {
+      "normal": {
+        "title": {
+          "en": "Save"
+        }
+      },
+      "loading": {
+        "title": {
+          "en": "Save Loading"
+        }
+      }
+    }
   }
 }

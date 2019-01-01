@@ -29,6 +29,24 @@ module.exports = {
       password: inputProps.password
     };
   },
+  _prepareBrandRolePriority: (props) => {
+    const { technicalTab } = props,
+          { brandRoles, brandRole } = technicalTab,
+          _BRAND_ROLES_PRIORITIES = brandRoles.map((role, i) => {
+            return role.priority;
+          }),
+          _MAXIMUM_PRIORITY_IN_BRAND_ROLE = Math.max(..._BRAND_ROLES_PRIORITIES),
+          _MINIMUM_PRIORITY_IN_BRAND_ROLE = Math.min(..._BRAND_ROLES_PRIORITIES),
+          _CURRENT_BRAND_ROLE_PRIORITY = brandRole.priority;
+
+      return {
+        current: _CURRENT_BRAND_ROLE_PRIORITY,
+        range: {
+          max: _MAXIMUM_PRIORITY_IN_BRAND_ROLE,
+          min: _MINIMUM_PRIORITY_IN_BRAND_ROLE
+        }
+      };
+  },
   _prepareLogout: async (props) => {
     const { navigation } = props,
           _KEYS_LISTENING_TO_REMOVE = [

@@ -3,7 +3,7 @@ const { TECHNICAL_TAB } = SUB_VIEWS.USER_PROFILE;
 
 const initialState = {
         brandName: '',
-        brandProfilePhoto: '',
+        brandProfilePhoto: {},
         brandRole: '',
         cameraRollPickerModalVisibility: false,
         brandRoles: [],

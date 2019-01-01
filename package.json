@@ -26,6 +26,7 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
+    "rn-fetch-blob": "^0.10.15",
     "socket.io-client": "^2.2.0"
   },
   "devDependencies": {

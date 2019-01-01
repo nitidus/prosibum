@@ -59,7 +59,8 @@ module.exports = StyleSheet.create({
   },
   BrandRoleCarouselContainer: {
     flexDirection: 'row',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: 15
   },
   BrandRoleCarouselErrorContainer: {
     width: width - (_CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal * 2),
@@ -74,6 +75,9 @@ module.exports = StyleSheet.create({
   QuickLink: {
     marginVertical: 38,
     alignItems: 'center'
+  },
+  SubmitInput: {
+    marginHorizontal: _CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal
   },
   ForYouButton: {
     ..._CUSTOM_FOR_YOU_BUTTON
