@@ -207,9 +207,7 @@ export const Icon = (props) => {
       width={attitude.width}
       height={attitude.height}
       viewBox={attitude.viewBox}
-      style={[
-        attitude.style
-      ]}>
+      style={attitude.style}>
         {_ICON_DEFS_CONTENT}
         {attitude.content}
     </Svg>

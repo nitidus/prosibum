@@ -196,14 +196,53 @@ class TechnicalTab extends Component<{}> {
             name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
             value={__CONSTANTS.submitInput.state.normal.title.en}
             gradient={Global.colors.pair.ongerine}
-            onPress={() => {
-              if (props.technicalTab.brandProfilePhoto != ''){
-                Functions._fetchBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto, (photoURI) => {
-                  // use photoURI
-                  console.log(photoURI)
-                });
-              }else{
+            onPress={async () => {
+              const _PROPS = props.technicalTab,
+                    _PRIORITY_TOKEN = Preparation._prepareBrandRolePriority(props),
+                    _AUTH = await Preparation._prepareAuthDetails();
 
+              if (_AUTH !== null){
+                var _SEED = {
+                  _id: _AUTH._id
+                };
+
+                if (_AUTH.brand_role._id !== _PROPS.brandRole._id){
+                  _SEED.user_group_id = _PROPS.brandRole._id;
+                }
+
+                if (_PRIORITY_TOKEN.current === _PRIORITY_TOKEN.range.min){
+                  if ((_AUTH.brand_name !== _PROPS.brandName) && (_PROPS.brandName != '')){
+                    if (typeof _SEED.brand != 'undefined'){
+                      _SEED.brand.name = _PROPS.brandName;
+                    }else{
+                      _SEED.brand = {
+                        name: _PROPS.brandName
+                      };
+                    }
+                  }
+                }
+
+                // if (_PRIORITY_TOKEN.current !== _PRIORITY_TOKEN.range.max){
+                //
+                // }
+
+                if (props.technicalTab.brandProfilePhoto != ''){
+                  Functions._fetchBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto, async (photoURI) => {
+                    if (_AUTH.brand_profile_photo !== photoURI){
+                      if (typeof _SEED.brand != 'undefined'){
+                        _SEED.brand.photo = photoURI;
+                      }else{
+                        _SEED.brand = {
+                          photo: photoURI
+                        };
+                      }
+                    }
+
+                    await props.editUserTechnicalData(_SEED);
+                  });
+                }else{
+                    await props.editUserTechnicalData(_SEED);
+                }
               }
             }}
             forcedDisable={_VALIDATED} />

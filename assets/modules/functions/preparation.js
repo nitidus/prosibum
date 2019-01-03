@@ -164,10 +164,30 @@ module.exports = {
       props.setCameraRollItems(_FETCHED_CAMERA_ROLL_ITEMS.edges);
     }
   },
+  _prepareAuthDetails: async () => {
+    const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
+
+    var _RESPONSE = {};
+
+    if (_DID_TOKEN_CREATED !== false){
+      const _AUTH = JSON.parse(_DID_TOKEN_CREATED);
+
+      _RESPONSE._id = _AUTH._id;
+
+      if (typeof _AUTH.brand != 'undefined'){
+        _RESPONSE.brand_profile_photo = _AUTH.brand.photo || _AUTH.brand.profile_photo || _AUTH.brand.profilePhoto || _AUTH.brand.logo || _AUTH.brand.profile || _AUTH.brand.emblem || '';
+        _RESPONSE.brand_name = _AUTH.brand.name || _AUTH.brand.title || _AUTH.brand.head || _AUTH.brand.heading || _AUTH.brand.headline || _AUTH.brand.caption || '';
+      }
+
+      _RESPONSE.brand_role = _AUTH.usergroup;
+    }
+
+    return _RESPONSE;
+  },
   _prepareTechnicalTabInProfile: async (self) => {
     const { props } = self,
           { navigation } = props,
-          _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
+          _AUTH = await module.exports._prepareAuthDetails();
 
     props.fetchAvailableBrandRoles('Wholesaler');
 
@@ -175,10 +195,10 @@ module.exports = {
         _BRAND_NAME = '',
         _BRAND_ROLE = '';
 
-    if (_DID_TOKEN_CREATED){
-      // _BRAND_PROFILE_PHOTO
-      // _BRAND_NAME
-      // _BRAND_ROLE
+    if (_AUTH !== null){
+      _BRAND_PROFILE_PHOTO = _AUTH.brand_profile_photo || '';
+      _BRAND_NAME = _AUTH.brand_name || '';
+      _BRAND_ROLE = _AUTH.brand_role || props.technicalTab.brandRoles[0];
     }
 
     props.setBrandProfilePhoto(_BRAND_PROFILE_PHOTO);
