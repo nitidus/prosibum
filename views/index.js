@@ -1,7 +1,6 @@
 import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'react-navigation';
 
 //Profile Screens
-import Dashboard from './profile/dashboard';
 import Profile from './profile/profile';
 
   //Profile Subsets
@@ -16,12 +15,21 @@ import VerifyPhoneNumber from './authentication/verify-phone-number';
 //Authorization Screen
 import Authorization from './authorization';
 
+//Overseer Screen
+import Overseer from './overseer';
+
 const ProfileStack = createStackNavigator({
-  // Dashboard,
   Profile,
   Roles
 }, {
   headerMode: 'none'
+});
+
+const OverseerStack = createSwitchNavigator({
+  Overseer,
+  ProfileStack: ProfileStack
+}, {
+  initialRouteName: 'Overseer'
 });
 
 const AuthenticationStack = createStackNavigator({
@@ -34,8 +42,8 @@ const AuthenticationStack = createStackNavigator({
 });
 
 const RootStack = createSwitchNavigator({
-  ProfileStack: ProfileStack,
-  AuthenticationStack: AuthenticationStack,
+  OverseerStack,
+  Authentication: AuthenticationStack,
   Authorization
 }, {
   initialRouteName: 'Authorization',

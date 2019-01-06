@@ -55,7 +55,7 @@ module.exports = {
           ],
           _DID_TOKENS_REMOVED = await Prototypes._removeDataWithKeys(_KEYS_LISTENING_TO_REMOVE);
 
-    navigation.navigate(_DID_TOKENS_REMOVED? 'AuthenticationStack': 'ProfileStack');
+    navigation.navigate(_DID_TOKENS_REMOVED? 'Authentication': 'Overseer');
   },
   _prepareLogin: async (props) => {
     const { navigation } = props,
@@ -74,7 +74,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'ProfileStack': 'AuthenticationStack');
+    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,

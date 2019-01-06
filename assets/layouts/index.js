@@ -5,6 +5,7 @@ import { Modal } from './modal';
 import { CountriesCodesModal, CameraRollPickerModal, RolesModal } from './modals/index';
 import { Icon } from './icon';
 import { TopBar, PinnedSide, TabItem } from './container/layouts/pilot/top-bar';
+import { TabBar, TabBarItem } from './container/layouts/pilot/tab-bar';
 import { Pilot } from './pilot';
 import { DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile } from './drawer-menu';
 
@@ -15,6 +16,6 @@ module.exports = {
   Modal,
   CountriesCodesModal, CameraRollPickerModal, RolesModal,
   Icon,
-  Pilot, TopBar, PinnedSide, TabItem,
+  Pilot, TabBar, TabBarItem, TopBar, PinnedSide, TabItem,
   DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile
 };

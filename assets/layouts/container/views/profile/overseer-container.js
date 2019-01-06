@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { StatusBar, View, Text, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
-import { Pilot, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
+import { Pilot, TabBarItem, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
 const Styles = Views.Profile.Dashboard;
 
 import { Functions, Utils } from '../../../../modules/index';
 const { MenuCardPulling } = Utils.Animations.MenuPulling;
 
-export const DashboardContainer = (props) => {
+export const OverseerContainer = (props) => {
   var attitude = {},
       animations = {
         xPosition: new Animated.Value(0)
@@ -90,6 +90,20 @@ export const DashboardContainer = (props) => {
                     return React.cloneElement(child, childProps);
                   })
                 }
+
+                <Pilot
+                  layout="tabs">
+                    <TabBarItem
+                      activated={true}
+                      name="Dashboard"
+                      onPress={() => alert('ok')} />
+                    <TabBarItem
+                      name="Products"
+                      onPress={() => alert('ok')} />
+                    <TabBarItem
+                      name="Messages"
+                      onPress={() => alert('ok')} />
+                </Pilot>
             </View>
         </Animated.View>
     </View>

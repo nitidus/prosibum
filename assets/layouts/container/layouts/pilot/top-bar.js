@@ -90,9 +90,7 @@ export const TabItem = (props) => {
           Styles.SingleTabItemContainer,
           attitude.style
         ]}
-        onPress={() => {
-          attitude.onPress(attitude.name);
-        }}>
+        onPress={() => attitude.onPress(attitude.name)}>
           {_MAIN_TEXT_COTNENT}
       </Input>
     );
@@ -324,7 +322,7 @@ export const TopBar = (props) => {
   return (
     <View
       style={[
-        Styles.MainContainer,
+        Styles.TopBarContainer,
         attitude.style
       ]}>
         <View
