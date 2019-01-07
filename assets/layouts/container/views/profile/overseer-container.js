@@ -26,9 +26,28 @@ export const OverseerContainer = (props) => {
     }
   }
 
+  if ((typeof props.tabs != 'undefined') || (typeof props.pilotTabs != 'undefined') || (typeof props.pilot_tabs != 'undefined')){
+    attitude.tabs = props.tabs || props.pilotTabs || props.pilot_tabs;
+  }
+
+  if ((typeof props.currentTab != 'undefined') || (typeof props.current_tab != 'undefined') || (typeof props.currentPilotTab != 'undefined') || (typeof props.current_pilot_tab != 'undefined')){
+    attitude.currentTab = props.currentTab || props.current_tab || props.currentPilotTab || props.current_pilot_tab;
+  }
+
+  if ((typeof props.onPress != 'undefined') || (typeof props.onTabItemPress != 'undefined') || (typeof props.on_tab_item_press != 'undefined')){
+    attitude.onPress = props.onPress || props.onTabItemPress || props.on_tab_item_press;
+  }
+
   const { Interpolation, Events } = MenuCardPulling,
         _CONTAINER_ANIMATION = Interpolation._Container(animations.xPosition),
         _OVERLAY_ANIMATION = Interpolation._Overlay(animations.xPosition);
+
+  var _CURRENT_TAB_INDEX = attitude.tabs.findIndex((tab) => {
+        const _CURRENT_TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(attitude.currentTab),
+              _TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(tab);
+
+        return (_TAB_IN_KEY_FORMAT === _CURRENT_TAB_IN_KEY_FORMAT);
+      });
 
   return (
     <View
@@ -93,16 +112,27 @@ export const OverseerContainer = (props) => {
 
                 <Pilot
                   layout="tabs">
-                    <TabBarItem
-                      activated={true}
-                      name="Dashboard"
-                      onPress={() => alert('ok')} />
-                    <TabBarItem
-                      name="Products"
-                      onPress={() => alert('ok')} />
-                    <TabBarItem
-                      name="Messages"
-                      onPress={() => alert('ok')} />
+                    {
+                      attitude.tabs.map((tab, i) => {
+                        const _GENNERATED_KEY = Functions._generateNewUniqueObjectKey(`${tab}-${i}`),
+                              _TAB_TOKEN_NAME = Functions._convertKeywordToToken(tab);
+
+                        if (i === _CURRENT_TAB_INDEX){
+                          return (
+                            <TabBarItem
+                              activated={true}
+                              name={_TAB_TOKEN_NAME}
+                              onPress={() => attitude.onPress(tab)} />
+                          );
+                        }else{
+                          return (
+                            <TabBarItem
+                              name={_TAB_TOKEN_NAME}
+                              onPress={() => attitude.onPress(tab)} />
+                          );
+                        }
+                      })
+                    }
                 </Pilot>
             </View>
         </Animated.View>

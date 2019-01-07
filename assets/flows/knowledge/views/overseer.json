@@ -1,0 +1,18 @@
+{
+  "pilot": {
+    "title": {
+      "en": "Root Tabs"
+    },
+    "content": [
+      {
+        "en": "Dashboard"
+      },
+      {
+        "en": "Products"
+      },
+      {
+        "en": "Messages"
+      }
+    ]
+  }
+}

@@ -178,8 +178,8 @@ module.exports = StyleSheet.create({
     alignItems: 'center'
   },
   SecondRowContainer: {
-    marginTop: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
-    paddingHorizontal: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
+    marginTop: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
+    paddingHorizontal: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
     justifyContent: 'space-between'
   },
   HeaderTitle: {
@@ -210,7 +210,7 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen
   },
   TabItemContainer: {
-    marginRight: _CUSTOM_CONTAINER.paddingVertical || _CUSTOM_CONTAINER.paddingBottom,
+    marginRight: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
     flexGrow: 1
   },
   TabItemsContainer: {

@@ -157,6 +157,32 @@ export const TabBar = (props) => {
     }
   }
 
+  var _TAB_BAR_CONTENT;
+
+  if (typeof attitude.children != 'undefined'){
+    if (attitude.children.length > 0){
+      _TAB_BAR_CONTENT = attitude.children.map((item, i) => {
+        const _PROPS = item.props,
+              _ITEM_KEY = Functions._generateNewUniqueObjectKey(i);
+
+        var _CUSTOM_STYLE = {};
+
+        if (i < (attitude.children.length - 1)){
+          _CUSTOM_STYLE = {
+            ..._CUSTOM_STYLE,
+            ...Styles.LTR_TabItems
+          };
+        }
+
+        return (
+          <TabBarItem
+            {..._PROPS}
+            style={_CUSTOM_STYLE} />
+        );
+      });
+    }
+  }
+
   return (
     <View
       style={[
@@ -168,27 +194,7 @@ export const TabBar = (props) => {
             Styles.FirstRowContainer,
             Styles.TabItemsContent
           ]}>
-            {
-              attitude.children.map((item, i) => {
-                const _PROPS = item.props,
-                      _ITEM_KEY = Functions._generateNewUniqueObjectKey(i);
-
-                var _CUSTOM_STYLE = {};
-
-                if (i < (attitude.children.length - 1)){
-                  _CUSTOM_STYLE = {
-                    ..._CUSTOM_STYLE,
-                    ...Styles.LTR_TabItems
-                  };
-                }
-
-                return (
-                  <TabBarItem
-                    {..._PROPS}
-                    style={_CUSTOM_STYLE} />
-                );
-              })
-            }
+            {_TAB_BAR_CONTENT}
         </View>
     </View>
   )
