@@ -120,6 +120,7 @@ export const OverseerContainer = (props) => {
                         if (i === _CURRENT_TAB_INDEX){
                           return (
                             <TabBarItem
+                              key={_GENNERATED_KEY}
                               activated={true}
                               name={_TAB_TOKEN_NAME}
                               onPress={() => attitude.onPress(tab)} />
@@ -127,6 +128,7 @@ export const OverseerContainer = (props) => {
                         }else{
                           return (
                             <TabBarItem
+                              key={_GENNERATED_KEY}
                               name={_TAB_TOKEN_NAME}
                               onPress={() => attitude.onPress(tab)} />
                           );

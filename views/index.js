@@ -25,11 +25,11 @@ const ProfileStack = createStackNavigator({
   headerMode: 'none'
 });
 
-const OverseerStack = createSwitchNavigator({
+const OverseerStack = createStackNavigator({
   Overseer,
   ProfileStack: ProfileStack
 }, {
-  initialRouteName: 'Overseer'
+  headerMode: 'none'
 });
 
 const AuthenticationStack = createStackNavigator({

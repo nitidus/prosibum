@@ -176,6 +176,7 @@ export const TabBar = (props) => {
 
         return (
           <TabBarItem
+            key={_ITEM_KEY}
             {..._PROPS}
             style={_CUSTOM_STYLE} />
         );
