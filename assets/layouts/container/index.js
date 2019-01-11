@@ -9,7 +9,8 @@ import { TabBar, TabBarItem } from './layouts/pilot/tab-bar'
 //Profile
 import { OverseerContainer } from './views/profile/overseer-container';
 import { ProfileContainer } from './views/profile/profile-container';
-import { RolesContainer } from './views/profile/roles-container'
+import { RolesContainer } from './views/profile/roles-container';
+import { WalletsContainer } from './views/profile/wallets-container';
 
 module.exports = {
   Layouts: {
@@ -25,7 +26,8 @@ module.exports = {
     Profile: {
       OverseerContainer,
       ProfileContainer,
-      RolesContainer
+      RolesContainer,
+      WalletsContainer
     }
   }
 };

@@ -2,7 +2,9 @@ import { AsyncStorage, CameraRoll, PermissionsAndroid, Platform } from 'react-na
 import RNFetchBlob from 'rn-fetch-blob';
 import Lodash from 'lodash';
 
-import { countries as __COUNTRIES } from '../../flows/knowledge/index';
+import { countries as __COUNTRIES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
+const __WALLETS = __VIEWS_CONSTANTS.profile.wallets;
+
 import { name as __APP_NAME } from '../../../app.json';
 
 module.exports = {
@@ -114,6 +116,24 @@ module.exports = {
   },
   _convertKeywordToBlockToken: (keyword) => {
     return module.exports._convertKeywordToToken(keyword).replace(/ /ig, '');
+  },
+  _returnCurrencyDependOnLanguage: (currency) => {
+    if (typeof currency != 'undefined' && currency != ''){
+      const _CURRENCY_TYPE_KEY = module.exports._convertTokenToKey(currency);
+
+      const _PILOT_TABS_TITLE = __WALLETS.pilot.content.map((item, j) => {
+              return item.title;
+            }),
+            _FOUNDED_TAB_NAME_INDEX = _PILOT_TABS_TITLE.findIndex((item) => {
+              return (_CURRENCY_TYPE_KEY === module.exports._convertTokenToKey(item.en));
+            });
+
+      if (_FOUNDED_TAB_NAME_INDEX > -1){
+        return _PILOT_TABS_TITLE[_FOUNDED_TAB_NAME_INDEX].en;
+      }else{
+        return module.exports._convertKeywordToToken(currency);
+      }
+    }
   },
   _generateNewUniqueObjectKey: (seedKey) => {
     const _TODAY = new Date(),

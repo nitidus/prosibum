@@ -248,7 +248,8 @@ export const TopBar = (props) => {
           _RIGHT_SIDE_CONTENT = React.cloneElement(_CHILD, _CHILD_PROPS);
           break;
         case 'bottom':
-          var _TAB_ATTITUDE = {};
+          var _TAB_ATTITUDE = {},
+              _TAB_ATTITUDE_CONTENT;
 
           if (typeof _CHILD_PROPS.children != 'undefined'){
             _BOTTOM_WIDE_CONTENT = <View
@@ -271,47 +272,49 @@ export const TopBar = (props) => {
               _TAB_ATTITUDE.onPress = _CHILD_PROPS.onPress || _CHILD_PROPS.onTabPress || _CHILD_PROPS.tabOnPress || _CHILD_PROPS.onTabItemPress || _CHILD_PROPS.tabItemOnPress;
             }
 
+            if ((typeof _TAB_ATTITUDE.data != 'undefined') && (typeof _TAB_ATTITUDE.current != 'undefined')){
+              _TAB_ATTITUDE_CONTENT = _TAB_ATTITUDE.data.map((tabItemName, w, tabItems) => {
+                var _ITEM_STYLE;
+
+                if (w < tabItems.length - 1){
+                  _ITEM_STYLE = Styles.TabItemContainer;
+                }
+
+                const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w),
+                      _ITEM_NAME = tabItemName,
+                      _SCAPED_ITEM_NAME = Functions._convertTokenToKeyword(_ITEM_NAME),
+                      _SCAPED_CURRENT_ITEM = Functions._convertTokenToKeyword(_TAB_ATTITUDE.current);
+
+                if (_SCAPED_ITEM_NAME === _SCAPED_CURRENT_ITEM){
+                  return (
+                    <TabItem
+                      key={_ITEM_KEY}
+                      name={tabItemName}
+                      style={_ITEM_STYLE}
+                      gradient={Global.colors.pair.ongerine}
+                      onPress={_TAB_ATTITUDE.onPress} />
+                  );
+                }else{
+                  return (
+                    <TabItem
+                      key={_ITEM_KEY}
+                      name={tabItemName}
+                      style={[
+                        _ITEM_STYLE,
+                        Styles.DisabledSingleTabItemContainer
+                      ]}
+                      disable={true}
+                      onPress={_TAB_ATTITUDE.onPress} />
+                  );
+                }
+              })
+            }
+
             _BOTTOM_WIDE_CONTENT = <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={Styles.SecondRowContainer}>
-                {
-                  _TAB_ATTITUDE.data.map((tabItemName, w, tabItems) => {
-                    var _ITEM_STYLE;
-
-                    if (w < tabItems.length - 1){
-                      _ITEM_STYLE = Styles.TabItemContainer;
-                    }
-
-                    const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w),
-                          _ITEM_NAME = tabItemName,
-                          _SCAPED_ITEM_NAME = Functions._convertTokenToKeyword(_ITEM_NAME),
-                          _SCAPED_CURRENT_ITEM = Functions._convertTokenToKeyword(_TAB_ATTITUDE.current);
-
-                    if (_SCAPED_ITEM_NAME === _SCAPED_CURRENT_ITEM){
-                      return (
-                        <TabItem
-                          key={_ITEM_KEY}
-                          name={tabItemName}
-                          style={_ITEM_STYLE}
-                          gradient={Global.colors.pair.ongerine}
-                          onPress={_TAB_ATTITUDE.onPress} />
-                      );
-                    }else{
-                      return (
-                        <TabItem
-                          key={_ITEM_KEY}
-                          name={tabItemName}
-                          style={[
-                            _ITEM_STYLE,
-                            Styles.DisabledSingleTabItemContainer
-                          ]}
-                          disable={true}
-                          onPress={_TAB_ATTITUDE.onPress} />
-                      );
-                    }
-                  })
-                }
+                {_TAB_ATTITUDE_CONTENT}
             </ScrollView>;
           }
           break;

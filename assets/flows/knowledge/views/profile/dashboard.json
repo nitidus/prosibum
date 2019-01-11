@@ -1,0 +1,22 @@
+{
+  "walletsCursor": {
+    "type": "BUTTON",
+    "options": {
+      "unit": {
+        "en": "PCS"
+      }
+    },
+    "state": {
+      "normal": {
+        "title": {
+          "en": "Wallets"
+        }
+      },
+      "loading": {
+        "title": {
+          "en": "Wallets Loading"
+        }
+      }
+    }
+  }
+}

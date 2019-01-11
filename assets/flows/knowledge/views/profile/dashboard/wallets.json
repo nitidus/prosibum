@@ -1,0 +1,34 @@
+{
+  "pilot": {
+    "title": {
+      "en": "Wallets"
+    },
+    "content": [
+      {
+        "title": {
+          "en": "Dollar"
+        }
+      },
+      {
+        "title": {
+          "en": "TP"
+        }
+      },
+      {
+        "title": {
+          "en": "Rial"
+        }
+      },
+      {
+        "title": {
+          "en": "Pound"
+        }
+      },
+      {
+        "title": {
+          "en": "Euro"
+        }
+      }
+    ]
+  }
+}

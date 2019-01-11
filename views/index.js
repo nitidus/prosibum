@@ -6,6 +6,9 @@ import Profile from './profile/profile';
   //Profile Subsets
   import Roles from './profile/profile/roles';
 
+  //Dashboard Subsets
+  import Wallets from './profile/dashboard/wallets';
+
 //Authentication Screens
 import Login from './authentication/login';
 import Signup from './authentication/signup';
@@ -20,7 +23,8 @@ import Overseer from './overseer';
 
 const ProfileStack = createStackNavigator({
   Profile,
-  Roles
+  Roles,
+  Wallets
 }, {
   headerMode: 'none'
 });

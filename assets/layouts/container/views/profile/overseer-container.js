@@ -3,7 +3,7 @@ import { StatusBar, View, Text, TouchableWithoutFeedback, Animated, Easing } fro
 
 import { Global, Views } from '../../../../styles/index';
 import { Pilot, TabBarItem, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
-const Styles = Views.Profile.Dashboard;
+const Styles = Views.Profile.Overseer;
 
 import { Functions, Utils } from '../../../../modules/index';
 const { MenuCardPulling } = Utils.Animations.MenuPulling;

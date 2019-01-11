@@ -14,8 +14,8 @@ import { SubViews as SubViewsActions } from '../../../assets/flows/states/action
 const { mapStateToProps, mapDispatchToProps } = SubViewsActions.UserProfile.TechnicalTab;
 
 import { Functions } from '../../../assets/modules/index';
-const { Preparation } = Functions;
-const _SCREEN = Dimensions.get('window');
+const { Preparation } = Functions,
+      _SCREEN = Dimensions.get('window');
 
 import { views_constants } from '../../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.user_profile_sub_views.technical_tab;

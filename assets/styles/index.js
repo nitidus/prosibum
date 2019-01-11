@@ -9,9 +9,12 @@ import ForgottenPassword from './views/authentication/forgotten-password';
 import VerifyPhoneNumber from './views/authentication/verify-phone-number';
 
 //Profile
-import Dashboard from './views/profile/dashboard';
+import Overseer from './views/profile/overseer';
 import Profile from './views/profile/profile';
 import Roles from './views/profile/roles';
+import Wallets from './views/profile/wallets';
+
+import Dashboard from './views/profile/profile/dashboard';
 
 /*** Modules ***/
 
@@ -29,9 +32,11 @@ module.exports = {
       VerifyPhoneNumber
     },
     Profile: {
-      Dashboard,
+      Overseer,
       Profile,
-      Roles
+      Roles,
+      Wallets,
+      Dashboard
     }
   },
   Modules: {

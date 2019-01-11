@@ -22,6 +22,7 @@ import VerifyPhoneNumber from './reducers/views/authentication/verify-phone-numb
 import Overseer from './reducers/views/profile/overseer';
 import UserProfile from './reducers/views/profile/user-profile';
 import Roles from './reducers/views/profile/roles';
+import Wallets from './reducers/views/profile/wallets';
 
 /* Sub Views Reducers */
 
@@ -33,7 +34,7 @@ export default () => {
           Segment,
           Toast, CountriesCodesModal, CameraRollPickerModal, RolesModal,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber,
-          Overseer, UserProfile, Roles,
+          Overseer, UserProfile, Roles, Wallets,
           TechnicalTab
         }),
         middeware = applyMiddleware(logger);

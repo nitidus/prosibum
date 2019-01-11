@@ -64,7 +64,8 @@ class Overseer extends Component<{}> {
         currentTab={props.overseer.currentTab}
         onTabItemPress={(tabName) => props.setBottomPilotCurrentTab(tabName)}
         {...props}>
-          <RootContentComponent />
+          <RootContentComponent
+            {...props} />
       </Container>
     );
   }

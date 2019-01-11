@@ -21,6 +21,7 @@ import { views_constants } from '../../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.roles;
 
 import { Functions } from '../../../assets/modules/index';
+const { Preparation } = Functions;
 
 class Roles extends Component<{}> {
   static navigationOptions = {
