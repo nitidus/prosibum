@@ -1,0 +1,38 @@
+{
+  "modalContainer": {
+    "title": {
+      "en": "Wallet Modal"
+    },
+    "content": {
+      "firstCarouselContainer": {
+        "title": {
+          "en": "Currencies"
+        },
+        "content": {
+          "self": {
+            "type": "BUTTON",
+            "title": {
+              "en": "Wallet Type"
+            }
+          }
+        }
+      },
+      "firstInput": {
+        "type": "TEXT",
+        "title": {
+          "en": "Wallet Name"
+        }
+      },
+      "submitInput": {
+        "type": "BUTTON",
+        "state": {
+          "normal": {
+            "title": {
+              "en": "Increase Credit"
+            }
+          }
+        }
+      }
+    }
+  }
+}
