@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: pilotTabs
       })
     },
-    setwalletModalVisibility: (visibilityStatus) => {
+    setWalletModalVisibility: (visibilityStatus) => {
       dispatch({
         type: WALLETS.SET_WALLET_MODAL_VISIBILITY,
         payload: visibilityStatus

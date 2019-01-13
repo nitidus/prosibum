@@ -1,7 +1,6 @@
 import { LAYOUTS } from '../../types/index';
 const { ROLES_MODAL } = LAYOUTS;
 
-
 const initialState = {
   roles: [],
   currentRole: {},
@@ -13,7 +12,6 @@ const initialState = {
     content: ''
   }
 };
-
 
 export default (state = initialState, action) => {
   switch (action.type) {

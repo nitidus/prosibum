@@ -221,7 +221,7 @@ class Roles extends Component<{}> {
               //We can use response later
               await props.fetchAvailableRoles(props.roles.currentTab);
             }}
-            rolesModalvisibility={props.roles.rolesModalVisibility}
+            rolesModalVisibility={props.roles.rolesModalVisibility}
             {...props}>
               {_TAB_CONTENT}
           </Container>

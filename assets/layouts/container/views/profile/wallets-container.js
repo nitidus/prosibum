@@ -3,7 +3,7 @@ import { StatusBar, View, Text, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
 import { Input } from '../../../../components/index';
-import { Pilot, PinnedSide, Icon } from '../../../../layouts/index';
+import { Pilot, PinnedSide, Icon, WalletModal } from '../../../../layouts/index';
 const Styles = Views.Profile.Wallets;
 
 import { Functions } from '../../../../modules/index';
@@ -32,8 +32,18 @@ export const WalletsContainer = (props) => {
   }
 
   if ((typeof props.onPilotTabItemPress != 'undefined') || (typeof props.pilotTabItemOnPress != 'undefined') || (typeof props.navigationTabItemOnPress != 'undefined') || (typeof props.onNavigationTabItemPress != 'undefined')){
-    props.onPilotTabItemPress = props.onPilotTabItemPress || props.pilotTabItemOnPress || props.onNavigationTabItemPress || props.navigationTabItemOnPress;
+    attitude.onPilotTabItemPress = props.onPilotTabItemPress || props.pilotTabItemOnPress || props.onNavigationTabItemPress || props.navigationTabItemOnPress;
   }
+
+  if ((typeof props.onAddWalletPress != 'undefined') || (typeof props.onRightPinnedPress != 'undefined') || (typeof props.onLeftPinnedPress != 'undefined')){
+    attitude.onAddWalletPress = props.onAddWalletPress || props.onRightPinnedPress || props.onLeftPinnedPress;
+  }
+
+  if ((typeof props.onWalletAbsorb != 'undefined') || (typeof props.onWalletAppend != 'undefined') || (typeof props.onWalletMerge != 'undefined') || (typeof props.onWalletImbibe != 'undefined') || (typeof props.onAbsorbWallet != 'undefined') || (typeof props.onAppendWallet != 'undefined') || (typeof props.onMergeWallet != 'undefined') || (typeof props.onImbibeWallet != 'undefined')){
+    attitude.onWalletAbsorb = props.onWalletAbsorb || props.onWalletAppend || props.onWalletMerge || props.onWalletImbibe || props.onAbsorbWallet || props.onAppendWallet || props.onMergeWallet || props.onImbibeWallet;
+  }
+
+  attitude.walletModalVisibility = props.walletModalVisibility || props.walletModalVisible || props.walletModalIsVisible || false;
 
   var _CHILDREN_CONTENT;
 
@@ -78,7 +88,7 @@ export const WalletsContainer = (props) => {
             </PinnedSide>
             <PinnedSide
               type="right"
-              onPress={() => alert('ok 2')}>
+              onPress={() => attitude.onAddWalletPress(true)}>
                 <Icon
                   name="plus"
                   style={Styles.ForYouButton}
@@ -90,6 +100,13 @@ export const WalletsContainer = (props) => {
               current={_CURRENT_TAB}
               onPress={props.onPilotTabItemPress} />
         </Pilot>
+
+        <WalletModal
+          visibility={attitude.walletModalVisibility}
+          data={attitude.pilotData}
+          currentCurrenciesItem={attitude.currentPilotItem}
+          onBlur={attitude.onAddWalletPress}
+          onProgressSuccess={attitude.onWalletAbsorb} />
 
         {_CHILDREN_CONTENT}
     </View>

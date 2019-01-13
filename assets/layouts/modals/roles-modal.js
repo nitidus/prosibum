@@ -104,10 +104,10 @@ const RolesModal = (props) => {
 
       return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
     }),
-    _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role,
+    _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role || props.rolesModal.currentRole,
     _CURRENT_USER_GROUP_ROLE_INDEX = props.rolesModal.roles.findIndex((item) => {
-      const _USER_GROUP_ROLE = item.role,
-            _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role;
+      const _USER_GROUP_ROLE = item.role || item,
+            _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role || props.rolesModal.currentRole;
 
       return (_CURRENT_USER_GROUP_ROLE === _USER_GROUP_ROLE);
     }),
@@ -130,7 +130,7 @@ const RolesModal = (props) => {
           itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
           firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
           onLayout={({ item, i }) => {
-            var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.rolesModal.currentRole.role),
+            var _CURRENT_USER_GROUP = Functions._convertKeywordToToken( props.rolesModal.currentRole.role || props.rolesModal.currentRole),
                 _ITEM_NAME = item.toLowerCase(),
                 _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
 

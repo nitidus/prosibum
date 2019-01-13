@@ -48,6 +48,12 @@ class Wallets extends Component<{}> {
 
           // await props.fetchAvailableRoles(props.roles.tabs[_SELECTED_ITEM_INDEX]);
         }}
+        onAddWalletPress={(visibilityStatus) => props.setWalletModalVisibility(visibilityStatus)}
+        onWalletAbsorb={async (response) => {
+          //We can use response later
+          // await props.fetchAvailableRoles(props.roles.currentTab);
+        }}
+        walletModalVisibility={props.wallets.walletModalVisibility}
         {...props}>
           <Text>Wallets Intro</Text>
       </Container>

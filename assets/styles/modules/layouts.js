@@ -5,14 +5,14 @@ import Modal from './layouts/modal';
 import Pilot from './layouts/pilot';
 import DrawerMenu from './layouts/drawer-menu';
 
-import { CountriesCodesModal, CameraRollPickerModal, RolesModal } from './layouts/modals/index';
+import { CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal } from './layouts/modals/index';
 
 module.exports = {
   Container,
   ActivityIndicator,
   Toast,
   Modal,
-  CountriesCodesModal, CameraRollPickerModal, RolesModal,
+  CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal,
   Pilot,
   DrawerMenu
 };

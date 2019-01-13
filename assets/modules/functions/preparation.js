@@ -73,8 +73,8 @@ module.exports = {
           { navigation } = props;
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
-
-    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
+//here
+    navigation.navigate(_DID_TOKEN_CREATED? 'Wallets': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
