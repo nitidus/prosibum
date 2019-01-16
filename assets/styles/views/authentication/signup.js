@@ -8,15 +8,15 @@ const { width, height } = Dimensions.get('window'),
 
 var _INNER_CONTENT = {};
 
+var _CONTENT = {};
+
 if (width >= 1000 || height >= 1000){
-  _INNER_CONTENT = {
-    width: (Platform.OS === 'ios')? width - (162 * 2): width - (202 * 2),
-    marginHorizontal: (Platform.OS === 'ios')? 162: 202
+  _CONTENT = {
+    width: (Platform.OS === 'ios')? width - (162 * 2): width - (202 * 2)
   };
 }else{
-  _INNER_CONTENT = {
-    width: width - (32 * 2),
-    marginHorizontal: 32
+  _CONTENT = {
+    width: width - (32 * 2)
   };
 }
 
@@ -28,26 +28,11 @@ module.exports = StyleSheet.create({
   },
   Content: {
     position: 'absolute',
-    bottom: 0
-  },
-  InnerContent: {
-    ..._INNER_CONTENT
-  },
-  Headline: {
-    marginTop: 47
-  },
-  FirstCarousel: {
-    marginTop: 44,
-    flexDirection: 'row'
-  },
-  FirstCarouselLoading: {
-    marginHorizontal: _INNER_CONTENT.marginHorizontal
+    bottom: 0,
+    ..._CONTENT
   },
   FirstInputGroup: {
-    marginTop: 15
-  },
-  SecondInputGroup: {
-    marginTop: 15
+    marginTop: 44
   },
   SubmitButton: {
     marginTop: 15

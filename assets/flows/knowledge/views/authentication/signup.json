@@ -7,38 +7,7 @@
       "en": "Please enter your\nuser account details."
     }
   },
-  "firstCarouselContainer": {
-    "title": {
-      "en": "User Group"
-    },
-    "content": {
-      "self": {
-        "type": "BUTTON",
-        "state": {
-          "loading": {
-            "title": {
-              "en": "User Group Loading"
-            }
-          }
-        }
-      }
-    }
-  },
   "firstInputGroup": {
-    "first": {
-      "type": "TEXT",
-      "title": {
-        "en": "First Name"
-      }
-    },
-    "second": {
-      "type": "TEXT",
-      "title": {
-        "en": "Last Name"
-      }
-    }
-  },
-  "secondInputGroup": {
     "first": {
       "type": "PHONE-LINK",
       "title": {

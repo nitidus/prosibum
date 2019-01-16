@@ -5,18 +5,18 @@ import { GLOBAL } from '../../flows/states/types/index';
 
 module.exports = {
   _prepareSignupSeed: (inputProps) => {
-    return {
-      personal: {
-        first_name: inputProps.firstName,
-        last_name: inputProps.lastName
-      },
-      user_group_id: inputProps.userGroup._id,
+    var _SEED = {
       phone: {
         mobile: `${inputProps.phone.dialCode.area_code}${Prototypes._getRidOfZerosFromPhoneNumber(inputProps.phone.number)}`
       },
-      email: inputProps.email,
       password: inputProps.password
     };
+
+    if (typeof inputProps.email != 'undefined'){
+      _SEED.email = inputProps.email;
+    }
+
+    return _SEED;
   },
   _prepareVerifyPhoneNumberSeed: (inputProps) => {
     return {
