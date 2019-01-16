@@ -12,9 +12,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setEmail: (email) => {
+    setToken: (email) => {
       dispatch({
-        type: LOGIN.SET_EMAIL,
+        type: LOGIN.SET_TOKEN,
         payload: email
       })
     },

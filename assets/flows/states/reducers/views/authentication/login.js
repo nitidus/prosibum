@@ -2,7 +2,7 @@ import { VIEWS } from '../../../types/index';
 const { LOGIN } = VIEWS.AUTHENTICATION;
 
 const initialState = {
-  email: '',
+  token: '',
   password: '',
   loading: false,
   connected: {
@@ -13,10 +13,10 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN.SET_EMAIL:
+    case LOGIN.SET_TOKEN:
       return {
         ...state,
-        email: action.payload
+        token: action.payload
       };
       break;
     case LOGIN.SET_PASSWORD:

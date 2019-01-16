@@ -9,9 +9,9 @@
   },
   "firstInputGroup": {
     "first": {
-      "type": "EMAIL",
+      "type": "TEXT",
       "title": {
-        "en": "Email"
+        "en": "Email or Mobile Phone"
       }
     },
     "second": {

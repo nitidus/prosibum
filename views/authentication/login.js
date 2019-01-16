@@ -40,10 +40,11 @@ class Login extends Component<{}> {
 
     var _FORM_FIELDS_VALIDITY = false;
 
-    if (_PROPS.email != '' && _PROPS.password != ''){
-      const _IS_EMAIL_VALID = Functions._checkIsAValidEmail(_PROPS.email);
+    if (_PROPS.token != '' && _PROPS.password != ''){
+      const _IS_TOKEN_VALID = Functions._checkIsAValidToken(_PROPS.token),
+            _IS_PASSWORD_VALID = Functions._checkIsAValidPassword(_PROPS.password);
 
-      if (_IS_EMAIL_VALID){
+      if (_IS_TOKEN_VALID && _IS_PASSWORD_VALID){
         _FORM_FIELDS_VALIDITY = true;
       }
     }
@@ -55,6 +56,8 @@ class Login extends Component<{}> {
     const { props } = this;
 
     var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
+
+    const _VALIDATED = this._componentWillCheckValidation(props);
 
     if (props.login.loading){
       _SUBMIT_BUTTON_CONTENT = <Input
@@ -91,8 +94,6 @@ class Login extends Component<{}> {
         forcedDisable={_VALIDATED} />;
     }
 
-    const _VALIDATED = this._componentWillCheckValidation(props);
-
     return (
       <View style={Styles.Container}>
         <StatusBar hidden={true}/>
@@ -109,8 +110,8 @@ class Login extends Component<{}> {
               type={__CONSTANTS.firstInputGroup.first.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
               placeholder={__CONSTANTS.firstInputGroup.first.title.en}
-              value={props.login.email}
-              onChangeText={(currentValue) => props.setEmail(currentValue)} />
+              value={props.login.token}
+              onChangeText={(currentValue) => props.setToken(currentValue)} />
             <Input
               type={__CONSTANTS.firstInputGroup.second.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.second.title.en)}
@@ -120,7 +121,7 @@ class Login extends Component<{}> {
               onPress={() => {
                 const { navigation } = props;
 
-                props.setEmail('');
+                props.setToken('');
                 // props.setPassword('');
 
                 navigation.navigate('ForgottenPassword');
@@ -136,7 +137,7 @@ class Login extends Component<{}> {
             onPress={() => {
               const { navigation } = props;
 
-              // props.setEmail('');
+              // props.setToken('');
               // props.setPassword('');
 
               navigation.navigate('Signup');

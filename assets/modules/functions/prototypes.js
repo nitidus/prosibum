@@ -171,9 +171,16 @@ module.exports = {
     return (_IS_EMAIL_VALID !== null)? true: false;
   },
   _checkIsAValidPhoneNumber: (phoneNumber) => {
-    const _IS_PHONE_NUMBER_VALID = phoneNumber.match(/^(?=.*\d)[0-9]{6,12}$/);
+    const _IS_PHONE_NUMBER_VALID = phoneNumber.match(/^\+?[0-9]{1,4}[0-9]{10,14}$/);
 
     return (_IS_PHONE_NUMBER_VALID !== null)? true: false;
+  },
+  _checkIsAValidToken: (token) => {
+    if (token.match(/^\+?[0-9]{1,4}[0-9]{3,14}/)){
+      return module.exports._checkIsAValidPhoneNumber(token);
+    }else{
+      return module.exports._checkIsAValidEmail(token);
+    }
   },
   _checkIsAValidPassword: (password) => {
     const _IS_PASSWORD_VALID = password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\$%&#!~`\^*\(\)_\-\+\=\?><])[0-9a-zA-Z\$%&#!~`\^*\(\)_\-\+\=\?><]{8,}$/);
