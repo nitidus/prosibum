@@ -13,7 +13,13 @@ module.exports = {
     })
 
     try {
-      const _ROLES = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/endusers`, rolesRules);
+      const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+            _AUTH = JSON.parse(_SERIALIZED_AUTH),
+            _REFERENCE_ID = (typeof _AUTH.reference_id != 'undefined')? _AUTH.reference_id: _AUTH._id,
+            _ROLES = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/endusers`, {
+              ...rolesRules,
+              reference_id: _REFERENCE_ID
+            });
 
       if (_ROLES.status === 200){
         const _FINAL_RESPONSE = _ROLES.data;
