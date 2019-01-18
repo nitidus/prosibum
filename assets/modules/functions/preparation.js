@@ -25,7 +25,7 @@ module.exports = {
   },
   _prepareLoginSeed: (inputProps) => {
     return {
-      email: inputProps.email,
+      token: inputProps.token,
       password: inputProps.password
     };
   },
@@ -63,7 +63,7 @@ module.exports = {
 
     await props.verifyAuthentication(_LOGIN_SEED);
 
-    props.setEmail('');
+    props.setToken('');
     props.setPassword('');
 
     navigation.navigate('Authorization');
