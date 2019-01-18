@@ -30,6 +30,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: password
       })
     },
+    setUsergroup: (usergroup) => {
+      dispatch({
+        type: SIGNUP.SET_USERGROUP,
+        payload: usergroup
+      });
+    },
     subscribeTheUser: async (userDetail) => CMD._subscribeUserWithDetail(userDetail, dispatch),
     regenerateTheUserPhoneNumberValidationToken: async (validation) => CMD._regenerateValidationToken(validation, dispatch),
     setSubscribeLoadingStatus: (loadingStatus) => {

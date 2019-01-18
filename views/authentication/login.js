@@ -111,6 +111,7 @@ class Login extends Component<{}> {
               name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
               placeholder={__CONSTANTS.firstInputGroup.first.title.en}
               value={props.login.token}
+              autoCapitalize="none"
               onChangeText={(currentValue) => props.setToken(currentValue)} />
             <Input
               type={__CONSTANTS.firstInputGroup.second.type}

@@ -11,6 +11,7 @@ const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
         },
         email: '',
         password: '',
+        usergroup: {},
         loadingSubscribe: false,
         connected: {
           status: true,
@@ -41,6 +42,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         password: action.payload
+      };
+      break;
+    case SIGNUP.SET_USERGROUP:
+      return {
+        ...state,
+        usergroup: action.payload
       };
       break;
     case SIGNUP.SUBSCRIBE_THE_USER:

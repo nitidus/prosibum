@@ -42,6 +42,10 @@ export const Input = (props) => {
           attitude.onChangeText = props.onChangeText || props.onChange;
         }
 
+        if (attitude.type === 'text'){
+          attitude.autoCapitalize = props.autoCapitalize || 'words';
+        }
+
         attitude.onBlur = props.onBlur || function (){};
         attitude.onFocus = props.onFocus || function (){};
         break;
@@ -68,8 +72,12 @@ export const Input = (props) => {
           attitude.onChangeText = props.onChangeText || props.onChange;
         }
 
-          attitude.onBlur = props.onBlur || function (){};
-          attitude.onFocus = props.onFocus || function (){};
+        if (attitude.type === 'text-link'){
+          attitude.autoCapitalize = props.autoCapitalize || 'words';
+        }
+
+        attitude.onBlur = props.onBlur || function (){};
+        attitude.onFocus = props.onFocus || function (){};
         break;
       case 'photo':
       case 'photo-picker':
@@ -167,6 +175,7 @@ export const Input = (props) => {
             Styles.ContainerWithoutButton,
             attitude.style
           ]}
+          autoCapitalize={attitude.autoCapitalize}
           value={attitude.value}
           placeholder={attitude.placeholder}
           placeholderTextColor={Global.colors.single.mercury}
@@ -260,6 +269,7 @@ export const Input = (props) => {
                 Styles.TextInputConatiner,
                 { width: '72%' }
               ]}
+              autoCapitalize={attitude.autoCapitalize}
               value={attitude.value}
               placeholder={attitude.placeholder}
               placeholderTextColor={Global.colors.single.mercury}

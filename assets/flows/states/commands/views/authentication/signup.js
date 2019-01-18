@@ -14,42 +14,54 @@ module.exports = {
     })
 
     try {
-      const _SUBSCRIBED_USER = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/users`, userDetail);
+      const _ADMINISTRATOR_TOKEN = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${GLOBAL.TARGET}/HIGHEST_PRIORITY`);
 
-      if (_SUBSCRIBED_USER.status === 200){
-        const _FINAL_RESPONSE = _SUBSCRIBED_USER.data;
+      if (_ADMINISTRATOR_TOKEN.status === 200){
+        const _FINAL_ADMINISTRATOR_TOKEN_RESPONSE = _ADMINISTRATOR_TOKEN.data;
 
-        if (_FINAL_RESPONSE.meta.code === 200){
-          const _DATA = _FINAL_RESPONSE.data,
-                _SERIALIZED_DATA = JSON.stringify(_DATA)
-                _DID_SUBSCRIBED_USER_STORE = await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _SERIALIZED_DATA);
+        if (_FINAL_ADMINISTRATOR_TOKEN_RESPONSE.meta.code === 200){
+          const _ADMINISTRATOR_TOKEN_DATA = _FINAL_ADMINISTRATOR_TOKEN_RESPONSE.data,
+                _SUBSCRIBED_USER = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/users`, {
+                  user_group_id: _ADMINISTRATOR_TOKEN_DATA._id,
+                  ...userDetail
+                });
 
-          if (_DID_SUBSCRIBED_USER_STORE === true){
-            dispatch({
-              type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-              payload: false
-            })
+          if (_SUBSCRIBED_USER.status === 200){
+            const _FINAL_RESPONSE = _SUBSCRIBED_USER.data;
 
-            dispatch({
-              type: SIGNUP.SET_CONNECTED_STATUS,
-              payload: {
-                status: true
+            if (_FINAL_RESPONSE.meta.code === 200){
+              const _DATA = _FINAL_RESPONSE.data,
+                    _SERIALIZED_DATA = JSON.stringify(_DATA),
+                    _DID_SUBSCRIBED_USER_STORE = await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _SERIALIZED_DATA);
+
+              if (_DID_SUBSCRIBED_USER_STORE === true){
+                dispatch({
+                  type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+                  payload: false
+                })
+
+                dispatch({
+                  type: SIGNUP.SET_CONNECTED_STATUS,
+                  payload: {
+                    status: true
+                  }
+                })
               }
-            })
-          }
-        }else{
-          dispatch({
-            type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-            payload: false
-          })
+            }else{
+              dispatch({
+                type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+                payload: false
+              })
 
-          dispatch({
-            type: SIGNUP.SET_CONNECTED_STATUS,
-            payload: {
-              status: false,
-              content: _FINAL_RESPONSE.meta.error_message
+              dispatch({
+                type: SIGNUP.SET_CONNECTED_STATUS,
+                payload: {
+                  status: false,
+                  content: _FINAL_RESPONSE.meta.error_message
+                }
+              })
             }
-          })
+          }
         }
       }
     } catch (error) {
