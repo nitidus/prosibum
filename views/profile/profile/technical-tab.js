@@ -65,7 +65,7 @@ class TechnicalTab extends Component<{}> {
       _BRAND_ROLE_CAROUSEL_CONTENT = <Input
         type={__CONSTANTS.firstCarouselContainer.content.self.type}
         name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.content.self.state.loading.title.en)}
-        gradient={Global.colors.pair.aqrulean}
+        gradient={Global.colors.pair.ongerine}
         style={[
           Styles.BrandRoleCarouselContainer,
           { marginHorizontal: Styles.GlobalMeasurements.marginHorizontal }
@@ -94,68 +94,47 @@ class TechnicalTab extends Component<{}> {
             </Text>
         </Input>;
       }else{
-        _BRAND_ROLE_CAROUSEL_CONTENT = <Carousel
-          name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.title.en)}
-          data={props.technicalTab.brandRoles}
-          style={Styles.BrandRoleCarouselContainer}
-          itemWidth={_SCREEN.width - (Styles.GlobalMeasurements.marginHorizontal * 2)}
-          firstItem={_CURRENT_BRAND_ROLE}
-          onLayout={({ item, i }) => {
-            var __LOCAL_CURRENT_RAND_ROLE = props.technicalTab.brandRole,
-                _INACTIVE_STYLE = {
-                  backgroundColor: Global.colors.single.wildSand
-                },
-                _ITEM_NAME = item.role.toLowerCase(),
-                _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
+        if (typeof props.technicalTab.brandRole.role != 'undefined'){
+          _BRAND_ROLE_CAROUSEL_CONTENT = <Input
+            type={__CONSTANTS.firstCarouselContainer.content.self.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.content.self.state.loading.title.en)}
+            gradient={Global.colors.pair.aqrulean}
+            value={Functions._convertKeywordToToken(props.technicalTab.brandRole.role)}
+            style={[
+              Styles.BrandRoleCarouselContainer,
+              {
+                width: _SCREEN.width - (Styles.GlobalMeasurements.marginHorizontal * 2),
+                marginHorizontal: Styles.GlobalMeasurements.marginHorizontal
+              }
+            ]}
+            disable={true} />;
 
-            if (__LOCAL_CURRENT_RAND_ROLE.role === item.role){
-              return (
-                <Input
-                  type={__CONSTANTS.firstCarouselContainer.content.self.type}
-                  name={_ITEM_NAME}
-                  value={_ITEM_VALUE}
-                  gradient={Global.colors.pair.aqrulean}
-                  disable={true}/>
-              );
-            }else{
-              return (
-                <Input
-                  type={__CONSTANTS.firstCarouselContainer.content.self.type}
-                  name={_ITEM_NAME}
-                  value={_ITEM_VALUE}
-                  style={_INACTIVE_STYLE}
-                  disable={true}/>
-              );
+          if (typeof props.technicalTab.brandRoles[_CURRENT_BRAND_ROLE] != 'undefined'){
+            const _PRIORITY_TOKEN = Preparation._prepareBrandRolePriority(props);
+
+            if (_PRIORITY_TOKEN.current === _PRIORITY_TOKEN.range.min){
+              _BRAND_NAME_DEPENDED_HANDLER_CONTENT = <Input
+                type={__CONSTANTS.secondInput.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.secondInput.title.en)}
+                placeholder={__CONSTANTS.secondInput.title.en}
+                value={props.technicalTab.brandName}
+                style={Styles.SingleInput}
+                onChangeText={(currentValue) => props.setBrandName(currentValue)}
+                disable={true} />;
             }
-          }}
-          onSnap={(selectedItemIndex) => {
-            props.setBrandRole(props.technicalTab.brandRoles[selectedItemIndex]);
-          }}/>;
 
-        if (typeof props.technicalTab.brandRoles[_CURRENT_BRAND_ROLE] != 'undefined'){
-          const _PRIORITY_TOKEN = Preparation._prepareBrandRolePriority(props);
+            if (_PRIORITY_TOKEN.current !== _PRIORITY_TOKEN.range.max){
+              _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT = <Link
+                containerStyle={Styles.QuickLink}
+                value={__CONSTANTS.quickLink.title.en}
+                onPress={() => {
+                  const { navigation } = this.props;
 
-          if (_PRIORITY_TOKEN.current === _PRIORITY_TOKEN.range.min){
-            _BRAND_NAME_DEPENDED_HANDLER_CONTENT = <Input
-              type={__CONSTANTS.secondInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.secondInput.title.en)}
-              placeholder={__CONSTANTS.secondInput.title.en}
-              value={props.technicalTab.brandName}
-              style={Styles.SingleInput}
-              onChangeText={(currentValue) => props.setBrandName(currentValue)} />;
-          }
-
-          if (_PRIORITY_TOKEN.current !== _PRIORITY_TOKEN.range.max){
-            _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT = <Link
-              containerStyle={Styles.QuickLink}
-              value={__CONSTANTS.quickLink.title.en}
-              onPress={() => {
-                const { navigation } = this.props;
-
-                navigation.navigate('Roles', {
-                  currentRole: props.technicalTab.brandRole
-                });
-              }} />;
+                  navigation.navigate('Roles', {
+                    currentRole: props.technicalTab.brandRole
+                  });
+                }} />;
+            }
           }
         }
       }

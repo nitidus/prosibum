@@ -38,6 +38,8 @@ export const Input = (props) => {
           attitude.onChangeText = props.onChangeText || props.onChange;
         }
 
+        attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
+
         if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
           attitude.onChangeText = props.onChangeText || props.onChange;
         }
@@ -68,6 +70,8 @@ export const Input = (props) => {
           attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
         }
 
+        attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
+
         if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
           attitude.onChangeText = props.onChangeText || props.onChange;
         }
@@ -92,6 +96,8 @@ export const Input = (props) => {
         if (typeof props.onPress != 'undefined'){
           attitude.onPress = props.onPress;
         }
+
+        attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
 
         attitude.icon = props.icon || props.icon_name || props.icon_title|| props.iconName || props.iconTitle || 'GALLERY';
 
@@ -184,8 +190,9 @@ export const Input = (props) => {
           onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
-          onSubmitEditing={Keyboard.dismiss} />
-      )
+          onSubmitEditing={Keyboard.dismiss}
+          editable={!attitude.disable} />
+      );
       break;
     case 'numeric':
       return (
@@ -205,8 +212,9 @@ export const Input = (props) => {
           onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
-          onSubmitEditing={Keyboard.dismiss} />
-      )
+          onSubmitEditing={Keyboard.dismiss}
+          editable={!attitude.disable} />
+      );
       break;
     case 'email':
       return (
@@ -228,8 +236,9 @@ export const Input = (props) => {
           onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
-          onSubmitEditing={Keyboard.dismiss} />
-      )
+          onSubmitEditing={Keyboard.dismiss}
+          editable={!attitude.disable} />
+      );
       break;
     case 'password':
       return (
@@ -251,11 +260,29 @@ export const Input = (props) => {
           onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
-          onSubmitEditing={Keyboard.dismiss} />
-      )
+          onSubmitEditing={Keyboard.dismiss}
+          editable={!attitude.disable} />
+      );
       break;
     case 'link':
     case 'text-link':
+      var _LINK_CONTENT = (
+        <Link
+          containerStyle={Styles.RTL_TextInputLinkContainer}
+          style={Styles.TextInputLink}
+          value={attitude.link}
+          onPress={attitude.onPress} />
+      );
+
+      if (attitude.disable){
+        _LINK_CONTENT = (
+          <Link
+            containerStyle={Styles.RTL_TextInputLinkContainer}
+            style={Styles.TextInputLink}
+            value={attitude.link} />
+        );
+      }
+
       return (
         <View
           key={attitude.key}
@@ -278,16 +305,31 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss} />
-            <Link
-              containerStyle={Styles.RTL_TextInputLinkContainer}
-              style={Styles.TextInputLink}
-              value={attitude.link}
-              onPress={attitude.onPress} />
+              onSubmitEditing={Keyboard.dismiss}
+              editable={!attitude.disable} />
+
+            {_LINK_CONTENT}
         </View>
       )
       break;
     case 'email-link':
+      var _LINK_CONTENT = (
+        <Link
+          containerStyle={Styles.RTL_TextInputLinkContainer}
+          style={Styles.TextInputLink}
+          value={attitude.link}
+          onPress={attitude.onPress} />
+      );
+
+      if (attitude.disable){
+        _LINK_CONTENT = (
+          <Link
+            containerStyle={Styles.RTL_TextInputLinkContainer}
+            style={Styles.TextInputLink}
+            value={attitude.link} />
+        );
+      }
+
       return (
         <View
           key={attitude.key}
@@ -312,17 +354,32 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss} />
-            <Link
-              containerStyle={Styles.RTL_TextInputLinkContainer}
-              style={Styles.TextInputLink}
-              value={attitude.link}
-              onPress={attitude.onPress} />
+              onSubmitEditing={Keyboard.dismiss}
+              editable={!attitude.disable} />
+
+            {_LINK_CONTENT}
         </View>
       )
       break;
 
     case 'numeric-link':
+      var _LINK_CONTENT = (
+        <Link
+          containerStyle={Styles.RTL_TextInputLinkContainer}
+          style={Styles.TextInputLink}
+          value={attitude.link}
+          onPress={attitude.onPress} />
+      );
+
+      if (attitude.disable){
+        _LINK_CONTENT = (
+          <Link
+            containerStyle={Styles.RTL_TextInputLinkContainer}
+            style={Styles.TextInputLink}
+            value={attitude.link} />
+        );
+      }
+
       return (
         <View
           key={attitude.key}
@@ -345,17 +402,32 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss} />
-            <Link
-              containerStyle={Styles.RTL_TextInputLinkContainer}
-              style={Styles.TextInputLink}
-              value={attitude.link}
-              onPress={attitude.onPress} />
+              onSubmitEditing={Keyboard.dismiss}
+              editable={!attitude.disable} />
+
+            {_LINK_CONTENT}
         </View>
       )
       break;
     case 'phone-link':
     case 'phone-number-link':
+      var _LINK_CONTENT = (
+        <Link
+          containerStyle={Styles.RTL_TextInputLinkContainer}
+          style={Styles.TextInputLink}
+          value={attitude.link}
+          onPress={attitude.onPress} />
+      );
+
+      if (attitude.disable){
+        _LINK_CONTENT = (
+          <Link
+            containerStyle={Styles.RTL_TextInputLinkContainer}
+            style={Styles.TextInputLink}
+            value={attitude.link} />
+        );
+      }
+
       return (
         <View
           key={attitude.key}
@@ -378,17 +450,32 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss} />
-            <Link
-              containerStyle={Styles.LTR_TextInputLinkContainer}
-              style={Styles.TextInputLink}
-              value={attitude.link}
-              onPress={attitude.onPress} />
+              onSubmitEditing={Keyboard.dismiss}
+              editable={!attitude.disable} />
+
+            {_LINK_CONTENT}
         </View>
       )
       break;
 
     case 'password-link':
+      var _LINK_CONTENT = (
+        <Link
+          containerStyle={Styles.RTL_TextInputLinkContainer}
+          style={Styles.TextInputLink}
+          value={attitude.link}
+          onPress={attitude.onPress} />
+      );
+
+      if (attitude.disable){
+        _LINK_CONTENT = (
+          <Link
+            containerStyle={Styles.RTL_TextInputLinkContainer}
+            style={Styles.TextInputLink}
+            value={attitude.link} />
+        );
+      }
+
       return (
         <View
           key={attitude.key}
@@ -412,12 +499,10 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss} />
-            <Link
-              containerStyle={Styles.RTL_TextInputLinkContainer}
-              style={Styles.TextInputLink}
-              value={attitude.link}
-              onPress={attitude.onPress} />
+              onSubmitEditing={Keyboard.dismiss}
+              editable={!attitude.disable} />
+
+            {_LINK_CONTENT}
         </View>
       )
       break;
@@ -429,7 +514,7 @@ export const Input = (props) => {
     case 'camera-roll':
     case 'camera-roll-picker':
       var _ACTIVE_OPACITY = 0.7,
-          _CAMERAROLL_CONTENT,
+          _CAMERAROLL_CONTAINER_CONTENT, _CAMERAROLL_CONTENT,
           _CAMERAROLL_CONTENT_VERB_MODE = 'Choose';
 
       if (typeof attitude.photo != 'undefined' && attitude.photo != ''){
@@ -466,29 +551,48 @@ export const Input = (props) => {
         _CAMERAROLL_CONTENT_VERB_MODE = 'Choose';
       }
 
-      return (
-        <TouchableOpacity
-          key={attitude.key}
-          name={attitude.name}
-          activeOpacity={_ACTIVE_OPACITY}
-          style={[
-            Styles.ContainerWithPhoto,
-            attitude.style
-          ]}
-          onPress={attitude.onPress}>
-          <View
-            style={Styles.PhotoInputContainer}>
-              {_CAMERAROLL_CONTENT}
+      _CAMERAROLL_CONTAINER_CONTENT = (
+        <View
+          style={Styles.PhotoInputContainer}>
+            {_CAMERAROLL_CONTENT}
 
-              <View style={Styles.PhotoInputLabelContainer}>
-                <Text
-                  style={Styles.PhotoInputLabelContent}>
-                    {_CAMERAROLL_CONTENT_VERB_MODE} The {Functions._convertKeywordToToken(attitude.value)}
-                </Text>
-              </View>
-          </View>
-        </TouchableOpacity>
+            <View style={Styles.PhotoInputLabelContainer}>
+              <Text
+                style={Styles.PhotoInputLabelContent}>
+                  {_CAMERAROLL_CONTENT_VERB_MODE} The {Functions._convertKeywordToToken(attitude.value)}
+              </Text>
+            </View>
+        </View>
       );
+
+      if (attitude.disable){
+        return (
+          <TouchableOpacity
+            key={attitude.key}
+            name={attitude.name}
+            activeOpacity={_ACTIVE_OPACITY}
+            style={[
+              Styles.ContainerWithPhoto,
+              attitude.style
+            ]}>
+              {_CAMERAROLL_CONTAINER_CONTENT}
+          </TouchableOpacity>
+        );
+      }else{
+        return (
+          <TouchableOpacity
+            key={attitude.key}
+            name={attitude.name}
+            activeOpacity={_ACTIVE_OPACITY}
+            style={[
+              Styles.ContainerWithPhoto,
+              attitude.style
+            ]}
+            onPress={attitude.onPress}>
+              {_CAMERAROLL_CONTAINER_CONTENT}
+          </TouchableOpacity>
+        );
+      }
       break;
 
     case 'button':

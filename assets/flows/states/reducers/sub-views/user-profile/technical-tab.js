@@ -5,6 +5,7 @@ const initialState = {
         brandName: '',
         brandProfilePhoto: {},
         brandRole: '',
+        brandRole: {},
         cameraRollPickerModalVisibility: false,
         brandRoles: [],
         loadingBrandRole: false,

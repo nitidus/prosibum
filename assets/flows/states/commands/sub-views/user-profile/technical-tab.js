@@ -93,10 +93,10 @@ module.exports = {
             payload: _DATA
           })
 
-          dispatch({
-            type: TECHNICAL_TAB.SET_BRAND_ROLE,
-            payload: _DATA[0]
-          })
+          // dispatch({
+          //   type: TECHNICAL_TAB.SET_BRAND_ROLE,
+          //   payload: _DATA[0]
+          // })
 
           dispatch({
             type: TECHNICAL_TAB.SET_BRAND_ROLE_LOADING_STATUS,
