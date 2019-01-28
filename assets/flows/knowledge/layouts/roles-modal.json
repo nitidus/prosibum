@@ -15,9 +15,9 @@
         }
       },
       "firstInput": {
-        "type": "NUMERIC",
+        "type": "TEXT",
         "title": {
-          "en": "Number of Role Instance"
+          "en": "Email or Mobile Phone"
         }
       },
       "submitInput": {
@@ -25,10 +25,7 @@
         "state": {
           "normal": {
             "title": {
-              "en": "Append"
-            },
-            "preposition": {
-              "en": "s"
+              "en": "Send Invitation"
             }
           }
         }

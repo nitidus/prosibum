@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { KeyboardAvoidingView, View, Text, Animated, Platform, Easing } from 'react-native';
+import { KeyboardAvoidingView, View, ScrollView, Text, Animated, Platform, Easing } from 'react-native';
 import PrimaryModal from 'react-native-modal-with-blur-support-background';
 import { BlurView } from 'react-native-blur';
 
@@ -117,7 +117,7 @@ export const Modal = (props) => {
               <Icon
                 name="indicator"
                 style={Styles.ModalIndicator} />
-              <View>
+              <ScrollView>
                 {
                   attitude.children.map((child, i) => {
                     var childProps = {...child.props};
@@ -129,7 +129,7 @@ export const Modal = (props) => {
                     return React.cloneElement(child, childProps);
                   })
                 }
-              </View>
+              </ScrollView>
           </KeyboardAvoidingView>
       </PrimaryModal>
     );
@@ -160,7 +160,7 @@ export const Modal = (props) => {
               <Icon
                 name="indicator"
                 style={Styles.ModalIndicator} />
-              <View>
+              <KeyboardAvoidingView>
                 {
                   attitude.children.map((child, i) => {
                     var childProps = {...child.props};
@@ -172,7 +172,7 @@ export const Modal = (props) => {
                     return React.cloneElement(child, childProps);
                   })
                 }
-              </View>
+              </KeyboardAvoidingView>
           </KeyboardAvoidingView>
       </PrimaryModal>
     );

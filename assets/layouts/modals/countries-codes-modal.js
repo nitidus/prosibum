@@ -98,7 +98,8 @@ const CountriesCodesModal = (props) => {
         MODAL.ON_BLUR(false);
       }}
       onPress={attitude.onPress}
-      style={Styles.ModalContainer}>
+      style={Styles.ModalContainer}
+      swipeDirection="down">
         <FlatList
           name={__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en}
           data={props.countriesCodesModal.restrictedData}

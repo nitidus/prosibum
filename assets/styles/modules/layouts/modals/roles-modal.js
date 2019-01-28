@@ -37,12 +37,14 @@ module.exports = StyleSheet.create({
     marginBottom: 15,
     flexDirection: 'row'
   },
-  RolesCountInput: {
+  TokenInput: {
     width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal,
     marginBottom: 15
   },
   AppendRolesButton: {
-    width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2)
+    width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal
   },
   __Global: {
     ..._CUSTOM___GLOBAL

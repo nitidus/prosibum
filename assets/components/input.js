@@ -413,7 +413,7 @@ export const Input = (props) => {
     case 'phone-number-link':
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.RTL_TextInputLinkContainer}
+          containerStyle={Styles.LTR_TextInputLinkContainer}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -422,7 +422,7 @@ export const Input = (props) => {
       if (attitude.disable){
         _LINK_CONTENT = (
           <Link
-            containerStyle={Styles.RTL_TextInputLinkContainer}
+            containerStyle={Styles.LTR_TextInputLinkContainer}
             style={Styles.TextInputLink}
             value={attitude.link} />
         );

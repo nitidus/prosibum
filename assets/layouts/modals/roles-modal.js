@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, ScrollView, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -19,6 +19,22 @@ const { mapStateToProps, mapDispatchToProps } = LayoutsActions.RolesModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
 const __CONSTANTS = layouts_constants.roles_modal;
+
+const _componentWillCheckValidation = (props) => {
+  const _PROPS = props.rolesModal;
+
+  var _FORM_FIELDS_VALIDITY = false;
+
+  if (_PROPS.token != ''){
+    const _IS_TOKEN_VALID = Functions._checkIsAValidToken(_PROPS.token)
+
+    if (_IS_TOKEN_VALID){
+      _FORM_FIELDS_VALIDITY = true;
+    }
+  }
+
+  return !_FORM_FIELDS_VALIDITY;
+}
 
 const RolesModal = (props) => {
   var attitude = {};
@@ -110,10 +126,10 @@ const RolesModal = (props) => {
             _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role || props.rolesModal.currentRole;
 
       return (_CURRENT_USER_GROUP_ROLE === _USER_GROUP_ROLE);
-    }),
-    _ROLE_COUNT = props.rolesModal.roleCount.toString(),
-    _ROLE_COUNT_DEPENDED_NOUN = (props.rolesModal.roleCount > 1)? __CONSTANTS.modalContainer.content.submitInput.state.normal.preposition.en: '';
+    });
   }
+
+  const _VALIDATED = _componentWillCheckValidation(props);
 
   return (
     <Modal
@@ -122,7 +138,8 @@ const RolesModal = (props) => {
       backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
       onBlur={() => MODAL.ON_BLUR(false)}
       onPress={attitude.onPress}
-      style={Styles.ModalContainer}>
+      style={Styles.ModalContainer}
+      swipeDirection="down">
         <Carousel
           name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
           data={_USER_GROUP_ROLES}
@@ -156,33 +173,33 @@ const RolesModal = (props) => {
           }}
           onSnap={(selectedItemIndex) => props.setCurrentRole(props.rolesModal.roles[selectedItemIndex])}/>
 
-        <View
-          style={Styles.ModalMajorContent}>
-            <Input
-              type={__CONSTANTS.modalContainer.content.firstInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
-              placeholder={__CONSTANTS.modalContainer.content.firstInput.title.en}
-              value={_ROLE_COUNT}
-              style={Styles.RolesCountInput}
-              onChangeText={(currentValue) => props.setRoleCount(currentValue)} />
-            <Input
-              type={__CONSTANTS.modalContainer.content.submitInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-              value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en} ${Functions._convertKeywordToToken(_CURRENT_USER_GROUP_ROLE)}${_ROLE_COUNT_DEPENDED_NOUN}`}
-              gradient={Global.colors.pair.ongerine}
-              style={Styles.AppendRolesButton}
-              onPress={async () => {
-                const _RULES = {
-                  user_group_id: props.rolesModal.currentRole._id,
-                  roles_count: props.rolesModal.roleCount
-                };
+          <Input
+            type={__CONSTANTS.modalContainer.content.firstInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
+            placeholder={__CONSTANTS.modalContainer.content.firstInput.title.en}
+            value={props.rolesModal.token}
+            style={Styles.TokenInput}
+            autoCapitalize="none"
+            onChangeText={(currentValue) => props.setToken(currentValue)} />
 
-                await props.appendRolesToResource(_RULES, (response, state) => {
-                  MODAL.ON_PROGRESS_SUCCESS(response);
-                  MODAL.ON_BLUR(state);
-                });
-              }}/>
-        </View>
+          <Input
+            type={__CONSTANTS.modalContainer.content.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+            value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}`}
+            gradient={Global.colors.pair.ongerine}
+            style={Styles.AppendRolesButton}
+            onPress={async () => {
+              // const _RULES = {
+              //   user_group_id: props.rolesModal.currentRole._id,
+              //   roles_count: props.rolesModal.roleCount
+              // };
+              //
+              // await props.appendRolesToResource(_RULES, (response, state) => {
+              //   MODAL.ON_PROGRESS_SUCCESS(response);
+              //   MODAL.ON_BLUR(state);
+              // });
+            }}
+            forcedDisable={_VALIDATED}/>
     </Modal>
   )
 };

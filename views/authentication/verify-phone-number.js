@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, AsyncStorage, Dimensions, Text, Animated, Easing } from 'react-native';
+import { StatusBar, View, AsyncStorage, KeyboardAvoidingView, Dimensions, Platform, Text, Animated, Easing } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -107,41 +107,45 @@ class VerifyPhoneNumber extends Component<{}> {
         forcedDisable={_VALIDATED} />;
     }
 
+    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
+
     return (
-      <View style={Styles.Container}>
-        <StatusBar hidden={true}/>
+      <KeyboardAvoidingView
+        style={Styles.Container}
+        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
+          <StatusBar hidden={true}/>
 
-        {_TOP_PINNED_TOAST}
+          {_TOP_PINNED_TOAST}
 
-        <View style={Styles.Content}>
-          <Headline
-            style={Styles.Headline}
-            title={__CONSTANTS.headline.title.en}
-            subtitle={__CONSTANTS.headline.subtitle.en} />
+          <View style={Styles.Content}>
+            <Headline
+              style={Styles.Headline}
+              title={__CONSTANTS.headline.title.en}
+              subtitle={__CONSTANTS.headline.subtitle.en} />
 
-            <Input
-              type={__CONSTANTS.firstInputGroup.first.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
-              placeholder={__CONSTANTS.firstInputGroup.first.title.en}
-              value={props.verifyPhoneNumber.validationToken}
-              style={Styles.FirstInput}
-              onChangeText={(currentValue) => props.setValidationToken(currentValue)} />
+              <Input
+                type={__CONSTANTS.firstInputGroup.first.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
+                placeholder={__CONSTANTS.firstInputGroup.first.title.en}
+                value={props.verifyPhoneNumber.validationToken}
+                style={Styles.FirstInput}
+                onChangeText={(currentValue) => props.setValidationToken(currentValue)} />
 
-            {_SUBMIT_BUTTON_CONTENT}
+              {_SUBMIT_BUTTON_CONTENT}
 
-            <Link
-              containerStyle={Styles.QuickLink}
-              value={__CONSTANTS.quickLink.title.en}
-              onPress={() => {
-                const { navigation } = this.props;
+              <Link
+                containerStyle={Styles.QuickLink}
+                value={__CONSTANTS.quickLink.title.en}
+                onPress={() => {
+                  const { navigation } = this.props;
 
-                // props.setValidationToken('');
-                // props.setSecretKey('');
+                  // props.setValidationToken('');
+                  // props.setSecretKey('');
 
-                navigation.goBack();
-              }} />
-        </View>
-      </View>
+                  navigation.goBack();
+                }} />
+          </View>
+      </KeyboardAvoidingView>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, ScrollView, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -117,18 +117,15 @@ export const WalletModal = (props) => {
       backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
       onBlur={() => MODAL.ON_BLUR(false)}
       onPress={attitude.onPress}
-      style={Styles.ModalContainer}>
-        <View>
-          <View
-            style={Styles.ModalMajorContent}>
-              <Input
-                type={__CONSTANTS.modalContainer.content.firstInput.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
-                placeholder={__CONSTANTS.modalContainer.content.firstInput.title.en}
-                value={props.walletModal.walletName}
-                style={Styles.WalletNameInput}
-                onChangeText={(currentValue) => props.setWalletName(currentValue)} />
-          </View>
+      style={Styles.ModalContainer}
+      swipeDirection="down">
+          <Input
+            type={__CONSTANTS.modalContainer.content.firstInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
+            placeholder={__CONSTANTS.modalContainer.content.firstInput.title.en}
+            value={props.walletModal.walletName}
+            style={Styles.WalletNameInput}
+            onChangeText={(currentValue) => props.setWalletName(currentValue)} />
 
           <Carousel
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
@@ -187,33 +184,28 @@ export const WalletModal = (props) => {
             }}
             onSnap={(selectedItemIndex) => props.setCurrentCurrency(props.walletModal.currencies[selectedItemIndex])}/>
 
-          <View
-            style={Styles.ModalMajorContent}>
-              <Input
-                type={__CONSTANTS.modalContainer.content.submitInput.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-                value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
-                gradient={Global.colors.pair.ongerine}
-                style={[
-                  Styles.AppendRolesButton,
-                  {
-                    marginBottom: Styles.__Global.marginBottom
-                  }
-                ]}
-                onPress={async () => {
-                  // const _RULES = {
-                  //   user_group_id: props.rolesModal.currentRole._id,
-                  //   roles_count: props.rolesModal.roleCount
-                  // };
-                  //
-                  // await props.appendRolesToResource(_RULES, (response, state) => {
-                  //   MODAL.ON_PROGRESS_SUCCESS(response);
-                  //   MODAL.ON_BLUR(state);
-                  // });
-                }}/>
-          </View>
-        </View>
-
+          <Input
+            type={__CONSTANTS.modalContainer.content.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+            value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
+            gradient={Global.colors.pair.ongerine}
+            style={[
+              Styles.AppendRolesButton,
+              {
+                marginBottom: Styles.__Global.marginBottom
+              }
+            ]}
+            onPress={async () => {
+              // const _RULES = {
+              //   user_group_id: props.rolesModal.currentRole._id,
+              //   roles_count: props.rolesModal.roleCount
+              // };
+              //
+              // await props.appendRolesToResource(_RULES, (response, state) => {
+              //   MODAL.ON_PROGRESS_SUCCESS(response);
+              //   MODAL.ON_BLUR(state);
+              // });
+            }}/>
     </Modal>
   )
 };

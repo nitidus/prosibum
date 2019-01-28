@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View } from 'react-native';
+import { StatusBar, View, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -76,80 +76,84 @@ class ForgottenPassword extends Component<{}> {
 
     const _VALIDATED = this._componentWillCheckValidation(props);
 
+    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
+
     return (
-      <View style={Styles.Container}>
-        <StatusBar hidden={true}/>
+      <KeyboardAvoidingView
+        style={Styles.Container}
+        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
+          <StatusBar hidden={true}/>
 
-        <CountriesCodesModal
-          name={__CONSTANTS.modals.first.title.en}
-          visible={props.forgottenPassword.countriesCodesModalVisibility}
-          onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
-          selectedItem={props.forgottenPassword.phone.dialCode}
-          onPress={(currentValue) => props.setPhoneNumber({
-            dialCode: currentValue
-          })}/>
+          <CountriesCodesModal
+            name={__CONSTANTS.modals.first.title.en}
+            visible={props.forgottenPassword.countriesCodesModalVisibility}
+            onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
+            selectedItem={props.forgottenPassword.phone.dialCode}
+            onPress={(currentValue) => props.setPhoneNumber({
+              dialCode: currentValue
+            })}/>
 
-        <View style={Styles.Content}>
-          <Headline
-            style={Styles.Headline}
-            title={__CONSTANTS.headline.title.en}
-            subtitle={__CONSTANTS.headline.subtitle.en} />
+          <View style={Styles.Content}>
+            <Headline
+              style={Styles.Headline}
+              title={__CONSTANTS.headline.title.en}
+              subtitle={__CONSTANTS.headline.subtitle.en} />
 
-          <Segment
-            style={Styles.Segment}
-            name={__CONSTANTS.firstSegment.title.en}
-            onChange={(currentValue) => props.setRequestType(currentValue)}>
-              <Container
-                active={true}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.title.en)}
-                title={__CONSTANTS.firstSegment.content.firstSegmentContainer.title.en}>
-                  <Input
-                    type={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title.en)}
-                    placeholder={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title.en}
-                    value={props.forgottenPassword.email}
-                    onChangeText={(currentValue) => props.setEmail(currentValue)} />
-              </Container>
-              <Container
-                name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.title.en)}
-                title={__CONSTANTS.firstSegment.content.secondSegmentContainer.title.en}>
-                  <Input
-                    type={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title.en)}
-                    placeholder={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title.en}
-                    value={props.forgottenPassword.phone.number}
-                    link={props.forgottenPassword.phone.dialCode.area_code}
-                    onPress={() => props.setCountriesCodesModalVisibility(true)}
-                    onChangeText={(currentValue) => props.setPhoneNumber({
-                      number: currentValue
-                    })} />
-              </Container>
-          </Segment>
+            <Segment
+              style={Styles.Segment}
+              name={__CONSTANTS.firstSegment.title.en}
+              onChange={(currentValue) => props.setRequestType(currentValue)}>
+                <Container
+                  active={true}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.title.en)}
+                  title={__CONSTANTS.firstSegment.content.firstSegmentContainer.title.en}>
+                    <Input
+                      type={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title.en)}
+                      placeholder={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title.en}
+                      value={props.forgottenPassword.email}
+                      onChangeText={(currentValue) => props.setEmail(currentValue)} />
+                </Container>
+                <Container
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.title.en)}
+                  title={__CONSTANTS.firstSegment.content.secondSegmentContainer.title.en}>
+                    <Input
+                      type={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title.en)}
+                      placeholder={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title.en}
+                      value={props.forgottenPassword.phone.number}
+                      link={props.forgottenPassword.phone.dialCode.area_code}
+                      onPress={() => props.setCountriesCodesModalVisibility(true)}
+                      onChangeText={(currentValue) => props.setPhoneNumber({
+                        number: currentValue
+                      })} />
+                </Container>
+            </Segment>
 
-          <Input
-            style={Styles.SubmitButton}
-            type={__CONSTANTS.submitInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-            value={__CONSTANTS.submitInput.state.normal.title.en}
-            gradient={Global.colors.pair.ongerine}
-            onPress={() => {
-              alert('ok')
-            }}
-            forcedDisable={_VALIDATED} />
+            <Input
+              style={Styles.SubmitButton}
+              type={__CONSTANTS.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+              value={__CONSTANTS.submitInput.state.normal.title.en}
+              gradient={Global.colors.pair.ongerine}
+              onPress={() => {
+                alert('ok')
+              }}
+              forcedDisable={_VALIDATED} />
 
-          <Link
-            containerStyle={Styles.QuickLink}
-            value={__CONSTANTS.quickLink.title.en}
-            onPress={() => {
-              const { navigation } = props;
+            <Link
+              containerStyle={Styles.QuickLink}
+              value={__CONSTANTS.quickLink.title.en}
+              onPress={() => {
+                const { navigation } = props;
 
-              props.setEmail('');
-              // props.setPhoneNumber('');
+                props.setEmail('');
+                // props.setPhoneNumber('');
 
-              navigation.goBack();
-            }} />
-        </View>
-      </View>
+                navigation.goBack();
+              }} />
+          </View>
+      </KeyboardAvoidingView>
     )
   }
 }

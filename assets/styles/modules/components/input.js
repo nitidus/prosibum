@@ -97,8 +97,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BUTTON_CONTAINER.borderRadius += 2;
     _CUSTOM_BUTTON_TITLE.fontSize += 7;
 
-    _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 25;
-    _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 25;
+    _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 23;
+    _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 23;
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical += 3;
     _CUSTOM_TEXT_INPUT_LINK.height += 16;
@@ -110,8 +110,8 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.paddingHorizontal += 3;
 
-    _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 20;
-    _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 20;
+    _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 18;
+    _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 18;
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical -= 2;
     _CUSTOM_TEXT_INPUT_LINK.height += 3;
@@ -147,8 +147,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_TEXT_INPUT_CONTAINER.width = '81.5%';
   }
 
-  _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 20;
-  _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 20;
+  _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 18;
+  _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 18;
 }
 
 module.exports = StyleSheet.create({

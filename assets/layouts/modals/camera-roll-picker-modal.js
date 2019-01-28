@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, ScrollView, TouchableOpacity, Image, Dimensions, Animated, Easing } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -151,7 +151,8 @@ const CameraRollPickerModal = (props) => {
       backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
       onBlur={() => MODAL.ON_BLUR(false)}
       onPress={attitude.onPress}
-      style={Styles.ModalContainer}>
+      style={Styles.ModalContainer}
+      swipeDirection="down">
         <Carousel
           name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
           data={props.cameraRollPickerModal.groupTypes}
@@ -185,14 +186,14 @@ const CameraRollPickerModal = (props) => {
           }}
           onSnap={(selectedItemIndex) => props.setCurrentCameraRollGroupType(props.cameraRollPickerModal.groupTypes[selectedItemIndex])}/>
 
-        <View
+        <KeyboardAvoidingView
           style={Styles.CameraRollMajorContainer}>
             <ScrollView
               style={Styles.CameraRollContainer}
               showsVerticalScrollIndicator={false}>
                 {_CAMERA_ROLL_ITEMS_CONTENT}
             </ScrollView>
-        </View>
+        </KeyboardAvoidingView>
     </Modal>
   )
 };

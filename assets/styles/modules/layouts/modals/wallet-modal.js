@@ -57,10 +57,12 @@ module.exports = StyleSheet.create({
   },
   WalletNameInput: {
     width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal,
     marginBottom: 15
   },
   AppendRolesButton: {
-    width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2)
+    width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal
   },
   LTR_ContentAlignment: {
     alignItems: 'flex-start'

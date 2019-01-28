@@ -24,10 +24,10 @@ const mapDispatchToProps = (dispatch) => {
         payload: currentRole
       })
     },
-    setRoleCount: (roleCount) => {
+    setToken: (token) => {
       dispatch({
-        type: ROLES_MODAL.SET_ROLES_COUNT,
-        payload: roleCount
+        type: ROLES_MODAL.SET_TOKEN,
+        payload: token
       })
     },
     appendRolesToResource: async (rolesRules, callback) => CMD._appendRolesToResourceWithRules(rolesRules, callback, dispatch),

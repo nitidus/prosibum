@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Text, Animated, Easing } from 'react-native';
+import { StatusBar, View, KeyboardAvoidingView, Text, Platform, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
 import { Input } from '../../../../components/index';
@@ -51,9 +51,12 @@ export const ProfileContainer = (props) => {
     }
   }
 
+  const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'padding': '';
+
   return (
-    <View
-      style={Styles.Container}>
+    <KeyboardAvoidingView
+      style={Styles.Container}
+      behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
         <StatusBar />
 
         <Pilot
@@ -86,6 +89,6 @@ export const ProfileContainer = (props) => {
         </Pilot>
 
         {_CHILDREN_CONTENT}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
