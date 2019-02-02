@@ -24,9 +24,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: currentRole
       })
     },
-    setToken: (token) => {
+    setEmail: (token) => {
       dispatch({
-        type: ROLES_MODAL.SET_TOKEN,
+        type: ROLES_MODAL.SET_EMAIL,
         payload: token
       })
     },

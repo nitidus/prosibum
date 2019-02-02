@@ -175,8 +175,11 @@ module.exports = {
 
     return (_IS_PHONE_NUMBER_VALID !== null)? true: false;
   },
+  _checkIsAValidPhoneNumberOrEmail: (token) => {
+    return (token.match(/^\+?[0-9]{1,4}[0-9]{10,14}/) !== null)? true: false;
+  },
   _checkIsAValidToken: (token) => {
-    if (token.match(/^\+?[0-9]{1,4}[0-9]{10,14}/)){
+    if (module.exports._checkIsAValidPhoneNumberOrEmail(token)){
       return module.exports._checkIsAValidPhoneNumber(token);
     }else{
       return module.exports._checkIsAValidEmail(token);

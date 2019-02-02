@@ -14,12 +14,17 @@ module.exports = {
 
     try {
       const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
-            _AUTH = JSON.parse(_SERIALIZED_AUTH),
-            _REFERENCE_ID = (typeof _AUTH.reference_id != 'undefined')? _AUTH.reference_id: _AUTH._id,
-            _ROLES = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/endusers`, {
-              ...rolesRules,
-              reference_id: _REFERENCE_ID
-            });
+            _AUTH = JSON.parse(_SERIALIZED_AUTH);
+
+      var _ROLES_RULES = rolesRules;
+
+      if (typeof _ROLES_RULES.reference_id != 'undefined'){
+        _ROLES_RULES.reference_id =  _AUTH._id;
+      }
+
+      _ROLES_RULES.cardinal_id = (typeof _AUTH.cardinal_id != 'undefined')? _AUTH.cardinal_id: _AUTH._id;
+
+      const _ROLES = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/endusers`, _ROLES_RULES);
 
       if (_ROLES.status === 200){
         const _FINAL_RESPONSE = _ROLES.data;

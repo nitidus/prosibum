@@ -4,7 +4,7 @@ const { ROLES_MODAL } = LAYOUTS;
 const initialState = {
   roles: [],
   currentRole: {},
-  token: '',
+  email: '',
   appendRolesToResources: false,
   appendedResources: [],
   connected: {
@@ -27,10 +27,10 @@ export default (state = initialState, action) => {
         currentRole: action.payload
       };
       break;
-    case ROLES_MODAL.SET_TOKEN:
+    case ROLES_MODAL.SET_EMAIL:
       return {
         ...state,
-        token: action.payload
+        email: action.payload
       };
       break;
     case ROLES_MODAL.APPEND_ROLES_TO_RESOURCE:

@@ -15,9 +15,9 @@
         }
       },
       "firstInput": {
-        "type": "TEXT",
+        "type": "EMAIL",
         "title": {
-          "en": "Email or Mobile Phone"
+          "en": "Email"
         }
       },
       "submitInput": {

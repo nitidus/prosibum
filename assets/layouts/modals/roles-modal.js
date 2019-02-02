@@ -18,6 +18,7 @@ import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions'
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.RolesModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
+import { name as appName } from '../../../app.json';
 const __CONSTANTS = layouts_constants.roles_modal;
 
 const _componentWillCheckValidation = (props) => {
@@ -25,10 +26,10 @@ const _componentWillCheckValidation = (props) => {
 
   var _FORM_FIELDS_VALIDITY = false;
 
-  if (_PROPS.token != ''){
-    const _IS_TOKEN_VALID = Functions._checkIsAValidToken(_PROPS.token)
+  if (_PROPS.email != ''){
+    const _IS_EMAIL_VALID = Functions._checkIsAValidEmail(_PROPS.email)
 
-    if (_IS_TOKEN_VALID){
+    if (_IS_EMAIL_VALID){
       _FORM_FIELDS_VALIDITY = true;
     }
   }
@@ -180,7 +181,7 @@ const RolesModal = (props) => {
             value={props.rolesModal.token}
             style={Styles.TokenInput}
             autoCapitalize="none"
-            onChangeText={(currentValue) => props.setToken(currentValue)} />
+            onChangeText={(currentValue) => props.setEmail(currentValue)} />
 
           <Input
             type={__CONSTANTS.modalContainer.content.submitInput.type}
@@ -189,15 +190,34 @@ const RolesModal = (props) => {
             gradient={Global.colors.pair.ongerine}
             style={Styles.AppendRolesButton}
             onPress={async () => {
-              // const _RULES = {
-              //   user_group_id: props.rolesModal.currentRole._id,
-              //   roles_count: props.rolesModal.roleCount
-              // };
-              //
-              // await props.appendRolesToResource(_RULES, (response, state) => {
-              //   MODAL.ON_PROGRESS_SUCCESS(response);
-              //   MODAL.ON_BLUR(state);
-              // });
+              var _RULES = {
+                user_group_id: props.rolesModal.currentRole._id,
+                email: props.rolesModal.email
+              };
+
+              const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+                    _AUTH = JSON.parse(_SERIALIZED_AUTH);
+
+              if (typeof _AUTH.brand != 'undefined'){
+                _RULES.target = {
+                  app_name: appName,
+                  brand: {
+                    name: _AUTH.brand.name,
+                    url: `http://${Functions._convertTokenToKeyword(_AUTH.brand.name)}.${appName}.com`
+                  }
+                };
+
+                if (typeof _AUTH.brand.photo != 'undefined'){
+                  _RULES.target.brand.photo = _AUTH.brand.photo;
+                }
+              }else{
+                //handle non admin user in creation
+              }
+
+              await props.appendRolesToResource(_RULES, (response, state) => {
+                MODAL.ON_PROGRESS_SUCCESS(response);
+                MODAL.ON_BLUR(state);
+              });
             }}
             forcedDisable={_VALIDATED}/>
     </Modal>

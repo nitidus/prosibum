@@ -21,6 +21,7 @@ export default class App extends Component<> {
     Linking.addEventListener('url', this.handleUrl);
 
     DeepLinking.addRoute('/test/:id/details', (response) => {
+      //prosibum://join/villa/invite/enQtNTM4NzgyNjA
       console.log(response)
     });
 
