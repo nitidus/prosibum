@@ -163,7 +163,7 @@ class Roles extends Component<{}> {
                                 _PERSONAL_CONTENT = (
                                   <Text
                                     style={Styles.RoleTitle}>
-                                      {Functions._convertKeywordToToken(_EMAIL_CONTENT)}
+                                      {_EMAIL_CONTENT}
                                   </Text>
                                 );
                               }
@@ -177,7 +177,7 @@ class Roles extends Component<{}> {
                               _PERSONAL_CONTENT = (
                                 <Text
                                   style={Styles.RoleTitle}>
-                                    {Functions._convertKeywordToToken(_EMAIL_CONTENT)}
+                                    {_EMAIL_CONTENT}
                                 </Text>
                               );
                             }

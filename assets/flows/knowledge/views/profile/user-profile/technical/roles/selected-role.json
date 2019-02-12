@@ -1,0 +1,70 @@
+{
+  "pilot": {
+    "title": {
+      "en": "Selected Role"
+    }
+  },
+  "content": {
+    "firstCarousel": {
+      "title": {
+        "en": "Selected Role Container"
+      },
+      "type": "BUTTON",
+      "icon": "person",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Selected Role"
+          },
+          "content": {
+            "profile": {
+              "state": {
+                "noPhoto": {
+                  "icon": "person"
+                }
+              }
+            },
+            "contact": {
+              "state": {
+                "notValidated": {
+                  "icon": "bolt"
+                },
+                "validated": {
+                  "icon": "check"
+                }
+              }
+            }
+          },
+          "options": {
+            "layout": "default",
+            "loop": true
+          }
+        },
+        "loading": {
+          "title": {
+            "en": "Selected Role Loading"
+          }
+        }
+      }
+    },
+    "scrollViewItem": {
+      "type": "BUTTON",
+      "icon": "person",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Roles"
+          }
+        },
+        "loading": {
+          "title": {
+            "en": "Roles Loading"
+          }
+        }
+      }
+    },
+    "link": {
+      "en": "There's no role."
+    }
+  }
+}

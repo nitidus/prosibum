@@ -24,7 +24,7 @@ export const RolesContainer = (props) => {
   }
 
   if ((typeof props.pilotData != 'undefined') || (typeof props.pilot_data != 'undefined') || (typeof props.pilotItems != 'undefined') || (typeof props.pilot_items != 'undefined')){
-    attitude.pilotData = props.pilotData || props.pilot_data || props.pilotItems || props.pilot_items
+    attitude.pilotData = props.pilotData || props.pilot_data || props.pilotItems || props.pilot_items;
   }
 
   if ((typeof props.currentPilotItem != 'undefined') || (typeof props.current_pilot_item != 'undefined')){

@@ -110,14 +110,15 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_CONTENT
   },
   DetailContainer: {
-    marginVertical: _CUSTOM_CONTENT.marginVertical
+    marginTop: _CUSTOM_CONTENT.marginVertical
   },
   DetailItemContainer: {
     height: 140,
     padding: 18
   },
   DetailItemContent: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   DetailItemMasterInfoContent: {
     justifyContent: 'center'
@@ -154,7 +155,8 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     fontSize: 26,
-    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 5)) - 65)
+    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 5)) - 65),
+    marginBottom: 5
   },
   BriefDetailSubtitle: {
     color: colors.single.rangoonGreen,
@@ -180,7 +182,7 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_ROLE_ITEM_CONTAINER
   },
   RoleItemContainerWithEmptyPositionContent: {
-    backgroundColor: colors.single.romance
+    
   },
   RoleItemContent: {
     flexDirection: 'row'
