@@ -74,7 +74,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'Roles': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'SelectedRole': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
@@ -204,5 +204,96 @@ module.exports = {
     props.setBrandProfilePhoto(_BRAND_PROFILE_PHOTO);
     props.setBrandName(_BRAND_NAME);
     props.setBrandRole(_BRAND_ROLE);
+  },
+  _prepareSelectedRolePersonalContactInformation: (tokenizedData) => {
+    var _CONTAINER_TITLE = '',
+        _ROLE_DETAIL = [],
+        _ROLE_DETAIL_FIRST_INDEX = 0;
+
+    if (typeof tokenizedData != 'undefined'){
+      if (typeof tokenizedData.user != 'undefined'){
+        if (typeof tokenizedData.user.personal != 'undefined'){
+          if ((typeof tokenizedData.user.personal.first_name != 'undefined') && (typeof tokenizedData.user.personal.last_name != 'undefined')){
+            _CONTAINER_TITLE = Prototypes._convertKeywordToToken(`${tokenizedData.user.personal.first_name} ${tokenizedData.user.personal.last_name}`);
+
+            var _PRIMARY_CAROUSEL_ITEM = {
+              full_name: Prototypes._convertKeywordToToken(`${tokenizedData.user.personal.first_name} ${tokenizedData.user.personal.last_name}`),
+              role: Prototypes._convertKeywordToToken(tokenizedData.usergroup.role)
+            };
+
+            if ((typeof tokenizedData.user.profile != 'undefined') || (typeof tokenizedData.user.profile_photo != 'undefined')){
+              _PRIMARY_CAROUSEL_ITEM.profile = tokenizedData.user.profile || tokenizedData.user.profile_photo;
+            }
+
+            _ROLE_DETAIL.push({
+              key: "PRIMARY",
+              value: _PRIMARY_CAROUSEL_ITEM
+            });
+          }
+        }else if (typeof tokenizedData.user.email != 'undefined') {
+          if (typeof tokenizedData.user.email.content != 'undefined'){
+            _CONTAINER_TITLE = Prototypes._stripLongString(tokenizedData.user.email.content, 8);
+
+            var _PRIMARY_CAROUSEL_ITEM = {
+              email: {
+                content: tokenizedData.user.email.content,
+                validated: tokenizedData.user.email.validation.value
+              },
+              role: Prototypes._convertKeywordToToken(tokenizedData.usergroup.role)
+            };
+
+            if ((typeof tokenizedData.user.profile != 'undefined') || (typeof tokenizedData.user.profile_photo != 'undefined') || (typeof tokenizedData.user.profilePhoto != 'undefined') || (typeof tokenizedData.user.photoProfile != 'undefined')){
+              _PRIMARY_CAROUSEL_ITEM.profile = tokenizedData.user.profile || tokenizedData.user.profile_photo || tokenizedData.user.profilePhoto || tokenizedData.user.photoProfile;
+            }
+
+            _ROLE_DETAIL.push({
+              key: "PRIMARY",
+              value: _PRIMARY_CAROUSEL_ITEM
+            });
+          }
+        }else{
+          _CONTAINER_TITLE = Prototypes._stripLongString(tokenizedData._id, 8);
+        }
+
+        var _PERSONAL_CONTACT_INFO_CAROUSEL_ITEM = {};
+
+        if (typeof tokenizedData.user.phone != 'undefined'){
+          if (typeof tokenizedData.user.phone.mobile != 'undefined'){
+            if ((typeof tokenizedData.user.phone.mobile.content != 'undefined') && (typeof tokenizedData.user.phone.mobile.validation.value != 'undefined')){
+              _PERSONAL_CONTACT_INFO_CAROUSEL_ITEM.mobile_phone = {
+                content: tokenizedData.user.phone.mobile.content,
+                validated: tokenizedData.user.phone.mobile.validation.value
+              };
+            }
+          }
+        }
+
+        if ((typeof tokenizedData.user.email != 'undefined') && (typeof tokenizedData.user.personal != 'undefined')){
+          if ((typeof tokenizedData.user.email.content != 'undefined') && (typeof tokenizedData.user.email.validation.value != 'undefined') && (typeof tokenizedData.user.personal.first_name != 'undefined') && (typeof tokenizedData.user.personal.last_name != 'undefined')){
+            _PERSONAL_CONTACT_INFO_CAROUSEL_ITEM.email = {
+              content: tokenizedData.user.email.content,
+              validated: tokenizedData.user.email.validation.value
+            };
+          }
+        }
+
+        if (Object.keys(_PERSONAL_CONTACT_INFO_CAROUSEL_ITEM).length > 0){
+          _ROLE_DETAIL.push({
+            key: "PERSONAL_CONTACT_INFO",
+            value: _PERSONAL_CONTACT_INFO_CAROUSEL_ITEM
+          });
+        }
+      }else{
+        _CONTAINER_TITLE = Prototypes._stripLongString(tokenizedData._id, 8);
+      }
+
+      return {
+        CONTAINER_TITLE: _CONTAINER_TITLE,
+        ROLE_DETAIL: _ROLE_DETAIL,
+        ROLE_DETAIL_FIRST_INDEX: _ROLE_DETAIL_FIRST_INDEX
+      };
+    }else{
+      throw new Error('You should define main seed parameter.');
+    }
   }
 };

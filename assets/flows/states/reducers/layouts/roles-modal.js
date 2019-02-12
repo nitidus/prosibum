@@ -6,7 +6,9 @@ const initialState = {
   currentRole: {},
   email: '',
   appendRolesToResources: false,
+  cardinalityLoading: false,
   appendedResources: [],
+  cardinal: {},
   connected: {
     status: true,
     content: ''
@@ -37,6 +39,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         appendedResources: action.payload
+      };
+      break;
+    case ROLES_MODAL.FETCH_CARDINALITY:
+      return {
+        ...state,
+        cardinal: action.payload
+      };
+      break;
+    case ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS:
+      return {
+        ...state,
+        cardinalityLoading: action.payload
       };
       break;
     case ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS:

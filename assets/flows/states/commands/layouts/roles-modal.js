@@ -18,8 +18,12 @@ module.exports = {
 
       var _ROLES_RULES = rolesRules;
 
-      if (typeof _ROLES_RULES.reference_id != 'undefined'){
+      if (typeof _ROLES_RULES.reference_id == 'undefined'){
         _ROLES_RULES.reference_id =  _AUTH._id;
+      }
+
+      if (typeof _ROLES_RULES.cardinal_ancestors == 'undefined'){
+        _ROLES_RULES.cardinal_ancestors = [_AUTH._id];
       }
 
       _ROLES_RULES.cardinal_id = (typeof _AUTH.cardinal_id != 'undefined')? _AUTH.cardinal_id: _AUTH._id;
@@ -71,6 +75,73 @@ module.exports = {
 
         dispatch({
           type: ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
+          payload: false
+        })
+
+        dispatch({
+          type: ROLES_MODAL.SET_CONNECTED_STATUS,
+          payload: {
+            status: false,
+            content: _ERROR_MESSAGE
+          }
+        })
+      }
+    }
+  },
+  _fetchAvailableCardinalUsingID: async (token, dispatch) => {
+    dispatch({
+      type: ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS,
+      payload: true
+    })
+
+    try {
+      const _CARDINAL = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/endusers/${token}`);
+
+      if (_ROLES.status === 200){
+        const _FINAL_RESPONSE = _CARDINAL.data;
+
+        if (_FINAL_RESPONSE.meta.code === 200){
+          const _DATA = _FINAL_RESPONSE.data;
+
+          dispatch({
+            type: ROLES_MODAL.FETCH_CARDINALITY,
+            payload: _DATA
+          })
+
+          dispatch({
+            type: ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            payload: {
+              status: true
+            }
+          })
+
+          callback(_DATA, false);
+        }else{
+          dispatch({
+            type: ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            payload: {
+              status: false,
+              content: _FINAL_RESPONSE.meta.error_message
+            }
+          })
+        }
+      }
+    } catch (error) {
+      if (error){
+        const _ERROR_MESSAGE = error.message || error.request._response;
+
+        dispatch({
+          type: ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS,
           payload: false
         })
 

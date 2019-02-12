@@ -19,6 +19,7 @@ const { mapStateToProps, mapDispatchToProps } = LayoutsActions.RolesModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
 import { name as appName } from '../../../app.json';
+import { GLOBAL } from '../../flows/states/types/index';
 const __CONSTANTS = layouts_constants.roles_modal;
 
 const _componentWillCheckValidation = (props) => {
@@ -82,7 +83,7 @@ const RolesModal = (props) => {
   if ((typeof props.currentRolesItem != 'undefined') || (typeof props.current_roles_item != 'undefined')){
     attitude.currentRolesItem = props.currentRolesItem || props.current_roles_item;
 
-    if (!props.rolesModal.currentRole.hasOwnProperty('role')){
+    if (Object.keys(props.rolesModal.currentRole).length === 0){
       props.setCurrentRole(attitude.currentRolesItem);
     }
   }
@@ -211,7 +212,34 @@ const RolesModal = (props) => {
                   _RULES.target.brand.photo = _AUTH.brand.photo;
                 }
               }else{
-                //handle non admin user in creation
+                if ((typeof _AUTH.reference_id != 'undefined') && (typeof _AUTH.cardinal_ancestors != 'undefined')){
+                  _RULES.reference_id = _AUTH.reference_id;
+
+                  _AUTH.cardinal_ancestors = [
+                    ..._AUTH.cardinal_ancestors,
+                    _RULES.reference_id
+                  ];
+                }
+
+                if (typeof _AUTH.cardinal_id != 'undefined'){
+                  await props.fetchCardinal(_AUTH.cardinal_id);
+
+                  const _CARDINAL = await props.rolesModal.cardinal;
+
+                  if (_CARDINAL != null){
+                    _RULES.target = {
+                      app_name: appName,
+                      brand: {
+                        name: _CARDINAL.brand.name,
+                        url: `http://${Functions._convertTokenToKeyword(_CARDINAL.brand.name)}.${appName}.com`
+                      }
+                    };
+
+                    if (typeof _CARDINAL.brand.photo != 'undefined'){
+                      _RULES.target.brand.photo = _CARDINAL.brand.photo;
+                    }
+                  }
+                }
               }
 
               await props.appendRolesToResource(_RULES, (response, state) => {

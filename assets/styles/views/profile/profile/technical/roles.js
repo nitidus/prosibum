@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Dimensions, Platform } from 'react-native';
 
-import { Functions } from '../../../modules/index';
+import { Functions } from '../../../../../modules/index';
 
-import { colors, fonts } from '../../global';
+import { colors, fonts } from '../../../../global';
 
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
@@ -111,6 +111,13 @@ module.exports = StyleSheet.create({
   },
   Content: {
     ..._CUSTOM_CONTENT
+  },
+  EmptyContent: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  EmptyContentLink: {
+    alignItems: 'center'
   },
   RoleItemContainer: {
     shadowColor: colors.single.rangoonGreen,

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { StatusBar, View, Text, Animated, Easing } from 'react-native';
 
-import { Global, Views } from '../../../../styles/index';
-import { Input } from '../../../../components/index';
-import { Pilot, PinnedSide, Icon, RolesModal } from '../../../../layouts/index';
-const Styles = Views.Profile.Roles;
+import { Global, Views } from '../../../../../styles/index';
+import { Input } from '../../../../../components/index';
+import { Pilot, PinnedSide, Icon, RolesModal } from '../../../../../layouts/index';
+const Styles = Views.Profile.Technical.Roles;
 
-import { Functions } from '../../../../modules/index';
+import { Functions } from '../../../../../modules/index';
 
 export const RolesContainer = (props) => {
   var attitude = {};

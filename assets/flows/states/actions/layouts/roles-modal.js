@@ -30,6 +30,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: token
       })
     },
+    fetchCardinal: async (token) => CMD._fetchAvailableCardinalUsingID(token, dispatch),
     appendRolesToResource: async (rolesRules, callback) => CMD._appendRolesToResourceWithRules(rolesRules, callback, dispatch),
     setAppendRolesToResourcesLoadingStatus: (loadingStatus) => {
       dispatch({

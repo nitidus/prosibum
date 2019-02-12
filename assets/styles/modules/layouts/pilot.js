@@ -182,6 +182,11 @@ module.exports = StyleSheet.create({
     paddingHorizontal: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
     justifyContent: 'space-between'
   },
+  TailRowContainer: {
+    marginVertical: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
+    paddingHorizontal: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
+    justifyContent: 'space-between'
+  },
   HeaderTitle: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,

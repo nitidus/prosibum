@@ -117,6 +117,13 @@ module.exports = {
   _convertKeywordToBlockToken: (keyword) => {
     return module.exports._convertKeywordToToken(keyword).replace(/ /ig, '');
   },
+  _stripLongString: (longString, targetLength) => {
+    if ((typeof longString === 'string') && (typeof longString !== 'undefined') && (typeof targetLength === 'number') && (typeof targetLength !== 'undefined')){
+      return (longString.length > targetLength)? `${longString.substr(0, targetLength)}...`: longString;
+    }else{
+      throw new Error('Define the first parameter as a string and second as a number.');
+    }
+  },
   _returnCurrencyDependOnLanguage: (currency) => {
     if (typeof currency != 'undefined' && currency != ''){
       const _CURRENCY_TYPE_KEY = module.exports._convertTokenToKey(currency);

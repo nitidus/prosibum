@@ -3,8 +3,11 @@ import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'rea
 //Profile Screens
 import Profile from './profile/profile';
 
-  //Profile Subsets
-  import Roles from './profile/profile/roles';
+  //Technical Profile Subsets
+  import Roles from './profile/profile/technical/roles';
+
+    //Roles Subsets
+    import SelectedRole from './profile/profile/technical/roles/selected-role';
 
   //Dashboard Subsets
   import Wallets from './profile/dashboard/wallets';
@@ -21,9 +24,16 @@ import Authorization from './authorization';
 //Overseer Screen
 import Overseer from './overseer';
 
+const RolesStack = createStackNavigator({
+  Roles,
+  SelectedRole
+}, {
+  headerMode: 'none'
+});
+
 const ProfileStack = createStackNavigator({
   Profile,
-  Roles,
+  RolesStack,
   Wallets
 }, {
   headerMode: 'none'

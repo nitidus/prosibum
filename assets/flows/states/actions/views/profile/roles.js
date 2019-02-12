@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: visibilityStatus
       })
     },
-    fetchAvailableRoles: async (usergroup) => CMD._getRolesWithUsergroup(usergroup, dispatch),
+    fetchAvailableRoles: async (usergroup, reference) => CMD._getRolesWithUsergroup(usergroup, reference, dispatch),
     fetchAvailableRolesType: async (groupType, usergroup) => CMD._getRolesTypeWithGroupType(groupType, usergroup, dispatch),
     setRolesLoadingStatus: (loadingStatus) => {
       dispatch({

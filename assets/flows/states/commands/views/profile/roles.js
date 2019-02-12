@@ -15,8 +15,8 @@ module.exports = {
     try {
       const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
             _AUTH = JSON.parse(_SERIALIZED_AUTH),
-            _REFERENCE_PRIORITY = (typeof usergroup != 'undefined')? usergroup.priority: _AUTH.usergroup.priority,
-            _ROLES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${groupType}?priority=${_REFERENCE_PRIORITY}`);
+            _REFERENCE_PREFERED_USERGROUP_ID = (typeof usergroup != 'undefined')? usergroup._id: _AUTH.usergroup._id,
+            _ROLES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${groupType}?token=${_REFERENCE_PREFERED_USERGROUP_ID}`);
 
       if (_ROLES.status === 200){
         const _FINAL_RESPONSE = _ROLES.data;
@@ -46,7 +46,9 @@ module.exports = {
             }
           })
 
-          module.exports._getRolesWithUsergroup(_DATA[0], dispatch);
+          const _PREFERED_ID = (typeof _AUTH.reference_id != 'undefined')? _AUTH.reference_id: _AUTH._id;
+
+          module.exports._getRolesWithUsergroup(_DATA[0], _PREFERED_ID, dispatch);
         }else{
           dispatch({
             type: ROLES.SET_ROLES_TYPE_LOADING_STATUS,
@@ -81,7 +83,7 @@ module.exports = {
       }
     }
   },
-  _getRolesWithUsergroup: async (usergroup, dispatch) => {
+  _getRolesWithUsergroup: async (usergroup, reference, dispatch) => {
     dispatch({
       type: ROLES.SET_ROLES_LOADING_STATUS,
       payload: true
@@ -90,8 +92,17 @@ module.exports = {
     try {
       const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
             _AUTH = JSON.parse(_SERIALIZED_AUTH),
-            _REFERENCE_ID = (typeof _AUTH.reference_id != 'undefined')? _AUTH.reference_id: _AUTH._id,
-            _ROLES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/roles/${_REFERENCE_ID}?reference_id=${usergroup.reference_id}`);
+            _PREFERED_ID = (typeof _AUTH.cardinal_id != 'undefined')? _AUTH.cardinal_id: _AUTH._id,
+            _PREFERED_REFERENCE_ID = reference || _AUTH.reference_id || _AUTH._id,
+            _PREFERED_USERGROUP_ID = usergroup._id;
+
+      var _TARGET_URL = `${GLOBAL.URLS.INTERFAS.HOST_NAME}/roles/${_PREFERED_ID}?user_group_id=${_PREFERED_USERGROUP_ID}`;
+
+      if (_PREFERED_ID !== _PREFERED_REFERENCE_ID){
+        _TARGET_URL += `reference_id=${_PREFERED_REFERENCE_ID}`;
+      }
+
+      const _ROLES = await axios.get(_TARGET_URL);
 
       if (_ROLES.status === 200){
         const _FINAL_RESPONSE = _ROLES.data;

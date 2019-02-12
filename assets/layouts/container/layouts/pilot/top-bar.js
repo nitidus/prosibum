@@ -216,6 +216,8 @@ export const TopBar = (props) => {
                 case 'left':
                 case 'right':
                 case 'bottom':
+                case 'last':
+                case 'tail':
                   return child;
                   break;
               }
@@ -228,9 +230,9 @@ export const TopBar = (props) => {
 
   var _LEFT_SIDE_CONTENT = <View style={Styles.PinnedSide} />,
       _RIGHT_SIDE_CONTENT = <View style={Styles.PinnedSide} />,
-      _BOTTOM_WIDE_CONTENT;
+      _BOTTOM_WIDE_CONTENT, _TAIL_WIDE_CONTENT;
 
-  if ((typeof attitude.children != 'undefined') && ((attitude.children.length <= 2) || (attitude.children.length <= 3))){
+  if ((typeof attitude.children != 'undefined') && ((attitude.children.length <= 2) || (attitude.children.length <= 3) || (attitude.children.length <= 4))){
     for (var i = 0; i < attitude.children.length; i++) {
       var _CHILD = attitude.children[i],
           _CHILD_PROPS = {..._CHILD.props, navigation},
@@ -318,6 +320,13 @@ export const TopBar = (props) => {
             </ScrollView>;
           }
           break;
+        case 'last':
+        case 'tail':
+          _TAIL_WIDE_CONTENT = <View
+            style={Styles.TailRowContainer}>
+              {React.cloneElement(_CHILD, _CHILD_PROPS)}
+          </View>;
+          break;
       }
     }
   }
@@ -341,6 +350,8 @@ export const TopBar = (props) => {
         </View>
 
         {_BOTTOM_WIDE_CONTENT}
+
+        {_TAIL_WIDE_CONTENT}
     </View>
   )
 }

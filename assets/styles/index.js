@@ -11,8 +11,13 @@ import VerifyPhoneNumber from './views/authentication/verify-phone-number';
 //Profile
 import Overseer from './views/profile/overseer';
 import Profile from './views/profile/profile';
-import Roles from './views/profile/roles';
 import Wallets from './views/profile/wallets';
+
+//Technical Profile
+import Roles from './views/profile/profile/technical/roles';
+
+//Roles Subsets
+import SelectedRole from './views/profile/profile/technical/roles/selected-role';
 
 import Dashboard from './views/profile/profile/dashboard';
 
@@ -32,9 +37,14 @@ module.exports = {
       VerifyPhoneNumber
     },
     Profile: {
+      Technical: {
+        RolesSubsets: {
+          SelectedRole
+        },
+        Roles
+      },
       Overseer,
       Profile,
-      Roles,
       Wallets,
       Dashboard
     }

@@ -3,7 +3,7 @@ import dashboard from './profile/dashboard.json';
 
 //User Profile datasets
 import technical_tab from './profile/user-profile/technical-tab.json';
-import roles from './profile/user-profile/roles.json';
+import roles from './profile/user-profile/technical/roles.json';
 
 //Dashboard datasets
 import wallets from './profile/dashboard/wallets.json';
