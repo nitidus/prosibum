@@ -12,6 +12,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setReference: (data) => {
+      dispatch({
+        type: ROLES_MODAL.SET_REFERENCE,
+        payload: data
+      })
+    },
     setRolesItems: (data) => {
       dispatch({
         type: ROLES_MODAL.SET_ROLES,
@@ -30,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: token
       })
     },
+    fetchAvailableRolesType: async (groupType, usergroup) => CMD._getRolesTypeWithGroupType(groupType, usergroup, dispatch),
     fetchCardinal: async (token) => CMD._fetchAvailableCardinalUsingID(token, dispatch),
     appendRolesToResource: async (rolesRules, callback) => CMD._appendRolesToResourceWithRules(rolesRules, callback, dispatch),
     setAppendRolesToResourcesLoadingStatus: (loadingStatus) => {

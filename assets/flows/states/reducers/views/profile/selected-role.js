@@ -2,6 +2,7 @@ import { VIEWS } from '../../../types/index';
 const { SELECTED_ROLE } = VIEWS.PROFILE;
 
 const initialState = {
+        selectedReferenceRole: {},
         roles: [],
         rolesModalVisibility: false,
         loadingRoles: false,
@@ -13,6 +14,18 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SELECTED_ROLE.SET_SELECTED_REFERENCE_ROLE:
+      return {
+        ...state,
+        selectedReferenceRole: action.payload
+      };
+      break;
+    case SELECTED_ROLE.RESET_SELECTED_REFERENCE_ROLE:
+      return {
+        ...state,
+        selectedReferenceRole: initialState.selectedReferenceRole
+      };
+      break;
     case SELECTED_ROLE.SET_ROLES_MODAL_VISIBILITY:
       return {
         ...state,

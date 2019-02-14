@@ -46,6 +46,10 @@ module.exports = StyleSheet.create({
     width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2),
     marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal
   },
+  EmptyContent: {
+    alignItems: 'center',
+    marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal
+  },
   __Global: {
     ..._CUSTOM___GLOBAL
   }

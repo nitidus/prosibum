@@ -6,6 +6,79 @@ const { ROLES_MODAL } = LAYOUTS;
 import { Functions } from '../../../../modules/index';
 
 module.exports = {
+  _getRolesTypeWithGroupType: async (groupType, usergroup, dispatch) => {
+    dispatch({
+      type: ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
+      payload: true
+    })
+
+    try {
+      const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+            _AUTH = JSON.parse(_SERIALIZED_AUTH),
+            _REFERENCE_PREFERED_USERGROUP_ID = (typeof usergroup != 'undefined')? usergroup._id: _AUTH.usergroup._id,
+            _ROLES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/usergroups/type/${groupType}?token=${_REFERENCE_PREFERED_USERGROUP_ID}`);
+
+      if (_ROLES.status === 200){
+        const _FINAL_RESPONSE = _ROLES.data;
+
+        if (_FINAL_RESPONSE.meta.code === 200){
+          const _DATA = _FINAL_RESPONSE.data;
+
+          dispatch({
+            type: ROLES_MODAL.FETCH_AVAILABLE_ROLES_TYPE,
+            payload: _DATA
+          })
+
+          dispatch({
+            type: ROLES_MODAL.SET_CURRENT_ROLE,
+            payload: ((_DATA.length > 0)? _DATA[0]: {})
+          })
+
+          dispatch({
+            type: ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            payload: {
+              status: true
+            }
+          })
+        }else{
+          dispatch({
+            type: ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            payload: {
+              status: false,
+              content: _FINAL_RESPONSE.meta.error_message
+            }
+          })
+        }
+      }
+    } catch (error) {
+      if (error){
+        const _ERROR_MESSAGE = error.message || error.request._response;
+
+        dispatch({
+          type: ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
+          payload: false
+        })
+
+        dispatch({
+          type: ROLES_MODAL.SET_CONNECTED_STATUS,
+          payload: {
+            status: false,
+            content: _ERROR_MESSAGE
+          }
+        })
+      }
+    }
+  },
   _appendRolesToResourceWithRules: async (rolesRules, callback, dispatch) => {
     dispatch({
       type: ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,

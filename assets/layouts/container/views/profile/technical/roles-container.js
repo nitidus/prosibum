@@ -3,7 +3,7 @@ import { StatusBar, View, Text, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../../styles/index';
 import { Input } from '../../../../../components/index';
-import { Pilot, PinnedSide, Icon, RolesModal } from '../../../../../layouts/index';
+import { Pilot, PinnedSide, Icon } from '../../../../../layouts/index';
 const Styles = Views.Profile.Technical.Roles;
 
 import { Functions } from '../../../../../modules/index';

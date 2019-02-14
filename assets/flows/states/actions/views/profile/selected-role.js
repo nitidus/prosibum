@@ -12,6 +12,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setSelectedReferenceRole: (referenceRole) => {
+      dispatch({
+        type: SELECTED_ROLE.SET_SELECTED_REFERENCE_ROLE,
+        payload: referenceRole
+      })
+    },
+    resetSelectedReferenceRole: () => {
+      dispatch({
+        type: SELECTED_ROLE.RESET_SELECTED_REFERENCE_ROLE
+      })
+    },
     setRolesModalVisibility: (visibilityStatus) => {
       dispatch({
         type: SELECTED_ROLE.SET_ROLES_MODAL_VISIBILITY,

@@ -48,20 +48,22 @@ export const Pilot = (props) => {
 
     if (typeof attitude.children != 'undefined'){
       if (attitude.children.length > 0){
-        _CONTENT = attitude.children.map((child, i) => {
-          var childName = child.type.name,
-              childProps = {...child.props},
-              childStyle = [
-                Styles.PinnedSide,
-                childProps.style
-              ];
+        _CONTENT = attitude.children.filter((child, i) => {
+          if (typeof child != 'undefined'){
+            var childName = child.type.name,
+                childProps = {...child.props},
+                childStyle = [
+                  Styles.PinnedSide,
+                  childProps.style
+                ];
 
-          const ultimateKey = Functions._generateNewUniqueObjectKey();
+            const ultimateKey = Functions._generateNewUniqueObjectKey();
 
-          childProps.key = childProps.name || ultimateKey;
-          childProps.style = childStyle;
+            childProps.key = childProps.name || ultimateKey;
+            childProps.style = childStyle;
 
-          return React.cloneElement(child, childProps);
+            return React.cloneElement(child, childProps);
+          }
         });
       }
     }

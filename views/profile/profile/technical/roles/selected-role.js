@@ -41,6 +41,10 @@ class SelectedRole extends Component<{}> {
       }
     }
 
+    if (Object.keys(props.selectedRole.selectedReferenceRole).length === 0){
+      props.setSelectedReferenceRole(attitude.data);
+    }
+
     this.attitude = attitude;
   }
 
@@ -322,17 +326,30 @@ class SelectedRole extends Component<{}> {
                       }
                     }
 
+                    var _SINGLE_ROW_GRADIENT = Global.colors.pair.aqrulean;
+
+                    if ((typeof props.selectedRole.selectedReferenceRole._id != 'undefined') && (role._id === props.selectedRole.selectedReferenceRole._id)){
+                      _SINGLE_ROW_GRADIENT = Global.colors.pair.ongerine;
+                    }
+
                     _SINGLE_ROW_CONTENT = (
                       <Input
                         type={__CONSTANTS.content.scrollViewItem.type}
                         name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}
                         style={Styles.RoleItemContainer}
-                        gradient={Global.colors.pair.aqrulean}
+                        gradient={_SINGLE_ROW_GRADIENT}
                         onPress={() => {
-                          const { props } = this,
-                                { navigation } = props;
+                          const _SELECTED_REFERENCE_ROLE = props.selectedRole.selectedReferenceRole;
 
-                          // navigation.navigate('SelectedRole', role);
+                          if (Object.keys(_SELECTED_REFERENCE_ROLE).length > 0){
+                            if ((typeof _SELECTED_REFERENCE_ROLE._id != 'undefined') && (_SELECTED_REFERENCE_ROLE._id === role._id)){
+                              props.setSelectedReferenceRole(this.attitude.data);
+                            }else{
+                              props.setSelectedReferenceRole(role);
+                            }
+                          }else{
+                            props.setSelectedReferenceRole(role);
+                          }
                         }}>
                           <View
                             style={Styles.RoleItemContent}>
@@ -354,6 +371,15 @@ class SelectedRole extends Component<{}> {
                       </Input>
                     );
                   }else{
+                    var _SINGLE_ROW_DEPENDED_OPTIONS = {};
+
+                    if ((typeof props.selectedRole.selectedReferenceRole._id != 'undefined') && (role._id === props.selectedRole.selectedReferenceRole._id)){
+                      _SINGLE_ROW_DEPENDED_OPTIONS = {
+                        ..._SINGLE_ROW_DEPENDED_OPTIONS,
+                        gradient: Global.colors.pair.ongerine
+                      };
+                    }
+
                     _SINGLE_ROW_CONTENT = (
                       <Input
                         type={__CONSTANTS.content.scrollViewItem.type}
@@ -363,11 +389,19 @@ class SelectedRole extends Component<{}> {
                           Styles.RoleItemContainer,
                           Styles.RoleItemContainerWithEmptyPositionContent
                         ]}
+                        {..._SINGLE_ROW_DEPENDED_OPTIONS}
                         onPress={() => {
-                          const { props } = this,
-                                { navigation } = props;
+                          const _SELECTED_REFERENCE_ROLE = props.selectedRole.selectedReferenceRole;
 
-                          // navigation.navigate('SelectedRole', role);
+                          if (Object.keys(_SELECTED_REFERENCE_ROLE).length > 0){
+                            if ((typeof _SELECTED_REFERENCE_ROLE._id != 'undefined') && (_SELECTED_REFERENCE_ROLE._id === role._id)){
+                              props.setSelectedReferenceRole(this.attitude.data);
+                            }else{
+                              props.setSelectedReferenceRole(role);
+                            }
+                          }else{
+                            props.setSelectedReferenceRole(role);
+                          }
                         }}>
                           <View
                             style={Styles.RoleItemContent}>
@@ -408,6 +442,13 @@ class SelectedRole extends Component<{}> {
     return (
       <Container
         title={_PREPARED_PERSONAL_CONTACT_INFO.CONTAINER_TITLE}
+        referenceRole={props.selectedRole.selectedReferenceRole}
+        rolesModalVisibility={props.selectedRole.rolesModalVisibility}
+        onAddRolePress={(visibilityStatus) => props.setRolesModalVisibility(visibilityStatus)}
+        onRolesAbsorb={async (response) => {
+          //We can use response later
+          await props.fetchAvailableRoles(this.attitude.data.usergroup, this.attitude.data.reference_id);
+        }}
         {...props}>
           {_DETAIL_CAROUSEL_CONTAINER}
 

@@ -30,6 +30,11 @@
           }
         }
       }
+    },
+    "noContent": {
+      "title": {
+        "en": "There's no defined sub-role."
+      }
     }
   }
 }

@@ -244,9 +244,19 @@ export const TopBar = (props) => {
 
       switch (_CHILD_TYPE) {
         case 'left':
+            _CHILD_PROPS.style = [
+              _CHILD_PROPS.style,
+              Styles.PinnedSide
+            ];
+            
           _LEFT_SIDE_CONTENT = React.cloneElement(_CHILD, _CHILD_PROPS);
           break;
         case 'right':
+            _CHILD_PROPS.style = [
+              _CHILD_PROPS.style,
+              Styles.PinnedSide
+            ];
+            
           _RIGHT_SIDE_CONTENT = React.cloneElement(_CHILD, _CHILD_PROPS);
           break;
         case 'bottom':

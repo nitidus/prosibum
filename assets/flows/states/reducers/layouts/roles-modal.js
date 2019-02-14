@@ -2,11 +2,13 @@ import { LAYOUTS } from '../../types/index';
 const { ROLES_MODAL } = LAYOUTS;
 
 const initialState = {
+  reference: {},
   roles: [],
   currentRole: {},
   email: '',
   appendRolesToResources: false,
   cardinalityLoading: false,
+  loadingRolesType: false,
   appendedResources: [],
   cardinal: {},
   connected: {
@@ -17,6 +19,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case ROLES_MODAL.SET_REFERENCE:
+      return {
+        ...state,
+        reference: action.payload
+      };
+      break;
     case ROLES_MODAL.SET_ROLES:
       return {
         ...state,
@@ -45,6 +53,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         cardinal: action.payload
+      };
+      break;
+    case ROLES_MODAL.FETCH_AVAILABLE_ROLES_TYPE:
+      return {
+        ...state,
+        roles: action.payload
+      };
+      break;
+    case ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS:
+      return {
+        ...state,
+        loadingRolesType: action.payload
       };
       break;
     case ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS:

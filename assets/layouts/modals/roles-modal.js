@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Global, Modules } from '../../styles/index';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
-import { Input, Carousel } from '../../components/index';
+import { Input, Carousel, Link } from '../../components/index';
 const Styles = Modules.Layouts.RolesModal;
 
 import { Functions } from '../../modules/index';
@@ -72,19 +72,23 @@ const RolesModal = (props) => {
     attitude.style = {};
   }
 
-  if ((typeof props.data != 'undefined') || (typeof props.rolesData != 'undefined') || (typeof props.roles_data != 'undefined') || (typeof props.rolesItems != 'undefined') || (typeof props.roles_items != 'undefined')){
-    attitude.data = props.data || props.rolesData || props.roles_data || props.rolesItems || props.roles_items;
+  if ((typeof props.reference != 'undefined') || (typeof props.referenceRole != 'undefined') || (typeof props.role != 'undefined')){
+    attitude.reference = props.reference || props.referenceRole || props.role;
 
-    if (props.rolesModal.roles.length === 0){
-      props.setRolesItems(attitude.data);
-    }
-  }
+    if (attitude.visibility === true){
+      if (Object.keys(props.rolesModal.reference).length > 0){
+        if ((typeof attitude.reference._id != 'undefined') && (typeof props.rolesModal.reference._id != 'undefined')){
+          if (attitude.reference._id !== props.rolesModal.reference._id){
+            props.setReference(attitude.reference);
 
-  if ((typeof props.currentRolesItem != 'undefined') || (typeof props.current_roles_item != 'undefined')){
-    attitude.currentRolesItem = props.currentRolesItem || props.current_roles_item;
+            props.fetchAvailableRolesType(GLOBAL.TARGET, attitude.reference.usergroup);
+          }
+        }
+      }else{
+        props.setReference(attitude.reference);
 
-    if (Object.keys(props.rolesModal.currentRole).length === 0){
-      props.setCurrentRole(attitude.currentRolesItem);
+        props.fetchAvailableRolesType(GLOBAL.TARGET, attitude.reference.usergroup);
+      }
     }
   }
 
@@ -113,35 +117,30 @@ const RolesModal = (props) => {
       _CURRENT_USER_GROUP_ROLE = '',
       _CURRENT_USER_GROUP_ROLE_INDEX = -1,
       _ROLE_COUNT = '',
-      _ROLE_COUNT_DEPENDED_NOUN = '';
+      _ROLE_COUNT_DEPENDED_NOUN = '',
+      _MODAL_CONTENT;
 
-  if (attitude.visibility === true){
-    _USER_GROUP_ROLES = props.rolesModal.roles.map((item, i) => {
-      const _ROW = item,
-            _ROLE = _ROW.role;
+  if ((props.rolesModal.roles.length > 0) && (Object.keys(props.rolesModal.currentRole).length > 0)){
+    if (attitude.visibility === true){
+      _USER_GROUP_ROLES = props.rolesModal.roles.map((item, i) => {
+        const _ROW = item,
+              _ROLE = _ROW.role;
 
-      return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
-    }),
-    _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role || props.rolesModal.currentRole,
-    _CURRENT_USER_GROUP_ROLE_INDEX = props.rolesModal.roles.findIndex((item) => {
-      const _USER_GROUP_ROLE = item.role || item,
-            _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role || props.rolesModal.currentRole;
+        return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
+      }),
+      _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role || props.rolesModal.currentRole,
+      _CURRENT_USER_GROUP_ROLE_INDEX = props.rolesModal.roles.findIndex((item) => {
+        const _USER_GROUP_ROLE = item.role || item,
+              _CURRENT_USER_GROUP_ROLE = props.rolesModal.currentRole.role || props.rolesModal.currentRole;
 
-      return (_CURRENT_USER_GROUP_ROLE === _USER_GROUP_ROLE);
-    });
-  }
+        return (_CURRENT_USER_GROUP_ROLE === _USER_GROUP_ROLE);
+      });
+    }
 
-  const _VALIDATED = _componentWillCheckValidation(props);
+    const _VALIDATED = _componentWillCheckValidation(props);
 
-  return (
-    <Modal
-      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
-      visible={attitude.visibility}
-      backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
-      onBlur={() => MODAL.ON_BLUR(false)}
-      onPress={attitude.onPress}
-      style={Styles.ModalContainer}
-      swipeDirection="down">
+    _MODAL_CONTENT = (
+      <View>
         <Carousel
           name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
           data={_USER_GROUP_ROLES}
@@ -149,7 +148,7 @@ const RolesModal = (props) => {
           itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
           firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
           onLayout={({ item, i }) => {
-            var _CURRENT_USER_GROUP = Functions._convertKeywordToToken( props.rolesModal.currentRole.role || props.rolesModal.currentRole),
+            var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.rolesModal.currentRole.role || props.rolesModal.currentRole),
                 _ITEM_NAME = item.toLowerCase(),
                 _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
 
@@ -248,8 +247,29 @@ const RolesModal = (props) => {
               });
             }}
             forcedDisable={_VALIDATED}/>
+      </View>
+    );
+
+  }else{
+    _MODAL_CONTENT = (
+      <Link
+        containerStyle={Styles.EmptyContent}
+        value={__CONSTANTS.modalContainer.noContent.title.en} />
+    );
+  }
+
+  return (
+    <Modal
+      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
+      visible={attitude.visibility}
+      backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
+      onBlur={() => MODAL.ON_BLUR(false)}
+      onPress={attitude.onPress}
+      style={Styles.ModalContainer}
+      swipeDirection="down">
+        {_MODAL_CONTENT}
     </Modal>
-  )
+  );
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RolesModal);
