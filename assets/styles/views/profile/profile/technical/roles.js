@@ -8,10 +8,7 @@ import { colors, fonts } from '../../../../global';
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
-var _CUSTOM_ADD_ROLE_BUTTON = {
-      marginRight: 15
-    },
-    _CUSTOM_CONTENT = {
+var _CUSTOM_CONTENT = {
       marginVertical: 15,
       marginHorizontal: 15
     },
@@ -80,8 +77,6 @@ if (Platform.OS !== 'ios'){
   _CUSTOM_ROLE_SUBTITLE.fontWeight = '500';
 }else{
   if (width >= 1000 || height >= 1000){
-    _CUSTOM_ADD_ROLE_BUTTON.marginRight += 5;
-
     _CUSTOM_CONTENT.marginHorizontal = 162;
 
     _CUSTOM_ROLE_ITEM_CONTAINER.height += 6;
@@ -105,9 +100,6 @@ module.exports = StyleSheet.create({
   Container: {
     flex: 1,
     backgroundColor: colors.single.blackSqueeze
-  },
-  AddRoleButton: {
-    ..._CUSTOM_ADD_ROLE_BUTTON
   },
   Content: {
     ..._CUSTOM_CONTENT

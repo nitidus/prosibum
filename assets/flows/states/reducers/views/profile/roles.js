@@ -5,7 +5,6 @@ const initialState = {
         currentTab: {},
         tabs: [],
         roles: [],
-        rolesModalVisibility: false,
         loadingRolesType: false,
         loadingRoles: false,
         connected: {
@@ -26,12 +25,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         tabs: action.payload
-      };
-      break;
-    case ROLES.SET_ROLES_MODAL_VISIBILITY:
-      return {
-        ...state,
-        rolesModalVisibility: action.payload
       };
       break;
     case ROLES.FETCH_AVAILABLE_ROLES:

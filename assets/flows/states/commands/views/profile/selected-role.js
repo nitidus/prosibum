@@ -19,10 +19,10 @@ module.exports = {
             _PREFERED_REFERENCE_ID = reference || _AUTH.reference_id || _AUTH._id,
             _PREFERED_USERGROUP_ID = usergroup._id;
 
-      var _TARGET_URL = `${GLOBAL.URLS.INTERFAS.HOST_NAME}/roles/${_PREFERED_ID}?user_group_id=${_PREFERED_USERGROUP_ID}`;
+      var _TARGET_URL = `${GLOBAL.URLS.INTERFAS.HOST_NAME}/roles/${_PREFERED_ID}?user_group_ancestors=${_PREFERED_USERGROUP_ID}`;
 
       if (_PREFERED_ID !== _PREFERED_REFERENCE_ID){
-        _TARGET_URL += `reference_id=${_PREFERED_REFERENCE_ID}`;
+        _TARGET_URL += `reference_ancestors=${_PREFERED_REFERENCE_ID}`;
       }
 
       const _ROLES = await axios.get(_TARGET_URL);

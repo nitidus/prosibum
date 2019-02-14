@@ -35,16 +35,6 @@ export const RolesContainer = (props) => {
     attitude.onPilotTabItemPress = props.onPilotTabItemPress || props.pilotTabItemOnPress || props.onNavigationTabItemPress || props.navigationTabItemOnPress;
   }
 
-  if ((typeof props.onAddRolePress != 'undefined') || (typeof props.onRightPinnedPress != 'undefined') || (typeof props.onLeftPinnedPress != 'undefined')){
-    attitude.onAddRolePress = props.onAddRolePress || props.onRightPinnedPress || props.onLeftPinnedPress;
-  }
-
-  if ((typeof props.onRolesAbsorb != 'undefined') || (typeof props.onRolesAppend != 'undefined') || (typeof props.onRolesMerge != 'undefined') || (typeof props.onRolesImbibe != 'undefined') || (typeof props.onAbsorbRoles != 'undefined') || (typeof props.onAppendRoles != 'undefined') || (typeof props.onMergeRoles != 'undefined') || (typeof props.onImbibeRoles != 'undefined')){
-    attitude.onRolesAbsorb = props.onRolesAbsorb || props.onRolesAppend || props.onRolesMerge || props.onRolesImbibe || props.onAbsorbRoles || props.onAppendRoles || props.onMergeRoles || props.onImbibeRoles;
-  }
-
-  attitude.rolesModalVisibility = props.rolesModalVisibility || props.rolesModalVisible || props.rolesModalIsVisible || false;
-
   var _CHILDREN_CONTENT;
 
   if (typeof attitude.children != 'undefined'){
@@ -90,26 +80,11 @@ export const RolesContainer = (props) => {
                   height={Styles.__Gobal_Icons_In_Pilot.height} />
             </PinnedSide>
             <PinnedSide
-              type="right"
-              onPress={() => props.onAddRolePress(true)}>
-                <Icon
-                  name="roles"
-                  style={Styles.AddRoleButton}
-                  height={Styles.__Gobal_Icons_In_Pilot.height} />
-            </PinnedSide>
-            <PinnedSide
               type="bottom"
               items={_TABS}
               current={_CURRENT_TAB}
               onPress={attitude.onPilotTabItemPress} />
         </Pilot>
-
-        <RolesModal
-          visibility={attitude.rolesModalVisibility}
-          data={attitude.pilotData}
-          currentRolesItem={attitude.currentPilotItem}
-          onBlur={attitude.onAddRolePress}
-          onProgressSuccess={attitude.onRolesAbsorb} />
 
         {_CHILDREN_CONTENT}
     </View>
