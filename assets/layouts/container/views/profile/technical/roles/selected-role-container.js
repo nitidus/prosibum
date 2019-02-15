@@ -35,8 +35,7 @@ export const SelectedRoleContainer = (props) => {
     attitude.onRolesAbsorb = props.onRolesAbsorb || props.onRolesAppend || props.onRolesMerge || props.onRolesImbibe || props.onAbsorbRoles || props.onAppendRoles || props.onMergeRoles || props.onImbibeRoles;
   }
 
-  var _CHILDREN_CONTENT,
-      _DEPENDED_RIGHT_PINNED_SIDE;
+  var _CHILDREN_CONTENT, _DEPENDED_RIGHT_PINNED_SIDE;
 
   if (typeof attitude.children != 'undefined'){
     if (attitude.children.length > 0){

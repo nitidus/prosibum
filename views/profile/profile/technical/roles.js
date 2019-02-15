@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image } from 'react-native';
+import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -26,22 +26,39 @@ class Roles extends Component<{}> {
 
   };
 
-  async componentDidMount() {
+  async _initializeTheSelectedReference(props) {
+    if (Object.keys(props.roles.selectedReferenceRole).length === 0){
+      const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+            _AUTH = JSON.parse(_SERIALIZED_AUTH);
+
+      props.setSelectedReferenceRole(_AUTH);
+    }
+  }
+
+  async componentWillReceiveProps(props) {
+    await this._initializeTheSelectedReference(props);
+  }
+
+  async componentWillMount() {
     const { props } = this,
           { navigation } = props,
           { params } = navigation.state;
 
-    if (typeof params != 'undefined'){
-      if ((typeof params.currentRole != 'undefined') || (typeof params.current_role != 'undefined') || (typeof params.brandRole != 'undefined') || (typeof params.brand_ole != 'undefined') || (typeof params.selectedRole != 'undefined') || (typeof params.selected_role != 'undefined')){
-        const _CURRENT_ROLE = params.currentRole || params.current_role || params.brandRole || params.brand_ole || params.selectedRole || params.selected_role;
+    if (props.roles.tabs.length === 0){
+      if (typeof params != 'undefined'){
+        if ((typeof params.currentRole != 'undefined') || (typeof params.current_role != 'undefined') || (typeof params.brandRole != 'undefined') || (typeof params.brand_ole != 'undefined') || (typeof params.selectedRole != 'undefined') || (typeof params.selected_role != 'undefined')){
+          const _CURRENT_ROLE = params.currentRole || params.current_role || params.brandRole || params.brand_ole || params.selectedRole || params.selected_role;
 
-        await props.fetchAvailableRolesType(GLOBAL.TARGET, _CURRENT_ROLE);
+          await props.fetchAvailableRolesType(GLOBAL.TARGET, _CURRENT_ROLE);
+        }else{
+          await props.fetchAvailableRolesType(GLOBAL.TARGET);
+        }
       }else{
         await props.fetchAvailableRolesType(GLOBAL.TARGET);
       }
-    }else{
-      await props.fetchAvailableRolesType(GLOBAL.TARGET);
     }
+
+    await this._initializeTheSelectedReference(props);
   }
 
   render() {
@@ -184,17 +201,39 @@ class Roles extends Component<{}> {
                           }
                         }
 
+                        var _SINGLE_ROW_GRADIENT = Global.colors.pair.aqrulean;
+
+                        if ((typeof props.roles.selectedReferenceRole._id != 'undefined') && (role._id === props.roles.selectedReferenceRole._id)){
+                          _SINGLE_ROW_GRADIENT = Global.colors.pair.ongerine;
+                        }
+
                         _SINGLE_ROW_CONTENT = (
                           <Input
                             type={__CONSTANTS.content.scrollViewItem.type}
                             name={Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.normal.title.en)}
                             style={Styles.RoleItemContainer}
-                            gradient={Global.colors.pair.aqrulean}
+                            gradient={_SINGLE_ROW_GRADIENT}
                             onPress={() => {
                               const { props } = this,
                                     { navigation } = props;
 
                               navigation.navigate('SelectedRole', role);
+                            }}
+                            onLongPress={async () => {
+                              const _SELECTED_REFERENCE_ROLE = props.roles.selectedReferenceRole;
+
+                              if (Object.keys(_SELECTED_REFERENCE_ROLE).length > 0){
+                                if ((typeof _SELECTED_REFERENCE_ROLE._id != 'undefined') && (_SELECTED_REFERENCE_ROLE._id === role._id)){
+                                  const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+                                        _AUTH = JSON.parse(_SERIALIZED_AUTH);
+
+                                  props.setSelectedReferenceRole(_AUTH);
+                                }else{
+                                  props.setSelectedReferenceRole(role);
+                                }
+                              }else{
+                                props.setSelectedReferenceRole(role);
+                              }
                             }}>
                               <View
                                 style={Styles.RoleItemContent}>
@@ -216,6 +255,15 @@ class Roles extends Component<{}> {
                           </Input>
                         );
                       }else{
+                        var _SINGLE_ROW_DEPENDED_OPTIONS = {};
+
+                        if ((typeof props.roles.selectedReferenceRole._id != 'undefined') && (role._id === props.roles.selectedReferenceRole._id)){
+                          _SINGLE_ROW_DEPENDED_OPTIONS = {
+                            ..._SINGLE_ROW_DEPENDED_OPTIONS,
+                            gradient: Global.colors.pair.ongerine
+                          };
+                        }
+
                         _SINGLE_ROW_CONTENT = (
                           <Input
                             type={__CONSTANTS.content.scrollViewItem.type}
@@ -225,11 +273,28 @@ class Roles extends Component<{}> {
                               Styles.RoleItemContainer,
                               Styles.RoleItemContainerWithEmptyPositionContent
                             ]}
+                            {..._SINGLE_ROW_DEPENDED_OPTIONS}
                             onPress={() => {
                               const { props } = this,
                                     { navigation } = props;
 
                               navigation.navigate('SelectedRole', role);
+                            }}
+                            onLongPress={async () => {
+                              const _SELECTED_REFERENCE_ROLE = props.roles.selectedReferenceRole;
+
+                              if (Object.keys(_SELECTED_REFERENCE_ROLE).length > 0){
+                                if ((typeof _SELECTED_REFERENCE_ROLE._id != 'undefined') && (_SELECTED_REFERENCE_ROLE._id === role._id)){
+                                  const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+                                        _AUTH = JSON.parse(_SERIALIZED_AUTH);
+
+                                  props.setSelectedReferenceRole(_AUTH);
+                                }else{
+                                  props.setSelectedReferenceRole(role);
+                                }
+                              }else{
+                                props.setSelectedReferenceRole(role);
+                              }
                             }}>
                               <View
                                 style={Styles.RoleItemContent}>
@@ -280,11 +345,14 @@ class Roles extends Component<{}> {
               await props.fetchAvailableRoles(props.roles.tabs[_SELECTED_ITEM_INDEX]);
             }}
             onAddRolePress={(visibilityStatus) => props.setRolesModalVisibility(visibilityStatus)}
+            rolesModalVisibility={props.roles.rolesModalVisibility}
+            referenceRole={props.roles.selectedReferenceRole}
             onRolesAbsorb={async (response) => {
               //We can use response later
-              await props.fetchAvailableRoles(props.roles.currentTab);
+              if (Object.keys(props.roles.selectedReferenceRole).length > 0){
+                await props.fetchAvailableRoles(props.roles.selectedReferenceRole.usergroup, props.roles.selectedReferenceRole.reference_id);
+              }
             }}
-            rolesModalVisibility={props.roles.rolesModalVisibility}
             {...props}>
               {_TAB_CONTENT}
           </Container>

@@ -24,6 +24,23 @@ const mapDispatchToProps = (dispatch) => {
         payload: pilotTabs
       })
     },
+    setSelectedReferenceRole: (referenceRole) => {
+      dispatch({
+        type: ROLES.SET_SELECTED_REFERENCE_ROLE,
+        payload: referenceRole
+      })
+    },
+    resetSelectedReferenceRole: () => {
+      dispatch({
+        type: ROLES.RESET_SELECTED_REFERENCE_ROLE
+      })
+    },
+    setRolesModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: ROLES.SET_ROLES_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
     fetchAvailableRoles: async (usergroup, reference) => CMD._getRolesWithUsergroup(usergroup, reference, dispatch),
     fetchAvailableRolesType: async (groupType, usergroup) => CMD._getRolesTypeWithGroupType(groupType, usergroup, dispatch),
     setRolesLoadingStatus: (loadingStatus) => {

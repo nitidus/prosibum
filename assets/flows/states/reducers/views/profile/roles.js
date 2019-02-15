@@ -2,9 +2,11 @@ import { VIEWS } from '../../../types/index';
 const { ROLES } = VIEWS.PROFILE;
 
 const initialState = {
+        selectedReferenceRole: {},
         currentTab: {},
         tabs: [],
         roles: [],
+        rolesModalVisibility: false,
         loadingRolesType: false,
         loadingRoles: false,
         connected: {
@@ -25,6 +27,24 @@ export default (state = initialState, action) => {
       return {
         ...state,
         tabs: action.payload
+      };
+      break;
+    case ROLES.SET_SELECTED_REFERENCE_ROLE:
+      return {
+        ...state,
+        selectedReferenceRole: action.payload
+      };
+      break;
+    case ROLES.RESET_SELECTED_REFERENCE_ROLE:
+      return {
+        ...state,
+        selectedReferenceRole: initialState.selectedReferenceRole
+      };
+      break;
+    case ROLES.SET_ROLES_MODAL_VISIBILITY:
+      return {
+        ...state,
+        rolesModalVisibility: action.payload
       };
       break;
     case ROLES.FETCH_AVAILABLE_ROLES:

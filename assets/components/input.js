@@ -123,6 +123,10 @@ export const Input = (props) => {
           attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
         }
 
+        if ((typeof props.onLongPress != 'undefined') || (typeof props.onLinkLongPress != 'undefined') || (typeof props.linkOnLongPress != 'undefined')){
+          attitude.onLongPress = props.onLongPress || props.onLinkLongPress || props.linkOnLongPress;
+        }
+
         if (typeof props.gradient != 'undefined'){
           attitude.gradient = props.gradient;
         }
@@ -615,7 +619,12 @@ export const Input = (props) => {
         </Text>;
       }
 
-      var _ACTIVE_OPACITY = 0.7;
+      var _ACTIVE_OPACITY = 0.7,
+          _OTHER_OPTIONS = {};
+
+      if (typeof attitude.onLongPress != 'undefined'){
+        _OTHER_OPTIONS.onLongPress = attitude.onLongPress;
+      }
 
       if (typeof attitude.gradient != 'undefined'){
         const restructredRange = Object.keys(attitude.gradient).map((stepName) => {
@@ -624,7 +633,8 @@ export const Input = (props) => {
 
         var _GRADIENT_INPUT_BUTTON_CONTENT = <TouchableOpacity
           activeOpacity={_ACTIVE_OPACITY}
-          onPress={attitude.onPress}>
+          onPress={attitude.onPress}
+          {..._OTHER_OPTIONS}>
             <LinearGradient
               key={attitude.key}
               name={attitude.name}
@@ -695,7 +705,8 @@ export const Input = (props) => {
                   attitude.style
                 ]}
                 activeOpacity={_ACTIVE_OPACITY}
-                onPress={attitude.onPress}>
+                onPress={attitude.onPress}
+                {..._OTHER_OPTIONS}>
                   {buttonContent}
               </TouchableOpacity>
           );
