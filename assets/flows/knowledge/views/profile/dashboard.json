@@ -1,22 +1,41 @@
 {
-  "walletsCursor": {
+  "firstCarousel": {
+    "title": {
+      "en": "Brief Detail"
+    },
     "type": "BUTTON",
-    "options": {
-      "unit": {
-        "en": "PCS"
+    "state": {
+      "loading": {
+        "titleSuffix": {
+          "en": "Loading"
+        }
       }
     },
-    "state": {
-      "normal": {
+    "content": [
+      {
         "title": {
           "en": "Wallets"
-        }
+        },
+        "screen": {
+          "name": "Wallets"
+        },
+        "unit": {
+          "en": "PCS"
+        },
+        "gradientKey": "chaid"
       },
-      "loading": {
+      {
         "title": {
-          "en": "Wallets Loading"
-        }
+          "en": "Roles"
+        },
+        "screen": {
+          "name": "Roles"
+        },
+        "unit": {
+          "en": "PCS"
+        },
+        "gradientKey": "analue"
       }
-    }
+    ]
   }
 }

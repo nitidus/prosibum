@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, Dimensions } from 'react-native';
 
 import { Global, Views } from '../../assets/styles/index';
-import { Input } from '../../assets/components/index';
-const Styles = Views.Profile.Dashboard;
+import { Input, Carousel } from '../../assets/components/index';
+const Styles = Views.Profile.Dashboard,
+      _SCREEN = Dimensions.get('window');
 
 import { views_constants } from '../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.dashboard;
@@ -12,31 +13,62 @@ import { Functions } from '../../assets/modules/index';
 const { Preparation } = Functions;
 
 export const Dashboard = (props) => {
-  const { navigation } = props;
+  const { navigation } = props,
+        _FIRST_CAROUSEL_ITEMS = __CONSTANTS.firstCarousel.content;
 
   return (
     <ScrollView
       contentContainerStyle={Styles.Container}
       showsVerticalScrollIndicator={false}>
-        <Input
-          type={__CONSTANTS.walletsCursor.type}
-          name={Functions._convertTokenToKeyword(__CONSTANTS.walletsCursor.state.normal.title.en)}
-          gradient={Global.colors.pair.chaid}
-          style={[
-            Styles.DetailContainer,
-            Styles.BriefDetailContainer,
-            Styles.LTR_ContentAlignment
+        <Carousel
+          name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}
+          data={[
+            {
+              key: "wallets",
+              value: 8
+            },
+            {
+              key: "roles",
+              value: 12
+            }
           ]}
-          onPress={() => navigation.navigate('Wallets')}>
-            <Text
-              style={Styles.BriefDetailTitle}>
-                8 {__CONSTANTS.walletsCursor.options.unit.en}
-            </Text>
-            <Text
-              style={Styles.BriefDetailSubtitle}>
-                {Functions._convertKeywordToToken(__CONSTANTS.walletsCursor.state.normal.title.en)}
-            </Text>
-        </Input>
+          firstItem={0}
+          itemWidth={_SCREEN.width - (15 * 2)}
+          onLayout={({ item, i }) => {
+            const _CAROUSEL_CURRENT_ITEM_INDEX = _FIRST_CAROUSEL_ITEMS.findIndex((briefDetailItem, j) => {
+                    const _ITEM = Functions._convertTokenToKeyword(item.key),
+                          _CURRENT_ITEM = Functions._convertTokenToKeyword(briefDetailItem.title.en);
+
+                    return (_ITEM === _CURRENT_ITEM);
+                  }),
+                  _ITEM_KEY = Functions._convertTokenToKeyword(item.key),
+                  _ITEM_TITLE = Functions._convertKeywordToToken(_FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].title.en),
+                  _ITEM_TARGET_SCREEN = _FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].screen.name,
+                  _ITEM_UNIT = _FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].unit.en,
+                  _ITEM_GRADIENNT = Global.colors.pair[_FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].gradientKey] || Global.colors.pair.chaid;
+
+            return (
+              <Input
+                type={__CONSTANTS.firstCarousel.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}
+                gradient={Global.colors.pair.chaid}
+                style={[
+                  Styles.DetailContainer,
+                  Styles.BriefDetailContainer,
+                  Styles.LTR_ContentAlignment
+                ]}
+                onPress={() => navigation.navigate(_ITEM_TARGET_SCREEN)}>
+                  <Text
+                    style={Styles.BriefDetailTitle}>
+                      {item.value} {_ITEM_UNIT}
+                  </Text>
+                  <Text
+                    style={Styles.BriefDetailSubtitle}>
+                      {_ITEM_TITLE}
+                  </Text>
+              </Input>
+            );
+          }}/>
     </ScrollView>
   )
 }
