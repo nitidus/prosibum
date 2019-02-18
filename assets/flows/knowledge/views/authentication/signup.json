@@ -1,56 +1,122 @@
 {
-  "headline": {
-    "title": {
-      "en": "Dear User"
-    },
-    "subtitle": {
-      "en": "Please enter your\nuser account details."
-    }
-  },
-  "firstInputGroup": {
-    "first": {
-      "type": "PHONE-LINK",
-      "title": {
-        "en": "Phone Number"
-      }
-    },
-    "second": {
-      "type": "EMAIL",
-      "title": {
-        "en": "Email"
-      }
-    },
-    "third": {
-      "type": "PASSWORD",
-      "title": {
-        "en": "Password"
-      }
-    }
-  },
-  "submitInput": {
-    "type": "BUTTON",
+  "content": {
     "state": {
       "normal": {
-        "title": {
-          "en": "Signup"
+        "headline": {
+          "title": {
+            "en": "Dear User"
+          },
+          "subtitle": {
+            "en": "Please enter your\nuser account details."
+          }
+        },
+        "firstInputGroup": {
+          "first": {
+            "type": "PHONE-LINK",
+            "title": {
+              "en": "Phone Number"
+            }
+          },
+          "second": {
+            "type": "EMAIL",
+            "title": {
+              "en": "Email"
+            }
+          },
+          "third": {
+            "type": "PASSWORD",
+            "title": {
+              "en": "Password"
+            }
+          }
+        },
+        "submitInput": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Signup"
+              }
+            },
+            "loading": {
+              "title": {
+                "en": "Signup Loading"
+              }
+            }
+          }
+        },
+        "quickLink": {
+          "title": {
+            "en": "Already have an account?"
+          }
+        },
+        "modals": {
+          "first": {
+            "title": {
+              "en": "Countries Codes Modal"
+            }
+          }
         }
       },
-      "loading": {
-        "title": {
-          "en": "Signup Loading"
+      "invitation": {
+        "headline": {
+          "title": {
+            "en": "Dear User"
+          },
+          "subtitle": {
+            "en": "Please complete your\nregisteration based on invitation."
+          }
+        },
+        "firstInputGroup": {
+          "first": {
+            "type": "TEXT",
+            "title": {
+              "en": "First Name"
+            }
+          },
+          "second": {
+            "type": "TEXT",
+            "title": {
+              "en": "Last Name"
+            }
+          }
+        },
+        "secondInputGroup": {
+          "first": {
+            "type": "PHONE-LINK",
+            "title": {
+              "en": "Phone Number"
+            }
+          },
+          "second": {
+            "type": "PASSWORD",
+            "title": {
+              "en": "Password"
+            }
+          }
+        },
+        "submitInput": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Complete Registeration"
+              }
+            },
+            "loading": {
+              "title": {
+                "en": "Complete Registeration Loading"
+              }
+            }
+          }
+        },
+        "modals": {
+          "first": {
+            "title": {
+              "en": "Countries Codes Modal"
+            }
+          }
         }
-      }
-    }
-  },
-  "quickLink": {
-    "title": {
-      "en": "Already have an account?"
-    }
-  },
-  "modals": {
-    "first": {
-      "title": {
-        "en": "Countries Codes Modal"
       }
     }
   }

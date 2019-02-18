@@ -12,6 +12,24 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setDemandMode: (mode) => {
+      dispatch({
+        type: SIGNUP.SET_DEMAND_MODE,
+        payload: mode
+      });
+    },
+    setFirstName: (firstName) => {
+      dispatch({
+        type: SIGNUP.SET_FIRST_NAME,
+        payload: firstName
+      });
+    },
+    setLastName: (lastName) => {
+      dispatch({
+        type: SIGNUP.SET_LAST_NAME,
+        payload: lastName
+      });
+    },
     setPhoneNumber: (phoneNumber) => {
       dispatch({
         type: SIGNUP.SET_PHONE_NUMBER,
@@ -36,6 +54,8 @@ const mapDispatchToProps = (dispatch) => {
         payload: usergroup
       });
     },
+    fetchAvailableRoleWithBrandAndToken: async (brandName, token) => CMD._getAvailableRoleWithBrandAndToken(brandName, token, dispatch),
+    completeUserRegistration: async (token, userDetail) => CMD._completeUserRegistrationWithUpdatingDetail(token, userDetail, dispatch),
     subscribeTheUser: async (userDetail) => CMD._subscribeUserWithDetail(userDetail, dispatch),
     regenerateTheUserPhoneNumberValidationToken: async (validation) => CMD._regenerateValidationToken(validation, dispatch),
     setSubscribeLoadingStatus: (loadingStatus) => {

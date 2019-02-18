@@ -5,13 +5,17 @@ import { Functions } from '../../../../../modules/index';
 
 const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
       initialState = {
+        demandMode: '',
+        firstName: '',
+        lastName: '',
         phone: {
           number: '',
           dialCode: _SELECTED_DIAL_CODE
         },
         email: '',
         password: '',
-        usergroup: {},
+        role: {},
+        loadingRole: false,
         loadingSubscribe: false,
         connected: {
           status: true,
@@ -22,6 +26,24 @@ const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SIGNUP.SET_DEMAND_MODE:
+      return {
+        ...state,
+        demandMode: action.payload
+      };
+      break;
+    case SIGNUP.SET_FIRST_NAME:
+      return {
+        ...state,
+        firstName: action.payload
+      };
+      break;
+    case SIGNUP.SET_LAST_NAME:
+      return {
+        ...state,
+        lastName: action.payload
+      };
+      break;
     case SIGNUP.SET_PHONE_NUMBER:
       return {
         ...state,
@@ -44,19 +66,28 @@ export default (state = initialState, action) => {
         password: action.payload
       };
       break;
-    case SIGNUP.SET_USERGROUP:
+    case SIGNUP.FETCH_AVAILABLE_ROLE_WITH_BRAND_AND_TOKEN:
       return {
         ...state,
-        usergroup: action.payload
+        role: action.payload
       };
       break;
     case SIGNUP.SUBSCRIBE_THE_USER:
+      return state;
+      break;
+    case SIGNUP.COMPLETE_THE_USER_REGISTRATION:
       return state;
       break;
     case SIGNUP.SET_SUBSCRIBE_LOADING_STATUS:
       return {
         ...state,
         loadingSubscribe: action.payload
+      };
+      break;
+    case SIGNUP.SET_FETCH_AVAILABLE_ROLE_WITH_BRAND_AND_TOKEN_LOADING_STATUS:
+      return {
+        ...state,
+        loadingRole: action.payload
       };
       break;
     case SIGNUP.SET_CONNECTED_STATUS:

@@ -134,7 +134,7 @@ module.exports = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: _CUSTOM_CONTENT.marginHorizontal
+    marginRight: 18
   },
   BriefDetailProfileContainerWithNoPhoto: {
     backgroundColor: colors.single.wildSand,
@@ -143,7 +143,7 @@ module.exports = StyleSheet.create({
     width: 65,
     height: 65,
     borderRadius: 5,
-    marginRight: _CUSTOM_CONTENT.marginHorizontal
+    marginRight: 18
   },
   BriefDetailProfileContainer: {
     width: 65,
@@ -182,7 +182,7 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_ROLE_ITEM_CONTAINER
   },
   RoleItemContainerWithEmptyPositionContent: {
-    
+
   },
   RoleItemContent: {
     flexDirection: 'row'

@@ -27,7 +27,15 @@ class Signup extends Component<{}> {
   };
 
   componentDidMount() {
+    const { props } = this,
+          { navigation: { state: { params } } } = props;
 
+    if (Object.keys(params).length > 0){
+      if ((typeof params.brandName != 'undefined') && (typeof params.targetToken != 'undefined')){
+        props.setDemandMode('INVITATION');
+        props.fetchAvailableRoleWithBrandAndToken(params.brandName, params.targetToken);
+      }
+    }
   }
 
   componentWillReceiveProps(props) {
@@ -40,18 +48,36 @@ class Signup extends Component<{}> {
 
   _componentWillCheckValidation(props) {
     const _PROPS = props.signup,
+          _DEMAND_MODE = Functions._convertTokenToKey(_PROPS.demandMode),
           _CONNECTED_STATUS = _PROPS.connected.status;
 
     var _FORM_FIELDS_VALIDITY = false;
 
-    if (_PROPS.phone.number != '' && _PROPS.phone.dialCode.area_code != '' && _PROPS.email != '' && _PROPS.password != ''){
-      const _IS_EMAIL_VALID = Functions._checkIsAValidEmail(_PROPS.email),
-            _IS_PHONE_NUMBER_VALID = Functions._checkIsAValidPhoneNumber(_PROPS.phone.number),
-            _IS_PASSWORD_VALID = Functions._checkIsAValidPassword(_PROPS.password);
+    switch (_DEMAND_MODE) {
+      case 'INVITATION':
+        if (_PROPS.phone.number != '' && _PROPS.phone.dialCode.area_code != '' && _PROPS.firstName != '' && _PROPS.lastName != '' && _PROPS.password != ''){
+          const _IS_FIRST_NAME_VALID = Functions._checkIsAValidTextOnlyField(_PROPS.firstName),
+                _IS_LAST_NAME_VALID = Functions._checkIsAValidTextOnlyField(_PROPS.lastName),
+                _IS_PHONE_NUMBER_VALID = Functions._checkIsAValidPhoneNumber(_PROPS.phone.number),
+                _IS_PASSWORD_VALID = Functions._checkIsAValidPassword(_PROPS.password);
 
-      if (_IS_EMAIL_VALID && _IS_PHONE_NUMBER_VALID && _IS_PASSWORD_VALID){
-        _FORM_FIELDS_VALIDITY = true;
-      }
+          if (_IS_FIRST_NAME_VALID && _IS_LAST_NAME_VALID && _IS_PHONE_NUMBER_VALID && _IS_PASSWORD_VALID){
+            _FORM_FIELDS_VALIDITY = true;
+          }
+        }
+        break;
+
+      default:
+        if (_PROPS.phone.number != '' && _PROPS.phone.dialCode.area_code != '' && _PROPS.email != '' && _PROPS.password != ''){
+          const _IS_EMAIL_VALID = Functions._checkIsAValidEmail(_PROPS.email),
+                _IS_PHONE_NUMBER_VALID = Functions._checkIsAValidPhoneNumber(_PROPS.phone.number),
+                _IS_PASSWORD_VALID = Functions._checkIsAValidPassword(_PROPS.password);
+
+          if (_IS_EMAIL_VALID && _IS_PHONE_NUMBER_VALID && _IS_PASSWORD_VALID){
+            _FORM_FIELDS_VALIDITY = true;
+          }
+        }
+        break;
     }
 
     return !(_CONNECTED_STATUS && _FORM_FIELDS_VALIDITY);
@@ -59,36 +85,173 @@ class Signup extends Component<{}> {
 
   render() {
     const { props } = this,
-          _VALIDATED = this._componentWillCheckValidation(props);
+          { navigation: { state: { params } } } = props,
+          _VALIDATED = this._componentWillCheckValidation(props),
+          _DEMAND_MODE = Functions._convertTokenToKey(props.signup.demandMode);
 
-    var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
+    var _MAIN_CONTENT, _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
 
-    if (props.signup.loadingSubscribe){
-      _SUBMIT_BUTTON_CONTENT = <Input
-        type={__CONSTANTS.submitInput.type}
-        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
-        gradient={Global.colors.pair.ongerine}
-        style={Styles.SubmitButton}
-        disable={true}>
-          <ActivityIndicator />
-        </Input>;
-    }else{
-      if (!props.signup.connected.status && !_VALIDATED){
-        _TOP_PINNED_TOAST = <Toast
-          message={props.signup.connected.content}
-          launched={!props.signup.connected.status}
-          color={Global.colors.single.carminePink}
-          onPress={() => Preparation._prepareSignupComponentToSubmit(props)} />;
-      }
+    switch (_DEMAND_MODE) {
+      case 'INVITATION':
+        if (Object.keys(props.signup.role).length > 0){
+          if (props.signup.loadingSubscribe){
+            _SUBMIT_BUTTON_CONTENT = <Input
+              type={__CONSTANTS.content.state.normal.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.loading.title.en)}
+              gradient={Global.colors.pair.ongerine}
+              style={Styles.SubmitButtonInvitationState}
+              disable={true}>
+                <ActivityIndicator />
+              </Input>;
+          }else{
+            if (!props.signup.connected.status && !_VALIDATED){
+              _TOP_PINNED_TOAST = <Toast
+                message={props.signup.connected.content}
+                launched={!props.signup.connected.status}
+                color={Global.colors.single.carminePink}
+                onPress={() => Preparation._prepareSignupComponentToSubmit(props)} />;
+            }
 
-      _SUBMIT_BUTTON_CONTENT = <Input
-        style={Styles.SubmitButton}
-        type={__CONSTANTS.submitInput.type}
-        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-        value={__CONSTANTS.submitInput.state.normal.title.en}
-        gradient={Global.colors.pair.ongerine}
-        onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
-        forcedDisable={_VALIDATED} />;
+            _SUBMIT_BUTTON_CONTENT = <Input
+              style={Styles.SubmitButtonInvitationState}
+              type={__CONSTANTS.content.state.normal.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.normal.title.en)}
+              value={__CONSTANTS.content.state.normal.submitInput.state.normal.title.en}
+              gradient={Global.colors.pair.ongerine}
+              onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
+              forcedDisable={_VALIDATED} />;
+          }
+
+          _MAIN_CONTENT = (
+            <View style={Styles.Content}>
+              <Headline
+                style={Styles.Headline}
+                title={__CONSTANTS.content.state.invitation.headline.title.en}
+                subtitle={__CONSTANTS.content.state.invitation.headline.subtitle.en} />
+
+              <InputGroup
+                style={Styles.FirstInputGroupInvitationState}>
+                <Input
+                  type={__CONSTANTS.content.state.invitation.firstInputGroup.first.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.firstInputGroup.first.title.en)}
+                  placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.first.title.en}
+                  value={props.signup.firstName}
+                  onChangeText={(currentValue) => props.setFirstName(currentValue)} />
+                <Input
+                  type={__CONSTANTS.content.state.invitation.firstInputGroup.second.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.firstInputGroup.second.title.en)}
+                  placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.second.title.en}
+                  value={props.signup.lastName}
+                  onChangeText={(currentValue) => props.setLastName(currentValue)} />
+              </InputGroup>
+
+              <InputGroup
+                style={Styles.SecondInputGroupInvitationState}>
+                <Input
+                  type={__CONSTANTS.content.state.invitation.secondInputGroup.first.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.secondInputGroup.first.title.en)}
+                  placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.first.title.en}
+                  value={props.signup.phone.number}
+                  link={props.signup.phone.dialCode.area_code}
+                  onPress={() => props.setCountriesCodesModalVisibility(true)}
+                  onChangeText={(currentValue) => props.setPhoneNumber({
+                    number: currentValue
+                  })} />
+                <Input
+                  type={__CONSTANTS.content.state.invitation.secondInputGroup.second.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.secondInputGroup.second.title.en)}
+                  placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.second.title.en}
+                  value={props.signup.password}
+                  onChangeText={(currentValue) => props.setPassword(currentValue)} />
+              </InputGroup>
+
+              {_SUBMIT_BUTTON_CONTENT}
+            </View>
+          );
+        }else{
+          _MAIN_CONTENT = (
+            <ActivityIndicator />
+          );
+        }
+        break;
+      default:
+        if (props.signup.loadingSubscribe){
+          _SUBMIT_BUTTON_CONTENT = <Input
+            type={__CONSTANTS.content.state.normal.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.loading.title.en)}
+            gradient={Global.colors.pair.ongerine}
+            style={Styles.SubmitButtonNormalState}
+            disable={true}>
+              <ActivityIndicator />
+            </Input>;
+        }else{
+          if (!props.signup.connected.status && !_VALIDATED){
+            _TOP_PINNED_TOAST = <Toast
+              message={props.signup.connected.content}
+              launched={!props.signup.connected.status}
+              color={Global.colors.single.carminePink}
+              onPress={() => Preparation._prepareSignupComponentToSubmit(props)} />;
+          }
+
+          _SUBMIT_BUTTON_CONTENT = <Input
+            style={Styles.SubmitButtonNormalState}
+            type={__CONSTANTS.content.state.normal.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.normal.title.en)}
+            value={__CONSTANTS.content.state.normal.submitInput.state.normal.title.en}
+            gradient={Global.colors.pair.ongerine}
+            onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
+            forcedDisable={_VALIDATED} />;
+        }
+
+        _MAIN_CONTENT = (
+          <View style={Styles.Content}>
+            <Headline
+              style={Styles.Headline}
+              title={__CONSTANTS.content.state.normal.headline.title.en}
+              subtitle={__CONSTANTS.content.state.normal.headline.subtitle.en} />
+
+            <InputGroup
+              style={Styles.FirstInputGroupNormalState}>
+              <Input
+                type={__CONSTANTS.content.state.normal.firstInputGroup.first.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.first.title.en)}
+                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.first.title.en}
+                value={props.signup.phone.number}
+                link={props.signup.phone.dialCode.area_code}
+                onPress={() => props.setCountriesCodesModalVisibility(true)}
+                onChangeText={(currentValue) => props.setPhoneNumber({
+                  number: currentValue
+                })} />
+              <Input
+                type={__CONSTANTS.content.state.normal.firstInputGroup.second.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.second.title.en)}
+                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.second.title.en}
+                value={props.signup.email}
+                onChangeText={(currentValue) => props.setEmail(currentValue)} />
+              <Input
+                type={__CONSTANTS.content.state.normal.firstInputGroup.third.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.third.title.en)}
+                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.third.title.en}
+                value={props.signup.password}
+                onChangeText={(currentValue) => props.setPassword(currentValue)} />
+            </InputGroup>
+
+            {_SUBMIT_BUTTON_CONTENT}
+
+            <Link
+              containerStyle={Styles.QuickLink}
+              value={__CONSTANTS.content.state.normal.quickLink.title.en}
+              onPress={() => {
+                const { navigation } = this.props;
+
+                // props.setEmail('');
+                // props.setPassword('');
+
+                navigation.goBack();
+              }} />
+          </View>
+        );
+        break;
     }
 
     const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
@@ -109,52 +272,7 @@ class Signup extends Component<{}> {
               dialCode: currentValue
             })} />
 
-          <View style={Styles.Content}>
-            <Headline
-              style={Styles.Headline}
-              title={__CONSTANTS.headline.title.en}
-              subtitle={__CONSTANTS.headline.subtitle.en} />
-
-            <InputGroup
-              style={Styles.FirstInputGroup}>
-              <Input
-                type={__CONSTANTS.firstInputGroup.first.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.first.title.en}
-                value={props.signup.phone.number}
-                link={props.signup.phone.dialCode.area_code}
-                onPress={() => props.setCountriesCodesModalVisibility(true)}
-                onChangeText={(currentValue) => props.setPhoneNumber({
-                  number: currentValue
-                })} />
-              <Input
-                type={__CONSTANTS.firstInputGroup.second.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.second.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.second.title.en}
-                value={props.signup.email}
-                onChangeText={(currentValue) => props.setEmail(currentValue)} />
-              <Input
-                type={__CONSTANTS.firstInputGroup.third.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.third.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.third.title.en}
-                value={props.signup.password}
-                onChangeText={(currentValue) => props.setPassword(currentValue)} />
-            </InputGroup>
-
-            {_SUBMIT_BUTTON_CONTENT}
-
-            <Link
-              containerStyle={Styles.QuickLink}
-              value={__CONSTANTS.quickLink.title.en}
-              onPress={() => {
-                const { navigation } = this.props;
-
-                // props.setEmail('');
-                // props.setPassword('');
-
-                navigation.goBack();
-              }} />
-          </View>
+          {_MAIN_CONTENT}
       </KeyboardAvoidingView>
     );
   }

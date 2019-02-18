@@ -172,6 +172,11 @@ module.exports = {
           return 'rgba(' + [(c>>16)&255, (c>>8)&255, c&255].join(',') + ',' + opacity + ')';
       }
   },
+  _checkIsAValidTextOnlyField: (content) => {
+    const _IS_TEXT_ONLY_VALID = content.match(/([\p{L}-]+)/ug);
+
+    return (_IS_TEXT_ONLY_VALID !== null)? true: false;
+  },
   _checkIsAValidEmail: (email) => {
     const _IS_EMAIL_VALID = email.match(/[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/);
 

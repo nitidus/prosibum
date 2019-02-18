@@ -5,15 +5,37 @@ import { GLOBAL } from '../../flows/states/types/index';
 
 module.exports = {
   _prepareSignupSeed: (inputProps) => {
-    var _SEED = {
-      phone: {
-        mobile: `${inputProps.phone.dialCode.area_code}${Prototypes._getRidOfZerosFromPhoneNumber(inputProps.phone.number)}`
-      },
-      password: inputProps.password
-    };
+    const _DEMAND_MODE = Prototypes._convertTokenToKey(inputProps.demandMode);
 
-    if (typeof inputProps.email != 'undefined'){
-      _SEED.email = inputProps.email;
+    var _SEED = {};
+
+    switch (_DEMAND_MODE) {
+      case 'INVITATION':
+        _SEED = {
+          ..._SEED,
+          personal: {
+            first_name: inputProps.first_name,
+            last_name: inputProps.last_name
+          },
+          phone: {
+            mobile: `${inputProps.phone.dialCode.area_code}${Prototypes._getRidOfZerosFromPhoneNumber(inputProps.phone.number)}`
+          },
+          password: inputProps.password
+        };
+        break;
+      default:
+        _SEED = {
+          ..._SEED,
+          phone: {
+            mobile: `${inputProps.phone.dialCode.area_code}${Prototypes._getRidOfZerosFromPhoneNumber(inputProps.phone.number)}`
+          },
+          password: inputProps.password
+        };
+
+        if (typeof inputProps.email != 'undefined'){
+          _SEED.email = inputProps.email;
+        }
+        break;
     }
 
     return _SEED;
@@ -74,16 +96,24 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'Roles': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
           _SUBSCRIBED_USER = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);
 
     if (_SUBSCRIBED_USER === false){
-      const _SEED = module.exports._prepareSignupSeed(signup);
+      const _DEMAND_MODE = Prototypes._convertTokenToKey(signup.demandMode),
+            _SEED = module.exports._prepareSignupSeed(signup);
 
-      await props.subscribeTheUser(_SEED);
+      switch (_DEMAND_MODE) {
+        case 'INVITATION':
+          await props.completeUserRegistration(signup.role.user._id, _SEED);
+          break;
+        default:
+          await props.subscribeTheUser(_SEED);
+          break;
+      }
 
       navigation.navigate('VerifyPhoneNumber');
     }else{

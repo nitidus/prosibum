@@ -31,11 +31,22 @@ module.exports = StyleSheet.create({
     bottom: 0,
     ..._CONTENT
   },
-  FirstInputGroup: {
+  FirstInputGroupNormalState: {
     marginTop: 44
   },
-  SubmitButton: {
+  FirstInputGroupInvitationState: {
+    marginTop: 44,
+    marginBottom: 15
+  },
+  SecondInputGroupInvitationState: {
+
+  },
+  SubmitButtonNormalState: {
     marginTop: 15
+  },
+  SubmitButtonInvitationState: {
+    marginTop: 15,
+    marginBottom: 38
   },
   QuickLink: {
     marginVertical: 38,
