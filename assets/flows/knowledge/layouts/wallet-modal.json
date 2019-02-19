@@ -4,32 +4,67 @@
       "en": "Wallet Modal"
     },
     "content": {
-      "firstCarouselContainer": {
-        "title": {
-          "en": "Currencies"
+      "firstHiddenTab": {
+        "firstCarouselContainer": {
+          "title": {
+            "en": "Currencies"
+          },
+          "content": {
+            "self": {
+              "type": "BUTTON",
+              "title": {
+                "en": "Wallet Type"
+              }
+            }
+          }
         },
-        "content": {
-          "self": {
-            "type": "BUTTON",
-            "title": {
-              "en": "Wallet Type"
+        "firstInput": {
+          "type": "TEXT",
+          "title": {
+            "en": "Wallet Name"
+          }
+        },
+        "submitInput": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Increase Credit"
+              }
             }
           }
         }
       },
-      "firstInput": {
-        "type": "TEXT",
-        "title": {
-          "en": "Wallet Name"
-        }
-      },
-      "submitInput": {
-        "type": "BUTTON",
-        "state": {
-          "normal": {
-            "title": {
-              "en": "Increase Credit"
+      "secondHiddenTab": {
+        "firstInput": {
+          "type": "NUMERIC",
+          "title": {
+            "en": "Credit Amount"
+          }
+        },
+        "optionalLinkInput": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Choose plan"
+              }
             }
+          }
+        },
+        "submitInput": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Checkout"
+              }
+            }
+          }
+        },
+        "quickLink": {
+          "title": {
+            "en": "Want to change currency?"
           }
         }
       }

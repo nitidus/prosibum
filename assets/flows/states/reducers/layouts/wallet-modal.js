@@ -2,6 +2,7 @@ import { LAYOUTS } from '../../types/index';
 const { WALLET_MODAL } = LAYOUTS;
 
 const initialState = {
+  currentHiddenTabIndex: 0,
   currencies: [],
   currentCurrency: {},
   walletName: '',
@@ -15,6 +16,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case WALLET_MODAL.SET_CURRENT_HIDDEN_TAB_INDEX:
+      return {
+        ...state,
+        currentHiddenTabIndex: action.payload
+      };
+      break;
     case WALLET_MODAL.SET_CURRENCIES:
       return {
         ...state,

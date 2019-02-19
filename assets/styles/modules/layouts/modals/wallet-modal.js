@@ -60,9 +60,12 @@ module.exports = StyleSheet.create({
     marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal,
     marginBottom: 15
   },
-  AppendRolesButton: {
+  NormalContent: {
     width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2),
     marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal
+  },
+  Center_ContentAlignment: {
+    alignItems: 'flex-start'
   },
   LTR_ContentAlignment: {
     alignItems: 'flex-start'

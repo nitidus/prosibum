@@ -12,6 +12,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setCurrentHiddenTabIndex: (index) => {
+      dispatch({
+        type: WALLET_MODAL.SET_CURRENT_HIDDEN_TAB_INDEX,
+        payload: index
+      })
+    },
     setCurrenciesItems: (data) => {
       dispatch({
         type: WALLET_MODAL.SET_CURRENCIES,
