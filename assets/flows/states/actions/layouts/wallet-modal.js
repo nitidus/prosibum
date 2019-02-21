@@ -42,7 +42,20 @@ const mapDispatchToProps = (dispatch) => {
         payload: creditAmount
       })
     },
+    setWalletCurrentInitialCreditPlan: (plan) => {
+      dispatch({
+        type: WALLET_MODAL.SET_WALLET_CURRENT_INITIAL_CREDIT_PLAN,
+        payload: plan
+      })
+    },
+    fetchWalletInitialCreditPlans: async (currencyType) => CMD._getWalletInitialCreditPlansUsingCurrencyType(currencyType, dispatch),
     appendWalletToResource: async (walletRules, callback) => CMD._appendWalletToResourceWithRules(walletRules, callback, dispatch),
+    setWalletInitialCreditPlansLoadingStatus: (loadingStatus) => {
+      dispatch({
+        type: WALLET_MODAL.SET_FETCH_WALLET_INITIAL_CREDIT_PLANS_LOADING_STATUS,
+        payload: loadingStatus
+      })
+    },
     setAppendWalletToResourcesLoadingStatus: (loadingStatus) => {
       dispatch({
         type: WALLET_MODAL.SET_APPEND_WALLET_TO_RESOURCE_LOADING_STATUS,

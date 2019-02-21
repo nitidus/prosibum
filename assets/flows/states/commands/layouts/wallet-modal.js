@@ -72,5 +72,77 @@ module.exports = {
         })
       }
     }
+  },
+  _getWalletInitialCreditPlansUsingCurrencyType: async (currencyType, dispatch) => {
+    dispatch({
+      type: WALLET_MODAL.SET_FETCH_WALLET_INITIAL_CREDIT_PLANS_LOADING_STATUS,
+      payload: true
+    })
+
+    try {
+      const _CURRENCY_TYPE = (typeof currencyType != 'undefined')? Functions._convertTokenToKey(currencyType): 'TP',
+            _PLANS = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/plans/${_CURRENCY_TYPE}`);
+
+      if (_PLANS.status === 200){
+        const _FINAL_RESPONSE = _PLANS.data;
+
+        if (_FINAL_RESPONSE.meta.code === 200){
+          const _DATA = _FINAL_RESPONSE.data;
+
+          dispatch({
+            type: WALLET_MODAL.FETCH_WALLET_INITIAL_CREDIT_PLANS,
+            payload: _DATA
+          })
+
+          dispatch({
+            type: WALLET_MODAL.SET_WALLET_CURRENT_INITIAL_CREDIT_PLAN,
+            payload: _DATA[0]
+          })
+
+
+          dispatch({
+            type: WALLET_MODAL.SET_FETCH_WALLET_INITIAL_CREDIT_PLANS_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: WALLET_MODAL.SET_CONNECTED_STATUS,
+            payload: {
+              status: true
+            }
+          })
+        }else{
+          dispatch({
+            type: WALLET_MODAL.SET_FETCH_WALLET_INITIAL_CREDIT_PLANS_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: WALLET_MODAL.SET_CONNECTED_STATUS,
+            payload: {
+              status: false,
+              content: _FINAL_RESPONSE.meta.error_message
+            }
+          })
+        }
+      }
+    } catch (error) {
+      if (error){
+        const WALLET_MODAL = error.message || error.request._response;
+
+        dispatch({
+          type: WALLET_MODAL.SET_FETCH_WALLET_INITIAL_CREDIT_PLANS_LOADING_STATUS,
+          payload: false
+        })
+
+        dispatch({
+          type: WALLET_MODAL.SET_CONNECTED_STATUS,
+          payload: {
+            status: false,
+            content: _ERROR_MESSAGE
+          }
+        })
+      }
+    }
   }
 };

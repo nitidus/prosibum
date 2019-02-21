@@ -290,15 +290,19 @@ export const WalletModal = (props) => {
                 }
               ]}
               onPress={() => {
-                const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 2;
+                var _INDEX_COEFFICIENT = 2;
+
+                if ((Object.keys(props.walletModal.currentCurrency).length > 0) && (typeof props.walletModal.currentCurrency.type != 'undefined')){
+                  const _CURRENT_CURRENCY_TYPE = Functions._convertTokenToKey(props.walletModal.currentCurrency.type);
+
+                  if ((_CURRENT_CURRENCY_TYPE === "TP") || (_CURRENT_CURRENCY_TYPE === "T.P") || (_CURRENT_CURRENCY_TYPE === "T.P.") || (_CURRENT_CURRENCY_TYPE === "TRANSACTION_POINT")){
+                    _INDEX_COEFFICIENT -= 1;
+                  }
+                }
+
+                const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + _INDEX_COEFFICIENT;
 
                 props.setCurrentHiddenTabIndex(_TARGET_INDEX);
-                // const _SEED = {
-                //   name: props.walletModal.walletName,
-                //   type: props.walletModal.currentCurrency
-                // };
-                //
-                // console.log(_SEED)
               }}
               forcedDisable={_VALIDATED} />
           ),
@@ -318,6 +322,41 @@ export const WalletModal = (props) => {
         ];
       }
       break;
+    case 2:
+      if ((attitude.visibility === true) && (props.walletModal.walletInitialCreditPlansLoading === false)){
+        if ((props.walletModal.walletInitialCreditPlans.length === 0) && (Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length === 0)) {
+          props.fetchWalletInitialCreditPlans();
+        }/*else {
+          if (typeof props.walletModal.walletCurrentInitialCreditPlan.taxonomy != 'undefined'){
+            if ((typeof props.walletModal.walletCurrentInitialCreditPlan.taxonomy.value != 'undefined') && (typeof props.walletModal.walletCurrentInitialCreditPlan.type != 'undefined')){
+              const _CURRENT_PLAN_TAXONOMY_TYPE = Functions._convertTokenToKey(props.walletModal.walletCurrentInitialCreditPlan.taxonomy.value),
+                    _CURRENT_CURRENCY_TYPE = Functions._convertTokenToKey(props.walletModal.currentCurrency.type);
+
+              if (_CURRENT_PLAN_TAXONOMY_TYPE !== _CURRENT_CURRENCY_TYPE){
+                props.fetchWalletInitialCreditPlans();
+              }
+            }
+          }
+        }*/
+      }
+
+      _CURRENT_TAB_CONTENT = (
+        <Text>Choose Plan</Text>
+      )
+      break;
+    case 3:
+      _CURRENT_TAB_CONTENT = (
+        <Text>Choose Payment Gateway</Text>
+      )
+      break;
+  }
+
+  var _FINAL_CURRENT_TAB_CONTENT = _CURRENT_TAB_CONTENT;
+
+  if (Array.isArray(_CURRENT_TAB_CONTENT)){
+    _FINAL_CURRENT_TAB_CONTENT = _CURRENT_TAB_CONTENT.map((item, i) => {
+      return item;
+    });
   }
 
   return (
@@ -329,11 +368,7 @@ export const WalletModal = (props) => {
       onPress={attitude.onPress}
       style={Styles.ModalContainer}
       swipeDirection="down">
-        {
-          _CURRENT_TAB_CONTENT.map((item, i) => {
-            return item;
-          })
-        }
+        {_FINAL_CURRENT_TAB_CONTENT}
     </Modal>
   )
 };
