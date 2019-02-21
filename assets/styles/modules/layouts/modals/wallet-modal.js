@@ -65,7 +65,7 @@ module.exports = StyleSheet.create({
     marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal
   },
   Center_ContentAlignment: {
-    alignItems: 'flex-start'
+    alignItems: 'center'
   },
   LTR_ContentAlignment: {
     alignItems: 'flex-start'

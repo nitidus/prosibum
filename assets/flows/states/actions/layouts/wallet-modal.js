@@ -36,6 +36,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: roleCount
       })
     },
+    setWalletInitialCreditAmount: (creditAmount) => {
+      dispatch({
+        type: WALLET_MODAL.SET_WALLET_INITIAL_CREDIT_AMOUNT,
+        payload: creditAmount
+      })
+    },
     appendWalletToResource: async (walletRules, callback) => CMD._appendWalletToResourceWithRules(walletRules, callback, dispatch),
     setAppendWalletToResourcesLoadingStatus: (loadingStatus) => {
       dispatch({

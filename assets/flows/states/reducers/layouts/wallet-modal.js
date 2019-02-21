@@ -2,10 +2,11 @@ import { LAYOUTS } from '../../types/index';
 const { WALLET_MODAL } = LAYOUTS;
 
 const initialState = {
-  currentHiddenTabIndex: 0,
+  currentHiddenTabIndex: 1,
   currencies: [],
   currentCurrency: {},
   walletName: '',
+  walletInitialCreditAmount: 0,
   appendWalletToResources: false,
   appendedResources: [],
   connected: {
@@ -38,6 +39,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         walletName: action.payload
+      };
+      break;
+    case WALLET_MODAL.SET_WALLET_INITIAL_CREDIT_AMOUNT:
+      return {
+        ...state,
+        walletInitialCreditAmount: action.payload
       };
       break;
     case WALLET_MODAL.APPEND_WALLET_TO_RESOURCE:

@@ -36,6 +36,15 @@ const _componentWillCheckValidation = (props) => {
         }
       }
       break;
+    case 1:
+      if ((!isNaN(_PROPS.walletInitialCreditAmount)) && (_PROPS.walletInitialCreditAmount > 0)){
+        const _IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.walletInitialCreditAmount, 2);
+
+        if (_IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID){
+          _FORM_FIELDS_VALIDITY = true;
+        }
+      }
+      break;
   }
 
   return !_FORM_FIELDS_VALIDITY;
@@ -233,9 +242,9 @@ export const WalletModal = (props) => {
             type={__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.title.en)}
             placeholder={__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.title.en}
-            value={props.walletModal.walletName}
+            value={props.walletModal.walletInitialCreditAmount}
             style={Styles.WalletNameInput}
-            onChangeText={(currentValue) => props.setWalletName(currentValue)} />
+            onChangeText={(currentValue) => props.setWalletInitialCreditAmount(currentValue)} />
         )
       ];
 
@@ -290,7 +299,8 @@ export const WalletModal = (props) => {
                 // };
                 //
                 // console.log(_SEED)
-              }} />
+              }}
+              forcedDisable={_VALIDATED} />
           ),
           (
             <Link
