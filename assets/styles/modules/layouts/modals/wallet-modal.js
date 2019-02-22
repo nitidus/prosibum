@@ -90,14 +90,14 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     fontSize: 26,
-    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 5)) - 65),
+    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2.5)) - 65),
     marginBottom: 15
   },
   BriefDetailSubtitle: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     fontSize: 14,
-    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 5)) - 65),
+    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2.5)) - 65),
   },
   BriefDetailRowContainer: {
 
