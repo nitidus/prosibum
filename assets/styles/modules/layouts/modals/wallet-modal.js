@@ -12,7 +12,7 @@ const { width, height } = Dimensions.get('window'),
 
 var _CUSTOM_CONTENT = {
       marginVertical: 15,
-      marginHorizontal: 15
+      marginHorizontal: 32
     };
 
 if (Platform.OS !== 'ios'){
@@ -109,6 +109,9 @@ module.exports = StyleSheet.create({
   },
   BriefDetailRowIcon: {
 
+  },
+  Center_TextAlignment: {
+    textAlign: 'center'
   },
   Center_ContentAlignment: {
     alignItems: 'center'

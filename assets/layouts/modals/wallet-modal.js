@@ -332,6 +332,7 @@ export const WalletModal = (props) => {
                 Styles.NormalContent,
                 Styles.Center_ContentAlignment
               ]}
+              style={Styles.Center_TextAlignment}
               value={__CONSTANTS.modalContainer.content.secondHiddenTab.quickLink.title.en}
               onPress={() => {
                 const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex - 1;
@@ -484,6 +485,7 @@ export const WalletModal = (props) => {
               Styles.NormalContent,
               Styles.Center_ContentAlignment
             ]}
+            style={Styles.Center_TextAlignment}
             value={__CONSTANTS.modalContainer.content.thirdHiddenTab.quickLink.title.en}
             onPress={() => {
               const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex - 1;
