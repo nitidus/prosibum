@@ -10,22 +10,19 @@ import {
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
-var _CUSTOM___GLOBAL = {
-  marginBottom: 15
-};
+var _CUSTOM_CONTENT = {
+      marginVertical: 15,
+      marginHorizontal: 15
+    };
 
-if (width >= 1000 || height >= 1000){
-  _CUSTOM___GLOBAL = {
-    ..._CUSTOM___GLOBAL,
-    width: (Platform.OS === 'ios')? width - (162 * 2): width - (202 * 2),
-    marginHorizontal: (Platform.OS === 'ios')? 162: 202
-  };
+if (Platform.OS !== 'ios'){
+  if (width >= 1000 || height >= 1000){
+    _CUSTOM_CONTENT.marginHorizontal = 202;
+  }
 }else{
-  _CUSTOM___GLOBAL = {
-    ..._CUSTOM___GLOBAL,
-    width: width - (32 * 2),
-    marginHorizontal: 32
-  };
+  if (width >= 1000 || height >= 1000){
+    _CUSTOM_CONTENT.marginHorizontal = 162;
+  }
 }
 
 module.exports = StyleSheet.create({
@@ -34,7 +31,10 @@ module.exports = StyleSheet.create({
   },
   ModalMajorContent: {
     alignItems: 'center',
-    marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal
+  },
+  Content: {
+    ..._CUSTOM_CONTENT
   },
   WalletContainer: {
     marginBottom: 15,
@@ -56,13 +56,59 @@ module.exports = StyleSheet.create({
     fontSize: 14
   },
   WalletNameInput: {
-    width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2),
-    marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal,
+    width: width - (_CUSTOM_CONTENT.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
     marginBottom: 15
   },
   NormalContent: {
-    width: width - (_CUSTOM___GLOBAL.marginHorizontal * 2),
-    marginHorizontal: _CUSTOM___GLOBAL.marginHorizontal
+    width: width - (_CUSTOM_CONTENT.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal
+  },
+  DetailContainer: {
+    height: 'auto',
+    marginBottom: _CUSTOM_CONTENT.marginVertical
+  },
+  DetailItemContainer: {
+    height: 160,
+    padding: 18
+  },
+  DetailItemContent: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  DetailItemMasterInfoContent: {
+    justifyContent: 'center'
+  },
+  DetailItemMasterSubInfoContent: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  BriefDetailSubRowIconContainer: {
+    marginRight: 15
+  },
+  BriefDetailTitle: {
+    color: colors.single.rangoonGreen,
+    fontFamily: fonts.sanFrancisco.textBold,
+    fontSize: 26,
+    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 5)) - 65),
+    marginBottom: 15
+  },
+  BriefDetailSubtitle: {
+    color: colors.single.rangoonGreen,
+    fontFamily: fonts.sanFrancisco.textBold,
+    fontSize: 14,
+    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 5)) - 65),
+  },
+  BriefDetailRowContainer: {
+
+  },
+  BriefDetailRowText: {
+    color: colors.single.romance,
+    fontFamily: fonts.sanFrancisco.textBold,
+    fontSize: 14
+  },
+  BriefDetailRowIcon: {
+
   },
   Center_ContentAlignment: {
     alignItems: 'center'
@@ -72,8 +118,5 @@ module.exports = StyleSheet.create({
   },
   RTL_ContentAlignment: {
     alignItems: 'flex-end'
-  },
-  __Global: {
-    ..._CUSTOM___GLOBAL
   }
 });

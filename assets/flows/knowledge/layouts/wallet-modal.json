@@ -64,7 +64,46 @@
         },
         "quickLink": {
           "title": {
-            "en": "Want to change currency?"
+            "en": "Want to change currency or wallet name?"
+          }
+        }
+      },
+      "thirdHiddenTab": {
+        "firstCarousel": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Plans"
+              },
+              "content": {
+                "title": {
+                  "en": "Plan Item"
+                },
+                "quantityIcon": "grading",
+                "priceIcon": "pay"
+              }
+            },
+            "loading": {
+              "title": {
+                "en": "Plans Amount"
+              }
+            }
+          }
+        },
+        "submitInput": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Checkout"
+              }
+            }
+          }
+        },
+        "quickLink": {
+          "title": {
+            "en": "You don't want use the default plans?"
           }
         }
       }

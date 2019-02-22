@@ -6,6 +6,7 @@ const _Screen = Dimensions.get('window');
 import { connect } from 'react-redux';
 
 import { Global, Modules } from '../../styles/index';
+import { ActivityIndicator } from '../activity-indicator';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
 import { Input, Carousel, Link } from '../../components/index';
@@ -121,47 +122,53 @@ export const WalletModal = (props) => {
           }
         }
 
-  var _CURRENCIES = [],
-      _CURRENT_USER_GROUP_ROLE = '',
-      _CURRENT_CURRENCY_INDEX = -1,
-      _CURRENT_TAB_CONTENT;
-
-  if (attitude.visibility === true){
-    _CURRENCIES = props.walletModal.currencies.map((currency, i) => {
-      const _CURRENCY = currency;
-
-      return Functions._returnCurrencyDependOnLanguage(_CURRENCY.type || _CURRENCY);
-    }),
-    _CURRENT_CURRENCY = Functions._returnCurrencyDependOnLanguage(props.walletModal.currentCurrency.type || props.walletModal.currentCurrency),
-    _CURRENT_CURRENCY_INDEX = props.walletModal.currencies.findIndex((currency) => {
-      const _CURRENCY = currency.type || currency,
-            _CURRENT_CURRENCY = props.walletModal.currentCurrency.type || props.walletModal.currentCurrency;
-
-      return (_CURRENT_CURRENCY === _CURRENCY);
-    });
-  }
+  var _CURRENT_TAB_CONTENT;
 
   const _VALIDATED = _componentWillCheckValidation(props);
 
   switch (props.walletModal.currentHiddenTabIndex) {
     case 0:
     default:
-      _CURRENT_TAB_CONTENT = [
-        (
-          <Input
-            type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title.en}
-            value={props.walletModal.walletName}
-            style={Styles.WalletNameInput}
-            onChangeText={(currentValue) => props.setWalletName(currentValue)} />
-        ),
-        (
+      var _CURRENCIES = [],
+          _CURRENT_USER_GROUP_ROLE = '',
+          _CURRENT_CURRENCY_INDEX = -1,
+          _CURRENCIES_CONTENT = (
+            <Input
+              type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.title.en)}
+              gradient={Global.colors.pair.tilan}
+              style={[
+                Styles.WalletContainer,
+                {
+                  marginHorizontal: Styles.Content.marginHorizontal,
+                  height: 102
+                }
+              ]}
+              disable={true}>
+                <ActivityIndicator/>
+            </Input>
+          );
+
+      if ((attitude.visibility === true) && (props.walletModal.currencies.length > 0)){
+        _CURRENCIES = props.walletModal.currencies.map((currency, i) => {
+          const _CURRENCY = currency;
+
+          return Functions._returnCurrencyDependOnLanguage(_CURRENCY.type || _CURRENCY);
+        }),
+        _CURRENT_CURRENCY = Functions._returnCurrencyDependOnLanguage(props.walletModal.currentCurrency.type || props.walletModal.currentCurrency),
+        _CURRENT_CURRENCY_INDEX = props.walletModal.currencies.findIndex((currency) => {
+          const _CURRENCY = currency.type || currency,
+                _CURRENT_CURRENCY = props.walletModal.currentCurrency.type || props.walletModal.currentCurrency;
+
+          return (_CURRENT_CURRENCY === _CURRENCY);
+        });
+
+        _CURRENCIES_CONTENT = (
           <Carousel
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.title.en)}
             data={_CURRENCIES}
             style={Styles.WalletContainer}
-            itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
+            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
             firstItem={_CURRENT_CURRENCY_INDEX}
             onLayout={({ item, i }) => {
               var _CURRENT_CURRENCY = Functions._returnCurrencyDependOnLanguage(props.walletModal.currentCurrency.type || props.walletModal.currentCurrency),
@@ -213,7 +220,20 @@ export const WalletModal = (props) => {
               }
             }}
             onSnap={(selectedItemIndex) => props.setCurrentCurrency(props.walletModal.currencies[selectedItemIndex])}/>
+        );
+      }
+
+      _CURRENT_TAB_CONTENT = [
+        (
+          <Input
+            type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title.en)}
+            placeholder={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title.en}
+            value={props.walletModal.walletName}
+            style={Styles.WalletNameInput}
+            onChangeText={(currentValue) => props.setWalletName(currentValue)} />
         ),
+        _CURRENCIES_CONTENT,
         (
           <Input
             type={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.type}
@@ -223,7 +243,7 @@ export const WalletModal = (props) => {
             style={[
               Styles.NormalContent,
               {
-                marginBottom: Styles.__Global.marginBottom
+                marginBottom: Styles.Content.marginBottom
               }
             ]}
             onPress={() => {
@@ -263,7 +283,7 @@ export const WalletModal = (props) => {
                 style={[
                   Styles.NormalContent,
                   {
-                    marginBottom: Styles.__Global.marginBottom
+                    marginBottom: Styles.Content.marginBottom
                   }
                 ]}
                 onPress={() => {
@@ -286,7 +306,7 @@ export const WalletModal = (props) => {
               style={[
                 Styles.NormalContent,
                 {
-                  marginBottom: Styles.__Global.marginBottom
+                  marginBottom: Styles.Content.marginVertical
                 }
               ]}
               onPress={() => {
@@ -323,26 +343,155 @@ export const WalletModal = (props) => {
       }
       break;
     case 2:
+      var _PLANS_CONTENT = (
+        <Input
+          type={__CONSTANTS.modalContainer.content.thirdHiddenTab.firstCarousel.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.thirdHiddenTab.firstCarousel.state.loading.title.en)}
+          gradient={Global.colors.pair.tilan}
+          style={[
+            Styles.DetailItemContainer,
+            {
+              marginHorizontal: Styles.Content.marginHorizontal,
+              marginBottom: Styles.Content.marginVertical
+            }
+          ]}
+          disable={true}>
+            <ActivityIndicator/>
+        </Input>
+      );
+
       if ((attitude.visibility === true) && (props.walletModal.walletInitialCreditPlansLoading === false)){
         if ((props.walletModal.walletInitialCreditPlans.length === 0) && (Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length === 0)) {
           props.fetchWalletInitialCreditPlans();
-        }/*else {
-          if (typeof props.walletModal.walletCurrentInitialCreditPlan.taxonomy != 'undefined'){
-            if ((typeof props.walletModal.walletCurrentInitialCreditPlan.taxonomy.value != 'undefined') && (typeof props.walletModal.walletCurrentInitialCreditPlan.type != 'undefined')){
-              const _CURRENT_PLAN_TAXONOMY_TYPE = Functions._convertTokenToKey(props.walletModal.walletCurrentInitialCreditPlan.taxonomy.value),
-                    _CURRENT_CURRENCY_TYPE = Functions._convertTokenToKey(props.walletModal.currentCurrency.type);
+        }else {
+          // if (typeof props.walletModal.walletCurrentInitialCreditPlan.taxonomy != 'undefined'){
+          //   if ((typeof props.walletModal.walletCurrentInitialCreditPlan.taxonomy.value != 'undefined') && (typeof props.walletModal.walletCurrentInitialCreditPlan.type != 'undefined')){
+          //     const _CURRENT_PLAN_TAXONOMY_TYPE = Functions._convertTokenToKey(props.walletModal.walletCurrentInitialCreditPlan.taxonomy.value),
+          //           _CURRENT_CURRENCY_TYPE = Functions._convertTokenToKey(props.walletModal.currentCurrency.type);
+          //
+          //     if (_CURRENT_PLAN_TAXONOMY_TYPE !== _CURRENT_CURRENCY_TYPE){
+          //       props.fetchWalletInitialCreditPlans();
+          //     }
+          //   }
+          // }
 
-              if (_CURRENT_PLAN_TAXONOMY_TYPE !== _CURRENT_CURRENCY_TYPE){
-                props.fetchWalletInitialCreditPlans();
-              }
-            }
-          }
-        }*/
+          const _PLANS_CAROUSEL_DATA = props.walletModal.walletInitialCreditPlans,
+                _FIRST_INDEX = _PLANS_CAROUSEL_DATA.findIndex((planItem) => {
+                  const _CURRENT_PLAN_TOKEN = props.walletModal.walletCurrentInitialCreditPlan._id,
+                        _PLAN_TOKEN = planItem._id;
+
+                  return (_CURRENT_PLAN_TOKEN === _PLAN_TOKEN);
+                })
+
+          _PLANS_CONTENT = (
+            <Carousel
+              name={__CONSTANTS.modalContainer.content.thirdHiddenTab.firstCarousel.state.normal.title.en}
+              data={_PLANS_CAROUSEL_DATA}
+              firstItem={_FIRST_INDEX}
+              style={Styles.DetailContainer}
+              itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+              onLayout={({ item, i }) => {
+                const _CURRENT_PLAN = props.walletModal.walletCurrentInitialCreditPlan,
+                      _PLAN_NAME = Functions._convertKeywordToToken(item.name),
+                      _PLAN_CURRENCY_TYPE = (Functions._convertTokenToKey(item.taxonomy.value) == 'TRANSACTION_POINT')? 'T.P': Functions._convertKeywordToToken(item.taxonomy.value),
+                      _PLAN_PRICE = Functions._convertDigitsToMoneyFormat(item.price),
+                      _PLAN_PRICE_SIGN = '$';
+
+                var _ITEM_GRADIENT = Global.colors.pair.tilan;
+
+                if (_CURRENT_PLAN._id === item._id){
+                  _ITEM_GRADIENT = Global.colors.pair.analue;
+                }
+
+                return (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.thirdHiddenTab.firstCarousel.type}
+                    name={__CONSTANTS.modalContainer.content.thirdHiddenTab.firstCarousel.state.normal.content.title.en}
+                    gradient={_ITEM_GRADIENT}
+                    style={[
+                      Styles.DetailItemContainer,
+                      Styles.LTR_ContentAlignment
+                    ]}
+                    disable={true}>
+                      <View
+                        style={Styles.DetailItemMasterInfoContent}>
+                          <Text
+                            style={Styles.BriefDetailTitle}>
+                              {_PLAN_NAME} Plan
+                          </Text>
+                      </View>
+
+                      <View
+                        style={[
+                          Styles.DetailItemMasterSubInfoContent,
+                          {
+                            marginBottom: Styles.Content.marginVertical
+                          }
+                        ]}>
+                        <Icon
+                          name={__CONSTANTS.modalContainer.content.thirdHiddenTab.firstCarousel.state.normal.content.quantityIcon}
+                          style={Styles.BriefDetailSubRowIconContainer}
+                          color={Global.colors.single.romance} />
+
+                          <Text
+                            style={Styles.BriefDetailRowText}>
+                              {item.amount} {_PLAN_CURRENCY_TYPE}
+                          </Text>
+                      </View>
+                      <View
+                        style={Styles.DetailItemMasterSubInfoContent}>
+                          <Icon
+                            name={__CONSTANTS.modalContainer.content.thirdHiddenTab.firstCarousel.state.normal.content.priceIcon}
+                            style={Styles.BriefDetailSubRowIconContainer}
+                            color={Global.colors.single.romance} />
+
+                          <Text
+                            style={Styles.BriefDetailRowText}>
+                              {_PLAN_PRICE_SIGN}{_PLAN_PRICE}
+                          </Text>
+                      </View>
+                  </Input>
+                );
+              }}
+              onSnap={(selectedItemIndex) => props.setWalletCurrentInitialCreditPlan(props.walletModal.walletInitialCreditPlans[selectedItemIndex])}/>
+          );
+        }
       }
 
-      _CURRENT_TAB_CONTENT = (
-        <Text>Choose Plan</Text>
-      )
+      _CURRENT_TAB_CONTENT = [
+        _PLANS_CONTENT,
+        (
+          <Input
+            type={__CONSTANTS.modalContainer.content.thirdHiddenTab.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.thirdHiddenTab.submitInput.state.normal.title.en)}
+            value={__CONSTANTS.modalContainer.content.thirdHiddenTab.submitInput.state.normal.title.en}
+            gradient={Global.colors.pair.ongerine}
+            style={[
+              Styles.NormalContent,
+              {
+                marginBottom: Styles.Content.marginVertical
+              }
+            ]}
+            onPress={() => {
+              const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 1;
+
+              props.setCurrentHiddenTabIndex(_TARGET_INDEX);
+            }} />
+        ),
+        (
+          <Link
+            containerStyle={[
+              Styles.NormalContent,
+              Styles.Center_ContentAlignment
+            ]}
+            value={__CONSTANTS.modalContainer.content.thirdHiddenTab.quickLink.title.en}
+            onPress={() => {
+              const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex - 1;
+
+              props.setCurrentHiddenTabIndex(_TARGET_INDEX);
+            }} />
+        )
+      ];
       break;
     case 3:
       _CURRENT_TAB_CONTENT = (
@@ -351,10 +500,8 @@ export const WalletModal = (props) => {
       break;
   }
 
-  var _FINAL_CURRENT_TAB_CONTENT = _CURRENT_TAB_CONTENT;
-
-  if (Array.isArray(_CURRENT_TAB_CONTENT)){
-    _FINAL_CURRENT_TAB_CONTENT = _CURRENT_TAB_CONTENT.map((item, i) => {
+  if ((typeof _CURRENT_TAB_CONTENT != 'undefined') && (Array.isArray(_CURRENT_TAB_CONTENT))){
+    _CURRENT_TAB_CONTENT = _CURRENT_TAB_CONTENT.map((item, i) => {
       return item;
     });
   }
@@ -368,7 +515,7 @@ export const WalletModal = (props) => {
       onPress={attitude.onPress}
       style={Styles.ModalContainer}
       swipeDirection="down">
-        {_FINAL_CURRENT_TAB_CONTENT}
+        {_CURRENT_TAB_CONTENT}
     </Modal>
   )
 };
