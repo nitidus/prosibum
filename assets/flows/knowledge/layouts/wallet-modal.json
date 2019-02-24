@@ -106,6 +106,28 @@
             "en": "You don't want use the default plans?"
           }
         }
+      },
+      "fourthHiddenTab": {
+        "firstInput": {
+          "type": "credit-card",
+          "title": {
+            "en": "Credit Card Number"
+          }
+        },
+        "quickLink": {
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Want to change wallet initial credit?"
+              }
+            },
+            "plan": {
+              "title": {
+                "en": "Want to change wallet initial plan?"
+              }
+            }
+          }
+        }
       }
     }
   }

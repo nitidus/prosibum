@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { View, TouchableOpacity, Image, ImageBackground, TextInput, Keyboard, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
+import CreditCardType from 'rn-credit-card-type';
 
 import { Link } from './link';
 import { Icon } from '../layouts/icon';
@@ -46,6 +47,27 @@ export const Input = (props) => {
 
         if (attitude.type === 'text'){
           attitude.autoCapitalize = props.autoCapitalize || 'words';
+        }
+
+        attitude.onBlur = props.onBlur || function (){};
+        attitude.onFocus = props.onFocus || function (){};
+        break;
+      case 'credit-card':
+      case 'debit-card':
+      case 'creditcard':
+      case 'debitcard':
+        if (typeof props.placeholder != 'undefined'){
+          attitude.placeholder = props.placeholder;
+        }
+
+        if (typeof props.value != 'undefined'){
+          attitude.value = props.value || '';
+        }
+
+        attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
         }
 
         attitude.onBlur = props.onBlur || function (){};
@@ -267,6 +289,86 @@ export const Input = (props) => {
           onSubmitEditing={Keyboard.dismiss}
           editable={!attitude.disable} />
       );
+      break;
+    case 'credit-card':
+    case 'debit-card':
+    case 'creditcard':
+    case 'debitcard':
+      var _DETECTED_CREDIT_CARD_TYPE = {},
+          _DETECTED_CREDIT_CARD_TYPE_CONTENT;
+
+      if (attitude.value != ''){
+        const _DETECTED_CREDIT_CARD_TYPES = CreditCardType.detectCreditCard(attitude.value);
+
+        if (_DETECTED_CREDIT_CARD_TYPES.length > 0){
+          const _IS_A_VALID_CREDIT_CARD = (Object.keys(Styles).findIndex((item) => {
+            return (Functions._convertTokenToKey(item) === Functions._convertTokenToKey(_DETECTED_CREDIT_CARD_TYPES[0].type));
+          }) !== -1)? true: false;
+
+          if (_IS_A_VALID_CREDIT_CARD){
+            _DETECTED_CREDIT_CARD_TYPE = _DETECTED_CREDIT_CARD_TYPES[0];
+          }
+        }
+
+        if (Object.keys(_DETECTED_CREDIT_CARD_TYPE).length > 0){
+          const _CREDIT_CARD_TYPE_KEY = Functions._convertTokenToKey(_DETECTED_CREDIT_CARD_TYPE.type);
+
+          _DETECTED_CREDIT_CARD_TYPE_CONTENT = (
+            <View
+              style={[
+                Styles.CreditCardContainer,
+                Styles[_CREDIT_CARD_TYPE_KEY]
+              ]}>
+                <Icon
+                  name={_CREDIT_CARD_TYPE_KEY}
+                  width={20} />
+            </View>
+          );
+        }else{
+          if (attitude.value.length >= 4){
+            _DETECTED_CREDIT_CARD_TYPE_CONTENT = (
+              <View
+                style={Styles.CreditCardContainer}>
+                  <Text>?</Text>
+              </View>
+            );
+          }
+        }
+      }
+
+      return (
+        <View
+          key={attitude.key}
+          name={attitude.name}
+          style={[
+            Styles.ContainerWithIcon,
+            attitude.style
+          ]}>
+            <TextInput
+              style={[
+                Styles.TextInputConatiner,
+                { width: '76%', flexGrow: 1 }
+              ]}
+              autoCapitalize={attitude.autoCapitalize}
+              value={attitude.value}
+              placeholder={attitude.placeholder}
+              placeholderTextColor={Global.colors.single.mercury}
+              selectionColor={Global.colors.single.mercury}
+              underlineColorAndroid={Global.colors.single.transparent}
+              onChangeText={(currentValue) => {
+                const APPLIED_MASK_VALUE = Functions._convertTokenToCreditCard(currentValue);
+
+                attitude.onChangeText(APPLIED_MASK_VALUE);
+              }}
+              onBlur={attitude.onBlur}
+              onFocus={attitude.onFocus}
+              onSubmitEditing={Keyboard.dismiss}
+              editable={!attitude.disable}
+              maxLength={19} />
+
+              {_DETECTED_CREDIT_CARD_TYPE_CONTENT}
+        </View>
+      )
       break;
     case 'link':
     case 'text-link':

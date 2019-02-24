@@ -50,6 +50,36 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchWalletInitialCreditPlans: async (currencyType) => CMD._getWalletInitialCreditPlansUsingCurrencyType(currencyType, dispatch),
     appendWalletToResource: async (walletRules, callback) => CMD._appendWalletToResourceWithRules(walletRules, callback, dispatch),
+    setCreditCardNumber: (number) => {
+      dispatch({
+        type: WALLET_MODAL.SET_CARD_NUMBER,
+        payload: number
+      })
+    },
+    setCreditCardExpirationDate: (expirationDate) => {
+      dispatch({
+        type: WALLET_MODAL.SET_CARD_EXPIRATION_DATE,
+        payload: expirationDate
+      })
+    },
+    setCreditCardExpirationMonth: (month) => {
+      dispatch({
+        type: WALLET_MODAL.SET_CARD_EXPIRATION_DATE_MONTH,
+        payload: month
+      })
+    },
+    setCreditCardExpirationYear: (year) => {
+      dispatch({
+        type: WALLET_MODAL.SET_CARD_EXPIRATION_DATE_YEAR,
+        payload: year
+      })
+    },
+    setCreditCardCVV: (cvv) => {
+      dispatch({
+        type: WALLET_MODAL.SET_CARD_CVV,
+        payload: cvv
+      })
+    },
     setWalletInitialCreditPlansLoadingStatus: (loadingStatus) => {
       dispatch({
         type: WALLET_MODAL.SET_FETCH_WALLET_INITIAL_CREDIT_PLANS_LOADING_STATUS,

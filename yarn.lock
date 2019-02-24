@@ -4813,6 +4813,14 @@ rimraf@~2.2.6:
   version "2.2.8"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
 
+rn-credit-card-type@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/rn-credit-card-type/-/rn-credit-card-type-1.0.3.tgz#2fe100ca87565826dd873cee4fa98559880d8a82"
+  dependencies:
+    lodash "^4.17.11"
+    react "16.4.1"
+    react-native "0.56.0"
+
 rn-fetch-blob@^0.10.15:
   version "0.10.15"
   resolved "https://registry.yarnpkg.com/rn-fetch-blob/-/rn-fetch-blob-0.10.15.tgz#3526860c1c57e0bf4c09bdbe409c919264afffba"

@@ -208,16 +208,16 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
             view_box: "0 0 38.8 33.6",
             content: <G>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#F26122"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.mastercard.sorbus}
                 d="M14.2,2.6h10.5v18.9H14.2V2.6z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#ED1C24"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.mastercard.cgRed}
                 d="M14.8,12c0-3.8,1.8-7.2,4.6-9.4C17.4,1,14.8,0,12,0C5.4,0,0,5.4,0,12s5.4,12,12,12c2.8,0,5.4-1,7.4-2.6C16.6,19.2,14.8,15.8,14.8,12z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#F99F1C"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.mastercard.yellowSea}
                 d="M38.8,12c0,6.6-5.4,12-12,12c-2.8,0-5.4-1-7.4-2.6c2.8-2.2,4.6-5.6,4.6-9.4s-1.8-7.3-4.6-9.4C21.5,1,24,0,26.8,0C33.5,0,38.8,5.4,38.8,12z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#000000"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.mastercard.black}
                 d="M5.6,33.5v-2.2c0-0.8-0.5-1.4-1.4-1.4c-0.5,0-0.9,0.1-1.2,0.6c-0.3-0.4-0.6-0.6-1.2-0.6c-0.4,0-0.8,0.1-1,0.5v-0.4H0v3.5h0.8v-2c0-0.6,0.3-0.9,0.9-0.9c0.5,0,0.8,0.3,0.8,0.9v2h0.8v-2c0-0.6,0.4-0.9,0.9-0.9c0.5,0,0.8,0.3,0.8,0.9v2L5.6,33.5L5.6,33.5zM17.1,29.9h-1.3v-1.1h-0.8v1.1h-0.7v0.7h0.7v1.6c0,0.8,0.3,1.3,1.2,1.3c0.3,0,0.7-0.1,1-0.3L17,32.6c-0.2,0.1-0.5,0.2-0.7,0.2c-0.4,0-0.5-0.2-0.5-0.6v-1.6h1.3L17.1,29.9L17.1,29.9z M23.7,29.8c-0.4,0-0.7,0.2-0.9,0.5v-0.4H22v3.5h0.8v-2c0-0.6,0.3-0.9,0.8-0.9c0.2,0,0.3,0,0.5,0.1l0.2-0.7C24.1,29.9,23.8,29.8,23.7,29.8z M13.8,30.2c-0.4-0.3-0.9-0.4-1.4-0.4c-0.9,0-1.5,0.4-1.5,1.1c0,0.6,0.4,0.9,1.2,1l0.4,0.1c0.4,0.1,0.6,0.2,0.6,0.4c0,0.3-0.3,0.4-0.8,0.4c-0.5,0-0.9-0.2-1.2-0.4l-0.4,0.6c0.4,0.3,1,0.5,1.5,0.5c1,0,1.6-0.5,1.6-1.2c0-0.6-0.5-0.9-1.2-1.1l-0.4-0.1c-0.3,0-0.6-0.1-0.6-0.4c0-0.3,0.3-0.4,0.7-0.4c0.5,0,0.9,0.2,1.1,0.3L13.8,30.2L13.8,30.2z M34.4,29.8c-0.4,0-0.7,0.2-0.9,0.5v-0.4h-0.8v3.5h0.8v-2c0-0.6,0.3-0.9,0.8-0.9c0.2,0,0.3,0,0.5,0.1l0.2-0.7C34.8,29.9,34.5,29.8,34.4,29.8z M24.5,31.7c0,1.1,0.8,1.9,1.9,1.9c0.5,0,0.9-0.1,1.3-0.4l-0.4-0.6c-0.3,0.2-0.6,0.3-0.9,0.3c-0.6,0-1.1-0.5-1.1-1.1s0.5-1.1,1.1-1.1c0.3,0,0.6,0.1,0.9,0.3l0.4-0.6c-0.4-0.3-0.7-0.4-1.3-0.4C25.2,29.8,24.5,30.6,24.5,31.7z M31.7,31.7v-1.8h-0.8v0.4c-0.3-0.3-0.6-0.5-1.1-0.5c-1,0-1.8,0.8-1.8,1.9s0.8,1.9,1.8,1.9c0.5,0,0.9-0.2,1.1-0.5v0.4h0.8V31.7z M28.8,31.7c0-0.6,0.4-1.1,1.1-1.1c0.6,0,1.1,0.5,1.1,1.1s-0.4,1.1-1.1,1.1C29.2,32.8,28.8,32.3,28.8,31.7z M19.5,29.8c-1,0-1.8,0.8-1.8,1.9c0,1.1,0.8,1.9,1.8,1.9c0.5,0,1-0.1,1.4-0.5l-0.4-0.6c-0.3,0.2-0.7,0.4-1,0.4c-0.5,0-0.9-0.2-1.1-0.9h2.6c0-0.1,0-0.2,0-0.3C21.2,30.6,20.5,29.8,19.5,29.8z M19.5,30.5c0.5,0,0.8,0.3,0.9,0.9h-1.8C18.6,30.9,19,30.5,19.5,30.5z M38.8,31.7v-3.2h-0.8v1.8c-0.3-0.3-0.6-0.5-1.1-0.5c-1,0-1.8,0.8-1.8,1.9s0.8,1.9,1.8,1.9c0.5,0,0.9-0.2,1.1-0.5v0.4h0.8V31.7z M36,31.7c0-0.6,0.4-1.1,1.1-1.1c0.6,0,1.1,0.5,1.1,1.1s-0.4,1.1-1.1,1.1C36.4,32.8,36,32.3,36,31.7z M10,31.7v-1.8H9.2v0.4c-0.3-0.3-0.6-0.5-1.1-0.5c-1,0-1.8,0.8-1.8,1.9s0.8,1.9,1.8,1.9c0.5,0,0.9-0.2,1.1-0.5v0.4H10V31.7z M7.1,31.7c0-0.6,0.4-1.1,1.1-1.1c0.6,0,1.1,0.5,1.1,1.1s-0.4,1.1-1.1,1.1C7.5,32.8,7.1,32.3,7.1,31.7z"/>
             </G>
           },
@@ -227,54 +227,79 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
             view_box: "0 0 56 17.9",
             content: <G>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#FEFEFE"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.visa.romance}
                 d="M52.3,0.3h-3.9c-0.9,0-1.6,0.5-1.9,1.3l-6.8,16.1h4.8l0.9-2.6h5.8l0.6,2.6H56L52.3,0.3z M46.8,11.5L49.1,5l1.4,6.5H46.8z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#FEFEFE"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.visa.romance}
                 d="M16.5,0.3l-4.7,11.8l-1.9-10C9.7,0.9,8.8,0.3,7.8,0.3H0.1L0,0.8c1.6,0.4,3.4,0.9,4.5,1.5c0.6,0.4,0.8,0.7,1,1.5l3.6,13.9H14l7.3-17.4H16.5z"/>
               <Polygon
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#FEFEFE"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.visa.romance}
                 points="23.2,0.3 19.5,17.7 24,17.7 27.7,0.3 	"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#FEFEFE"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.visa.romance}
                 d="M33.7,5.1c0-0.6,0.6-1.3,1.9-1.5c0.6,0,2.4-0.1,4.4,0.8l0.8-3.7c-1-0.3-2.5-0.7-4.2-0.7C32.1,0,29,2.4,29,5.7c0,2.5,2.2,3.9,4,4.7c1.8,0.9,2.4,1.4,2.3,2.2c0,1.2-1.4,1.7-2.7,1.7c-2.3,0-3.6-0.6-4.6-1.1L27.1,17c1.1,0.5,3,0.9,5,0.9c4.8,0,7.9-2.3,7.9-5.9C40,7.4,33.6,7.2,33.7,5.1z"/>
             </G>
           },
           AMERICAN_EXPRESS: {
-            width: 45,
-            height: 18.5,
-            view_box: "0 0 45 18.5",
+            width: 48.1,
+            height: 18.2,
+            view_box: "0 0 48.1 18.2",
             content: <G>
-              <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#FFFFFF"}
-                d="M45,17.9v-7.4H17.4l-0.7,1l-0.7-1H8v7.9h8l0.7-1l0.7,1h5v-1.7h-0.2c0.7,0,1.3-0.1,1.8-0.3v2.1h3.6v-1l0.7,1h14.9C43.8,18.3,44.5,18.2,45,17.9L45,17.9z"/>
-              <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#FFFFFF"}
-                d="M39.5,7.9h3.4V0h-3.7v1.1L38.5,0h-3.2v1.4L34.7,0h-5.2c-0.2,0-0.5,0-0.7,0c-0.2,0-0.4,0.1-0.6,0.1c-0.2,0-0.3,0.1-0.5,0.2c-0.3,0.1-0.3,0.1-0.6,0.2V0.3V0H10.2L9.7,1.3L9.2,0h-4v1.4L4.6,0H1.4L0,3.4v4.5h2.3l0.4-1.1h0.8l0.4,1.1h17.6v-1l0.7,1h4.9V7.7V7.3c0.2,0.1,0.3,0.1,0.4,0.2s0.3,0.1,0.4,0.2c0.2,0.1,0.4,0.1,0.6,0.1s0.5,0,0.7,0h2.9l0.4-1.1h0.8l0.4,1.1h4.9v-1L39.5,7.9z"/>
-              <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#006FCF"}
-                d="M37.8,3.4l2.1,3.2h1.5V1.3h-1.2v3.5l-0.3-0.5l-1.9-3h-1.6v5.3h1.2V3L37.8,3.4z M32.6,3.3L33,2.2l0.4,1.1l0.5,1.2h-1.7L32.6,3.3z M34.7,6.6H36l-2.3-5.3h-1.5l-2.3,5.3h1.3l0.5-1.1h2.6L34.7,6.6z M29.1,6.6L29.1,6.6l0.5-1.1h-0.2C28.5,5.5,28,4.9,28,4V3.9c0-0.9,0.5-1.5,1.4-1.5h1.3V1.3h-1.4c-1.6,0-2.5,1.1-2.5,2.6V4C26.7,5.6,27.6,6.6,29.1,6.6L29.1,6.6zM24.6,6.6h1.2V4.2V1.4h-1.2v2.7V6.6z M22,2.4c0.5,0,0.7,0.3,0.7,0.6S22.5,3.6,22,3.6h-1.5V2.3L22,2.4L22,2.4z M20.5,4.7h0.6l1.6,1.9h1.5l-1.8-2c0.9-0.2,1.4-0.8,1.4-1.6c0-1-0.7-1.7-1.8-1.7h-2.8v5.3h1.3V4.7L20.5,4.7z M18.3,2.4V1.3h-4.2v5.3h4.2V5.5h-3V4.4h2.9V3.3h-2.9v-1L18.3,2.4L18.3,2.4z M9.2,6.6h1.1l1.5-4.3v4.3H13V1.3h-2L9.8,4.9L8.6,1.3h-2v5.3h1.2V2.3L9.2,6.6z M2.7,3.3l0.4-1.1l0.4,1.1L4,4.5H2.2L2.7,3.3z M4.8,6.6h1.3L3.8,1.3H2.3L0,6.6h1.3l0.5-1.1h2.6L4.8,6.6z"/>
-              <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#006FCF"}
-                d="M43.3,16h-2.8v1.1h2.6c1.1,0,1.8-0.7,1.8-1.7s-0.6-1.5-1.6-1.5h-1.2c-0.3,0-0.5-0.2-0.5-0.5s0.2-0.5,0.5-0.5h2.3l0.5-1.1h-2.7c-1.1,0-1.8,0.7-1.8,1.6c0,1,0.6,1.5,1.6,1.5h1.2c0.3,0,0.5,0.2,0.5,0.5C43.8,15.8,43.6,16,43.3,16L43.3,16z"/>
-              <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#006FCF"}
-                d="M38.3,16h-2.7v1.1h2.6c1.1,0,1.8-0.7,1.8-1.7s-0.6-1.5-1.6-1.5h-1.2c-0.3,0-0.5-0.2-0.5-0.5s0.2-0.5,0.5-0.5h2.3l0.5-1.1h-2.7c-1.1,0-1.8,0.7-1.8,1.6c0,1,0.6,1.5,1.6,1.5h1.2c0.3,0,0.5,0.2,0.5,0.5C39,15.8,38.6,16,38.3,16L38.3,16z"/>
-              <Polygon
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#006FCF"}
-                points="34.8,12.8 34.8,11.7 30.6,11.7 30.6,17 34.8,17 34.8,15.9 31.8,15.9 31.8,14.8 34.7,14.8 34.7,13.731.9,13.7 31.9,12.7 34.9,12.7 	"/>
-              <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#006FCF"}
-                d="M28.5,15c0.9-0.2,1.4-0.8,1.4-1.6c0-1-0.7-1.7-1.8-1.7h-2.8V17h1.2v-1.9h0.6l1.6,1.9h1.5L28.5,15z M26.5,14v-1.3l1.5,0.1c0.5,0,0.7,0.3,0.7,0.6S28.5,14,28,14H26.5z"/>
-              <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#006FCF"}
-                d="M22.7,11.6l-2.9,0.1V17H21v-1.8h1.6c1.1,0,1.9-0.7,1.9-1.8C24.5,12.4,23.8,11.6,22.7,11.6z M22.7,14.2h-1.6v-1.4h1.4c0.5,0,0.8,0.3,0.8,0.7S23.2,14.2,22.7,14.2z"/>
-              <Polygon
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#006FCF"}
-                points="18,17 19.5,17 17.4,14.3 19.5,11.7 18,11.7 16.7,13.4 15.4,11.7 13.9,11.7 16,14.3 13.9,16.915.4,16.9 16.7,15.2 	"/>
-              <Polygon
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#006FCF"}
-                points="13.5,12.8 13.5,11.7 9.3,11.7 9.3,17 13.5,17 13.5,15.9 10.5,15.9 10.5,14.8 13.4,14.8 13.4,13.710.5,13.7 10.5,12.7 13.5,12.7 	"/>
+            	<G>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.white}
+                  d="M48.1,10.6l-29.3-0.1l-0.7,1l-0.7-1h-1.3h-3.2H9.6v7.7h7.6l0.9-1.2l0.8,1.2h4.7v-1.9H24c0.6,0,1.1-0.1,1.6-0.4v2.3h3.5v-0.7l0.5,0.7h14.9c1.7,0,3-1.2,3-2.9c0-0.8-0.2-1.4-0.7-1.9L48.1,10.6z"/>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.white}
+                  d="M23.5,7.1l0.4,0.5h4.8V6.9c0.4,0.3,1.2,0.7,1.2,0.7h3.8l0.5-1.1h1.1l0.4,1.1h4.9V6.8L41,7.6h3.3V0h-3.5v0.7L40.4,0H37v1.8L36.2,0H31c-0.9,0-1.7,0.3-2.4,0.8V0H11.9l-0.4,1.1L11.2,0h-4v2.1L6.3,0h-3L0,7.6h3.8l0.5-1.1h1.1l0.4,1.1h17.7V7.1z"/>
+            	</G>
+            	<G>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  d="M4.1,1.1L1.8,6.4h1.3l0.5-1.1h2.6l0.4,1.1h1.3L5.6,1.1H4.1z M4,4.3l0.5-1.2L4.9,2l0.4,1.1l0.5,1.2H4z"/>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  d="M25.6,2.8c0-1-0.7-1.7-1.8-1.7H21v5.3h1.3V4.5h0.6l1.6,1.9H26l-1.8-2C25.1,4.2,25.6,3.6,25.6,2.8z M22.3,3.4V2.1l1.5,0.1c0.5,0,0.7,0.3,0.7,0.6c0,0.3-0.2,0.6-0.7,0.6H22.3z"/>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  d="M30.9,6.4l0.5-1.1h-0.2c-0.9,0-1.4-0.6-1.4-1.5V3.7c0-0.9,0.5-1.5,1.4-1.5h1.3V1.1h-1.4c-1.6,0-2.5,1.1-2.5,2.6v0.1C28.5,5.4,29.4,6.4,30.9,6.4z"/>
+            		<Polygon
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  points="20.1,5.3 17.1,5.3 17.1,4.2 20,4.2 20,3.1 17.1,3.1 17.1,2.1 20.1,2.2 20.1,1.1 15.9,1.1 15.9,6.4 20.1,6.4 		"/>
+            		<Polygon
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  points="11.6,4.7 10.4,1.1 8.4,1.1 8.4,6.4 9.6,6.4 9.6,2.1 11,6.4 12.1,6.4 13.6,2.1 13.6,6.4 14.8,6.4 14.8,1.1 12.8,1.1 		"/>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  d="M35.5,1.1H34l-2.3,5.3H33l0.5-1.1h2.6l0.4,1.1h1.3L35.5,1.1z M34,4.3l0.4-1.2L34.8,2l0.4,1.1l0.5,1.2H34z"/>
+            		<Polygon
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  points="27.6,4 27.6,1.2 26.4,1.2 26.4,3.9 26.4,6.4 27.6,6.4 		"/>
+            		<Polygon
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  points="39.4,2.8 39.6,3.2 41.7,6.4 43.2,6.4 43.2,1.1 42,1.1 42,4.6 41.7,4.1 39.8,1.1 38.2,1.1 38.2,6.4 39.4,6.4 		"/>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  d="M44.6,13.9h-1.2c-0.3,0-0.5-0.2-0.5-0.5s0.2-0.5,0.5-0.5h2.3l0.5-1.1h-2.7c-1.1,0-1.8,0.7-1.8,1.6c0,1,0.6,1.5,1.6,1.5h1.2c0.3,0,0.5,0.2,0.5,0.5c0.1,0.4-0.1,0.6-0.4,0.6h-2.8v1.1h2.6c1.1,0,1.8-0.7,1.8-1.7S45.6,13.9,44.6,13.9z"/>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  d="M38.5,12.9h2.3l0.5-1.1h-2.7c-1.1,0-1.8,0.7-1.8,1.6c0,1,0.6,1.5,1.6,1.5h1.2c0.3,0,0.5,0.2,0.5,0.5c0.2,0.4-0.2,0.6-0.5,0.6h-2.7v1.1h2.6c1.1,0,1.8-0.7,1.8-1.7s-0.6-1.5-1.6-1.5h-1.2c-0.3,0-0.5-0.2-0.5-0.5S38.2,12.9,38.5,12.9z"/>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  d="M31.2,13.4c0-1-0.7-1.7-1.8-1.7h-2.8V17h1.2v-1.9h0.6L30,17h1.5l-1.7-2C30.7,14.8,31.2,14.2,31.2,13.4zM27.8,14v-1.3l1.5,0.1c0.5,0,0.7,0.3,0.7,0.6S29.8,14,29.3,14H27.8z"/>
+            		<Path
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  d="M24,11.6l-2.9,0.1V17h1.2v-1.8h1.6c1.1,0,1.9-0.7,1.9-1.8C25.8,12.4,25.1,11.6,24,11.6z M24,14.2h-1.6v-1.4h1.4c0.5,0,0.8,0.3,0.8,0.7C24.6,13.9,24.5,14.2,24,14.2z"/>
+            		<Polygon
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  points="19.3,11.7 18,13.4 16.7,11.7 15.2,11.7 17.3,14.3 15.2,16.9 16.7,16.9 18,15.2 19.3,17 20.8,17 18.7,14.3 20.8,11.7 		"/>
+            		<Polygon
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  points="10.6,17 14.8,17 14.8,15.9 11.8,15.9 11.8,14.8 14.7,14.8 14.7,13.7 11.8,13.7 11.8,12.7 14.8,12.7 14.8,11.7 10.6,11.7 		"/>
+            		<Polygon
+                  fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.americanExpress.denim}
+                  points="32,17 36.2,17 36.2,15.9 33.2,15.9 33.2,14.8 36.1,14.8 36.1,13.7 33.2,13.7 33.2,12.7 36.2,12.7 36.2,11.7 32,11.7 		"/>
+            	</G>
             </G>
           },
           DISCOVER: {
@@ -282,38 +307,40 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
             height: 14.8,
             view_box: "0 0 87.2 14.8",
             content: <G>
-              <LinearGradient id="DEFAULT_DISCOVER_GRADIENT" gradientUnits="userSpaceOnUse" x1="5109.2583" y1="7780.7021" x2="5212.4282" y2="7887.8848" gradientTransform="matrix(0.1 0 0 0.1 -469.8 -776.0197)">
-                <Stop offset="6.232897e-02" style="stop-color:#66170C"/>
-                <Stop offset="0.105" style="stop-color:#7A1E10"/>
-                <Stop offset="0.2187" style="stop-color:#A92D19"/>
-                <Stop offset="0.3058" style="stop-color:#C7371F"/>
-                <Stop offset="0.3552" style="stop-color:#D23B21"/>
-                <Stop offset="0.5026" style="stop-color:#E34A1E"/>
-                <Stop offset="0.6184" style="stop-color:#E9571B"/>
-                <Stop offset="0.7537" style="stop-color:#EE6D17"/>
-                <Stop offset="1" style="stop-color:#F59314"/>
-              </LinearGradient>
+              <Defs>
+                <LinearGradient id="DEFAULT_DISCOVER_GRADIENT" gradientUnits="userSpaceOnUse" x1="5109.2583" y1="7780.7021" x2="5212.4282" y2="7887.8848" gradientTransform="matrix(0.1 0 0 0.1 -469.8 -776.0197)">
+                  <Stop offset="6.232897e-02" stopColor={Global.colors.organization.discover.redwood}/>
+                  <Stop offset="0.105" stopColor={Global.colors.organization.discover.metallicCopper}/>
+                  <Stop offset="0.2187" stopColor={Global.colors.organization.discover.prairieSand}/>
+                  <Stop offset="0.3058" stopColor={Global.colors.organization.discover.mediumCarmine}/>
+                  <Stop offset="0.3552" stopColor={Global.colors.organization.discover.mojo}/>
+                  <Stop offset="0.5026" stopColor={Global.colors.organization.discover.chileanFire}/>
+                  <Stop offset="0.6184" stopColor={Global.colors.organization.discover.flamePea}/>
+                  <Stop offset="0.7537" stopColor={Global.colors.organization.discover.tahitiGold}/>
+                  <Stop offset="1" stopColor={Global.colors.organization.discover.sun}/>
+                </LinearGradient>
+              </Defs>
               <Ellipse fill={(color !== Global.colors.single.rangoonGreen)? color: "url(#DEFAULT_DISCOVER_GRADIENT)"} cx="46.3" cy="7.4" rx="7.4" ry="7.4"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#201D1C"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.discover.rangoonGreen}
                 d="M7.2,10.9c-0.9,0.8-2,1.1-3.7,1.1H2.7V2.7h0.7c1.8,0,2.8,0.3,3.7,1.1C8.1,4.7,8.7,6,8.7,7.4C8.7,8.7,8.1,10,7.2,10.9z M4,0.4H0v14h4c2.1,0,3.7-0.5,5-1.6c1.6-1.3,2.5-3.3,2.5-5.4C11.5,3.2,8.4,0.4,4,0.4"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#201D1C"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.discover.rangoonGreen}
                 d="M12.8,14.4h2.7v-14h-2.7V14.4z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#201D1C"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.discover.rangoonGreen}
                 d="M22.2,5.7c-1.6-0.6-2.1-1-2.1-1.8c0-0.9,0.9-1.5,2-1.5c0.8,0,1.5,0.3,2.2,1.1l1.4-1.9c-1.2-1-2.6-1.6-4.1-1.6c-2.5,0-4.4,1.7-4.4,4c0,1.9,0.9,2.9,3.4,3.8c1.1,0.4,1.6,0.6,1.9,0.8c0.5,0.4,0.8,0.9,0.8,1.5c0,1.1-0.9,2-2.1,2c-1.3,0-2.4-0.6-3-1.9L16.5,12c1.3,1.9,2.8,2.7,4.8,2.7c2.8,0,4.8-1.9,4.8-4.6C26.2,7.9,25.3,6.9,22.2,5.7"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#201D1C"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.discover.rangoonGreen}
                 d="M27.1,7.4c0,4.1,3.2,7.3,7.4,7.3c1.2,0,2.2-0.2,3.4-0.8v-3.2c-1.1,1.1-2.1,1.5-3.3,1.5c-2.8,0-4.7-2-4.7-4.8c0-2.7,2-4.8,4.6-4.8c1.3,0,2.3,0.5,3.4,1.6V0.9c-1.2-0.6-2.2-0.9-3.4-0.9C30.4,0.1,27.1,3.3,27.1,7.4"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#201D1C"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.discover.rangoonGreen}
                 d="M59.5,9.8l-3.7-9.4h-3l5.9,14.3h1.5l6-14.3h-3L59.5,9.8"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#201D1C"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.discover.rangoonGreen}
                 d="M67.5,14.4h7.7V12h-5V8.2H75V5.8h-4.8V2.7h5V0.4h-7.7L67.5,14.4"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#201D1C"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.discover.rangoonGreen}
                 d="M80.5,6.8h-0.8V2.6h0.8c1.7,0,2.6,0.7,2.6,2.1C83.2,6.1,82.3,6.8,80.5,6.8z M86,4.5c0-2.6-1.8-4.1-5-4.1h-4v14h2.7V8.7h0.4l3.8,5.6h3.4l-4.4-5.9C84.9,8.1,86,6.6,86,4.5"/>
             </G>
           },
@@ -323,22 +350,22 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
             view_box: "0 0 90.1 24",
             content: <G>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#003087"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.paypal.catalinaBlue}
                 d="M10.8,0h-7c-0.5,0-0.9,0.4-1,0.8L0,18.8c-0.1,0.4,0.2,0.7,0.6,0.7h3.4c0.5,0,0.9-0.4,1-0.8l0.8-4.8c0.1-0.5,0.5-0.8,1-0.8h2.2c4.6,0,7.3-2.2,8-6.7C17.5,2.3,15.5,0,10.8,0z M11.6,6.6c-0.4,2.5-2.3,2.5-4.2,2.5H6.4l0.7-4.7c0-0.3,0.3-0.5,0.6-0.5h0.5C10.2,3.9,12,3.9,11.6,6.6z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#003087"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.paypal.catalinaBlue}
                 d="M31.8,6.5h-3.4c-0.3,0-0.5,0.2-0.6,0.5l-0.2,0.9l-0.2-0.4c-0.7-1.1-2.3-1.4-4-1.4c-3.7,0-6.8,2.8-7.5,6.8c-0.5,3,0.9,6.8,5.5,6.8c3,0,4.6-1.9,4.6-1.9L26,18.8c-0.1,0.4,0.2,0.7,0.6,0.7h3c0.5,0,0.9-0.4,1-0.8l1.8-11.5C32.4,6.8,32.1,6.5,31.8,6.5z M27.1,13c-0.3,1.9-1.9,3.2-3.8,3.2c-2,0-3.1-1.4-2.8-3.3c0.3-1.9,1.9-3.2,3.7-3.2C26.2,9.7,27.4,11.1,27.1,13z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#003087"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.paypal.catalinaBlue}
                 d="M49.6,6.5h-3.4c-0.3,0-0.6,0.2-0.8,0.4l-4.7,6.8l-2-6.6c-0.1-0.4-0.5-0.7-0.9-0.7h-3.3c-0.4,0-0.7,0.4-0.5,0.8l3.7,10.9l-3.5,4.9c-0.3,0.4,0,0.9,0.5,0.9h3.4c0.3,0,0.6-0.2,0.8-0.4L50.1,7.4C50.4,7,50.1,6.5,49.6,6.5z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#009CDE"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.paypal.celestialBlue}
                 d="M60.7,0h-7c-0.5,0-0.9,0.4-1,0.8l-2.8,18c-0.1,0.4,0.2,0.7,0.6,0.7h3.4c0.5,0,0.9-0.4,1-0.8l0.8-4.8c0.1-0.5,0.5-0.8,1-0.8h2.2c4.6,0,7.3-2.2,8-6.7C67.4,2.3,65.4,0,60.7,0z M61.5,6.6c-0.4,2.5-2.3,2.5-4.2,2.5h-1.1l0.7-4.7c0-0.3,0.3-0.5,0.6-0.5h0.5C60.1,3.9,62,3.9,61.5,6.6z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#009CDE"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.paypal.celestialBlue}
                 d="M81.7,6.5h-3.4c-0.3,0-0.5,0.2-0.6,0.5l-0.2,0.9l-0.2-0.4c-0.7-1.1-2.3-1.4-4-1.4c-3.7,0-6.8,2.8-7.5,6.8c-0.5,3,0.9,6.8,5.5,6.8c3,0,4.6-1.9,4.6-1.9l-0.2,0.9c-0.1,0.4,0.2,0.7,0.6,0.7h3c0.5,0,0.9-0.4,1-0.8l1.8-11.5C82.3,6.8,82,6.5,81.7,6.5z M77,13c-0.3,1.9-1.9,3.2-3.8,3.2c-2,0-3.1-1.4-2.8-3.3c0.3-1.9,1.9-3.2,3.7-3.2C76.2,9.7,77.3,11.1,77,13z"/>
               <Path
-                fill={(color !== Global.colors.single.rangoonGreen)? color: "#009CDE"}
+                fill={(color !== Global.colors.single.rangoonGreen)? color: Global.colors.organization.paypal.celestialBlue}
                 d="M85.7,0.5l-2.9,18.3c-0.1,0.4,0.2,0.7,0.6,0.7h2.9c0.5,0,0.9-0.4,1-0.8l2.8-18C90.1,0.3,89.8,0,89.5,0h-3.2C86,0,85.7,0.2,85.7,0.5z"/>
             </G>
           }

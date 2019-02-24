@@ -4,8 +4,7 @@ import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'reac
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
-import CreditCardType from 'rn-credit-card-type';
-console.log(CreditCardType.types)
+
 import { Global, Modules } from '../../styles/index';
 import { ActivityIndicator } from '../activity-indicator';
 import { Icon } from '../icon';
@@ -497,12 +496,36 @@ export const WalletModal = (props) => {
       ];
       break;
     case 3:
-      _CURRENT_TAB_CONTENT = (
-          <View>
-            <Text>Choose Payment Gateway</Text>
-            <Icon name="visa"/>
-          </View>
-      )
+      _CURRENT_TAB_CONTENT = [
+        (
+          <Input
+            type="credit-card"
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en)}
+            placeholder="Card Number"
+            style={[
+              Styles.NormalContent,
+              {
+                marginBottom: Styles.Content.marginVertical
+              }
+            ]}
+            value={props.walletModal.creditCard.number}
+            onChangeText={(currentValue) => props.setCreditCardNumber(currentValue)} />
+        ),
+        (
+          <Link
+            containerStyle={[
+              Styles.NormalContent,
+              Styles.Center_ContentAlignment
+            ]}
+            style={Styles.Center_TextAlignment}
+            value={((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0))?__CONSTANTS.modalContainer.content.fourthHiddenTab.quickLink.state.plan.title.en: __CONSTANTS.modalContainer.content.fourthHiddenTab.quickLink.state.normal.title.en}
+            onPress={() => {
+              const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex - 1;
+
+              props.setCurrentHiddenTabIndex(_TARGET_INDEX);
+            }} />
+        )
+      ];
       break;
   }
 
@@ -515,7 +538,7 @@ export const WalletModal = (props) => {
   return (
     <Modal
       name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
-      visible={attitude.visibility}
+      visible={true/*attitude.visibility*/}
       backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
       onBlur={() => MODAL.ON_BLUR(false)}
       onPress={attitude.onPress}

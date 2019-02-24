@@ -62,6 +62,41 @@ module.exports = {
         babyBlueEyes: '#A0C4FD',
         frenchPass: '#C1E9FC'
       }
+    },
+    organization: {
+      mastercard: {
+        sorbus: "#F26122",
+        cgRed: "#ED1C24",
+        yellowSea: "#F99F1C",
+        black: "#000000",
+        white: "#FFFFFF"
+      },
+      visa: {
+        romance: "#FEFEFE",
+        bunting: "#192056"
+      },
+      americanExpress: {
+        white: "#FFFFFF",
+        denim: "#006FCF"
+      },
+      discover: {
+        redwood: "#66170C",
+        metallicCopper: "#7A1E10",
+        prairieSand: "#A92D19",
+        mediumCarmine: "#C7371F",
+        mojo: "#D23B21",
+        chileanFire: "#E34A1E",
+        flamePea: "#E9571B",
+        tahitiGold: "#EE6D17",
+        sun: "#F59314",
+        rangoonGreen: "#201D1C",
+        white: "#FFFFFF"
+      },
+      paypal: {
+        catalinaBlue: "#003087",
+        celestialBlue: "#009CDE",
+        white: "#FFFFFF"
+      }
     }
   },
   fonts: {

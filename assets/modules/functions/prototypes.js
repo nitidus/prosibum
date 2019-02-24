@@ -117,6 +117,24 @@ module.exports = {
   _convertKeywordToBlockToken: (keyword) => {
     return module.exports._convertKeywordToToken(keyword).replace(/ /ig, '');
   },
+  _convertTokenToCreditCard: (token) => {
+    const _TOKEN = (!isNaN(token))? token.toString(): token,
+          _ESCAPED_TOKEN = token.replace(/\s+/g, '').replace(/[^0-9]/gi, ''),
+          _MATCHES = _ESCAPED_TOKEN.match(/\d{4,16}/g),
+          _MATCH = _MATCHES && _MATCHES[0] || '';
+
+    var _PARTS = [];
+
+    for (var i = 0; i < _MATCH.length; i += 4) {
+      _PARTS.push(_MATCH.substring(i, i + 4));
+    }
+
+    if (_PARTS.length) {
+      return _PARTS.join(' ');
+    } else {
+      return token;
+    }
+  },
   _stripLongString: (longString, targetLength) => {
     if ((typeof longString === 'string') && (typeof longString !== 'undefined') && (typeof targetLength === 'number') && (typeof targetLength !== 'undefined')){
       return (longString.length > targetLength)? `${longString.substr(0, targetLength)}...`: longString;

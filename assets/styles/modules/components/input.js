@@ -164,6 +164,13 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.single.romance,
     ..._CUSTOM_CONTAINER_WITH_BUTTON
   },
+  ContainerWithIcon: {
+    borderColor: colors.single.mercury,
+    backgroundColor: colors.single.romance,
+    flexDirection: 'row',
+    alignItems: 'center',
+    ..._CUSTOM_CONTAINER_WITH_BUTTON
+  },
   PhotoInputContainer: {
     flexDirection: 'row',
     alignItems: 'center'
@@ -250,6 +257,37 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BUTTON_TITLE
+  },
+  CreditCardContainer: {
+    backgroundColor: colors.single.mercury,
+    width: 40,
+    height: 25,
+    borderRadius: _CUSTOM_CONTAINER_WITH_BUTTON.borderRadius,
+    marginHorizontal: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowOpacity: 0.25,
+    shadowRadius: 0.75,
+    shadowColor: colors.single.rangoonGreen,
+    shadowOffset: {
+      width: 0.5,
+      height: 0.75
+    }
+  },
+  MASTERCARD: {
+    backgroundColor: colors.organization.mastercard.white
+  },
+  VISA: {
+    backgroundColor: colors.organization.visa.bunting
+  },
+  AMERICAN_EXPRESS: {
+    backgroundColor: colors.organization.americanExpress.denim
+  },
+  DISCOVER: {
+    backgroundColor: colors.organization.discover.white
+  },
+  PAYPAL: {
+    backgroundColor: colors.organization.paypal.white
   },
   RTL_Pinned: {
     alignSelf: 'flex-end'

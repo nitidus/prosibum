@@ -9,6 +9,14 @@ const initialState = {
   walletInitialCreditAmount: 0,
   walletCurrentInitialCreditPlan: {},
   walletInitialCreditPlans: [],
+  creditCard: {
+    number: '',
+    expirationDate: {
+      month: '',
+      year: ''
+    },
+    cvv: ''
+  },
   walletInitialCreditPlansLoading: false,
   appendWalletToResourcesLoading: false,
   appendedResources: [],
@@ -66,6 +74,61 @@ export default (state = initialState, action) => {
       return {
         ...state,
         walletInitialCreditPlans: action.payload
+      };
+      break;
+    case WALLET_MODAL.SET_CARD_NUMBER:
+      return {
+        ...state,
+        creditCard: {
+          ...state.creditCard,
+          number: action.payload
+        }
+      };
+      break;
+    case WALLET_MODAL.SET_CARD_EXPIRATION_DATE:
+      return {
+        ...state,
+        creditCard: {
+          ...state.creditCard,
+          expirationDate: {
+            ...state.creditCard.expirationDate,
+            month: action.payload.month,
+            year: action.payload.year
+          }
+        }
+      };
+      break;
+    case WALLET_MODAL.SET_CARD_EXPIRATION_DATE_MONTH:
+      return {
+        ...state,
+        creditCard: {
+          ...state.creditCard,
+          expirationDate: {
+            ...state.creditCard.expirationDate,
+            month: action.payload
+          }
+        }
+      };
+      break;
+    case WALLET_MODAL.SET_CARD_EXPIRATION_DATE_YEAR:
+      return {
+        ...state,
+        creditCard: {
+          ...state.creditCard,
+          expirationDate: {
+            ...state.creditCard.expirationDate,
+            year: action.payload
+          }
+        }
+      };
+      break;
+    case WALLET_MODAL.SET_CARD_CVV:
+      return {
+        ...state,
+        creditCard: {
+          ...state.creditCard,
+          cvv: action.payload
+        }
       };
       break;
     case WALLET_MODAL.SET_FETCH_WALLET_INITIAL_CREDIT_PLANS_LOADING_STATUS:
