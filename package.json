@@ -23,7 +23,6 @@
     "react-native-modal-with-blur-support-background": "^1.0.0",
     "react-native-snap-carousel": "^3.7.4",
     "react-native-svg": "^7.0.3",
-    "react-native-text-input-mask": "^0.8.0",
     "react-navigation": "^2.12.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",

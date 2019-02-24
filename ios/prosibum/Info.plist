@@ -26,14 +26,14 @@
 	<true/>
 	<key>CFBundleURLTypes</key>
 	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>com.pikopack.$(PRODUCT_NAME)</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>$(PRODUCT_NAME)</string>
-			</array>
-		</dict>
+	    <dict>
+	        <key>CFBundleURLName</key>
+	        <string>com.pikopack.$(PRODUCT_NAME)</string>
+	        <key>CFBundleURLSchemes</key>
+	        <array>
+	            <string>$(PRODUCT_NAME)</string>
+	        </array>
+	    </dict>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
@@ -41,7 +41,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) app requires access to the photo library.</string>
 	<key>UIAppFonts</key>
