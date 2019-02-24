@@ -4,7 +4,8 @@ import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'reac
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
-
+import CreditCardType from 'rn-credit-card-type';
+console.log(CreditCardType.types)
 import { Global, Modules } from '../../styles/index';
 import { ActivityIndicator } from '../activity-indicator';
 import { Icon } from '../icon';
@@ -497,7 +498,10 @@ export const WalletModal = (props) => {
       break;
     case 3:
       _CURRENT_TAB_CONTENT = (
-        <Text>Choose Payment Gateway</Text>
+          <View>
+            <Text>Choose Payment Gateway</Text>
+            <Icon name="visa"/>
+          </View>
       )
       break;
   }

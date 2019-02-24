@@ -2,7 +2,7 @@ import { LAYOUTS } from '../../types/index';
 const { WALLET_MODAL } = LAYOUTS;
 
 const initialState = {
-  currentHiddenTabIndex: 2,
+  currentHiddenTabIndex: 3,
   currencies: [],
   currentCurrency: {},
   walletName: '',
