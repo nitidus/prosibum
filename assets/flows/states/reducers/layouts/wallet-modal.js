@@ -10,9 +10,12 @@ const initialState = {
   walletCurrentInitialCreditPlan: {},
   walletInitialCreditPlans: [],
   creditCard: {
-    number: '',
+    number: {
+      formatted: '',
+      extracted: ''
+    },
     expirationDate: {
-      month: '',
+      month: {},
       year: ''
     },
     cvv: ''

@@ -17,7 +17,8 @@ const _SCREEN = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((_SCREEN.height === 812 || _SCREEN.width === 812));
 
 export const Input = (props) => {
-  var attitude = {};
+  var attitude = {},
+      otherProps = {};
 
   if (typeof props.type != 'undefined'){
     attitude.type = props.type.toLowerCase();
@@ -49,6 +50,10 @@ export const Input = (props) => {
           attitude.autoCapitalize = props.autoCapitalize || 'words';
         }
 
+        if (typeof props.maxLength != 'undefined'){
+          otherProps.maxLength = attitude.maxLength = props.maxLength;
+        }
+
         attitude.onBlur = props.onBlur || function (){};
         attitude.onFocus = props.onFocus || function (){};
         break;
@@ -68,6 +73,10 @@ export const Input = (props) => {
 
         if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
           attitude.onChangeText = props.onChangeText || props.onChange;
+        }
+
+        if (typeof props.maxLength != 'undefined'){
+          otherProps.maxLength = attitude.maxLength = props.maxLength;
         }
 
         attitude.onBlur = props.onBlur || function (){};
@@ -100,6 +109,10 @@ export const Input = (props) => {
 
         if (attitude.type === 'text-link'){
           attitude.autoCapitalize = props.autoCapitalize || 'words';
+        }
+
+        if (typeof props.maxLength != 'undefined'){
+          otherProps.maxLength = attitude.maxLength = props.maxLength;
         }
 
         attitude.onBlur = props.onBlur || function (){};
@@ -217,7 +230,8 @@ export const Input = (props) => {
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
           onSubmitEditing={Keyboard.dismiss}
-          editable={!attitude.disable} />
+          editable={!attitude.disable}
+          {...otherProps} />
       );
       break;
     case 'numeric':
@@ -239,7 +253,8 @@ export const Input = (props) => {
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
           onSubmitEditing={Keyboard.dismiss}
-          editable={!attitude.disable} />
+          editable={!attitude.disable}
+          {...otherProps} />
       );
       break;
     case 'email':
@@ -263,7 +278,8 @@ export const Input = (props) => {
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
           onSubmitEditing={Keyboard.dismiss}
-          editable={!attitude.disable} />
+          editable={!attitude.disable}
+          {...otherProps} />
       );
       break;
     case 'password':
@@ -287,7 +303,8 @@ export const Input = (props) => {
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
           onSubmitEditing={Keyboard.dismiss}
-          editable={!attitude.disable} />
+          editable={!attitude.disable}
+          {...otherProps} />
       );
       break;
     case 'credit-card':
@@ -364,7 +381,7 @@ export const Input = (props) => {
               onFocus={attitude.onFocus}
               onSubmitEditing={Keyboard.dismiss}
               editable={!attitude.disable}
-              maxLength={19} />
+              {...otherProps} />
 
               {_DETECTED_CREDIT_CARD_TYPE_CONTENT}
         </View>
@@ -412,7 +429,8 @@ export const Input = (props) => {
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
               onSubmitEditing={Keyboard.dismiss}
-              editable={!attitude.disable} />
+              editable={!attitude.disable}
+              {...otherProps} />
 
             {_LINK_CONTENT}
         </View>
@@ -461,7 +479,8 @@ export const Input = (props) => {
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
               onSubmitEditing={Keyboard.dismiss}
-              editable={!attitude.disable} />
+              editable={!attitude.disable}
+              {...otherProps} />
 
             {_LINK_CONTENT}
         </View>
@@ -509,7 +528,8 @@ export const Input = (props) => {
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
               onSubmitEditing={Keyboard.dismiss}
-              editable={!attitude.disable} />
+              editable={!attitude.disable}
+              {...otherProps} />
 
             {_LINK_CONTENT}
         </View>
@@ -557,7 +577,8 @@ export const Input = (props) => {
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
               onSubmitEditing={Keyboard.dismiss}
-              editable={!attitude.disable} />
+              editable={!attitude.disable}
+              {...otherProps} />
 
             {_LINK_CONTENT}
         </View>
@@ -606,7 +627,8 @@ export const Input = (props) => {
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
               onSubmitEditing={Keyboard.dismiss}
-              editable={!attitude.disable} />
+              editable={!attitude.disable}
+              {...otherProps} />
 
             {_LINK_CONTENT}
         </View>

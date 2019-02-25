@@ -147,7 +147,7 @@ const RolesModal = (props) => {
           style={Styles.RolesContainer}
           itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
           firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
-          onLayout={({ item, i }) => {
+          onLayout={({ item, index }) => {
             var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.rolesModal.currentRole.role || props.rolesModal.currentRole),
                 _ITEM_NAME = item.toLowerCase(),
                 _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);

@@ -159,7 +159,7 @@ const CameraRollPickerModal = (props) => {
           style={Styles.CameraRollGroupTypesContainer}
           itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
           firstItem={_CURRENT_GROUP_TYPE_INDEX}
-          onLayout={({ item, i }) => {
+          onLayout={({ item, index }) => {
             var _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType,
                 _ITEM_NAME = item.toLowerCase(),
                 _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);

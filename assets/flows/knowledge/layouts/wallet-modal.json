@@ -111,7 +111,56 @@
         "firstInput": {
           "type": "credit-card",
           "title": {
-            "en": "Credit Card Number"
+            "en": "Card Number"
+          }
+        },
+        "firstCarousel": {
+          "type": "BUTTON",
+          "title": {
+            "en": "Expiration Month"
+          },
+          "content": {
+            "title": {
+              "en": "Expiration Month Item"
+            },
+            "splitter": {
+              "en": ","
+            }
+          },
+          "options": {
+            "layout": "default",
+            "loop": true
+          }
+        },
+        "secondCarousel": {
+          "type": "BUTTON",
+          "title": {
+            "en": "Expiration Year"
+          },
+          "content": {
+            "title": {
+              "en": "Expiration Year Item"
+            }
+          },
+          "options": {
+            "layout": "default",
+            "loop": true
+          }
+        },
+        "secondInput": {
+          "type": "NUMERIC",
+          "title": {
+            "en": "3-digit CVV"
+          }
+        },
+        "submitInput": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Checkout"
+              }
+            }
           }
         },
         "quickLink": {
