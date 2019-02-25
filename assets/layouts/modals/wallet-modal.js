@@ -669,7 +669,7 @@ export const WalletModal = (props) => {
   return (
     <Modal
       name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
-      visible={true/*attitude.visibility*/}
+      visible={attitude.visibility}
       backdropBlurType={MODAL.BACKDROP_BLUR_TYPE}
       onBlur={() => MODAL.ON_BLUR(false)}
       onPress={attitude.onPress}
