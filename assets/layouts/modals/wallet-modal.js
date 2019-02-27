@@ -39,7 +39,7 @@ const _componentWillCheckValidation = (props) => {
       break;
     case 1:
       if ((!isNaN(_PROPS.walletInitialCreditAmount)) && (_PROPS.walletInitialCreditAmount > 0)){
-        const _IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.walletInitialCreditAmount, 2);
+        const _IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.walletInitialCreditAmount.toString(), 2);
 
         if (_IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID){
           _FORM_FIELDS_VALIDITY = true;
@@ -273,16 +273,16 @@ export const WalletModal = (props) => {
             type={__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.title.en)}
             placeholder={__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.title.en}
-            value={props.walletModal.walletInitialCreditAmount}
+            value={(props.walletModal.walletInitialCreditAmount > 0)? props.walletModal.walletInitialCreditAmount.toString(): ''}
             style={Styles.WalletNameInput}
-            onChangeText={(currentValue) => props.setWalletInitialCreditAmount(currentValue)} />
+            onChangeText={(currentValue) => props.setWalletInitialCreditAmount((!isNaN(currentValue) && currentValue != '')? parseInt(currentValue): 0)} />
         )
       ];
 
       if ((Object.keys(props.walletModal.currentCurrency).length > 0) && (typeof props.walletModal.currentCurrency.type != 'undefined')){
         const _CURRENT_CURRENCY_TYPE = Functions._convertTokenToKey(props.walletModal.currentCurrency.type);
 
-        if ((_CURRENT_CURRENCY_TYPE === "RIAL") || (_CURRENT_CURRENCY_TYPE === "TOMAN")){
+        if ((_CURRENT_CURRENCY_TYPE === "TP") || (_CURRENT_CURRENCY_TYPE === "T.P") || (_CURRENT_CURRENCY_TYPE === "T.P.") || (_CURRENT_CURRENCY_TYPE === "TRANSACTION_POINT")){
           _CURRENT_TAB_CONTENT = [
             ..._CURRENT_TAB_CONTENT,
             (
@@ -294,13 +294,14 @@ export const WalletModal = (props) => {
                 style={[
                   Styles.NormalContent,
                   {
-                    marginBottom: Styles.Content.marginBottom
+                    marginBottom: Styles.Content.marginVertical
                   }
                 ]}
                 onPress={() => {
                   const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 1;
 
                   props.setCurrentHiddenTabIndex(_TARGET_INDEX);
+                  props.setWalletInitialCreditAmount(0);
                 }} />
             )
           ];
@@ -323,15 +324,7 @@ export const WalletModal = (props) => {
               onPress={() => {
                 var _INDEX_COEFFICIENT = 2;
 
-                if ((Object.keys(props.walletModal.currentCurrency).length > 0) && (typeof props.walletModal.currentCurrency.type != 'undefined')){
-                  const _CURRENT_CURRENCY_TYPE = Functions._convertTokenToKey(props.walletModal.currentCurrency.type);
-
-                  if ((_CURRENT_CURRENCY_TYPE === "TP") || (_CURRENT_CURRENCY_TYPE === "T.P") || (_CURRENT_CURRENCY_TYPE === "T.P.") || (_CURRENT_CURRENCY_TYPE === "TRANSACTION_POINT")){
-                    _INDEX_COEFFICIENT -= 1;
-                  }
-                }
-
-                const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + _INDEX_COEFFICIENT;
+                const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 2;
 
                 props.setCurrentHiddenTabIndex(_TARGET_INDEX);
               }}
@@ -651,9 +644,15 @@ export const WalletModal = (props) => {
             style={Styles.Center_TextAlignment}
             value={((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0))?__CONSTANTS.modalContainer.content.fourthHiddenTab.quickLink.state.plan.title.en: __CONSTANTS.modalContainer.content.fourthHiddenTab.quickLink.state.normal.title.en}
             onPress={() => {
-              const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex - 1;
+              var _INDEX_COEFFICIENT = 2;
 
-              props.setCurrentHiddenTabIndex(_TARGET_INDEX);
+              if ((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0)){
+                if (props.walletModal.walletInitialCreditAmount === 0){
+                  _INDEX_COEFFICIENT -= 1;
+                }
+              }
+
+              props.setCurrentHiddenTabIndex(props.walletModal.currentHiddenTabIndex - _INDEX_COEFFICIENT);
             }} />
         )
       ];
