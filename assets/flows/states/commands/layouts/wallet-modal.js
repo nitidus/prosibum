@@ -13,7 +13,13 @@ module.exports = {
     })
 
     try {
-      const _WALLET = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/endusers`, walletRules);
+      const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+            _AUTH = JSON.parse(_SERIALIZED_AUTH),
+            _END_USER_ID = (typeof _AUTH.cardinal_id != 'undefined')? _AUTH.cardinal_id: _AUTH._id,
+            _WALLET = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/wallets`, {
+              end_user_id: _END_USER_ID,
+              ...walletRules
+            });
 
       if (_WALLET.status === 200){
         const _FINAL_RESPONSE = _WALLET.data;
