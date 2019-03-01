@@ -86,7 +86,7 @@ export const RolesContainer = (props) => {
               onPress={() => {
                 const { navigation } = props;
 
-                navigation.goBack()
+                navigation.navigate('Overseer');
               }}>
                 <Icon
                   name="arrow left"

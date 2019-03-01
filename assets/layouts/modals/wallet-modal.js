@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -131,7 +131,7 @@ export const WalletModal = (props) => {
           ITEMS: {
             ACTIVE_OPACITY: 0.7
           }
-        }
+        };
 
   var _CURRENT_TAB_CONTENT;
 
@@ -500,6 +500,20 @@ export const WalletModal = (props) => {
       ];
       break;
     case 3:
+      var _EXPIRATION_MONTH_CONTENT = _EXPIRATION_YEAR_CONTENT = (
+        <Input
+          type={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.title.en)}
+          gradient={Global.colors.pair.tilan}
+          style={{
+            marginHorizontal: Styles.Content.marginHorizontal,
+            marginBottom: Styles.Content.marginVertical
+          }}
+          disable={true}>
+            <ActivityIndicator/>
+        </Input>
+      );
+
       var _SELECTED_MONTH_INDEX = (Object.keys(props.walletModal.creditCard.expirationDate.month).length > 0)? __MONTHS.en.findIndex((monthItem, i) => {
             return monthItem.name === props.walletModal.creditCard.expirationDate.month.name;
           }): 0,
@@ -519,26 +533,10 @@ export const WalletModal = (props) => {
         props.setCreditCardExpirationYear(_SELECTED_YEARS_RANGE[_SELECTED_YEAR_INDEX].toString());
       }
 
-      _CURRENT_TAB_CONTENT = [
-        (
-          <Input
-            type={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en}
-            style={[
-              Styles.NormalContent,
-              {
-                marginBottom: Styles.Content.marginVertical
-              }
-            ]}
-            value={props.walletModal.creditCard.number.formatted}
-            onChangeText={(currentValue) => props.setCreditCardNumber({
-              formatted: currentValue,
-              extracted: currentValue.replace(/\s+/g, '')
-            })}
-            maxLength={19} />
-        ),
-        (
+      const _EXPIRATION_DATE_CAROUSEL_ITEM_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? ((Platform.OS === 'ios')? 2.9: 2.8): 6;
+
+      if (__MONTHS.en.length > 0){
+        _EXPIRATION_MONTH_CONTENT = (
           <Carousel
             name={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.title.en}
             data={__MONTHS.en}
@@ -546,7 +544,7 @@ export const WalletModal = (props) => {
               marginBottom: Styles.Content.marginVertical
             }}
             firstItem={_SELECTED_MONTH_INDEX}
-            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 6)}
+            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _EXPIRATION_DATE_CAROUSEL_ITEM_COEFFICIENT)}
             onLayout={({ item, index }) => {
               const _ITEM_CORRECT_INDEX = __MONTHS.en.findIndex((monthItem, i) => {
                 return monthItem.name === item.name;
@@ -571,8 +569,11 @@ export const WalletModal = (props) => {
               value: selectedItemIndex + 1
             })}
             {...__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.options}/>
-        ),
-        (
+        );
+      }
+
+      if (_SELECTED_YEARS_RANGE.length > 0){
+        _EXPIRATION_YEAR_CONTENT = (
           <Carousel
             name={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondCarousel.title.en}
             data={_SELECTED_YEARS_RANGE}
@@ -580,7 +581,7 @@ export const WalletModal = (props) => {
               marginBottom: Styles.Content.marginVertical
             }}
             firstItem={_SELECTED_YEAR_INDEX}
-            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 6)}
+            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _EXPIRATION_DATE_CAROUSEL_ITEM_COEFFICIENT)}
             onLayout={({ item, index }) => {
               const _ITEM_CORRECT_INDEX = _SELECTED_YEARS_RANGE.findIndex((yearItem, i) => {
                 return parseInt(yearItem) === parseInt(item);
@@ -602,7 +603,30 @@ export const WalletModal = (props) => {
             }}
             onSnap={(selectedItemIndex) => props.setCreditCardExpirationYear(_SELECTED_YEARS_RANGE[selectedItemIndex].toString())}
             {...__CONSTANTS.modalContainer.content.fourthHiddenTab.secondCarousel.options}/>
+        );
+      }
+
+      _CURRENT_TAB_CONTENT = [
+        (
+          <Input
+            type={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en)}
+            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en}
+            style={[
+              Styles.NormalContent,
+              {
+                marginBottom: Styles.Content.marginVertical
+              }
+            ]}
+            value={props.walletModal.creditCard.number.formatted}
+            onChangeText={(currentValue) => props.setCreditCardNumber({
+              formatted: currentValue,
+              extracted: currentValue.replace(/\s+/g, '')
+            })}
+            maxLength={19} />
         ),
+        _EXPIRATION_MONTH_CONTENT,
+        _EXPIRATION_YEAR_CONTENT,
         (
           <Input
             type={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.type}

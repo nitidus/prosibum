@@ -95,7 +95,7 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_BUTTON_CONTAINER.height += 20;
     _CUSTOM_BUTTON_CONTAINER.borderRadius += 2;
-    _CUSTOM_BUTTON_TITLE.fontSize += 7;
+    _CUSTOM_BUTTON_TITLE.fontSize += 8;
 
     _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 23;
     _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 23;
@@ -120,6 +120,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_PHOTO_CONTAINER.height += 4;
 
     _CUSTOM_PHOTO_INPUT_LABEL_CONTAINER.width += 38;
+
+    _CUSTOM_BUTTON_TITLE.fontSize += 1;
   }
 
   _CUSTOM_INNER_INPUT_CONTAINER.fontWeight = '500';

@@ -122,7 +122,7 @@ if (Platform.OS === 'ios'){
       paddingVertical: 25
     };
 
-    _CUSTOM_TAB_ITEMS_TEXT.fontSize += 4;
+    _CUSTOM_TAB_ITEMS_TEXT.fontSize += 5;
 
     _CUSTOM_LTR_TAB_ITEMS.marginRight *= 3;
     _CUSTOM_RTL_TAB_ITEMS.marginLeft *= 3;
@@ -147,6 +147,8 @@ if (Platform.OS === 'ios'){
     };
 
     _CUSTOM_HEADER_TITLE.fontSize += 5;
+
+    _CUSTOM_TAB_ITEMS_TEXT.fontSize += 1;
   }
 
   _CUSTOM_CONTAINER.elevation = 2;

@@ -3,7 +3,6 @@ package com.prosibum;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.RNTextInputMask.RNTextInputMaskPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.horcrux.svg.SvgPackage;
 import com.cmcewen.blurview.BlurViewPackage;
@@ -28,7 +27,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNTextInputMaskPackage(),
             new RNFetchBlobPackage(),
             new SvgPackage(),
             new BlurViewPackage(),

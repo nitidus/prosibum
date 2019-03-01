@@ -148,7 +148,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-text-input-mask')
     compile project(':rn-fetch-blob')
     compile project(':react-native-svg')
     compile project(':react-native-blur')

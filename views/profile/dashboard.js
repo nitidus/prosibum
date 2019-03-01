@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Dimensions } from 'react-native';
+import { View, ScrollView, Text, Dimensions, Platform } from 'react-native';
 
 import { Global, Views } from '../../assets/styles/index';
 import { Input, Carousel } from '../../assets/components/index';
@@ -14,7 +14,14 @@ const { Preparation } = Functions;
 
 export const Dashboard = (props) => {
   const { navigation } = props,
-        _FIRST_CAROUSEL_ITEMS = __CONSTANTS.firstCarousel.content;
+        _FIRST_CAROUSEL_ITEMS = __CONSTANTS.firstCarousel.content,
+        _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+        _ITEM_WIDTH_COEFFICIENT = (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)? 2: 4;
+
+  if (Platform.OS !== 'ios'){
+    _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+    _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+  }
 
   return (
     <ScrollView
@@ -33,7 +40,7 @@ export const Dashboard = (props) => {
             }
           ]}
           firstItem={0}
-          itemWidth={_SCREEN.width - (15 * 2)}
+          itemWidth={_SCREEN.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
           onLayout={({ item, i }) => {
             const _CAROUSEL_CURRENT_ITEM_INDEX = _FIRST_CAROUSEL_ITEMS.findIndex((briefDetailItem, j) => {
                     const _ITEM = Functions._convertTokenToKeyword(item.key),
@@ -68,7 +75,8 @@ export const Dashboard = (props) => {
                   </Text>
               </Input>
             );
-          }}/>
+          }}
+          {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
     </ScrollView>
   )
 }

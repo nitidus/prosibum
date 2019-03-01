@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-const __API_HOST = (Platform.OS === 'ios')? 'localhost': '192.168.0.104',
+const __API_HOST = (Platform.OS === 'ios')? 'localhost': '192.168.0.105',
       __API_PORT = 16374,
       GLOBAL = {
         TARGET: 'Wholesaler',
