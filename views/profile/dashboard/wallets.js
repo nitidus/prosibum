@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Global, Views } from '../../../assets/styles/index';
 import { ActivityIndicator, Toast, Icon } from '../../../assets/layouts/index';
-import { Input } from '../../../assets/components/index';
+import { Input, Link } from '../../../assets/components/index';
 import { Views as ViewsContainer } from '../../../assets/layouts/container/index';
 const Styles = Views.Profile.Wallets,
       Container = ViewsContainer.Profile.WalletsContainer;
@@ -33,31 +33,93 @@ class Wallets extends Component<{}> {
   render() {
     const { props } = this;
 
-    return (
-      <Container
-        title={__CONSTANTS.pilot.title.en}
-        pilotItems={props.wallets.tabs}
-        currentPilotItem={props.wallets.currentTab}
-        onPilotTabItemPress={async (item) => {
-          const _TABS = props.wallets.tabs.map((tabItem, i) => {
-                    return Functions._returnCurrencyDependOnLanguage(tabItem.type || tabItem);
-                  }),
-                _SELECTED_ITEM_INDEX = _TABS.indexOf(item);
+    if (props.wallets.loadingWalletCurrenciesType){
+      return (
+        <View
+          style={Styles.Container}>
+            <ActivityIndicator />
+        </View>
+      );
+    }else{
+      if (!props.wallets.connected.status){
+        const _TOP_PINNED_TOAST = (
+          <Toast
+            message={props.wallets.connected.content}
+            launched={!props.wallets.connected.status}
+            color={Global.colors.single.carminePink}
+            onPress={() => props.fetchAvailableWalletCurrenciesType()} />
+        );
 
-          props.setPilotCurrentTab(props.wallets.tabs[_SELECTED_ITEM_INDEX]);
+        return (
+          <View
+            style={Styles.Container}>
+              {_TOP_PINNED_TOAST}
+          </View>
+        );
+      }else{
+        var _TAB_CONTENT;
 
-          await props.fetchAvailableWallets(props.wallets.tabs[_SELECTED_ITEM_INDEX]);
-        }}
-        onAddWalletPress={(visibilityStatus) => props.setWalletModalVisibility(visibilityStatus)}
-        onWalletAbsorb={async (response) => {
-          //We can use response later
-          // await props.fetchAvailableWallets(props.roles.currentTab);
-        }}
-        walletModalVisibility={props.wallets.walletModalVisibility}
-        {...props}>
-          <Text>Wallets Intro</Text>
-      </Container>
-    )
+        if (props.wallets.loadingWallets){
+          _TAB_CONTENT = (
+            <View
+              style={Styles.Content}>
+              <Input
+                type="button"
+                name="{Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.loading.title.en)}"
+                style={[
+                  Styles.RoleItemContainer,
+                  Styles.RoleItemContainerWithEmptyPositionContent
+                ]}
+                disable={true}>
+                  <ActivityIndicator />
+              </Input>
+            </View>
+          );
+        }else{
+          if (props.wallets.wallets.length > 0){
+            _TAB_CONTENT = (<Text>is not empty.</Text>)
+          }else {
+            _TAB_CONTENT = (
+              <View
+                style={[
+                  Styles.Content,
+                  Styles.EmptyContent
+                ]}>
+                <Link
+                  containerStyle={Styles.EmptyContentLink}
+                  value="There's no wallet." />
+              </View>
+            );
+          }
+        }
+
+        return (
+          <Container
+            title={__CONSTANTS.pilot.title.en}
+            pilotItems={props.wallets.tabs}
+            currentPilotItem={props.wallets.currentTab}
+            onPilotTabItemPress={async (item) => {
+              const _TABS = props.wallets.tabs.map((tabItem, i) => {
+                        return Functions._returnCurrencyDependOnLanguage(tabItem.type || tabItem);
+                      }),
+                    _SELECTED_ITEM_INDEX = _TABS.indexOf(item);
+
+              props.setPilotCurrentTab(props.wallets.tabs[_SELECTED_ITEM_INDEX]);
+
+              await props.fetchAvailableWallets(props.wallets.tabs[_SELECTED_ITEM_INDEX]);
+            }}
+            onAddWalletPress={(visibilityStatus) => props.setWalletModalVisibility(visibilityStatus)}
+            onWalletAbsorb={async (response) => {
+              //We can use response later
+              // await props.fetchAvailableWallets(props.roles.currentTab);
+            }}
+            walletModalVisibility={props.wallets.walletModalVisibility}
+            {...props}>
+              {_TAB_CONTENT}
+          </Container>
+        );
+      }
+    }
   }
 }
 
