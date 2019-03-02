@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: visibilityStatus
       })
     },
-    fetchAvailableWallets: async (usergroup) => CMD._getWalletsWithUsergroup(usergroup, dispatch),
+    fetchAvailableWallets: async (currency, usergroup) => CMD._getWalletsWithUsergroup(currency, usergroup, dispatch),
     fetchAvailableWalletCurrenciesType: async () => CMD._getWalletsTypeWithCurrenciesType(dispatch),
     setWalletsLoadingStatus: (loadingStatus) => {
       dispatch({

@@ -24,10 +24,10 @@ class Wallets extends Component<{}> {
 
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { props } = this;
 
-    props.fetchAvailableWalletCurrenciesType();
+    await props.fetchAvailableWalletCurrenciesType();
   }
 
   render() {
@@ -46,12 +46,12 @@ class Wallets extends Component<{}> {
 
           props.setPilotCurrentTab(props.wallets.tabs[_SELECTED_ITEM_INDEX]);
 
-          // await props.fetchAvailableRoles(props.roles.tabs[_SELECTED_ITEM_INDEX]);
+          await props.fetchAvailableWallets(props.wallets.tabs[_SELECTED_ITEM_INDEX]);
         }}
         onAddWalletPress={(visibilityStatus) => props.setWalletModalVisibility(visibilityStatus)}
         onWalletAbsorb={async (response) => {
           //We can use response later
-          // await props.fetchAvailableRoles(props.roles.currentTab);
+          // await props.fetchAvailableWallets(props.roles.currentTab);
         }}
         walletModalVisibility={props.wallets.walletModalVisibility}
         {...props}>
