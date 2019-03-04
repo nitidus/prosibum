@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image } from 'react-native';
+import { View, ScrollView, Dimensions, Text, Image } from 'react-native';
+const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../../assets/styles/index';
 import { ActivityIndicator, Toast, Icon } from '../../../assets/layouts/index';
-import { Input, Link } from '../../../assets/components/index';
+import { Input, Link, Carousel } from '../../../assets/components/index';
 import { Views as ViewsContainer } from '../../../assets/layouts/container/index';
 const Styles = Views.Profile.Wallets,
       Container = ViewsContainer.Profile.WalletsContainer;
@@ -67,8 +68,8 @@ class Wallets extends Component<{}> {
                 type="button"
                 name="{Functions._convertTokenToKeyword(__CONSTANTS.content.scrollViewItem.state.loading.title.en)}"
                 style={[
-                  Styles.RoleItemContainer,
-                  Styles.RoleItemContainerWithEmptyPositionContent
+                  Styles.WalletItemContainer,
+                  Styles.WalletItemContainerWithEmptyPositionContent
                 ]}
                 disable={true}>
                   <ActivityIndicator />
@@ -77,7 +78,43 @@ class Wallets extends Component<{}> {
           );
         }else{
           if (props.wallets.wallets.length > 0){
-            _TAB_CONTENT = (<Text>is not empty.</Text>)
+            _TAB_CONTENT = (
+              <Carousel
+                name="{__CONSTANTS.modalContainer.content.fourthHiddenTab.secondCarousel.title.en}"
+                data={props.wallets.wallets}
+                style={{
+                  marginVertical: Styles.Content.marginVertical
+                }}
+                firstItem={0}
+                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+                onLayout={({ item, index }) => {
+                  // const _ITEM_CORRECT_INDEX = _SELECTED_YEARS_RANGE.findIndex((yearItem, i) => {
+                  //   return parseInt(yearItem) === parseInt(item);
+                  // }) + 1;
+                  //
+                  // var _ITEM_GRADIENT = Global.colors.pair.tilan;
+                  //
+                  // if (_SELECTED_YEAR_INDEX === (_ITEM_CORRECT_INDEX - 1)){
+                  //   _ITEM_GRADIENT = Global.colors.pair.analue;
+                  // }
+
+                  return (
+                    <Input
+                      type="button"
+                      name="{Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.secondCarousel.content.title.en)}"
+                      style={{
+                        height: Styles.WalletItemContainer.height
+                      }}
+                      gradient={Global.colors.pair.ongerine}>
+                        <Text>{item.name}</Text>
+                        <Text>{item.created_at}</Text>
+                        <Text>{item.transactions.amount}</Text>
+                        <Text>{item.transactions.deposit}</Text>
+                    </Input>
+                  );
+                }}
+                onSnap={(selectedItemIndex) => {/*props.setCreditCardExpirationYear(_SELECTED_YEARS_RANGE[selectedItemIndex].toString())*/}}/>
+            );
           }else {
             _TAB_CONTENT = (
               <View

@@ -12,8 +12,8 @@ var _CUSTOM_CONTENT = {
       marginVertical: 15,
       marginHorizontal: 15
     },
-    _CUSTOM_ROLE_ITEM_CONTAINER = {
-      height: 70,
+    _CUSTOM_WALLET_ITEM_CONTAINER = {
+      height: 184,
       marginBottom: 15,
       paddingHorizontal: 15,
       shadowOpacity: 0.15,
@@ -39,9 +39,9 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_CONTENT.marginHorizontal = 202;
 
-    _CUSTOM_ROLE_ITEM_CONTAINER.height += 25;
-    _CUSTOM_ROLE_ITEM_CONTAINER.marginBottom += 5;
-    _CUSTOM_ROLE_ITEM_CONTAINER.paddingHorizontal += 5;
+    _CUSTOM_WALLET_ITEM_CONTAINER.height += 25;
+    _CUSTOM_WALLET_ITEM_CONTAINER.marginBottom += 5;
+    _CUSTOM_WALLET_ITEM_CONTAINER.paddingHorizontal += 5;
 
     _CUSTOM___GLOBAL_ICONS_IN_ROLE.height += 14;
 
@@ -49,18 +49,18 @@ if (Platform.OS !== 'ios'){
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
 
-    _CUSTOM_ROLE_ITEM_CONTAINER.height += 3;
+    _CUSTOM_WALLET_ITEM_CONTAINER.height += 3;
   }
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;
 
-    _CUSTOM_ROLE_ITEM_CONTAINER.height += 6;
+    _CUSTOM_WALLET_ITEM_CONTAINER.height += 6;
 
     _CUSTOM___GLOBAL_ICONS_IN_ROLE.height += 4;
   }else{
     if (!_IS_IPHONE_X){
-      _CUSTOM_ROLE_ITEM_CONTAINER.height += 1;
+      _CUSTOM_WALLET_ITEM_CONTAINER.height += 1;
     }
   }
 }
@@ -80,13 +80,13 @@ module.exports = StyleSheet.create({
   EmptyContentLink: {
     alignItems: 'center'
   },
-  RoleItemContainer: {
+  WalletItemContainer: {
     shadowColor: colors.single.rangoonGreen,
     alignItems: 'flex-start',
     elevation: 1,
-    ..._CUSTOM_ROLE_ITEM_CONTAINER
+    ..._CUSTOM_WALLET_ITEM_CONTAINER
   },
-  RoleItemContainerWithEmptyPositionContent: {
+  WalletItemContainerWithEmptyPositionContent: {
     backgroundColor: colors.single.romance
   },
   LTR_ProfileContainer: {
