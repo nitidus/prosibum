@@ -4,6 +4,7 @@ const { WALLETS } = VIEWS.DASHBOARD;
 const initialState = {
         currentTab: {},
         tabs: [],
+        selectedWallet: {},
         wallets: [],
         walletModalVisibility: false,
         loadingWalletCurrenciesType: false,
@@ -26,6 +27,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         tabs: action.payload
+      };
+      break;
+    case WALLETS.SET_SELECTED_WALLET:
+      return {
+        ...state,
+        selectedWallet: action.payload
       };
       break;
     case WALLETS.SET_WALLET_MODAL_VISIBILITY:

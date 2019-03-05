@@ -1,6 +1,7 @@
 import { AsyncStorage, CameraRoll, PermissionsAndroid, Platform } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import Lodash from 'lodash';
+import Moment from 'moment';
 
 import { countries as __COUNTRIES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
 const __WALLETS = __VIEWS_CONSTANTS.profile.wallets;
@@ -147,6 +148,13 @@ module.exports = {
       return Lodash.range(1, number + 1);
     }else{
       throw new Error('You should define a numerical value.')
+    }
+  },
+  _convertDateToHumanReadableFormat: (isoDate) => {
+    if (typeof isoDate == 'string'){
+      return Moment(isoDate).fromNow();
+    }else{
+      throw new Error("You should define the date as ISO date in string format.");
     }
   },
   _convertDigitsToMoneyFormat: (n, c, d, t) => {

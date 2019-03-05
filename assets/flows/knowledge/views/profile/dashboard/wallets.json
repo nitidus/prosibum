@@ -11,7 +11,7 @@
       },
       {
         "title": {
-          "en": "TP"
+          "en": "Transaction Point"
         }
       },
       {
@@ -30,5 +30,39 @@
         }
       }
     ]
+  },
+  "firstCarousel": {
+    "title": {
+      "en": "Wallet Carousel"
+    },
+    "type": "BUTTON",
+    "items": {
+      "title": {
+        "en": "Wallet Carousel Item"
+      },
+      "content": {
+        "transactionsAmount": {
+          "icon": "grading",
+          "suffix": {
+            "en": "Transaction"
+          }
+        },
+        "transactionsDeposit": {
+          "icon": "pay",
+          "sign": {
+            "en": "$"
+          }
+        }
+      }
+    }
+  },
+  "modalHandlerButton": {
+    "type": "BUTTON",
+    "title": {
+      "en": "Charge The Wallet"
+    }
+  },
+  "link": {
+    "en": "There's no wallet."
   }
 }

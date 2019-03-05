@@ -102,7 +102,7 @@ module.exports = {
 
           dispatch({
             type: WALLET_MODAL.SET_WALLET_CURRENT_INITIAL_CREDIT_PLAN,
-            payload: _DATA[0]
+            payload: (_DATA.length > 0)? _DATA[0]: {}
           })
 
 

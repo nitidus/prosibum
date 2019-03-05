@@ -31,7 +31,7 @@ module.exports = {
 
           dispatch({
             type: ROLES.SET_PILOT_CURRENT_TAB,
-            payload: _DATA[0]
+            payload: (_DATA.length > 0)? _DATA[0]: {}
           })
 
           dispatch({

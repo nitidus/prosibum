@@ -28,7 +28,7 @@ module.exports = {
 
           dispatch({
             type: WALLETS.SET_PILOT_CURRENT_TAB,
-            payload: _DATA[0]
+            payload: (_DATA.length > 0)? _DATA[0]: {}
           })
 
           dispatch({
@@ -100,6 +100,11 @@ module.exports = {
           dispatch({
             type: WALLETS.FETCH_AVAILABLE_WALLETS,
             payload: _DATA
+          })
+
+          dispatch({
+            type: WALLETS.SET_SELECTED_WALLET,
+            payload: (_DATA.length > 0)? _DATA[0]: {}
           })
 
           dispatch({
