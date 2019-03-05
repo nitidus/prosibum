@@ -12,6 +12,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    resetModal: () => {
+      dispatch({
+        type: WALLET_MODAL.RESET_MODAL
+      })
+    },
     setCurrentHiddenTabIndex: (index) => {
       dispatch({
         type: WALLET_MODAL.SET_CURRENT_HIDDEN_TAB_INDEX,
@@ -30,10 +35,16 @@ const mapDispatchToProps = (dispatch) => {
         payload: currentRole
       })
     },
-    setWalletName: (roleCount) => {
+    setWalletName: (name) => {
       dispatch({
         type: WALLET_MODAL.SET_WALLET_NAME,
-        payload: roleCount
+        payload: name
+      })
+    },
+    setWallet: (wallet) => {
+      dispatch({
+        type: WALLET_MODAL.SET_WALLET,
+        payload: wallet
       })
     },
     setWalletInitialCreditAmount: (creditAmount) => {
@@ -50,6 +61,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchWalletInitialCreditPlans: async (currencyType) => CMD._getWalletInitialCreditPlansUsingCurrencyType(currencyType, dispatch),
     appendWalletToResource: async (walletRules, callback) => CMD._appendWalletToResourceWithRules(walletRules, callback, dispatch),
+    chargeWallet: async (chargeRules, callback) => CMD._chargeWalletWithRules(chargeRules, callback, dispatch),
     setCreditCardNumber: (number) => {
       dispatch({
         type: WALLET_MODAL.SET_CARD_NUMBER,
@@ -86,9 +98,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: loadingStatus
       })
     },
-    setAppendWalletToResourcesLoadingStatus: (loadingStatus) => {
+    setMultiPurposeRequestToResourcesLoadingStatus: (loadingStatus) => {
       dispatch({
-        type: WALLET_MODAL.SET_APPEND_WALLET_TO_RESOURCE_LOADING_STATUS,
+        type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
         payload: loadingStatus
       })
     }

@@ -8,7 +8,7 @@ import { Functions } from '../../../../modules/index';
 module.exports = {
   _appendWalletToResourceWithRules: async (walletRules, callback, dispatch) => {
     dispatch({
-      type: WALLET_MODAL.SET_APPEND_WALLET_TO_RESOURCE_LOADING_STATUS,
+      type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
       payload: true
     })
 
@@ -33,7 +33,7 @@ module.exports = {
           })
 
           dispatch({
-            type: WALLET_MODAL.SET_APPEND_WALLET_TO_RESOURCE_LOADING_STATUS,
+            type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
             payload: false
           })
 
@@ -47,7 +47,7 @@ module.exports = {
           callback(_DATA, false);
         }else{
           dispatch({
-            type: WALLET_MODAL.SET_APPEND_WALLET_TO_RESOURCE_LOADING_STATUS,
+            type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
             payload: false
           })
 
@@ -65,7 +65,80 @@ module.exports = {
         const WALLET_MODAL = error.message || error.request._response;
 
         dispatch({
-          type: WALLET_MODAL.SET_APPEND_WALLET_TO_RESOURCE_LOADING_STATUS,
+          type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
+          payload: false
+        })
+
+        dispatch({
+          type: WALLET_MODAL.SET_CONNECTED_STATUS,
+          payload: {
+            status: false,
+            content: _ERROR_MESSAGE
+          }
+        })
+      }
+    }
+  },
+  _chargeWalletWithRules: async (chargeRules, callback, dispatch) => {
+    dispatch({
+      type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
+      payload: true
+    })
+
+    try {
+      const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+            _AUTH = JSON.parse(_SERIALIZED_AUTH),
+            _END_USER_ID = (typeof _AUTH.cardinal_id != 'undefined')? _AUTH.cardinal_id: _AUTH._id,
+            _CHARGE = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/histories`, {
+              end_user_id: _END_USER_ID,
+              ...chargeRules
+            });
+
+      if (_CHARGE.status === 200){
+        const _FINAL_RESPONSE = _CHARGE.data;
+
+        if (_FINAL_RESPONSE.meta.code === 200){
+          const _DATA = _FINAL_RESPONSE.data;
+
+          dispatch({
+            type: WALLET_MODAL.CHARGE_WALLET,
+            payload: _DATA
+          })
+
+          dispatch({
+            type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: WALLET_MODAL.SET_CONNECTED_STATUS,
+            payload: {
+              status: true
+            }
+          })
+
+          callback(_DATA, false);
+        }else{
+          dispatch({
+            type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: WALLET_MODAL.SET_CONNECTED_STATUS,
+            payload: {
+              status: false,
+              content: _FINAL_RESPONSE.meta.error_message
+            }
+          })
+        }
+      }
+    } catch (error) {
+      if (error){
+        const WALLET_MODAL = error.message || error.request._response;
+
+        dispatch({
+          type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
           payload: false
         })
 

@@ -26,43 +26,20 @@ const _componentWillCheckValidation = (props) => {
 
   var _FORM_FIELDS_VALIDITY = false;
 
-  switch (_PROPS.currentHiddenTabIndex) {
-    case 0:
-    default:
-      if ((_PROPS.walletName != '') && (Object.keys(_PROPS.currentCurrency).length > 0) && (typeof _PROPS.currentCurrency._id != 'undefined')){
-        const _IS_WALLET_NAME_VALID = Functions._checkIsAValidTextOnlyField(_PROPS.walletName, 7);
+  if ((_PROPS.creditCard.number.extracted != '') && ((Object.keys(_PROPS.creditCard.expirationDate.month).length > 0) && (typeof _PROPS.creditCard.expirationDate.month.value != 'undefined')) && (_PROPS.creditCard.expirationDate.year != '') && (_PROPS.creditCard.cvv != '')){
+    const _IS_CREDIT_CARD_NUMBER_VALID = Functions._checkIsAValidCreditCardNumber(_PROPS.creditCard.number.extracted),
+          _IS_CREDIT_CARD_EXPIRATION_DATE_VALID = Functions._checkIsAValidCreditCardExpirationDate(_PROPS.creditCard.expirationDate.month.value, _PROPS.creditCard.expirationDate.year),
+          _IS_CREDIT_CARD_CVV_VALID = Functions._checkIsAValidCreditCardCVV(_PROPS.creditCard.cvv);
 
-        if (_IS_WALLET_NAME_VALID){
-          _FORM_FIELDS_VALIDITY = true;
-        }
-      }
-      break;
-    case 1:
-      if ((!isNaN(_PROPS.walletInitialCreditAmount)) && (_PROPS.walletInitialCreditAmount > 0)){
-        const _IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.walletInitialCreditAmount.toString(), 2);
-
-        if (_IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID){
-          _FORM_FIELDS_VALIDITY = true;
-        }
-      }
-      break;
-    case 3:
-      if ((_PROPS.creditCard.number.extracted != '') && ((Object.keys(_PROPS.creditCard.expirationDate.month).length > 0) && (typeof _PROPS.creditCard.expirationDate.month.value != 'undefined')) && (_PROPS.creditCard.expirationDate.year != '') && (_PROPS.creditCard.cvv != '')){
-        const _IS_CREDIT_CARD_NUMBER_VALID = Functions._checkIsAValidCreditCardNumber(_PROPS.creditCard.number.extracted),
-              _IS_CREDIT_CARD_EXPIRATION_DATE_VALID = Functions._checkIsAValidCreditCardExpirationDate(_PROPS.creditCard.expirationDate.month.value, _PROPS.creditCard.expirationDate.year),
-              _IS_CREDIT_CARD_CVV_VALID = Functions._checkIsAValidCreditCardCVV(_PROPS.creditCard.cvv);
-
-        if (_IS_CREDIT_CARD_NUMBER_VALID && _IS_CREDIT_CARD_EXPIRATION_DATE_VALID && _IS_CREDIT_CARD_CVV_VALID){
-          _FORM_FIELDS_VALIDITY = true;
-        }
-      }
-      break;
+    if (_IS_CREDIT_CARD_NUMBER_VALID && _IS_CREDIT_CARD_EXPIRATION_DATE_VALID && _IS_CREDIT_CARD_CVV_VALID){
+      _FORM_FIELDS_VALIDITY = true;
+    }
   }
 
   return !_FORM_FIELDS_VALIDITY;
 }
 
-export const WalletModal = (props) => {
+export const ChargeWalletModal = (props) => {
   var attitude = {};
 
   if (typeof props.key != 'undefined'){
@@ -96,39 +73,19 @@ export const WalletModal = (props) => {
     attitude.style = {};
   }
 
-  if ((typeof props.data != 'undefined') || (typeof props.wallet != 'undefined') || (typeof props.walletData != 'undefined') || (typeof props.wallet_data != 'undefined')){
-    attitude.data = props.data || props.wallet || props.walletData || props.wallet_data;
+  if ((typeof props.data != 'undefined') || (typeof props.walletData != 'undefined') || (typeof props.wallet_data != 'undefined') || (typeof props.walletItems != 'undefined') || (typeof props.wallet_items != 'undefined') || (typeof props.currenciesData != 'undefined') || (typeof props.currencies_data != 'undefined') || (typeof props.currenciesItems != 'undefined') || (typeof props.currencies_items != 'undefined')){
+    attitude.data = props.data || props.walletData || props.wallet_data || props.walletItems || props.wallet_items || props.currenciesData || props.currencies_data || props.currenciesItems || props.currencies_items;
 
-    if ((Object.keys(attitude.data).length > 0) && (attitude.visibility === true)){
-      const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 1;
-
-      if (Object.keys(props.walletModal.wallet).length > 0){
-        if (props.walletModal.wallet._id !== attitude.data._id){
-          props.setWallet(attitude.data);
-
-          props.setCurrentHiddenTabIndex(_TARGET_INDEX);
-        }
-      }else{
-        props.setWallet(attitude.data);
-
-        props.setCurrentHiddenTabIndex(_TARGET_INDEX);
-      }
+    if ((props.walletModal.currencies.length === 0 && attitude.data.length > 0) && (attitude.visibility === true)){
+      props.setCurrenciesItems(attitude.data);
     }
-  }else{
-    if ((typeof props.currenciesData != 'undefined') || (typeof props.currencies_data != 'undefined') || (typeof props.currenciesItems != 'undefined') || (typeof props.currencies_items != 'undefined')){
-      attitude.currenciesData = props.currenciesData || props.currencies_data || props.currenciesItems || props.currencies_items;
+  }
 
-      if ((props.walletModal.currencies.length === 0 && attitude.currenciesData.length > 0) && (attitude.visibility === true)){
-        props.setCurrenciesItems(attitude.currenciesData);
-      }
-    }
+  if ((typeof props.currentWalletItem != 'undefined') || (typeof props.current_wallet_item != 'undefined') || (typeof props.currentCurrenciesItem != 'undefined') || (typeof props.current_currencies_item != 'undefined')){
+    attitude.currentWalletItem = props.currentWalletItem || props.current_wallet_item || props.currentCurrenciesItem || props.current_currencies_item;
 
-    if ((typeof props.currentCurrenciesItem != 'undefined') || (typeof props.current_currencies_item != 'undefined')){
-      attitude.currentCurrenciesItem = props.currentCurrenciesItem || props.current_currencies_item;
-
-      if (!props.walletModal.currentCurrency.hasOwnProperty('type') && attitude.currentCurrenciesItem.hasOwnProperty('type') && (attitude.visibility === true)){
-        props.setCurrentCurrency(attitude.currentCurrenciesItem);
-      }
+    if (!props.walletModal.currentCurrency.hasOwnProperty('type') && attitude.currentWalletItem.hasOwnProperty('type') && (attitude.visibility === true)){
+      props.setCurrentCurrency(attitude.currentWalletItem);
     }
   }
 
@@ -146,10 +103,7 @@ export const WalletModal = (props) => {
 
   const MODAL = {
           BACKDROP_BLUR_TYPE: "dark",
-          ON_BLUR: (status) => {
-            attitude.onBlur(status);
-            props.resetModal();
-          },
+          ON_BLUR: (status) => attitude.onBlur(status),
           ON_PROGRESS_SUCCESS: async (response) => attitude.onProgressSuccess(response),
           ITEMS: {
             ACTIVE_OPACITY: 0.7
@@ -302,11 +256,8 @@ export const WalletModal = (props) => {
         )
       ];
 
-      if (
-        ((Object.keys(props.walletModal.currentCurrency).length > 0) && (typeof props.walletModal.currentCurrency.type != 'undefined')) ||
-        (Object.keys(props.walletModal.wallet).length > 0)
-      ){
-        const _CURRENT_CURRENCY_TYPE = (Object.keys(props.walletModal.wallet).length > 0)? Functions._convertTokenToKey(props.walletModal.wallet.currency.type): Functions._convertTokenToKey(props.walletModal.currentCurrency.type);
+      if ((Object.keys(props.walletModal.currentCurrency).length > 0) && (typeof props.walletModal.currentCurrency.type != 'undefined')){
+        const _CURRENT_CURRENCY_TYPE = Functions._convertTokenToKey(props.walletModal.currentCurrency.type);
 
         if ((_CURRENT_CURRENCY_TYPE === "TP") || (_CURRENT_CURRENCY_TYPE === "T.P") || (_CURRENT_CURRENCY_TYPE === "T.P.") || (_CURRENT_CURRENCY_TYPE === "TRANSACTION_POINT")){
           _CURRENT_TAB_CONTENT = [
@@ -355,11 +306,8 @@ export const WalletModal = (props) => {
                 props.setCurrentHiddenTabIndex(_TARGET_INDEX);
               }}
               forcedDisable={_VALIDATED} />
-          )
-        ];
-
-        if (Object.keys(props.walletModal.wallet).length === 0){
-          _CURRENT_TAB_CONTENT.push(
+          ),
+          (
             <Link
               containerStyle={[
                 Styles.NormalContent,
@@ -372,8 +320,8 @@ export const WalletModal = (props) => {
 
                 props.setCurrentHiddenTabIndex(_TARGET_INDEX);
               }} />
-          );
-        }
+          )
+        ];
       }
       break;
     case 2:
@@ -686,6 +634,14 @@ export const WalletModal = (props) => {
             onPress={async () => {
               var _RULES = {};
 
+              if (typeof props.walletModal.currentCurrency._id != 'undefined'){
+                _RULES.currency_id = props.walletModal.currentCurrency._id;
+              }
+
+              if (props.walletModal.walletName != ''){
+                _RULES.wallet_name = props.walletModal.walletName;
+              }
+
               if (props.walletModal.creditCard.number.extracted != ''){
                 _RULES.card = {
                   ..._RULES.card,
@@ -714,59 +670,24 @@ export const WalletModal = (props) => {
                 }
               }
 
-              if (Object.keys(props.walletModal.wallet).length > 0){
-                if (typeof props.walletModal.wallet._id != 'undefined'){
-                  _RULES.wallet_id = props.walletModal.wallet._id;
-                }
-
-                if ((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0)){
-                  if (props.walletModal.walletInitialCreditAmount === 0){
-                    _RULES.plan_id = props.walletModal.walletCurrentInitialCreditPlan._id;
-                    _RULES.amount = parseInt(props.walletModal.walletCurrentInitialCreditPlan.price);
-                    _RULES.balance = parseInt(props.walletModal.walletCurrentInitialCreditPlan.amount);
-                  }else{
-                    _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
-                    _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
-                  }
+              if ((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0)){
+                if (props.walletModal.walletInitialCreditAmount === 0){
+                  _RULES.plan_id = props.walletModal.walletCurrentInitialCreditPlan._id;
                 }else{
-                  if (props.walletModal.walletInitialCreditAmount > 0){
-                    _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
-                    _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
-                  }
+                  _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
+                  _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
                 }
-
-                await props.chargeWallet(_RULES, (response, state) => {
-                  MODAL.ON_PROGRESS_SUCCESS(response);
-                  MODAL.ON_BLUR(state);
-                });
               }else{
-                if (typeof props.walletModal.currentCurrency._id != 'undefined'){
-                  _RULES.currency_id = props.walletModal.currentCurrency._id;
+                if (props.walletModal.walletInitialCreditAmount > 0){
+                  _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
+                  _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
                 }
-
-                if (props.walletModal.walletName != ''){
-                  _RULES.wallet_name = props.walletModal.walletName;
-                }
-
-                if ((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0)){
-                  if (props.walletModal.walletInitialCreditAmount === 0){
-                    _RULES.plan_id = props.walletModal.walletCurrentInitialCreditPlan._id;
-                  }else{
-                    _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
-                    _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
-                  }
-                }else{
-                  if (props.walletModal.walletInitialCreditAmount > 0){
-                    _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
-                    _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
-                  }
-                }
-
-                await props.appendWalletToResource(_RULES, (response, state) => {
-                  MODAL.ON_PROGRESS_SUCCESS(response);
-                  MODAL.ON_BLUR(state);
-                });
               }
+
+              await props.appendWalletToResource(_RULES, (response, state) => {
+                MODAL.ON_PROGRESS_SUCCESS(response);
+                MODAL.ON_BLUR(state);
+              });
             }}
             forcedDisable={_VALIDATED} />
         ),

@@ -6,6 +6,7 @@ const initialState = {
   currencies: [],
   currentCurrency: {},
   walletName: '',
+  wallet: {},
   walletInitialCreditAmount: 0,
   walletCurrentInitialCreditPlan: {},
   walletInitialCreditPlans: [],
@@ -22,7 +23,7 @@ const initialState = {
   },
   walletInitialCreditPlansLoading: false,
   appendWalletToResourcesLoading: false,
-  appendedResources: [],
+  appendedResource: {},
   connected: {
     status: true,
     content: ''
@@ -31,6 +32,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case WALLET_MODAL.RESET_MODAL:
+      return initialState;
+      break;
     case WALLET_MODAL.SET_CURRENT_HIDDEN_TAB_INDEX:
       return {
         ...state,
@@ -55,6 +59,12 @@ export default (state = initialState, action) => {
         walletName: action.payload
       };
       break;
+    case WALLET_MODAL.SET_WALLET:
+      return {
+        ...state,
+        wallet: action.payload
+      };
+      break;
     case WALLET_MODAL.SET_WALLET_INITIAL_CREDIT_AMOUNT:
       return {
         ...state,
@@ -64,7 +74,13 @@ export default (state = initialState, action) => {
     case WALLET_MODAL.APPEND_WALLET_TO_RESOURCE:
       return {
         ...state,
-        appendedResources: action.payload
+        appendedResource: action.payload
+      };
+      break;
+    case WALLET_MODAL.CHARGE_WALLET:
+      return {
+        ...state,
+        appendedResource: action.payload
       };
       break;
     case WALLET_MODAL.SET_WALLET_CURRENT_INITIAL_CREDIT_PLAN:
@@ -140,7 +156,7 @@ export default (state = initialState, action) => {
         walletInitialCreditPlansLoading: action.payload
       };
       break;
-    case WALLET_MODAL.SET_APPEND_WALLET_TO_RESOURCE_LOADING_STATUS:
+    case WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS:
       return {
         ...state,
         appendWalletToResourcesLoading: action.payload

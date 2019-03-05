@@ -29,10 +29,11 @@ class Wallets extends Component<{}> {
     const { props } = this;
 
     await props.fetchAvailableWalletCurrenciesType();
+    this.otherProps = {};
   }
 
   render() {
-    const { props } = this;
+    const { props, otherProps } = this;
 
     if (props.wallets.loadingWalletCurrenciesType){
       return (
@@ -58,7 +59,8 @@ class Wallets extends Component<{}> {
           </View>
         );
       }else{
-        var _TAB_CONTENT;
+        var _TAB_CONTENT,
+            OTHER_PROPS = otherProps || {};
 
         if (props.wallets.loadingWallets){
           _TAB_CONTENT = (
@@ -164,7 +166,29 @@ class Wallets extends Component<{}> {
                     style={{
                       marginHorizontal: Styles.Content.marginHorizontal
                     }}
-                    gradient={Global.colors.pair.ongerine}/>
+                    gradient={Global.colors.pair.ongerine}
+                    onPress={() => {
+                      this.otherProps = {
+                        pilotItems: props.wallets.tabs,
+                        currentPilotItem: props.wallets.currentTab,
+                        data: props.wallets.selectedWallet,
+                        onChargeWalletPress: (visibilityStatus) => {
+                          this.otherProps = {
+                            pilotItems: props.wallets.tabs,
+                            currentPilotItem: props.wallets.currentTab,
+                            onAddWalletPress: (visibilityStatus) => props.setWalletModalVisibility(visibilityStatus),
+                            onWalletAbsorb: async (response) => {
+                              //We can use response later
+                              // await props.fetchAvailableWallets(props.roles.currentTab);
+                            }
+                          };
+
+                          props.setWalletModalVisibility(visibilityStatus);
+                        }
+                      };
+
+                      props.setWalletModalVisibility(true);
+                    }}/>
               </View>
             );
           }else {
@@ -182,11 +206,21 @@ class Wallets extends Component<{}> {
           }
         }
 
+        if ((props.wallets.tabs.length > 0) && (Object.keys(props.wallets.currentTab).length > 0) && (Object.keys(OTHER_PROPS).length === 0)){
+          OTHER_PROPS = {
+            pilotItems: props.wallets.tabs,
+            currentPilotItem: props.wallets.currentTab,
+            onAddWalletPress: (visibilityStatus) => props.setWalletModalVisibility(visibilityStatus),
+            onWalletAbsorb: async (response) => {
+              //We can use response later
+              // await props.fetchAvailableWallets(props.roles.currentTab);
+            }
+          };
+        }
+
         return (
           <Container
             title={__CONSTANTS.pilot.title.en}
-            pilotItems={props.wallets.tabs}
-            currentPilotItem={props.wallets.currentTab}
             onPilotTabItemPress={async (item) => {
               const _TABS = props.wallets.tabs.map((tabItem, i) => {
                         return Functions._returnCurrencyDependOnLanguage(tabItem.type || tabItem);
@@ -197,13 +231,9 @@ class Wallets extends Component<{}> {
 
               await props.fetchAvailableWallets(props.wallets.tabs[_SELECTED_ITEM_INDEX]);
             }}
-            onAddWalletPress={(visibilityStatus) => props.setWalletModalVisibility(visibilityStatus)}
-            onWalletAbsorb={async (response) => {
-              //We can use response later
-              // await props.fetchAvailableWallets(props.roles.currentTab);
-            }}
             walletModalVisibility={props.wallets.walletModalVisibility}
-            {...props}>
+            {...props}
+            {...OTHER_PROPS}>
               {_TAB_CONTENT}
           </Container>
         );
