@@ -18,6 +18,19 @@ var _CUSTOM_CONTENT = {
     _WALLET_CONTAINER_DIRECTION = {
       marginHorizontal: 15
     },
+    _CUSTOM_BRIEF_DETAIL_TITLE = {
+      fontSize: 26,
+      width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2)) - 42),
+      marginBottom: 5
+    },
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE = {
+      fontSize: 14,
+      width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2)) - 42),
+      marginBottom: 10
+    },
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT = {
+      fontSize: 14
+    },
     _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
       height: 23,
     },
@@ -31,23 +44,48 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_CONTENT.marginHorizontal = 202;
 
-    _CUSTOM_WALLET_ITEM_CONTAINER.height += 25;
+    _CUSTOM_WALLET_ITEM_CONTAINER.height += 48;
 
     _CUSTOM___GLOBAL_ICONS_IN_ROLE.height += 14;
 
     _WALLET_CONTAINER_DIRECTION.marginHorizontal += 5;
+
+    _CUSTOM_BRIEF_DETAIL_TITLE.width -= 380;
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 6;
+
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 380;
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 4;
+
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 4;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
 
     _CUSTOM_WALLET_ITEM_CONTAINER.height += 3;
+
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 3;
+
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 1;
+
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 1;
   }
+
+  _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
+  _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
+  _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontWeight = 'bold';
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;
 
-    _CUSTOM_WALLET_ITEM_CONTAINER.height += 6;
+    _CUSTOM_WALLET_ITEM_CONTAINER.height += 16;
 
     _CUSTOM___GLOBAL_ICONS_IN_ROLE.height += 4;
+
+    _CUSTOM_BRIEF_DETAIL_TITLE.width -= 300;
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 1;
+
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 300;
+
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 1;
   }else{
     if (!_IS_IPHONE_X){
       _CUSTOM_WALLET_ITEM_CONTAINER.height += 1;
@@ -87,21 +125,17 @@ module.exports = StyleSheet.create({
   BriefDetailTitle: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
-    fontSize: 26,
-    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 5)) - 65),
-    marginBottom: 5
+    ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailSubtitle: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
-    fontSize: 14,
-    width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 5)) - 65),
-    marginBottom: 10
+    ..._CUSTOM_BRIEF_DETAIL_SUBTITLE
   },
   BriefDetailRowText: {
     color: colors.single.romance,
     fontFamily: fonts.sanFrancisco.textBold,
-    fontSize: 14
+    ..._CUSTOM_BRIEF_DETAIL_ROW_TEXT
   },
   WalletItemContainerWithEmptyPositionContent: {
     backgroundColor: colors.single.romance

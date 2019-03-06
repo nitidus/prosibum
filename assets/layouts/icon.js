@@ -76,6 +76,14 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
               fill={color}
               d="M4.5,12.5l10-9.5c0.7-0.7,0.7-1.8,0-2.5s-1.9-0.7-2.7,0L0.5,11.2c-0.7,0.7-0.7,1.8,0,2.5l11.2,10.7c0.7,0.7,1.9,0.7,2.7,0s0.7-1.8,0-2.5L4.5,12.5z"/>
           },
+          ARROW_RIGHT: {
+            width: 15.1,
+            height: 25,
+            view_box: "0 0 15.1 25",
+            content: <Path
+              fill={color}
+              d="M10.5,12.4l-10,9.5c-0.7,0.7-0.7,1.8,0,2.5c0.7,0.7,1.9,0.7,2.7,0l11.3-10.7c0.7-0.7,0.7-1.8,0-2.5L3.3,0.5c-0.7-0.7-1.9-0.7-2.7,0s-0.7,1.8,0,2.5L10.5,12.4z"/>
+          },
           PLUS: {
             width: 24,
             height: 24,
@@ -429,7 +437,7 @@ export const Icon = (props) => {
               const _INDEX = i.toString();
 
               return (
-                <Stop offset={_INDEX} stopColor={range} stopOpacity={_INDEX} />
+                <Stop offset={_INDEX} stopColor={range} />
               );
             })
           }

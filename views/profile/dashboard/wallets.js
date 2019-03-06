@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Text, Image } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, Text, Image } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon } from '../../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, Pin } from '../../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../../assets/components/index';
 import { Views as ViewsContainer } from '../../../assets/layouts/container/index';
 const Styles = Views.Profile.Wallets,
@@ -85,7 +85,8 @@ class Wallets extends Component<{}> {
                   });
 
             _TAB_CONTENT = (
-              <View>
+              <View
+                style={{flex: 1}}>
                 <Carousel
                   name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}
                   data={props.wallets.wallets}
@@ -159,11 +160,12 @@ class Wallets extends Component<{}> {
                   }}
                   onSnap={(selectedItemIndex) => props.setSelectedWallet(props.wallets.wallets[selectedItemIndex])}/>
 
-                  <Input
+                <Input
                     type={__CONSTANTS.modalHandlerButton.type}
                     name={Functions._convertTokenToKeyword(__CONSTANTS.modalHandlerButton.title.en)}
                     value={__CONSTANTS.modalHandlerButton.title.en}
                     style={{
+                      marginBottom: Styles.Content.marginVertical,
                       marginHorizontal: Styles.Content.marginHorizontal
                     }}
                     gradient={Global.colors.pair.ongerine}
@@ -189,6 +191,17 @@ class Wallets extends Component<{}> {
 
                       props.setWalletModalVisibility(true);
                     }}/>
+
+                <Pin
+                  title="Wallet Turnover"
+                  subtitle={`$${props.wallets.selectedWallet.transactions.withdraw} Withdraw`}
+                  style={{
+                    width: _Screen.width - (Styles.Content.marginHorizontal * 2),
+                    marginBottom: ((Platform.OS === 'ios') && ((_Screen.height === 812 || _Screen.width === 812)))? (Styles.Content.marginHorizontal * 2): ((_Screen.width >= 1000 || _Screen.height >= 1000)? 15: Styles.Content.marginHorizontal),
+                    marginHorizontal: Styles.Content.marginHorizontal
+                  }}
+                  onPress={() => {alert('ok')}}
+                  defaultGradient />
               </View>
             );
           }else {

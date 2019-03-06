@@ -1,6 +1,7 @@
 import { Container } from './container';
 import { ActivityIndicator } from './activity-indicator';
 import Toast from './toast';
+import { Pin } from './pin';
 import { Modal } from './modal';
 import { CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal } from './modals/index';
 import { Icon } from './icon';
@@ -13,6 +14,7 @@ module.exports = {
   Container,
   ActivityIndicator,
   Toast,
+  Pin,
   Modal,
   CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal,
   Icon,
