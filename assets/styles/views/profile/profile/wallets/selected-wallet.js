@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Dimensions, Platform } from 'react-native';
 
-import { Functions } from '../../../modules/index';
+import { Functions } from '../../../../../modules/index';
 
-import { colors, fonts } from '../../global';
+import { colors, fonts } from '../../../../global';
 
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
@@ -12,10 +12,10 @@ var _CUSTOM_CONTENT = {
       marginVertical: 15,
       marginHorizontal: 15
     },
-    _CUSTOM_WALLET_ITEM_CONTAINER = {
+    _CUSTOM_TRANSACTION_ITEM_CONTAINER = {
       height: 184
     },
-    _WALLET_CONTAINER_DIRECTION = {
+    _TRANSACTION_CONTAINER_DIRECTION = {
       marginHorizontal: 15
     },
     _CUSTOM_BRIEF_DETAIL_TITLE = {
@@ -37,7 +37,7 @@ var _CUSTOM_CONTENT = {
     _CUSTOM___GLOBAL_ICONS_IN_ROLE = {
       height: 32
     },
-    _CUSTOM_WALLET_PIN = {
+    _CUSTOM_TRANSACTION_PIN = {
       marginBottom: _CUSTOM_CONTENT.marginHorizontal * 2
     };
 
@@ -47,11 +47,11 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_CONTENT.marginHorizontal = 202;
 
-    _CUSTOM_WALLET_ITEM_CONTAINER.height += 48;
+    _CUSTOM_TRANSACTION_ITEM_CONTAINER.height += 48;
 
     _CUSTOM___GLOBAL_ICONS_IN_ROLE.height += 14;
 
-    _WALLET_CONTAINER_DIRECTION.marginHorizontal += 5;
+    _TRANSACTION_CONTAINER_DIRECTION.marginHorizontal += 5;
 
     _CUSTOM_BRIEF_DETAIL_TITLE.width -= 380;
     _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 6;
@@ -61,11 +61,11 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 4;
 
-    _CUSTOM_WALLET_PIN.marginBottom = 15;
+    _CUSTOM_TRANSACTION_PIN.marginBottom = 15;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
 
-    _CUSTOM_WALLET_ITEM_CONTAINER.height += 3;
+    _CUSTOM_TRANSACTION_ITEM_CONTAINER.height += 3;
 
     _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 3;
 
@@ -73,7 +73,7 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 1;
 
-    _CUSTOM_WALLET_PIN.marginBottom = _CUSTOM_CONTENT.marginHorizontal;
+    _CUSTOM_TRANSACTION_PIN.marginBottom = _CUSTOM_CONTENT.marginHorizontal;
   }
 
   _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
@@ -83,7 +83,7 @@ if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;
 
-    _CUSTOM_WALLET_ITEM_CONTAINER.height += 16;
+    _CUSTOM_TRANSACTION_ITEM_CONTAINER.height += 16;
 
     _CUSTOM___GLOBAL_ICONS_IN_ROLE.height += 4;
 
@@ -95,7 +95,7 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 1;
   }else{
     if (!_IS_IPHONE_X){
-      _CUSTOM_WALLET_ITEM_CONTAINER.height += 1;
+      _CUSTOM_TRANSACTION_ITEM_CONTAINER.height += 1;
     }
   }
 }
@@ -115,8 +115,8 @@ module.exports = StyleSheet.create({
   EmptyContentLink: {
     alignItems: 'center'
   },
-  WalletItemContainer: {
-    ..._CUSTOM_WALLET_ITEM_CONTAINER,
+  TransactionItemContainer: {
+    ..._CUSTOM_TRANSACTION_ITEM_CONTAINER,
     padding: 18
   },
   DetailItemMasterInfoContent: {
@@ -144,19 +144,19 @@ module.exports = StyleSheet.create({
     fontFamily: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_ROW_TEXT
   },
-  WalletItemContainerWithEmptyPositionContent: {
+  TransactionItemContainerWithEmptyPositionContent: {
     backgroundColor: colors.single.romance
   },
-  WalletPin: {
+  TransactionPin: {
     width: width - (_CUSTOM_CONTENT.marginHorizontal * 2),
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
-    ..._CUSTOM_WALLET_PIN
+    ..._CUSTOM_TRANSACTION_PIN
   },
   LTR_ProfileContainer: {
-    marginRight: _WALLET_CONTAINER_DIRECTION.marginHorizontal
+    marginRight: _TRANSACTION_CONTAINER_DIRECTION.marginHorizontal
   },
   RTL_ProfileContainer: {
-    marginLeft: _WALLET_CONTAINER_DIRECTION.marginHorizontal
+    marginLeft: _TRANSACTION_CONTAINER_DIRECTION.marginHorizontal
   },
   LTR_ContentAlignment: {
     alignItems: 'flex-start'

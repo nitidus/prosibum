@@ -1,0 +1,69 @@
+{
+  "pilot": {
+    "title": {
+      "en": "Selected Wallet"
+    },
+    "subtitle": {
+      "suffix": [
+        {
+          "en": "Dollar"
+        },
+        {
+          "en": "Transaction Point"
+        },
+        {
+          "en": "Rial"
+        },
+        {
+          "en": "Pound"
+        },
+        {
+          "en": "Euro"
+        }
+      ]
+    }
+  },
+  "transactions": {
+    "type": "BUTTON",
+    "state": {
+      "deposit": {
+        "title": {
+          "en": "Deposit Transaction"
+        }
+      },
+      "withdraw": {
+        "title": {
+          "en": "Withdraw Transaction"
+        }
+      }
+    },
+    "previous_balance": {
+      "sign": {
+        "en": "$"
+      },
+      "icon": {
+        "name": "output",
+        "otherOptions": {
+          "width": 22
+        }
+      },
+      "suffix": {
+        "en": "Previous Balance"
+      }
+    },
+    "difference_balance": {
+      "sign": {
+        "en": "$"
+      },
+      "icon": {
+        "name": "pay"
+      },
+      "suffix": {
+        "en": "Difference Balance"
+      }
+    }
+  },
+  "link": {
+    "en": "There's no transaction."
+  }
+}

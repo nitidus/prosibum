@@ -118,7 +118,7 @@ class Wallets extends Component<{}> {
                             style={Styles.DetailItemMasterInfoContent}>
                               <Text
                                 style={Styles.BriefDetailTitle}>
-                                  {item.name}
+                                  {Functions._convertKeywordToToken(item.name)}
                               </Text>
                               <Text
                                 style={Styles.BriefDetailSubtitle}>
@@ -152,7 +152,7 @@ class Wallets extends Component<{}> {
                               </View>
                               <Text
                                 style={Styles.BriefDetailRowText}>
-                                  {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign.en}{Functions._convertDigitsToMoneyFormat(item.transactions.deposit)}
+                                  {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign.en}{Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix.en}
                               </Text>
                           </View>
                       </Input>
@@ -193,14 +193,14 @@ class Wallets extends Component<{}> {
                     }}/>
 
                 <Pin
-                  title="Wallet Turnover"
-                  subtitle={`$${props.wallets.selectedWallet.transactions.withdraw} Withdraw`}
-                  style={{
-                    width: _Screen.width - (Styles.Content.marginHorizontal * 2),
-                    marginBottom: ((Platform.OS === 'ios') && ((_Screen.height === 812 || _Screen.width === 812)))? (Styles.Content.marginHorizontal * 2): ((_Screen.width >= 1000 || _Screen.height >= 1000)? 15: Styles.Content.marginHorizontal),
-                    marginHorizontal: Styles.Content.marginHorizontal
+                  title={__CONSTANTS.firstPin.title.en}
+                  subtitle={`${__CONSTANTS.firstPin.subtitle.sign.en}${Functions._convertDigitsToMoneyFormat(props.wallets.selectedWallet.transactions.withdraw)} ${__CONSTANTS.firstPin.subtitle.suffix.en}`}
+                  style={Styles.WalletPin}
+                  onPress={() => {
+                    const { navigation } = props;
+
+                    navigation.navigate('SelectedWallet', props.wallets.selectedWallet);
                   }}
-                  onPress={() => {alert('ok')}}
                   defaultGradient />
               </View>
             );

@@ -11,13 +11,15 @@ import VerifyPhoneNumber from './views/authentication/verify-phone-number';
 //Profile
 import Overseer from './views/profile/overseer';
 import Profile from './views/profile/profile';
+
 import Wallets from './views/profile/wallets';
+  //Wallets Subsets
+  import SelectedWallet from './views/profile/profile/wallets/selected-wallet';
 
 //Technical Profile
 import Roles from './views/profile/profile/technical/roles';
-
-//Roles Subsets
-import SelectedRole from './views/profile/profile/technical/roles/selected-role';
+  //Roles Subsets
+  import SelectedRole from './views/profile/profile/technical/roles/selected-role';
 
 import Dashboard from './views/profile/profile/dashboard';
 
@@ -42,6 +44,9 @@ module.exports = {
           SelectedRole
         },
         Roles
+      },
+      WalletsSubsets: {
+        SelectedWallet
       },
       Overseer,
       Profile,

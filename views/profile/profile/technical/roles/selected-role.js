@@ -15,7 +15,7 @@ import { Views as ViewsActions } from '../../../../../assets/flows/states/action
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.SelectedRole;
 
 import { views_constants } from '../../../../../assets/flows/knowledge/index';
-const __CONSTANTS = views_constants.profile.selectedRole;
+const __CONSTANTS = views_constants.profile.selected_role;
 
 import { Functions } from '../../../../../assets/modules/index';
 const { Preparation } = Functions;
@@ -36,8 +36,6 @@ class SelectedRole extends Component<{}> {
 
       if (typeof _ROUTE_PARAMS != 'undefined'){
         attitude.data = _ROUTE_PARAMS;
-      }else{
-        attitude.data = {"_id":"5c62a6c2e70af56819877717","cardinal_id":"5c62a3d1d3b8016767779dca","created_at":"2019-02-12T10:58:10.044Z","modified_at":"2019-02-12T10:58:10.044Z","reference_id":"5c62a3d1d3b8016767779dca","cardinal_ancestors":["5c62a3d1d3b8016767779dca"],"user":{"_id":"5c62a6c2e70af56819877716","email":{"content":"fifth@example.com","validation":{"token":"6dade72a96af2f52be2ac5c2f49b6a2624422fcde150f0848827fb97ae455a39","value":true}},"created_at":"2019-02-12T10:58:10.044Z","modified_at":"2019-02-12T10:58:10.044Z"},"usergroup":{"_id":"5c62cd26195b276f1aa76a3f","cardinal_id":"5c62ccc1195b276f1aa76a39","cardinal_ancestors":["5c62ccc1195b276f1aa76a39"],"reference_id":"5c62ccc1195b276f1aa76a39","type":"WHOLESALER","role":"WAREHOUSE_MANAGER","priority":1,"created_at":"2019-02-12T13:41:58.181Z","modified_at":"2019-02-12T13:41:58.181Z"}};
       }
     }
 

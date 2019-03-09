@@ -196,6 +196,14 @@ export const TopBar = (props) => {
     }
   }
 
+  if (typeof props.title != 'undefined'){
+    attitude.title = props.title;
+  }
+
+  if (typeof props.subtitle != 'undefined'){
+    attitude.subtitle = props.subtitle;
+  }
+
   if (typeof props.children != 'undefined'){
     attitude.children = [];
 
@@ -248,7 +256,7 @@ export const TopBar = (props) => {
               _CHILD_PROPS.style,
               Styles.PinnedSide
             ];
-            
+
           _LEFT_SIDE_CONTENT = React.cloneElement(_CHILD, _CHILD_PROPS);
           break;
         case 'right':
@@ -256,7 +264,7 @@ export const TopBar = (props) => {
               _CHILD_PROPS.style,
               Styles.PinnedSide
             ];
-            
+
           _RIGHT_SIDE_CONTENT = React.cloneElement(_CHILD, _CHILD_PROPS);
           break;
         case 'bottom':
@@ -341,6 +349,30 @@ export const TopBar = (props) => {
     }
   }
 
+  var _TITLE_CONTAINER = (
+    <Text
+      style={Styles.HeaderTitle}>
+        {attitude.title}
+    </Text>
+  );
+
+  if (typeof attitude.subtitle != 'undefined'){
+    _TITLE_CONTAINER = (
+      <View
+        style={Styles.ComplexHeaderContainer}>
+          <Text
+            style={Styles.ComplexHeaderTitle}>
+              {attitude.title}
+          </Text>
+
+          <Text
+            style={Styles.ComplexHeaderSubtitle}>
+              {attitude.subtitle}
+          </Text>
+      </View>
+    )
+  }
+
   return (
     <View
       style={[
@@ -351,10 +383,7 @@ export const TopBar = (props) => {
           style={Styles.FirstRowContainer}>
             {_LEFT_SIDE_CONTENT}
 
-            <Text
-              style={Styles.HeaderTitle}>
-                {props.title}
-            </Text>
+            {_TITLE_CONTAINER}
 
             {_RIGHT_SIDE_CONTENT}
         </View>

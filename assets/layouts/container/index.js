@@ -9,13 +9,15 @@ import { TabBar, TabBarItem } from './layouts/pilot/tab-bar'
 //Profile
 import { OverseerContainer } from './views/profile/overseer-container';
 import { ProfileContainer } from './views/profile/profile-container';
+
 import { WalletsContainer } from './views/profile/wallets-container';
+  //Wallets Subsets
+  import { SelectedWalletContainer } from './views/profile/wallets/selected-wallet-container';
 
 //Technical Profile
 import { RolesContainer } from './views/profile/technical/roles-container';
-
-//Roles Subsets
-import { SelectedRoleContainer } from './views/profile/technical/roles/selected-role-container';
+  //Roles Subsets
+  import { SelectedRoleContainer } from './views/profile/technical/roles/selected-role-container';
 
 module.exports = {
   Layouts: {
@@ -34,6 +36,9 @@ module.exports = {
           SelectedRoleContainer
         },
         RolesContainer
+      },
+      Wallets: {
+        SelectedWalletContainer
       },
       OverseerContainer,
       ProfileContainer,

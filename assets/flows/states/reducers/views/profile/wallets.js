@@ -42,39 +42,39 @@ export default (state = initialState, action) => {
       };
       break;
     case WALLETS.FETCH_AVAILABLE_WALLETS:
-          return {
-            ...state,
-            wallets: action.payload
-          };
-          break;
+      return {
+        ...state,
+        wallets: action.payload
+      };
+      break;
     case WALLETS.FETCH_AVAILABLE_WALLET_CURRENCIES_TYPE:
-          return {
-            ...state,
-            tabs: action.payload
-          };
-          break;
+      return {
+        ...state,
+        tabs: action.payload
+      };
+      break;
     case WALLETS.SET_WALLETS_LOADING_STATUS:
-          return {
-            ...state,
-            loadingWallets: action.payload
-          };
-          break;
+      return {
+        ...state,
+        loadingWallets: action.payload
+      };
+      break;
     case WALLETS.SET_WALLET_CURRENCIES_TYPE_LOADING_STATUS:
-          return {
-            ...state,
-            loadingWalletCurrenciesType: action.payload
-          };
-          break;
+      return {
+        ...state,
+        loadingWalletCurrenciesType: action.payload
+      };
+      break;
     case WALLETS.SET_CONNECTED_STATUS:
-          return {
-            ...state,
-            connected: {
-              ...state.connected,
-              status: action.payload.status,
-              content: action.payload.content || ''
-            }
-          };
-          break;
+      return {
+        ...state,
+        connected: {
+          ...state.connected,
+          status: action.payload.status,
+          content: action.payload.content || ''
+        }
+      };
+      break;
 
     default:
       return state;

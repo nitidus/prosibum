@@ -25,6 +25,7 @@ import UserProfile from './reducers/views/profile/user-profile';
 import Roles from './reducers/views/profile/roles';
 import SelectedRole from './reducers/views/profile/selected-role';
 import Wallets from './reducers/views/profile/wallets';
+import SelectedWallet from './reducers/views/profile/selected-wallet';
 
 /* Sub Views Reducers */
 
@@ -36,7 +37,7 @@ export default () => {
           Segment,
           Toast, CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber,
-          Overseer, UserProfile, Roles, SelectedRole, Wallets,
+          Overseer, UserProfile, Roles, SelectedRole, Wallets, SelectedWallet,
           TechnicalTab
         }),
         middeware = applyMiddleware(logger);

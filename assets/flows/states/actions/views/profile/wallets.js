@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: loadingStatus
       })
     },
-    setwalletCurrenciesTypeLoadingStatus: (loadingStatus) => {
+    setWalletCurrenciesTypeLoadingStatus: (loadingStatus) => {
       dispatch({
         type: WALLETS.SET_WALLET_CURRENCIES_TYPE_LOADING_STATUS,
         payload: loadingStatus

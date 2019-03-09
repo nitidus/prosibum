@@ -29,6 +29,9 @@ var _CUSTOM_CONTAINER = {
     _CUSTOM_HEADER_TITLE = {
       fontSize: 32
     },
+    _CUSTOM_HEADER_SUBTITLE = {
+      fontSize: 13
+    },
     _CUSTOM_PINNED_SIDE = {
       minWidth: 62
     },
@@ -188,6 +191,20 @@ module.exports = StyleSheet.create({
     marginVertical: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
     paddingHorizontal: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
     justifyContent: 'space-between'
+  },
+  ComplexHeaderContainer: {
+    flexGrow: 1,
+    flex: 1
+  },
+  ComplexHeaderTitle: {
+    fontFamily: fonts.sanFrancisco.textBold,
+    color: colors.single.rangoonGreen,
+    ..._CUSTOM_HEADER_TITLE
+  },
+  ComplexHeaderSubtitle: {
+    fontFamily: fonts.sanFrancisco.textBold,
+    color: colors.single.lavenderGray,
+    ..._CUSTOM_HEADER_SUBTITLE
   },
   HeaderTitle: {
     fontFamily: fonts.sanFrancisco.textBold,

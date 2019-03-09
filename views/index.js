@@ -12,6 +12,9 @@ import Profile from './profile/profile';
   //Dashboard Subsets
   import Wallets from './profile/dashboard/wallets';
 
+    //Wallets Subsets
+    import SelectedWallet from './profile/dashboard/wallets/selected-wallet';
+
 //Authentication Screens
 import Login from './authentication/login';
 import Signup from './authentication/signup';
@@ -31,10 +34,17 @@ const RolesStack = createStackNavigator({
   headerMode: 'none'
 });
 
+const WalletsStack = createStackNavigator({
+  Wallets,
+  SelectedWallet
+}, {
+  headerMode: 'none'
+});
+
 const ProfileStack = createStackNavigator({
   Profile,
   RolesStack,
-  Wallets
+  WalletsStack
 }, {
   headerMode: 'none'
 });

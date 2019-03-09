@@ -8,9 +8,14 @@ const Styles = Modules.Layouts.Pilot;
 import { Functions } from '../modules/index';
 
 export const Pilot = (props) => {
-  var attitude = {};
+  var attitude = {},
+      otherProps = {};
 
-  attitude.type = props.type || props.title || props.name || props.id || props._id || props.token || props.navigation_type || props.navType || props.NavType || props.nav_type || props.navigationType || props.NavigationType || 'Title';
+  attitude.title = props.type || props.title || props.name || props.id || props._id || props.token || props.navigation_type || props.navType || props.NavType || props.nav_type || props.navigationType || props.NavigationType || 'Title';
+
+  if (typeof props.subtitle != 'undefined'){
+    otherProps.subtitle = attitude.subtitle = props.subtitle;
+  }
 
   attitude.layout = props.layout || props.layout_name || props.layoutName || props.layout_Type || props.layoutType || 'TOP_BAR';
 
@@ -24,7 +29,7 @@ export const Pilot = (props) => {
     }
   }
 
-  if (attitude.type != 'undefined'){
+  if (attitude.title != 'undefined'){
     const _LAYOUT_TYPE = Functions._convertTokenToKey(attitude.layout);
 
     var Bar = TopBar,
@@ -70,8 +75,9 @@ export const Pilot = (props) => {
 
     return (
       <Bar
-        title={attitude.type}
-        {...props}>
+        title={attitude.title}
+        {...props}
+        {...otherProps}>
           {_CONTENT}
       </Bar>
     );

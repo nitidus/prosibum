@@ -51,6 +51,9 @@
           "icon": "pay",
           "sign": {
             "en": "$"
+          },
+          "suffix": {
+            "en": "Deposit"
           }
         }
       }
@@ -60,6 +63,19 @@
     "type": "BUTTON",
     "title": {
       "en": "Charge The Wallet"
+    }
+  },
+  "firstPin": {
+    "title": {
+      "en": "Wallet Turnover"
+    },
+    "subtitle": {
+      "sign": {
+        "en": "$"
+      },
+      "suffix": {
+        "en": "Withdraw"
+      }
     }
   },
   "link": {
