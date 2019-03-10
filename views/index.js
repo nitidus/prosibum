@@ -1,19 +1,24 @@
 import { createSwitchNavigator, createStackNavigator, StackNavigator } from 'react-navigation';
 
 //Profile Screens
-import Profile from './profile/profile';
+import Profile from './profile';
 
   //Technical Profile Subsets
-  import Roles from './profile/profile/technical/roles';
+  import Roles from './profile/account/technical/roles';
 
     //Roles Subsets
-    import SelectedRole from './profile/profile/technical/roles/selected-role';
+    import SelectedRole from './profile/account/technical/roles/selected-role';
 
-  //Dashboard Subsets
-  import Wallets from './profile/dashboard/wallets';
+//Dashboard Subsets
+import Wallets from './dashboard/wallets';
 
-    //Wallets Subsets
-    import SelectedWallet from './profile/dashboard/wallets/selected-wallet';
+  //Wallets Subsets
+  import SelectedWallet from './dashboard/wallets/selected-wallet';
+
+//Products Subsets
+
+  //Wallets Subsets
+  import NewProductIdentity from './products/new-product-identity';
 
 //Authentication Screens
 import Login from './authentication/login';
@@ -26,6 +31,12 @@ import Authorization from './authorization';
 
 //Overseer Screen
 import Overseer from './overseer';
+
+const ProductsStack = createStackNavigator({
+  NewProductIdentity
+}, {
+  headerMode: 'none'
+});
 
 const RolesStack = createStackNavigator({
   Roles,
@@ -44,7 +55,8 @@ const WalletsStack = createStackNavigator({
 const ProfileStack = createStackNavigator({
   Profile,
   RolesStack,
-  WalletsStack
+  WalletsStack,
+  ProductsStack
 }, {
   headerMode: 'none'
 });

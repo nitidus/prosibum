@@ -9,6 +9,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setTopPilotCurrentTab: (pilotCurrentTab) => {
+      dispatch({
+        type: OVERSEER.SET_TOP_PILOT_BAR_CURRENT_TAB,
+        payload: pilotCurrentTab
+      })
+    },
+    setTopPilotTabs: (pilotTabs) => {
+      dispatch({
+        type: OVERSEER.SET_TOP_PILOT_BAR_TABS,
+        payload: pilotTabs
+      })
+    },
     setBottomPilotCurrentTab: (pilotCurrentTab) => {
       dispatch({
         type: OVERSEER.SET_BOTTOM_PILOT_TAB_BAR_CURRENT_TAB,

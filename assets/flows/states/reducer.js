@@ -22,10 +22,18 @@ import VerifyPhoneNumber from './reducers/views/authentication/verify-phone-numb
 //Profile
 import Overseer from './reducers/views/profile/overseer';
 import UserProfile from './reducers/views/profile/user-profile';
-import Roles from './reducers/views/profile/roles';
-import SelectedRole from './reducers/views/profile/selected-role';
-import Wallets from './reducers/views/profile/wallets';
-import SelectedWallet from './reducers/views/profile/selected-wallet';
+  //Account
+  import Roles from './reducers/views/profile/account/roles';
+  import SelectedRole from './reducers/views/profile/account/roles/selected-role';
+
+//Dashboard
+
+  //Wallets
+  import Wallets from './reducers/views/dashboard/wallets';
+  import SelectedWallet from './reducers/views/dashboard/wallets/selected-wallet';
+
+//Products
+import NewProductIdentity from './reducers/views/products/new-product-identity';
 
 /* Sub Views Reducers */
 
@@ -37,7 +45,10 @@ export default () => {
           Segment,
           Toast, CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber,
-          Overseer, UserProfile, Roles, SelectedRole, Wallets, SelectedWallet,
+          Overseer, UserProfile,
+            Roles, SelectedRole,
+            Wallets, SelectedWallet,
+            NewProductIdentity,
           TechnicalTab
         }),
         middeware = applyMiddleware(logger);

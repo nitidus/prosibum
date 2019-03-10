@@ -10,18 +10,22 @@ import VerifyPhoneNumber from './views/authentication/verify-phone-number';
 
 //Profile
 import Overseer from './views/profile/overseer';
-import Profile from './views/profile/profile';
+import Profile from './views/profile';
+  //Technical Profile
+  import Roles from './views/profile/account/technical/roles';
+    //Roles Subsets
+    import SelectedRole from './views/profile/account/technical/roles/selected-role';
 
-import Wallets from './views/profile/wallets';
+//Dashboard
+import Dashboard from './views/dashboard';
+import Wallets from './views/dashboard/wallets';
   //Wallets Subsets
-  import SelectedWallet from './views/profile/profile/wallets/selected-wallet';
+  import SelectedWallet from './views/dashboard/wallets/selected-wallet';
 
-//Technical Profile
-import Roles from './views/profile/profile/technical/roles';
-  //Roles Subsets
-  import SelectedRole from './views/profile/profile/technical/roles/selected-role';
+//Products
 
-import Dashboard from './views/profile/profile/dashboard';
+  //New Product Identity
+  import NewProductIdentity from './views/products/new-product-identity';
 
 /*** Modules ***/
 
@@ -45,13 +49,18 @@ module.exports = {
         },
         Roles
       },
+      Overseer,
+      Self: Profile
+    },
+    Dashboard: {
       WalletsSubsets: {
         SelectedWallet
       },
-      Overseer,
-      Profile,
       Wallets,
-      Dashboard
+      Self: Dashboard
+    },
+    Products: {
+      NewProductIdentity
     }
   },
   Modules: {

@@ -5,13 +5,36 @@
     },
     "content": [
       {
-        "en": "Dashboard"
+        "title": {
+          "en": "Dashboard"
+        }
       },
       {
-        "en": "Products"
+        "title": {
+          "en": "Products"
+        },
+        "tabs": [
+          {
+            "title": {
+              "en": "Published"
+            }
+          },
+          {
+            "title": {
+              "en": "Drafted"
+            }
+          },
+          {
+            "title": {
+              "en": "Suspended"
+            }
+          }
+        ]
       },
       {
-        "en": "Messages"
+        "title": {
+          "en": "Messages"
+        }
       }
     ]
   }
