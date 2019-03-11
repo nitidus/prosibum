@@ -41,7 +41,6 @@ module.exports = {
         },
         RolesContainer
       },
-
       OverseerContainer,
       ProfileContainer
     },

@@ -12,6 +12,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    resetSelectedRole: () => {
+      dispatch({
+        type: SELECTED_ROLE.RESET_SELECTED_ROLE
+      })
+    },
     setSelectedReferenceRole: (referenceRole) => {
       dispatch({
         type: SELECTED_ROLE.SET_SELECTED_REFERENCE_ROLE,

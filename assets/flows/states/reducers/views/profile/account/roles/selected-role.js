@@ -14,6 +14,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SELECTED_ROLE.RESET_SELECTED_ROLE:
+      return initialState;
+      break;
     case SELECTED_ROLE.SET_SELECTED_REFERENCE_ROLE:
       return {
         ...state,

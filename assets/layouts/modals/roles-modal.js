@@ -106,7 +106,10 @@ const RolesModal = (props) => {
 
   const MODAL = {
           BACKDROP_BLUR_TYPE: "dark",
-          ON_BLUR: (status) => attitude.onBlur(status),
+          ON_BLUR: (status) => {
+            attitude.onBlur(status);
+            props.resetModal();
+          },
           ON_PROGRESS_SUCCESS: async (response) => attitude.onProgressSuccess(response),
           ITEMS: {
             ACTIVE_OPACITY: 0.7

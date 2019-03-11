@@ -4,7 +4,7 @@ import { StatusBar, View, KeyboardAvoidingView, Text, Platform, Animated, Easing
 import { Global, Views } from '../../../../styles/index';
 import { Input } from '../../../../components/index';
 import { Pilot, PinnedSide, Icon } from '../../../../layouts/index';
-const Styles = Views.Profile.Profile;
+const Styles = Views.Profile.Self;
 
 import { Functions } from '../../../../modules/index';
 

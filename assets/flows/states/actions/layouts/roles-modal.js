@@ -12,6 +12,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    resetModal: () => {
+      dispatch({
+        type: ROLES_MODAL.RESET_MODAL
+      })
+    },
     setReference: (data) => {
       dispatch({
         type: ROLES_MODAL.SET_REFERENCE,

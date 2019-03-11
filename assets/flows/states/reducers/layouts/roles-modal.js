@@ -19,6 +19,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case ROLES_MODAL.RESET_MODAL:
+      return initialState;
+      break;
     case ROLES_MODAL.SET_REFERENCE:
       return {
         ...state,

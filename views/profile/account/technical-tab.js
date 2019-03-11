@@ -8,7 +8,7 @@ import { GLOBAL } from '../../../assets/flows/states/types/index';
 import { Input, InputGroup, Carousel, Link } from '../../../assets/components/index';
 import { CameraRollPickerModal, ActivityIndicator } from '../../../assets/layouts/index';
 import { Global, Views } from '../../../assets/styles/index';
-const Styles = Views.Profile.Profile;
+const Styles = Views.Profile.Self;
 
 import { SubViews as SubViewsActions } from '../../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = SubViewsActions.UserProfile.TechnicalTab;

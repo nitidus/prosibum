@@ -47,7 +47,9 @@ class SelectedRole extends Component<{}> {
   }
 
   componentDidMount() {
+    const { props } = this;
 
+    props.resetSelectedRole();
   }
 
   componentWillReceiveProps(props) {
@@ -340,8 +342,8 @@ class SelectedRole extends Component<{}> {
                           const _SELECTED_REFERENCE_ROLE = props.selectedRole.selectedReferenceRole;
 
                           if (Object.keys(_SELECTED_REFERENCE_ROLE).length > 0){
-                            if ((typeof _SELECTED_REFERENCE_ROLE._id != 'undefined') && (_SELECTED_REFERENCE_ROLE._id === role._id)){
-                              props.setSelectedReferenceRole(this.attitude.data);
+                            if (_SELECTED_REFERENCE_ROLE._id === role._id){
+                              props.setSelectedReferenceRole(attitude.data);
                             }else{
                               props.setSelectedReferenceRole(role);
                             }
@@ -447,6 +449,7 @@ class SelectedRole extends Component<{}> {
           //We can use response later
           await props.fetchAvailableRoles(this.attitude.data.usergroup, this.attitude.data.reference_id);
         }}
+        onBackPress={() => props.resetSelectedRole()}
         {...props}>
           {_DETAIL_CAROUSEL_CONTAINER}
 

@@ -3,7 +3,7 @@ import { View, ScrollView, Text } from 'react-native';
 
 import { Input } from '../../../assets/components/index';
 import { Global, Views } from '../../../assets/styles/index';
-const Styles = Views.Profile.Profile;
+const Styles = Views.Profile.Self;
 
 import { views_constants } from '../../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.user_profile;

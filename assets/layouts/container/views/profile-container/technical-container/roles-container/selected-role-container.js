@@ -35,6 +35,10 @@ export const SelectedRoleContainer = (props) => {
     attitude.onRolesAbsorb = props.onRolesAbsorb || props.onRolesAppend || props.onRolesMerge || props.onRolesImbibe || props.onAbsorbRoles || props.onAppendRoles || props.onMergeRoles || props.onImbibeRoles;
   }
 
+  if ((typeof props.onBackPress != 'undefined') || (typeof props.onPressBack != 'undefined') || (typeof props.backOnPress != 'undefined')){
+    attitude.onBackPress = props.onBackPress || props.onPressBack || props.backOnPress;
+  }
+
   var _CHILDREN_CONTENT, _DEPENDED_RIGHT_PINNED_SIDE;
 
   if (typeof attitude.children != 'undefined'){
@@ -77,7 +81,8 @@ export const SelectedRoleContainer = (props) => {
               onPress={() => {
                 const { navigation } = props;
 
-                navigation.goBack()
+                navigation.goBack();
+                attitude.onBackPress();
               }}>
                 <Icon
                   name="arrow left"
