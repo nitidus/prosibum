@@ -3,6 +3,9 @@ import RNFetchBlob from 'rn-fetch-blob';
 import Lodash from 'lodash';
 import Moment from 'moment';
 
+import Utils from '../utils';
+const { ObjectID } = Utils.Structures;
+
 import { countries as __COUNTRIES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
 const __WALLETS = __VIEWS_CONSTANTS.profile.wallets;
 
@@ -237,6 +240,11 @@ module.exports = {
       SECRET_SEED_KEY = `${(seedKey || '')}${_TIME_LIMITED_RANDOM_TOKEN}`;
 
     return `${_TIME_LIMITED_RANDOM_TOKEN}${SECRET_SEED_KEY}`;
+  },
+  _generateNewBSONObjectID: () => {
+    const _OBJECT_ID_INSTANCE = new ObjectID();
+
+    return _OBJECT_ID_INSTANCE.toHexString();
   },
   _convertHexColorToRGBA: (hex, opacity) => {
     var c;

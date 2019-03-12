@@ -87,121 +87,121 @@ class Wallets extends Component<{}> {
             _TAB_CONTENT = (
               <View
                 style={{flex: 1}}>
-                <Carousel
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}
-                  data={props.wallets.wallets}
-                  style={{
-                    marginVertical: Styles.Content.marginVertical
-                  }}
-                  firstItem={_SELECTED_WALLET_INDEX}
-                  itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
-                  onLayout={({ item, index }) => {
-                    var _ITEM_GRADIENT = Global.colors.pair.tilan;
-
-                    if (_SELECTED_WALLET_INDEX === index){
-                      _ITEM_GRADIENT = Global.colors.pair.analue;
-                    }
-
-                    _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix.en}${(item.transactions.amount > 1)? 's': ''}`;
-
-                    return (
-                      <Input
-                        type={__CONSTANTS.firstCarousel.type}
-                        name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.items.title.en)}
-                        style={[
-                          Styles.WalletItemContainer,
-                          Styles.LTR_ContentAlignment
-                        ]}
-                        gradient={_ITEM_GRADIENT}
-                        disable={true}>
-                          <View
-                            style={Styles.DetailItemMasterInfoContent}>
-                              <Text
-                                style={Styles.BriefDetailTitle}>
-                                  {Functions._convertKeywordToToken(item.name)}
-                              </Text>
-                              <Text
-                                style={Styles.BriefDetailSubtitle}>
-                                  {Functions._convertDateToHumanReadableFormat(item.created_at)}
-                              </Text>
-                          </View>
-
-                          <View
-                            style={[
-                              Styles.DetailItemMasterSubInfoContent,
-                              {
-                                marginBottom: Styles.Content.marginVertical
-                              }
-                            ]}>
-                              <View style={Styles.BriefDetailSubRowIconContainer}>
-                                <Icon
-                                  name={__CONSTANTS.firstCarousel.items.content.transactionsAmount.icon}
-                                  color={Global.colors.single.romance} />
-                              </View>
-                              <Text
-                                style={Styles.BriefDetailRowText}>
-                                  {item.transactions.amount} {_WALLET_TRANSACTIONS_AMOUNT_SUFFIX}
-                              </Text>
-                          </View>
-                          <View
-                            style={Styles.DetailItemMasterSubInfoContent}>
-                              <View style={Styles.BriefDetailSubRowIconContainer}>
-                                <Icon
-                                  name={__CONSTANTS.firstCarousel.items.content.transactionsDeposit.icon}
-                                  color={Global.colors.single.romance} />
-                              </View>
-                              <Text
-                                style={Styles.BriefDetailRowText}>
-                                  {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign.en}{Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix.en}
-                              </Text>
-                          </View>
-                      </Input>
-                    );
-                  }}
-                  onSnap={(selectedItemIndex) => props.setSelectedWallet(props.wallets.wallets[selectedItemIndex])}/>
-
-                <Input
-                    type={__CONSTANTS.modalHandlerButton.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.modalHandlerButton.title.en)}
-                    value={__CONSTANTS.modalHandlerButton.title.en}
+                  <Carousel
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}
+                    data={props.wallets.wallets}
                     style={{
-                      marginBottom: Styles.Content.marginVertical,
-                      marginHorizontal: Styles.Content.marginHorizontal
+                      marginVertical: Styles.Content.marginVertical
                     }}
-                    gradient={Global.colors.pair.ongerine}
+                    firstItem={_SELECTED_WALLET_INDEX}
+                    itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+                    onLayout={({ item, index }) => {
+                      var _ITEM_GRADIENT = Global.colors.pair.tilan;
+
+                      if (_SELECTED_WALLET_INDEX === index){
+                        _ITEM_GRADIENT = Global.colors.pair.analue;
+                      }
+
+                      _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix.en}${(item.transactions.amount > 1)? 's': ''}`;
+
+                      return (
+                        <Input
+                          type={__CONSTANTS.firstCarousel.type}
+                          name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.items.title.en)}
+                          style={[
+                            Styles.WalletItemContainer,
+                            Styles.LTR_ContentAlignment
+                          ]}
+                          gradient={_ITEM_GRADIENT}
+                          disable={true}>
+                            <View
+                              style={Styles.DetailItemMasterInfoContent}>
+                                <Text
+                                  style={Styles.BriefDetailTitle}>
+                                    {Functions._convertKeywordToToken(item.name)}
+                                </Text>
+                                <Text
+                                  style={Styles.BriefDetailSubtitle}>
+                                    {Functions._convertDateToHumanReadableFormat(item.created_at)}
+                                </Text>
+                            </View>
+
+                            <View
+                              style={[
+                                Styles.DetailItemMasterSubInfoContent,
+                                {
+                                  marginBottom: Styles.Content.marginVertical
+                                }
+                              ]}>
+                                <View style={Styles.BriefDetailSubRowIconContainer}>
+                                  <Icon
+                                    name={__CONSTANTS.firstCarousel.items.content.transactionsAmount.icon}
+                                    color={Global.colors.single.romance} />
+                                </View>
+                                <Text
+                                  style={Styles.BriefDetailRowText}>
+                                    {item.transactions.amount} {_WALLET_TRANSACTIONS_AMOUNT_SUFFIX}
+                                </Text>
+                            </View>
+                            <View
+                              style={Styles.DetailItemMasterSubInfoContent}>
+                                <View style={Styles.BriefDetailSubRowIconContainer}>
+                                  <Icon
+                                    name={__CONSTANTS.firstCarousel.items.content.transactionsDeposit.icon}
+                                    color={Global.colors.single.romance} />
+                                </View>
+                                <Text
+                                  style={Styles.BriefDetailRowText}>
+                                    {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign.en}{Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix.en}
+                                </Text>
+                            </View>
+                        </Input>
+                      );
+                    }}
+                    onSnap={(selectedItemIndex) => props.setSelectedWallet(props.wallets.wallets[selectedItemIndex])}/>
+
+                  <Input
+                      type={__CONSTANTS.modalHandlerButton.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.modalHandlerButton.title.en)}
+                      value={__CONSTANTS.modalHandlerButton.title.en}
+                      style={{
+                        marginBottom: Styles.Content.marginVertical,
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      }}
+                      gradient={Global.colors.pair.ongerine}
+                      onPress={() => {
+                        this.otherProps = {
+                          pilotItems: props.wallets.tabs,
+                          currentPilotItem: props.wallets.currentTab,
+                          data: props.wallets.selectedWallet,
+                          onChargeWalletPress: (visibilityStatus) => {
+                            this.otherProps = {
+                              pilotItems: props.wallets.tabs,
+                              currentPilotItem: props.wallets.currentTab,
+                              onAddWalletPress: (visibilityStatus) => props.setWalletModalVisibility(visibilityStatus),
+                              onWalletAbsorb: async (response) => {
+                                //We can use response later
+                                // await props.fetchAvailableWallets(props.roles.currentTab);
+                              }
+                            };
+
+                            props.setWalletModalVisibility(visibilityStatus);
+                          }
+                        };
+
+                        props.setWalletModalVisibility(true);
+                      }}/>
+
+                  <Pin
+                    title={__CONSTANTS.firstPin.title.en}
+                    subtitle={`${__CONSTANTS.firstPin.subtitle.sign.en}${Functions._convertDigitsToMoneyFormat(props.wallets.selectedWallet.transactions.withdraw)} ${__CONSTANTS.firstPin.subtitle.suffix.en}`}
+                    style={Styles.WalletPin}
                     onPress={() => {
-                      this.otherProps = {
-                        pilotItems: props.wallets.tabs,
-                        currentPilotItem: props.wallets.currentTab,
-                        data: props.wallets.selectedWallet,
-                        onChargeWalletPress: (visibilityStatus) => {
-                          this.otherProps = {
-                            pilotItems: props.wallets.tabs,
-                            currentPilotItem: props.wallets.currentTab,
-                            onAddWalletPress: (visibilityStatus) => props.setWalletModalVisibility(visibilityStatus),
-                            onWalletAbsorb: async (response) => {
-                              //We can use response later
-                              // await props.fetchAvailableWallets(props.roles.currentTab);
-                            }
-                          };
+                      const { navigation } = props;
 
-                          props.setWalletModalVisibility(visibilityStatus);
-                        }
-                      };
-
-                      props.setWalletModalVisibility(true);
-                    }}/>
-
-                <Pin
-                  title={__CONSTANTS.firstPin.title.en}
-                  subtitle={`${__CONSTANTS.firstPin.subtitle.sign.en}${Functions._convertDigitsToMoneyFormat(props.wallets.selectedWallet.transactions.withdraw)} ${__CONSTANTS.firstPin.subtitle.suffix.en}`}
-                  style={Styles.WalletPin}
-                  onPress={() => {
-                    const { navigation } = props;
-
-                    navigation.navigate('SelectedWallet', props.wallets.selectedWallet);
-                  }}
-                  defaultGradient />
+                      navigation.navigate('SelectedWallet', props.wallets.selectedWallet);
+                    }}
+                    defaultGradient />
               </View>
             );
           }else {

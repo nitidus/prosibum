@@ -6,14 +6,25 @@ import { colors, fonts } from '../../global';
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
-var _CUSTOM_SCROLLABLE_CONTAINER = {
-      marginHorizontal: 32
+var _CUSTOM_CONTENT = {
+      marginVertical: 15,
+      marginHorizontal: 15
     },
-    _CUSTOM_BUTTON_TITLE = {
-      fontSize: 18
-    },
-    _CUSTOM_FOR_YOU_BUTTON = {
+    _CUSTOM_PILOT_BUTTON = {
       marginRight: 15
+    },
+    _CUSTOM_WAREHOUSE_ITEM_CONTAINER = {
+      height: 102
+    },
+    _CUSTOM_BRIEF_DETAIL_TITLE = {
+      fontSize: 26,
+      width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2)) - 42),
+      marginBottom: 5
+    },
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE = {
+      fontSize: 14,
+      width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2)) - 42),
+      marginBottom: 10
     },
     _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
       height: 16
@@ -21,21 +32,46 @@ var _CUSTOM_SCROLLABLE_CONTAINER = {
 
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
-    _CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal = 202;
-
-    _CUSTOM_BUTTON_TITLE.fontSize += 7;
+    _CUSTOM_CONTENT.marginHorizontal = 202;
 
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 10;
+
+    _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 48;
+
+    _CUSTOM_BRIEF_DETAIL_TITLE.width -= 380;
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 6;
+
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 380;
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 4;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
+
+    _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 3;
+
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 3;
+
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 1;
   }
 
-  _CUSTOM_BUTTON_TITLE.fontWeight = '500';
+  _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
+  _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
 }else{
   if (width >= 1000 || height >= 1000){
-    _CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal = 162;
+    _CUSTOM_CONTENT.marginHorizontal = 162;
 
-    _CUSTOM_FOR_YOU_BUTTON.marginRight += 5;
+    _CUSTOM_PILOT_BUTTON.marginRight += 5;
+
+    _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 16;
+
+    _CUSTOM_BRIEF_DETAIL_TITLE.width -= 300;
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 1;
+
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 300;
+  }else{
+    if (!_IS_IPHONE_X){
+      _CUSTOM_CONTENT.marginTop
+      _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 1;
+    }
   }
 }
 
@@ -46,41 +82,60 @@ module.exports = StyleSheet.create({
     borderRadius: 5,
     overflow: 'hidden'
   },
-  ScrollableContainer: {
-    marginTop: 15,
-    justifyContent: 'space-between'
+  Content: {
+    ..._CUSTOM_CONTENT
   },
-  GlobalMeasurements: {
-    ..._CUSTOM_SCROLLABLE_CONTAINER
+  MajorContent: {
+    flex: 1,
+    marginTop: _CUSTOM_CONTENT.marginVertical,
+    marginBottom: (_IS_IPHONE_X)? _CUSTOM_CONTENT.marginVertical * 1.85: _CUSTOM_CONTENT.marginVertical
   },
-  SingleInput: {
-    marginBottom: 15,
-    marginHorizontal: _CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal
+  PilotButton: {
+    ..._CUSTOM_PILOT_BUTTON
   },
-  BrandRoleCarouselContainer: {
-    flexDirection: 'row',
-    alignSelf: 'center',
-    marginBottom: 15
+  EmptyContent: {
+    flex: 1,
+    justifyContent: 'center'
   },
-  BrandRoleCarouselErrorContainer: {
-    width: width - (_CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal * 2),
-    marginHorizontal: _CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal,
-    backgroundColor: colors.single.carminePink
-  },
-  BrandRoleCarouselErrorContent: {
-    color: colors.single.romance,
-    fontFamily: fonts.sanFrancisco.textBold,
-    ..._CUSTOM_BUTTON_TITLE
-  },
-  QuickLink: {
-    marginVertical: 38,
+  EmptyContentLink: {
     alignItems: 'center'
   },
-  SubmitInput: {
-    marginHorizontal: _CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal
+  RegularItemContainer: {
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
+    marginBottom: _CUSTOM_CONTENT.marginVertical
   },
-  ForYouButton: {
-    ..._CUSTOM_FOR_YOU_BUTTON
+  WarehouseItemContainer: {
+    ..._CUSTOM_WAREHOUSE_ITEM_CONTAINER,
+    padding: 18
+  },
+  WarehouseErrorContainer: {
+    backgroundColor: colors.single.carminePink
+  },
+  WarehouseErrorContent: {
+    color: colors.single.romance
+  },
+  DetailItemMasterInfoContent: {
+    justifyContent: 'center'
+  },
+  BriefDetailTitle: {
+    color: colors.single.rangoonGreen,
+    fontFamily: fonts.sanFrancisco.textBold,
+    ..._CUSTOM_BRIEF_DETAIL_TITLE
+  },
+  BriefDetailSubtitle: {
+    color: colors.single.rangoonGreen,
+    fontFamily: fonts.sanFrancisco.textBold,
+    ..._CUSTOM_BRIEF_DETAIL_SUBTITLE
+  },
+  BottomPinnedContainer: {
+    flexGrow: 1,
+    justifyContent: 'flex-end'
+  },
+  LTR_ContentAlignment: {
+    alignItems: 'flex-start'
+  },
+  RTL_ContentAlignment: {
+    alignItems: 'flex-end'
   },
   __Gobal_Icons_In_Pilot: {
     ..._CUSTOM___GLOBAL_ICONS_IN_PILOT

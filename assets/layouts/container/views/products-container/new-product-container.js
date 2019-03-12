@@ -40,7 +40,7 @@ export const NewProductContainer = (props) => {
         onPress={attitude.onRightIconPress}>
           <Icon
             name={attitude.rightIcon}
-            style={Styles.ForYouButton}
+            style={Styles.PilotButton}
             height={Styles.__Gobal_Icons_In_Pilot.height} />
       </PinnedSide>
     )

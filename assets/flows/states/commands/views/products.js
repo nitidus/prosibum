@@ -1,7 +1,7 @@
-import NewProductIdentity from './products/new-product-identity';
+import NewProduct from './products/new-product';
 
 const Products = {
-  NewProductIdentity
+  NewProduct
 };
 
 module.exports = Products;

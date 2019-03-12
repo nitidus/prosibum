@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, Text, Image } from 'react-native';
+import { View, KeyboardAvoidingView, Dimensions, Platform, Text, Image } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ const Styles = Views.Products.NewProductIdentity,
       Container = ViewsContainer.Products.NewProductContainer;
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewProductIdentity;
+const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewProduct;
 
 import { views_constants } from '../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.wallets;
@@ -25,17 +25,154 @@ class NewProductIdentity extends Component<{}> {
 
   };
 
-  // async componentDidMount() {
-  //   const { props } = this;
-  //
-  //   await props.fetchAvailableWalletCurrenciesType();
-  //   this.otherProps = {};
-  // }
+  async componentDidMount() {
+    const { props } = this;
+
+    await props.fetchAvailableWarehouses();
+  }
 
   render() {
-    const { props, otherProps } = this;
+    const { props } = this;
 
-    _TAB_CONTENT = <Text>Hello Mode</Text>
+    var _TAB_CONTENT, _WAREHOUSE_CONTENT;
+
+    if (props.newProduct.warehousesLoading){
+      _WAREHOUSE_CONTENT = (
+        <Input
+          type="button"
+          name="{Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.title.en)}"
+          gradient={Global.colors.pair.tilan}
+          style={[
+            Styles.WarehouseItemContainer,
+            {
+              marginHorizontal: Styles.Content.marginHorizontal,
+              marginBottom: Styles.Content.marginHorizontal
+            }
+          ]}
+          disable={true}>
+            <ActivityIndicator/>
+        </Input>
+      );
+    }else{
+      if (!props.newProduct.connected.status){
+        _WAREHOUSE_CONTENT = (
+          <Input
+            type="button"
+            name="{Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.title.en)}"
+            style={[
+              Styles.WarehouseItemContainer,
+              Styles.WarehouseErrorContainer,
+              {
+                marginHorizontal: Styles.Content.marginHorizontal,
+                marginBottom: Styles.Content.marginHorizontal
+              }
+            ]}
+            textStyle={Styles.WarehouseErrorContent}
+            value={props.newProduct.connected.content}
+            onPress={() => props.fetchAvailableWarehouses()}/>
+        );
+      }else{
+        if (props.newProduct.warehouses.length > 0){
+          const _SELECTED_WAREHOUSE_INDEX = props.newProduct.warehouses.findIndex((warehouse, i) => {
+                  return warehouse._id === props.newProduct.currentWarehouse._id;
+                });
+
+          _WAREHOUSE_CONTENT = (
+            <Carousel
+              name="{Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}"
+              data={props.newProduct.warehouses}
+              firstItem={_SELECTED_WAREHOUSE_INDEX}
+              itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+              style={{
+                marginBottom: Styles.Content.marginHorizontal
+              }}
+              onLayout={({ item, index }) => {
+                var _ITEM_GRADIENT = Global.colors.pair.tilan;
+
+                if (_SELECTED_WAREHOUSE_INDEX === index){
+                  _ITEM_GRADIENT = Global.colors.pair.analue;
+                }
+
+                return (
+                  <Input
+                    type={__CONSTANTS.firstCarousel.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.items.title.en)}
+                    style={[
+                      Styles.WarehouseItemContainer,
+                      Styles.LTR_ContentAlignment
+                    ]}
+                    gradient={_ITEM_GRADIENT}
+                    disable={true}>
+                      <View
+                        style={Styles.DetailItemMasterInfoContent}>
+                          <Text
+                            style={Styles.BriefDetailTitle}>
+                              {Functions._convertKeywordToToken(item.name)}
+                          </Text>
+                          <Text
+                            style={Styles.BriefDetailSubtitle}>
+                              {item.products.count + " Products"}
+                          </Text>
+                      </View>
+                  </Input>
+                );
+              }}
+              onSnap={(selectedItemIndex) => props.setCurrentWarehouse(props.newProduct.warehouses[selectedItemIndex])}/>
+          );
+        }else{
+          _WAREHOUSE_CONTENT = (
+            <View
+              style={[
+                Styles.Content,
+                Styles.EmptyContent
+              ]}>
+                <Link
+                  containerStyle={Styles.EmptyContentLink}
+                  value={"There's no warehouse."} />
+            </View>
+          );
+        }
+      }
+    }
+
+    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'padding': '';
+
+    _TAB_CONTENT = (
+      <KeyboardAvoidingView
+        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}
+        style={Styles.MajorContent}>
+          <Input
+            type="text"
+            name="{Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}"
+            placeholder="Product Name"
+            value={props.newProduct.name}
+            style={Styles.RegularItemContainer}
+            onChangeText={(currentValue) => props.setProductName(currentValue)} />
+
+          {_WAREHOUSE_CONTENT}
+
+          <View
+            style={Styles.BottomPinnedContainer}>
+              <Input
+                type="button"
+                name="{Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}"
+                value="Append New Warehouse"
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal,
+                  marginBottom: Styles.Content.marginVertical
+                }} />
+              <Input
+                type="button"
+                name="{Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}"
+                value="Append Features"
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal
+                }} />
+          </View>
+      </KeyboardAvoidingView>
+    );
 
     return (
       <Container
@@ -45,200 +182,6 @@ class NewProductIdentity extends Component<{}> {
           {_TAB_CONTENT}
       </Container>
     );
-
-    // if (props.wallets.loadingWalletCurrenciesType){
-    //   return (
-    //     <View
-    //       style={Styles.Container}>
-    //         <ActivityIndicator />
-    //     </View>
-    //   );
-    // }else{
-    //   if (!props.wallets.connected.status){
-    //     const _TOP_PINNED_TOAST = (
-    //       <Toast
-    //         message={props.wallets.connected.content}
-    //         launched={!props.wallets.connected.status}
-    //         color={Global.colors.single.carminePink}
-    //         onPress={() => props.fetchAvailableWalletCurrenciesType()} />
-    //     );
-    //
-    //     return (
-    //       <View
-    //         style={Styles.Container}>
-    //           {_TOP_PINNED_TOAST}
-    //       </View>
-    //     );
-    //   }else{
-    //     var _TAB_CONTENT;
-    //
-    //     if (props.wallets.loadingWallets){
-    //       _TAB_CONTENT = (
-    //         <View
-    //           style={Styles.Content}>
-    //           <Input
-    //             type={__CONSTANTS.firstCarousel.type}
-    //             name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}
-    //             style={[
-    //               Styles.WalletItemContainer,
-    //               Styles.WalletItemContainerWithEmptyPositionContent
-    //             ]}
-    //             disable={true}>
-    //               <ActivityIndicator />
-    //           </Input>
-    //         </View>
-    //       );
-    //     }else{
-    //       if (props.wallets.wallets.length > 0){
-    //         const _SELECTED_WALLET_INDEX = props.wallets.wallets.findIndex((wallet, i) => {
-    //                 return wallet._id === props.wallets.selectedWallet._id;
-    //               });
-    //
-    //         _TAB_CONTENT = (
-    //           <View
-    //             style={{flex: 1}}>
-    //             <Carousel
-    //               name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}
-    //               data={props.wallets.wallets}
-    //               style={{
-    //                 marginVertical: Styles.Content.marginVertical
-    //               }}
-    //               firstItem={_SELECTED_WALLET_INDEX}
-    //               itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
-    //               onLayout={({ item, index }) => {
-    //                 var _ITEM_GRADIENT = Global.colors.pair.tilan;
-    //
-    //                 if (_SELECTED_WALLET_INDEX === index){
-    //                   _ITEM_GRADIENT = Global.colors.pair.analue;
-    //                 }
-    //
-    //                 _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix.en}${(item.transactions.amount > 1)? 's': ''}`;
-    //
-    //                 return (
-    //                   <Input
-    //                     type={__CONSTANTS.firstCarousel.type}
-    //                     name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.items.title.en)}
-    //                     style={[
-    //                       Styles.WalletItemContainer,
-    //                       Styles.LTR_ContentAlignment
-    //                     ]}
-    //                     gradient={_ITEM_GRADIENT}
-    //                     disable={true}>
-    //                       <View
-    //                         style={Styles.DetailItemMasterInfoContent}>
-    //                           <Text
-    //                             style={Styles.BriefDetailTitle}>
-    //                               {Functions._convertKeywordToToken(item.name)}
-    //                           </Text>
-    //                           <Text
-    //                             style={Styles.BriefDetailSubtitle}>
-    //                               {Functions._convertDateToHumanReadableFormat(item.created_at)}
-    //                           </Text>
-    //                       </View>
-    //
-    //                       <View
-    //                         style={[
-    //                           Styles.DetailItemMasterSubInfoContent,
-    //                           {
-    //                             marginBottom: Styles.Content.marginVertical
-    //                           }
-    //                         ]}>
-    //                           <View style={Styles.BriefDetailSubRowIconContainer}>
-    //                             <Icon
-    //                               name={__CONSTANTS.firstCarousel.items.content.transactionsAmount.icon}
-    //                               color={Global.colors.single.romance} />
-    //                           </View>
-    //                           <Text
-    //                             style={Styles.BriefDetailRowText}>
-    //                               {item.transactions.amount} {_WALLET_TRANSACTIONS_AMOUNT_SUFFIX}
-    //                           </Text>
-    //                       </View>
-    //                       <View
-    //                         style={Styles.DetailItemMasterSubInfoContent}>
-    //                           <View style={Styles.BriefDetailSubRowIconContainer}>
-    //                             <Icon
-    //                               name={__CONSTANTS.firstCarousel.items.content.transactionsDeposit.icon}
-    //                               color={Global.colors.single.romance} />
-    //                           </View>
-    //                           <Text
-    //                             style={Styles.BriefDetailRowText}>
-    //                               {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign.en}{Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix.en}
-    //                           </Text>
-    //                       </View>
-    //                   </Input>
-    //                 );
-    //               }}
-    //               onSnap={(selectedItemIndex) => props.setSelectedWallet(props.wallets.wallets[selectedItemIndex])}/>
-    //
-    //             <Input
-    //                 type={__CONSTANTS.modalHandlerButton.type}
-    //                 name={Functions._convertTokenToKeyword(__CONSTANTS.modalHandlerButton.title.en)}
-    //                 value={__CONSTANTS.modalHandlerButton.title.en}
-    //                 style={{
-    //                   marginBottom: Styles.Content.marginVertical,
-    //                   marginHorizontal: Styles.Content.marginHorizontal
-    //                 }}
-    //                 gradient={Global.colors.pair.ongerine}
-    //                 onPress={() => {
-    //                   this.otherProps = {
-    //                     pilotItems: props.wallets.tabs,
-    //                     currentPilotItem: props.wallets.currentTab,
-    //                     data: props.wallets.selectedWallet,
-    //                     onChargeWalletPress: (visibilityStatus) => {
-    //                       this.otherProps = {
-    //                         pilotItems: props.wallets.tabs,
-    //                         currentPilotItem: props.wallets.currentTab,
-    //                         onAddWalletPress: (visibilityStatus) => props.setWalletModalVisibility(visibilityStatus),
-    //                         onWalletAbsorb: async (response) => {
-    //                           //We can use response later
-    //                           // await props.fetchAvailableWallets(props.roles.currentTab);
-    //                         }
-    //                       };
-    //
-    //                       props.setWalletModalVisibility(visibilityStatus);
-    //                     }
-    //                   };
-    //
-    //                   props.setWalletModalVisibility(true);
-    //                 }}/>
-    //
-    //             <Pin
-    //               title={__CONSTANTS.firstPin.title.en}
-    //               subtitle={`${__CONSTANTS.firstPin.subtitle.sign.en}${Functions._convertDigitsToMoneyFormat(props.wallets.selectedWallet.transactions.withdraw)} ${__CONSTANTS.firstPin.subtitle.suffix.en}`}
-    //               style={Styles.WalletPin}
-    //               onPress={() => {
-    //                 const { navigation } = props;
-    //
-    //                 navigation.navigate('SelectedWallet', props.wallets.selectedWallet);
-    //               }}
-    //               defaultGradient />
-    //           </View>
-    //         );
-    //       }else {
-    //         _TAB_CONTENT = (
-    //           <View
-    //             style={[
-    //               Styles.Content,
-    //               Styles.EmptyContent
-    //             ]}>
-    //             <Link
-    //               containerStyle={Styles.EmptyContentLink}
-    //               value={__CONSTANTS.link.en} />
-    //           </View>
-    //         );
-    //       }
-    //     }
-    //
-    //     return (
-    //       <Container
-    //         title="New Product"
-    //         subtitle="Product Identity"
-    //         {...props}>
-    //           {_TAB_CONTENT}
-    //       </Container>
-    //     );
-    //   }
-    // }
   }
 }
 

@@ -175,6 +175,19 @@ export const Input = (props) => {
             attitude.children.push(props.children);
           }
         }
+
+        if (typeof props.textStyle != 'undefined'){
+          attitude.textStyle = props.textStyle;
+
+          if (typeof attitude.textStyle == 'object' && Array.isArray(attitude.textStyle)){
+            attitude.textStyle = attitude.textStyle.reduce((total, item) => {
+              return {
+                ...total,
+                ...item
+              };
+            })
+          }
+        }
         break;
     }
   }
@@ -737,8 +750,16 @@ export const Input = (props) => {
           return React.cloneElement(child, childProps);
         });
       }else if (typeof attitude.value != 'undefined') {
+        var _DEFAULT_BUTTON_STYLE = [
+          Styles.ButtonTitle
+        ];
+
+        if (typeof attitude.textStyle != 'undefined'){
+          _DEFAULT_BUTTON_STYLE.push(attitude.textStyle);
+        }
+
         buttonContent = <Text
-          style={Styles.ButtonTitle}>
+          style={_DEFAULT_BUTTON_STYLE}>
           {attitude.value}
         </Text>;
       }
