@@ -735,9 +735,9 @@ export const WalletModal = (props) => {
                   }
                 }
 
-                await props.chargeWallet(_RULES, (response, state) => {
-                  MODAL.ON_PROGRESS_SUCCESS(response);
-                  MODAL.ON_BLUR(state);
+                await props.chargeWallet(_RULES, async (response, state) => {
+                  await MODAL.ON_PROGRESS_SUCCESS(response);
+                  await MODAL.ON_BLUR(state);
                 });
               }else{
                 if (typeof props.walletModal.currentCurrency._id != 'undefined'){
@@ -762,9 +762,9 @@ export const WalletModal = (props) => {
                   }
                 }
 
-                await props.appendWalletToResource(_RULES, (response, state) => {
-                  MODAL.ON_PROGRESS_SUCCESS(response);
-                  MODAL.ON_BLUR(state);
+                await props.appendWalletToResource(_RULES, async (response, state) => {
+                  await MODAL.ON_PROGRESS_SUCCESS(response);
+                  await MODAL.ON_BLUR(state);
                 });
               }
             }}

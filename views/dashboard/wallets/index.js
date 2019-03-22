@@ -15,7 +15,7 @@ import { Views as ViewsActions } from '../../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Dashboard.Wallets;
 
 import { views_constants } from '../../../assets/flows/knowledge/index';
-const __CONSTANTS = views_constants.profile.wallets;
+const __CONSTANTS = views_constants.dashboard.wallets;
 
 import { Functions } from '../../../assets/modules/index';
 const { Preparation } = Functions;

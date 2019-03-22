@@ -3,8 +3,9 @@ import { ActivityIndicator } from './activity-indicator';
 import Toast from './toast';
 import { Pin } from './pin';
 import { Modal } from './modal';
-import { CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal } from './modals/index';
+import { CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal } from './modals/index';
 import { Icon } from './icon';
+import List from './list';
 import { TopBar, PinnedSide, TabItem } from './container/layouts/pilot/top-bar';
 import { TabBar, TabBarItem } from './container/layouts/pilot/tab-bar';
 import { Pilot } from './pilot';
@@ -16,8 +17,9 @@ module.exports = {
   Toast,
   Pin,
   Modal,
-  CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal,
+  CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal,
   Icon,
+  List,
   Pilot, TabBar, TabBarItem, TopBar, PinnedSide, TabItem,
   DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile
 };

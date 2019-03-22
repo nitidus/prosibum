@@ -1,5 +1,5 @@
 import { LAYOUTS } from '../../types/index';
-const { ROLES_MODAL } = LAYOUTS;
+const { ROLE_MODAL } = LAYOUTS;
 
 const initialState = {
   reference: {},
@@ -19,70 +19,70 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ROLES_MODAL.RESET_MODAL:
+    case ROLE_MODAL.RESET_MODAL:
       return initialState;
       break;
-    case ROLES_MODAL.SET_REFERENCE:
+    case ROLE_MODAL.SET_REFERENCE:
       return {
         ...state,
         reference: action.payload
       };
       break;
-    case ROLES_MODAL.SET_ROLES:
+    case ROLE_MODAL.SET_ROLES:
       return {
         ...state,
         roles: action.payload
       };
       break;
-    case ROLES_MODAL.SET_CURRENT_ROLE:
+    case ROLE_MODAL.SET_CURRENT_ROLE:
       return {
         ...state,
         currentRole: action.payload
       };
       break;
-    case ROLES_MODAL.SET_EMAIL:
+    case ROLE_MODAL.SET_EMAIL:
       return {
         ...state,
         email: action.payload
       };
       break;
-    case ROLES_MODAL.APPEND_ROLES_TO_RESOURCE:
+    case ROLE_MODAL.APPEND_ROLES_TO_RESOURCE:
       return {
         ...state,
         appendedResources: action.payload
       };
       break;
-    case ROLES_MODAL.FETCH_CARDINALITY:
+    case ROLE_MODAL.FETCH_CARDINALITY:
       return {
         ...state,
         cardinal: action.payload
       };
       break;
-    case ROLES_MODAL.FETCH_AVAILABLE_ROLES_TYPE:
+    case ROLE_MODAL.FETCH_AVAILABLE_ROLES_TYPE:
       return {
         ...state,
         roles: action.payload
       };
       break;
-    case ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS:
+    case ROLE_MODAL.SET_ROLES_TYPE_LOADING_STATUS:
       return {
         ...state,
         loadingRolesType: action.payload
       };
       break;
-    case ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS:
+    case ROLE_MODAL.SET_CARDINALITY_LOADING_STATUS:
       return {
         ...state,
         cardinalityLoading: action.payload
       };
       break;
-    case ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS:
+    case ROLE_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS:
       return {
         ...state,
         appendRolesToResources: action.payload
       };
       break;
-    case ROLES_MODAL.SET_CONNECTED_STATUS:
+    case ROLE_MODAL.SET_CONNECTED_STATUS:
       return {
         ...state,
         connected: {

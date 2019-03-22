@@ -1,0 +1,25 @@
+{
+  "modalContainer": {
+    "title": {
+      "en": "Warehouse Modal"
+    },
+    "content": {
+      "firstInput": {
+        "type": "TEXT",
+        "title": {
+          "en": "Warehouse Name"
+        }
+      },
+      "submitInput": {
+        "type": "BUTTON",
+        "state": {
+          "normal": {
+            "title": {
+              "en": "Append It"
+            }
+          }
+        }
+      }
+    }
+  }
+}

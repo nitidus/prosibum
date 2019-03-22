@@ -1,11 +1,13 @@
 import CountriesCodesModal from './countries-codes-modal';
 import CameraRollPickerModal from './camera-roll-picker-modal';
-import RolesModal from './roles-modal';
+import RoleModal from './role-modal';
 import WalletModal from './wallet-modal';
+import WarehouseModal from './warehouse-modal';
 
 module.exports = {
   CountriesCodesModal,
   CameraRollPickerModal,
-  RolesModal,
-  WalletModal
+  RoleModal,
+  WalletModal,
+  WarehouseModal
 };

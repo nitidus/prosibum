@@ -1,4 +1,5 @@
 import Container from './layouts/container';
+import List from './layouts/list';
 import ActivityIndicator from './layouts/activity-indicator';
 import Toast from './layouts/toast';
 import Modal from './layouts/modal';
@@ -6,14 +7,15 @@ import Pilot from './layouts/pilot';
 import Pin from './layouts/pin';
 import DrawerMenu from './layouts/drawer-menu';
 
-import { CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal } from './layouts/modals/index';
+import { CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal } from './layouts/modals/index';
 
 module.exports = {
   Container,
   ActivityIndicator,
+  List,
   Toast,
   Modal,
-  CountriesCodesModal, CameraRollPickerModal, RolesModal, WalletModal,
+  CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal,
   Pilot,
   Pin,
   DrawerMenu

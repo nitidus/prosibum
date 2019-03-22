@@ -166,6 +166,8 @@ export const Input = (props) => {
           attitude.gradient = props.gradient;
         }
 
+        attitude.activeOpacity = props.activeOpacity || 0.7;
+
         if (typeof props.children != 'undefined'){
           attitude.children = [];
 
@@ -741,13 +743,15 @@ export const Input = (props) => {
 
       if (typeof attitude.children != 'undefined' && attitude.children.length > 0){
         buttonContent = attitude.children.map((child) => {
-          var childProps = {...child.props};
+          if (typeof child != 'undefined'){
+            var childProps = {...child.props};
 
-          const ultimateKey = Functions._generateNewUniqueObjectKey();
+            const ultimateKey = Functions._generateNewUniqueObjectKey();
 
-          childProps.key = childProps.name || ultimateKey;
+            childProps.key = childProps.name || ultimateKey;
 
-          return React.cloneElement(child, childProps);
+            return React.cloneElement(child, childProps);
+          }
         });
       }else if (typeof attitude.value != 'undefined') {
         var _DEFAULT_BUTTON_STYLE = [
@@ -764,8 +768,12 @@ export const Input = (props) => {
         </Text>;
       }
 
-      var _ACTIVE_OPACITY = 0.7,
+      var _ACTIVE_OPACITY = attitude.activeOpacity || 0.7,
           _OTHER_OPTIONS = {};
+
+      if (typeof _ACTIVE_OPACITY != 'undefined'){
+        _OTHER_OPTIONS.activeOpacity = _ACTIVE_OPACITY;
+      }
 
       if (typeof attitude.onLongPress != 'undefined'){
         _OTHER_OPTIONS.onLongPress = attitude.onLongPress;
@@ -777,7 +785,6 @@ export const Input = (props) => {
         });
 
         var _GRADIENT_INPUT_BUTTON_CONTENT = <TouchableOpacity
-          activeOpacity={_ACTIVE_OPACITY}
           onPress={attitude.onPress}
           {..._OTHER_OPTIONS}>
             <LinearGradient
@@ -795,16 +802,16 @@ export const Input = (props) => {
 
         if (attitude.disable){
           if ((typeof attitude.forcedDisable != 'undefined') && (attitude.forcedDisable === true)) {
-            _ACTIVE_OPACITY = 1;
+            _OTHER_OPTIONS.activeOpacity = 1;
 
             return (
               <TouchableOpacity
-                  activeOpacity={_ACTIVE_OPACITY}
                   style={[
                     Styles.ButtonContainer,
                     attitude.style,
                     Styles.DisableTypeButtonContainer
-                  ]}>
+                  ]}
+                  {..._OTHER_OPTIONS}>
                     {buttonContent}
               </TouchableOpacity>
             );
@@ -834,8 +841,8 @@ export const Input = (props) => {
 
           return (
             <TouchableOpacity
-                activeOpacity={_ACTIVE_OPACITY}
-                style={_DISABLE_BUTTON_STYLE}>
+                style={_DISABLE_BUTTON_STYLE}
+                {..._OTHER_OPTIONS}>
                   {buttonContent}
             </TouchableOpacity>
           );
@@ -849,7 +856,6 @@ export const Input = (props) => {
                   Styles.RegularTypeButtonContainer,
                   attitude.style
                 ]}
-                activeOpacity={_ACTIVE_OPACITY}
                 onPress={attitude.onPress}
                 {..._OTHER_OPTIONS}>
                   {buttonContent}

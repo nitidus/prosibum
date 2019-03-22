@@ -5,7 +5,7 @@ const _Screen = Dimensions.get('window');
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, Pin } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, List, Pin, WarehouseModal } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewProductIdentity,
@@ -15,7 +15,7 @@ import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewProduct;
 
 import { views_constants } from '../../assets/flows/knowledge/index';
-const __CONSTANTS = views_constants.profile.wallets;
+const __CONSTANTS = views_constants.products.new_product_identity;
 
 import { Functions } from '../../assets/modules/index';
 const { Preparation } = Functions;
@@ -39,8 +39,8 @@ class NewProductIdentity extends Component<{}> {
     if (props.newProduct.warehousesLoading){
       _WAREHOUSE_CONTENT = (
         <Input
-          type="button"
-          name="{Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.title.en)}"
+          type={__CONSTANTS.content.firstCarousel.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.loading.title.en)}
           gradient={Global.colors.pair.tilan}
           style={[
             Styles.WarehouseItemContainer,
@@ -57,8 +57,8 @@ class NewProductIdentity extends Component<{}> {
       if (!props.newProduct.connected.status){
         _WAREHOUSE_CONTENT = (
           <Input
-            type="button"
-            name="{Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.title.en)}"
+            type={__CONSTANTS.content.firstCarousel.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.disconected.title.en)}
             style={[
               Styles.WarehouseItemContainer,
               Styles.WarehouseErrorContainer,
@@ -79,7 +79,7 @@ class NewProductIdentity extends Component<{}> {
 
           _WAREHOUSE_CONTENT = (
             <Carousel
-              name="{Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}"
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.normal.title.en)}
               data={props.newProduct.warehouses}
               firstItem={_SELECTED_WAREHOUSE_INDEX}
               itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
@@ -95,8 +95,8 @@ class NewProductIdentity extends Component<{}> {
 
                 return (
                   <Input
-                    type={__CONSTANTS.firstCarousel.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.items.title.en)}
+                    type={__CONSTANTS.content.firstCarousel.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.normal.content.title.en)}
                     style={[
                       Styles.WarehouseItemContainer,
                       Styles.LTR_ContentAlignment
@@ -111,7 +111,7 @@ class NewProductIdentity extends Component<{}> {
                           </Text>
                           <Text
                             style={Styles.BriefDetailSubtitle}>
-                              {item.products.count + " Products"}
+                              {item.products.count} {__CONSTANTS.content.firstCarousel.state.normal.content.suffix.en}
                           </Text>
                       </View>
                   </Input>
@@ -128,7 +128,7 @@ class NewProductIdentity extends Component<{}> {
               ]}>
                 <Link
                   containerStyle={Styles.EmptyContentLink}
-                  value={"There's no warehouse."} />
+                  value={__CONSTANTS.content.firstCarousel.state.null.title.en} />
             </View>
           );
         }
@@ -142,30 +142,92 @@ class NewProductIdentity extends Component<{}> {
         behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}
         style={Styles.MajorContent}>
           <Input
-            type="text"
-            name="{Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}"
-            placeholder="Product Name"
+            type={__CONSTANTS.content.firstInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}
+            placeholder={__CONSTANTS.content.firstInput.title.en}
             value={props.newProduct.name}
             style={Styles.RegularItemContainer}
             onChangeText={(currentValue) => props.setProductName(currentValue)} />
 
           {_WAREHOUSE_CONTENT}
 
+          <List
+            dataSource={[
+              {
+                _id: '0',
+                children: ['01'],
+                key: 'Level 1.0'
+              },
+              {
+                _id: '01',
+                ancestors: ['0'],
+                children: ['011'],
+                key: 'Level 1.1'
+              },
+              {
+                _id: '011',
+                ancestors: ['0', '01'],
+                children: ['0111'],
+                key: 'Level 1.1.1'
+              },
+              {
+                _id: '0111',
+                ancestors: ['0', '01', '011'],
+                children: ['01111'],
+                key: 'Level 1.1.1.1'
+              },
+              {
+                _id: '01111',
+                ancestors: ['0', '01', '011', '0111'],
+                children: ['011111'],
+                key: 'Level 1.1.1.1.1'
+              },
+              {
+                _id: '011111',
+                ancestors: ['0', '01', '011', '0111', '01111'],
+                key: 'Level 1.1.1.1.1.1'
+              },
+              {
+                _id: '1',
+                children: ['11'],
+                key: 'Level 2.0'
+              },
+              {
+                _id: '11',
+                ancestors: ['1'],
+                key: 'Level 2.1'
+              }
+            ]}
+            style={{
+              marginHorizontal: Styles.Content.marginHorizontal
+            }}
+            onLayout={(color) => {
+              return (
+                <Icon
+                  name="bookmark"
+                  color={color}
+                  style={{
+                    marginRight: Styles.Content.marginHorizontal
+                  }}/>
+              );
+            }}/>
+
           <View
             style={Styles.BottomPinnedContainer}>
               <Input
-                type="button"
-                name="{Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}"
-                value="Append New Warehouse"
+                type={__CONSTANTS.content.modalHandlerButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalHandlerButton.state.normal.title.en)}
+                value={__CONSTANTS.content.modalHandlerButton.state.normal.title.en}
                 gradient={Global.colors.pair.ongerine}
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal,
                   marginBottom: Styles.Content.marginVertical
-                }} />
+                }}
+                onPress={() => props.setWarehouseModalVisibility(true)} />
               <Input
-                type="button"
-                name="{Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}"
-                value="Append Features"
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={__CONSTANTS.content.submitButton.state.normal.title.en}
                 gradient={Global.colors.pair.ongerine}
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal
@@ -176,10 +238,17 @@ class NewProductIdentity extends Component<{}> {
 
     return (
       <Container
-        title="New Product"
-        subtitle="Product Identity"
+        title={Functions._convertKeywordToToken(__CONSTANTS.pilot.title.en)}
+        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle.en)}
         {...props}>
           {_TAB_CONTENT}
+
+          <WarehouseModal
+            visibility={props.newProduct.warehouseModalVisibility}
+            onBlur={() => props.setWarehouseModalVisibility(false)}
+            onProgressSuccess={async (response) => {
+              await props.appendWarehouse(response);
+            }} />
       </Container>
     );
   }

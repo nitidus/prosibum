@@ -222,6 +222,14 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
                 d="M14.5,0h-4v0l-2,0h-4C2,0,0,2,0,4.5v5C0,12,2,14,4.5,14h4V6c0-0.5,0.5-1,1-1s1,0.5,1,1v8h4C17,14,19,12,19,9.5
             		v-5C19,2,17,0,14.5,0z"/>
             </G>
+          },
+          BOOKMARK: {
+            width: 14,
+            height: 24,
+            view_box: "0 0 14 24",
+            content: <Path
+              fill={color}
+              d="M13.7,1c-0.2-0.3-0.4-0.6-0.8-0.8S12.3,0,11.4,0H2.6C1.7,0,1.3,0.1,1,0.3S0.4,0.7,0.3,1S0,1.7,0,2.6V24l7-6l7,6V2.6C14,1.7,13.9,1.3,13.7,1z"/>
           }
         },
         _CREDIT_CARD_ICONS = {

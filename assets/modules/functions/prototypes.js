@@ -7,7 +7,7 @@ import Utils from '../utils';
 const { ObjectID } = Utils.Structures;
 
 import { countries as __COUNTRIES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
-const __WALLETS = __VIEWS_CONSTANTS.profile.wallets;
+const __WALLETS = __VIEWS_CONSTANTS.dashboard.wallets;
 
 import { name as __APP_NAME } from '../../../app.json';
 
@@ -203,6 +203,9 @@ module.exports = {
       return token;
     }
   },
+  _convertNestedArrayToFlattenDeep: (content) => {
+    return Lodash.flattenDeep(content);
+  },
   _stripLongString: (longString, targetLength) => {
     if ((typeof longString === 'string') && (typeof longString !== 'undefined') && (typeof targetLength === 'number') && (typeof targetLength !== 'undefined')) {
       return (longString.length > targetLength) ? `${longString.substr(0, targetLength)}...` : longString;
@@ -262,6 +265,32 @@ module.exports = {
 
       return 'rgba(' + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(',') + ',' + opacity + ')';
     }
+  },
+  _refactorColor: (col, amt) => {
+    var usePound = false;
+
+    if (col[0] == "#") {
+      col = col.slice(1);
+      usePound = true;
+    }
+
+    var num = parseInt(col, 16),
+        r = (num >> 16) + amt;
+
+    if (r > 255) r = 255;
+    else if  (r < 0) r = 0;
+
+    var b = ((num >> 8) & 0x00FF) + amt;
+
+    if (b > 255) b = 255;
+    else if  (b < 0) b = 0;
+
+    var g = (num & 0x0000FF) + amt;
+
+    if (g > 255) g = 255;
+    else if (g < 0) g = 0;
+
+    return (usePound?"#":"") + (g | (b << 8) | (r << 16)).toString(16);
   },
   _checkIsAValidNumericOnlyField: (content, targetLength) => {
     const _TARGET_LENGTH = targetLength || 16,

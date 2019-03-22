@@ -7,7 +7,7 @@ const Styles = Views.Dashboard.Self,
       _SCREEN = Dimensions.get('window');
 
 import { views_constants } from '../../assets/flows/knowledge/index';
-const __CONSTANTS = views_constants.profile.dashboard;
+const __CONSTANTS = views_constants.dashboard.self;
 
 import { Functions } from '../../assets/modules/index';
 const { Preparation } = Functions;

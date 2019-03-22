@@ -14,6 +14,7 @@ const initialState = {
         shippingPlans: [],
         shippingTypes: [],
         paymentTypes: [],
+        warehouseModalVisibility: false,
         warehousesLoading: false,
         shippingTypesLoading: false,
         paymentTypesLoading: false,
@@ -192,6 +193,12 @@ export default (state = initialState, action) => {
             shippingType: action.payload.shippingType
           }
         ]
+      };
+      break;
+    case NEW_PRODUCT.SET_WAREHOUSE_MODAL_VISIBILITY:
+      return {
+        ...state,
+        warehouseModalVisibility: action.payload
       };
       break;
     case NEW_PRODUCT.FETCH_AVAILABLE_WAREHOUSES:

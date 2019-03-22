@@ -14,7 +14,7 @@ import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.UserProfile;
 
 import { views_constants } from '../../assets/flows/knowledge/index';
-const __CONSTANTS = views_constants.profile.user_profile;
+const __CONSTANTS = views_constants.profile.self;
 
 import { Functions } from '../../assets/modules/index';
 

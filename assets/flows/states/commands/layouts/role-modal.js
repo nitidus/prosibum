@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 import { LAYOUTS, GLOBAL } from '../../types/index';
-const { ROLES_MODAL } = LAYOUTS;
+const { ROLE_MODAL } = LAYOUTS;
 
 import { Functions } from '../../../../modules/index';
 
 module.exports = {
   _getRolesTypeWithGroupType: async (groupType, usergroup, dispatch) => {
     dispatch({
-      type: ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
+      type: ROLE_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
       payload: true
     })
 
@@ -25,34 +25,34 @@ module.exports = {
           const _DATA = _FINAL_RESPONSE.data;
 
           dispatch({
-            type: ROLES_MODAL.FETCH_AVAILABLE_ROLES_TYPE,
+            type: ROLE_MODAL.FETCH_AVAILABLE_ROLES_TYPE,
             payload: _DATA
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_CURRENT_ROLE,
+            type: ROLE_MODAL.SET_CURRENT_ROLE,
             payload: ((_DATA.length > 0)? _DATA[0]: {})
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
+            type: ROLE_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
             payload: false
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            type: ROLE_MODAL.SET_CONNECTED_STATUS,
             payload: {
               status: true
             }
           })
         }else{
           dispatch({
-            type: ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
+            type: ROLE_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
             payload: false
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            type: ROLE_MODAL.SET_CONNECTED_STATUS,
             payload: {
               status: false,
               content: _FINAL_RESPONSE.meta.error_message
@@ -65,12 +65,12 @@ module.exports = {
         const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
-          type: ROLES_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
+          type: ROLE_MODAL.SET_ROLES_TYPE_LOADING_STATUS,
           payload: false
         })
 
         dispatch({
-          type: ROLES_MODAL.SET_CONNECTED_STATUS,
+          type: ROLE_MODAL.SET_CONNECTED_STATUS,
           payload: {
             status: false,
             content: _ERROR_MESSAGE
@@ -81,7 +81,7 @@ module.exports = {
   },
   _appendRolesToResourceWithRules: async (rolesRules, callback, dispatch) => {
     dispatch({
-      type: ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
+      type: ROLE_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
       payload: true
     })
 
@@ -110,17 +110,17 @@ module.exports = {
           const _DATA = _FINAL_RESPONSE.data;
 
           dispatch({
-            type: ROLES_MODAL.APPEND_ROLES_TO_RESOURCE,
+            type: ROLE_MODAL.APPEND_ROLES_TO_RESOURCE,
             payload: _DATA
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
+            type: ROLE_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
             payload: false
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            type: ROLE_MODAL.SET_CONNECTED_STATUS,
             payload: {
               status: true
             }
@@ -129,12 +129,12 @@ module.exports = {
           callback(_DATA, false);
         }else{
           dispatch({
-            type: ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
+            type: ROLE_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
             payload: false
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            type: ROLE_MODAL.SET_CONNECTED_STATUS,
             payload: {
               status: false,
               content: _FINAL_RESPONSE.meta.error_message
@@ -147,12 +147,12 @@ module.exports = {
         const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
-          type: ROLES_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
+          type: ROLE_MODAL.SET_APPEND_ROLES_TO_RESOURCE_LOADING_STATUS,
           payload: false
         })
 
         dispatch({
-          type: ROLES_MODAL.SET_CONNECTED_STATUS,
+          type: ROLE_MODAL.SET_CONNECTED_STATUS,
           payload: {
             status: false,
             content: _ERROR_MESSAGE
@@ -163,7 +163,7 @@ module.exports = {
   },
   _fetchAvailableCardinalUsingID: async (token, dispatch) => {
     dispatch({
-      type: ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS,
+      type: ROLE_MODAL.SET_CARDINALITY_LOADING_STATUS,
       payload: true
     })
 
@@ -177,17 +177,17 @@ module.exports = {
           const _DATA = _FINAL_RESPONSE.data;
 
           dispatch({
-            type: ROLES_MODAL.FETCH_CARDINALITY,
+            type: ROLE_MODAL.FETCH_CARDINALITY,
             payload: _DATA
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS,
+            type: ROLE_MODAL.SET_CARDINALITY_LOADING_STATUS,
             payload: false
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            type: ROLE_MODAL.SET_CONNECTED_STATUS,
             payload: {
               status: true
             }
@@ -196,12 +196,12 @@ module.exports = {
           callback(_DATA, false);
         }else{
           dispatch({
-            type: ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS,
+            type: ROLE_MODAL.SET_CARDINALITY_LOADING_STATUS,
             payload: false
           })
 
           dispatch({
-            type: ROLES_MODAL.SET_CONNECTED_STATUS,
+            type: ROLE_MODAL.SET_CONNECTED_STATUS,
             payload: {
               status: false,
               content: _FINAL_RESPONSE.meta.error_message
@@ -214,12 +214,12 @@ module.exports = {
         const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
-          type: ROLES_MODAL.SET_CARDINALITY_LOADING_STATUS,
+          type: ROLE_MODAL.SET_CARDINALITY_LOADING_STATUS,
           payload: false
         })
 
         dispatch({
-          type: ROLES_MODAL.SET_CONNECTED_STATUS,
+          type: ROLE_MODAL.SET_CONNECTED_STATUS,
           payload: {
             status: false,
             content: _ERROR_MESSAGE

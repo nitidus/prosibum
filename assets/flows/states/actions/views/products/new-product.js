@@ -120,6 +120,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: shippingPlans
       })
     },
+    setWarehouseModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_WAREHOUSE_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
     fetchAvailableWarehouses: async (token) =>  CMD._getAvailableWarehousesWithToken(token, dispatch),
     fetchAvailableShippingTypes: async () =>  CMD._getAvailableShippingTypes(dispatch),
     fetchAvailablePaymentTypes: async () =>  CMD._getAvailablePaymentTypes(dispatch),
