@@ -153,16 +153,17 @@ class NewProductIdentity extends Component<{}> {
           {_WAREHOUSE_CONTENT}
 
           <Input
-            type="link"
-            disable={true}
-            link="Categories"
-            placeholder="Product Category"
+            type={__CONSTANTS.content.secondInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.secondInput.title.en)}
+            link={__CONSTANTS.content.secondInput.link.en}
+            placeholder={__CONSTANTS.content.secondInput.title.en}
             value={_PRODUCT_CATEGORY}
             style={{
               marginHorizontal: Styles.Content.marginHorizontal,
               marginBottom: Styles.Content.marginHorizontal
             }}
-            onPress={() => props.setProductModalModalVisibility(true)}/>
+            onPress={() => props.setProductModalModalVisibility(true)}
+            disable={true} />
 
           <View
             style={Styles.BottomPinnedContainer}>

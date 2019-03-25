@@ -1,0 +1,26 @@
+{
+  "modalContainer": {
+    "title": {
+      "en": "Product Categories Modal"
+    },
+    "content": {
+      "firstList": {
+        "extraContent": {
+          "icon": {
+            "name": "bookmark"
+          }
+        }
+      },
+      "submitInput": {
+        "type": "BUTTON",
+        "state": {
+          "normal": {
+            "title": {
+              "en": "Approve It"
+            }
+          }
+        }
+      }
+    }
+  }
+}

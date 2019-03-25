@@ -10,7 +10,7 @@ import { Icon } from '../icon';
 import { Modal } from '../modal';
 import List from '../list';
 import { Input, Carousel, Link } from '../../components/index';
-const Styles = Modules.Layouts.WarehouseModal;
+const Styles = Modules.Layouts.ProductCategoriesModal;
 
 import { Functions } from '../../modules/index';
 const { Preparation } = Functions;
@@ -19,7 +19,7 @@ import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions'
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.ProductCategoriesModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.warehouse_modal;
+const __CONSTANTS = layouts_constants.product_categories_modal;
 
 const _componentWillCheckValidation = (props) => {
   const _PROPS = props.productCategoriesModal;
@@ -109,78 +109,79 @@ const ProductCategoriesModal = (props) => {
         }
       ]}
       swipeDirection="down">
-      <List
-        dataSource={[
-          {
-            _id: '0',
-            children: ['01'],
-            key: 'Level 1.0'
-          },
-          {
-            _id: '01',
-            ancestors: ['0'],
-            children: ['011'],
-            key: 'Level 1.1'
-          },
-          {
-            _id: '011',
-            ancestors: ['0', '01'],
-            children: ['0111'],
-            key: 'Level 1.1.1'
-          },
-          {
-            _id: '0111',
-            ancestors: ['0', '01', '011'],
-            children: ['01111'],
-            key: 'Level 1.1.1.1'
-          },
-          {
-            _id: '01111',
-            ancestors: ['0', '01', '011', '0111'],
-            children: ['011111'],
-            key: 'Level 1.1.1.1.1'
-          },
-          {
-            _id: '011111',
-            ancestors: ['0', '01', '011', '0111', '01111'],
-            key: 'Level 1.1.1.1.1.1'
-          },
-          {
-            _id: '1',
-            children: ['11'],
-            key: 'Level 2.0'
-          },
-          {
-            _id: '11',
-            ancestors: ['1'],
-            key: 'Level 2.1'
-          },
-          {
-            _id: '2',
-            key: 'Level 3.0'
-          }
-        ]}
-        onLayout={(color) => {
-          return (
-            <Icon
-              name="bookmark"
-              color={color}
-              style={{
-                marginRight: Styles.Content.marginHorizontal
-              }}/>
-          );
-        }}
-        onPress={(response) => {
-          props.setCurrentCategory(response);
-          attitude.onProgressSuccess(response);
-        }}/>
-      <Input
-        type="button"
-        name="{Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}"
-        value="Approve It"
-        gradient={Global.colors.pair.ongerine}
-        onPress={() => MODAL.ON_BLUR(false)}
-        forcedDisable={_VALIDATED}/>
+        <List
+          dataSource={[
+            {
+              _id: '0',
+              children: ['01'],
+              key: 'Level 1.0'
+            },
+            {
+              _id: '01',
+              ancestors: ['0'],
+              children: ['011'],
+              key: 'Level 1.1'
+            },
+            {
+              _id: '011',
+              ancestors: ['0', '01'],
+              children: ['0111'],
+              key: 'Level 1.1.1'
+            },
+            {
+              _id: '0111',
+              ancestors: ['0', '01', '011'],
+              children: ['01111'],
+              key: 'Level 1.1.1.1'
+            },
+            {
+              _id: '01111',
+              ancestors: ['0', '01', '011', '0111'],
+              children: ['011111'],
+              key: 'Level 1.1.1.1.1'
+            },
+            {
+              _id: '011111',
+              ancestors: ['0', '01', '011', '0111', '01111'],
+              key: 'Level 1.1.1.1.1.1'
+            },
+            {
+              _id: '1',
+              children: ['11'],
+              key: 'Level 2.0'
+            },
+            {
+              _id: '11',
+              ancestors: ['1'],
+              key: 'Level 2.1'
+            },
+            {
+              _id: '2',
+              key: 'Level 3.0'
+            }
+          ]}
+          onLayout={(color) => {
+            return (
+              <Icon
+                name={__CONSTANTS.modalContainer.content.firstList.extraContent.icon.name}
+                color={color}
+                style={{
+                  marginRight: Styles.Content.marginHorizontal
+                }}/>
+            );
+          }}
+          onPress={(response) => {
+            props.setCurrentCategory(response);
+            attitude.onProgressSuccess(response);
+          }}/>
+
+        <Input
+          type={__CONSTANTS.modalContainer.content.submitInput.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+          value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
+          gradient={Global.colors.pair.ongerine}
+          onPress={() => MODAL.ON_BLUR(false)}
+          forcedDisable={_VALIDATED}/>
     </Modal>
   );
 };

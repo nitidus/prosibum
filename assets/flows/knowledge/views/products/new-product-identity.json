@@ -47,6 +47,15 @@
         }
       }
     },
+    "secondInput": {
+      "type": "LINK",
+      "link": {
+        "en": "Categories"
+      },
+      "title": {
+        "en": "Product Categories"
+      }
+    },
     "modalHandlerButton": {
       "type": "BUTTON",
       "state": {
