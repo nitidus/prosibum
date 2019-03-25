@@ -36,6 +36,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: warehouse
       })
     },
+    setCategory: (category) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_CATEGORY,
+        payload: category
+      })
+    },
     setProductFeatures: (features) => {
       dispatch({
         type: NEW_PRODUCT.SET_PRODUCT_FEATURES,
@@ -123,6 +129,12 @@ const mapDispatchToProps = (dispatch) => {
     setWarehouseModalVisibility: (visibilityStatus) => {
       dispatch({
         type: NEW_PRODUCT.SET_WAREHOUSE_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
+    setProductModalModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_PRODUCT_CATEGORIES_MODAL_VISIBILITY,
         payload: visibilityStatus
       })
     },

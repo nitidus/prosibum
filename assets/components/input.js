@@ -412,14 +412,14 @@ export const Input = (props) => {
           onPress={attitude.onPress} />
       );
 
-      if (attitude.disable){
-        _LINK_CONTENT = (
-          <Link
-            containerStyle={Styles.RTL_TextInputLinkContainer}
-            style={Styles.TextInputLink}
-            value={attitude.link} />
-        );
-      }
+      // if (attitude.disable){
+      //   _LINK_CONTENT = (
+      //     <Link
+      //       containerStyle={Styles.RTL_TextInputLinkContainer}
+      //       style={Styles.TextInputLink}
+      //       value={attitude.link} />
+      //   );
+      // }
 
       return (
         <View

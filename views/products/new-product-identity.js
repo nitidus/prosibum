@@ -5,7 +5,7 @@ const _Screen = Dimensions.get('window');
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, List, Pin, WarehouseModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, Pin, WarehouseModal, ProductCategoriesModal } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewProductIdentity,
@@ -135,7 +135,8 @@ class NewProductIdentity extends Component<{}> {
       }
     }
 
-    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'padding': '';
+    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'padding': '',
+          _PRODUCT_CATEGORY = (Object.keys(props.newProduct.category).length > 0)? props.newProduct.category.key: '';
 
     _TAB_CONTENT = (
       <KeyboardAvoidingView
@@ -151,66 +152,17 @@ class NewProductIdentity extends Component<{}> {
 
           {_WAREHOUSE_CONTENT}
 
-          <List
-            dataSource={[
-              {
-                _id: '0',
-                children: ['01'],
-                key: 'Level 1.0'
-              },
-              {
-                _id: '01',
-                ancestors: ['0'],
-                children: ['011'],
-                key: 'Level 1.1'
-              },
-              {
-                _id: '011',
-                ancestors: ['0', '01'],
-                children: ['0111'],
-                key: 'Level 1.1.1'
-              },
-              {
-                _id: '0111',
-                ancestors: ['0', '01', '011'],
-                children: ['01111'],
-                key: 'Level 1.1.1.1'
-              },
-              {
-                _id: '01111',
-                ancestors: ['0', '01', '011', '0111'],
-                children: ['011111'],
-                key: 'Level 1.1.1.1.1'
-              },
-              {
-                _id: '011111',
-                ancestors: ['0', '01', '011', '0111', '01111'],
-                key: 'Level 1.1.1.1.1.1'
-              },
-              {
-                _id: '1',
-                children: ['11'],
-                key: 'Level 2.0'
-              },
-              {
-                _id: '11',
-                ancestors: ['1'],
-                key: 'Level 2.1'
-              }
-            ]}
+          <Input
+            type="link"
+            disable={true}
+            link="Categories"
+            placeholder="Product Category"
+            value={_PRODUCT_CATEGORY}
             style={{
-              marginHorizontal: Styles.Content.marginHorizontal
+              marginHorizontal: Styles.Content.marginHorizontal,
+              marginBottom: Styles.Content.marginHorizontal
             }}
-            onLayout={(color) => {
-              return (
-                <Icon
-                  name="bookmark"
-                  color={color}
-                  style={{
-                    marginRight: Styles.Content.marginHorizontal
-                  }}/>
-              );
-            }}/>
+            onPress={() => props.setProductModalModalVisibility(true)}/>
 
           <View
             style={Styles.BottomPinnedContainer}>
@@ -249,6 +201,11 @@ class NewProductIdentity extends Component<{}> {
             onProgressSuccess={async (response) => {
               await props.appendWarehouse(response);
             }} />
+
+          <ProductCategoriesModal
+            visibility={props.newProduct.productCategoriesModalVisibility}
+            onBlur={() => props.setProductModalModalVisibility(false)}
+            onProgressSuccess={(response) => props.setCategory(response)} />
       </Container>
     );
   }

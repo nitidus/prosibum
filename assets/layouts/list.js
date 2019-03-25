@@ -72,8 +72,8 @@ const List = (props) => {
     attitude.onLayout = _ON_LAYOUT;
   }
 
-  if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.linkOnPress != 'undefined')){
-    attitude.onPress = props.onPress || props.onLinkPress || props.linkOnPress;
+  if ((typeof props.onPress != 'undefined') || (typeof props.onRowPress != 'undefined') || (typeof props.rowOnPress != 'undefined')){
+    attitude.onPress = props.onPress || props.onRowPress || props.rowOnPress;
   }
 
   const _DATA_SOURCE = _restructureTheDataSource(attitude.dataSource);
@@ -161,6 +161,8 @@ const List = (props) => {
                                   previous: props.list.targetLeaf.new,
                                   new: _DETECTED_PARENT_LEAF
                                 });
+
+                                attitude.onPress(_DETECTED_PARENT_LEAF);
                               }
 
                               props.setCurrentDepth(_DEPTH - 1);
@@ -222,6 +224,13 @@ const List = (props) => {
                                       });
 
                                       props.setCurrentDepth(_DEPTH + 1);
+
+                                      props.setTargetLeaf({
+                                        previous: props.list.targetLeaf.new,
+                                        new: nestedItem
+                                      });
+
+                                      attitude.onPress(nestedItem);
                                     }}>
                                       {_ROW_EXTRA_CONTENT}
 
@@ -243,8 +252,12 @@ const List = (props) => {
                                           previous: props.list.targetLeaf.new,
                                           new: nestedItem
                                         });
+
+                                        attitude.onPress(nestedItem);
                                       }else{
                                         props.setTargetNewLeaf(props.list.targetLeaf.previous);
+
+                                        attitude.onPress(props.list.targetLeaf.previous);
                                       }
                                     }}>
                                       {_ROW_EXTRA_CONTENT}
@@ -299,29 +312,72 @@ const List = (props) => {
                   }
                 }
 
-                return (
-                  <Input
-                    type={__CONSTANTS.row.type}
-                    key={Functions._generateNewUniqueObjectKey()}
-                    style={_CUSTOM_STYLE}
-                    onPress={() => {
-                      props.setSelectedRow({
-                        previous: props.list.selectedRow.new,
-                        new: item
-                      });
+                if (typeof item.children != 'undefined'){
+                  return (
+                    <Input
+                      type={__CONSTANTS.row.type}
+                      key={Functions._generateNewUniqueObjectKey()}
+                      style={_CUSTOM_STYLE}
+                      onPress={() => {
+                        props.setSelectedRow({
+                          previous: props.list.selectedRow.new,
+                          new: item
+                        });
 
-                      if (typeof item.children != 'undefined'){
                         props.setCurrentDepth(_DEPTH + 1);
-                      }
-                    }}>
-                      {_ROW_EXTRA_CONTENT}
 
-                      <Text
-                        style={_CUSTOM_TEXT_STYLE}>
-                          {item.key}
-                      </Text>
-                  </Input>
-                );
+                        props.setTargetLeaf({
+                          previous: props.list.targetLeaf.new,
+                          new: item
+                        });
+
+                        attitude.onPress(item);
+                      }}>
+                        {_ROW_EXTRA_CONTENT}
+
+                        <Text
+                          style={_CUSTOM_TEXT_STYLE}>
+                            {item.key}
+                        </Text>
+                    </Input>
+                  );
+                }else{
+                  return (
+                    <Input
+                      type={__CONSTANTS.row.type}
+                      key={Functions._generateNewUniqueObjectKey()}
+                      style={_CUSTOM_STYLE}
+                      onPress={() => {
+                        if (item._id !== props.list.targetLeaf.new._id){
+                          props.setTargetLeaf({
+                            previous: props.list.targetLeaf.new,
+                            new: item
+                          });
+
+                          attitude.onPress(item);
+                        }else{
+                          const _ROOT_ITEM_DEPTH = (typeof item.depth != 'undefined')? item.depth: ((typeof item.ancestors != 'undefined')? item.ancestors.length: 0);
+
+                          if (_ROOT_ITEM_DEPTH > 0){
+                            props.setTargetNewLeaf(props.list.targetLeaf.previous);
+
+                            attitude.onPress(props.list.targetLeaf.previous);
+                          }else{
+                            props.setTargetNewLeaf({});
+
+                            attitude.onPress({});
+                          }
+                        }
+                      }}>
+                        {_ROW_EXTRA_CONTENT}
+
+                        <Text
+                          style={_CUSTOM_TEXT_STYLE}>
+                            {item.key}
+                        </Text>
+                    </Input>
+                  );
+                }
               }
             }
           })

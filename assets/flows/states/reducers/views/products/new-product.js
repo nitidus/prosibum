@@ -5,6 +5,7 @@ const initialState = {
         name: '',
         currentWarehouse: {},
         warehouses: [],
+        category: {},
         features: [],
         photos: [],
         primaryPhoto: {},
@@ -15,6 +16,7 @@ const initialState = {
         shippingTypes: [],
         paymentTypes: [],
         warehouseModalVisibility: false,
+        productCategoriesModalVisibility: false,
         warehousesLoading: false,
         shippingTypesLoading: false,
         paymentTypesLoading: false,
@@ -51,6 +53,12 @@ export default (state = initialState, action) => {
           ...state.warehouses,
           action.payload
         ]
+      };
+      break;
+    case NEW_PRODUCT.SET_CATEGORY:
+      return {
+        ...state,
+        category: action.payload
       };
       break;
     case NEW_PRODUCT.SET_PRODUCT_FEATURES:
@@ -199,6 +207,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         warehouseModalVisibility: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_PRODUCT_CATEGORIES_MODAL_VISIBILITY:
+      return {
+        ...state,
+        productCategoriesModalVisibility: action.payload
       };
       break;
     case NEW_PRODUCT.FETCH_AVAILABLE_WAREHOUSES:
