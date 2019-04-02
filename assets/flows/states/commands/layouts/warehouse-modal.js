@@ -62,7 +62,7 @@ module.exports = {
       }
     } catch (error) {
       if (error){
-        const WALLET_MODAL = error.message || error.request._response;
+        const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
           type: WAREHOUSE_MODAL.SET_APPEND_WAREHOUSE_TO_RESOURCE_LOADING_STATUS,

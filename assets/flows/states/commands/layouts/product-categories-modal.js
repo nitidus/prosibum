@@ -6,14 +6,14 @@ const { PRODUCT_CATEGORIES_MODAL } = LAYOUTS;
 import { Functions } from '../../../../modules/index';
 
 module.exports = {
-  _getAvailableProductCategories: async (callback, dispatch) => {
+  _getAvailableProductCategories: async (dispatch) => {
     dispatch({
       type: PRODUCT_CATEGORIES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_CATEGORIES_LOADING_STATUS,
       payload: true
     })
 
     try {
-      const _PRODUCT_CATEGORIES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/PRODUCT_CATEGORIES_ENDPOINT_URL`);
+      const _PRODUCT_CATEGORIES = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/taxonomies/p.c`);
 
       if (_PRODUCT_CATEGORIES.status === 200){
         const _FINAL_RESPONSE = _PRODUCT_CATEGORIES.data;
@@ -22,7 +22,7 @@ module.exports = {
           const _DATA = _FINAL_RESPONSE.data;
 
           dispatch({
-            type: PRODUCT_CATEGORIES_MODAL.APPEND_WAREHOUSE_TO_RESOURCE,
+            type: PRODUCT_CATEGORIES_MODAL.FETCH_AVAILABLE_PRODUCT_CATEGORIES,
             payload: _DATA
           })
 
@@ -37,8 +37,6 @@ module.exports = {
               status: true
             }
           })
-
-          callback(_DATA, false);
         }else{
           dispatch({
             type: PRODUCT_CATEGORIES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_CATEGORIES_LOADING_STATUS,
@@ -56,7 +54,7 @@ module.exports = {
       }
     } catch (error) {
       if (error){
-        const WALLET_MODAL = error.message || error.request._response;
+        const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
           type: PRODUCT_CATEGORIES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_CATEGORIES_LOADING_STATUS,

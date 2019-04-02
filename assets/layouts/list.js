@@ -17,13 +17,33 @@ import { layouts_constants } from '../flows/knowledge/index';
 const __CONSTANTS = layouts_constants.list;
 
 const _restructureTheDataSource = (dataSource) => {
-        return dataSource.map((item, i) => {
-          var _RESPONSE = item;
+        return dataSource.map((item, i, totalItems) => {
+          var _RESPONSE = item,
+              _CHILDREN = totalItems;
 
           if (typeof _RESPONSE.ancestors != 'undefined'){
             _RESPONSE.depth = _RESPONSE.ancestors.length;
           }else{
             _RESPONSE.depth = 0;
+          }
+
+          _CHILDREN = _CHILDREN.filter((child, j) => {
+            if (typeof child.ancestors != 'undefined'){
+              const _CHILD_DEPTH = child.ancestors.length;
+
+              if (
+                ((_RESPONSE.depth + 1) === _CHILD_DEPTH) &&
+                child.ancestors.includes(_RESPONSE._id)
+              ){
+                return child;
+              }
+            }
+          });
+
+          if (_CHILDREN.length > 0){
+            _RESPONSE.children = _CHILDREN.map((child, j) => {
+              return child._id;
+            });
           }
 
           _RESPONSE.color = _RESPONSE.color || Styles.RowSelectedState.backgroundColor;
@@ -231,6 +251,14 @@ const List = (props) => {
                                       });
 
                                       attitude.onPress(nestedItem);
+                                    }}
+                                    onLongPress={() => {
+                                      props.setTargetLeaf({
+                                        previous: props.list.targetLeaf.new,
+                                        new: nestedItem
+                                      });
+
+                                      attitude.onPress(nestedItem);
                                     }}>
                                       {_ROW_EXTRA_CONTENT}
 
@@ -247,6 +275,20 @@ const List = (props) => {
                                     key={Functions._generateNewUniqueObjectKey()}
                                     style={_CUSTOM_STYLE}
                                     onPress={() => {
+                                      if (nestedItem._id !== props.list.targetLeaf.new._id){
+                                        props.setTargetLeaf({
+                                          previous: props.list.targetLeaf.new,
+                                          new: nestedItem
+                                        });
+
+                                        attitude.onPress(nestedItem);
+                                      }else{
+                                        props.setTargetNewLeaf(props.list.targetLeaf.previous);
+
+                                        attitude.onPress(props.list.targetLeaf.previous);
+                                      }
+                                    }}
+                                    onLongPress={() => {
                                       if (nestedItem._id !== props.list.targetLeaf.new._id){
                                         props.setTargetLeaf({
                                           previous: props.list.targetLeaf.new,
@@ -332,6 +374,14 @@ const List = (props) => {
                         });
 
                         attitude.onPress(item);
+                      }}
+                      onLongPress={() => {
+                        props.setTargetLeaf({
+                          previous: props.list.targetLeaf.new,
+                          new: item
+                        });
+
+                        attitude.onPress(item);
                       }}>
                         {_ROW_EXTRA_CONTENT}
 
@@ -348,6 +398,28 @@ const List = (props) => {
                       key={Functions._generateNewUniqueObjectKey()}
                       style={_CUSTOM_STYLE}
                       onPress={() => {
+                        if (item._id !== props.list.targetLeaf.new._id){
+                          props.setTargetLeaf({
+                            previous: props.list.targetLeaf.new,
+                            new: item
+                          });
+
+                          attitude.onPress(item);
+                        }else{
+                          const _ROOT_ITEM_DEPTH = (typeof item.depth != 'undefined')? item.depth: ((typeof item.ancestors != 'undefined')? item.ancestors.length: 0);
+
+                          if (_ROOT_ITEM_DEPTH > 0){
+                            props.setTargetNewLeaf(props.list.targetLeaf.previous);
+
+                            attitude.onPress(props.list.targetLeaf.previous);
+                          }else{
+                            props.setTargetNewLeaf({});
+
+                            attitude.onPress({});
+                          }
+                        }
+                      }}
+                      onLongPress={() => {
                         if (item._id !== props.list.targetLeaf.new._id){
                           props.setTargetLeaf({
                             previous: props.list.targetLeaf.new,

@@ -62,7 +62,7 @@ module.exports = {
       }
     } catch (error) {
       if (error){
-        const WALLET_MODAL = error.message || error.request._response;
+        const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
           type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
@@ -135,7 +135,7 @@ module.exports = {
       }
     } catch (error) {
       if (error){
-        const WALLET_MODAL = error.message || error.request._response;
+        const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
           type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
@@ -207,7 +207,7 @@ module.exports = {
       }
     } catch (error) {
       if (error){
-        const WALLET_MODAL = error.message || error.request._response;
+        const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
           type: WALLET_MODAL.SET_FETCH_WALLET_INITIAL_CREDIT_PLANS_LOADING_STATUS,

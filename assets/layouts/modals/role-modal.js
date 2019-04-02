@@ -75,7 +75,7 @@ const RoleModal = (props) => {
   if ((typeof props.reference != 'undefined') || (typeof props.referenceRole != 'undefined') || (typeof props.role != 'undefined')){
     attitude.reference = props.reference || props.referenceRole || props.role;
 
-    if (attitude.visibility === true){
+    if ((attitude.visibility === true) && (props.roleModal.loadingRolesType === false)){
       if (Object.keys(props.roleModal.reference).length > 0){
         if ((typeof attitude.reference._id != 'undefined') && (typeof props.roleModal.reference._id != 'undefined')){
           if (attitude.reference._id !== props.roleModal.reference._id){

@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: category
       })
     },
-    fetchAvailableProductCategories: async (callback) => CMD._getAvailableProductCategories(callback, dispatch),
+    fetchAvailableProductCategories: async () => CMD._getAvailableProductCategories(dispatch),
     setCategoriesLoadingStatus: (loadingStatus) => {
       dispatch({
         type: PRODUCT_CATEGORIES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_CATEGORIES_LOADING_STATUS,

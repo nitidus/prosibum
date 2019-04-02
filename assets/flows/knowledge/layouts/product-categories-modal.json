@@ -5,11 +5,27 @@
     },
     "content": {
       "firstList": {
-        "extraContent": {
-          "icon": {
-            "name": "bookmark"
+        "state": {
+          "normal": {
+            "extraContent": {
+              "icon": {
+                "name": "bookmark"
+              }
+            }
+          },
+          "loading": {
+            "type": "BUTTON",
+            "title": {
+              "en": "Categories Loading"
+            }
+          },
+          "empty": {
+            "title": {
+              "en": "There's no Product categories."
+            }
           }
         }
+
       },
       "submitInput": {
         "type": "BUTTON",

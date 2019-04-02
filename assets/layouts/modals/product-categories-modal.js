@@ -6,6 +6,7 @@ const _Screen = Dimensions.get('window');
 import { connect } from 'react-redux';
 
 import { Global, Modules } from '../../styles/index';
+import { ActivityIndicator } from '../activity-indicator';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
 import List from '../list';
@@ -81,11 +82,21 @@ const ProductCategoriesModal = (props) => {
     attitude.onProgressSuccess = props.onProgressSuccess || props.onProgressComplete || props.onProgressDone || props.onTaskSuccess || props.onTaskComplete || props.onTaskDone || props.onDutySuccess || props.onDutyComplete || props.onDutyDone || props.onObligationSuccess || props.onObligationComplete || props.onObligationDone || props.onSuccessProgress || props.onCompleteProgress || props.onDoneProgress || props.onSuccessTask || props.onCompleteTask || props.onDoneTask || props.onSuccessDuty || props.onCompleteDuty || props.onDoneDuty || props.onSuccessObligation || props.onCompleteObligation || props.onDoneObligation;
   }
 
+  if (attitude.visibility === true){
+    if (
+      (props.productCategoriesModal.categories.length === 0) &&
+      (Object.keys(props.productCategoriesModal.currentCategory).length === 0) &&
+      (props.productCategoriesModal.categoriesLoading === false)
+    ){
+      props.fetchAvailableProductCategories();
+    }
+  }
+
   const MODAL = {
           BACKDROP_BLUR_TYPE: "dark",
           ON_BLUR: (status) => {
             attitude.onBlur(status);
-            props.resetModal();
+            // props.resetModal();
           },
           ON_PROGRESS_SUCCESS: async (response) => attitude.onProgressSuccess(response),
           ITEMS: {
@@ -94,6 +105,60 @@ const ProductCategoriesModal = (props) => {
         };
 
   const _VALIDATED = _componentWillCheckValidation(props);
+
+  var _LIST_CONTENT;
+
+  if (props.productCategoriesModal.categoriesLoading === true){
+    _LIST_CONTENT = (
+      <Input
+        type={__CONSTANTS.modalContainer.content.firstList.state.loading.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstList.state.loading.title.en)}
+        style={{
+          backgroundColor: Global.colors.single.mercury
+        }}
+        disable={true}>
+          <ActivityIndicator color={Global.colors.single.lavenderGray}/>
+      </Input>
+    );
+  }else{
+    if (props.productCategoriesModal.categories.length > 0) {
+      _LIST_CONTENT = (
+        <View>
+          <List
+            dataSource={props.productCategoriesModal.categories}
+            onLayout={(color) => {
+              return (
+                <Icon
+                  name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
+                  color={color}
+                  style={{
+                    marginRight: Styles.Content.marginHorizontal
+                  }}/>
+              );
+            }}
+            onPress={(response) => props.setCurrentCategory(response)}/>
+
+          <Input
+            type={__CONSTANTS.modalContainer.content.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+            value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
+            gradient={Global.colors.pair.ongerine}
+            onPress={() => {
+              attitude.onProgressSuccess(props.productCategoriesModal.currentCategory);
+              MODAL.ON_BLUR(false);
+            }}
+            forcedDisable={_VALIDATED}/>
+        </View>
+      );
+    }else{
+      _LIST_CONTENT = (
+        <Link
+          containerStyle={Styles.Center_ContentAlignment}
+          style={Styles.Center_TextAlignment}
+          value={__CONSTANTS.modalContainer.content.firstList.state.empty.title.en} />
+      );
+    }
+  }
 
   return (
     <Modal
@@ -109,79 +174,7 @@ const ProductCategoriesModal = (props) => {
         }
       ]}
       swipeDirection="down">
-        <List
-          dataSource={[
-            {
-              _id: '0',
-              children: ['01'],
-              key: 'Level 1.0'
-            },
-            {
-              _id: '01',
-              ancestors: ['0'],
-              children: ['011'],
-              key: 'Level 1.1'
-            },
-            {
-              _id: '011',
-              ancestors: ['0', '01'],
-              children: ['0111'],
-              key: 'Level 1.1.1'
-            },
-            {
-              _id: '0111',
-              ancestors: ['0', '01', '011'],
-              children: ['01111'],
-              key: 'Level 1.1.1.1'
-            },
-            {
-              _id: '01111',
-              ancestors: ['0', '01', '011', '0111'],
-              children: ['011111'],
-              key: 'Level 1.1.1.1.1'
-            },
-            {
-              _id: '011111',
-              ancestors: ['0', '01', '011', '0111', '01111'],
-              key: 'Level 1.1.1.1.1.1'
-            },
-            {
-              _id: '1',
-              children: ['11'],
-              key: 'Level 2.0'
-            },
-            {
-              _id: '11',
-              ancestors: ['1'],
-              key: 'Level 2.1'
-            },
-            {
-              _id: '2',
-              key: 'Level 3.0'
-            }
-          ]}
-          onLayout={(color) => {
-            return (
-              <Icon
-                name={__CONSTANTS.modalContainer.content.firstList.extraContent.icon.name}
-                color={color}
-                style={{
-                  marginRight: Styles.Content.marginHorizontal
-                }}/>
-            );
-          }}
-          onPress={(response) => {
-            props.setCurrentCategory(response);
-            attitude.onProgressSuccess(response);
-          }}/>
-
-        <Input
-          type={__CONSTANTS.modalContainer.content.submitInput.type}
-          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-          value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
-          gradient={Global.colors.pair.ongerine}
-          onPress={() => MODAL.ON_BLUR(false)}
-          forcedDisable={_VALIDATED}/>
+        {_LIST_CONTENT}
     </Modal>
   );
 };
