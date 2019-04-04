@@ -24,8 +24,8 @@ import Wallets from './views/dashboard/wallets';
 
 //Products
 
-  //New Product Identity
-  import NewProductIdentity from './views/products/new-product-identity';
+  //New Product
+  import NewProduct from './views/products/new-product';
 
 /*** Modules ***/
 
@@ -60,7 +60,7 @@ module.exports = {
       Self: Dashboard
     },
     Products: {
-      NewProductIdentity
+      NewProduct
     }
   },
   Modules: {

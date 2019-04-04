@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { View, KeyboardAvoidingView, Dimensions, Platform, Text, Image } from 'react-native';
+import { View, Dimensions, Platform, Text, Image, Keyboard } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, Pin, WarehouseModal, ProductCategoriesModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, WarehouseModal, ProductCategoriesModal } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
-const Styles = Views.Products.NewProductIdentity,
+const Styles = Views.Products.NewProduct,
       Container = ViewsContainer.Products.NewProductContainer;
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
@@ -28,13 +28,32 @@ class NewProductIdentity extends Component<{}> {
   async componentDidMount() {
     const { props } = this;
 
+    props.setProductName('');
+    props.setCurrentWarehouse({});
+    props.setWarehouses([]);
+    props.setCategory({});
+
     await props.fetchAvailableWarehouses();
+  }
+
+  _componentWillCheckValidation(props) {
+    const _PROPS = props.newProduct;
+
+    var _FORM_FIELDS_VALIDITY = false;
+
+    if ((_PROPS.name != '') && (Object.keys(_PROPS.currentWarehouse).length > 0) && (Object.keys(_PROPS.category).length > 0)){
+      if (_PROPS.name.length > 7){
+        _FORM_FIELDS_VALIDITY = true;
+      }
+    }
+
+    return !_FORM_FIELDS_VALIDITY;
   }
 
   render() {
     const { props } = this;
 
-    var _TAB_CONTENT, _WAREHOUSE_CONTENT;
+    var _WAREHOUSE_CONTENT;
 
     if (props.newProduct.warehousesLoading){
       _WAREHOUSE_CONTENT = (
@@ -135,19 +154,25 @@ class NewProductIdentity extends Component<{}> {
       }
     }
 
-    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'padding': '',
-          _PRODUCT_CATEGORY = (Object.keys(props.newProduct.category).length > 0)? props.newProduct.category.key: '';
+    const _PRODUCT_CATEGORY = (Object.keys(props.newProduct.category).length > 0)? props.newProduct.category.key: '',
+          _VALIDATED = this._componentWillCheckValidation(props);
 
-    _TAB_CONTENT = (
-      <KeyboardAvoidingView
-        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}
-        style={Styles.MajorContent}>
+    return (
+      <Container
+        title={Functions._convertKeywordToToken(__CONSTANTS.pilot.title.en)}
+        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle.en)}
+        {...props}>
           <Input
             type={__CONSTANTS.content.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}
             placeholder={__CONSTANTS.content.firstInput.title.en}
             value={props.newProduct.name}
-            style={Styles.RegularItemContainer}
+            style={[
+              Styles.RegularItemContainer,
+              {
+                marginTop: Styles.Content.marginVertical
+              }
+            ]}
             onChangeText={(currentValue) => props.setProductName(currentValue)} />
 
           {_WAREHOUSE_CONTENT}
@@ -162,7 +187,10 @@ class NewProductIdentity extends Component<{}> {
               marginHorizontal: Styles.Content.marginHorizontal,
               marginBottom: Styles.Content.marginHorizontal
             }}
-            onPress={() => props.setProductModalModalVisibility(true)}
+            onPress={() => {
+              Keyboard.dismiss();
+              props.setProductModalModalVisibility(true);
+            }}
             disable={true} />
 
           <View
@@ -184,17 +212,14 @@ class NewProductIdentity extends Component<{}> {
                 gradient={Global.colors.pair.ongerine}
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal
-                }} />
-          </View>
-      </KeyboardAvoidingView>
-    );
+                }}
+                onPress={() => {
+                  const { navigation } = props;
 
-    return (
-      <Container
-        title={Functions._convertKeywordToToken(__CONSTANTS.pilot.title.en)}
-        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle.en)}
-        {...props}>
-          {_TAB_CONTENT}
+                  navigation.navigate('NewProductFeatures');
+                }}
+                forcedDisable={_VALIDATED} />
+          </View>
 
           <WarehouseModal
             visibility={props.newProduct.warehouseModalVisibility}

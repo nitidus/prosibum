@@ -1,0 +1,80 @@
+{
+  "pilot": {
+    "title": {
+      "en": "New Product"
+    },
+    "subtitle": {
+      "en": "Product Features"
+    }
+  },
+  "content": {
+    "firstInput": {
+      "type": "TEXT",
+      "title": {
+        "en": "Product Name"
+      }
+    },
+    "firstCarousel": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Warehouses"
+          },
+          "content": {
+            "title": {
+              "en": "Warehouse Item"
+            },
+            "suffix": {
+              "en": "Products"
+            }
+          }
+        },
+        "loading": {
+          "title": {
+            "en": "Warehouses Loading"
+          }
+        },
+        "disconected": {
+          "title": {
+            "en": "Warehouses Disconected Situation"
+          }
+        },
+        "null": {
+          "title": {
+            "en": "There's no warehouse."
+          }
+        }
+      }
+    },
+    "secondInput": {
+      "type": "LINK",
+      "link": {
+        "en": "Categories"
+      },
+      "title": {
+        "en": "Product Categories"
+      }
+    },
+    "modalHandlerButton": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Append Warehouse"
+          }
+        }
+      }
+    },
+    "submitButton": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Append Features"
+          }
+        }
+      }
+    }
+  }
+}

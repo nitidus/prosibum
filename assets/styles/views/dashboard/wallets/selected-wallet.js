@@ -33,6 +33,7 @@ var _CUSTOM_CONTENT = {
     },
     _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
       height: 23,
+      width: 15
     },
     _CUSTOM___GLOBAL_ICONS_IN_ROLE = {
       height: 32
@@ -44,6 +45,7 @@ var _CUSTOM_CONTENT = {
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 10;
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 10;
 
     _CUSTOM_CONTENT.marginHorizontal = 202;
 
@@ -64,6 +66,7 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_TRANSACTION_PIN.marginBottom = 15;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 2;
 
     _CUSTOM_TRANSACTION_ITEM_CONTAINER.height += 3;
 

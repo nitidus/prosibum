@@ -96,7 +96,7 @@ const ProductCategoriesModal = (props) => {
           BACKDROP_BLUR_TYPE: "dark",
           ON_BLUR: (status) => {
             attitude.onBlur(status);
-            // props.resetModal();
+            props.resetModal();
           },
           ON_PROGRESS_SUCCESS: async (response) => attitude.onProgressSuccess(response),
           ITEMS: {
@@ -121,43 +121,34 @@ const ProductCategoriesModal = (props) => {
       </Input>
     );
   }else{
-    if (props.productCategoriesModal.categories.length > 0) {
-      _LIST_CONTENT = (
-        <View>
-          <List
-            dataSource={props.productCategoriesModal.categories}
-            onLayout={(color) => {
-              return (
-                <Icon
-                  name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
-                  color={color}
-                  style={{
-                    marginRight: Styles.Content.marginHorizontal
-                  }}/>
-              );
-            }}
-            onPress={(response) => props.setCurrentCategory(response)}/>
+    _LIST_CONTENT = (
+      <View>
+        <List
+          dataSource={props.productCategoriesModal.categories}
+          onLayout={(color) => {
+            return (
+              <Icon
+                name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
+                color={color}
+                style={{
+                  marginRight: Styles.Content.marginHorizontal
+                }}/>
+            );
+          }}
+          onPress={(response) => props.setCurrentCategory(response)}/>
 
-          <Input
-            type={__CONSTANTS.modalContainer.content.submitInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-            value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
-            gradient={Global.colors.pair.ongerine}
-            onPress={() => {
-              attitude.onProgressSuccess(props.productCategoriesModal.currentCategory);
-              MODAL.ON_BLUR(false);
-            }}
-            forcedDisable={_VALIDATED}/>
-        </View>
-      );
-    }else{
-      _LIST_CONTENT = (
-        <Link
-          containerStyle={Styles.Center_ContentAlignment}
-          style={Styles.Center_TextAlignment}
-          value={__CONSTANTS.modalContainer.content.firstList.state.empty.title.en} />
-      );
-    }
+        <Input
+          type={__CONSTANTS.modalContainer.content.submitInput.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+          value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}
+          gradient={Global.colors.pair.ongerine}
+          onPress={() => {
+            attitude.onProgressSuccess(props.productCategoriesModal.currentCategory);
+            attitude.onBlur(false);
+          }}
+          forcedDisable={_VALIDATED}/>
+      </View>
+    );
   }
 
   return (

@@ -71,7 +71,7 @@ export const ProfileContainer = (props) => {
               }}>
                 <Icon
                   name="arrow left"
-                  height={Styles.__Gobal_Icons_In_Pilot.height} />
+                  left={Styles.__Gobal_Icons_In_Pilot.left} />
             </PinnedSide>
             <PinnedSide
               type="right"

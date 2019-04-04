@@ -71,7 +71,9 @@ class Overseer extends Component<{}> {
           _OTHER_PROPS.onRightIconPress = () => {
             const { navigation } = props;
 
-            navigation.navigate('NewProductIdentity')
+            navigation.navigate('NewProductIdentity', {
+              isRoot: true
+            });
           };
           _OTHER_PROPS.rightIcon = 'plus';
 

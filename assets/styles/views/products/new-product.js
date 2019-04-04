@@ -27,7 +27,8 @@ var _CUSTOM_CONTENT = {
       marginBottom: 10
     },
     _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
-      height: 16
+      height: 23,
+      width: 15
     };
 
 if (Platform.OS !== 'ios'){
@@ -35,6 +36,7 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_CONTENT.marginHorizontal = 202;
 
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 10;
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 10;
 
     _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 48;
 
@@ -45,6 +47,7 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 4;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 2;
 
     _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 3;
 
@@ -85,11 +88,6 @@ module.exports = StyleSheet.create({
   Content: {
     ..._CUSTOM_CONTENT
   },
-  MajorContent: {
-    flex: 1,
-    marginTop: _CUSTOM_CONTENT.marginVertical,
-    marginBottom: (_IS_IPHONE_X)? _CUSTOM_CONTENT.marginVertical * 1.85: _CUSTOM_CONTENT.marginVertical
-  },
   PilotButton: {
     ..._CUSTOM_PILOT_BUTTON
   },
@@ -129,7 +127,8 @@ module.exports = StyleSheet.create({
   },
   BottomPinnedContainer: {
     flexGrow: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    bottom: (_IS_IPHONE_X)? _CUSTOM_CONTENT.marginVertical * 1.85: _CUSTOM_CONTENT.marginVertical
   },
   LTR_ContentAlignment: {
     alignItems: 'flex-start'

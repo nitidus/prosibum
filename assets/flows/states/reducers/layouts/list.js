@@ -16,6 +16,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case LIST.RESET_LIST:
+      return initialState;
+      break;
     case LIST.SET_LIST_DATA_SOURCE:
       return {
         ...state,

@@ -9,6 +9,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    resetList: () => {
+      dispatch({
+        type: LIST.RESET_LIST
+      })
+    },
     setDataSource: (dataSource) => {
       dispatch({
         type: LIST.SET_LIST_DATA_SOURCE,

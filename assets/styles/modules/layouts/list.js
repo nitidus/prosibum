@@ -50,5 +50,20 @@ module.exports = StyleSheet.create({
   },
   DefaultTextStyleDarkMode: {
     color: colors.single.romance
+  },
+  EmptyContent: {
+    marginBottom: 15
+  },
+  Center_TextAlignment: {
+    textAlign: 'center'
+  },
+  Center_ContentAlignment: {
+    alignItems: 'center'
+  },
+  LTR_ContentAlignment: {
+    alignItems: 'flex-start'
+  },
+  RTL_ContentAlignment: {
+    alignItems: 'flex-end'
   }
 });

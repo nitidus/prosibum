@@ -3,7 +3,7 @@ import { StatusBar, View, KeyboardAvoidingView, Text, TouchableWithoutFeedback, 
 
 import { Global, Views } from '../../../../styles/index';
 import { Pilot, TabBarItem, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
-const Styles = Views.Products.NewProductIdentity;
+const Styles = Views.Products.NewProduct;
 
 import { Functions } from '../../../../modules/index';
 
@@ -60,13 +60,19 @@ export const NewProductContainer = (props) => {
             <PinnedSide
               type="left"
               onPress={() => {
-                const { navigation } = props;
+                const { navigation } = props,
+                      { params } = navigation.state,
+                      _IS_ROOT = (typeof params != 'undefined')? ((typeof params.isRoot != 'undefined')? params.isRoot: false): false;
 
-                navigation.navigate('Overseer');
+                if (_IS_ROOT === true){
+                  navigation.navigate('Overseer');
+                }else{
+                  navigation.goBack();
+                }
               }}>
                 <Icon
                   name="arrow left"
-                  width={Styles.__Gobal_Icons_In_Pilot.height} />
+                  width={Styles.__Gobal_Icons_In_Pilot.width} />
             </PinnedSide>
 
             {_RIGHT_PINNED_ITEMS}

@@ -19,6 +19,7 @@ import Wallets from './dashboard/wallets';
 
   //Wallets Subsets
   import NewProductIdentity from './products/new-product-identity';
+  import NewProductFeatures from './products/new-product-features';
 
 //Authentication Screens
 import Login from './authentication/login';
@@ -33,7 +34,8 @@ import Authorization from './authorization';
 import Overseer from './overseer';
 
 const ProductsStack = createStackNavigator({
-  NewProductIdentity
+  NewProductIdentity,
+  NewProductFeatures
 }, {
   headerMode: 'none'
 });

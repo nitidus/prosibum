@@ -86,7 +86,7 @@ export const SelectedRoleContainer = (props) => {
               }}>
                 <Icon
                   name="arrow left"
-                  height={Styles.__Gobal_Icons_In_Pilot.height} />
+                  width={Styles.__Gobal_Icons_In_Pilot.width} />
             </PinnedSide>
 
             {_DEPENDED_RIGHT_PINNED_SIDE}

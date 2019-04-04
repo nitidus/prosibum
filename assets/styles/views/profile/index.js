@@ -16,7 +16,8 @@ var _CUSTOM_SCROLLABLE_CONTAINER = {
       marginRight: 15
     },
     _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
-      height: 23
+      height: 23,
+      width: 15
     };
 
 if (Platform.OS !== 'ios'){
@@ -26,8 +27,10 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BUTTON_TITLE.fontSize += 7;
 
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 10;
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 10;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
+    _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 2;
   }
 
   _CUSTOM_BUTTON_TITLE.fontWeight = '500';

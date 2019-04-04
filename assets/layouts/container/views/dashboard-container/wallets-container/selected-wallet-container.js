@@ -113,7 +113,7 @@ export const SelectedWalletContainer = (props) => {
               }}>
                 <Icon
                   name="arrow left"
-                  height={Styles.__Gobal_Icons_In_Pilot.height} />
+                  width={Styles.__Gobal_Icons_In_Pilot.width} />
             </PinnedSide>
         </Pilot>
 
