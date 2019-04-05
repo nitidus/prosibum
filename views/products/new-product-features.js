@@ -5,7 +5,7 @@ const _Screen = Dimensions.get('window');
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, ProductCategoriesModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, ProductFeaturesModal } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewProduct,
@@ -56,11 +56,16 @@ class NewProductFeatures extends Component<{}> {
         title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
         subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle.en)}
         rightIcon="plus"
-        onRightIconPress={() => {
-          alert('ok')
-        }}
+        onRightIconPress={() => props.setProductFeaturesModalVisibility(true)}
         {...props}>
           <Text>ok</Text>
+
+          <ProductFeaturesModal
+            visibility={/*props.newProduct.productFeaturesModalVisibility*/true}
+            onBlur={() => props.setProductFeaturesModalVisibility(false)}
+            onProgressSuccess={(response) => {
+              // props.setCategory(response)
+            }} />
       </Container>
     );
   }

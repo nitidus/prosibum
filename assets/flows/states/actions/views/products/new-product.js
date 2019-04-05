@@ -132,9 +132,15 @@ const mapDispatchToProps = (dispatch) => {
         payload: visibilityStatus
       })
     },
-    setProductModalModalVisibility: (visibilityStatus) => {
+    setProductCategoriesModalVisibility: (visibilityStatus) => {
       dispatch({
         type: NEW_PRODUCT.SET_PRODUCT_CATEGORIES_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
+    setProductFeaturesModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_PRODUCT_FEATURES_MODAL_VISIBILITY,
         payload: visibilityStatus
       })
     },

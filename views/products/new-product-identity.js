@@ -189,7 +189,7 @@ class NewProductIdentity extends Component<{}> {
             }}
             onPress={() => {
               Keyboard.dismiss();
-              props.setProductModalModalVisibility(true);
+              props.setProductCategoriesModalVisibility(true);
             }}
             disable={true} />
 
@@ -230,7 +230,7 @@ class NewProductIdentity extends Component<{}> {
 
           <ProductCategoriesModal
             visibility={props.newProduct.productCategoriesModalVisibility}
-            onBlur={() => props.setProductModalModalVisibility(false)}
+            onBlur={() => props.setProductCategoriesModalVisibility(false)}
             onProgressSuccess={(response) => props.setCategory(response)} />
       </Container>
     );

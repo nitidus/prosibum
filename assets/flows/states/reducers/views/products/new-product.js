@@ -17,6 +17,7 @@ const initialState = {
         paymentTypes: [],
         warehouseModalVisibility: false,
         productCategoriesModalVisibility: false,
+        productFeaturesModalVisibility: false,
         warehousesLoading: false,
         shippingTypesLoading: false,
         paymentTypesLoading: false,
@@ -213,6 +214,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productCategoriesModalVisibility: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_PRODUCT_FEATURES_MODAL_VISIBILITY:
+      return {
+        ...state,
+        productFeaturesModalVisibility: action.payload
       };
       break;
     case NEW_PRODUCT.FETCH_AVAILABLE_WAREHOUSES:
