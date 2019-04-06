@@ -61,10 +61,11 @@ class NewProductFeatures extends Component<{}> {
           <Text>ok</Text>
 
           <ProductFeaturesModal
-            visibility={/*props.newProduct.productFeaturesModalVisibility*/true}
+            visibility={props.newProduct.productFeaturesModalVisibility}
             onBlur={() => props.setProductFeaturesModalVisibility(false)}
             onProgressSuccess={(response) => {
               // props.setCategory(response)
+              console.log(response)
             }} />
       </Container>
     );

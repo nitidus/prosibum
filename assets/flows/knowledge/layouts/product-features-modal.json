@@ -1,0 +1,113 @@
+{
+  "modalContainer": {
+    "title": {
+      "en": "Product Features Modal"
+    },
+    "content": {
+      "firstCarousel": {
+        "title": {
+          "en": "Product Features"
+        },
+        "content": {
+          "self": {
+            "type": "BUTTON",
+            "title": {
+              "en": "Feature Type"
+            },
+            "icon": {
+              "name": "grading"
+            },
+            "context": {
+              "unit": {
+                "firstCarousel": {
+                  "title": {
+                    "en": "Product Units"
+                  },
+                  "content": {
+                    "self": {
+                      "type": "BUTTON",
+                      "title": {
+                        "en": "Unit Type"
+                      },
+                      "icon": {
+                        "name": "grading"
+                      }
+                    },
+                    "empty": {
+                      "title": {
+                        "en": "There's no unit."
+                      }
+                    }
+                  }
+                },
+                "firstInput": {
+                  "type": "NUMERIC",
+                  "title": {
+                    "en": "Minimum Order Quantity"
+                  },
+                  "options": {
+                    "maxLength": 9
+                  }
+                },
+                "secondInput": {
+                  "type": "NUMERIC",
+                  "title": {
+                    "en": "Maximum Order Quantity"
+                  },
+                  "options": {
+                    "maxLength": 9
+                  }
+                },
+                "thirdInput": {
+                  "type": "NUMERIC",
+                  "title": {
+                    "en": "Quantity"
+                  },
+                  "options": {
+                    "maxLength": 9
+                  }
+                }
+              },
+              "description": {
+                "firstInput": {
+                  "type": "TEXT",
+                  "title": {
+                    "en": "Description"
+                  },
+                  "options": {
+                    "multiline": true
+                  }
+                }
+              },
+              "customized": {
+                "firstInput": {
+                  "type": "TEXT",
+                  "title": {
+                    "en": "Customized Feature Name"
+                  }
+                },
+                "secondInput": {
+                  "type": "TEXT",
+                  "title": {
+                    "en": "Customized Feature Value"
+                  }
+                }
+              }
+            }
+          },
+          "empty": {
+            "title": {
+              "en": "There's no feature."
+            }
+          }
+        }
+      },
+      "submitInput": {
+        "type": "BUTTON",
+        "prefix": {
+          "en": "Append"
+        }
+      }
+    }
+  }
+}

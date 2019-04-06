@@ -25,6 +25,42 @@ export const Input = (props) => {
 
     switch (attitude.type) {
       case 'text':
+        if (typeof props.placeholder != 'undefined'){
+          attitude.placeholder = props.placeholder;
+        }
+
+        if (typeof props.value != 'undefined'){
+          attitude.value = props.value || '';
+        }
+
+        if (typeof props.multiline != 'undefined'){
+          otherProps.multiline = attitude.multiline = props.multiline || false;
+          otherProps.blurOnSubmit = attitude.blurOnSubmit = props.blurOnSubmit || false;
+        }else{
+          otherProps.onSubmitEditing = attitude.onSubmitEditing = Keyboard.dismiss;
+        }
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
+        }
+
+        attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
+        }
+
+        if (attitude.type === 'text'){
+          attitude.autoCapitalize = props.autoCapitalize || 'words';
+        }
+
+        if (typeof props.maxLength != 'undefined'){
+          otherProps.maxLength = attitude.maxLength = props.maxLength;
+        }
+
+        attitude.onBlur = props.onBlur || function (){};
+        attitude.onFocus = props.onFocus || function (){};
+        break;
       case 'email':
       case 'numeric':
       case 'password':
@@ -227,14 +263,25 @@ export const Input = (props) => {
 
   switch (attitude.type) {
     case 'text':
+      var _TEXT_INPUT_STYLES = [
+        Styles.ContainerWithoutButton
+      ];
+
+      if ((typeof otherProps.multiline != 'undefined') && (otherProps.multiline === true)){
+        _TEXT_INPUT_STYLES.push({
+          textAlignVertical: 'top',
+          paddingTop: Styles.ContainerWithoutButton.height / 3.5,
+          height: Styles.ContainerWithoutButton.height * 2
+        });
+      }
+
+      _TEXT_INPUT_STYLES.push(attitude.style);
+
       return (
         <TextInput
           key={attitude.key}
           name={attitude.name}
-          style={[
-            Styles.ContainerWithoutButton,
-            attitude.style
-          ]}
+          style={_TEXT_INPUT_STYLES}
           autoCapitalize={attitude.autoCapitalize}
           value={attitude.value}
           placeholder={attitude.placeholder}
@@ -244,7 +291,6 @@ export const Input = (props) => {
           onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
-          onSubmitEditing={Keyboard.dismiss}
           editable={!attitude.disable}
           {...otherProps} />
       );
@@ -267,7 +313,6 @@ export const Input = (props) => {
           onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
-          onSubmitEditing={Keyboard.dismiss}
           editable={!attitude.disable}
           {...otherProps} />
       );
@@ -292,7 +337,6 @@ export const Input = (props) => {
           onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
-          onSubmitEditing={Keyboard.dismiss}
           editable={!attitude.disable}
           {...otherProps} />
       );
@@ -317,7 +361,6 @@ export const Input = (props) => {
           onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
-          onSubmitEditing={Keyboard.dismiss}
           editable={!attitude.disable}
           {...otherProps} />
       );
@@ -394,7 +437,6 @@ export const Input = (props) => {
               }}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss}
               editable={!attitude.disable}
               {...otherProps} />
 
@@ -443,7 +485,6 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss}
               editable={!attitude.disable}
               {...otherProps} />
 
@@ -493,7 +534,6 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss}
               editable={!attitude.disable}
               {...otherProps} />
 
@@ -542,7 +582,6 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss}
               editable={!attitude.disable}
               {...otherProps} />
 
@@ -591,7 +630,6 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss}
               editable={!attitude.disable}
               {...otherProps} />
 
@@ -641,7 +679,6 @@ export const Input = (props) => {
               onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
-              onSubmitEditing={Keyboard.dismiss}
               editable={!attitude.disable}
               {...otherProps} />
 

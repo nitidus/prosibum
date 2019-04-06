@@ -19,7 +19,7 @@ import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions'
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.ProductFeaturesModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.product_categories_modal;
+const __CONSTANTS = layouts_constants.product_features_modal;
 
 const _componentWillCheckValidation = (props) => {
   const _PROPS = props.productFeaturesModal;
@@ -30,27 +30,25 @@ const _componentWillCheckValidation = (props) => {
     switch (Functions._convertTokenToKeyword(_PROPS.currentFeature.key)) {
       case 'unit':
       default:
-        if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0)){
+        if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
           const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 2),
-                _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2);
+                _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2),
+                _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
 
-          if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID){
-            _FORM_FIELDS_VALIDITY = true;
-          }
-        }
-        break;
-      case 'quantity':
-        if (_PROPS.quantity > 0){
-          const _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
-
-          if (_IS_QTY_VALID){
+          if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
             _FORM_FIELDS_VALIDITY = true;
           }
         }
         break;
       case 'description':
+        if (_PROPS.description != ''){
+          _FORM_FIELDS_VALIDITY = true;
+        }
         break;
       case 'customized':
+        if ((_PROPS.customizedFeatureName != '') && (_PROPS.customizedFeatureValue != '')){
+          _FORM_FIELDS_VALIDITY = true;
+        }
         break;
     }
   }
@@ -133,7 +131,7 @@ const ProductFeaturesModal = (props) => {
   if (props.productFeaturesModal.featuresLoading === true){
     _MODAL_CONTENT = (
       <Input
-        type="button"
+        type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.type}
         gradient={Global.colors.pair.ongerine}
         style={[
           Styles.DetailItemContainer,
@@ -149,14 +147,17 @@ const ProductFeaturesModal = (props) => {
     if (!props.productFeaturesModal.connected.status){
       _MODAL_CONTENT = (
         <Input
-          type="button"
+          type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.type}
           style={[
             Styles.DetailItemContainer,
             {
-              color: Global.colors.single.carminePink,
+              backgroundColor: Global.colors.single.carminePink,
               marginHorizontal: Styles.Content.marginHorizontal
             }
           ]}
+          textStyle={{
+            color: Global.colors.single.romance
+          }}
           value={props.wallets.connected.content}
           disable={true}/>
       );
@@ -169,7 +170,7 @@ const ProductFeaturesModal = (props) => {
         _MODAL_CONTENT = [
           (
             <Carousel
-              name="{__CONSTANTS.modalContainer.content.thirdHiddenTab.firstCarousel.state.normal.title.en}"
+              name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.type}
               data={props.productFeaturesModal.features}
               firstItem={_SELECTED_INDEX}
               style={Styles.DetailContainer}
@@ -183,7 +184,7 @@ const ProductFeaturesModal = (props) => {
 
                 return (
                   <Input
-                    type="button"
+                    type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.type}
                     gradient={_ITEM_GRADIENT}
                     style={[
                       Styles.DetailItemContainer,
@@ -194,13 +195,13 @@ const ProductFeaturesModal = (props) => {
                       style={Styles.DetailItemMasterInfoContent}>
                         <Text
                           style={Styles.BriefDetailTitle}>
-                            {"Feature Type"}
+                            {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.title.en)}
                         </Text>
                     </View>
                     <View
                       style={Styles.DetailItemMasterSubInfoContent}>
                         <Icon
-                          name={"grading"}
+                          name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.icon.name}
                           color={Global.colors.single.romance} />
 
                         <Text
@@ -211,98 +212,287 @@ const ProductFeaturesModal = (props) => {
                   </Input>
                 )
               }}
-              onSnap={(selectedItemIndex) => props.setCurrentFeature(props.productFeaturesModal.features[selectedItemIndex])}/>
+              onSnap={(selectedItemIndex) => {
+                props.setCurrentFeature(props.productFeaturesModal.features[selectedItemIndex]);
+                props.resetModalIndependly();
+              }}/>
           )
         ];
+
+        var _IS_ALL_EXTRA_DEPENDED_FIELDS_PREPARED = false;
 
         switch (Functions._convertTokenToKeyword(props.productFeaturesModal.currentFeature.key)) {
           case 'unit':
           default:
-          const _MIN_ORDER_QTY = (props.productFeaturesModal.minimumOrderQuantity > 0)? props.productFeaturesModal.minimumOrderQuantity: '',
-                _MAX_ORDER_QTY = (props.productFeaturesModal.maximumOrderQuantity > 0)? props.productFeaturesModal.maximumOrderQuantity: '';
+            if (
+              (props.productFeaturesModal.units.length === 0) &&
+              (Object.keys(props.productFeaturesModal.selectedUnit).length === 0) &&
+              (props.productFeaturesModal.unitsLoading === false)
+            ){
+              props.fetchAvailableProductUnits();
+            }
 
-            _MODAL_CONTENT = [
-              ..._MODAL_CONTENT,
-              (
+            if (props.productFeaturesModal.unitsLoading === true){
+              _MODAL_CONTENT.push(
                 <Input
-                  type="numeric"
-                  name="{Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}"
-                  placeholder="Minimum Order Quantity"
-                  value={_MIN_ORDER_QTY}
+                  type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
+                  gradient={Global.colors.pair.ongerine}
                   style={[
-                    Styles.RegularItemContainer,
+                    Styles.DetailItemContainer,
                     {
                       marginBottom: Styles.Content.marginVertical,
                       marginHorizontal: Styles.Content.marginHorizontal
                     }
                   ]}
-                  maxLength={9}
-                  onChangeText={(currentValue) => props.setMinimumOrderQuantity(parseInt(currentValue))} />
-              ),
-              (
-                <Input
-                  type="numeric"
-                  name="{Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}2"
-                  placeholder="Maximum Order Quantity"
-                  value={_MAX_ORDER_QTY}
-                  style={[
-                    Styles.RegularItemContainer,
-                    {
-                      marginBottom: Styles.Content.marginVertical,
-                      marginHorizontal: Styles.Content.marginHorizontal
-                    }
-                  ]}
-                  maxLength={9}
-                  onChangeText={(currentValue) => props.setMaximumOrderQuantity(parseInt(currentValue))} />
-              )
-            ];
-            break;
+                  disable={true}>
+                    <ActivityIndicator/>
+                </Input>
+              );
+            }else{
+              if (!props.productFeaturesModal.connected.status){
+                _MODAL_CONTENT.push(
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
+                    style={[
+                      Styles.DetailItemContainer,
+                      {
+                        backgroundColor: Global.colors.single.carminePink,
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      }
+                    ]}
+                    textStyle={{
+                      color: Global.colors.single.romance
+                    }}
+                    value={props.wallets.connected.content}
+                    disable={true}/>
+                );
+              }else{
+                if (props.productFeaturesModal.units.length > 0){
+                  const _MIN_ORDER_QTY = (props.productFeaturesModal.minimumOrderQuantity > 0)? props.productFeaturesModal.minimumOrderQuantity: '',
+                        _MAX_ORDER_QTY = (props.productFeaturesModal.maximumOrderQuantity > 0)? props.productFeaturesModal.maximumOrderQuantity: '',
+                        _QTY = (props.productFeaturesModal.quantity > 0)? props.productFeaturesModal.quantity: '',
+                        _SELECTED_UNIT_INDEX = props.productFeaturesModal.units.findIndex((unit, i) => {
+                          return unit._id === props.productFeaturesModal.selectedUnit._id;
+                        });
 
-          case 'quantity':
-            const _QTY = (props.productFeaturesModal.quantity > 0)? props.productFeaturesModal.quantity: '';
+                  _MODAL_CONTENT = [
+                    ..._MODAL_CONTENT,
+                    (
+                      <Carousel
+                        name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
+                        data={props.productFeaturesModal.units}
+                        firstItem={_SELECTED_UNIT_INDEX}
+                        style={Styles.DetailContainer}
+                        itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+                        onLayout={({ item, index }) => {
+                          var _ITEM_GRADIENT = Global.colors.pair.ongerine;
 
-            _MODAL_CONTENT.push(
-              <Input
-                type="numeric"
-                name="{Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}"
-                placeholder="Quantity"
-                value={_QTY}
-                style={[
-                  Styles.RegularItemContainer,
-                  {
-                    marginBottom: Styles.Content.marginVertical,
-                    marginHorizontal: Styles.Content.marginHorizontal
-                  }
-                ]}
-                maxLength={9}
-                onChangeText={(currentValue) => props.setQuantity(parseInt(currentValue))} />
-            );
+                          if (index === _SELECTED_UNIT_INDEX){
+                            _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                          }
+
+                          return (
+                            <Input
+                              type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
+                              gradient={_ITEM_GRADIENT}
+                              style={[
+                                Styles.DetailItemContainer,
+                                Styles.LTR_ContentAlignment
+                              ]}
+                              disable={true}>
+                              <View
+                                style={Styles.DetailItemMasterInfoContent}>
+                                  <Text
+                                    style={Styles.BriefDetailTitle}>
+                                      {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title.en)}
+                                  </Text>
+                              </View>
+                              <View
+                                style={Styles.DetailItemMasterSubInfoContent}>
+                                  <Icon
+                                    name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
+                                    color={Global.colors.single.romance} />
+
+                                  <Text
+                                    style={Styles.BriefDetailRowText}>
+                                      {Functions._convertKeywordToToken(item.key)}
+                                  </Text>
+                              </View>
+                            </Input>
+                          )
+                        }}
+                        onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.units[selectedItemIndex])}/>
+                    ),
+                    (
+                      <Input
+                        type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.type}
+                        name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title.en)}
+                        placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title.en}
+                        value={_MIN_ORDER_QTY}
+                        style={[
+                          Styles.RegularItemContainer,
+                          {
+                            marginBottom: Styles.Content.marginVertical,
+                            marginHorizontal: Styles.Content.marginHorizontal
+                          }
+                        ]}
+                        onChangeText={(currentValue) => props.setMinimumOrderQuantity(parseInt(currentValue))}
+                        {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.options} />
+                    ),
+                    (
+                      <Input
+                        type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.type}
+                        name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en)}
+                        placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en}
+                        value={_MAX_ORDER_QTY}
+                        style={[
+                          Styles.RegularItemContainer,
+                          {
+                            marginBottom: Styles.Content.marginVertical,
+                            marginHorizontal: Styles.Content.marginHorizontal
+                          }
+                        ]}
+                        onChangeText={(currentValue) => props.setMaximumOrderQuantity(parseInt(currentValue))}
+                        {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.options} />
+                    ),
+                    (
+                      <Input
+                          type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.type}
+                          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title.en)}
+                          placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title.en}
+                          value={_QTY}
+                          style={[
+                            Styles.RegularItemContainer,
+                            {
+                              marginBottom: Styles.Content.marginVertical,
+                              marginHorizontal: Styles.Content.marginHorizontal
+                            }
+                          ]}
+                          onChangeText={(currentValue) => props.setQuantity(parseInt(currentValue))}
+                          {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.options} />
+                    )
+                  ];
+
+                  _IS_ALL_EXTRA_DEPENDED_FIELDS_PREPARED = true;
+                }else{
+                  _MODAL_CONTENT.push(
+                    <Link
+                      containerStyle={[
+                        Styles.Center_TextAlignment,
+                        Styles.Center_ContentAlignment,
+                        {
+                          marginBottom: Styles.Content.marginVertical
+                        }
+                      ]}
+                      value={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.empty.title.en} />
+                  );
+                }
+              }
+            }
             break;
 
           case 'description':
             _MODAL_CONTENT.push(
-              <Text>{Functions._convertKeywordToToken(props.productFeaturesModal.currentFeature.key)}</Text>
+              <Input
+                  type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.description.firstInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.description.firstInput.title.en)}
+                  placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.description.firstInput.title.en}
+                  value={props.productFeaturesModal.description}
+                  style={[
+                    Styles.RegularItemContainer,
+                    {
+                      marginBottom: Styles.Content.marginVertical,
+                      marginHorizontal: Styles.Content.marginHorizontal
+                    }
+                  ]}
+                  onChangeText={(currentValue) => props.setDescription(currentValue)}
+                  {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.description.firstInput.options} />
             );
+
+            _IS_ALL_EXTRA_DEPENDED_FIELDS_PREPARED = true;
             break;
 
           case 'customized':
-            _MODAL_CONTENT.push(
-              <Text>{Functions._convertKeywordToToken(props.productFeaturesModal.currentFeature.key)}</Text>
-            );
+            _MODAL_CONTENT = [
+              ..._MODAL_CONTENT,
+              (
+                <Input
+                    type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.firstInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.firstInput.title.en)}
+                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.firstInput.title.en}
+                    value={props.productFeaturesModal.customizedFeatureName}
+                    style={[
+                      Styles.RegularItemContainer,
+                      {
+                        marginBottom: Styles.Content.marginVertical,
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      }
+                    ]}
+                    onChangeText={(currentValue) => props.setCustomizedFeatureName(currentValue)} />
+              ),
+              (
+                <Input
+                    type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.secondInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.secondInput.title.en)}
+                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.secondInput.title.en}
+                    value={props.productFeaturesModal.customizedFeatureValue}
+                    style={[
+                      Styles.RegularItemContainer,
+                      {
+                        marginBottom: Styles.Content.marginVertical,
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      }
+                    ]}
+                    onChangeText={(currentValue) => props.setCustomizedFeatureValue(currentValue)} />
+              )
+            ];
+
+            _IS_ALL_EXTRA_DEPENDED_FIELDS_PREPARED = true;
             break;
         }
 
-        _MODAL_CONTENT.push(
-          <Input
-            type="button"
-            gradient={Global.colors.pair.ongerine}
-            value={`Add ${Functions._convertKeywordToToken(props.productFeaturesModal.currentFeature.key)}`}
-            style={{
-              marginHorizontal: Styles.Content.marginHorizontal
-            }}
-            onPress={() => {alert('ok')}}
-            forcedDisable={_VALIDATED} />
-        );
+        if (_IS_ALL_EXTRA_DEPENDED_FIELDS_PREPARED){
+          _MODAL_CONTENT.push(
+            <Input
+              type={__CONSTANTS.modalContainer.content.submitInput.type}
+              gradient={Global.colors.pair.ongerine}
+              value={`${__CONSTANTS.modalContainer.content.submitInput.prefix.en} ${Functions._convertKeywordToToken(props.productFeaturesModal.currentFeature.key)}`}
+              style={{
+                marginHorizontal: Styles.Content.marginHorizontal
+              }}
+              onPress={() => {
+                var _RESPONSE = {
+                  feature: props.productFeaturesModal.currentFeature
+                };
+
+                switch (Functions._convertTokenToKeyword(props.productFeaturesModal.currentFeature.key)) {
+                  case 'unit':
+                  default:
+                    _RESPONSE = {
+                      ..._RESPONSE,
+                      unit: props.productFeaturesModal.selectedUnit,
+                      minimumOrderQuantity: props.productFeaturesModal.minimumOrderQuantity,
+                      maximumOrderQuantity: props.productFeaturesModal.maximumOrderQuantity,
+                      quantity: props.productFeaturesModal.quantity
+                    };
+                    break;
+                  case 'description':
+                    _RESPONSE.description = props.productFeaturesModal.description;
+                    break;
+                  case 'customized':
+                    _RESPONSE = {
+                      ..._RESPONSE,
+                      featureName: props.productFeaturesModal.customizedFeatureName,
+                      featureValue: props.productFeaturesModal.customizedFeatureValue
+                    };
+                    break;
+                }
+
+                attitude.onProgressSuccess(_RESPONSE);
+              }}
+              forcedDisable={_VALIDATED} />
+          );
+        }
       }else{
         _MODAL_CONTENT = (
           <Link
@@ -310,7 +500,7 @@ const ProductFeaturesModal = (props) => {
               Styles.Center_TextAlignment,
               Styles.Center_ContentAlignment
             ]}
-            value={"There's no feature."} />
+            value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.title.en} />
         );
       }
     }

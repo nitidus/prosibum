@@ -25,7 +25,6 @@
             }
           }
         }
-
       },
       "submitInput": {
         "type": "BUTTON",

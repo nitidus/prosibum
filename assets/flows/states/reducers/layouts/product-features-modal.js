@@ -4,8 +4,8 @@ const { PRODUCT_FEATURES_MODAL } = LAYOUTS;
 const initialState = {
   currentFeature: {},
   selectedUnit: {},
-  maximumOrderQuantity: 0,
   minimumOrderQuantity: 0,
+  maximumOrderQuantity: 0,
   quantity: 0,
   description: '',
   customizedFeatureName: '',
@@ -25,6 +25,18 @@ export default (state = initialState, action) => {
     case PRODUCT_FEATURES_MODAL.RESET_MODAL:
       return initialState;
       break;
+    case PRODUCT_FEATURES_MODAL.RESET_MODAL_INDEPENDLY:
+      return {
+        ...initialState,
+        currentFeature: state.currentFeature,
+        selectedUnit: state.selectedUnit,
+        features: state.features,
+        units: state.units,
+        featuresLoading: state.featuresLoading,
+        unitsLoading: state.unitsLoading,
+        connected: state.connected
+      };
+      break;
     case PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURE:
       return {
         ...state,
@@ -37,16 +49,16 @@ export default (state = initialState, action) => {
         selectedUnit: action.payload
       };
       break;
-    case PRODUCT_FEATURES_MODAL.SET_MAXIMUM_ORDER_QUANTITY:
-      return {
-        ...state,
-        maximumOrderQuantity: action.payload
-      };
-      break;
     case PRODUCT_FEATURES_MODAL.SET_MINIMUM_ORDER_QUANTITY:
       return {
         ...state,
         minimumOrderQuantity: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_MAXIMUM_ORDER_QUANTITY:
+      return {
+        ...state,
+        maximumOrderQuantity: action.payload
       };
       break;
     case PRODUCT_FEATURES_MODAL.SET_QUANTITY:

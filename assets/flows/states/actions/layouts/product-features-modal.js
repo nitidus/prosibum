@@ -17,22 +17,27 @@ const mapDispatchToProps = (dispatch) => {
         type: PRODUCT_FEATURES_MODAL.RESET_MODAL
       })
     },
+    resetModalIndependly: () => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.RESET_MODAL_INDEPENDLY
+      })
+    },
     setCurrentFeature: (feature) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURE,
         payload: feature
       })
     },
-    setMaximumOrderQuantity: (maximumOrderQuantity) => {
-      dispatch({
-        type: PRODUCT_FEATURES_MODAL.SET_MAXIMUM_ORDER_QUANTITY,
-        payload: maximumOrderQuantity
-      })
-    },
     setMinimumOrderQuantity: (minimumOrderQuantity) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_MINIMUM_ORDER_QUANTITY,
         payload: minimumOrderQuantity
+      })
+    },
+    setMaximumOrderQuantity: (maximumOrderQuantity) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_MAXIMUM_ORDER_QUANTITY,
+        payload: maximumOrderQuantity
       })
     },
     setQuantity: (quantity) => {
