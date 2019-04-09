@@ -1,0 +1,22 @@
+{
+  "name": "Interactable",
+  "version": "0.1.10",
+  "summary": "High performance interactable views in React Native",
+  "homepage": "https://github.com/wix/react-native-interactable",
+  "license": "MIT",
+  "authors": {
+    "Tal Kol": "talkol@gmail.com"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/wix/react-native-interactable.git"
+  },
+  "source_files": "lib/ios/Interactable/*.{h,m}",
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}

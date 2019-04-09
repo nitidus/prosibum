@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -53,6 +54,7 @@
 		7A07F91D219F6C3F0081F75F /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A07F8F8219F6C2F0081F75F /* libRCTCameraRoll.a */; };
 		7A32095B213DD1E400693728 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A32095C213DD1E400693728 /* libBVLinearGradient.a */; };
 		7A39F582214EF1FF008BBE59 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A39F558214EF1F6008BBE59 /* libART.a */; };
+		7A524332225D1AFD00BDF034 /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A524306225D1ACD00BDF034 /* libInteractable.a */; };
 		7A59BAAE2157AE80007592C2 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A59BAAB2157AE67007592C2 /* libRNSVG.a */; };
 		7A7FC0F12156C3A30034BFA2 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7FC0EE2156C38E0034BFA2 /* libRNBlur.a */; };
 		7ACC742921DB905F0058847F /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACC742621DB90540058847F /* libRNFetchBlob.a */; };
@@ -373,6 +375,13 @@
 			remoteGlobalIDString = 323A12871E5F266B004975B8;
 			remoteInfo = "ART-tvOS";
 		};
+		7A524305225D1ACD00BDF034 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A5242FD225D1AC800BDF034 /* Interactable.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CC0127971E3ACC3900B23C9F;
+			remoteInfo = Interactable;
+		};
 		7A59BAAA2157AE67007592C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A59BA7A2157AE67007592C2 /* RNSVG.xcodeproj */;
@@ -470,6 +479,7 @@
 		7A32092D213DD1B900693728 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		7A32095C213DD1E400693728 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A39F552214EF1F5008BBE59 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		7A5242FD225D1AC800BDF034 /* Interactable.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Interactable.xcodeproj; path = "../node_modules/react-native-interactable/lib/ios/Interactable.xcodeproj"; sourceTree = "<group>"; };
 		7A59BA7A2157AE67007592C2 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		7A78D11921DB8F4E002FE196 /* librn-fetch-blob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "librn-fetch-blob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A7FC0BF2156C38E0034BFA2 /* RNBlur.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
@@ -514,6 +524,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A524332225D1AFD00BDF034 /* libInteractable.a in Frameworks */,
 				7ACC742921DB905F0058847F /* libRNFetchBlob.a in Frameworks */,
 				7A07F91D219F6C3F0081F75F /* libRCTCameraRoll.a in Frameworks */,
 				7A59BAAE2157AE80007592C2 /* libRNSVG.a in Frameworks */,
@@ -737,6 +748,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7A5242FE225D1AC800BDF034 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A524306225D1ACD00BDF034 /* libInteractable.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7A59BA7B2157AE67007592C2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -766,6 +785,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				7A5242FD225D1AC800BDF034 /* Interactable.xcodeproj */,
 				7ACC73F521DB90540058847F /* RNFetchBlob.xcodeproj */,
 				7A07F8EA219F6C2F0081F75F /* RCTCameraRoll.xcodeproj */,
 				7A59BA7A2157AE67007592C2 /* RNSVG.xcodeproj */,
@@ -1007,6 +1027,10 @@
 				{
 					ProductGroup = 7A32092E213DD1B900693728 /* Products */;
 					ProjectRef = 7A32092D213DD1B900693728 /* BVLinearGradient.xcodeproj */;
+				},
+				{
+					ProductGroup = 7A5242FE225D1AC800BDF034 /* Products */;
+					ProjectRef = 7A5242FD225D1AC800BDF034 /* Interactable.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
@@ -1362,6 +1386,13 @@
 			fileType = archive.ar;
 			path = "libART-tvOS.a";
 			remoteRef = 7A39F559214EF1F6008BBE59 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7A524306225D1ACD00BDF034 /* libInteractable.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libInteractable.a;
+			remoteRef = 7A524305225D1ACD00BDF034 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		7A59BAAB2157AE67007592C2 /* libRNSVG.a */ = {

@@ -1,0 +1,1 @@
+../../../../../node_modules/react-native-interactable/lib/ios/Interactable/InteractableSpring.h

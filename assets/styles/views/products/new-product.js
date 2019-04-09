@@ -16,10 +16,17 @@ var _CUSTOM_CONTENT = {
     _CUSTOM_WAREHOUSE_ITEM_CONTAINER = {
       height: 102
     },
-    _CUSTOM_BRIEF_DETAIL_TITLE = {
-      fontSize: 26,
+    _CUSTOM_BRIEF_DETAIL_TITLE_CONTAINER = {
       width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2)) - 42),
       marginBottom: 5
+    },
+    _CUSTOM_BRIEF_DETAIL_TITLE = {
+      fontSize: 26
+    },
+    _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX = {
+      fontSize: 14,
+      marginLeft: 5,
+      marginBottom: 3
     },
     _CUSTOM_BRIEF_DETAIL_SUBTITLE = {
       fontSize: 14,
@@ -29,6 +36,9 @@ var _CUSTOM_CONTENT = {
     _CUSTOM___GLOBAL_ICONS_IN_PILOT = {
       height: 23,
       width: 15
+    },
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT = {
+      fontSize: 14
     };
 
 if (Platform.OS !== 'ios'){
@@ -40,11 +50,13 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 48;
 
-    _CUSTOM_BRIEF_DETAIL_TITLE.width -= 380;
+    _CUSTOM_BRIEF_DETAIL_TITLE_CONTAINER.width -= 380;
     _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 6;
+    _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontSize += 6;
 
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 380;
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 4;
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 3;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 2;
@@ -52,12 +64,15 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 3;
 
     _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 3;
+    _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontSize += 3;
 
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 1;
   }
 
   _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
+  _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontWeight = 'bold';
   _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
+  _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontWeight = '500';
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;
@@ -66,8 +81,9 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 16;
 
-    _CUSTOM_BRIEF_DETAIL_TITLE.width -= 300;
+    _CUSTOM_BRIEF_DETAIL_TITLE_CONTAINER.width -= 300;
     _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 1;
+    _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontSize += 1;
 
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 300;
   }else{
@@ -112,23 +128,85 @@ module.exports = StyleSheet.create({
   WarehouseErrorContent: {
     color: colors.single.romance
   },
+  DetailContainer: {
+    height: 'auto'
+  },
+  UnitsFeatureDetailItemContainer: {
+    height: 178,
+    padding: 18
+  },
+  CustomizedFeatureDetailItemContainer: {
+    height: 'auto',
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
+    padding: 18
+  },
+  DetailItemContent: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   DetailItemMasterInfoContent: {
     justifyContent: 'center'
+  },
+  DetailItemMasterSubInfoContent: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  BriefDetailTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    ..._CUSTOM_BRIEF_DETAIL_TITLE_CONTAINER
   },
   BriefDetailTitle: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
+  BriefDetailTitleSuffix: {
+    color: colors.single.rangoonGreen,
+    fontFamily: fonts.sanFrancisco.textBold,
+    ..._CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX
+  },
   BriefDetailSubtitle: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_SUBTITLE
   },
+  BriefDetailRowContainer: {
+
+  },
+  BriefDetailRowText: {
+    color: colors.single.romance,
+    fontFamily: fonts.sanFrancisco.textBold,
+    marginLeft: 15,
+    ..._CUSTOM_BRIEF_DETAIL_ROW_TEXT
+  },
+  BriefDetailRowIcon: {
+
+  },
+  FeaturesContainer: {
+    marginVertical: _CUSTOM_CONTENT.marginVertical
+  },
+  DescriptionFeature: {
+    height: 68,
+    backgroundColor: colors.single.wildSand,
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
+    padding: 18
+  },
+  DescriptionFeatureText: {
+    color: colors.single.rangoonGreen,
+    fontFamily: fonts.sanFrancisco.textBold,
+    fontSize: 16
+  },
   BottomPinnedContainer: {
     flexGrow: 1,
     justifyContent: 'flex-end',
     bottom: (_IS_IPHONE_X)? _CUSTOM_CONTENT.marginVertical * 1.85: _CUSTOM_CONTENT.marginVertical
+  },
+  Center_TextAlignment: {
+    textAlign: 'center'
+  },
+  Center_ContentAlignment: {
+    alignItems: 'center'
   },
   LTR_ContentAlignment: {
     alignItems: 'flex-start'

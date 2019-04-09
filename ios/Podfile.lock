@@ -1,6 +1,8 @@
 PODS:
   - BVLinearGradient (2.4.2):
     - React
+  - Interactable (0.1.10):
+    - React
   - React (0.56.0):
     - React/Core (= 0.56.0)
   - react-native-blur (0.8.0):
@@ -14,12 +16,13 @@ PODS:
     - React/Core
   - rn-fetch-blob (0.10.6):
     - React/Core
-  - RNSVG (7.0.3):
+  - RNSVG (7.2.0):
     - React
   - yoga (0.56.0.React)
 
 DEPENDENCIES:
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
+  - Interactable (from `../node_modules/react-native-interactable`)
   - react-native-blur (from `../node_modules/react-native-blur`)
   - React/RCTImage (from `../node_modules/react-native`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
@@ -29,6 +32,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   BVLinearGradient:
     :path: "../node_modules/react-native-linear-gradient"
+  Interactable:
+    :path: "../node_modules/react-native-interactable"
   React:
     :path: "../node_modules/react-native"
   react-native-blur:
@@ -42,12 +47,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   BVLinearGradient: 6d8909e3fc6b089defa4b89d967441fa6827a2ee
+  Interactable: 45e5d4d1bb2d196f08b011010c6913469ccf4d0a
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-blur: c35c1f6c2c76db7108bde7ed343bd2b01d64e0c0
   rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
   RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: d6675cf8becd417093d17d6704912e0aef7fdba7
+PODFILE CHECKSUM: a3622f039dd618edcdc9a323ca1d055b24883b6e
 
 COCOAPODS: 1.5.3

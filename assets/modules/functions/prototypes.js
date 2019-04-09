@@ -326,6 +326,13 @@ module.exports = {
       return module.exports._checkIsAValidEmail(token);
     }
   },
+  _convertNumberToHumanReadableFormat: (targetNumber) => {
+    if (typeof targetNumber != 'string'){
+      targetNumber = targetNumber.toString();
+    }
+
+    return targetNumber.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  },
   _checkIsAValidPassword: (password) => {
     const _IS_PASSWORD_VALID = password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\$%&#!~`\^*\(\)_\-\+\=\?><])[0-9a-zA-Z\$%&#!~`\^*\(\)_\-\+\=\?><]{8,}$/);
 

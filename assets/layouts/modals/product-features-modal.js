@@ -489,6 +489,7 @@ const ProductFeaturesModal = (props) => {
                 }
 
                 attitude.onProgressSuccess(_RESPONSE);
+                MODAL.ON_BLUR(false);
               }}
               forcedDisable={_VALIDATED} />
           );

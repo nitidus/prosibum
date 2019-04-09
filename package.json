@@ -20,6 +20,7 @@
     "react-native": "0.56.0",
     "react-native-blur": "^3.2.2",
     "react-native-deep-linking": "^2.2.0",
+    "react-native-interactable": "^0.1.10",
     "react-native-linear-gradient": "^2.4.2",
     "react-native-loader": "^1.2.1",
     "react-native-modal-with-blur-support-background": "^1.0.0",
