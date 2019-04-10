@@ -91,6 +91,22 @@ const _getIconWithName = (name, color = Global.colors.single.rangoonGreen) => {
             content: <Path
               fill={color}
               d="M22,10h-8V2c0-1.1-0.9-2-2-2s-2,0.9-2,2v8H2c-1.1,0-2,0.9-2,2s0.9,2,2,2h8v8c0,1.1,0.9,2,2,2s2-0.9,2-2v-8h8c1.1,0,2-0.9,2-2S23.1,10,22,10z"/>
+          },
+          BUCKET: {
+            width: 22,
+            height: 24,
+            view_box: "0 0 22 24",
+            content: <G>
+            	<Path
+                fill={color}
+                d="M21,4h-2h-3V1c0-0.5-0.4-1-1-1H7C6.4,0,6,0.5,6,1v3H3H1C0.4,4,0,4.4,0,5s0.4,1,1,1h1v15c0,1.7,1.3,3,3,3h12c1.7,0,3-1.3,3-3V6h1c0.6,0,1-0.5,1-1C22,4.5,21.6,4,21,4z M8,1.7h6V4H8V1.7z M18,21c0,0.6-0.5,1-1,1H5c-0.6,0-1-0.5-1-1V6h3h8h3V21z"/>
+            	<Path
+                fill={color}
+                d="M8,8.6c-0.6,0-1,0.5-1,1v9c0,0.6,0.4,1,1,1s1-0.4,1-1v-9C9,9.1,8.6,8.6,8,8.6z"/>
+            	<Path
+                fill={color}
+                d="M14,8.6c-0.6,0-1,0.5-1,1v9c0,0.6,0.4,1,1,1s1-0.4,1-1v-9C15,9.1,14.6,8.6,14,8.6z"/>
+            </G>
           }
         },
         _SECONDARY_UI_ICONS = {

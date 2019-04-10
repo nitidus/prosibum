@@ -207,17 +207,32 @@ class NewProductFeatures extends Component<{}> {
                         <Animated.View
                           style={{
                             position: 'absolute',
-                            backgroundColor: 'red',
                             height: (featureItem.description.length > 64)? 128: Styles.DescriptionFeature.height,
                             right: Styles.Content.marginHorizontal,
                             borderRadius: 5,
+                            overflow: 'hidden',
                             width: _FEATURES_ANIMATED_VALUES[i].interpolate({
                               inputRange: [-116, 0],
                               outputRange: [101, 0],
                               extrapolateLeft: 'clamp',
                               extrapolateRight: 'clamp'
                             })
-                          }}/>
+                          }}>
+                            <Input
+                              type="button"
+                              gradient={Global.colors.pair.peroly}
+                              style={{
+                                height: '100%', width: '100%'
+                              }}
+                              onPress={() => {
+                                alert('ok')
+                              }}>
+                                <Icon
+                                  name="bucket"
+                                  height={40}
+                                  color={Global.colors.single.romance}/>
+                            </Input>
+                        </Animated.View>
                     </View>
                   );
                   break;
