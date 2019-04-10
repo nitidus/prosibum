@@ -1,8 +1,11 @@
 /*** Layouts ***/
 
 //Pilot
-import { TopBar, PinnedSide, TabItem } from './layouts/pilot/top-bar'
-import { TabBar, TabBarItem } from './layouts/pilot/tab-bar'
+import { TopBar, PinnedSide, TabItem } from './layouts/pilot/top-bar';
+import { TabBar, TabBarItem } from './layouts/pilot/tab-bar';
+
+//Other
+import { Options } from './layouts/options';
 
 /*** Views ***/
 
@@ -31,7 +34,8 @@ module.exports = {
       PinnedSide,
       TabItem,
       TabBarItem
-    }
+    },
+    Options
   },
   Views: {
     Profile: {

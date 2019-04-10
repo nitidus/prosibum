@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Interactable from 'react-native-interactable';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, ProductFeaturesModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, Options, ProductFeaturesModal } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewProduct,
@@ -53,23 +53,18 @@ class NewProductFeatures extends Component<{}> {
     const _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title.en,
           _VALIDATED = this._componentWillCheckValidation(props);
 
-    // if (props.newProduct.features.length > 0){
-      const TEST = [{"feature":{"_id":"5ca681d9d0a37b307e733050","created_at":"2019-04-04T22:14:48.903Z","modified_at":"2019-04-04T22:14:48.903Z","key":"UNIT"},"unit":{"_id":"5ca6848ed0a37b307e733054","created_at":"2019-04-04T22:26:21.819Z","modified_at":"2019-04-04T22:26:21.819Z","key":"BOX"},"minimumOrderQuantity":20,"maximumOrderQuantity":200,"quantity":1000},{"feature":{"_id":"5ca681d9d0a37b307e733050","created_at":"2019-04-04T22:14:48.903Z","modified_at":"2019-04-04T22:14:48.903Z","key":"UNIT"},"unit":{"_id":"5ca684a9d0a37b307e733055","created_at":"2019-04-04T22:26:48.960Z","modified_at":"2019-04-04T22:26:48.960Z","key":"KILOGRAM"},"minimumOrderQuantity":20,"maximumOrderQuantity":2000,"quantity":20000},{"feature":{"_id":"5ca6823dd0a37b307e733052","created_at":"2019-04-04T22:16:28.930Z","modified_at":"2019-04-04T22:16:28.930Z","key":"DESCRIPTION"},"description":"Hello\nWorld"},{"feature":{"_id":"5ca68269d0a37b307e733053","created_at":"2019-04-04T22:17:13.287Z","modified_at":"2019-04-04T22:17:13.287Z","key":"CUSTOMIZED"},"featureName":"Barcode","featureValue":"112335345"}];
-
-      _FEATURES_ANIMATED_VALUES = TEST.map((item, i) => {
-        const _FINAL_VALUE = new Animated.Value(0);
-
-        return _FINAL_VALUE;
-      });
-
+    if (props.newProduct.features.length > 0){
       _FEATURES_CONTENT = <ScrollView
         showsVerticalScrollIndicator={true}
         contentContainerStyle={Styles.FeaturesContainer}>
           {
-            /*props.newProduct.features*/TEST.map((featureItem, i, totalFeatures) => {
+            props.newProduct.features.map((featureItem, i, totalFeatures) => {
               const _FEATURE_NAME = Functions._convertTokenToKeyword(featureItem.feature.key);
 
-              var _CUSTOM_STYLE = {};
+              var _CUSTOM_STYLE = {},
+                  _FEATURE_DELETE_ACTION = () => props.setProductFeatures(props.newProduct.features.filter((checkingItem, j) => {
+                    return (checkingItem.feature._id != featureItem.feature._id);
+                  }));
 
               if (i < totalFeatures.length){
                 _CUSTOM_STYLE.marginBottom = Styles.Content.marginHorizontal;
@@ -86,7 +81,7 @@ class NewProductFeatures extends Component<{}> {
 
                     return (
                       <Carousel
-                        name="{Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.normal.title.en)}"
+                        name={Functions._convertTokenToKeyword(__CONSTANTS.content.carousel.state.normal.title.en)}
                         data={_UNIT_FEATURES}
                         firstItem={_SELECTED_FEATURE_INDEX}
                         itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
@@ -97,14 +92,23 @@ class NewProductFeatures extends Component<{}> {
                         onLayout={({ item, index }) => {
                           var _ITEM_GRADIENT = Global.colors.pair.tilan;
 
+                          _FEATURE_DELETE_ACTION = () => props.setProductFeatures(props.newProduct.features.filter((checkingItem, j) => {
+                            if (typeof checkingItem.unit != 'undefined') {
+                              return (checkingItem.unit._id !== item.unit._id);
+                            }else{
+                              return true;
+                            }
+                          }));
+
                           return (
                             <Input
-                              type="BUTTON"
+                              type={__CONSTANTS.content.carousel.type}
                               style={[
                                 Styles.UnitsFeatureDetailItemContainer,
                                 Styles.LTR_ContentAlignment
                               ]}
-                              gradient={_ITEM_GRADIENT}>
+                              gradient={_ITEM_GRADIENT}
+                              onLongPress={_FEATURE_DELETE_ACTION}>
                                 <View
                                   style={Styles.DetailItemMasterInfoContent}>
                                     <View
@@ -115,7 +119,7 @@ class NewProductFeatures extends Component<{}> {
                                       </Text>
                                       <Text
                                         style={Styles.BriefDetailTitleSuffix}>
-                                          {"Unit Type"}
+                                          {Functions._convertKeywordToToken(__CONSTANTS.contentcarousel.state.normal.content.title.suffix.en)}
                                       </Text>
                                     </View>
                                 </View>
@@ -127,12 +131,12 @@ class NewProductFeatures extends Component<{}> {
                                     }
                                   ]}>
                                     <Icon
-                                      name="grading"
+                                      name={__CONSTANTS.contentcarousel.state.normal.content.firstFeature.icon.name}
                                       color={Global.colors.single.romance} />
 
                                     <Text
                                       style={Styles.BriefDetailRowText}>
-                                        {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {"Minimum Order"}
+                                        {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.contentcarousel.state.normal.content.firstFeature.title.en)}
                                     </Text>
                                 </View>
                                 <View
@@ -143,23 +147,23 @@ class NewProductFeatures extends Component<{}> {
                                     }
                                   ]}>
                                     <Icon
-                                      name="grading"
+                                      name={__CONSTANTS.contentcarousel.state.normal.content.secondFeature.icon.name}
                                       color={Global.colors.single.romance} />
 
                                     <Text
                                       style={Styles.BriefDetailRowText}>
-                                        {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {"Maximum Order"}
+                                        {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.contentcarousel.state.normal.content.secondFeature.title.en)}
                                     </Text>
                                 </View>
                                 <View
                                   style={Styles.DetailItemMasterSubInfoContent}>
                                     <Icon
-                                      name="grading"
+                                      name={__CONSTANTS.contentcarousel.state.normal.content.thirdFeature.icon.name}
                                       color={Global.colors.single.romance} />
 
                                     <Text
                                       style={Styles.BriefDetailRowText}>
-                                        {Functions._convertNumberToHumanReadableFormat(item.quantity)} {"Quantity"}
+                                        {Functions._convertNumberToHumanReadableFormat(item.quantity)} {Functions._convertKeywordToToken(__CONSTANTS.contentcarousel.state.normal.content.thirdFeature.title.en)}
                                     </Text>
                                 </View>
                             </Input>
@@ -170,118 +174,95 @@ class NewProductFeatures extends Component<{}> {
                   break;
 
                 case 'description':
-                // console.log(_FEATURES_ANIMATED_VALUES[i])
                   return (
-                    <View
-                      style={{flex: 1}}>
-                        <Interactable.View
-                          horizontalOnly={true}
-                          snapPoints={[
-                            { x: 0 },
-                            { x: -116 }
+                    <Options
+                      style={{
+                        right: Styles.Content.marginHorizontal,
+                        height: (featureItem.description.length > 64)? 128: Styles.DescriptionFeature.height
+                      }}
+                      onDeletePress={_FEATURE_DELETE_ACTION}
+                      {...__CONSTANTS.content.description.options}>
+                        <Input
+                          type={__CONSTANTS.content.description.type}
+                          style={[
+                            Styles.DescriptionFeature,
+                            Styles.LTR_ContentAlignment,
+                            {
+                              ..._CUSTOM_STYLE,
+                              height: (featureItem.description.length > 64)? 128: Styles.DescriptionFeature.height
+                            }
                           ]}
-                          boundaries={{
-                            left: -116,
-                            right: 0
-                          }}
-                          dragToss={0.01}
-                          animatedValueX={_FEATURES_ANIMATED_VALUES[i]}
-                          onSnap={({nativeEvent}) => {
-                            // console.log(nativeEvent)
-                          }}>
-                            <Input
-                              type="BUTTON"
-                              style={[
-                                Styles.DescriptionFeature,
-                                Styles.LTR_ContentAlignment,
-                                {
-                                  ..._CUSTOM_STYLE,
-                                  height: (featureItem.description.length > 64)? 128: Styles.DescriptionFeature.height
-                                }
-                              ]}
-                              textStyle={Styles.DescriptionFeatureText}
-                              value={Functions._stripLongString(featureItem.description, ((featureItem.description.length > 64)? 128: 64))}
-                              disable={true}/>
-                        </Interactable.View>
-
-                        <Animated.View
-                          style={{
-                            position: 'absolute',
-                            height: (featureItem.description.length > 64)? 128: Styles.DescriptionFeature.height,
-                            right: Styles.Content.marginHorizontal,
-                            borderRadius: 5,
-                            overflow: 'hidden',
-                            width: _FEATURES_ANIMATED_VALUES[i].interpolate({
-                              inputRange: [-116, 0],
-                              outputRange: [101, 0],
-                              extrapolateLeft: 'clamp',
-                              extrapolateRight: 'clamp'
-                            })
-                          }}>
-                            <Input
-                              type="button"
-                              gradient={Global.colors.pair.peroly}
-                              style={{
-                                height: '100%', width: '100%'
-                              }}
-                              onPress={() => {
-                                alert('ok')
-                              }}>
-                                <Icon
-                                  name="bucket"
-                                  height={40}
-                                  color={Global.colors.single.romance}/>
-                            </Input>
-                        </Animated.View>
-                    </View>
+                          textStyle={Styles.DescriptionFeatureText}
+                          value={Functions._stripLongString(featureItem.description, ((featureItem.description.length > 64)? 128: 64))}
+                          onLongPress={_FEATURE_DELETE_ACTION}/>
+                    </Options>
                   );
                   break;
 
                 case 'customized':
                   return (
-                    <Input
-                      type="BUTTON"
-                      style={[
-                        Styles.CustomizedFeatureDetailItemContainer,
-                        Styles.LTR_ContentAlignment,
-                        _CUSTOM_STYLE
-                      ]}
-                      gradient={Global.colors.pair.aqrulean}>
-                        <View
-                          style={Styles.DetailItemMasterInfoContent}>
+                    <Options
+                      style={{
+                        right: Styles.Content.marginHorizontal,
+                        height: Styles.CustomizedFeatureDetailItemContainer.height
+                      }}
+                      onDeletePress={_FEATURE_DELETE_ACTION}
+                      {...__CONSTANTS.content.customized.options}>
+                        <Input
+                          type={__CONSTANTS.content.customized.type}
+                          style={[
+                            Styles.CustomizedFeatureDetailItemContainer,
+                            Styles.LTR_ContentAlignment,
+                            _CUSTOM_STYLE
+                          ]}
+                          gradient={Global.colors.pair.aqrulean}
+                          onLongPress={_FEATURE_DELETE_ACTION}>
                             <View
-                              style={Styles.BriefDetailTitleContainer}>
-                              <Text
-                                style={Styles.BriefDetailTitle}>
-                                  {Functions._convertKeywordToToken(featureItem.featureName)}
-                              </Text>
-                              <Text
-                                style={Styles.BriefDetailTitleSuffix}>
-                                  {"Customized"}
-                              </Text>
-                            </View>
+                              style={Styles.DetailItemMasterInfoContent}>
+                                <View
+                                  style={Styles.BriefDetailTitleContainer}>
+                                  <Text
+                                    style={Styles.BriefDetailTitle}>
+                                      {Functions._convertKeywordToToken(featureItem.featureName)}
+                                  </Text>
+                                  <Text
+                                    style={Styles.BriefDetailTitleSuffix}>
+                                      {Functions._convertKeywordToToken(__CONSTANTS.content.customized.title.suffix.en)}
+                                  </Text>
+                                </View>
 
-                            <Text
-                              style={Styles.BriefDetailSubtitle}>
-                                {Functions._convertKeywordToToken(featureItem.featureValue)}
-                            </Text>
-                        </View>
-                    </Input>
+                                <Text
+                                  style={Styles.BriefDetailSubtitle}>
+                                    {Functions._convertKeywordToToken(featureItem.featureValue)}
+                                </Text>
+                            </View>
+                        </Input>
+                    </Options>
                   );
                   break;
               }
             })
           }
       </ScrollView>;
-    // }else{
-    //   _FEATURES_CONTENT = (<Text>Empty</Text>)
-    // }
+    }else{
+      _FEATURES_CONTENT = (
+        <View
+          style={[
+            Styles.Content,
+            Styles.EmptyContent
+          ]}>
+            <Link
+              containerStyle={Styles.EmptyContentLink}
+              value={__CONSTANTS.content.carousel.state.null.title.en} />
+        </View>
+      );
+    }
 
     return (
       <Container
         title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
         subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle.en)}
-        rightIcon="plus"
+        rightIcon={__CONSTANTS.pilot.rightIcon}
         onRightIconPress={() => props.setProductFeaturesModalVisibility(true)}
         {...props}>
           {_FEATURES_CONTENT}

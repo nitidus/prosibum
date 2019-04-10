@@ -8,6 +8,7 @@ import { Icon } from './icon';
 import List from './list';
 import { TopBar, PinnedSide, TabItem } from './container/layouts/pilot/top-bar';
 import { TabBar, TabBarItem } from './container/layouts/pilot/tab-bar';
+import { Options } from './container/layouts/options';
 import { Pilot } from './pilot';
 import { DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile } from './drawer-menu';
 
@@ -20,6 +21,6 @@ module.exports = {
   CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal,
   Icon,
   List,
-  Pilot, TabBar, TabBarItem, TopBar, PinnedSide, TabItem,
+  Pilot, TabBar, TabBarItem, TopBar, PinnedSide, TabItem, Options,
   DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile
 };

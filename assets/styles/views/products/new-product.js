@@ -136,7 +136,7 @@ module.exports = StyleSheet.create({
     padding: 18
   },
   CustomizedFeatureDetailItemContainer: {
-    height: 'auto',
+    height: 100,
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
     padding: 18
   },

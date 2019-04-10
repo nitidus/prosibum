@@ -5,55 +5,71 @@
     },
     "subtitle": {
       "en": "Product Features"
-    }
+    },
+    "rightIcon": "plus"
   },
   "content": {
-    "firstInput": {
-      "type": "TEXT",
-      "title": {
-        "en": "Product Name"
-      }
-    },
-    "firstCarousel": {
+    "carousel": {
       "type": "BUTTON",
       "state": {
         "normal": {
           "title": {
-            "en": "Warehouses"
+            "en": "Units Feature"
           },
           "content": {
             "title": {
-              "en": "Warehouse Item"
+              "suffix": {
+                "en": "Unit Type"
+              }
             },
-            "suffix": {
-              "en": "Products"
+            "firstFeature": {
+              "title": {
+                "en": "Minimum Order"
+              },
+              "icon": {
+                "name": "grading"
+              }
+            },
+            "secondFeature": {
+              "title": {
+                "en": "Maximum Order"
+              },
+              "icon": {
+                "name": "grading"
+              }
+            },
+            "thirdFeature": {
+              "title": {
+                "en": "Quantity"
+              },
+              "icon": {
+                "name": "grading"
+              }
             }
-          }
-        },
-        "loading": {
-          "title": {
-            "en": "Warehouses Loading"
-          }
-        },
-        "disconected": {
-          "title": {
-            "en": "Warehouses Disconected Situation"
           }
         },
         "null": {
           "title": {
-            "en": "There's no warehouse."
+            "en": "No features have been appended yet."
           }
         }
       }
     },
-    "secondInput": {
-      "type": "LINK",
-      "link": {
-        "en": "Categories"
-      },
+    "description": {
+      "type": "BUTTON",
+      "options": {
+        "horizontalOnly": true
+      }
+    },
+    "customized": {
+      "type": "BUTTON",
       "title": {
-        "en": "Product Categories"
+        "suffix": {
+          "en": "Customized"
+        }
+      },
+      "options": {
+        "horizontalOnly": true
       }
     },
     "modalHandlerButton": {

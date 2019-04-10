@@ -6,7 +6,7 @@ const initialState = {
         currentWarehouse: {},
         warehouses: [],
         category: {},
-        selectedUnitFeature: {},
+        features: [],
         photos: [],
         primaryPhoto: {},
         prices: [],
