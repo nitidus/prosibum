@@ -72,6 +72,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: photo
       })
     },
+    setOnFetchingModePhoto: (photo) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_SELECTED_PRODUCT_PHOTO_FETCHINNG_MODE_ON,
+        payload: photo
+      })
+    },
     setProductPrices: (prices) => {
       dispatch({
         type: NEW_PRODUCT.SET_PRODUCT_PRICES,
@@ -141,6 +147,12 @@ const mapDispatchToProps = (dispatch) => {
     setProductFeaturesModalVisibility: (visibilityStatus) => {
       dispatch({
         type: NEW_PRODUCT.SET_PRODUCT_FEATURES_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
+    setProductPhotoModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_PRODUCT_PHOTO_MODAL_VISIBILITY,
         payload: visibilityStatus
       })
     },

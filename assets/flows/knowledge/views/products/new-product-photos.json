@@ -1,0 +1,57 @@
+{
+  "pilot": {
+    "title": {
+      "en": "New Product"
+    },
+    "subtitle": {
+      "en": "Product Photos"
+    },
+    "rightIcon": "plus"
+  },
+  "content": {
+    "list": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "type": "PHOTO",
+          "title": {
+            "en": "Product Photo"
+          },
+          "options": {
+            "horizontalOnly": true
+          }
+        },
+        "null": {
+          "title": {
+            "en": "No photos have been appended yet."
+          }
+        }
+      }
+    },
+    "modalContainer": {
+      "title": {
+        "en": "Product Photo Modal"
+      }
+    },
+    "appendHandlerButton": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Append Feature"
+          }
+        }
+      }
+    },
+    "submitButton": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Append Prices"
+          }
+        }
+      }
+    }
+  }
+}

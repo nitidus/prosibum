@@ -39,6 +39,9 @@ var _CUSTOM_CONTENT = {
     },
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT = {
       fontSize: 14
+    },
+    _CUSTOM_PHOTO_CONTAINER = {
+      height: 144
     };
 
 if (Platform.OS !== 'ios'){
@@ -57,6 +60,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 380;
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 4;
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 3;
+
+    _CUSTOM_PHOTO_CONTAINER.height += 38;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 2;
@@ -67,6 +72,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontSize += 3;
 
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 1;
+
+    _CUSTOM_PHOTO_CONTAINER.height += 4;
   }
 
   _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
@@ -86,6 +93,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontSize += 1;
 
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 300;
+
+    _CUSTOM_PHOTO_CONTAINER.height += 10;
   }else{
     if (!_IS_IPHONE_X){
       _CUSTOM_CONTENT.marginTop
@@ -196,6 +205,9 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
     fontSize: 16
+  },
+  PhotoContainer: {
+    ..._CUSTOM_PHOTO_CONTAINER
   },
   BottomPinnedContainer: {
     flexGrow: 1,

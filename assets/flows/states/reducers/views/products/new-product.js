@@ -9,6 +9,7 @@ const initialState = {
         features: [],
         photos: [],
         primaryPhoto: {},
+        onFetchingModePhoto: {},
         prices: [],
         promotions: [],
         discounts: [],
@@ -18,6 +19,7 @@ const initialState = {
         warehouseModalVisibility: false,
         productCategoriesModalVisibility: false,
         productFeaturesModalVisibility: false,
+        productPhotoModalVisibility: false,
         warehousesLoading: false,
         shippingTypesLoading: false,
         paymentTypesLoading: false,
@@ -100,6 +102,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         primaryPhoto: {
+          ...action.payload,
+          _id: action.payload._id,
+          content: action.payload.content
+        }
+      };
+      break;
+    case NEW_PRODUCT.SET_SELECTED_PRODUCT_PHOTO_FETCHINNG_MODE_ON:
+      return {
+        ...state,
+        onFetchingModePhoto: {
           ...action.payload,
           _id: action.payload._id,
           content: action.payload.content
@@ -220,6 +232,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productFeaturesModalVisibility: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_PRODUCT_PHOTO_MODAL_VISIBILITY:
+      return {
+        ...state,
+        productPhotoModalVisibility: action.payload
       };
       break;
     case NEW_PRODUCT.FETCH_AVAILABLE_WAREHOUSES:

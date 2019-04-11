@@ -168,6 +168,14 @@ export const Input = (props) => {
           attitude.onPress = props.onPress;
         }
 
+        if ((typeof props.onLongPress != 'undefined') || (typeof props.onLinkLongPress != 'undefined') || (typeof props.linkOnLongPress != 'undefined')){
+          attitude.onLongPress = props.onLongPress || props.onLinkLongPress || props.linkOnLongPress;
+        }
+
+        if (typeof props.gradient != 'undefined'){
+          attitude.gradient = props.gradient;
+        }
+
         attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
 
         attitude.icon = props.icon || props.icon_name || props.icon_title|| props.iconName || props.iconTitle || 'GALLERY';
@@ -694,6 +702,7 @@ export const Input = (props) => {
     case 'camera-roll':
     case 'camera-roll-picker':
       var _ACTIVE_OPACITY = 0.7,
+          _OTHER_OPTIONS = {},
           _CAMERAROLL_CONTAINER_CONTENT, _CAMERAROLL_CONTENT,
           _CAMERAROLL_CONTENT_VERB_MODE = 'Choose';
 
@@ -731,19 +740,48 @@ export const Input = (props) => {
         _CAMERAROLL_CONTENT_VERB_MODE = 'Choose';
       }
 
-      _CAMERAROLL_CONTAINER_CONTENT = (
-        <View
-          style={Styles.PhotoInputContainer}>
-            {_CAMERAROLL_CONTENT}
+      if (typeof attitude.onLongPress != 'undefined'){
+        _OTHER_OPTIONS.onLongPress = attitude.onLongPress;
+      }
 
-            <View style={Styles.PhotoInputLabelContainer}>
-              <Text
-                style={Styles.PhotoInputLabelContent}>
-                  {_CAMERAROLL_CONTENT_VERB_MODE} The {Functions._convertKeywordToToken(attitude.value)}
-              </Text>
-            </View>
-        </View>
-      );
+      if (typeof attitude.gradient != 'undefined'){
+        const restructredRange = Object.keys(attitude.gradient).map((stepName) => {
+          return attitude.gradient[stepName];
+        });
+
+        _CAMERAROLL_CONTAINER_CONTENT = (
+          <LinearGradient
+            style={Styles.PhotoInputContainer}
+            start={{x: 0.0, y: 0.0}} end={{x: 1.0, y: 1.0}}
+            colors={restructredRange}>
+              {_CAMERAROLL_CONTENT}
+
+              <View style={Styles.PhotoInputLabelContainer}>
+                <Text
+                  style={{
+                    ...Styles.PhotoInputLabelContent,
+                    color: Global.colors.single.rangoonGreen
+                  }}>
+                    {_CAMERAROLL_CONTENT_VERB_MODE} The {Functions._convertKeywordToToken(attitude.value)}
+                </Text>
+              </View>
+          </LinearGradient>
+        );
+      }else{
+        _CAMERAROLL_CONTAINER_CONTENT = (
+          <View
+            style={Styles.PhotoInputContainer}>
+              {_CAMERAROLL_CONTENT}
+
+              <View style={Styles.PhotoInputLabelContainer}>
+                <Text
+                  style={Styles.PhotoInputLabelContent}>
+                    {_CAMERAROLL_CONTENT_VERB_MODE} The {Functions._convertKeywordToToken(attitude.value)}
+                </Text>
+              </View>
+          </View>
+        );
+      }
 
       if (attitude.disable){
         return (
@@ -754,7 +792,8 @@ export const Input = (props) => {
             style={[
               Styles.ContainerWithPhoto,
               attitude.style
-            ]}>
+            ]}
+            {..._OTHER_OPTIONS}>
               {_CAMERAROLL_CONTAINER_CONTENT}
           </TouchableOpacity>
         );
@@ -768,7 +807,8 @@ export const Input = (props) => {
               Styles.ContainerWithPhoto,
               attitude.style
             ]}
-            onPress={attitude.onPress}>
+            onPress={attitude.onPress}
+            {..._OTHER_OPTIONS}>
               {_CAMERAROLL_CONTAINER_CONTENT}
           </TouchableOpacity>
         );

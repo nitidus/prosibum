@@ -144,7 +144,7 @@ class TechnicalTab extends Component<{}> {
 
     var _PHOTO_URI;
 
-    if ((props.technicalTab.brandProfilePhoto != null) && (typeof props.technicalTab.brandProfilePhoto.image != 'undefined')){
+    if ((Object.keys(props.technicalTab.brandProfilePhoto).length > 0) && (typeof props.technicalTab.brandProfilePhoto.image != 'undefined')){
       _PHOTO_URI = props.technicalTab.brandProfilePhoto.image.uri;
     }
 
@@ -152,7 +152,7 @@ class TechnicalTab extends Component<{}> {
       <ScrollView
         contentContainerStyle={Styles.ScrollableContainer}>
           <CameraRollPickerModal
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.tilte.en)}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
             visible={props.technicalTab.cameraRollPickerModalVisibility}
             onBlur={(status) => props.setCameraRollPickerModalVisibility(status)}
             onPress={(photo) => props.setBrandProfilePhoto(photo)}/>

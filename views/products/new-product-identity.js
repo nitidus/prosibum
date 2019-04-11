@@ -216,7 +216,7 @@ class NewProductIdentity extends Component<{}> {
                 onPress={() => {
                   const { navigation } = props;
 
-                  navigation.navigate('NewProductFeatures');
+                  navigation.navigate('NewProductPhotos');
                 }}
                 forcedDisable={_VALIDATED} />
           </View>
