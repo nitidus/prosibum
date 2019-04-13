@@ -134,8 +134,7 @@ export default (state = initialState, action) => {
             _id: action.payload._id,
             name: action.payload.name,
             value: action.payload.value,
-            unit: action.payload.unit,
-            quantity: action.payload.quantity
+            unit: action.payload.unit
           }
         ]
       };
@@ -156,8 +155,7 @@ export default (state = initialState, action) => {
             _id: action.payload._id,
             name: action.payload.name,
             value: action.payload.value,
-            unit: action.payload.unit,
-            quantity: action.payload.quantity
+            unit: action.payload.unit
           }
         ]
       };

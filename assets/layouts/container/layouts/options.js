@@ -83,17 +83,17 @@ export const Options = (props) => {
   };
 
   if ((otherProps.horizontalOnly === true) && (otherProps.verticalOnly === true)) {
-    otherProps.animatedValueX = new Animated.Value(0);
-    otherProps.animatedValueY = new Animated.Value(0);
+    otherProps.animatedValueX = attitude.animatedValueX = props.animatedValueX || (new Animated.Value(0));
+    otherProps.animatedValueY = attitude.animatedValueY = props.animatedValueY || (new Animated.Value(0));
 
     CUSTOM_BUTTON_CONTAINER_STYLE.width = otherProps.animatedValueX.interpolate(attitude.interpolation);
     CUSTOM_BUTTON_CONTAINER_STYLE.height = otherProps.animatedValueY.interpolate(attitude.interpolation);
   }else if ((otherProps.horizontalOnly === true) && (otherProps.verticalOnly === false)) {
-    otherProps.animatedValueX = new Animated.Value(0);
+    otherProps.animatedValueX = attitude.animatedValueX = props.animatedValueX || (new Animated.Value(0));
 
     CUSTOM_BUTTON_CONTAINER_STYLE.width = otherProps.animatedValueX.interpolate(attitude.interpolation);
   }else if ((otherProps.horizontalOnly === false) && (otherProps.verticalOnly === true)) {
-    otherProps.animatedValueY = new Animated.Value(0);
+    otherProps.animatedValueY = attitude.animatedValueY = props.animatedValueY || (new Animated.Value(0));
 
     CUSTOM_BUTTON_CONTAINER_STYLE.height = otherProps.animatedValueY.interpolate(attitude.interpolation);
   }

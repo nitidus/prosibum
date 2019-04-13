@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, TouchableOpacity, Image, ImageBackground, TextInput, Keyboard, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Image, ImageBackground, TextInput, KeyboardAvoidingView, Keyboard, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import CreditCardType from 'rn-credit-card-type';
@@ -1011,56 +1011,60 @@ export const InputGroup = (props) => {
     }
   }
 
+  const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
+
   return (
-    <View style={[
-      Styles.MasterContainer,
-      attitude.style
-    ]}>
-      {
-        attitude.children.map((child, i) => {
-          var childProps = {...child.props},
+    <KeyboardAvoidingView
+      behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}
+      style={[
+        Styles.MasterContainer,
+        attitude.style
+      ]}>
+        {
+          attitude.children.map((child, i) => {
+            var childProps = {...child.props},
+                childStyle = [
+                  Styles.InnerInputContainer,
+                  childProps.style
+                ];
+
+            if (i > 0){
+              var _BORDER_TOP_WIDTH = 2;
+
+              if ((Platform.OS !== 'ios') && (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)){
+                _BORDER_TOP_WIDTH += 1;
+              }
+
               childStyle = [
                 Styles.InnerInputContainer,
+                {
+                  borderTopWidth: _BORDER_TOP_WIDTH
+                },
                 childProps.style
               ];
-
-          if (i > 0){
-            var _BORDER_TOP_WIDTH = 2;
-
-            if ((Platform.OS !== 'ios') && (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)){
-              _BORDER_TOP_WIDTH += 1;
             }
 
-            childStyle = [
-              Styles.InnerInputContainer,
-              {
-                borderTopWidth: _BORDER_TOP_WIDTH
-              },
-              childProps.style
-            ];
-          }
+            /*if (typeof childProps.link != 'undefined'){
+              childStyle.push({
+                paddingHorizontal: 0
+              });
+            }else{
+              childStyle.push({
+                paddingHorizontal: 16
+              });
+            }*/
 
-          /*if (typeof childProps.link != 'undefined'){
-            childStyle.push({
-              paddingHorizontal: 0
-            });
-          }else{
-            childStyle.push({
-              paddingHorizontal: 16
-            });
-          }*/
+            const today = new Date(),
+                  randomToken = Math.random();
 
-          const today = new Date(),
-                randomToken = Math.random();
+            const ultimateKey = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
 
-          const ultimateKey = parseInt(today.getTime().toString() + (randomToken * Math.pow(10, randomToken.toString().length - 2)).toString());
+            childProps.key = childProps.name || ultimateKey;
+            childProps.style = childStyle;
 
-          childProps.key = childProps.name || ultimateKey;
-          childProps.style = childStyle;
-
-          return React.cloneElement(child, childProps);
-        })
-      }
-    </View>
+            return React.cloneElement(child, childProps);
+          })
+        }
+    </KeyboardAvoidingView>
   )
 }

@@ -1,0 +1,88 @@
+{
+  "pilot": {
+    "title": {
+      "en": "New Product"
+    },
+    "subtitle": {
+      "en": "Product Prices"
+    },
+    "rightIcon": "plus"
+  },
+  "content": {
+    "list": {
+      "title": {
+        "en": "Prices Container"
+      },
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Product Price Animation Handler"
+          },
+          "options": {
+            "horizontalOnly": true
+          },
+          "content": {
+            "firstInputGroup": {
+              "title": {
+                "en": "Product Price Complex Container"
+              },
+              "context": {
+                "firstInput": {
+                  "type": "TEXT",
+                  "title": {
+                    "en": "Price Name"
+                  }
+                },
+                "secondInput": {
+                  "type": "NUMERIC",
+                  "title": {
+                    "en": "Price Value"
+                  }
+                },
+                "thirdInput": {
+                  "type": "LINK",
+                  "title": {
+                    "en": "Price Unit"
+                  },
+                  "link": {
+                    "en": "Units"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "null": {
+          "title": {
+            "en": "No prices have been appended yet."
+          }
+        }
+      }
+    },
+    "modalContainer": {
+      "title": {
+        "en": "Product Photo Modal"
+      }
+    },
+    "appendHandlerButton": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Append Price"
+          }
+        }
+      }
+    },
+    "submitButton": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Append Shipping Method"
+          }
+        }
+      }
+    }
+  }
+}
