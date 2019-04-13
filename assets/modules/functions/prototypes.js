@@ -318,7 +318,7 @@ module.exports = {
     return (_IS_EMAIL_VALID !== null) ? true : false;
   },
   _checkIsAValidPhoneNumber: (phoneNumber) => {
-    const _IS_PHONE_NUMBER_VALID = phoneNumber.match(/^\+?[0-9]{1,4}[0-9]{10,14}$/);
+    const _IS_PHONE_NUMBER_VALID = phoneNumber.match(/^\+?[0-9]{1,4}[0-9]{9,14}$/);
 
     return (_IS_PHONE_NUMBER_VALID !== null) ? true : false;
   },

@@ -30,10 +30,12 @@ class Signup extends Component<{}> {
     const { props } = this,
           { navigation: { state: { params } } } = props;
 
-    if (Object.keys(params).length > 0){
-      if ((typeof params.brandName != 'undefined') && (typeof params.targetToken != 'undefined')){
-        props.setDemandMode('INVITATION');
-        props.fetchAvailableRoleWithBrandAndToken(params.brandName, params.targetToken);
+    if (typeof params != 'undefined'){
+      if (Object.keys(params).length > 0){
+        if ((typeof params.brandName != 'undefined') && (typeof params.targetToken != 'undefined')){
+          props.setDemandMode('INVITATION');
+          props.fetchAvailableRoleWithBrandAndToken(params.brandName, params.targetToken);
+        }
       }
     }
   }
@@ -96,8 +98,8 @@ class Signup extends Component<{}> {
         if (Object.keys(props.signup.role).length > 0){
           if (props.signup.loadingSubscribe){
             _SUBMIT_BUTTON_CONTENT = <Input
-              type={__CONSTANTS.content.state.normal.submitInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.loading.title.en)}
+              type={__CONSTANTS.content.state.invitation.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.loading.title.en)}
               gradient={Global.colors.pair.ongerine}
               style={Styles.SubmitButtonInvitationState}
               disable={true}>
@@ -114,8 +116,8 @@ class Signup extends Component<{}> {
 
             _SUBMIT_BUTTON_CONTENT = <Input
               style={Styles.SubmitButtonInvitationState}
-              type={__CONSTANTS.content.state.normal.submitInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.normal.title.en)}
+              type={__CONSTANTS.content.state.invitation.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.normal.title.en)}
               value={__CONSTANTS.content.state.normal.submitInput.state.normal.title.en}
               gradient={Global.colors.pair.ongerine}
               onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
