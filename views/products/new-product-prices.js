@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Interactable from 'react-native-interactable';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, Options, CameraRollPickerModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, Options, ProductUnitDependedModal } from '../../assets/layouts/index';
 import { Input, InputGroup, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewProduct,
@@ -28,6 +28,31 @@ class NewProductPrices extends Component<{}> {
 
   componentDidMount() {
     const { props } = this;
+
+    props.setProductFeatures([
+      {
+        "feature":{
+          "_id":"5ca681d9d0a37b307e733050","created_at":"2019-04-04T22:14:48.903Z","modified_at":"2019-04-04T22:14:48.903Z","key":"UNIT"
+        },
+        "unit":{
+          "_id":"5ca6848ed0a37b307e733054","created_at":"2019-04-04T22:26:21.819Z","modified_at":"2019-04-04T22:26:21.819Z","key":"BOX"
+        },
+        "minimumOrderQuantity":20,
+        "maximumOrderQuantity":2000,
+        "quantity":20000
+      },
+      {
+        "feature":{
+          "_id":"5ca681d9d0a37b307e733050","created_at":"2019-04-04T22:14:48.903Z","modified_at":"2019-04-04T22:14:48.903Z","key":"UNIT"
+        },
+        "unit":{
+          "_id":"5ca684a9d0a37b307e733055","created_at":"2019-04-04T22:26:48.960Z","modified_at":"2019-04-04T22:26:48.960Z","key":"KILOGRAM"
+        },
+        "minimumOrderQuantity":30,
+        "maximumOrderQuantity":3000,
+        "quantity":30000
+      }
+    ])
   }
 
   _componentWillCheckValidation(props) {
@@ -35,9 +60,11 @@ class NewProductPrices extends Component<{}> {
 
     var _FORM_FIELDS_VALIDITY = false;
 
-    if ((_PROPS.photos.length > 0) && (Object.keys(_PROPS.primaryPhoto).length > 0)){
-      if (_PROPS.photos.every((photo) => (Object.keys(photo.content).length > 0)))
-      _FORM_FIELDS_VALIDITY = true;
+    if (_PROPS.prices.length > 0){
+      if (_PROPS.prices.every((price) => ((((price.name != '') && (price.value > 0))? ((Functions._checkIsAValidTextOnlyField(price.name, 7)) && (Functions._checkIsAValidCurrencyValueOnlyField(price.value.toString()))): false) &&
+      (Object.keys(price.unit).length > 0)))){
+        _FORM_FIELDS_VALIDITY = true;
+      }
     }
 
     return !_FORM_FIELDS_VALIDITY;
@@ -46,7 +73,8 @@ class NewProductPrices extends Component<{}> {
   render() {
     const { props } = this;
 
-    var _PRICES_CONTENT;
+    var _PRICES_CONTENT,
+        _UNITS = [];
 
     const _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title.en,
           _VALIDATED = this._componentWillCheckValidation(props);
@@ -72,6 +100,7 @@ class NewProductPrices extends Component<{}> {
 
                 const _PRICE_NAME = priceItem.name,
                       _PRICE_VALUE = (priceItem.value > 0)? priceItem.value.toString(): '',
+                      _PRICE_UNIT = (Object.keys(priceItem.unit).length > 0)? Functions._convertKeywordToToken(priceItem.unit.key): '',
                       _PRICE_SUB_FIELD_ON_CHANGE_ACTION = (currentValue, changingKey) => props.setProductPrices(props.newProduct.prices.map((checkingPriceItem, j) => {
                         if (checkingPriceItem._id === priceItem._id){
                           var _TARGET_PRICE_CHANGED_NODE = checkingPriceItem;
@@ -123,9 +152,11 @@ class NewProductPrices extends Component<{}> {
                             link={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.link.en}
                             name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.title.en)}
                             placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.title.en}
+                            value={_PRICE_UNIT}
                             onPress={() => {
                               Keyboard.dismiss();
-                              alert('ok')
+                              props.setOnFetchingModePrice(priceItem);
+                              props.setProductUnitDependedModalVisibility(true);
                             }}
                             disable={true} />
                       </InputGroup>
@@ -181,6 +212,14 @@ class NewProductPrices extends Component<{}> {
       );
     }
 
+    if (props.newProduct.features.length > 0){
+      _UNITS = props.newProduct.features.filter((featureItem, i) => {
+        const _FEATURE_KEY = Functions._convertTokenToKeyword(featureItem.feature.key);
+
+        return (_FEATURE_KEY == 'unit');
+      });
+    }
+
     return (
       <Container
         title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
@@ -196,33 +235,24 @@ class NewProductPrices extends Component<{}> {
         {...props}>
           {_PRICES_CONTENT}
 
-          <CameraRollPickerModal
-            name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalContainer.title.en)}
-            visible={props.newProduct.productPhotoModalVisibility}
-            onBlur={(status) => props.setProductPhotoModalVisibility(status)}
-            onPress={(photo) => props.setProductPhotos(props.newProduct.photos.map((priceItem, i) => {
-              const _ON_FETCHING_MODE_PHOTO = props.newProduct.onFetchingModePhoto;
+          <ProductUnitDependedModal
+            data={_UNITS}
+            visibility={props.newProduct.productUnitDependedModalVisibility}
+            onBlur={() => props.setProductUnitDependedModalVisibility(false)}
+            onProgressSuccess={(response) => props.setProductPrices(props.newProduct.prices.map((priceItem, i) => {
+              const _ON_FETCHING_MODE_PHOTO = props.newProduct.onFetchingModePrice;
 
               if (priceItem._id === _ON_FETCHING_MODE_PHOTO._id){
-                const _TARGET_PHOTO_NODE = {
+                const _TARGET_PRICE_NODE = {
                   ...priceItem,
-                  content: photo
+                  unit: response.unit
                 };
 
-
-                if (Object.keys(props.newProduct.primaryPhoto).length === 0){
-                  props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
-                }else{
-                  if (props.newProduct.primaryPhoto._id === priceItem._id){
-                    props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
-                  }
-                }
-
-                return _TARGET_PHOTO_NODE;
+                return _TARGET_PRICE_NODE;
               }else{
                 return priceItem;
               }
-            }))}/>
+            }))} />
       </Container>
     );
   }

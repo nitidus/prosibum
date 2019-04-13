@@ -5,6 +5,7 @@ import WalletModal from './wallet-modal';
 import WarehouseModal from './warehouse-modal';
 import ProductCategoriesModal from './product-categories-modal';
 import ProductFeaturesModal from './product-features-modal';
+import ProductUnitDependedModal from './product-unit-depended-modal';
 
 module.exports = {
   CountriesCodesModal,
@@ -13,5 +14,6 @@ module.exports = {
   WalletModal,
   WarehouseModal,
   ProductCategoriesModal,
-  ProductFeaturesModal
+  ProductFeaturesModal,
+  ProductUnitDependedModal
 };

@@ -7,6 +7,7 @@ import WalletModal from './layouts/wallet-modal';
 import WarehouseModal from './layouts/warehouse-modal';
 import ProductCategoriesModal from './layouts/product-categories-modal';
 import ProductFeaturesModal from './layouts/product-features-modal';
+import ProductUnitDependedModal from './layouts/product-unit-depended-modal';
 
 const Layouts = {
   Toast,
@@ -17,7 +18,8 @@ const Layouts = {
   WalletModal,
   WarehouseModal,
   ProductCategoriesModal,
-  ProductFeaturesModal
+  ProductFeaturesModal,
+  ProductUnitDependedModal
 };
 
 module.exports = Layouts;

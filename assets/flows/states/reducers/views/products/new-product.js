@@ -11,6 +11,7 @@ const initialState = {
         primaryPhoto: {},
         onFetchingModePhoto: {},
         prices: [],
+        onFetchingModePrice: {},
         promotions: [],
         discounts: [],
         shippingPlans: [],
@@ -20,6 +21,7 @@ const initialState = {
         productCategoriesModalVisibility: false,
         productFeaturesModalVisibility: false,
         productPhotoModalVisibility: false,
+        productUnitDependedModalVisibility: false,
         warehousesLoading: false,
         shippingTypesLoading: false,
         paymentTypesLoading: false,
@@ -139,6 +141,12 @@ export default (state = initialState, action) => {
         ]
       };
       break;
+    case NEW_PRODUCT.SET_SELECTED_PRODUCT_PRICE_FETCHINNG_MODE_ON:
+      return {
+        ...state,
+        onFetchingModePrice: action.payload
+      };
+      break;
     case NEW_PRODUCT.SET_PRODUCT_PROMOTIONS:
       return {
         ...state,
@@ -236,6 +244,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productPhotoModalVisibility: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_PRODUCT_UNIT_DEPENDED_MODAL_VISIBILITY:
+      return {
+        ...state,
+        productUnitDependedModalVisibility: action.payload
       };
       break;
     case NEW_PRODUCT.FETCH_AVAILABLE_WAREHOUSES:

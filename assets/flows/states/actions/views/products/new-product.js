@@ -90,6 +90,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: price
       })
     },
+    setOnFetchingModePrice: (unitFeature) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_SELECTED_PRODUCT_PRICE_FETCHINNG_MODE_ON,
+        payload: unitFeature
+      })
+    },
     setProductPromotions: (promotions) => {
       dispatch({
         type: NEW_PRODUCT.SET_PRODUCT_PROMOTIONS,
@@ -153,6 +159,12 @@ const mapDispatchToProps = (dispatch) => {
     setProductPhotoModalVisibility: (visibilityStatus) => {
       dispatch({
         type: NEW_PRODUCT.SET_PRODUCT_PHOTO_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
+    setProductUnitDependedModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_PRODUCT_UNIT_DEPENDED_MODAL_VISIBILITY,
         payload: visibilityStatus
       })
     },

@@ -1,0 +1,64 @@
+{
+  "modalContainer": {
+    "title": {
+      "en": "Product Unit Depended Modal"
+    },
+    "content": {
+      "carousel": {
+        "type": "BUTTON",
+        "state": {
+          "normal": {
+            "title": {
+              "en": "Units Feature"
+            },
+            "content": {
+              "title": {
+                "suffix": {
+                  "en": "Unit Type"
+                }
+              },
+              "firstFeature": {
+                "title": {
+                  "en": "Minimum Order"
+                },
+                "icon": {
+                  "name": "grading"
+                }
+              },
+              "secondFeature": {
+                "title": {
+                  "en": "Maximum Order"
+                },
+                "icon": {
+                  "name": "grading"
+                }
+              },
+              "thirdFeature": {
+                "title": {
+                  "en": "Quantity"
+                },
+                "icon": {
+                  "name": "grading"
+                }
+              }
+            }
+          },
+          "null": {
+            "title": {
+              "en": "No units have been appended yet."
+            }
+          }
+        }
+      },
+      "submitInput": {
+        "type": "BUTTON",
+        "prefix": {
+          "en": "Append"
+        },
+        "suffix": {
+          "en": "Unit"
+        }
+      }
+    }
+  }
+}

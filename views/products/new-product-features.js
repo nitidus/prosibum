@@ -119,7 +119,7 @@ class NewProductFeatures extends Component<{}> {
                                         </Text>
                                         <Text
                                           style={Styles.BriefDetailTitleSuffix}>
-                                            {Functions._convertKeywordToToken(__CONSTANTS.contentcarousel.state.normal.content.title.suffix.en)}
+                                            {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.title.suffix.en)}
                                         </Text>
                                       </View>
                                   </View>
@@ -131,12 +131,12 @@ class NewProductFeatures extends Component<{}> {
                                       }
                                     ]}>
                                       <Icon
-                                        name={__CONSTANTS.contentcarousel.state.normal.content.firstFeature.icon.name}
+                                        name={__CONSTANTS.content.carousel.state.normal.content.firstFeature.icon.name}
                                         color={Global.colors.single.romance} />
 
                                       <Text
                                         style={Styles.BriefDetailRowText}>
-                                          {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.contentcarousel.state.normal.content.firstFeature.title.en)}
+                                          {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.firstFeature.title.en)}
                                       </Text>
                                   </View>
                                   <View
@@ -147,23 +147,23 @@ class NewProductFeatures extends Component<{}> {
                                       }
                                     ]}>
                                       <Icon
-                                        name={__CONSTANTS.contentcarousel.state.normal.content.secondFeature.icon.name}
+                                        name={__CONSTANTS.content.carousel.state.normal.content.secondFeature.icon.name}
                                         color={Global.colors.single.romance} />
 
                                       <Text
                                         style={Styles.BriefDetailRowText}>
-                                          {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.contentcarousel.state.normal.content.secondFeature.title.en)}
+                                          {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.secondFeature.title.en)}
                                       </Text>
                                   </View>
                                   <View
                                     style={Styles.DetailItemMasterSubInfoContent}>
                                       <Icon
-                                        name={__CONSTANTS.contentcarousel.state.normal.content.thirdFeature.icon.name}
+                                        name={__CONSTANTS.content.carousel.state.normal.content.thirdFeature.icon.name}
                                         color={Global.colors.single.romance} />
 
                                       <Text
                                         style={Styles.BriefDetailRowText}>
-                                          {Functions._convertNumberToHumanReadableFormat(item.quantity)} {Functions._convertKeywordToToken(__CONSTANTS.contentcarousel.state.normal.content.thirdFeature.title.en)}
+                                          {Functions._convertNumberToHumanReadableFormat(item.quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.thirdFeature.title.en)}
                                       </Text>
                                   </View>
                               </Input>

@@ -196,7 +196,6 @@ class NewProductPhotos extends Component<{}> {
                   content: photo
                 };
 
-
                 if (Object.keys(props.newProduct.primaryPhoto).length === 0){
                   props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
                 }else{

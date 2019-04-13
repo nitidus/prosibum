@@ -12,6 +12,7 @@ import WalletModal from './reducers/layouts/wallet-modal';
 import WarehouseModal from './reducers/layouts/warehouse-modal';
 import ProductCategoriesModal from './reducers/layouts/product-categories-modal';
 import ProductFeaturesModal from './reducers/layouts/product-features-modal';
+import ProductUnitDependedModal from './reducers/layouts/product-unit-depended-modal';
 import Toast from './reducers/layouts/toast';
 import List from './reducers/layouts/list';
 
@@ -47,7 +48,7 @@ import TechnicalTab from './reducers/sub-views/user-profile/technical-tab';
 export default () => {
   const reducer = combineReducers({
           Segment,
-          Toast, List, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal,
+          Toast, List, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitDependedModal,
           Login, ForgottenPassword, Signup, VerifyPhoneNumber,
           Overseer, UserProfile,
             Roles, SelectedRole,
