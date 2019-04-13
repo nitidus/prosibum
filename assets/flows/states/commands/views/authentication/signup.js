@@ -90,7 +90,7 @@ module.exports = {
     })
 
     try {
-      const _DID_VALIDATE = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/regenerate/phone-number`, validation);
+      const _DID_VALIDATE = await axios.put(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/regenerate/phone-number`, validation);
 
       if (_DID_VALIDATE === 200){
         const _DATA = _DID_VALIDATE.data,

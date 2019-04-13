@@ -35,6 +35,12 @@ export default class Authorization extends Component<{}> {
       });
     });
 
+    DeepLinking.addRoute('/verify/:target_token', (response) => {
+      navigation.navigate('VerifyEmail', {
+        targetToken: response.target_token
+      });
+    });
+
     const _URL = await Linking.getInitialURL();
 
     if (_URL !== null){

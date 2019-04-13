@@ -1,0 +1,38 @@
+{
+  "headline": {
+    "title": {
+      "en": "Dear User"
+    },
+    "subtitle": {
+      "en": "Please enter the\nsent confirmation code."
+    }
+  },
+  "firstInputGroup": {
+    "first": {
+      "type": "NUMERIC",
+      "title": {
+        "en": "Confirmation Code"
+      }
+    }
+  },
+  "submitInput": {
+    "type": "BUTTON",
+    "state": {
+      "normal": {
+        "title": {
+          "en": "Verify Phone Number"
+        }
+      },
+      "loading": {
+        "title": {
+          "en": "Verify Phone Number Loading"
+        }
+      }
+    }
+  },
+  "quickLink": {
+    "title": {
+      "en": "Wrong Number?"
+    }
+  }
+}
