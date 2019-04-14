@@ -13,7 +13,10 @@ module.exports = {
     })
 
     try {
-      const _RESPONSE = await axios.put(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/verify/email`, token);
+      const _TOKEN = (typeof token != 'string')? token: {
+              email_token: token
+            },
+            _RESPONSE = await axios.put(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/verify/email`, _TOKEN);
 
       if (_RESPONSE.status === 200){
         const _FINAL_RESPONSE = _RESPONSE.data;

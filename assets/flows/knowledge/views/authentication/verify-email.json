@@ -4,35 +4,26 @@
       "en": "Dear User"
     },
     "subtitle": {
-      "en": "Please enter the\nsent confirmation code."
-    }
-  },
-  "firstInputGroup": {
-    "first": {
-      "type": "NUMERIC",
-      "title": {
-        "en": "Confirmation Code"
-      }
-    }
-  },
-  "submitInput": {
-    "type": "BUTTON",
-    "state": {
-      "normal": {
-        "title": {
-          "en": "Verify Phone Number"
-        }
-      },
-      "loading": {
-        "title": {
-          "en": "Verify Phone Number Loading"
+      "state": {
+        "normal": {
+          "en": "Your email has been\nverified successfully."
+        },
+        "disconnect": {
+          "en": "Your email verification\nprocess has been failed."
         }
       }
     }
   },
   "quickLink": {
     "title": {
-      "en": "Wrong Number?"
+      "state": {
+        "normal": {
+          "en": "Would you like to login?"
+        },
+        "disconnect": {
+          "en": "already verified your account?"
+        }
+      }
     }
   }
 }

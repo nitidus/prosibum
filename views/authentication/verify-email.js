@@ -51,8 +51,50 @@ class VerifyEmail extends Component<{}> {
     const { props } = this,
           { navigation: { state: { params } } } = props;
 
+    var _MAIN_CONTENT;
+
+    if (props.verifyEmail.verifyTheUserEmailAddressLoading){
+      _MAIN_CONTENT = (
+        <ActivityIndicator />
+      );
+    }else{
+      var _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.normal.en,
+          _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.normal.en;
+
+      if (!props.verifyEmail.connected.status){
+        _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.disconnect.en;
+        _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.disconnect.en;
+      }
+
+      _MAIN_CONTENT = (
+        <View style={Styles.Content}>
+          <Headline
+            style={Styles.Headline}
+            title={__CONSTANTS.headline.title.en}
+            subtitle={_HEADLINE_SUBTITLE} />
+
+          <Link
+            containerStyle={Styles.QuickLink}
+            value={_QUICK_LINK_CONTENT}
+            onPress={() => {
+              const { navigation } = props;
+
+              navigation.navigate('Login');
+            }} />
+        </View>
+      );
+    }
+
+    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
+
     return (
-      <Text>ok</Text>
+      <KeyboardAvoidingView
+        style={Styles.Container}
+        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
+          <StatusBar hidden={true}/>
+
+          {_MAIN_CONTENT}
+      </KeyboardAvoidingView>
     )
   }
 }
