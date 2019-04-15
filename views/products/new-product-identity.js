@@ -65,7 +65,7 @@ class NewProductIdentity extends Component<{}> {
             Styles.WarehouseItemContainer,
             {
               marginHorizontal: Styles.Content.marginHorizontal,
-              marginBottom: Styles.Content.marginHorizontal
+              marginBottom: Styles.Content.marginVertical
             }
           ]}
           disable={true}>
@@ -83,7 +83,7 @@ class NewProductIdentity extends Component<{}> {
               Styles.WarehouseErrorContainer,
               {
                 marginHorizontal: Styles.Content.marginHorizontal,
-                marginBottom: Styles.Content.marginHorizontal
+                marginBottom: Styles.Content.marginVertical
               }
             ]}
             textStyle={Styles.WarehouseErrorContent}
@@ -103,7 +103,7 @@ class NewProductIdentity extends Component<{}> {
               firstItem={_SELECTED_WAREHOUSE_INDEX}
               itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
               style={{
-                marginBottom: Styles.Content.marginHorizontal
+                marginBottom: Styles.Content.marginVertical
               }}
               onLayout={({ item, index }) => {
                 var _ITEM_GRADIENT = Global.colors.pair.tilan;
@@ -185,7 +185,7 @@ class NewProductIdentity extends Component<{}> {
             value={_PRODUCT_CATEGORY}
             style={{
               marginHorizontal: Styles.Content.marginHorizontal,
-              marginBottom: Styles.Content.marginHorizontal
+              marginBottom: Styles.Content.marginVertical
             }}
             onPress={() => {
               Keyboard.dismiss();

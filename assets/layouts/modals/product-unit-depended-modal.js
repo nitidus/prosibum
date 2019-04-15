@@ -166,7 +166,7 @@ const ProductUnitDependedModal = (props) => {
                       style={[
                         Styles.DetailItemMasterSubInfoContent,
                         {
-                          marginBottom: Styles.Content.marginHorizontal / 2
+                          marginBottom: Styles.Content.marginVertical
                         }
                       ]}>
                         <Icon
@@ -182,7 +182,7 @@ const ProductUnitDependedModal = (props) => {
                       style={[
                         Styles.DetailItemMasterSubInfoContent,
                         {
-                          marginBottom: Styles.Content.marginHorizontal / 2
+                          marginBottom: Styles.Content.marginVertical
                         }
                       ]}>
                         <Icon

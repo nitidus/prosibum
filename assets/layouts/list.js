@@ -196,7 +196,8 @@ const List = (props) => {
                               }}>
                                 <Text
                                   style={[
-                                    Styles.DefaultTextStyle
+                                    Styles.DefaultTextStyle,
+                                    Styles.DefaultBackButtonTextStyle
                                   ]}>
                                     {`←`}
                                 </Text>

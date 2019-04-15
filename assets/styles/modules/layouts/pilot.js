@@ -131,6 +131,7 @@ if (Platform.OS === 'ios'){
     _CUSTOM_RTL_TAB_ITEMS.marginLeft *= 3;
 
     _CUSTOM_HEADER_TITLE.fontSize += 15;
+    _CUSTOM_HEADER_SUBTITLE.fontSize += 5;
 
     _CUSTOM_PINNED_SIDE.minWidth += 20;
 
@@ -150,12 +151,14 @@ if (Platform.OS === 'ios'){
     };
 
     _CUSTOM_HEADER_TITLE.fontSize += 5;
+    _CUSTOM_HEADER_SUBTITLE.fontSize += 2;
 
     _CUSTOM_TAB_ITEMS_TEXT.fontSize += 1;
   }
 
   _CUSTOM_CONTAINER.elevation = 2;
   _CUSTOM_HEADER_TITLE.fontWeight = 'bold';
+  _CUSTOM_HEADER_SUBTITLE.fontWeight = 'bold';
   _CUSTOM_TAB_ITEMS_TEXT.fontWeight = 'bold';
 
   _CUSTOM_SINGLE_TAB_ITEM_CONTENT.fontWeight = '500';

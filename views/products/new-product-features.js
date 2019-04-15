@@ -67,7 +67,7 @@ class NewProductFeatures extends Component<{}> {
                     }));
 
                 if (i < totalFeatures.length){
-                  _CUSTOM_STYLE.marginBottom = Styles.Content.marginHorizontal;
+                  _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
                 }
 
                 switch (_FEATURE_NAME) {
@@ -127,7 +127,7 @@ class NewProductFeatures extends Component<{}> {
                                     style={[
                                       Styles.DetailItemMasterSubInfoContent,
                                       {
-                                        marginBottom: Styles.Content.marginHorizontal / 2
+                                        marginBottom: Styles.Content.marginVertical / 2
                                       }
                                     ]}>
                                       <Icon
@@ -143,7 +143,7 @@ class NewProductFeatures extends Component<{}> {
                                     style={[
                                       Styles.DetailItemMasterSubInfoContent,
                                       {
-                                        marginBottom: Styles.Content.marginHorizontal / 2
+                                        marginBottom: Styles.Content.marginVertical / 2
                                       }
                                     ]}>
                                       <Icon
@@ -174,11 +174,31 @@ class NewProductFeatures extends Component<{}> {
                     break;
 
                   case 'description':
+                    var _COUNTED_LINE_OF_DESCRIPTION = Functions._countNumberOfOccurrencesStringInString(featureItem.description, '\n');
+
+                    if (_COUNTED_LINE_OF_DESCRIPTION > 5){
+                      if (Platform.OS !== 'ios'){
+                        if (_Screen.width >= 1000 || _Screen.height >= 1000){
+                          _COUNTED_LINE_OF_DESCRIPTION = _COUNTED_LINE_OF_DESCRIPTION;
+                        }else{
+                          _COUNTED_LINE_OF_DESCRIPTION -= (_COUNTED_LINE_OF_DESCRIPTION / 5);
+                        }
+                      }else{
+                        _COUNTED_LINE_OF_DESCRIPTION -= (_COUNTED_LINE_OF_DESCRIPTION / 5);
+                      }
+                    }else{
+                      if (Platform.OS !== 'ios'){
+                        if (_Screen.width >= 1000 || _Screen.height >= 1000){
+                          _COUNTED_LINE_OF_DESCRIPTION += (_COUNTED_LINE_OF_DESCRIPTION / 5);
+                        }
+                      }
+                    }
+
                     return (
                       <Options
                         style={{
                           right: Styles.Content.marginHorizontal,
-                          height: (featureItem.description.length > 64)? 128: Styles.DescriptionFeature.height
+                          height: (_COUNTED_LINE_OF_DESCRIPTION > 1)? (_COUNTED_LINE_OF_DESCRIPTION * (Styles.DescriptionFeature.height / 2)): Styles.DescriptionFeature.height
                         }}
                         onDeletePress={_FEATURE_DELETE_ACTION}
                         {...__CONSTANTS.content.description.options}>
@@ -189,11 +209,11 @@ class NewProductFeatures extends Component<{}> {
                               Styles.LTR_ContentAlignment,
                               {
                                 ..._CUSTOM_STYLE,
-                                height: (featureItem.description.length > 64)? 128: Styles.DescriptionFeature.height
+                                height: (_COUNTED_LINE_OF_DESCRIPTION > 1)? (_COUNTED_LINE_OF_DESCRIPTION * (Styles.DescriptionFeature.height / 2)): Styles.DescriptionFeature.height
                               }
                             ]}
                             textStyle={Styles.DescriptionFeatureText}
-                            value={Functions._stripLongString(featureItem.description, ((featureItem.description.length > 64)? 128: 64))}
+                            value={featureItem.description}
                             onLongPress={_FEATURE_DELETE_ACTION}/>
                       </Options>
                     );

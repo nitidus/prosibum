@@ -213,6 +213,9 @@ module.exports = {
       throw new Error('Define the first parameter as a string and second as a number.');
     }
   },
+  _countNumberOfOccurrencesStringInString: (str1, str2) => {
+    return Lodash.countBy(str1)[str2] || 0;
+  },
   _returnCurrencyDependOnLanguage: (currency) => {
     if (typeof currency != 'undefined' && currency != '') {
       const _CURRENCY_TYPE_KEY = module.exports._convertTokenToKey(currency);

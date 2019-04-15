@@ -45,6 +45,13 @@ var _CUSTOM_CONTENT = {
     },
     _CUSTOM_PRICE_CONTAINER = {
       height: 180
+    },
+    _CUSTOM_DESCRIPTION_FEATURE = {
+      height: 68,
+      padding: 18
+    },
+    _CUSTOM_DESCRIPTION_FEATURE_TEXT = {
+      fontSize: 16
     };
 
 if (Platform.OS !== 'ios'){
@@ -63,6 +70,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.width -= 380;
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 4;
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontSize += 3;
+
+    _CUSTOM_DESCRIPTION_FEATURE_TEXT.fontSize += 5;
 
     _CUSTOM_PHOTO_CONTAINER.height += 38;
     _CUSTOM_PRICE_CONTAINER.height += 38;
@@ -85,6 +94,7 @@ if (Platform.OS !== 'ios'){
   _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontWeight = 'bold';
   _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
   _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontWeight = '500';
+  _CUSTOM_DESCRIPTION_FEATURE_TEXT.fontWeight = 'bold';
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;
@@ -202,15 +212,14 @@ module.exports = StyleSheet.create({
     marginVertical: _CUSTOM_CONTENT.marginVertical
   },
   DescriptionFeature: {
-    height: 68,
     backgroundColor: colors.single.wildSand,
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
-    padding: 18
+    ..._CUSTOM_DESCRIPTION_FEATURE
   },
   DescriptionFeatureText: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
-    fontSize: 16
+    ..._CUSTOM_DESCRIPTION_FEATURE_TEXT
   },
   PhotoContainer: {
     ..._CUSTOM_PHOTO_CONTAINER

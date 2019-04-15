@@ -81,7 +81,7 @@ class NewProductPhotos extends Component<{}> {
                     _SINGLE_PHOTO_OTHER_PROPS = {};
 
                 if (i < totalPhotos.length){
-                  _CUSTOM_STYLE.marginBottom = Styles.Content.marginHorizontal;
+                  _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical
                 }
 
                 if ((Object.keys(_PHOTO_CONTENT).length > 0) && (typeof _PHOTO_CONTENT.image != 'undefined')){
@@ -96,7 +96,7 @@ class NewProductPhotos extends Component<{}> {
                   <Options
                     style={{
                       right: Styles.Content.marginHorizontal,
-                      height: Styles.PhotoContainer.height
+                      height: ((Platform.OS !== 'ios') && (_Screen.width >= 1000 || _Screen.height >= 1000))? Styles.PhotoContainer.height + 11: Styles.PhotoContainer.height
                     }}
                     onDeletePress={_PHOTO_DELETE_ACTION}
                     {...__CONSTANTS.content.list.state.normal.options}>

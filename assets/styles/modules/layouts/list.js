@@ -8,9 +8,35 @@ import {
 const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
+var _CUSTOM_ROW = {
+      padding: 20,
+      borderRadius: 5,
+      height: 59,
+      marginBottom: 15
+    },
+    _CUSTOM_DEFAULT_TEXT_STYLE = {
+      fontSize: 15
+    },
+    _CUSTOM_DEFAULT_BACK_BUTTON_TEXT_STYLE = {
+      fontSize: 15
+    };
+
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
+    _CUSTOM_ROW.height += 18;
+
+    _CUSTOM_DEFAULT_TEXT_STYLE.fontSize += 5;
+
+    _CUSTOM_DEFAULT_BACK_BUTTON_TEXT_STYLE.fontSize += 15;
+    _CUSTOM_DEFAULT_BACK_BUTTON_TEXT_STYLE.lineHeight = 25;
+  }else{
+    _CUSTOM_ROW.height += 5;
+
+    _CUSTOM_DEFAULT_BACK_BUTTON_TEXT_STYLE.fontSize += 10;
+    _CUSTOM_DEFAULT_BACK_BUTTON_TEXT_STYLE.lineHeight = 20;
   }
+
+  _CUSTOM_DEFAULT_TEXT_STYLE.fontWeight = 'bold';
 }
 
 module.exports = StyleSheet.create({
@@ -25,19 +51,19 @@ module.exports = StyleSheet.create({
   },
   Row: {
     justifyContent: 'flex-start',
-    padding: 20,
     flexDirection: 'row',
-    borderRadius: 5,
-    height: 59,
-    marginBottom: 15,
-    backgroundColor: colors.single.mercury
+    backgroundColor: colors.single.mercury,
+    ..._CUSTOM_ROW
   },
   DefaultTextStyle: {
     flexGrow: 1,
     display: 'flex',
     fontFamily: fonts.sanFrancisco.textBold,
-    fontSize: 15,
-    color: colors.single.rangoonGreen
+    color: colors.single.rangoonGreen,
+    ..._CUSTOM_DEFAULT_TEXT_STYLE
+  },
+  DefaultBackButtonTextStyle: {
+    ..._CUSTOM_DEFAULT_BACK_BUTTON_TEXT_STYLE
   },
   RowTextDefaultState: {
     color: colors.single.rangoonGreen

@@ -95,7 +95,7 @@ class NewProductPrices extends Component<{}> {
                     }));
 
                 if (i < totalPrices.length){
-                  _CUSTOM_STYLE.marginBottom = Styles.Content.marginHorizontal;
+                  _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
                 }
 
                 const _PRICE_NAME = priceItem.name,

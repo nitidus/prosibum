@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -126,13 +126,24 @@ const ProductCategoriesModal = (props) => {
         <List
           dataSource={props.productCategoriesModal.categories}
           onLayout={(color) => {
+            var _OTHER_ICON_PROPS = {};
+
+            if (Platform.OS !== 'ios'){
+              if (_Screen.width >= 1000 || _Screen.height >= 1000){
+                _OTHER_ICON_PROPS.height = 28;
+              }else{
+                _OTHER_ICON_PROPS.height = 25;
+              }
+            }
+
             return (
               <Icon
                 name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
                 color={color}
                 style={{
-                  marginRight: Styles.Content.marginHorizontal
-                }}/>
+                  marginRight: Styles.Content.marginVertical
+                }}
+                {..._OTHER_ICON_PROPS}/>
             );
           }}
           onPress={(response) => props.setCurrentCategory(response)}/>
