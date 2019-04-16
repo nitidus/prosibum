@@ -6,7 +6,7 @@ const __API_HOST = (Platform.OS === 'ios')? 'localhost': '192.168.0.105',
         TARGET: 'Wholesaler',
         URLS: {
           INTERFAS: {
-            HOST_NAME: `http://${__API_HOST}:${__API_PORT}` /*'http://interfas.herokuapp.com'*/
+            HOST_NAME: /*`http://${__API_HOST}:${__API_PORT}`*/ 'http://interfas.herokuapp.com'
           }
         },
         STORAGE: {

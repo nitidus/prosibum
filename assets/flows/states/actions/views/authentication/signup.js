@@ -12,6 +12,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    resetForm: () => {
+      dispatch({
+        type: SIGNUP.RESET_FORM
+      });
+    },
     setDemandMode: (mode) => {
       dispatch({
         type: SIGNUP.SET_DEMAND_MODE,
@@ -56,7 +61,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     fetchAvailableRoleWithBrandAndToken: async (brandName, token) => CMD._getAvailableRoleWithBrandAndToken(brandName, token, dispatch),
     completeUserRegistration: async (token, userDetail) => CMD._completeUserRegistrationWithUpdatingDetail(token, userDetail, dispatch),
-    subscribeTheUser: async (userDetail) => CMD._subscribeUserWithDetail(userDetail, dispatch),
+    subscribeTheUser: async (userDetail, callback) => CMD._subscribeUserWithDetail(userDetail, callback, dispatch),
     regenerateTheUserPhoneNumberValidationToken: async (validation) => CMD._regenerateValidationToken(validation, dispatch),
     setSubscribeLoadingStatus: (loadingStatus) => {
       dispatch({

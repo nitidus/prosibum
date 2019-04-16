@@ -97,7 +97,7 @@ module.exports = {
 
     await props.verifyAuthentication(_LOGIN_SEED);
 
-    props.setToken('');
+    // props.setToken('');
     props.setPassword('');
 
     navigation.navigate('Authorization');
@@ -123,18 +123,10 @@ module.exports = {
           await props.completeUserRegistration(signup.role.user._id, _SEED);
           break;
         default:
-          await props.subscribeTheUser(_SEED);
+          await props.subscribeTheUser(_SEED, () => {
+            navigation.navigate('VerifyPhoneNumber');
+          });
           break;
-      }
-
-      if (!props.signup.connected.status){
-        props.setPhoneNumber({
-          number: ''
-        });
-        props.setEmail('');
-        props.setPassword('');
-      }else{
-        navigation.navigate('VerifyPhoneNumber');
       }
     }else{
       const _TOKEN = JSON.parse(_SUBSCRIBED_USER),

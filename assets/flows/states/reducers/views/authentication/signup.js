@@ -26,6 +26,12 @@ const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SIGNUP.RESET_FORM:
+      return {
+        ...initialState,
+        demandMode: state.demandMode
+      };
+      break;
     case SIGNUP.SET_DEMAND_MODE:
       return {
         ...state,

@@ -7,7 +7,7 @@ const { SIGNUP } = VIEWS.AUTHENTICATION;
 import { Functions } from '../../../../../modules/index';
 
 module.exports = {
-  _subscribeUserWithDetail: async (userDetail, dispatch) => {
+  _subscribeUserWithDetail: async (userDetail, callback, dispatch) => {
     dispatch({
       type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
       payload: true
@@ -46,6 +46,8 @@ module.exports = {
                     status: true
                   }
                 })
+
+                callback();
               }
             }else{
               dispatch({
