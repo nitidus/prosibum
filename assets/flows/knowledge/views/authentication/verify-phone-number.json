@@ -12,6 +12,14 @@
       "type": "NUMERIC",
       "title": {
         "en": "Confirmation Code"
+      },
+      "options": {
+        "maxLength": 6
+      },
+      "validation": {
+        "message": {
+          "en": "Code must be 6 digit"
+        }
       }
     }
   },

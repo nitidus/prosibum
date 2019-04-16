@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Input, InputGroup, Segment, Link } from '../../assets/components/index';
-import { Container, CountriesCodesModal } from '../../assets/layouts/index';
+import { Container, Toast, CountriesCodesModal } from '../../assets/layouts/index';
 const Styles = Views.Authentication.ForgottenPassword;
 
 import { Functions } from '../../assets/modules/index';
@@ -78,11 +78,40 @@ class ForgottenPassword extends Component<{}> {
 
     const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
 
+    var _TOP_PINNED_TOAST,
+        _WARNING_MESSAGE = '';
+
+    switch (props.forgottenPassword.requestType.toLowerCase()) {
+      case 'email':
+        if (props.forgottenPassword.email != ''){
+          if (!Functions._checkIsAValidEmail(props.forgottenPassword.email)){
+            _WARNING_MESSAGE = __CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.validation.message.en;
+          }
+        }
+        break;
+      case 'phone':
+        if (props.forgottenPassword.phone.number != ''){
+          if (!Functions._checkIsAValidPhoneNumber(props.forgottenPassword.phone.number)){
+            _WARNING_MESSAGE = __CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.validation.message.en;
+          }
+        }
+        break;
+    }
+
+    if (_WARNING_MESSAGE != ''){
+      _TOP_PINNED_TOAST = <Toast
+        message={_WARNING_MESSAGE}
+        launched={true}
+        color={Global.colors.pair.ongerine.orangeYellow} />;
+    }
+
     return (
       <KeyboardAvoidingView
         style={Styles.Container}
         behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
           <StatusBar hidden={true}/>
+
+          {_TOP_PINNED_TOAST}
 
           <CountriesCodesModal
             name={__CONSTANTS.modals.first.title.en}

@@ -316,17 +316,20 @@ module.exports = {
     return (_IS_TEXT_ONLY_VALID !== null) ? true : false;
   },
   _checkIsAValidEmail: (email) => {
-    const _IS_EMAIL_VALID = email.match(/[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}/);
+    const _IS_EMAIL_VALID = email.match(/^[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/);
 
     return (_IS_EMAIL_VALID !== null) ? true : false;
   },
   _checkIsAValidPhoneNumber: (phoneNumber) => {
-    const _IS_PHONE_NUMBER_VALID = phoneNumber.match(/^\+?[0-9]{1,4}[0-9]{9,14}$/);
+    const _CORRECT_PHONE_NUMBER = (phoneNumber[0] != '0')? phoneNumber: phoneNumber.replace(/^0+/, ''),
+          _IS_PHONE_NUMBER_VALID = _CORRECT_PHONE_NUMBER.match(/^\+?[0-9]{1,4}[0-9]{9,14}$/);
 
     return (_IS_PHONE_NUMBER_VALID !== null) ? true : false;
   },
   _checkIsAValidPhoneNumberOrEmail: (token) => {
-    return (token.match(/^\+?[0-9]{1,4}[0-9]{10,14}/) !== null) ? true : false;
+    const _CORRECT_PHONE_NUMBER = (token[0] != '0')? token: token.replace(/^0+/, '');
+
+    return (_CORRECT_PHONE_NUMBER.match(/^\+?[0-9]{1,4}[0-9]{10,14}/) !== null) ? true : false;
   },
   _checkIsAValidToken: (token) => {
     if (module.exports._checkIsAValidPhoneNumberOrEmail(token)) {

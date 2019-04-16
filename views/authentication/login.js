@@ -96,11 +96,34 @@ class Login extends Component<{}> {
 
     const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
 
+    var _WARNING_MESSAGE = '';
+
+    if (props.login.token != ''){
+      if (!Functions._checkIsAValidToken(props.login.token)){
+        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message.en;
+      }
+    }
+
+    if (props.login.password != ''){
+      if (!Functions._checkIsAValidPassword(props.login.password)){
+        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.second.validation.message.en;
+      }
+    }
+
+    if (_WARNING_MESSAGE != ''){
+      _TOP_PINNED_TOAST = <Toast
+        message={_WARNING_MESSAGE}
+        launched={true}
+        color={Global.colors.pair.ongerine.orangeYellow} />;
+    }
+
     return (
       <KeyboardAvoidingView
         style={Styles.Container}
         behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
           <StatusBar hidden={true}/>
+
+          {_TOP_PINNED_TOAST}
 
           <View style={Styles.Content}>
             <Headline

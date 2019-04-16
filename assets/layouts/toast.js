@@ -26,10 +26,6 @@ const Toast = (props) => {
 
   attitude.message = props.message || props.messageContent || '';
 
-  if (attitude.message !== props.toast.message){
-    props.setMessage(attitude.message);
-  }
-
   attitude.link = props.link || 'Retry';
 
   if (attitude.link !== props.toast.link){
@@ -54,8 +50,9 @@ const Toast = (props) => {
 
   attitude.launched = props.launched || props.triggered || props.visible || props.visibled || false;
 
-  if (attitude.launched !== props.toast.visibility){
+  if ((attitude.message != '') && (attitude.message !== props.toast.message)){
     props.setVisibility(attitude.launched);
+    props.setMessage(attitude.message);
   }
 
   if (typeof attitude.duration != 'undefined'){

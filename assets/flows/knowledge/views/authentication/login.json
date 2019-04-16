@@ -12,6 +12,11 @@
       "type": "TEXT",
       "title": {
         "en": "Email or Mobile Phone"
+      },
+      "validation": {
+        "message": {
+          "en": "Check your email or phone numbersal"
+        }
       }
     },
     "second": {
@@ -21,6 +26,11 @@
       },
       "link": {
         "en": "Forgot it?"
+      },
+      "validation": {
+        "message": {
+          "en": "Password must contain 8 characters"
+        }
       }
     }
   },

@@ -205,6 +205,33 @@ class Signup extends Component<{}> {
             forcedDisable={_VALIDATED} />;
         }
 
+        var _WARNING_MESSAGE = '';
+
+        if (props.signup.phone.number != ''){
+          if (!Functions._checkIsAValidPhoneNumber(props.signup.phone.number)){
+            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.first.validation.message.en;
+          }
+        }
+
+        if (props.signup.email != ''){
+          if (!Functions._checkIsAValidEmail(props.signup.email)){
+            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.second.validation.message.en;
+          }
+        }
+
+        if (props.signup.password != ''){
+          if (!Functions._checkIsAValidPassword(props.signup.password)){
+            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.en;
+          }
+        }
+
+        if (_WARNING_MESSAGE != ''){
+          _TOP_PINNED_TOAST = <Toast
+            message={_WARNING_MESSAGE}
+            launched={true}
+            color={Global.colors.pair.ongerine.orangeYellow} />;
+        }
+
         _MAIN_CONTENT = (
           <View style={Styles.Content}>
             <Headline

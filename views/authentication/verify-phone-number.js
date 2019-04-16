@@ -36,7 +36,6 @@ class VerifyPhoneNumber extends Component<{}> {
       const _PARSED_SUBSCRIBED_USER = JSON.parse(_SUBSCRIBED_USER),
             _TOKEN = _PARSED_SUBSCRIBED_USER.phone.mobile.validation.token;
 
-      console.log(_TOKEN);
       props.setSecretKey(_TOKEN);
     }
   }
@@ -56,7 +55,7 @@ class VerifyPhoneNumber extends Component<{}> {
     var _FORM_FIELDS_VALIDITY = false;
 
     if (_PROPS.secretKey != '' && _PROPS.validationToken != ''){
-      const _IS_VALIDATION_TOKEN_VALID = _PROPS.validationToken === _PROPS.secretKey;
+      const _IS_VALIDATION_TOKEN_VALID = (_PROPS.validationToken === _PROPS.secretKey) && (Functions._checkIsAValidNumericOnlyField(_PROPS.validationToken, 6));
 
       if (_IS_VALIDATION_TOKEN_VALID){
         _FORM_FIELDS_VALIDITY = true;
@@ -86,10 +85,7 @@ class VerifyPhoneNumber extends Component<{}> {
           <ActivityIndicator />
         </Input>;
     }else{
-      if (props.verifyPhoneNumber.connected.status){
-        _TOP_PINNED_TOAST = <Toast
-          launched={!props.verifyPhoneNumber.connected.status} />;
-      }else{
+      if (!props.verifyPhoneNumber.connected.status){
         _TOP_PINNED_TOAST = <Toast
           message={props.verifyPhoneNumber.connected.content}
           launched={!props.verifyPhoneNumber.connected.status}
@@ -108,6 +104,20 @@ class VerifyPhoneNumber extends Component<{}> {
     }
 
     const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
+
+    var _WARNING_MESSAGE = '';
+    if (props.verifyPhoneNumber.validationToken != ''){
+      if (!Functions._checkIsAValidNumericOnlyField(props.verifyPhoneNumber.validationToken, 6)){
+        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message.en;
+      }
+    }
+
+    if (_WARNING_MESSAGE != ''){
+      _TOP_PINNED_TOAST = <Toast
+        message={_WARNING_MESSAGE}
+        launched={true}
+        color={Global.colors.pair.ongerine.orangeYellow} />;
+    }
 
     return (
       <KeyboardAvoidingView
@@ -129,7 +139,8 @@ class VerifyPhoneNumber extends Component<{}> {
                 placeholder={__CONSTANTS.firstInputGroup.first.title.en}
                 value={props.verifyPhoneNumber.validationToken}
                 style={Styles.FirstInput}
-                onChangeText={(currentValue) => props.setValidationToken(currentValue)} />
+                onChangeText={(currentValue) => props.setValidationToken(currentValue)}
+                {...__CONSTANTS.firstInputGroup.first.options} />
 
               {_SUBMIT_BUTTON_CONTENT}
 

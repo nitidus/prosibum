@@ -15,18 +15,33 @@
             "type": "PHONE-LINK",
             "title": {
               "en": "Phone Number"
+            },
+            "validation": {
+              "message": {
+                "en": "Check your phone number format"
+              }
             }
           },
           "second": {
             "type": "EMAIL",
             "title": {
               "en": "Email"
+            },
+            "validation": {
+              "message": {
+                "en": "Check your email format"
+              }
             }
           },
           "third": {
             "type": "PASSWORD",
             "title": {
               "en": "Password"
+            },
+            "validation": {
+              "message": {
+                "en": "Password must contain 8 characters"
+              }
             }
           }
         },
