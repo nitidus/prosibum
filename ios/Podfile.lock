@@ -16,7 +16,7 @@ PODS:
     - React/Core
   - rn-fetch-blob (0.10.6):
     - React/Core
-  - RNSVG (7.2.0):
+  - RNSVG (7.0.3):
     - React
   - yoga (0.56.0.React)
 
