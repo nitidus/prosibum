@@ -108,7 +108,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'VerifyPhoneNumber');
+    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
@@ -127,7 +127,15 @@ module.exports = {
           break;
       }
 
-      navigation.navigate('VerifyPhoneNumber');
+      if (!props.signup.connected.status){
+        props.setPhoneNumber({
+          number: ''
+        });
+        props.setEmail('');
+        props.setPassword('');
+      }else{
+        navigation.navigate('VerifyPhoneNumber');
+      }
     }else{
       const _TOKEN = JSON.parse(_SUBSCRIBED_USER),
             _TOKEN_MOBILE_PHONE_VALIDATION_VALUE = _TOKEN.phone.mobile.validation.value;

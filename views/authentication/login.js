@@ -88,8 +88,8 @@ class Login extends Component<{}> {
         name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
         value={__CONSTANTS.submitInput.state.normal.title.en}
         gradient={Global.colors.pair.ongerine}
-        onPress={() => {
-          Preparation._prepareLogin(props)
+        onPress={async () => {
+          await Preparation._prepareLogin(props);
         }}
         forcedDisable={_VALIDATED} />;
     }

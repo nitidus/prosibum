@@ -28,16 +28,8 @@ const Toast = (props) => {
 
   attitude.link = props.link || 'Retry';
 
-  if (attitude.link !== props.toast.link){
-    props.setLinkText(attitude.link);
-  }
-
   if ((typeof props.onPress != 'undefined') || (typeof props.onLinkPress != 'undefined') || (typeof props.onPressLink != 'undefined')){
     attitude.onPress = props.onPress || props.onLinkPress || props.onPressLink;
-  }
-
-  if (attitude.onPress !== props.toast.onPress){
-    props.setOnLinkPress(attitude.onPress);
   }
 
   if ((typeof props.duration != 'undefined') || (typeof props.durationTime != 'undefined')){
@@ -53,6 +45,14 @@ const Toast = (props) => {
   if ((attitude.message != '') && (attitude.message !== props.toast.message)){
     props.setVisibility(attitude.launched);
     props.setMessage(attitude.message);
+
+    if (attitude.onPress !== props.toast.onPress){
+      props.setOnLinkPress(attitude.onPress);
+    }
+
+    if (attitude.link !== props.toast.link){
+      props.setLinkText(attitude.link);
+    }
   }
 
   if (typeof attitude.duration != 'undefined'){
