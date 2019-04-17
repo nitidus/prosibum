@@ -12,11 +12,14 @@ const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
           number: '',
           dialCode: _SELECTED_DIAL_CODE
         },
+        validationToken: '',
+        secretKey: '',
         email: '',
         password: '',
         role: {},
         loadingRole: false,
-        loadingSubscribe: false,
+        subscribeLoading: false,
+        verificationLoading: false,
         connected: {
           status: true,
           content: ''
@@ -60,6 +63,18 @@ export default (state = initialState, action) => {
         }
       };
       break;
+    case SIGNUP.SET_VALIDATION_TOKEN:
+      return {
+        ...state,
+        validationToken: action.payload
+      };
+      break;
+    case SIGNUP.SET_SECRET_KEY:
+      return {
+        ...state,
+        secretKey: action.payload
+      };
+      break;
     case SIGNUP.SET_EMAIL:
       return {
         ...state,
@@ -78,16 +93,25 @@ export default (state = initialState, action) => {
         role: action.payload
       };
       break;
+    case SIGNUP.VERIFY_THE_USER:
+      return state;
+      break;
     case SIGNUP.SUBSCRIBE_THE_USER:
       return state;
       break;
     case SIGNUP.COMPLETE_THE_USER_REGISTRATION:
       return state;
       break;
+    case SIGNUP.SET_VERIFICATION_LOADING_STATUS:
+      return {
+        ...state,
+        verificationLoading: action.payload
+      };
+      break;
     case SIGNUP.SET_SUBSCRIBE_LOADING_STATUS:
       return {
         ...state,
-        loadingSubscribe: action.payload
+        subscribeLoading: action.payload
       };
       break;
     case SIGNUP.SET_FETCH_AVAILABLE_ROLE_WITH_BRAND_AND_TOKEN_LOADING_STATUS:

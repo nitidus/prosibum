@@ -47,6 +47,18 @@ const mapDispatchToProps = (dispatch) => {
         payload: email
       })
     },
+    setValidationToken: (validationToken) => {
+      dispatch({
+        type: SIGNUP.SET_VALIDATION_TOKEN,
+        payload: validationToken
+      })
+    },
+    setSecretKey: (secretKey) => {
+      dispatch({
+        type: SIGNUP.SET_SECRET_KEY,
+        payload: secretKey
+      })
+    },
     setPassword: (password) => {
       dispatch({
         type: SIGNUP.SET_PASSWORD,
@@ -60,9 +72,14 @@ const mapDispatchToProps = (dispatch) => {
       });
     },
     fetchAvailableRoleWithBrandAndToken: async (brandName, token) => CMD._getAvailableRoleWithBrandAndToken(brandName, token, dispatch),
-    completeUserRegistration: async (token, userDetail) => CMD._completeUserRegistrationWithUpdatingDetail(token, userDetail, dispatch),
-    subscribeTheUser: async (userDetail, callback) => CMD._subscribeUserWithDetail(userDetail, callback, dispatch),
-    regenerateTheUserPhoneNumberValidationToken: async (validation) => CMD._regenerateValidationToken(validation, dispatch),
+    verifyTheUser: async (userDetail, callback) => CMD._verifyUserWithDetail(userDetail, callback, dispatch),
+    subscribeTheUser: async (callback) => CMD._subscribeUserWithDetail(callback, dispatch),
+    setVerificationLoadingStatus: (loadingStatus) => {
+      dispatch({
+        type: SIGNUP.SET_VERIFICATION_LOADING_STATUS,
+        payload: loadingStatus
+      })
+    },
     setSubscribeLoadingStatus: (loadingStatus) => {
       dispatch({
         type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,

@@ -15,7 +15,7 @@ const { Preparation } = Functions;
 const _SCREEN = Dimensions.get('window');
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.VerifyPhoneNumber;
+const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.Signup;
 
 import { views_constants } from '../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.authentication.verify_phone_number;
@@ -30,7 +30,7 @@ class VerifyPhoneNumber extends Component<{}> {
   async componentDidMount() {
     const { props } = this;
 
-    const _SUBSCRIBED_USER = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);
+    const _SUBSCRIBED_USER = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_TOKEN);
 
     if (_SUBSCRIBED_USER !== false){
       const _PARSED_SUBSCRIBED_USER = JSON.parse(_SUBSCRIBED_USER),
@@ -49,7 +49,7 @@ class VerifyPhoneNumber extends Component<{}> {
   }
 
   _componentWillCheckValidation(props) {
-    const _PROPS = props.verifyPhoneNumber,
+    const _PROPS = props.signup,
           _CONNECTED_STATUS = _PROPS.connected.status;
 
     var _FORM_FIELDS_VALIDITY = false;
@@ -72,25 +72,22 @@ class VerifyPhoneNumber extends Component<{}> {
 
     const _VALIDATED = this._componentWillCheckValidation(props);
 
-    if (props.verifyPhoneNumber.loadingFinalSubscribe){
+    if (props.signup.subscribeLoading){
       _SUBMIT_BUTTON_CONTENT = <Input
         type={__CONSTANTS.submitInput.type}
         name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
         gradient={Global.colors.pair.ongerine}
-        style={[
-          Styles.FirstCarousel,
-          Styles.FirstCarouselLoading
-        ]}
+        style={Styles.SubmitButton}
         disable={true}>
           <ActivityIndicator />
         </Input>;
     }else{
-      if (!props.verifyPhoneNumber.connected.status){
+      if (!props.signup.connected.status){
         _TOP_PINNED_TOAST = <Toast
-          message={props.verifyPhoneNumber.connected.content}
-          launched={!props.verifyPhoneNumber.connected.status}
+          message={props.signup.connected.content}
+          launched={!props.signup.connected.status}
           color={Global.colors.single.carminePink}
-          onPress={() => Preparation._prepareVerifyPhoneNumberComponentToSubmit(props)} />;
+          onPress={() => Preparation._prepareSubscribeTokenToSubmit(props)} />;
       }
 
       _SUBMIT_BUTTON_CONTENT = <Input
@@ -99,15 +96,16 @@ class VerifyPhoneNumber extends Component<{}> {
         name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
         value={__CONSTANTS.submitInput.state.normal.title.en}
         gradient={Global.colors.pair.ongerine}
-        onPress={() => Preparation._prepareVerifyPhoneNumberComponentToSubmit(props)}
+        onPress={() => Preparation._prepareSubscribeTokenToSubmit(props)}
         forcedDisable={_VALIDATED} />;
     }
 
     const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
 
     var _WARNING_MESSAGE = '';
-    if (props.verifyPhoneNumber.validationToken != ''){
-      if (!Functions._checkIsAValidNumericOnlyField(props.verifyPhoneNumber.validationToken, 6)){
+
+    if (props.signup.validationToken != ''){
+      if (!Functions._checkIsAValidNumericOnlyField(props.signup.validationToken, 6)){
         _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message.en;
       }
     }
@@ -137,7 +135,7 @@ class VerifyPhoneNumber extends Component<{}> {
                 type={__CONSTANTS.firstInputGroup.first.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
                 placeholder={__CONSTANTS.firstInputGroup.first.title.en}
-                value={props.verifyPhoneNumber.validationToken}
+                value={props.signup.validationToken}
                 style={Styles.FirstInput}
                 onChangeText={(currentValue) => props.setValidationToken(currentValue)}
                 {...__CONSTANTS.firstInputGroup.first.options} />

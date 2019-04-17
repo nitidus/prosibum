@@ -11,7 +11,7 @@ const __API_HOST = (Platform.OS === 'ios')? 'localhost': '192.168.0.105',
         },
         STORAGE: {
           AUTH: 'AUTH/TOKEN',
-          SUBSCRIBE_DEPEND_ON_PHONE_NUMBER: 'SUBSCRIBE/TOKEN/LISTENING_ON_VERIFY_PHONE_NUMBER'
+          SUBSCRIBE_TOKEN: 'SUBSCRIBE/TOKEN/SUBSCRIBE_TOKEN'
         }
       };
 

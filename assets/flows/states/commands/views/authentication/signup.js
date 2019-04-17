@@ -7,9 +7,9 @@ const { SIGNUP } = VIEWS.AUTHENTICATION;
 import { Functions } from '../../../../../modules/index';
 
 module.exports = {
-  _subscribeUserWithDetail: async (userDetail, callback, dispatch) => {
+  _verifyUserWithDetail: async (userDetail, callback, dispatch) => {
     dispatch({
-      type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+      type: SIGNUP.SET_VERIFICATION_LOADING_STATUS,
       payload: true
     })
 
@@ -21,22 +21,22 @@ module.exports = {
 
         if (_FINAL_ADMINISTRATOR_TOKEN_RESPONSE.meta.code === 200){
           const _ADMINISTRATOR_TOKEN_DATA = _FINAL_ADMINISTRATOR_TOKEN_RESPONSE.data,
-                _SUBSCRIBED_USER = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/users`, {
+                _VERIFIED_USER = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/verify`, {
                   user_group_id: _ADMINISTRATOR_TOKEN_DATA._id,
                   ...userDetail
                 });
 
-          if (_SUBSCRIBED_USER.status === 200){
-            const _FINAL_RESPONSE = _SUBSCRIBED_USER.data;
+          if (_VERIFIED_USER.status === 200){
+            const _FINAL_RESPONSE = _VERIFIED_USER.data;
 
             if (_FINAL_RESPONSE.meta.code === 200){
               const _DATA = _FINAL_RESPONSE.data,
                     _SERIALIZED_DATA = JSON.stringify(_DATA),
-                    _DID_SUBSCRIBED_USER_STORE = await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _SERIALIZED_DATA);
+                    _DID_VERIFIED_USER_STORE = await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_TOKEN, _SERIALIZED_DATA);
 
-              if (_DID_SUBSCRIBED_USER_STORE === true){
+              if (_DID_VERIFIED_USER_STORE === true){
                 dispatch({
-                  type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+                  type: SIGNUP.SET_VERIFICATION_LOADING_STATUS,
                   payload: false
                 })
 
@@ -51,7 +51,7 @@ module.exports = {
               }
             }else{
               dispatch({
-                type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+                type: SIGNUP.SET_VERIFICATION_LOADING_STATUS,
                 payload: false
               })
 
@@ -71,7 +71,7 @@ module.exports = {
         const _ERROR_MESSAGE = error.message || error.request._response;
 
         dispatch({
-          type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+          type: SIGNUP.SET_VERIFICATION_LOADING_STATUS,
           payload: false
         })
 
@@ -85,44 +85,102 @@ module.exports = {
       }
     }
   },
-  _regenerateValidationToken: async (validation, dispatch) => {
+  _subscribeUserWithDetail: async (callback, dispatch) => {
     dispatch({
       type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
       payload: true
     })
 
     try {
-      const _DID_VALIDATE = await axios.put(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/regenerate/phone-number`, validation);
+      const _SUBSCRIBED_USER = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_TOKEN);
 
-      if (_DID_VALIDATE === 200){
-        const _DATA = _DID_VALIDATE.data,
-              _SERIALIZED_DATA = JSON.stringify(_DATA),
-              _DID_RETRIEVE_SUBSCRIBED_USER = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);
+      if (_SUBSCRIBED_USER !== false){
+          var _TOKEN = JSON.parse(_SUBSCRIBED_USER),
+              _TODAY = new Date(),
+              _MOBILE_PHONE_VERIFICATION_DATE = new Date(_TOKEN.phone.mobile.validation.modified_at),
+              _MOBILE_PHONE_VERIFICATION_EXPIRATION_DATE_TIME = _MOBILE_PHONE_VERIFICATION_DATE.getTime() + (1000 * 60 * 2);
 
-        if (_DID_RETRIEVE_SUBSCRIBED_USER !== false){
-          var _UNSERIALIZED_DATA = JSON.parse(_DID_RETRIEVE_SUBSCRIBED_USER);
+          if (_TODAY.getTime() > _MOBILE_PHONE_VERIFICATION_EXPIRATION_DATE_TIME){
+            const _REGENERATED_SUBSCRIBER = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/regenerate`, _TOKEN);
 
-          _UNSERIALIZED_DATA.phone.mobile.validation.token = _DATA.token;
-          _UNSERIALIZED_DATA.phone.mobile.validation.modified_at = _DATA.modified_at;
+            if (_REGENERATED_SUBSCRIBER.status === 200){
+              const _FINAL_RESPONSE = _REGENERATED_SUBSCRIBER.data;
 
-          if (_DATA.phone_number){
-            _UNSERIALIZED_DATA.phone.mobile.content = _DATA.phone_number;
-          }
+              if (_FINAL_RESPONSE.meta.code === 200){
+                const _DATA = _FINAL_RESPONSE.data,
+                      _SERIALIZED_DATA = JSON.stringify(_DATA),
+                      _DID_SUBSCRIBED_USER_STORE = await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_TOKEN, _SERIALIZED_DATA);
 
-          await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _UNSERIALIZED_DATA);
+                callback({
+                  status: 701,
+                  error_message: `The subscribed user verification code has been expired.`
+                });
+              }else{
+                dispatch({
+                  type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+                  payload: false
+                })
 
-          dispatch({
-            type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-            payload: false
-          })
-
-          dispatch({
-            type: SIGNUP.SET_CONNECTED_STATUS,
-            payload: {
-              status: true
+                dispatch({
+                  type: SIGNUP.SET_CONNECTED_STATUS,
+                  payload: {
+                    status: false,
+                    content: _FINAL_RESPONSE.meta.error_message
+                  }
+                })
+              }
             }
-          })
-        }
+          }else{
+            _TOKEN.phone.mobile.validation.value = true;
+
+            const _FINAL_SUBSCRIBER = await axios.post(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/users`, _TOKEN);
+
+            if (_FINAL_SUBSCRIBER.status === 200){
+              const _FINAL_RESPONSE = _FINAL_SUBSCRIBER.data;
+
+              if (_FINAL_RESPONSE.meta.code === 200){
+                const _DATA = _FINAL_RESPONSE.data,
+                      _SERIALIZED_DATA = JSON.stringify(_DATA),
+                      _DID_AUTH_STORE = await Functions._storeDataWithKey(GLOBAL.STORAGE.AUTH, _SERIALIZED_DATA);
+
+                if (_DID_AUTH_STORE === true){
+                  dispatch({
+                    type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+                    payload: false
+                  })
+
+                  dispatch({
+                    type: SIGNUP.SET_CONNECTED_STATUS,
+                    payload: {
+                      status: true
+                    }
+                  })
+
+                  await Functions._removeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_TOKEN);
+
+                  callback(_FINAL_SUBSCRIBER);
+                }
+              }else{
+                dispatch({
+                  type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
+                  payload: false
+                })
+
+                dispatch({
+                  type: SIGNUP.SET_CONNECTED_STATUS,
+                  payload: {
+                    status: false,
+                    content: _FINAL_RESPONSE.meta.error_message
+                  }
+                })
+              }
+            }
+          }
+      }else{
+        callback({
+          status: 702,
+          error_message: `The subscribed user doesn't exist.`
+        });
       }
     } catch (error) {
       if (error){
@@ -196,70 +254,6 @@ module.exports = {
 
         dispatch({
           type: SIGNUP.SET_FETCH_AVAILABLE_ROLE_WITH_BRAND_AND_TOKEN_LOADING_STATUS,
-          payload: false
-        })
-
-        dispatch({
-          type: SIGNUP.SET_CONNECTED_STATUS,
-          payload: {
-            status: false,
-            content: _ERROR_MESSAGE
-          }
-        })
-      }
-    }
-  },
-  _completeUserRegistrationWithUpdatingDetail: async (token, userDetail, dispatch) => {
-    dispatch({
-      type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-      payload: true
-    })
-
-    try {
-      const _USER_MODIFICATION = await axios.put(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/users/${token}`, userDetail);
-
-      if (_USER_MODIFICATION.status === 200){
-        const _FINAL_RESPONSE = _USER_MODIFICATION.data;
-
-        if (_FINAL_RESPONSE.meta.code === 200){
-          const _DATA = _FINAL_RESPONSE.data,
-                _SERIALIZED_DATA = JSON.stringify(_DATA),
-                _DID_SUBSCRIBED_USER_STORE = await Functions._storeDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER, _SERIALIZED_DATA);
-
-          if (_DID_SUBSCRIBED_USER_STORE === true){
-            dispatch({
-              type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-              payload: false
-            })
-
-            dispatch({
-              type: SIGNUP.SET_CONNECTED_STATUS,
-              payload: {
-                status: true
-              }
-            })
-          }
-        }else{
-          dispatch({
-            type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
-            payload: false
-          })
-
-          dispatch({
-            type: SIGNUP.SET_CONNECTED_STATUS,
-            payload: {
-              status: false,
-              content: _FINAL_RESPONSE.meta.error_message
-            }
-          })
-        }
-      }
-    } catch (error) {
-      if (error){
-        const _ERROR_MESSAGE = error.message || error.request._response;
-
-        dispatch({
-          type: SIGNUP.SET_SUBSCRIBE_LOADING_STATUS,
           payload: false
         })
 

@@ -96,7 +96,7 @@ class Signup extends Component<{}> {
     switch (_DEMAND_MODE) {
       case 'INVITATION':
         if (Object.keys(props.signup.role).length > 0){
-          if (props.signup.loadingSubscribe){
+          if (props.signup.verificationLoading){
             _SUBMIT_BUTTON_CONTENT = <Input
               type={__CONSTANTS.content.state.invitation.submitInput.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.loading.title.en)}
@@ -177,7 +177,7 @@ class Signup extends Component<{}> {
         }
         break;
       default:
-        if (props.signup.loadingSubscribe){
+        if (props.signup.verificationLoading){
           _SUBMIT_BUTTON_CONTENT = <Input
             type={__CONSTANTS.content.state.normal.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.loading.title.en)}

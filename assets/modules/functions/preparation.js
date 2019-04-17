@@ -52,14 +52,11 @@ module.exports = {
 
     return _SEED;
   },
-  _prepareVerifyPhoneNumberSeed: (inputProps) => {
-    return {
-      user_id: inputProps
-    };
-  },
   _prepareLoginSeed: (inputProps) => {
+    const _IS_A_VALID_TOKEN = Prototypes._checkIsAValidToken(inputProps.token);
+
     return {
-      token: inputProps.token,
+      token: (_IS_A_VALID_TOKEN)? Prototypes._getRidOfZerosFromPhoneNumber(inputProps.token): inputProps.token,
       password: inputProps.password
     };
   },
@@ -97,7 +94,7 @@ module.exports = {
 
     await props.verifyAuthentication(_LOGIN_SEED);
 
-    // props.setToken('');
+    props.setToken('');
     props.setPassword('');
 
     navigation.navigate('Authorization');
@@ -123,7 +120,7 @@ module.exports = {
           await props.completeUserRegistration(signup.role.user._id, _SEED);
           break;
         default:
-          await props.subscribeTheUser(_SEED, () => {
+          await props.verifyTheUser(_SEED, () => {
             navigation.navigate('VerifyPhoneNumber');
           });
           break;
@@ -165,33 +162,20 @@ module.exports = {
       }
     }
   },
-  _prepareVerifyPhoneNumberComponentToSubmit: async (props) => {
-    const { navigation } = props,
-          _SUBSCRIBED_USER = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);
+  _prepareSubscribeTokenToSubmit: async (props) => {
+    const { navigation } = props;
 
-    if (_SUBSCRIBED_USER !== false){
-      const _TOKEN = JSON.parse(_SUBSCRIBED_USER),
-            _USER_ID = _TOKEN._id,
-            _SEED = module.exports._prepareVerifyPhoneNumberSeed(_USER_ID);
+    await props.subscribeTheUser(({ status }) => {
+      switch (status) {
+        case 200:
+          navigation.navigate('Overseer');
+          break;
 
-      await props.verifyTheUserPhoneNumber(_SEED);
-
-      navigation.navigate('Login');
-    }
-  },
-  _prepareVerifyPhoneNumberComponentToSubmit: async (props) => {
-    const { navigation, login } = props,
-          _SEED = module.exports._prepareLoginSeed(login);
-
-    await props.verifyAuthentication(_SEED);
-
-    const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
-
-    if (_DID_TOKEN_CREATED !== false){
-      const _PARSED_TOKEN = JSON.parse(_DID_TOKEN_CREATED);
-
-      navigation.navigate('Dashboard');
-    }
+        case 701:
+          props.setValidationToken('');
+          break;
+      }
+    });
   },
   _prepareCameraRoll: async (props) => {
     const { navigation } = props,

@@ -22,7 +22,6 @@ import List from './reducers/layouts/list';
 import Login from './reducers/views/authentication/login';
 import ForgottenPassword from './reducers/views/authentication/fogotten-password';
 import Signup from './reducers/views/authentication/signup';
-import VerifyPhoneNumber from './reducers/views/authentication/verify-phone-number';
 import VerifyEmail from './reducers/views/authentication/verify-email';
 
 //Profile
@@ -50,7 +49,7 @@ export default () => {
   const reducer = combineReducers({
           Segment,
           Toast, List, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitDependedModal,
-          Login, ForgottenPassword, Signup, VerifyPhoneNumber, VerifyEmail,
+          Login, ForgottenPassword, Signup, VerifyEmail,
           Overseer, UserProfile,
             Roles, SelectedRole,
             Wallets, SelectedWallet,

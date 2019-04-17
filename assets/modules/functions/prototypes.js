@@ -326,17 +326,10 @@ module.exports = {
 
     return (_IS_PHONE_NUMBER_VALID !== null) ? true : false;
   },
-  _checkIsAValidPhoneNumberOrEmail: (token) => {
-    const _CORRECT_PHONE_NUMBER = (token[0] != '0')? token: token.replace(/^0+/, '');
-
-    return (_CORRECT_PHONE_NUMBER.match(/^\+?[0-9]{1,4}[0-9]{10,14}/) !== null) ? true : false;
-  },
   _checkIsAValidToken: (token) => {
-    if (module.exports._checkIsAValidPhoneNumberOrEmail(token)) {
-      return module.exports._checkIsAValidPhoneNumber(token);
-    } else {
-      return module.exports._checkIsAValidEmail(token);
-    }
+    const _IS_A_VALID_PHONE_NUMBER = module.exports._checkIsAValidPhoneNumber(token);
+
+    return (_IS_A_VALID_PHONE_NUMBER)? _IS_A_VALID_PHONE_NUMBER: module.exports._checkIsAValidEmail(token);
   },
   _convertNumberToHumanReadableFormat: (targetNumber) => {
     if (typeof targetNumber != 'string'){

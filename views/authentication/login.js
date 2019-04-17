@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { StatusBar, View, KeyboardAvoidingView, Platform, NativeModules } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -24,7 +24,9 @@ class Login extends Component<{}> {
   };
 
   componentDidMount() {
+    const locale = (Platform.OS !== 'ios')? NativeModules.I18nManager.localeIdentifier: NativeModules.SettingsManager.settings.AppleLocale;
 
+    console.log(locale)
   }
 
   componentWillReceiveProps(props) {
