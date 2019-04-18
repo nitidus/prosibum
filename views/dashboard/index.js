@@ -18,6 +18,10 @@ export const Dashboard = (props) => {
         _FIRST_CAROUSEL_OTHER_OPTIONS = {},
         _ITEM_WIDTH_COEFFICIENT = (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)? 2: 4;
 
+  var attitude = {};
+
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   if (Platform.OS !== 'ios'){
     _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
     _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
@@ -49,9 +53,9 @@ export const Dashboard = (props) => {
                     return (_ITEM === _CURRENT_ITEM);
                   }),
                   _ITEM_KEY = Functions._convertTokenToKeyword(item.key),
-                  _ITEM_TITLE = Functions._convertKeywordToToken(_FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].title.en),
+                  _ITEM_TITLE = Functions._convertKeywordToToken(_FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].title[[attitude.language]]),
                   _ITEM_TARGET_SCREEN = _FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].screen.name,
-                  _ITEM_UNIT = _FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].unit.en,
+                  _ITEM_UNIT = _FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].unit[[attitude.language]],
                   _ITEM_GRADIENNT = Global.colors.pair[_FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].gradientKey] || Global.colors.pair.chaid;
 
             return (

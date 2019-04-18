@@ -26,8 +26,12 @@ class NewProductFeatures extends Component<{}> {
 
   };
 
-  componentDidMount() {
-    const { props } = this;
+  async componentDidMount() {
+    const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
+
+    this._language = _LANGUAGE;
   }
 
   _componentWillCheckValidation(props) {
@@ -49,7 +53,8 @@ class NewProductFeatures extends Component<{}> {
         _UNIT_FEATURES = [],
         _FEATURES_ANIMATED_VALUES = [];
 
-    const _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title.en,
+    const _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
+          _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
           _VALIDATED = this._componentWillCheckValidation(props);
 
     if (props.newProduct.features.length > 0){
@@ -119,7 +124,7 @@ class NewProductFeatures extends Component<{}> {
                                         </Text>
                                         <Text
                                           style={Styles.BriefDetailTitleSuffix}>
-                                            {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.title.suffix.en)}
+                                            {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.title.suffix[_LANGUAGE])}
                                         </Text>
                                       </View>
                                   </View>
@@ -136,7 +141,7 @@ class NewProductFeatures extends Component<{}> {
 
                                       <Text
                                         style={Styles.BriefDetailRowText}>
-                                          {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.firstFeature.title.en)}
+                                          {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.firstFeature.title[_LANGUAGE])}
                                       </Text>
                                   </View>
                                   <View
@@ -152,7 +157,7 @@ class NewProductFeatures extends Component<{}> {
 
                                       <Text
                                         style={Styles.BriefDetailRowText}>
-                                          {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.secondFeature.title.en)}
+                                          {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.secondFeature.title[_LANGUAGE])}
                                       </Text>
                                   </View>
                                   <View
@@ -163,7 +168,7 @@ class NewProductFeatures extends Component<{}> {
 
                                       <Text
                                         style={Styles.BriefDetailRowText}>
-                                          {Functions._convertNumberToHumanReadableFormat(item.quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.thirdFeature.title.en)}
+                                          {Functions._convertNumberToHumanReadableFormat(item.quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.thirdFeature.title[_LANGUAGE])}
                                       </Text>
                                   </View>
                               </Input>
@@ -247,7 +252,7 @@ class NewProductFeatures extends Component<{}> {
                                     </Text>
                                     <Text
                                       style={Styles.BriefDetailTitleSuffix}>
-                                        {Functions._convertKeywordToToken(__CONSTANTS.content.customized.title.suffix.en)}
+                                        {Functions._convertKeywordToToken(__CONSTANTS.content.customized.title.suffix[_LANGUAGE])}
                                     </Text>
                                   </View>
 
@@ -267,7 +272,7 @@ class NewProductFeatures extends Component<{}> {
             <Input
               type={__CONSTANTS.content.modalHandlerButton.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalHandlerButton.state.normal.title.en)}
-              value={__CONSTANTS.content.modalHandlerButton.state.normal.title.en}
+              value={__CONSTANTS.content.modalHandlerButton.state.normal.title[_LANGUAGE]}
               gradient={Global.colors.pair.ongerine}
               style={{
                 marginHorizontal: Styles.Content.marginHorizontal,
@@ -278,7 +283,7 @@ class NewProductFeatures extends Component<{}> {
             <Input
               type={__CONSTANTS.content.submitButton.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-              value={__CONSTANTS.content.submitButton.state.normal.title.en}
+              value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
               gradient={Global.colors.pair.ongerine}
               style={{
                 marginHorizontal: Styles.Content.marginHorizontal
@@ -300,7 +305,7 @@ class NewProductFeatures extends Component<{}> {
           ]}>
             <Link
               containerStyle={Styles.EmptyContentLink}
-              value={__CONSTANTS.content.carousel.state.null.title.en} />
+              value={__CONSTANTS.content.carousel.state.null.title[_LANGUAGE]} />
         </View>
       );
     }
@@ -308,7 +313,7 @@ class NewProductFeatures extends Component<{}> {
     return (
       <Container
         title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
-        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle.en)}
+        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
         rightIcon={__CONSTANTS.pilot.rightIcon}
         onRightIconPress={() => props.setProductFeaturesModalVisibility(true)}
         {...props}>

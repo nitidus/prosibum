@@ -1,4 +1,4 @@
-import { AsyncStorage, CameraRoll, PermissionsAndroid, Platform } from 'react-native';
+import { AsyncStorage, CameraRoll, PermissionsAndroid, Platform, NativeModules, I18nManager } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import Lodash from 'lodash';
 import Moment from 'moment';
@@ -6,9 +6,10 @@ import Moment from 'moment';
 import Utils from '../utils';
 const { ObjectID } = Utils.Structures;
 
-import { countries as __COUNTRIES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
+import { countries as __COUNTRIES, languages as __LANGUAGES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
 const __WALLETS = __VIEWS_CONSTANTS.dashboard.wallets;
 
+import GLOBAL from '../global';
 import { name as __APP_NAME } from '../../../app.json';
 
 module.exports = {
@@ -505,6 +506,54 @@ module.exports = {
       return true;
     } catch (error) {
       //Error retrieving all keys
+    }
+  },
+  _detectLocaleBasedDevice: () => {
+    const _LOCALE_STRING = ((Platform.OS !== 'ios')? NativeModules.I18nManager.localeIdentifier: NativeModules.SettingsManager.settings.AppleLocale),
+          _LOCALE_ARRAY = _LOCALE_STRING.split('_');
+
+    return {
+      language: _LOCALE_ARRAY[0],
+      region: _LOCALE_ARRAY[1]
+    };
+  },
+  _getDefaultNativeSettings: async () => {
+    const _DEFAULT_NATIVE_SETTINGS = await module.exports._retrieveDataWithKey(GLOBAL.STORAGE.DEFAULT_NATIVE_SETTINGS);
+
+    if (_DEFAULT_NATIVE_SETTINGS === false){
+      const _LOCALE = module.exports._detectLocaleBasedDevice();
+
+      var _NATIVE_SETTINGS = _LOCALE;
+
+      if (typeof _NATIVE_SETTINGS.language != 'undefined'){
+        const _FOUNDED_LANGUAGE_INDEX = __LANGUAGES.findIndex((language) => {
+                const _CURRENT_LANGUAGE = module.exports._convertTokenToKeyword(language.key),
+                      _TARGET_LANGUAGE = module.exports._convertTokenToKeyword(_NATIVE_SETTINGS.language);
+
+                return (_CURRENT_LANGUAGE === _TARGET_LANGUAGE);
+              }),
+              _FOUNDED_LANGUAGE = (_FOUNDED_LANGUAGE_INDEX > -1)? __LANGUAGES[_FOUNDED_LANGUAGE_INDEX]: __LANGUAGES[0];
+
+        _NATIVE_SETTINGS.language = _FOUNDED_LANGUAGE;
+
+        if (typeof _NATIVE_SETTINGS.language.rtl != 'undefined'){
+          if (_NATIVE_SETTINGS.language.rtl === true){
+            I18nManager.forceRTL(true);
+          }
+        }
+      }
+
+      if (Object.keys(_NATIVE_SETTINGS).length > 0){
+        const _SERIALIZED_NATIVE_SETTINGS = JSON.stringify(_NATIVE_SETTINGS);
+
+        await module.exports._storeDataWithKey(GLOBAL.STORAGE.DEFAULT_NATIVE_SETTINGS, _SERIALIZED_NATIVE_SETTINGS);
+
+        return _NATIVE_SETTINGS;
+      }
+    }else{
+      const _PARSED_DEFAULT_NATIVE_SETTINGS = JSON.parse(_DEFAULT_NATIVE_SETTINGS);
+
+      return _PARSED_DEFAULT_NATIVE_SETTINGS;
     }
   },
   _fetchPrivatelyLocalStoragePhotoWithOptions: async (options) => {

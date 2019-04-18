@@ -79,10 +79,12 @@ export const OverseerContainer = (props) => {
         _OVERLAY_ANIMATION = Interpolation._Overlay(animations.xPosition);
 
   var _CURRENT_TAB_INDEX = attitude.bottomBarTabs.findIndex((tab) => {
-        const _CURRENT_TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(attitude.currentBottomTab),
-              _TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(tab);
+        if (typeof attitude.currentBottomTab != 'undefined'){
+          const _CURRENT_TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(attitude.currentBottomTab),
+                _TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(tab);
 
-        return (_TAB_IN_KEY_FORMAT === _CURRENT_TAB_IN_KEY_FORMAT);
+          return (_TAB_IN_KEY_FORMAT === _CURRENT_TAB_IN_KEY_FORMAT);
+        }
       }),
       _RIGHT_PINNED_ITEMS, _BOTTOM_PINNED_ITEMS, _TAIL_PINNED_CONTENT,
       _TOP_BAR_ITEMS = (typeof attitude.topBarTabs != 'undefined')? attitude.topBarTabs: [],

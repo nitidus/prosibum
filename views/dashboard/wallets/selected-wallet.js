@@ -48,9 +48,13 @@ class SelectedWallet extends Component<{}> {
   }
 
   async componentDidMount() {
-    const { props } = this;
+    const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
 
-    this._initializeTheSelectedWallet(props);
+    this._language = _LANGUAGE;
+
+    await this._initializeTheSelectedWallet(props);
   }
 
   async componentWillReceiveProps(props) {
@@ -59,6 +63,8 @@ class SelectedWallet extends Component<{}> {
 
   render() {
     const { props } = this;
+
+    var _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
 
     if (props.selectedWallet.loadingTransactions){
       return (
@@ -98,7 +104,7 @@ class SelectedWallet extends Component<{}> {
 
                   return (Functions._convertTokenToKey(item.en) === _REFERENCE_WALLET_CURRENCY_SIGN);
                 }),
-                _TARGET_SIGN = (_POSSIBLE_SUBTITLE_SUFFIX_INDEX > -1)? __CONSTANTS.pilot.subtitle.suffix[_POSSIBLE_SUBTITLE_SUFFIX_INDEX].en: props.selectedWallet.referenceWallet.currency.sign;
+                _TARGET_SIGN = (_POSSIBLE_SUBTITLE_SUFFIX_INDEX > -1)? __CONSTANTS.pilot.subtitle.suffix[_POSSIBLE_SUBTITLE_SUFFIX_INDEX][_LANGUAGE]: props.selectedWallet.referenceWallet.currency.sign;
 
           _CONTAINER_TITLE = Functions._convertKeywordToToken(Functions._stripLongString(props.selectedWallet.referenceWallet.name, 13));
           _CONTAINER_SUBTITLE = `${Functions._convertDigitsToMoneyFormat(props.selectedWallet.referenceWallet.balance)} ${_TARGET_SIGN}`;
@@ -114,13 +120,13 @@ class SelectedWallet extends Component<{}> {
                           Styles.LTR_ContentAlignment
                         ],
                         _ITEM_GRADIENT = Global.colors.pair.peroly,
-                        _ITEM_TITLE = __CONSTANTS.transactions.state.withdraw.title.en,
+                        _ITEM_TITLE = __CONSTANTS.transactions.state.withdraw.title[_LANGUAGE],
                         _ITEM_HUMAN_READABLE_CREATED_DATE = Functions._convertDateToHumanReadableFormat(transaction.created_at),
                         _ITEM_BALANCE_DIFFERENCE_AMOUNT = Math.abs(transaction.new_balance - transaction.previous_balance);
 
                     if (transaction.new_balance > transaction.previous_balance){
                       _ITEM_GRADIENT = Global.colors.pair.aqrulean;
-                      _ITEM_TITLE = __CONSTANTS.transactions.state.deposit.title.en;
+                      _ITEM_TITLE = __CONSTANTS.transactions.state.deposit.title[_LANGUAGE];
                     }
 
                     if (i !== (props.selectedWallet.transactions.length - 1)){
@@ -162,7 +168,7 @@ class SelectedWallet extends Component<{}> {
                               </View>
                               <Text
                                 style={Styles.BriefDetailRowText}>
-                                  {`${__CONSTANTS.transactions.previous_balance.sign.en}${Functions._convertDigitsToMoneyFormat(transaction.previous_balance)} ${__CONSTANTS.transactions.previous_balance.suffix.en}`}
+                                  {`${__CONSTANTS.transactions.previous_balance.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(transaction.previous_balance)} ${__CONSTANTS.transactions.previous_balance.suffix[_LANGUAGE]}`}
                               </Text>
                           </View>
                           <View
@@ -179,7 +185,7 @@ class SelectedWallet extends Component<{}> {
                               </View>
                               <Text
                                 style={Styles.BriefDetailRowText}>
-                                  {`${__CONSTANTS.transactions.difference_balance.sign.en}${Functions._convertDigitsToMoneyFormat(_ITEM_BALANCE_DIFFERENCE_AMOUNT)} ${__CONSTANTS.transactions.difference_balance.suffix.en}`}
+                                  {`${__CONSTANTS.transactions.difference_balance.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(_ITEM_BALANCE_DIFFERENCE_AMOUNT)} ${__CONSTANTS.transactions.difference_balance.suffix[_LANGUAGE]}`}
                               </Text>
                           </View>
                       </Input>
@@ -197,7 +203,7 @@ class SelectedWallet extends Component<{}> {
               ]}>
               <Link
                 containerStyle={Styles.EmptyContentLink}
-                value={__CONSTANTS.link.en} />
+                value={__CONSTANTS.link[_LANGUAGE]} />
             </View>
           );
         }

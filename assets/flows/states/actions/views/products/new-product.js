@@ -12,6 +12,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    resetProductForms: () => {
+      dispatch({
+        type: NEW_PRODUCT.RESET_PRODUCT_FORMS
+      })
+    },
     setProductName: (name) => {
       dispatch({
         type: NEW_PRODUCT.SET_PRODUCT_NAME,

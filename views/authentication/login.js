@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, KeyboardAvoidingView, Platform, NativeModules } from 'react-native';
+import { StatusBar, View, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -23,10 +23,11 @@ class Login extends Component<{}> {
 
   };
 
-  componentDidMount() {
-    const locale = (Platform.OS !== 'ios')? NativeModules.I18nManager.localeIdentifier: NativeModules.SettingsManager.settings.AppleLocale;
+  async componentDidMount() {
+    const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
 
-    console.log(locale)
+    this._language = _LANGUAGE;
   }
 
   componentWillReceiveProps(props) {
@@ -59,7 +60,8 @@ class Login extends Component<{}> {
 
     var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
 
-    const _VALIDATED = this._componentWillCheckValidation(props);
+    const _VALIDATED = this._componentWillCheckValidation(props),
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
 
     if (props.login.loading){
       _SUBMIT_BUTTON_CONTENT = <Input
@@ -88,7 +90,7 @@ class Login extends Component<{}> {
         style={Styles.SubmitButton}
         type={__CONSTANTS.submitInput.type}
         name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-        value={__CONSTANTS.submitInput.state.normal.title.en}
+        value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
         gradient={Global.colors.pair.ongerine}
         onPress={async () => {
           await Preparation._prepareLogin(props);
@@ -102,13 +104,13 @@ class Login extends Component<{}> {
 
     if (props.login.token != ''){
       if (!Functions._checkIsAValidToken(props.login.token)){
-        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message.en;
+        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
       }
     }
 
     if (props.login.password != ''){
       if (!Functions._checkIsAValidPassword(props.login.password)){
-        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.second.validation.message.en;
+        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.second.validation.message[_LANGUAGE];
       }
     }
 
@@ -130,24 +132,24 @@ class Login extends Component<{}> {
           <View style={Styles.Content}>
             <Headline
               style={Styles.Headline}
-              title={__CONSTANTS.headline.title.en}
-              subtitle={__CONSTANTS.headline.subtitle.en} />
+              title={__CONSTANTS.headline.title[_LANGUAGE]}
+              subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
 
             <InputGroup
               style={Styles.InputGroup}>
               <Input
                 type={__CONSTANTS.firstInputGroup.first.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.first.title.en}
+                placeholder={__CONSTANTS.firstInputGroup.first.title[_LANGUAGE]}
                 value={props.login.token}
                 autoCapitalize="none"
                 onChangeText={(currentValue) => props.setToken(currentValue)} />
               <Input
                 type={__CONSTANTS.firstInputGroup.second.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.second.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.second.title.en}
+                placeholder={__CONSTANTS.firstInputGroup.second.title[_LANGUAGE]}
                 value={props.login.password}
-                link={__CONSTANTS.firstInputGroup.second.link.en}
+                link={__CONSTANTS.firstInputGroup.second.link[_LANGUAGE]}
                 onPress={() => {
                   const { navigation } = props;
 
@@ -163,7 +165,7 @@ class Login extends Component<{}> {
 
             <Link
               containerStyle={Styles.QuickLink}
-              value={__CONSTANTS.quickLink.title.en}
+              value={__CONSTANTS.quickLink.title[_LANGUAGE]}
               onPress={() => {
                 const { navigation } = props;
 

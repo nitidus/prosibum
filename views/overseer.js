@@ -29,11 +29,16 @@ class Overseer extends Component<{}> {
 
   };
 
-  componentWillMount() {
+  async componentDidMount() {
     const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language,
+          _LANGUAGE_KEY = Functions._convertTokenToKeyword(_LANGUAGE.key),
           _TABS = __CONSTANTS.pilot.content.map((tab, i) => {
-            return Functions._convertKeywordToToken(tab.title.en);
+            return Functions._convertKeywordToToken(tab.title[_LANGUAGE_KEY]);
           });
+
+    this._language = _LANGUAGE;
 
     props.setBottomPilotTabs(_TABS);
     props.setBottomPilotCurrentTab(_TABS[1]);
@@ -48,8 +53,11 @@ class Overseer extends Component<{}> {
           _CURRENT_TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(props.overseer.currentBottomTab);
 
     var _ROOT_CONTENT,
+        _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
         RootContentComponent = Products,
-        _OTHER_PROPS = {},
+        _OTHER_PROPS = {
+          language: this._language
+        },
         _CONTENT_OTHER_PROPS = {};
 
     switch (_CURRENT_TAB_IN_KEY_FORMAT) {
@@ -64,7 +72,7 @@ class Overseer extends Component<{}> {
 
       case 'PRODUCTS':
         const _CURRENT_TAB_CONTENT_INDEX = __CONSTANTS.pilot.content.findIndex((item, i) => {
-          return Functions._convertTokenToKey(item.title.en) === _CURRENT_TAB_IN_KEY_FORMAT;
+          return Functions._convertTokenToKey(item.title[_LANGUAGE]) === _CURRENT_TAB_IN_KEY_FORMAT;
         });
 
         if (_CURRENT_TAB_CONTENT_INDEX > -1){
@@ -79,7 +87,7 @@ class Overseer extends Component<{}> {
 
           if ((props.overseer.topTabs.length === 0) && (props.overseer.currentTopTab == '')){
             const _INITIALIZED_TABS = __CONSTANTS.pilot.content[_CURRENT_TAB_CONTENT_INDEX].tabs.map((item, i) => {
-              return item.title.en;
+              return item.title[_LANGUAGE];
             });
 
             props.setTopPilotTabs(_INITIALIZED_TABS);

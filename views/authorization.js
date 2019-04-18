@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Linking } from 'react-native';
+import { View, Text, Linking, Platform } from 'react-native';
 
 import DeepLinking from 'react-native-deep-linking';
 
@@ -22,7 +22,8 @@ export default class Authorization extends Component<{}> {
   }
 
   async componentDidMount() {
-    const { props: { navigation } } = this;
+    const { props: { navigation } } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings();
 
     DeepLinking.addScheme(`${appName}://`);
 

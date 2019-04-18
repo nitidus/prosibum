@@ -48,6 +48,8 @@ export const RolesContainer = (props) => {
     attitude.onRolesAbsorb = props.onRolesAbsorb || props.onRolesAppend || props.onRolesMerge || props.onRolesImbibe || props.onAbsorbRoles || props.onAppendRoles || props.onMergeRoles || props.onImbibeRoles;
   }
 
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   var _CHILDREN_CONTENT, _DEPENDED_RIGHT_PINNED_SIDE;
 
   if (typeof attitude.children != 'undefined'){
@@ -68,7 +70,7 @@ export const RolesContainer = (props) => {
           const _ROW = tabItem,
                 _ROLE = _ROW.role;
 
-          return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
+          return Functions._convertKeywordToToken(_ROLE || _ROLE[attitude.language]);
         }),
         _CURRENT_TAB_CONTENT = (typeof attitude.currentPilotItem != 'undefined')? ((typeof attitude.currentPilotItem.role != 'undefined')? attitude.currentPilotItem.role: ''): '',
         _CURRENT_TAB = Functions._convertKeywordToToken(_CURRENT_TAB_CONTENT);

@@ -293,41 +293,43 @@ export const TopBar = (props) => {
             }
 
             if ((typeof _TAB_ATTITUDE.data != 'undefined') && (typeof _TAB_ATTITUDE.current != 'undefined')){
-              _TAB_ATTITUDE_CONTENT = _TAB_ATTITUDE.data.map((tabItemName, w, tabItems) => {
-                var _ITEM_STYLE;
+              if (_TAB_ATTITUDE.data.length > 0){
+                _TAB_ATTITUDE_CONTENT = _TAB_ATTITUDE.data.map((tabItemName, w, tabItems) => {
+                  var _ITEM_STYLE;
 
-                if (w < tabItems.length - 1){
-                  _ITEM_STYLE = Styles.TabItemContainer;
-                }
+                  if (w < tabItems.length - 1){
+                    _ITEM_STYLE = Styles.TabItemContainer;
+                  }
 
-                const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w),
-                      _ITEM_NAME = tabItemName,
-                      _SCAPED_ITEM_NAME = Functions._convertTokenToKeyword(_ITEM_NAME),
-                      _SCAPED_CURRENT_ITEM = Functions._convertTokenToKeyword(_TAB_ATTITUDE.current);
+                  const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w),
+                        _ITEM_NAME = tabItemName,
+                        _SCAPED_ITEM_NAME = Functions._convertTokenToKeyword(_ITEM_NAME),
+                        _SCAPED_CURRENT_ITEM = Functions._convertTokenToKeyword(_TAB_ATTITUDE.current);
 
-                if (_SCAPED_ITEM_NAME === _SCAPED_CURRENT_ITEM){
-                  return (
-                    <TabItem
-                      key={_ITEM_KEY}
-                      name={tabItemName}
-                      style={_ITEM_STYLE}
-                      gradient={Global.colors.pair.ongerine}
-                      onPress={_TAB_ATTITUDE.onPress} />
-                  );
-                }else{
-                  return (
-                    <TabItem
-                      key={_ITEM_KEY}
-                      name={tabItemName}
-                      style={[
-                        _ITEM_STYLE,
-                        Styles.DisabledSingleTabItemContainer
-                      ]}
-                      disable={true}
-                      onPress={_TAB_ATTITUDE.onPress} />
-                  );
-                }
-              })
+                  if (_SCAPED_ITEM_NAME === _SCAPED_CURRENT_ITEM){
+                    return (
+                      <TabItem
+                        key={_ITEM_KEY}
+                        name={tabItemName}
+                        style={_ITEM_STYLE}
+                        gradient={Global.colors.pair.ongerine}
+                        onPress={_TAB_ATTITUDE.onPress} />
+                    );
+                  }else{
+                    return (
+                      <TabItem
+                        key={_ITEM_KEY}
+                        name={tabItemName}
+                        style={[
+                          _ITEM_STYLE,
+                          Styles.DisabledSingleTabItemContainer
+                        ]}
+                        disable={true}
+                        onPress={_TAB_ATTITUDE.onPress} />
+                    );
+                  }
+                })
+              }
             }
 
             _BOTTOM_WIDE_CONTENT = <ScrollView

@@ -46,8 +46,12 @@ class SelectedRole extends Component<{}> {
     this.attitude = attitude;
   }
 
-  componentDidMount() {
-    const { props } = this;
+  async componentDidMount() {
+    const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
+
+    this._language = _LANGUAGE;
 
     props.resetSelectedRole();
   }
@@ -66,6 +70,7 @@ class SelectedRole extends Component<{}> {
   render() {
     const { props, attitude } = this,
           _PREPARED_PERSONAL_CONTACT_INFO = Preparation._prepareSelectedRolePersonalContactInformation(attitude.data),
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
           _CAROUSEL_ITEM_KEYS = _PREPARED_PERSONAL_CONTACT_INFO.ROLE_DETAIL.map((item, i) => {
             return item.key;
           }),
@@ -433,7 +438,7 @@ class SelectedRole extends Component<{}> {
             ]}>
             <Link
               containerStyle={Styles.EmptyContentLink}
-              value={__CONSTANTS.content.link.en} />
+              value={__CONSTANTS.content.link[_LANGUAGE]} />
           </View>
         );
       }

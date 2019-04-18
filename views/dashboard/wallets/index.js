@@ -26,7 +26,11 @@ class Wallets extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this;
+    const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
+
+    this._language = _LANGUAGE;
 
     await props.fetchAvailableWalletCurrenciesType();
     this.otherProps = {};
@@ -34,6 +38,8 @@ class Wallets extends Component<{}> {
 
   render() {
     const { props, otherProps } = this;
+
+    var _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
 
     if (props.wallets.loadingWalletCurrenciesType){
       return (
@@ -102,7 +108,7 @@ class Wallets extends Component<{}> {
                         _ITEM_GRADIENT = Global.colors.pair.analue;
                       }
 
-                      _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix.en}${(item.transactions.amount > 1)? 's': ''}`;
+                      _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix[_LANGUAGE]}${(item.transactions.amount > 1)? 's': ''}`;
 
                       return (
                         <Input
@@ -152,7 +158,7 @@ class Wallets extends Component<{}> {
                                 </View>
                                 <Text
                                   style={Styles.BriefDetailRowText}>
-                                    {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign.en}{Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix.en}
+                                    {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign[_LANGUAGE]}{Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix[_LANGUAGE]}
                                 </Text>
                             </View>
                         </Input>
@@ -163,7 +169,7 @@ class Wallets extends Component<{}> {
                   <Input
                       type={__CONSTANTS.modalHandlerButton.type}
                       name={Functions._convertTokenToKeyword(__CONSTANTS.modalHandlerButton.title.en)}
-                      value={__CONSTANTS.modalHandlerButton.title.en}
+                      value={__CONSTANTS.modalHandlerButton.title[_LANGUAGE]}
                       style={{
                         marginBottom: Styles.Content.marginVertical,
                         marginHorizontal: Styles.Content.marginHorizontal
@@ -193,8 +199,8 @@ class Wallets extends Component<{}> {
                       }}/>
 
                   <Pin
-                    title={__CONSTANTS.firstPin.title.en}
-                    subtitle={`${__CONSTANTS.firstPin.subtitle.sign.en}${Functions._convertDigitsToMoneyFormat(props.wallets.selectedWallet.transactions.withdraw)} ${__CONSTANTS.firstPin.subtitle.suffix.en}`}
+                    title={__CONSTANTS.firstPin.title[_LANGUAGE]}
+                    subtitle={`${__CONSTANTS.firstPin.subtitle.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(props.wallets.selectedWallet.transactions.withdraw)} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`}
                     style={Styles.WalletPin}
                     onPress={() => {
                       const { navigation } = props;
@@ -213,7 +219,7 @@ class Wallets extends Component<{}> {
                 ]}>
                 <Link
                   containerStyle={Styles.EmptyContentLink}
-                  value={__CONSTANTS.link.en} />
+                  value={__CONSTANTS.link[_LANGUAGE]} />
               </View>
             );
           }
@@ -233,7 +239,7 @@ class Wallets extends Component<{}> {
 
         return (
           <Container
-            title={__CONSTANTS.pilot.title.en}
+            title={__CONSTANTS.pilot.title[_LANGUAGE]}
             onPilotTabItemPress={async (item) => {
               const _TABS = props.wallets.tabs.map((tabItem, i) => {
                         return Functions._returnCurrencyDependOnLanguage(tabItem.type || tabItem);

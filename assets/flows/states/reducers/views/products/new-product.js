@@ -33,6 +33,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case NEW_PRODUCT.RESET_PRODUCT_FORMS:
+      return {
+        ...initialState
+      };
+      break;
     case NEW_PRODUCT.SET_PRODUCT_NAME:
       return {
         ...state,

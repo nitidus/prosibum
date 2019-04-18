@@ -39,6 +39,14 @@ class Roles extends Component<{}> {
     await this._initializeTheSelectedReference(props);
   }
 
+  async componentDidMount() {
+    const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
+
+    this._language = _LANGUAGE;
+  }
+
   async componentWillMount() {
     const { props } = this,
           { navigation } = props,
@@ -62,7 +70,11 @@ class Roles extends Component<{}> {
   }
 
   render() {
-    const { props } = this;
+    const { props } = this,
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
+          containerOtherProps = {
+            language: this._language
+          };
 
     if (props.roles.loadingRolesType){
       return (
@@ -92,7 +104,7 @@ class Roles extends Component<{}> {
                 const _ROW = tabItem,
                       _ROLE = _ROW.role;
 
-                return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
+                return Functions._convertKeywordToToken(_ROLE || _ROLE[_LANGUAGE]);
               }),
               _CURRENT_TAB_CONTENT = (typeof props.roles.currentTab.role != 'undefined')? props.roles.currentTab.role: '',
               _CURRENT_TAB = Functions._convertKeywordToToken(_CURRENT_TAB_CONTENT);
@@ -326,7 +338,7 @@ class Roles extends Component<{}> {
                 ]}>
                 <Link
                   containerStyle={Styles.EmptyContentLink}
-                  value={__CONSTANTS.content.link.en} />
+                  value={__CONSTANTS.content.link[_LANGUAGE]} />
               </View>
             );
           }
@@ -334,7 +346,7 @@ class Roles extends Component<{}> {
 
         return (
           <Container
-            title={__CONSTANTS.pilot.title.en}
+            title={__CONSTANTS.pilot.title[_LANGUAGE]}
             pilotItems={props.roles.tabs}
             currentPilotItem={props.roles.currentTab}
             onPilotTabItemPress={async (item) => {
@@ -353,7 +365,8 @@ class Roles extends Component<{}> {
                 await props.fetchAvailableRoles(props.roles.selectedReferenceRole.usergroup, props.roles.selectedReferenceRole.reference_id);
               }
             }}
-            {...props}>
+            {...props}
+            {...containerOtherProps}>
               {_TAB_CONTENT}
           </Container>
         );

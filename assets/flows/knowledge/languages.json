@@ -1,0 +1,14 @@
+[{
+  "key": "en",
+  "name": "English",
+  "keywords": {
+    "fa": "انگلیسی"
+  }
+}, {
+  "key": "fa",
+  "name": "فارسی",
+  "keywords": {
+    "en": "Persian"
+  },
+  "rtl": true
+}]

@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import Prototypes from './prototypes';
+import GLOBAL from '../global';
 
-import { GLOBAL } from '../../flows/states/types/index';
 import { name as appName } from '../../../app.json';
 
 module.exports = {
@@ -213,9 +213,13 @@ module.exports = {
   _prepareTechnicalTabInProfile: async (self) => {
     const { props } = self,
           { navigation } = props,
+          _NATIVE_SETTINGS = await Prototypes._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language,
           _AUTH = await module.exports._prepareAuthDetails();
 
-    props.fetchAvailableBrandRoles('Wholesaler');
+    self._language = _LANGUAGE;
+
+    await props.fetchAvailableBrandRoles('Wholesaler');
 
     var _BRAND_PROFILE_PHOTO = '',
         _BRAND_NAME = '',

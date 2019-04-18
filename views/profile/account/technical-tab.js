@@ -21,8 +21,8 @@ import { views_constants } from '../../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.profile.user_profile_sub_views.technical_tab;
 
 class TechnicalTab extends Component<{}> {
-  componentDidMount() {
-    Preparation._prepareTechnicalTabInProfile(this);
+  async componentDidMount() {
+    await Preparation._prepareTechnicalTabInProfile(this);
   }
 
   _componentWillCheckValidation(props) {
@@ -52,14 +52,19 @@ class TechnicalTab extends Component<{}> {
 
   render() {
     const { props } = this;
+
     var _BRAND_ROLE_CAROUSEL_CONTENT, _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT, _BRAND_NAME_DEPENDED_HANDLER_CONTENT;
 
-    const _CURRENT_BRAND_ROLE = props.technicalTab.brandRoles.findIndex((brandRole) => {
-      const _BRAND_ROLE = brandRole.role,
-            _LOCAL_CURRENT_BRAND_ROLE = props.technicalTab.brandRole.role;
+    const _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
+          _CURRENT_BRAND_ROLE = props.technicalTab.brandRoles.findIndex((brandRole) => {
+            const _BRAND_ROLE = brandRole.role,
+                  _LOCAL_CURRENT_BRAND_ROLE = props.technicalTab.brandRole.role;
 
-      return (_LOCAL_CURRENT_BRAND_ROLE === _BRAND_ROLE)
-    });
+            return (_LOCAL_CURRENT_BRAND_ROLE === _BRAND_ROLE)
+          }),
+          _CAMERA_ROLL_OTHER_PROPS = {
+            language: this._language
+          };
 
     if (props.technicalTab.loadingBrandRole){
       _BRAND_ROLE_CAROUSEL_CONTENT = <Input
@@ -90,7 +95,7 @@ class TechnicalTab extends Component<{}> {
           onPress={() => props.fetchAvailableBrandRoles(GLOBAL.TARGET)}>
             <Text
               style={Styles.BrandRoleCarouselErrorContent}>
-                {`${__CONSTANTS.firstCarouselContainer.content.self.state.error.content.en} ${__CONSTANTS.firstCarouselContainer.title.en}`}
+                {`${__CONSTANTS.firstCarouselContainer.content.self.state.error.content[_LANGUAGE]} ${__CONSTANTS.firstCarouselContainer.title[_LANGUAGE]}`}
             </Text>
         </Input>;
       }else{
@@ -116,7 +121,7 @@ class TechnicalTab extends Component<{}> {
               _BRAND_NAME_DEPENDED_HANDLER_CONTENT = <Input
                 type={__CONSTANTS.secondInput.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.secondInput.title.en)}
-                placeholder={__CONSTANTS.secondInput.title.en}
+                placeholder={__CONSTANTS.secondInput.title[_LANGUAGE]}
                 value={props.technicalTab.brandName}
                 style={Styles.SingleInput}
                 onChangeText={(currentValue) => props.setBrandName(currentValue)}
@@ -126,7 +131,7 @@ class TechnicalTab extends Component<{}> {
             if (_PRIORITY_TOKEN.current !== _PRIORITY_TOKEN.range.max){
               _BRAND_ROLE_SUBSETS_DEPENDED_HANDLER_CONTENT = <Link
                 containerStyle={Styles.QuickLink}
-                value={__CONSTANTS.quickLink.title.en}
+                value={__CONSTANTS.quickLink.title[_LANGUAGE]}
                 onPress={() => {
                   const { navigation } = this.props;
 
@@ -155,12 +160,13 @@ class TechnicalTab extends Component<{}> {
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
             visible={props.technicalTab.cameraRollPickerModalVisibility}
             onBlur={(status) => props.setCameraRollPickerModalVisibility(status)}
-            onPress={(photo) => props.setBrandProfilePhoto(photo)}/>
+            onPress={(photo) => props.setBrandProfilePhoto(photo)}
+            {..._CAMERA_ROLL_OTHER_PROPS}/>
 
           <Input
             type={__CONSTANTS.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.firstInput.title.en)}
-            value={__CONSTANTS.firstInput.title.en}
+            value={__CONSTANTS.firstInput.title[_LANGUAGE]}
             style={Styles.SingleInput}
             photoURI={_PHOTO_URI}
             onPress={() => props.setCameraRollPickerModalVisibility(true)} />
@@ -173,7 +179,7 @@ class TechnicalTab extends Component<{}> {
             style={Styles.SubmitInput}
             type={__CONSTANTS.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-            value={__CONSTANTS.submitInput.state.normal.title.en}
+            value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
             gradient={Global.colors.pair.ongerine}
             onPress={async () => {
               const _PROPS = props.technicalTab,

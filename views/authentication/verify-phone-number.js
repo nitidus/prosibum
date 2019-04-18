@@ -28,9 +28,12 @@ class VerifyPhoneNumber extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this;
+    const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language,
+          _SUBSCRIBED_USER = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_TOKEN);
 
-    const _SUBSCRIBED_USER = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_TOKEN);
+    this._language = _LANGUAGE;
 
     if (_SUBSCRIBED_USER !== false){
       const _PARSED_SUBSCRIBED_USER = JSON.parse(_SUBSCRIBED_USER),
@@ -70,7 +73,8 @@ class VerifyPhoneNumber extends Component<{}> {
 
     var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
 
-    const _VALIDATED = this._componentWillCheckValidation(props);
+    const _VALIDATED = this._componentWillCheckValidation(props),
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
 
     if (props.signup.subscribeLoading){
       _SUBMIT_BUTTON_CONTENT = <Input
@@ -94,7 +98,7 @@ class VerifyPhoneNumber extends Component<{}> {
         style={Styles.SubmitButton}
         type={__CONSTANTS.submitInput.type}
         name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-        value={__CONSTANTS.submitInput.state.normal.title.en}
+        value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
         gradient={Global.colors.pair.ongerine}
         onPress={() => Preparation._prepareSubscribeTokenToSubmit(props)}
         forcedDisable={_VALIDATED} />;
@@ -106,7 +110,7 @@ class VerifyPhoneNumber extends Component<{}> {
 
     if (props.signup.validationToken != ''){
       if (!Functions._checkIsAValidNumericOnlyField(props.signup.validationToken, 6)){
-        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message.en;
+        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
       }
     }
 
@@ -128,13 +132,13 @@ class VerifyPhoneNumber extends Component<{}> {
           <View style={Styles.Content}>
             <Headline
               style={Styles.Headline}
-              title={__CONSTANTS.headline.title.en}
-              subtitle={__CONSTANTS.headline.subtitle.en} />
+              title={__CONSTANTS.headline.title[_LANGUAGE]}
+              subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
 
               <Input
                 type={__CONSTANTS.firstInputGroup.first.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.first.title.en}
+                placeholder={__CONSTANTS.firstInputGroup.first.title[_LANGUAGE]}
                 value={props.signup.validationToken}
                 style={Styles.FirstInput}
                 onChangeText={(currentValue) => props.setValidationToken(currentValue)}
@@ -144,7 +148,7 @@ class VerifyPhoneNumber extends Component<{}> {
 
               <Link
                 containerStyle={Styles.QuickLink}
-                value={__CONSTANTS.quickLink.title.en}
+                value={__CONSTANTS.quickLink.title[_LANGUAGE]}
                 onPress={() => {
                   const { navigation } = this.props;
 

@@ -26,8 +26,12 @@ class NewProductPrices extends Component<{}> {
 
   };
 
-  componentDidMount() {
-    const { props } = this;
+  async componentDidMount() {
+    const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
+
+    this._language = _LANGUAGE;
 
     props.setProductFeatures([
       {
@@ -76,7 +80,8 @@ class NewProductPrices extends Component<{}> {
     var _PRICES_CONTENT,
         _UNITS = [];
 
-    const _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title.en,
+    const _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
+          _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
           _VALIDATED = this._componentWillCheckValidation(props);
 
     if (props.newProduct.prices.length > 0){
@@ -136,22 +141,22 @@ class NewProductPrices extends Component<{}> {
                           <Input
                             type={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.firstInput.type}
                             name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.firstInput.title.en)}
-                            placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.firstInput.title.en}
+                            placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.firstInput.title[_LANGUAGE]}
                             value={_PRICE_NAME}
                             onChangeText={(currentValue) => _PRICE_SUB_FIELD_ON_CHANGE_ACTION(currentValue, 'name')} />
 
                           <Input
                             type={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.secondInput.type}
                             name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.secondInput.title.en)}
-                            placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.secondInput.title.en}
+                            placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.secondInput.title[_LANGUAGE]}
                             value={_PRICE_VALUE}
                             onChangeText={(currentValue) => _PRICE_SUB_FIELD_ON_CHANGE_ACTION(currentValue, 'value')} />
 
                           <Input
                             type={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.type}
-                            link={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.link.en}
+                            link={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.link[_LANGUAGE]}
                             name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.title.en)}
-                            placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.title.en}
+                            placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.thirdInput.title[_LANGUAGE]}
                             value={_PRICE_UNIT}
                             onPress={() => {
                               Keyboard.dismiss();
@@ -168,7 +173,7 @@ class NewProductPrices extends Component<{}> {
               <Input
                 type={__CONSTANTS.content.appendHandlerButton.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.appendHandlerButton.state.normal.title.en)}
-                value={__CONSTANTS.content.appendHandlerButton.state.normal.title.en}
+                value={__CONSTANTS.content.appendHandlerButton.state.normal.title[_LANGUAGE]}
                 gradient={Global.colors.pair.ongerine}
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal,
@@ -185,7 +190,7 @@ class NewProductPrices extends Component<{}> {
               <Input
                 type={__CONSTANTS.content.submitButton.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-                value={__CONSTANTS.content.submitButton.state.normal.title.en}
+                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
                 gradient={Global.colors.pair.ongerine}
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal
@@ -207,7 +212,7 @@ class NewProductPrices extends Component<{}> {
           ]}>
             <Link
               containerStyle={Styles.EmptyContentLink}
-              value={__CONSTANTS.content.list.state.null.title.en} />
+              value={__CONSTANTS.content.list.state.null.title[_LANGUAGE]} />
         </View>
       );
     }
@@ -223,7 +228,7 @@ class NewProductPrices extends Component<{}> {
     return (
       <Container
         title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
-        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle.en)}
+        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
         rightIcon={__CONSTANTS.pilot.rightIcon}
         onRightIconPress={() => props.appendProductPrice({
           _id: Functions._generateNewBSONObjectID(),

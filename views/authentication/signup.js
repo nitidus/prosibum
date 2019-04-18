@@ -26,9 +26,13 @@ class Signup extends Component<{}> {
 
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { props } = this,
-          { navigation: { state: { params } } } = props;
+          { navigation: { state: { params } } } = props,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
+
+    this._language = _LANGUAGE;
 
     if (typeof params != 'undefined'){
       if (Object.keys(params).length > 0){
@@ -89,6 +93,7 @@ class Signup extends Component<{}> {
     const { props } = this,
           { navigation: { state: { params } } } = props,
           _VALIDATED = this._componentWillCheckValidation(props),
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
           _DEMAND_MODE = Functions._convertTokenToKey(props.signup.demandMode);
 
     var _MAIN_CONTENT, _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
@@ -118,7 +123,7 @@ class Signup extends Component<{}> {
               style={Styles.SubmitButtonInvitationState}
               type={__CONSTANTS.content.state.invitation.submitInput.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.normal.title.en)}
-              value={__CONSTANTS.content.state.normal.submitInput.state.normal.title.en}
+              value={__CONSTANTS.content.state.normal.submitInput.state.normal.title[_LANGUAGE]}
               gradient={Global.colors.pair.ongerine}
               onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
               forcedDisable={_VALIDATED} />;
@@ -128,21 +133,21 @@ class Signup extends Component<{}> {
             <View style={Styles.Content}>
               <Headline
                 style={Styles.Headline}
-                title={__CONSTANTS.content.state.invitation.headline.title.en}
-                subtitle={__CONSTANTS.content.state.invitation.headline.subtitle.en} />
+                title={__CONSTANTS.content.state.invitation.headline.title[_LANGUAGE]}
+                subtitle={__CONSTANTS.content.state.invitation.headline.subtitle[_LANGUAGE]} />
 
               <InputGroup
                 style={Styles.FirstInputGroupInvitationState}>
                 <Input
                   type={__CONSTANTS.content.state.invitation.firstInputGroup.first.type}
                   name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.firstInputGroup.first.title.en)}
-                  placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.first.title.en}
+                  placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.first.title[_LANGUAGE]}
                   value={props.signup.firstName}
                   onChangeText={(currentValue) => props.setFirstName(currentValue)} />
                 <Input
                   type={__CONSTANTS.content.state.invitation.firstInputGroup.second.type}
                   name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.firstInputGroup.second.title.en)}
-                  placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.second.title.en}
+                  placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.second.title[_LANGUAGE]}
                   value={props.signup.lastName}
                   onChangeText={(currentValue) => props.setLastName(currentValue)} />
               </InputGroup>
@@ -152,7 +157,7 @@ class Signup extends Component<{}> {
                 <Input
                   type={__CONSTANTS.content.state.invitation.secondInputGroup.first.type}
                   name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.secondInputGroup.first.title.en)}
-                  placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.first.title.en}
+                  placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.first.title[_LANGUAGE]}
                   value={props.signup.phone.number}
                   link={props.signup.phone.dialCode.area_code}
                   onPress={() => props.setCountriesCodesModalVisibility(true)}
@@ -162,7 +167,7 @@ class Signup extends Component<{}> {
                 <Input
                   type={__CONSTANTS.content.state.invitation.secondInputGroup.second.type}
                   name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.secondInputGroup.second.title.en)}
-                  placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.second.title.en}
+                  placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.second.title[_LANGUAGE]}
                   value={props.signup.password}
                   onChangeText={(currentValue) => props.setPassword(currentValue)} />
               </InputGroup>
@@ -199,7 +204,7 @@ class Signup extends Component<{}> {
             style={Styles.SubmitButtonNormalState}
             type={__CONSTANTS.content.state.normal.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.normal.title.en)}
-            value={__CONSTANTS.content.state.normal.submitInput.state.normal.title.en}
+            value={__CONSTANTS.content.state.normal.submitInput.state.normal.title[_LANGUAGE]}
             gradient={Global.colors.pair.ongerine}
             onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
             forcedDisable={_VALIDATED} />;
@@ -209,19 +214,19 @@ class Signup extends Component<{}> {
 
         if (props.signup.phone.number != ''){
           if (!Functions._checkIsAValidPhoneNumber(props.signup.phone.number)){
-            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.first.validation.message.en;
+            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.first.validation.message[_LANGUAGE];
           }
         }
 
         if (props.signup.email != ''){
           if (!Functions._checkIsAValidEmail(props.signup.email)){
-            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.second.validation.message.en;
+            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.second.validation.message[_LANGUAGE];
           }
         }
 
         if (props.signup.password != ''){
           if (!Functions._checkIsAValidPassword(props.signup.password)){
-            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.en;
+            _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.third.validation.message[_LANGUAGE];
           }
         }
 
@@ -236,15 +241,15 @@ class Signup extends Component<{}> {
           <View style={Styles.Content}>
             <Headline
               style={Styles.Headline}
-              title={__CONSTANTS.content.state.normal.headline.title.en}
-              subtitle={__CONSTANTS.content.state.normal.headline.subtitle.en} />
+              title={__CONSTANTS.content.state.normal.headline.title[_LANGUAGE]}
+              subtitle={__CONSTANTS.content.state.normal.headline.subtitle[_LANGUAGE]} />
 
             <InputGroup
               style={Styles.FirstInputGroupNormalState}>
               <Input
                 type={__CONSTANTS.content.state.normal.firstInputGroup.first.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.first.title.en)}
-                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.first.title.en}
+                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.first.title[_LANGUAGE]}
                 value={props.signup.phone.number}
                 link={props.signup.phone.dialCode.area_code}
                 onPress={() => props.setCountriesCodesModalVisibility(true)}
@@ -254,13 +259,13 @@ class Signup extends Component<{}> {
               <Input
                 type={__CONSTANTS.content.state.normal.firstInputGroup.second.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.second.title.en)}
-                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.second.title.en}
+                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.second.title[_LANGUAGE]}
                 value={props.signup.email}
                 onChangeText={(currentValue) => props.setEmail(currentValue)} />
               <Input
                 type={__CONSTANTS.content.state.normal.firstInputGroup.third.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.third.title.en)}
-                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.third.title.en}
+                placeholder={__CONSTANTS.content.state.normal.firstInputGroup.third.title[_LANGUAGE]}
                 value={props.signup.password}
                 onChangeText={(currentValue) => props.setPassword(currentValue)} />
             </InputGroup>
@@ -269,7 +274,7 @@ class Signup extends Component<{}> {
 
             <Link
               containerStyle={Styles.QuickLink}
-              value={__CONSTANTS.content.state.normal.quickLink.title.en}
+              value={__CONSTANTS.content.state.normal.quickLink.title[_LANGUAGE]}
               onPress={() => {
                 const { navigation } = this.props;
 

@@ -66,6 +66,8 @@ const CameraRollPickerModal = (props) => {
     attitude.onBlur = props.onBlur || props.onModalBlur || props.modalOnBlur || props.onClose || props.onModalClose || props.modalOnClose;
   }
 
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   const MODAL = {
           BACKDROP_BLUR_TYPE: "dark",
           ON_BLUR: (status) => {
@@ -79,7 +81,7 @@ const CameraRollPickerModal = (props) => {
   if (attitude.visibility === true){
     if (props.cameraRollPickerModal.groupTypes.length === 0 && props.cameraRollPickerModal.currentGroupType === ''){
       const _GROUP_TYPES = __CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.context.map((item, i) => {
-        return Functions._convertKeywordToToken(item.en);
+        return Functions._convertKeywordToToken(item[attitude.language]);
       });
 
       props.setCameraRollGroupTypes(_GROUP_TYPES);

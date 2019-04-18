@@ -26,12 +26,13 @@ class NewProductIdentity extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this;
+    const { props } = this,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
 
-    props.setProductName('');
-    props.setCurrentWarehouse({});
-    props.setWarehouses([]);
-    props.setCategory({});
+    this._language = _LANGUAGE;
+
+    await props.resetProductForms();
 
     await props.fetchAvailableWarehouses();
   }
@@ -51,7 +52,8 @@ class NewProductIdentity extends Component<{}> {
   }
 
   render() {
-    const { props } = this;
+    const { props } = this,
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
 
     var _WAREHOUSE_CONTENT;
 
@@ -130,7 +132,7 @@ class NewProductIdentity extends Component<{}> {
                           </Text>
                           <Text
                             style={Styles.BriefDetailSubtitle}>
-                              {item.products.count} {__CONSTANTS.content.firstCarousel.state.normal.content.suffix.en}
+                              {item.products.count} {__CONSTANTS.content.firstCarousel.state.normal.content.suffix[_LANGUAGE]}
                           </Text>
                       </View>
                   </Input>
@@ -141,13 +143,12 @@ class NewProductIdentity extends Component<{}> {
         }else{
           _WAREHOUSE_CONTENT = (
             <View
-              style={[
-                Styles.Content,
-                Styles.EmptyContent
-              ]}>
+              style={{
+                marginBottom: Styles.Content.marginVertical
+              }}>
                 <Link
                   containerStyle={Styles.EmptyContentLink}
-                  value={__CONSTANTS.content.firstCarousel.state.null.title.en} />
+                  value={__CONSTANTS.content.firstCarousel.state.null.title[_LANGUAGE]} />
             </View>
           );
         }
@@ -159,13 +160,13 @@ class NewProductIdentity extends Component<{}> {
 
     return (
       <Container
-        title={Functions._convertKeywordToToken(__CONSTANTS.pilot.title.en)}
-        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle.en)}
+        title={Functions._convertKeywordToToken(__CONSTANTS.pilot.title[_LANGUAGE])}
+        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
         {...props}>
           <Input
             type={__CONSTANTS.content.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}
-            placeholder={__CONSTANTS.content.firstInput.title.en}
+            placeholder={__CONSTANTS.content.firstInput.title[_LANGUAGE]}
             value={props.newProduct.name}
             style={[
               Styles.RegularItemContainer,
@@ -180,8 +181,8 @@ class NewProductIdentity extends Component<{}> {
           <Input
             type={__CONSTANTS.content.secondInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.secondInput.title.en)}
-            link={__CONSTANTS.content.secondInput.link.en}
-            placeholder={__CONSTANTS.content.secondInput.title.en}
+            link={__CONSTANTS.content.secondInput.link[_LANGUAGE]}
+            placeholder={__CONSTANTS.content.secondInput.title[_LANGUAGE]}
             value={_PRODUCT_CATEGORY}
             style={{
               marginHorizontal: Styles.Content.marginHorizontal,
@@ -198,7 +199,7 @@ class NewProductIdentity extends Component<{}> {
               <Input
                 type={__CONSTANTS.content.modalHandlerButton.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalHandlerButton.state.normal.title.en)}
-                value={__CONSTANTS.content.modalHandlerButton.state.normal.title.en}
+                value={__CONSTANTS.content.modalHandlerButton.state.normal.title[_LANGUAGE]}
                 gradient={Global.colors.pair.ongerine}
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal,
@@ -208,7 +209,7 @@ class NewProductIdentity extends Component<{}> {
               <Input
                 type={__CONSTANTS.content.submitButton.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-                value={__CONSTANTS.content.submitButton.state.normal.title.en}
+                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
                 gradient={Global.colors.pair.ongerine}
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal

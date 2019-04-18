@@ -26,9 +26,13 @@ class VerifyEmail extends Component<{}> {
 
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { props } = this,
-          { navigation: { state: { params } } } = props;
+          { navigation: { state: { params } } } = props,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
+
+    this._language = _LANGUAGE;
 
     if (typeof params != 'undefined'){
       if (Object.keys(params).length > 0){
@@ -51,26 +55,27 @@ class VerifyEmail extends Component<{}> {
     const { props } = this,
           { navigation: { state: { params } } } = props;
 
-    var _MAIN_CONTENT;
+    var _MAIN_CONTENT,
+        _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
 
     if (props.verifyEmail.verifyTheUserEmailAddressLoading){
       _MAIN_CONTENT = (
         <ActivityIndicator />
       );
     }else{
-      var _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.normal.en,
-          _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.normal.en;
+      var _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.normal[_LANGUAGE],
+          _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.normal[_LANGUAGE];
 
       if (!props.verifyEmail.connected.status){
-        _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.disconnect.en;
-        _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.disconnect.en;
+        _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.disconnect[_LANGUAGE];
+        _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.disconnect[_LANGUAGE];
       }
 
       _MAIN_CONTENT = (
         <View style={Styles.Content}>
           <Headline
             style={Styles.Headline}
-            title={__CONSTANTS.headline.title.en}
+            title={__CONSTANTS.headline.title[_LANGUAGE]}
             subtitle={_HEADLINE_SUBTITLE} />
 
           <Link
