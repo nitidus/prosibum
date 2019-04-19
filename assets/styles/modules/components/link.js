@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform, I18nManager } from 'react-native';
 
 import {
   colors, fonts
@@ -24,6 +24,8 @@ module.exports = StyleSheet.create({
   TextInputLink: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.lavenderGray,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_TEXT_INPUT_LINK
   },
 });
