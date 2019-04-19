@@ -55,7 +55,10 @@ class NewProductFeatures extends Component<{}> {
 
     const _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
           _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
-          _VALIDATED = this._componentWillCheckValidation(props);
+          _VALIDATED = this._componentWillCheckValidation(props),
+          _PRODUCT_FEATURES_OTHER_PROPS = {
+            language: this._language
+          };
 
     if (props.newProduct.features.length > 0){
       _FEATURES_CONTENT = (
@@ -322,7 +325,8 @@ class NewProductFeatures extends Component<{}> {
           <ProductFeaturesModal
             visibility={props.newProduct.productFeaturesModalVisibility}
             onBlur={() => props.setProductFeaturesModalVisibility(false)}
-            onProgressSuccess={(response) => props.appendProductFeature(response)} />
+            onProgressSuccess={(response) => props.appendProductFeature(response)}
+            {..._PRODUCT_FEATURES_OTHER_PROPS} />
       </Container>
     );
   }

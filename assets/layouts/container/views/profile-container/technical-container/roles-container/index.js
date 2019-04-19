@@ -50,7 +50,10 @@ export const RolesContainer = (props) => {
 
   attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
 
-  var _CHILDREN_CONTENT, _DEPENDED_RIGHT_PINNED_SIDE;
+  var _CHILDREN_CONTENT, _DEPENDED_RIGHT_PINNED_SIDE,
+      roleModalOtherProps = {
+        language: props.language
+      };;
 
   if (typeof attitude.children != 'undefined'){
     if (attitude.children.length > 0){
@@ -115,7 +118,8 @@ export const RolesContainer = (props) => {
           reference={attitude.referenceRole}
           visibility={attitude.rolesModalVisibility}
           onBlur={attitude.onAddRolePress}
-          onProgressSuccess={attitude.onRolesAbsorb} />
+          onProgressSuccess={attitude.onRolesAbsorb}
+          {...roleModalOtherProps} />
 
         {_CHILDREN_CONTENT}
     </View>

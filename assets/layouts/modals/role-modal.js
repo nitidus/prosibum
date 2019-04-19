@@ -104,6 +104,8 @@ const RoleModal = (props) => {
     attitude.onProgressSuccess = props.onProgressSuccess || props.onProgressComplete || props.onProgressDone || props.onTaskSuccess || props.onTaskComplete || props.onTaskDone || props.onDutySuccess || props.onDutyComplete || props.onDutyDone || props.onObligationSuccess || props.onObligationComplete || props.onObligationDone || props.onSuccessProgress || props.onCompleteProgress || props.onDoneProgress || props.onSuccessTask || props.onCompleteTask || props.onDoneTask || props.onSuccessDuty || props.onCompleteDuty || props.onDoneDuty || props.onSuccessObligation || props.onCompleteObligation || props.onDoneObligation;
   }
 
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   const MODAL = {
           BACKDROP_BLUR_TYPE: "dark",
           ON_BLUR: (status) => {
@@ -129,7 +131,7 @@ const RoleModal = (props) => {
         const _ROW = item,
               _ROLE = _ROW.role;
 
-        return Functions._convertKeywordToToken(_ROLE || _ROLE.en);
+        return Functions._convertKeywordToToken(_ROLE || _ROLE[attitude.language]);
       }),
       _CURRENT_USER_GROUP_ROLE = props.roleModal.currentRole.role || props.roleModal.currentRole,
       _CURRENT_USER_GROUP_ROLE_INDEX = props.roleModal.roles.findIndex((item) => {
@@ -180,7 +182,7 @@ const RoleModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.firstInput.title.en}
+            placeholder={__CONSTANTS.modalContainer.content.firstInput.title[attitude.language]}
             value={props.roleModal.token}
             style={Styles.TokenInput}
             autoCapitalize="none"
@@ -189,7 +191,7 @@ const RoleModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-            value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en}`}
+            value={`${__CONSTANTS.modalContainer.content.submitInput.state.normal.title[attitude.language]}`}
             gradient={Global.colors.pair.ongerine}
             style={Styles.AppendRolesButton}
             onPress={async () => {
@@ -257,7 +259,7 @@ const RoleModal = (props) => {
     _MODAL_CONTENT = (
       <Link
         containerStyle={Styles.EmptyContent}
-        value={__CONSTANTS.modalContainer.noContent.title.en} />
+        value={__CONSTANTS.modalContainer.noContent.title[attitude.language]} />
     );
   }
 

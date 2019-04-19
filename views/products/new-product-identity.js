@@ -53,7 +53,13 @@ class NewProductIdentity extends Component<{}> {
 
   render() {
     const { props } = this,
-          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
+          _WAREHOUSES_OTHER_PROPS = {
+            language: this._language
+          },
+          _PRODUCT_CATEGORIES_OTHER_PROPS = {
+            language: this._language
+          };
 
     var _WAREHOUSE_CONTENT;
 
@@ -227,12 +233,14 @@ class NewProductIdentity extends Component<{}> {
             onBlur={() => props.setWarehouseModalVisibility(false)}
             onProgressSuccess={async (response) => {
               await props.appendWarehouse(response);
-            }} />
+            }}
+            {..._WAREHOUSES_OTHER_PROPS} />
 
           <ProductCategoriesModal
             visibility={props.newProduct.productCategoriesModalVisibility}
             onBlur={() => props.setProductCategoriesModalVisibility(false)}
-            onProgressSuccess={(response) => props.setCategory(response)} />
+            onProgressSuccess={(response) => props.setCategory(response)}
+            {..._PRODUCT_CATEGORIES_OTHER_PROPS} />
       </Container>
     );
   }

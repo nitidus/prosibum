@@ -62,7 +62,12 @@ export const WalletsContainer = (props) => {
 
   attitude.walletModalVisibility = props.walletModalVisibility || props.walletModalVisible || props.walletModalIsVisible || false;
 
-  var _CHILDREN_CONTENT;
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
+  var _CHILDREN_CONTENT,
+      walletModalOtherProps = {
+        language: props.language
+      };
 
   if (typeof attitude.children != 'undefined'){
     if (attitude.children.length > 0){
@@ -128,8 +133,9 @@ export const WalletsContainer = (props) => {
         </Pilot>
 
         <WalletModal
+          visibility={attitude.walletModalVisibility}
           {...otherProps}
-          visibility={attitude.walletModalVisibility} />
+          {...walletModalOtherProps} />
 
         {_CHILDREN_CONTENT}
     </View>

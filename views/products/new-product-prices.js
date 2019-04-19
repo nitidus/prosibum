@@ -82,7 +82,10 @@ class NewProductPrices extends Component<{}> {
 
     const _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
           _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
-          _VALIDATED = this._componentWillCheckValidation(props);
+          _VALIDATED = this._componentWillCheckValidation(props),
+          _PRODUCT_UNIT_DEPENDED_OTHER_PROPS = {
+            language: this._language
+          };;
 
     if (props.newProduct.prices.length > 0){
       _PRICES_CONTENT = (
@@ -257,7 +260,8 @@ class NewProductPrices extends Component<{}> {
               }else{
                 return priceItem;
               }
-            }))} />
+            }))}
+            {..._PRODUCT_UNIT_DEPENDED_OTHER_PROPS} />
       </Container>
     );
   }

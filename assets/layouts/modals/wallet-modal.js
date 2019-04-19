@@ -144,6 +144,8 @@ export const WalletModal = (props) => {
     attitude.onProgressSuccess = props.onProgressSuccess || props.onProgressComplete || props.onProgressDone || props.onTaskSuccess || props.onTaskComplete || props.onTaskDone || props.onDutySuccess || props.onDutyComplete || props.onDutyDone || props.onObligationSuccess || props.onObligationComplete || props.onObligationDone || props.onSuccessProgress || props.onCompleteProgress || props.onDoneProgress || props.onSuccessTask || props.onCompleteTask || props.onDoneTask || props.onSuccessDuty || props.onCompleteDuty || props.onDoneDuty || props.onSuccessObligation || props.onCompleteObligation || props.onDoneObligation;
   }
 
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   const MODAL = {
           BACKDROP_BLUR_TYPE: "dark",
           ON_BLUR: (status) => {
@@ -226,7 +228,7 @@ export const WalletModal = (props) => {
                       </Text>
                       <Text
                         style={Styles.WalletItemSubtitle}>
-                          {__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.title.en}
+                          {__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.title[attitude.language]}
                       </Text>
                   </Input>
                 );
@@ -247,7 +249,7 @@ export const WalletModal = (props) => {
                       </Text>
                       <Text
                         style={Styles.WalletItemSubtitle}>
-                          {__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.title.en}
+                          {__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.title[attitude.language]}
                       </Text>
                   </Input>
                 );
@@ -262,7 +264,7 @@ export const WalletModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title.en}
+            placeholder={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title[attitude.language]}
             value={props.walletModal.walletName}
             style={Styles.WalletNameInput}
             onChangeText={(currentValue) => props.setWalletName(currentValue)} />
@@ -272,7 +274,7 @@ export const WalletModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.state.normal.title.en)}
-            value={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.state.normal.title.en}
+            value={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.state.normal.title[attitude.language]}
             gradient={Global.colors.pair.ongerine}
             style={[
               Styles.NormalContent,
@@ -295,7 +297,7 @@ export const WalletModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.title.en}
+            placeholder={__CONSTANTS.modalContainer.content.secondHiddenTab.firstInput.title[attitude.language]}
             value={(props.walletModal.walletInitialCreditAmount > 0)? props.walletModal.walletInitialCreditAmount.toString(): ''}
             style={Styles.WalletNameInput}
             onChangeText={(currentValue) => props.setWalletInitialCreditAmount((!isNaN(currentValue) && currentValue != '')? parseInt(currentValue): 0)} />
@@ -315,7 +317,7 @@ export const WalletModal = (props) => {
               <Input
                 type={__CONSTANTS.modalContainer.content.secondHiddenTab.optionalLinkInput.type}
                 name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondHiddenTab.optionalLinkInput.state.normal.title.en)}
-                value={__CONSTANTS.modalContainer.content.secondHiddenTab.optionalLinkInput.state.normal.title.en}
+                value={__CONSTANTS.modalContainer.content.secondHiddenTab.optionalLinkInput.state.normal.title[attitude.language]}
                 gradient={Global.colors.pair.Brilue}
                 style={[
                   Styles.NormalContent,
@@ -339,7 +341,7 @@ export const WalletModal = (props) => {
             <Input
               type={__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.state.normal.title.en)}
-              value={__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.state.normal.title.en}
+              value={__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.state.normal.title[attitude.language]}
               gradient={Global.colors.pair.ongerine}
               style={[
                 Styles.NormalContent,
@@ -366,7 +368,7 @@ export const WalletModal = (props) => {
                 Styles.Center_ContentAlignment
               ]}
               style={Styles.Center_TextAlignment}
-              value={__CONSTANTS.modalContainer.content.secondHiddenTab.quickLink.title.en}
+              value={__CONSTANTS.modalContainer.content.secondHiddenTab.quickLink.title[attitude.language]}
               onPress={() => {
                 const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex - 1;
 
@@ -498,7 +500,7 @@ export const WalletModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.thirdHiddenTab.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.thirdHiddenTab.submitInput.state.normal.title.en)}
-            value={__CONSTANTS.modalContainer.content.thirdHiddenTab.submitInput.state.normal.title.en}
+            value={__CONSTANTS.modalContainer.content.thirdHiddenTab.submitInput.state.normal.title[attitude.language]}
             gradient={Global.colors.pair.ongerine}
             style={[
               Styles.NormalContent,
@@ -519,7 +521,7 @@ export const WalletModal = (props) => {
               Styles.Center_ContentAlignment
             ]}
             style={Styles.Center_TextAlignment}
-            value={__CONSTANTS.modalContainer.content.thirdHiddenTab.quickLink.title.en}
+            value={__CONSTANTS.modalContainer.content.thirdHiddenTab.quickLink.title[attitude.language]}
             onPress={() => {
               const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex - 1;
 
@@ -543,7 +545,7 @@ export const WalletModal = (props) => {
         </Input>
       );
 
-      var _SELECTED_MONTH_INDEX = (Object.keys(props.walletModal.creditCard.expirationDate.month).length > 0)? __MONTHS.en.findIndex((monthItem, i) => {
+      var _SELECTED_MONTH_INDEX = (Object.keys(props.walletModal.creditCard.expirationDate.month).length > 0)? __MONTHS[attitude.language].findIndex((monthItem, i) => {
             return monthItem.name === props.walletModal.creditCard.expirationDate.month.name;
           }): 0,
           _SELECTED_YEARS_RANGE = Functions._createYearArrayFromToday(),
@@ -553,7 +555,7 @@ export const WalletModal = (props) => {
 
       if (Object.keys(props.walletModal.creditCard.expirationDate.month).length === 0){
         props.setCreditCardExpirationMonth({
-          name: __MONTHS.en[_SELECTED_MONTH_INDEX].name,
+          name: __MONTHS[attitude.language][_SELECTED_MONTH_INDEX].name,
           value: (_SELECTED_MONTH_INDEX + 1).toString()
         });
       }
@@ -564,18 +566,18 @@ export const WalletModal = (props) => {
 
       const _EXPIRATION_DATE_CAROUSEL_ITEM_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? ((Platform.OS === 'ios')? 2.9: 2.8): 6;
 
-      if (__MONTHS.en.length > 0){
+      if (__MONTHS[attitude.language].length > 0){
         _EXPIRATION_MONTH_CONTENT = (
           <Carousel
             name={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.title.en}
-            data={__MONTHS.en}
+            data={__MONTHS[attitude.language]}
             style={{
               marginBottom: Styles.Content.marginVertical
             }}
             firstItem={_SELECTED_MONTH_INDEX}
             itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _EXPIRATION_DATE_CAROUSEL_ITEM_COEFFICIENT)}
             onLayout={({ item, index }) => {
-              const _ITEM_CORRECT_INDEX = __MONTHS.en.findIndex((monthItem, i) => {
+              const _ITEM_CORRECT_INDEX = __MONTHS[attitude.language].findIndex((monthItem, i) => {
                 return monthItem.name === item.name;
               }) + 1;
 
@@ -589,12 +591,12 @@ export const WalletModal = (props) => {
                 <Input
                   type={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.type}
                   name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.content.title.en)}
-                  value={`${item.name}${__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.content.splitter.en} ${_ITEM_CORRECT_INDEX}`}
+                  value={`${item.name}${__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.content.splitter[attitude.language]} ${_ITEM_CORRECT_INDEX}`}
                   gradient={_ITEM_GRADIENT} />
               );
             }}
             onSnap={(selectedItemIndex) => props.setCreditCardExpirationMonth({
-              name: __MONTHS.en[selectedItemIndex].name,
+              name: __MONTHS[attitude.language][selectedItemIndex].name,
               value: selectedItemIndex + 1
             })}
             {...__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.options}/>
@@ -640,7 +642,7 @@ export const WalletModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en}
+            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title[attitude.language]}
             style={[
               Styles.NormalContent,
               {
@@ -660,7 +662,7 @@ export const WalletModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.title.en}
+            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.title[attitude.language]}
             style={[
               Styles.NormalContent,
               {
@@ -675,7 +677,7 @@ export const WalletModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.state.normal.title.en)}
-            value={__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.state.normal.title.en}
+            value={__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.state.normal.title[attitude.language]}
             gradient={Global.colors.pair.ongerine}
             style={[
               Styles.NormalContent,
@@ -777,7 +779,7 @@ export const WalletModal = (props) => {
               Styles.Center_ContentAlignment
             ]}
             style={Styles.Center_TextAlignment}
-            value={((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0))?__CONSTANTS.modalContainer.content.fourthHiddenTab.quickLink.state.plan.title.en: __CONSTANTS.modalContainer.content.fourthHiddenTab.quickLink.state.normal.title.en}
+            value={((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0))?__CONSTANTS.modalContainer.content.fourthHiddenTab.quickLink.state.plan.title[attitude.language]: __CONSTANTS.modalContainer.content.fourthHiddenTab.quickLink.state.normal.title[attitude.language]}
             onPress={() => {
               var _INDEX_COEFFICIENT = 2;
 

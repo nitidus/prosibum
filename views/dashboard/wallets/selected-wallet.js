@@ -62,9 +62,11 @@ class SelectedWallet extends Component<{}> {
   }
 
   render() {
-    const { props } = this;
-
-    var _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
+    const { props } = this,
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
+          containerOtherProps = {
+            language: this._language
+          };
 
     if (props.selectedWallet.loadingTransactions){
       return (
@@ -212,7 +214,8 @@ class SelectedWallet extends Component<{}> {
           <Container
             title={_CONTAINER_TITLE}
             subtitle={_CONTAINER_SUBTITLE}
-            {...props}>
+            {...props}
+            {...containerOtherProps}>
               {_TAB_CONTENT}
           </Container>
         );

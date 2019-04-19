@@ -79,6 +79,8 @@ const ProductUnitDependedModal = (props) => {
     attitude.onProgressSuccess = props.onProgressSuccess || props.onProgressComplete || props.onProgressDone || props.onTaskSuccess || props.onTaskComplete || props.onTaskDone || props.onDutySuccess || props.onDutyComplete || props.onDutyDone || props.onObligationSuccess || props.onObligationComplete || props.onObligationDone || props.onSuccessProgress || props.onCompleteProgress || props.onDoneProgress || props.onSuccessTask || props.onCompleteTask || props.onDoneTask || props.onSuccessDuty || props.onCompleteDuty || props.onDoneDuty || props.onSuccessObligation || props.onCompleteObligation || props.onDoneObligation;
   }
 
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   if (attitude.visibility === true){
     if (
       (props.productUnitDependedModal.units.length === 0) &&
@@ -158,7 +160,7 @@ const ProductUnitDependedModal = (props) => {
                           </Text>
                           <Text
                             style={Styles.BriefDetailTitleSuffix}>
-                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.title.suffix.en)}
+                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.title.suffix[attitude.language])}
                           </Text>
                         </View>
                     </View>
@@ -175,7 +177,7 @@ const ProductUnitDependedModal = (props) => {
 
                         <Text
                           style={Styles.BriefDetailRowText}>
-                            {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.firstFeature.title.en)}
+                            {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.firstFeature.title[attitude.language])}
                         </Text>
                     </View>
                     <View
@@ -191,7 +193,7 @@ const ProductUnitDependedModal = (props) => {
 
                         <Text
                           style={Styles.BriefDetailRowText}>
-                            {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.secondFeature.title.en)}
+                            {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.secondFeature.title[attitude.language])}
                         </Text>
                     </View>
                     <View
@@ -202,7 +204,7 @@ const ProductUnitDependedModal = (props) => {
 
                         <Text
                           style={Styles.BriefDetailRowText}>
-                            {Functions._convertNumberToHumanReadableFormat(item.quantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.thirdFeature.title.en)}
+                            {Functions._convertNumberToHumanReadableFormat(item.quantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.thirdFeature.title[attitude.language])}
                         </Text>
                     </View>
                 </Input>
@@ -214,7 +216,7 @@ const ProductUnitDependedModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.submitInput.type}
             gradient={Global.colors.pair.ongerine}
-            value={`${__CONSTANTS.modalContainer.content.submitInput.prefix.en} ${Functions._convertKeywordToToken(props.productUnitDependedModal.selectedUnit.unit.key)} ${__CONSTANTS.modalContainer.content.submitInput.suffix.en}`}
+            value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._convertKeywordToToken(props.productUnitDependedModal.selectedUnit.unit.key)} ${__CONSTANTS.modalContainer.content.submitInput.suffix[attitude.language]}`}
             style={{
               marginHorizontal: Styles.Content.marginHorizontal
             }}
@@ -232,7 +234,7 @@ const ProductUnitDependedModal = (props) => {
           Styles.Center_TextAlignment,
           Styles.Center_ContentAlignment
         ]}
-        value={__CONSTANTS.modalContainer.content.carousel.state.null.title.en} />
+        value={__CONSTANTS.modalContainer.content.carousel.state.null.title[attitude.language]} />
     );
   }
 

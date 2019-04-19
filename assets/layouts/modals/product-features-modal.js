@@ -102,6 +102,8 @@ const ProductFeaturesModal = (props) => {
     attitude.onProgressSuccess = props.onProgressSuccess || props.onProgressComplete || props.onProgressDone || props.onTaskSuccess || props.onTaskComplete || props.onTaskDone || props.onDutySuccess || props.onDutyComplete || props.onDutyDone || props.onObligationSuccess || props.onObligationComplete || props.onObligationDone || props.onSuccessProgress || props.onCompleteProgress || props.onDoneProgress || props.onSuccessTask || props.onCompleteTask || props.onDoneTask || props.onSuccessDuty || props.onCompleteDuty || props.onDoneDuty || props.onSuccessObligation || props.onCompleteObligation || props.onDoneObligation;
   }
 
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   if (attitude.visibility === true){
     if (
       (props.productFeaturesModal.features.length === 0) &&
@@ -195,7 +197,7 @@ const ProductFeaturesModal = (props) => {
                       style={Styles.DetailItemMasterInfoContent}>
                         <Text
                           style={Styles.BriefDetailTitle}>
-                            {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.title.en)}
+                            {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.title[attitude.language])}
                         </Text>
                     </View>
                     <View
@@ -304,7 +306,7 @@ const ProductFeaturesModal = (props) => {
                                 style={Styles.DetailItemMasterInfoContent}>
                                   <Text
                                     style={Styles.BriefDetailTitle}>
-                                      {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title.en)}
+                                      {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])}
                                   </Text>
                               </View>
                               <View
@@ -327,7 +329,7 @@ const ProductFeaturesModal = (props) => {
                       <Input
                         type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.type}
                         name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title.en)}
-                        placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title.en}
+                        placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title[attitude.language]}
                         value={_MIN_ORDER_QTY}
                         style={[
                           Styles.RegularItemContainer,
@@ -343,7 +345,7 @@ const ProductFeaturesModal = (props) => {
                       <Input
                         type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.type}
                         name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en)}
-                        placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en}
+                        placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title[attitude.language]}
                         value={_MAX_ORDER_QTY}
                         style={[
                           Styles.RegularItemContainer,
@@ -359,7 +361,7 @@ const ProductFeaturesModal = (props) => {
                       <Input
                           type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.type}
                           name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title.en)}
-                          placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title.en}
+                          placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title[attitude.language]}
                           value={_QTY}
                           style={[
                             Styles.RegularItemContainer,
@@ -384,7 +386,7 @@ const ProductFeaturesModal = (props) => {
                           marginBottom: Styles.Content.marginVertical
                         }
                       ]}
-                      value={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.empty.title.en} />
+                      value={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.empty.title[attitude.language]} />
                   );
                 }
               }
@@ -396,7 +398,7 @@ const ProductFeaturesModal = (props) => {
               <Input
                   type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.description.firstInput.type}
                   name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.description.firstInput.title.en)}
-                  placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.description.firstInput.title.en}
+                  placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.description.firstInput.title[attitude.language]}
                   value={props.productFeaturesModal.description}
                   style={[
                     Styles.RegularItemContainer,
@@ -419,7 +421,7 @@ const ProductFeaturesModal = (props) => {
                 <Input
                     type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.firstInput.type}
                     name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.firstInput.title.en)}
-                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.firstInput.title.en}
+                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.firstInput.title[attitude.language]}
                     value={props.productFeaturesModal.customizedFeatureName}
                     style={[
                       Styles.RegularItemContainer,
@@ -434,7 +436,7 @@ const ProductFeaturesModal = (props) => {
                 <Input
                     type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.secondInput.type}
                     name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.secondInput.title.en)}
-                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.secondInput.title.en}
+                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.customized.secondInput.title[attitude.language]}
                     value={props.productFeaturesModal.customizedFeatureValue}
                     style={[
                       Styles.RegularItemContainer,
@@ -456,7 +458,7 @@ const ProductFeaturesModal = (props) => {
             <Input
               type={__CONSTANTS.modalContainer.content.submitInput.type}
               gradient={Global.colors.pair.ongerine}
-              value={`${__CONSTANTS.modalContainer.content.submitInput.prefix.en} ${Functions._convertKeywordToToken(props.productFeaturesModal.currentFeature.key)}`}
+              value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._convertKeywordToToken(props.productFeaturesModal.currentFeature.key)}`}
               style={{
                 marginHorizontal: Styles.Content.marginHorizontal
               }}
@@ -501,7 +503,7 @@ const ProductFeaturesModal = (props) => {
               Styles.Center_TextAlignment,
               Styles.Center_ContentAlignment
             ]}
-            value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.title.en} />
+            value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.title[attitude.language]} />
         );
       }
     }

@@ -74,7 +74,10 @@ class SelectedRole extends Component<{}> {
           _CAROUSEL_ITEM_KEYS = _PREPARED_PERSONAL_CONTACT_INFO.ROLE_DETAIL.map((item, i) => {
             return item.key;
           }),
-          _ITEM_WIDTH_COEFFICIENT = (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)? 2: ((_PREPARED_PERSONAL_CONTACT_INFO.ROLE_DETAIL.length > 1)? 4: 2);
+          _ITEM_WIDTH_COEFFICIENT = (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)? 2: ((_PREPARED_PERSONAL_CONTACT_INFO.ROLE_DETAIL.length > 1)? 4: 2),
+          containerOtherProps = {
+            language: this._language
+          };
 
     var _DETAIL_CAROUSEL_CONTAINER = (
       <Carousel
@@ -455,7 +458,8 @@ class SelectedRole extends Component<{}> {
           await props.fetchAvailableRoles(this.attitude.data.usergroup, this.attitude.data.reference_id);
         }}
         onBackPress={() => props.resetSelectedRole()}
-        {...props}>
+        {...props}
+        {...containerOtherProps}>
           {_DETAIL_CAROUSEL_CONTAINER}
 
           {_SELECTED_ROLE_SUB_ROLES_CONTENT}

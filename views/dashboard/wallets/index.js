@@ -37,9 +37,11 @@ class Wallets extends Component<{}> {
   }
 
   render() {
-    const { props, otherProps } = this;
-
-    var _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
+    const { props, otherProps } = this,
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
+          containerOtherProps = {
+            language: this._language
+          };
 
     if (props.wallets.loadingWalletCurrenciesType){
       return (
@@ -236,6 +238,11 @@ class Wallets extends Component<{}> {
             }
           };
         }
+
+        OTHER_PROPS = {
+          ...OTHER_PROPS,
+          ...containerOtherProps
+        };
 
         return (
           <Container
