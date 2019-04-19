@@ -113,7 +113,6 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_PRICE_CONTAINER.height += 10;
   }else{
     if (!_IS_IPHONE_X){
-      _CUSTOM_CONTENT.marginTop
       _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 1;
     }
   }

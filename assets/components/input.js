@@ -303,6 +303,7 @@ export const Input = (props) => {
           {...otherProps} />
       );
       break;
+
     case 'numeric':
       return (
         <TextInput
@@ -325,6 +326,7 @@ export const Input = (props) => {
           {...otherProps} />
       );
       break;
+
     case 'email':
       return (
         <TextInput
@@ -349,6 +351,7 @@ export const Input = (props) => {
           {...otherProps} />
       );
       break;
+
     case 'password':
       return (
         <TextInput
@@ -373,6 +376,7 @@ export const Input = (props) => {
           {...otherProps} />
       );
       break;
+
     case 'credit-card':
     case 'debit-card':
     case 'creditcard':
@@ -452,11 +456,12 @@ export const Input = (props) => {
         </View>
       )
       break;
+
     case 'link':
     case 'text-link':
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.RTL_TextInputLinkContainer}
+          containerStyle={Styles.TextInputLinkContainer}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -465,7 +470,7 @@ export const Input = (props) => {
       // if (attitude.disable){
       //   _LINK_CONTENT = (
       //     <Link
-      //       containerStyle={Styles.RTL_TextInputLinkContainer}
+      //       containerStyle={Styles.TextInputLinkContainer}
       //       style={Styles.TextInputLink}
       //       value={attitude.link} />
       //   );
@@ -500,10 +505,11 @@ export const Input = (props) => {
         </View>
       )
       break;
+
     case 'email-link':
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.RTL_TextInputLinkContainer}
+          containerStyle={Styles.TextInputLinkContainer}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -512,7 +518,7 @@ export const Input = (props) => {
       // if (attitude.disable){
       //   _LINK_CONTENT = (
       //     <Link
-      //       containerStyle={Styles.RTL_TextInputLinkContainer}
+      //       containerStyle={Styles.TextInputLinkContainer}
       //       style={Styles.TextInputLink}
       //       value={attitude.link} />
       //   );
@@ -529,6 +535,7 @@ export const Input = (props) => {
             <TextInput
               style={[
                 Styles.TextInputConatiner,
+                Styles.ReverseTextInputConatiner,
                 { width: '72%' }
               ]}
               autoCapitalize="none"
@@ -553,7 +560,7 @@ export const Input = (props) => {
     case 'numeric-link':
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.RTL_TextInputLinkContainer}
+          containerStyle={Styles.TextInputLinkContainer}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -562,7 +569,7 @@ export const Input = (props) => {
       // if (attitude.disable){
       //   _LINK_CONTENT = (
       //     <Link
-      //       containerStyle={Styles.RTL_TextInputLinkContainer}
+      //       containerStyle={Styles.TextInputLinkContainer}
       //       style={Styles.TextInputLink}
       //       value={attitude.link} />
       //   );
@@ -579,6 +586,7 @@ export const Input = (props) => {
             <TextInput
               style={[
                 Styles.TextInputConatiner,
+                Styles.ReverseTextInputConatiner,
                 { width: '72%' }
               ]}
               keyboardType="numeric"
@@ -597,11 +605,12 @@ export const Input = (props) => {
         </View>
       )
       break;
+
     case 'phone-link':
     case 'phone-number-link':
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.LTR_TextInputLinkContainer}
+          containerStyle={Styles.StaticTextInputLinkContainer}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -610,7 +619,7 @@ export const Input = (props) => {
       // if (attitude.disable){
       //   _LINK_CONTENT = (
       //     <Link
-      //       containerStyle={Styles.LTR_TextInputLinkContainer}
+      //       containerStyle={Styles.StaticTextInputLinkContainer}
       //       style={Styles.TextInputLink}
       //       value={attitude.link} />
       //   );
@@ -625,10 +634,7 @@ export const Input = (props) => {
             attitude.style
           ]}>
             <TextInput
-              style={[
-                Styles.TextInputConatiner,
-                Styles.RTL_Pinned
-              ]}
+              style={Styles.TextInputConatiner}
               keyboardType="phone-pad"
               value={attitude.value}
               placeholder={attitude.placeholder}
@@ -649,7 +655,7 @@ export const Input = (props) => {
     case 'password-link':
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.RTL_TextInputLinkContainer}
+          containerStyle={Styles.TextInputLinkContainer}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -658,7 +664,7 @@ export const Input = (props) => {
       // if (attitude.disable){
       //   _LINK_CONTENT = (
       //     <Link
-      //       containerStyle={Styles.RTL_TextInputLinkContainer}
+      //       containerStyle={Styles.TextInputLinkContainer}
       //       style={Styles.TextInputLink}
       //       value={attitude.link} />
       //   );
@@ -675,6 +681,7 @@ export const Input = (props) => {
             <TextInput
               style={[
                 Styles.TextInputConatiner,
+                Styles.ReverseTextInputConatiner,
                 { width: '72%' }
               ]}
               autoCapitalize="none"
@@ -762,7 +769,7 @@ export const Input = (props) => {
                     ...Styles.PhotoInputLabelContent,
                     color: Global.colors.single.rangoonGreen
                   }}>
-                    {_CAMERAROLL_CONTENT_VERB_MODE} The {Functions._convertKeywordToToken(attitude.value)}
+                    {_CAMERAROLL_CONTENT_VERB_MODE} {Functions._convertKeywordToToken(attitude.value)}
                 </Text>
               </View>
           </LinearGradient>
@@ -776,7 +783,7 @@ export const Input = (props) => {
               <View style={Styles.PhotoInputLabelContainer}>
                 <Text
                   style={Styles.PhotoInputLabelContent}>
-                    {_CAMERAROLL_CONTENT_VERB_MODE} The {Functions._convertKeywordToToken(attitude.value)}
+                    {_CAMERAROLL_CONTENT_VERB_MODE} {Functions._convertKeywordToToken(attitude.value)}
                 </Text>
               </View>
           </View>

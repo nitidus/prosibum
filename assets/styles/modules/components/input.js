@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform, I18nManager } from 'react-native';
 
 import {
   colors, fonts
@@ -58,8 +58,8 @@ var _CUSTOM_TEXT_INPUT_LINK = {
     _CUSTOM_BUTTON_TITLE = {
       fontSize: 18
     },
-    _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER = {},
-    _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER = {};
+    _CUSTOM_TEXT_INPUT_LINK_CONTAINER = {},
+    _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER = {};
 
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
@@ -97,8 +97,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BUTTON_CONTAINER.borderRadius += 2;
     _CUSTOM_BUTTON_TITLE.fontSize += 8;
 
-    _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 23;
-    _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 23;
+    _CUSTOM_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'left': 'right'] = 23;
+    _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER[/*(I18nManager.isRTL)? 'right': */'left'] = 23;
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical += 3;
     _CUSTOM_TEXT_INPUT_LINK.height += 16;
@@ -110,8 +110,8 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.paddingHorizontal += 3;
 
-    _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 18;
-    _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 18;
+    _CUSTOM_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'left': 'right'] = 18;
+    _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER[/*(I18nManager.isRTL)? 'right': */'left'] = 18;
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical -= 2;
     _CUSTOM_TEXT_INPUT_LINK.height += 3;
@@ -149,8 +149,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_TEXT_INPUT_CONTAINER.width = '81.5%';
   }
 
-  _CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER.right = 18;
-  _CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER.left = 18;
+  _CUSTOM_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'left': 'right'] = 18;
+  _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER[/*(I18nManager.isRTL)? 'right': */'left'] = 18;
 }
 
 module.exports = StyleSheet.create({
@@ -159,23 +159,28 @@ module.exports = StyleSheet.create({
     fontFamily: fonts.sanFrancisco.textBold,
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_CONTAINER_WITHOUT_BUTTON
   },
   ContainerWithButton: {
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     ..._CUSTOM_CONTAINER_WITH_BUTTON
   },
   ContainerWithIcon: {
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     flexDirection: 'row',
     alignItems: 'center',
     ..._CUSTOM_CONTAINER_WITH_BUTTON
   },
   PhotoInputContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
   },
   ContainerWithPhoto: {
     borderColor: colors.single.mercury,
@@ -202,26 +207,37 @@ module.exports = StyleSheet.create({
     right: 0
   },
   PhotoInputLabelContainer: {
+    alignItems: 'flex-start',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_PHOTO_INPUT_LABEL_CONTAINER
   },
   PhotoInputLabelContent: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.lavenderGray,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     ..._CUSTOM_PHOTO_INPUT_LABEL_CONTENT
   },
   TextInputConatiner: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
-    paddingHorizontal: 16,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
+    alignSelf: (I18nManager.isRTL)? 'flex-start': 'flex-end',
+    paddingLeft: (I18nManager.isRTL)? 0: 16,
+    paddingRight: (I18nManager.isRTL)? 16: 0,
     ..._CUSTOM_TEXT_INPUT_CONTAINER
   },
-  RTL_TextInputLinkContainer: {
-    position: 'absolute',
-    ..._CUSTOM_RTL_TEXT_INPUT_LINK_CONTAINER
+  ReverseTextInputConatiner: {
+    alignSelf: (I18nManager.isRTL)? 'flex-end': 'flex-start',
   },
-  LTR_TextInputLinkContainer: {
+  TextInputLinkContainer: {
     position: 'absolute',
-    ..._CUSTOM_LTR_TEXT_INPUT_LINK_CONTAINER
+    ..._CUSTOM_TEXT_INPUT_LINK_CONTAINER
+  },
+  StaticTextInputLinkContainer: {
+    position: 'absolute',
+    ..._CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER
   },
   TextInputLink: {
     ..._CUSTOM_TEXT_INPUT_LINK
@@ -290,11 +306,5 @@ module.exports = StyleSheet.create({
   },
   PAYPAL: {
     backgroundColor: colors.organization.paypal.white
-  },
-  RTL_Pinned: {
-    alignSelf: 'flex-end'
-  },
-  LTR_Pinned: {
-    alignSelf: 'flex-start'
   }
 });
