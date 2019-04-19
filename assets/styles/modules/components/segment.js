@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform, I18nManager } from 'react-native';
 
 import {
   colors, fonts
@@ -41,7 +41,8 @@ module.exports = StyleSheet.create({
 
   },
   DualSegmentTabs: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
   },
   DualSegmentContents: {
     marginTop: 15
@@ -60,6 +61,8 @@ module.exports = StyleSheet.create({
   DualSegmentTabInnerContentTitle: {
     color: colors.single.rangoonGreen,
     fontFamily: fonts.sanFrancisco.textBold,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_DUAL_SEGMENT_TAB_INNER_CONTENT_TITLE
   }
 });
