@@ -1,3 +1,4 @@
+import languages_modal from './layouts/languages-modal.json';
 import countries_codes_modal from './layouts/countries-codes-modal.json';
 import camera_roll_picker_modal from './layouts/camera-roll-picker-modal.json';
 import role_modal from './layouts/role-modal.json';
@@ -9,6 +10,7 @@ import product_unit_depended_modal from './layouts/product-unit-depended-modal.j
 import list from './layouts/list.json';
 
 module.exports = {
+  languages_modal,
   countries_codes_modal,
   camera_roll_picker_modal,
   role_modal,

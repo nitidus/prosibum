@@ -1,0 +1,29 @@
+{
+  "modalContainer": {
+    "title": {
+      "en": "Languages Modal"
+    },
+    "content": {
+      "firstCarouselContainer": {
+        "title": {
+          "en": "Languages Group"
+        },
+        "content": {
+          "self": {
+            "type": "BUTTON"
+          }
+        }
+      },
+      "submitInput": {
+        "type": "BUTTON",
+        "state": {
+          "normal": {
+            "title": {
+              "en": "Change"
+            }
+          }
+        }
+      }
+    }
+  }
+}

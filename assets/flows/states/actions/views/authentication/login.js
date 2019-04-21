@@ -6,12 +6,19 @@ const CMD = ViewsCMD.Authentication.Login;
 
 const mapStateToProps = (state) => {
   return {
-    login: state.Login
+    login: state.Login,
+    nativeSettings: state.NativeSettings
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setLanguage: (language) => {
+      dispatch({
+        type: LOGIN.SET_LANGUAGE,
+        payload: language
+      })
+    },
     setToken: (token) => {
       dispatch({
         type: LOGIN.SET_TOKEN,
@@ -28,6 +35,12 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: LOGIN.SET_LOADING_STATUS,
         payload: loadingStatus
+      })
+    },
+    setLanguagesModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: LOGIN.SET_LANGUAGES_MODAL_VISIBILITY,
+        payload: visibilityStatus
       })
     },
     verifyAuthentication: async (token) => CMD._authecticateUser(token, dispatch)

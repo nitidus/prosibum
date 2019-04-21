@@ -78,6 +78,7 @@
 		EAF61C5BC72B4810BC96616B /* SF-Pro-Display-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E37D001F198F40EDB01C6BFA /* SF-Pro-Display-LightItalic.ttf */; };
 		EC3FB2C1606448329841C538 /* SF-Pro-Text-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D3521B519FE4FBD969124C5 /* SF-Pro-Text-LightItalic.ttf */; };
 		F7E91DED402942B28ED749A2 /* SF-Pro-Text-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 484D8C917527454BAC76A714 /* SF-Pro-Text-BoldItalic.ttf */; };
+		F9D2AFEBAF4F4E52AD9433CB /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79161095B0B54BAF85F7CA81 /* libRCTRestart.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -382,6 +383,13 @@
 			remoteGlobalIDString = CC0127971E3ACC3900B23C9F;
 			remoteInfo = Interactable;
 		};
+		7A667E0F226CEADC00603DEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F31BAF8278ED4A5A9EF8F770 /* RCTRestart.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
+			remoteInfo = RCTRestart;
+		};
 		7A7FC0ED2156C38E0034BFA2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7A7FC0BF2156C38E0034BFA2 /* RNBlur.xcodeproj */;
@@ -475,6 +483,7 @@
 		717EE48904E84129AD5C2F8A /* SF-Pro-Text-HeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-HeavyItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-HeavyItalic.ttf"; sourceTree = "<group>"; };
 		7571EA888B104A28A96F12BE /* SF-Pro-Display-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Regular.ttf"; path = "../assets/fonts/SF-Pro-Display-Regular.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		79161095B0B54BAF85F7CA81 /* libRCTRestart.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTRestart.a; sourceTree = "<group>"; };
 		7A07F8EA219F6C2F0081F75F /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		7A32092D213DD1B900693728 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		7A32095C213DD1E400693728 /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -506,6 +515,7 @@
 		E37D001F198F40EDB01C6BFA /* SF-Pro-Display-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-LightItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-LightItalic.ttf"; sourceTree = "<group>"; };
 		EACE0F5D6BA34F0A8F7C2CCA /* SF-Pro-Text-SemiboldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-SemiboldItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		F1988D2A9CF7475FA9174F8B /* SF-Pro-Text-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Regular.ttf"; path = "../assets/fonts/SF-Pro-Text-Regular.ttf"; sourceTree = "<group>"; };
+		F31BAF8278ED4A5A9EF8F770 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		FEFE7926C4B44EF2A58198AA /* SF-Pro-Display-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-ThinItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-ThinItalic.ttf"; sourceTree = "<group>"; };
 		FF90388E33B74E22A850F360 /* SF-Pro-Text-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Medium.ttf"; path = "../assets/fonts/SF-Pro-Text-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -545,6 +555,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				D478ACDFA8523FF62FD69793 /* libPods-prosibum.a in Frameworks */,
+				F9D2AFEBAF4F4E52AD9433CB /* libRCTRestart.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -756,6 +767,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7A667DDB226CEADB00603DEC /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				79161095B0B54BAF85F7CA81 /* libRCTRestart.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		7A667E0C226CEADC00603DEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A667E10226CEADC00603DEC /* libRCTRestart.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7A7FC0C02156C38E0034BFA2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -804,6 +831,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				F31BAF8278ED4A5A9EF8F770 /* RCTRestart.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -827,6 +855,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				FC86E24A68134BD9A49147D1 /* Resources */,
 				E53EF5828CA4CA6DC4A41490 /* Pods */,
+				7A667DDB226CEADB00603DEC /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1064,6 +1093,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 7A667E0C226CEADC00603DEC /* Products */;
+					ProjectRef = F31BAF8278ED4A5A9EF8F770 /* RCTRestart.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1396,6 +1429,13 @@
 			remoteRef = 7A524305225D1ACD00BDF034 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		7A667E10226CEADC00603DEC /* libRCTRestart.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTRestart.a;
+			remoteRef = 7A667E0F226CEADC00603DEC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		7A7FC0EE2156C38E0034BFA2 /* libRNBlur.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1668,9 +1708,17 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+				);
 				INFOPLIST_FILE = prosibumTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1686,9 +1734,17 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+				);
 				INFOPLIST_FILE = prosibumTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1706,6 +1762,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = K6X49DG8VF;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+				);
 				INFOPLIST_FILE = prosibum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1726,6 +1786,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K6X49DG8VF;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+				);
 				INFOPLIST_FILE = prosibum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1751,8 +1815,16 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+				);
 				INFOPLIST_FILE = "prosibum-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1777,8 +1849,16 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+				);
 				INFOPLIST_FILE = "prosibum-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1803,8 +1883,16 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+				);
 				INFOPLIST_FILE = "prosibum-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1829,8 +1917,16 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+				);
 				INFOPLIST_FILE = "prosibum-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",

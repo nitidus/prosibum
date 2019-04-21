@@ -9,6 +9,9 @@ import { Options } from './layouts/options';
 
 /*** Views ***/
 
+//Authentication
+import { AuthenticationContainer } from './views/authentication-container';
+
 //Profile
 import { ProfileContainer } from './views/profile-container';
 import { OverseerContainer } from './views/profile-container/overseer-container';
@@ -38,6 +41,9 @@ module.exports = {
     Options
   },
   Views: {
+    Authentication: {
+      AuthenticationContainer
+    },
     Profile: {
       Technical: {
         Roles: {

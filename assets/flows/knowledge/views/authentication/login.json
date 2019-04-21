@@ -1,35 +1,42 @@
 {
   "headline": {
     "title": {
-      "en": "Welcome"
+      "en": "Welcome",
+      "fa": "خوش‌آمدید"
     },
     "subtitle": {
-      "en": "Please login to\n your account."
+      "en": "Please login to\n your account.",
+      "fa": "لطفا به حساب خود\nوارد شوید."
     }
   },
   "firstInputGroup": {
     "first": {
       "type": "TEXT",
       "title": {
-        "en": "Email or Mobile Phone"
+        "en": "Email or Mobile Phone",
+        "fa": "ایمیل یا شماره موبایل"
       },
       "validation": {
         "message": {
-          "en": "Check your email or phone numbersal"
+          "en": "Check your email or phone number",
+          "fa": "ایمیل یا شماره موبایل بررسی شود"
         }
       }
     },
     "second": {
       "type": "PASSWORD-LINK",
       "title": {
-        "en": "Password"
+        "en": "Password",
+        "fa": "گذرواژه"
       },
       "link": {
-        "en": "Forgot it?"
+        "en": "Forgot it?",
+        "fa": "فراموش کردید؟"
       },
       "validation": {
         "message": {
-          "en": "Password must contain 8 characters"
+          "en": "Password must contain 8 characters",
+          "fa": "گذرواژه شامل ۸ کاراکتر است"
         }
       }
     }
@@ -39,7 +46,8 @@
     "state": {
       "normal": {
         "title": {
-          "en": "Sign In"
+          "en": "Sign In",
+          "fa": "ورود"
         }
       },
       "loading": {
@@ -51,7 +59,8 @@
   },
   "quickLink": {
     "title": {
-      "en": "Don't have an account?"
+      "en": "Don't have an account?",
+      "fa": "مایلید حساب‌کاربری جدید بسازید؟"
     }
   }
 }

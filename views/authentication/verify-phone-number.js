@@ -7,7 +7,9 @@ import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Input, InputGroup, Link } from '../../assets/components/index';
 import { ActivityIndicator, Toast } from '../../assets/layouts/index';
-const Styles = Views.Authentication.VerifyPhoneNumber;
+import { Views as ViewsContainer } from '../../assets/layouts/container/index';
+const Styles = Views.Authentication.VerifyPhoneNumber,
+      Container = ViewsContainer.Authentication.AuthenticationContainer;
 
 import { Functions } from '../../assets/modules/index';
 const { Preparation } = Functions;
@@ -122,11 +124,8 @@ class VerifyPhoneNumber extends Component<{}> {
     }
 
     return (
-      <KeyboardAvoidingView
-        style={Styles.Container}
-        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
-          <StatusBar hidden={true}/>
-
+      <Container
+        style={Styles.Container}>
           {_TOP_PINNED_TOAST}
 
           <View style={Styles.Content}>
@@ -158,7 +157,7 @@ class VerifyPhoneNumber extends Component<{}> {
                   navigation.goBack();
                 }} />
           </View>
-      </KeyboardAvoidingView>
+      </Container>
     );
   }
 }

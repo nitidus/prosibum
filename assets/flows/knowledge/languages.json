@@ -1,14 +1,10 @@
 [{
   "key": "en",
   "name": "English",
-  "keywords": {
-    "fa": "انگلیسی"
-  }
+  "native": "English"
 }, {
   "key": "fa",
-  "name": "فارسی",
-  "keywords": {
-    "en": "Persian"
-  },
+  "name": "Persian",
+  "native": "فارسی",
   "rtl": true
 }]

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, TouchableOpacity, Image, ImageBackground, TextInput, KeyboardAvoidingView, Keyboard, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Image, ImageBackground, TextInput, KeyboardAvoidingView, Keyboard, I18nManager, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import CreditCardType from 'rn-credit-card-type';
@@ -654,9 +654,17 @@ export const Input = (props) => {
       break;
 
     case 'password-link':
+      var _PASSWORD_CUSTOM_STYLES = [
+        Styles.TextInputLinkContainer
+      ];
+
+      if (I18nManager.isRTL){
+        _PASSWORD_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
+      }
+
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.TextInputLinkContainer}
+          containerStyle={_PASSWORD_CUSTOM_STYLES}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -682,7 +690,7 @@ export const Input = (props) => {
             <TextInput
               style={[
                 Styles.TextInputConatiner,
-                Styles.ReverseTextInputConatiner,
+                Styles.NormalTextInputConatiner,
                 { width: '72%' }
               ]}
               autoCapitalize="none"

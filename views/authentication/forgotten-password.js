@@ -7,7 +7,9 @@ import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Input, InputGroup, Segment, Link } from '../../assets/components/index';
 import { Container, Toast, CountriesCodesModal } from '../../assets/layouts/index';
-const Styles = Views.Authentication.ForgottenPassword;
+import { Views as ViewsContainer } from '../../assets/layouts/container/index';
+const Styles = Views.Authentication.ForgottenPassword,
+      MajorContainer = ViewsContainer.Authentication.AuthenticationContainer;
 
 import { Functions } from '../../assets/modules/index';
 
@@ -110,11 +112,8 @@ class ForgottenPassword extends Component<{}> {
     }
 
     return (
-      <KeyboardAvoidingView
-        style={Styles.Container}
-        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
-          <StatusBar hidden={true}/>
-
+      <MajorContainer
+        style={Styles.Container}>
           {_TOP_PINNED_TOAST}
 
           <CountriesCodesModal
@@ -186,7 +185,7 @@ class ForgottenPassword extends Component<{}> {
                 navigation.goBack();
               }} />
           </View>
-      </KeyboardAvoidingView>
+      </MajorContainer>
     )
   }
 }

@@ -51,7 +51,7 @@ if (Platform.OS !== 'ios'){
 module.exports = StyleSheet.create({
   ModalContainer: {
     paddingHorizontal: 0,
-    paddingBottom: 0
+    paddingBottom: 15
   },
   MajorContainer: {
     alignItems: 'center'

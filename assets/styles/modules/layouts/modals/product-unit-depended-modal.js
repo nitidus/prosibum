@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, I18nManager, Dimensions } from 'react-native';
 
 import { Functions } from '../../../../modules/index';
 
@@ -41,6 +41,8 @@ var _CUSTOM_CONTENT = {
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT = {
       fontSize: 14
     };
+
+_CUSTOM_BRIEF_DETAIL_ROW_TEXT[((I18nManager.isRTL)? 'marginRight': 'marginLeft')] = 15;
 
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
@@ -127,7 +129,6 @@ module.exports = StyleSheet.create({
   BriefDetailRowText: {
     color: colors.single.romance,
     fontFamily: fonts.sanFrancisco.textBold,
-    marginLeft: 15,
     ..._CUSTOM_BRIEF_DETAIL_ROW_TEXT
   },
   BriefDetailRowIcon: {

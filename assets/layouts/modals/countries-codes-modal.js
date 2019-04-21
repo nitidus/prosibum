@@ -65,6 +65,17 @@ const CountriesCodesModal = (props) => {
     attitude.onBlur = props.onBlur || props.onModalBlur || props.modalOnBlur || props.onClose || props.onModalClose || props.modalOnClose;
   }
 
+  if ((props.countriesCodesModal.restrictedData.length === 0) && (attitude.visibility !== props.countriesCodesModal.visibility)){
+    var _RESTRICTED_COUNTRIES = __COUNTRIES.slice(props.countriesCodesModal.offset.from, (props.countriesCodesModal.offset.to + 1));
+
+    props.setCarouselCurrentIndex(props.countriesCodesModal.offset.from);
+    props.mergeDataWithCarouselRestrictedData(_RESTRICTED_COUNTRIES);
+  }
+
+  if (attitude.visibility !== props.countriesCodesModal.visibility){
+    props.setModalVisibility(attitude.visibility);
+  }
+
   const _SELECTED_INDEX = __COUNTRIES.findIndex((country) => {
           const _SELECTED_COUNTRY_CODE = attitude.selectedItem.code,
                 _COUNTRY_CODE = country.code;
@@ -77,17 +88,6 @@ const CountriesCodesModal = (props) => {
             props.setModalVisibility(status);
           }
         };
-
-  if ((props.countriesCodesModal.restrictedData.length === 0) && (attitude.visibility !== props.countriesCodesModal.visibility)){
-    var _RESTRICTED_COUNTRIES = __COUNTRIES.slice(props.countriesCodesModal.offset.from, (props.countriesCodesModal.offset.to + 1));
-
-    props.setCarouselCurrentIndex(props.countriesCodesModal.offset.from);
-    props.mergeDataWithCarouselRestrictedData(_RESTRICTED_COUNTRIES);
-  }
-
-  if (attitude.visibility !== props.countriesCodesModal.visibility){
-    props.setModalVisibility(attitude.visibility);
-  }
 
   return (
     <Modal

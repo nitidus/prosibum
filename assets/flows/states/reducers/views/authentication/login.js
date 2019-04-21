@@ -2,9 +2,11 @@ import { VIEWS } from '../../../types/index';
 const { LOGIN } = VIEWS.AUTHENTICATION;
 
 const initialState = {
+  language: {},
   token: '',
   password: '',
   loading: false,
+  languagesModalVisibility: false,
   connected: {
     status: true,
     content: ''
@@ -13,6 +15,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case LOGIN.SET_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload
+      };
+      break;
     case LOGIN.SET_TOKEN:
       return {
         ...state,
@@ -32,6 +40,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: action.payload
+      };
+      break;
+    case LOGIN.SET_LANGUAGES_MODAL_VISIBILITY:
+      return {
+        ...state,
+        languagesModalVisibility: action.payload
       };
       break;
     case LOGIN.SET_CONNECTED_STATUS:

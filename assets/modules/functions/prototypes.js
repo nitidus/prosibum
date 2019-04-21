@@ -517,6 +517,46 @@ module.exports = {
       region: _LOCALE_ARRAY[1]
     };
   },
+  _getAllAvailableLanguages: () => {
+    return __LANGUAGES;
+  },
+  _setDefaultNativeSettingsItemWithKey: async (key, value) => {
+    const _DEFAULT_NATIVE_SETTINGS = await module.exports._retrieveDataWithKey(GLOBAL.STORAGE.DEFAULT_NATIVE_SETTINGS);
+
+    var _TARGET_SETTINGS = {};
+
+    if (_DEFAULT_NATIVE_SETTINGS !== false){
+      const _PARSED_DEFAULT_NATIVE_SETTINGS = JSON.parse(_DEFAULT_NATIVE_SETTINGS);
+
+      _TARGET_SETTINGS = _PARSED_DEFAULT_NATIVE_SETTINGS;
+    }
+
+    if ((typeof key == 'string') && (typeof value != 'undefined')){
+      const _KEY = module.exports._convertTokenToKeyword(key);
+
+      _TARGET_SETTINGS[_KEY] = value;
+
+      if (Object.keys(_TARGET_SETTINGS).length > 0){
+        const _SERIALIZED_TARGET_SETTINGS = JSON.stringify(_TARGET_SETTINGS);
+
+        if (_KEY == 'language'){
+          if (typeof _TARGET_SETTINGS[_KEY].rtl != 'undefined'){
+            if (_TARGET_SETTINGS[_KEY].rtl === true){
+              I18nManager.forceRTL(true);
+            }else{
+              I18nManager.forceRTL(false);
+            }
+          }else{
+            I18nManager.forceRTL(false);
+          }
+        }
+
+        await module.exports._storeDataWithKey(GLOBAL.STORAGE.DEFAULT_NATIVE_SETTINGS, _SERIALIZED_TARGET_SETTINGS);
+      }
+    }else{
+      throw new Error('You should define the key and value of native settings as string:object pair.');
+    }
+  },
   _getDefaultNativeSettings: async () => {
     const _DEFAULT_NATIVE_SETTINGS = await module.exports._retrieveDataWithKey(GLOBAL.STORAGE.DEFAULT_NATIVE_SETTINGS);
 

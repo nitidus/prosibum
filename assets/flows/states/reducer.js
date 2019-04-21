@@ -5,6 +5,7 @@ import logger from 'redux-logger';
 import Segment from './reducers/components/segment';
 
 /* Layouts Reducers */
+import LanguagesModal from './reducers/layouts/languages-modal';
 import CountriesCodesModal from './reducers/layouts/countries-codes-modal';
 import CameraRollPickerModal from './reducers/layouts/camera-roll-picker-modal';
 import RoleModal from './reducers/layouts/role-modal';
@@ -48,7 +49,7 @@ import TechnicalTab from './reducers/sub-views/user-profile/technical-tab';
 export default () => {
   const reducer = combineReducers({
           Segment,
-          Toast, List, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitDependedModal,
+          Toast, List, LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitDependedModal,
           Login, ForgottenPassword, Signup, VerifyEmail,
           Overseer, UserProfile,
             Roles, SelectedRole,

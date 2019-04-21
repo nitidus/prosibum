@@ -1,5 +1,6 @@
 import Toast from './layouts/toast';
 import List from './layouts/list';
+import LanguagesModal from './layouts/languages-modal';
 import CountriesCodesModal from './layouts/countries-codes-modal';
 import CameraRollPickerModal from './layouts/camera-roll-picker-modal';
 import RoleModal from './layouts/role-modal';
@@ -12,6 +13,7 @@ import ProductUnitDependedModal from './layouts/product-unit-depended-modal';
 const Layouts = {
   Toast,
   List,
+  LanguagesModal,
   CountriesCodesModal,
   CameraRollPickerModal,
   RoleModal,

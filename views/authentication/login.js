@@ -6,8 +6,10 @@ import { connect } from 'react-redux';
 import { Global, Views } from '../../assets/styles/index';
 
 import { Headline, Input, InputGroup, Link } from '../../assets/components/index';
-import { ActivityIndicator, Toast } from '../../assets/layouts/index';
-const Styles = Views.Authentication.Login;
+import { ActivityIndicator, Toast, Icon, LanguagesModal } from '../../assets/layouts/index';
+import { Views as ViewsContainer } from '../../assets/layouts/container/index';
+const Styles = Views.Authentication.Login,
+      Container = ViewsContainer.Authentication.AuthenticationContainer;
 
 import { Functions } from '../../assets/modules/index';
 const { Preparation } = Functions;
@@ -24,18 +26,32 @@ class Login extends Component<{}> {
   };
 
   async componentDidMount() {
-    const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
-          _LANGUAGE = _NATIVE_SETTINGS.language;
+    const { props } = this;
 
-    this._language = _LANGUAGE;
+    await this._fetchLanguageFromNativeSettings(props);
+  }
+
+  async shouldComponentUpdate(nextProps, nextState) {
+    await this._fetchLanguageFromNativeSettings(nextProps);
+
+    return true;
   }
 
   componentWillReceiveProps(props) {
 
   }
 
-  componentWillMount() {
+  async _fetchLanguageFromNativeSettings(props) {
+    const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
 
+    if (Object.keys(props.login.language).length === 0){
+      props.setLanguage(_LANGUAGE);
+    }else{
+      if (props.login.language.key !== _LANGUAGE.key){
+        props.setLanguage(_LANGUAGE);
+      }
+    }
   }
 
   _componentWillCheckValidation(props) {
@@ -58,75 +74,77 @@ class Login extends Component<{}> {
   render() {
     const { props } = this;
 
-    var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
+    var _LOGIN_CONTENT;
 
-    const _VALIDATED = this._componentWillCheckValidation(props),
-          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
+    if (Object.keys(props.login.language).length > 0){
+      var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
 
-    if (props.login.loading){
-      _SUBMIT_BUTTON_CONTENT = <Input
-        style={Styles.SubmitButton}
-        type={__CONSTANTS.submitInput.type}
-        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
-        gradient={Global.colors.pair.ongerine}
-        disable={true}>
-          <ActivityIndicator />
-        </Input>;
-    }else{
-      if (props.login.connected.status){
-        _TOP_PINNED_TOAST = <Toast
-          launched={!props.login.connected.status} />;
+      const _VALIDATED = this._componentWillCheckValidation(props),
+            _LANGUAGE = Functions._convertTokenToKeyword(props.login.language.key),
+            _LANGUAGES_MODAL_OTHER_PROPS = {
+              language: props.login.language
+            };
+
+      if (props.login.loading){
+        _SUBMIT_BUTTON_CONTENT = <Input
+          style={Styles.SubmitButton}
+          type={__CONSTANTS.submitInput.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
+          gradient={Global.colors.pair.ongerine}
+          disable={true}>
+            <ActivityIndicator />
+          </Input>;
       }else{
+        if (props.login.connected.status){
+          _TOP_PINNED_TOAST = <Toast
+            launched={!props.login.connected.status} />;
+        }else{
+          _TOP_PINNED_TOAST = <Toast
+            message={props.login.connected.content}
+            launched={!props.login.connected.status}
+            color={Global.colors.single.carminePink}
+            onPress={() => {
+              Preparation._prepareLogin(props)
+            }} />;
+        }
+
+        _SUBMIT_BUTTON_CONTENT = <Input
+          style={Styles.SubmitButton}
+          type={__CONSTANTS.submitInput.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+          value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
+          gradient={Global.colors.pair.ongerine}
+          onPress={async () => {
+            await Preparation._prepareLogin(props);
+          }}
+          forcedDisable={_VALIDATED} />;
+      }
+
+      const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
+
+      var _WARNING_MESSAGE = '';
+
+      if (props.login.token != ''){
+        if (!Functions._checkIsAValidToken(props.login.token)){
+          _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
+        }
+      }
+
+      if (props.login.password != ''){
+        if (!Functions._checkIsAValidPassword(props.login.password)){
+          _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.second.validation.message[_LANGUAGE];
+        }
+      }
+
+      if (_WARNING_MESSAGE != ''){
         _TOP_PINNED_TOAST = <Toast
-          message={props.login.connected.content}
-          launched={!props.login.connected.status}
-          color={Global.colors.single.carminePink}
-          onPress={() => {
-            Preparation._prepareLogin(props)
-          }} />;
+          message={_WARNING_MESSAGE}
+          launched={true}
+          color={Global.colors.pair.ongerine.orangeYellow} />;
       }
 
-      _SUBMIT_BUTTON_CONTENT = <Input
-        style={Styles.SubmitButton}
-        type={__CONSTANTS.submitInput.type}
-        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-        value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
-        gradient={Global.colors.pair.ongerine}
-        onPress={async () => {
-          await Preparation._prepareLogin(props);
-        }}
-        forcedDisable={_VALIDATED} />;
-    }
-
-    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
-
-    var _WARNING_MESSAGE = '';
-
-    if (props.login.token != ''){
-      if (!Functions._checkIsAValidToken(props.login.token)){
-        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
-      }
-    }
-
-    if (props.login.password != ''){
-      if (!Functions._checkIsAValidPassword(props.login.password)){
-        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.second.validation.message[_LANGUAGE];
-      }
-    }
-
-    if (_WARNING_MESSAGE != ''){
-      _TOP_PINNED_TOAST = <Toast
-        message={_WARNING_MESSAGE}
-        launched={true}
-        color={Global.colors.pair.ongerine.orangeYellow} />;
-    }
-
-    return (
-      <KeyboardAvoidingView
-        style={Styles.Container}
-        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
-          <StatusBar hidden={true}/>
-
+      _LOGIN_CONTENT = (
+        <React.Fragment>
           {_TOP_PINNED_TOAST}
 
           <View style={Styles.Content}>
@@ -163,19 +181,51 @@ class Login extends Component<{}> {
 
             {_SUBMIT_BUTTON_CONTENT}
 
-            <Link
-              containerStyle={Styles.QuickLink}
-              value={__CONSTANTS.quickLink.title[_LANGUAGE]}
-              onPress={() => {
-                const { navigation } = props;
+            <View
+              style={Styles.TailContainer}>
+                <Link
+                  containerStyle={Styles.QuickLink}
+                  value={__CONSTANTS.quickLink.title[_LANGUAGE]}
+                  onPress={() => {
+                    const { navigation } = props;
 
-                // props.setToken('');
-                // props.setPassword('');
+                    // props.setToken('');
+                    // props.setPassword('');
 
-                navigation.navigate('Signup');
-              }} />
+                    navigation.navigate('Signup');
+                  }} />
+
+                  <Input
+                    type={"button"}
+                    name="language-modal-handler"
+                    gradient={Global.colors.pair.ongerine}
+                    style={Styles.LanguageHandlerButton}
+                    onPress={() => props.setLanguagesModalVisibility(true)}>
+                      <Icon
+                        name="globe"
+                        height={Styles.LanguageHandlerButtonIcon.height} />
+                  </Input>
+            </View>
           </View>
-      </KeyboardAvoidingView>
+
+          <LanguagesModal
+            visibility={props.login.languagesModalVisibility}
+            onBlur={() => props.setLanguagesModalVisibility(false)}
+            onPress={async () => await this._fetchLanguageFromNativeSettings(props)}
+            {..._LANGUAGES_MODAL_OTHER_PROPS} />
+        </React.Fragment>
+      );
+    }else{
+      _LOGIN_CONTENT = (
+        <ActivityIndicator/>
+      )
+    }
+
+    return (
+      <Container
+        style={Styles.Container}>
+          {_LOGIN_CONTENT}
+      </Container>
     )
   }
 }

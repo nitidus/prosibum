@@ -59,6 +59,7 @@ var _CUSTOM_TEXT_INPUT_LINK = {
       fontSize: 18
     },
     _CUSTOM_TEXT_INPUT_LINK_CONTAINER = {},
+    _CUSTOM_REVERSE_TEXT_INPUT_LINK_CONTAINER = {}
     _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER = {};
 
 if (Platform.OS !== 'ios'){
@@ -150,6 +151,7 @@ if (Platform.OS !== 'ios'){
   }
 
   _CUSTOM_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'left': 'right'] = 18;
+  _CUSTOM_REVERSE_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'right': 'left'] = 18;
   _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER[/*(I18nManager.isRTL)? 'right': */'left'] = 18;
 }
 
@@ -228,12 +230,19 @@ module.exports = StyleSheet.create({
     paddingRight: (I18nManager.isRTL)? 16: 0,
     ..._CUSTOM_TEXT_INPUT_CONTAINER
   },
+  NormalTextInputConatiner: {
+    paddingHorizontal: 16,
+    alignSelf: 'flex-start',
+  },
   ReverseTextInputConatiner: {
     alignSelf: (I18nManager.isRTL)? 'flex-end': 'flex-start',
   },
   TextInputLinkContainer: {
     position: 'absolute',
     ..._CUSTOM_TEXT_INPUT_LINK_CONTAINER
+  },
+  ReverseTextInputLinkContainer: {
+    ..._CUSTOM_REVERSE_TEXT_INPUT_LINK_CONTAINER
   },
   StaticTextInputLinkContainer: {
     position: 'absolute',
