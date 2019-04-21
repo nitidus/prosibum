@@ -170,7 +170,7 @@ export const TabBar = (props) => {
         if (i < (attitude.children.length - 1)){
           _CUSTOM_STYLE = {
             ..._CUSTOM_STYLE,
-            ...Styles.LTR_TabItems
+            ...Styles.TabItems
           };
         }
 

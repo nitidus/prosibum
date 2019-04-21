@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Animated, Easing, Platform } from 'react-native';
+import { View, Text, Animated, Easing, Platform, I18nManager } from 'react-native';
 
 import { BlurView } from 'react-native-blur';
 import LinearGradient from 'react-native-linear-gradient';
@@ -109,7 +109,7 @@ export const Pin = (props) => {
           style={Styles.PinDefaultButtonNavigatorContainer}
           onPress={attitude.onPress}>
             <Icon
-              name="arrow right"
+              name={`arrow ${((I18nManager.isRTL)? 'left': 'right')}`}
               {...otherProps} />
         </Input>
       );

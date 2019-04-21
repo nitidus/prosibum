@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Platform, Animated, Easing } from 'react-native';
+import { View, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import Interactable from 'react-native-interactable';
@@ -18,7 +18,7 @@ export const Options = (props) => {
 
   const _CONFIGS = {
     DEFAULT_NORMAL_HORIZONTAL_SNAP_POINT: 0,
-    DEFAULT_LAUNCHED_HORIZONTAL_SNAP_POINT: -116,
+    DEFAULT_LAUNCHED_HORIZONTAL_SNAP_POINT: ((I18nManager.isRTL)? 116: -116),
     DEFAULT_NORMAL_BUTTON_WIDTH: 0,
     DEFAULT_LAUNCHED_BUTTON_WIDTH: 101,
     DEFAULT_NORMAL_BUTTON_HEIGHT: 0,
@@ -64,10 +64,13 @@ export const Options = (props) => {
     { x: _CONFIGS.DEFAULT_LAUNCHED_HORIZONTAL_SNAP_POINT }
   ];
 
-  otherProps.boundaries = attitude.boundaries = props.boundaries || {
+  otherProps.boundaries = attitude.boundaries = props.boundaries || ((I18nManager.isRTL)? {
+    left: _CONFIGS.DEFAULT_NORMAL_HORIZONTAL_SNAP_POINT,
+    right: _CONFIGS.DEFAULT_LAUNCHED_HORIZONTAL_SNAP_POINT
+  }: {
     left: _CONFIGS.DEFAULT_LAUNCHED_HORIZONTAL_SNAP_POINT,
     right: _CONFIGS.DEFAULT_NORMAL_HORIZONTAL_SNAP_POINT
-  };
+  });
 
   otherProps.dragToss = attitude.dragToss = props.dragToss || 0.01;
 
@@ -76,8 +79,8 @@ export const Options = (props) => {
   }
 
   attitude.interpolation = props.interpolation || {
-    inputRange: [_CONFIGS.DEFAULT_LAUNCHED_HORIZONTAL_SNAP_POINT, _CONFIGS.DEFAULT_NORMAL_HORIZONTAL_SNAP_POINT],
-    outputRange: [_CONFIGS.DEFAULT_LAUNCHED_BUTTON_WIDTH, _CONFIGS.DEFAULT_NORMAL_BUTTON_WIDTH],
+    inputRange: ((I18nManager.isRTL)? [_CONFIGS.DEFAULT_NORMAL_HORIZONTAL_SNAP_POINT, _CONFIGS.DEFAULT_LAUNCHED_HORIZONTAL_SNAP_POINT]: [_CONFIGS.DEFAULT_LAUNCHED_HORIZONTAL_SNAP_POINT, _CONFIGS.DEFAULT_NORMAL_HORIZONTAL_SNAP_POINT]),
+    outputRange: ((I18nManager.isRTL)? [_CONFIGS.DEFAULT_NORMAL_BUTTON_WIDTH, _CONFIGS.DEFAULT_LAUNCHED_BUTTON_WIDTH]: [_CONFIGS.DEFAULT_LAUNCHED_BUTTON_WIDTH, _CONFIGS.DEFAULT_NORMAL_BUTTON_WIDTH]),
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp'
   };

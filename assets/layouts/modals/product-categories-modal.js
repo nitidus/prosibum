@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -128,7 +128,8 @@ const ProductCategoriesModal = (props) => {
         <List
           dataSource={props.productCategoriesModal.categories}
           onLayout={(color) => {
-            var _OTHER_ICON_PROPS = {};
+            var _OTHER_ICON_PROPS = {},
+                _ICON_CUSTOM_STYLE = {};
 
             if (Platform.OS !== 'ios'){
               if (_Screen.width >= 1000 || _Screen.height >= 1000){
@@ -138,13 +139,13 @@ const ProductCategoriesModal = (props) => {
               }
             }
 
+            _ICON_CUSTOM_STYLE[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] = Styles.Content.marginVertical;
+
             return (
               <Icon
                 name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
                 color={color}
-                style={{
-                  marginRight: Styles.Content.marginVertical
-                }}
+                style={_ICON_CUSTOM_STYLE}
                 {..._OTHER_ICON_PROPS}/>
             );
           }}

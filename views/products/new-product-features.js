@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, Text, Image, Animated, Easing } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, I18nManager, Text, Image, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -182,7 +182,10 @@ class NewProductFeatures extends Component<{}> {
                     break;
 
                   case 'description':
-                    var _COUNTED_LINE_OF_DESCRIPTION = Functions._countNumberOfOccurrencesStringInString(featureItem.description, '\n');
+                    var _COUNTED_LINE_OF_DESCRIPTION = Functions._countNumberOfOccurrencesStringInString(featureItem.description, '\n'),
+                        DESCRIPTION_FEATURE_OPTION_CUSTOM_CONTAINER = {
+                          height: (_COUNTED_LINE_OF_DESCRIPTION > 1)? (_COUNTED_LINE_OF_DESCRIPTION * (Styles.DescriptionFeature.height / 2)): Styles.DescriptionFeature.height
+                        };
 
                     if (_COUNTED_LINE_OF_DESCRIPTION > 5){
                       if (Platform.OS !== 'ios'){
@@ -202,12 +205,11 @@ class NewProductFeatures extends Component<{}> {
                       }
                     }
 
+                    DESCRIPTION_FEATURE_OPTION_CUSTOM_CONTAINER[((I18nManager.isRTL)? 'left': 'right')] = Styles.Content.marginHorizontal;
+
                     return (
                       <Options
-                        style={{
-                          right: Styles.Content.marginHorizontal,
-                          height: (_COUNTED_LINE_OF_DESCRIPTION > 1)? (_COUNTED_LINE_OF_DESCRIPTION * (Styles.DescriptionFeature.height / 2)): Styles.DescriptionFeature.height
-                        }}
+                        style={DESCRIPTION_FEATURE_OPTION_CUSTOM_CONTAINER}
                         onDeletePress={_FEATURE_DELETE_ACTION}
                         {...__CONSTANTS.content.description.options}>
                           <Input
@@ -228,12 +230,15 @@ class NewProductFeatures extends Component<{}> {
                     break;
 
                   case 'customized':
+                    var CUSTOMIZED_FEATURE_OPTION_CUSTOM_CONTAINER = {
+                      height: Styles.CustomizedFeatureDetailItemContainer.height
+                    };
+
+                    CUSTOMIZED_FEATURE_OPTION_CUSTOM_CONTAINER[((I18nManager.isRTL)? 'left': 'right')] = Styles.Content.marginHorizontal;
+
                     return (
                       <Options
-                        style={{
-                          right: Styles.Content.marginHorizontal,
-                          height: Styles.CustomizedFeatureDetailItemContainer.height
-                        }}
+                        style={CUSTOMIZED_FEATURE_OPTION_CUSTOM_CONTAINER}
                         onDeletePress={_FEATURE_DELETE_ACTION}
                         {...__CONSTANTS.content.customized.options}>
                           <Input

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, Dimensions, I18nManager } from 'react-native';
 
 import {
   colors, fonts
@@ -49,7 +49,8 @@ module.exports = StyleSheet.create({
     ..._CONTAINER_DEPENDED_HEIGHT
   },
   Content: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
   },
   ErrorTypeContainer: {
     backgroundColor: colors.single.lavenderGray
@@ -57,16 +58,13 @@ module.exports = StyleSheet.create({
   MessageText: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_MESSAGE_TEXT
   },
   ToastLink: {
     alignSelf: 'flex-end',
-    color: colors.single.romance
-  },
-  RTL_ToastLink: {
-    marginRight: 15
-  },
-  LTR_ToastLink: {
-    marginLeft: 15
+    color: colors.single.romance,
+    marginRight: (I18nManager.isRTL)? 15: 0,
+    marginLeft: (I18nManager.isRTL)? 0: 15
   }
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, Dimensions, I18nManager } from 'react-native';
 
 import { Functions } from '../../../modules/index';
 
@@ -77,7 +77,8 @@ module.exports = StyleSheet.create({
     justifyContent: 'center'
   },
   PinContent: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
   },
   PinDefaultContentItemContainer: {
     flexGrow: 1
@@ -89,11 +90,13 @@ module.exports = StyleSheet.create({
   PinTitle: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
+    textAlign: 'left',
     ..._CUSTOM_PIN_TITLE
   },
   PinSubtitle: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
+    textAlign: 'left',
     ..._CUSTOM_PIN_SUBTITLE
   }
 });

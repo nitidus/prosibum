@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, Dimensions, I18nManager } from 'react-native';
 
 import { Functions } from '../../../modules/index';
 
@@ -42,15 +42,14 @@ var _CUSTOM_CONTAINER = {
     _CUSTOM_SINGLE_TAB_ITEM_CONTENT = {
       fontSize: 17
     },
-    _CUSTOM_LTR_TAB_ITEMS = {
+    _CUSTOM_TAB_ITEMS = {
       marginRight: 60
-    },
-    _CUSTOM_RTL_TAB_ITEMS = {
-      marginLeft: 60
     },
     _CUSTOM_TAB_ITEMS_TEXT = {
       fontSize: 12
     };
+
+_CUSTOM_TAB_ITEMS[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] = 60;
 
 if (Platform.OS === 'ios'){
   if (width >= 1000 || height >= 1000){
@@ -78,8 +77,7 @@ if (Platform.OS === 'ios'){
       }
     };
 
-    _CUSTOM_LTR_TAB_ITEMS.marginRight *= 2;
-    _CUSTOM_RTL_TAB_ITEMS.marginLeft *= 2;
+    _CUSTOM_TAB_ITEMS[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] *= 2;
 
     _CUSTOM_HEADER_TITLE.fontSize += 2;
 
@@ -127,8 +125,7 @@ if (Platform.OS === 'ios'){
 
     _CUSTOM_TAB_ITEMS_TEXT.fontSize += 5;
 
-    _CUSTOM_LTR_TAB_ITEMS.marginRight *= 3;
-    _CUSTOM_RTL_TAB_ITEMS.marginLeft *= 3;
+    _CUSTOM_TAB_ITEMS[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] *= 3;
 
     _CUSTOM_HEADER_TITLE.fontSize += 15;
     _CUSTOM_HEADER_SUBTITLE.fontSize += 5;
@@ -183,11 +180,14 @@ module.exports = StyleSheet.create({
   },
   FirstRowContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
   },
   SecondRowContainer: {
     marginTop: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
     paddingHorizontal: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    alignItems: (I18nManager.isRTL)? 'flex-end': 'flex-start',
     justifyContent: 'space-between'
   },
   TailRowContainer: {
@@ -228,6 +228,8 @@ module.exports = StyleSheet.create({
   SingleTabItemContent: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_SINGLE_TAB_ITEM_CONTENT
   },
   DisabledSingleTabItemContainer: {
@@ -237,7 +239,9 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen
   },
   TabItemContainer: {
-    marginRight: _CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom,
+    marginRight: (I18nManager.isRTL)? 0: (_CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom),
+    marginLeft: (I18nManager.isRTL)? (_CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom): 0,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     flexGrow: 1
   },
   TabItemsContainer: {
@@ -256,21 +260,14 @@ module.exports = StyleSheet.create({
   TabItemsText: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.lavenderGray,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_TAB_ITEMS_TEXT
   },
   ActivatedTabItemsText: {
     color: colors.single.rangoonGreen,
   },
-  LTR_TabItems: {
-    ..._CUSTOM_LTR_TAB_ITEMS
-  },
-  RTL_TabItems: {
-    ..._CUSTOM_RTL_TAB_ITEMS
-  },
-  LTR_Items: {
-    alignItems: 'flex-start'
-  },
-  RTL_Items: {
-    alignItems: 'flex-end'
+  TabItems: {
+    ..._CUSTOM_TAB_ITEMS
   }
 });

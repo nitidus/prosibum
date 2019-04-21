@@ -273,10 +273,7 @@ export const TopBar = (props) => {
 
           if (typeof _CHILD_PROPS.children != 'undefined'){
             _BOTTOM_WIDE_CONTENT = <View
-              style={[
-                Styles.SecondRowContainer,
-                Styles.LTR_Items
-              ]}>
+              style={Styles.SecondRowContainer}>
                 {React.cloneElement(_CHILD, _CHILD_PROPS)}
             </View>;
           }else{

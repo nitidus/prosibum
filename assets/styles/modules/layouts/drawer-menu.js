@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform, I18nManager } from 'react-native';
 
 import {
   colors, fonts
@@ -9,8 +9,7 @@ const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
 var _CUSTOM_CONTAINER = {
-      marginVertical: 59,
-      marginHorizontal: 25
+      marginVertical: 59
     },
     _CUSTOM_PINNED_PROFILE_CONTAINER = {
       width: 96,
@@ -23,9 +22,11 @@ var _CUSTOM_CONTAINER = {
       marginBottom: 30
     },
     _CUSTOM_PINNED_ITEM = {
-      fontSize: 17,
-      marginRight: 40
+      fontSize: 17
     };
+
+_CUSTOM_CONTAINER[((I18nManager.isRTL)? 'right': 'left')] = 25;
+_CUSTOM_PINNED_ITEM[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] = 40;
 
 if (Platform.OS === 'ios'){
   if (width >= 1000 || height >= 1000){
@@ -40,7 +41,7 @@ if (Platform.OS === 'ios'){
     _CUSTOM_INGLE_ITEM_CONTENT.marginBottom += 2;
 
     _CUSTOM_PINNED_ITEM.fontSize += 1;
-    _CUSTOM_PINNED_ITEM.marginRight += 5;
+    _CUSTOM_PINNED_ITEM[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] += 5;
   }else{
     if (!_IS_IPHONE_X){
       _CUSTOM_CONTAINER.marginVertical -= 10;
@@ -59,7 +60,7 @@ if (Platform.OS === 'ios'){
     _CUSTOM_INGLE_ITEM_CONTENT.marginBottom += 5;
 
     _CUSTOM_PINNED_ITEM.fontSize += 5;
-    _CUSTOM_PINNED_ITEM.marginRight += 15;
+    _CUSTOM_PINNED_ITEM[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] += 15;
   }else{
     _CUSTOM_CONTAINER.marginVertical -= 10;
   }
@@ -70,6 +71,7 @@ module.exports = StyleSheet.create({
     position: 'absolute',
     top: 0,
     bottom: 0,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     ..._CUSTOM_CONTAINER
   },
   PinnedProfileMajorContainer: {
@@ -99,17 +101,20 @@ module.exports = StyleSheet.create({
   SingleItemContent: {
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     ..._CUSTOM_INGLE_ITEM_CONTENT
   },
   MenuItemsContainer: {
-
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
   },
   PinnedItemsContainer: {
-    flex: 1,
-    justifyContent: 'flex-end'
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    justifyContent: 'flex-end',
+    flex: 1
   },
   PinnedItemGroup: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
   },
   PinnedItem: {
     fontFamily: fonts.sanFrancisco.textBold,

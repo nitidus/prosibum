@@ -102,10 +102,7 @@ const Toast = (props) => {
       <Link
         value={props.toast.link}
         activeOpacity={_ACTIVE_OPACITY}
-        style={[
-          Styles.ToastLink,
-          Styles.LTR_ToastLink
-        ]}
+        style={Styles.ToastLink}
         onPress={props.toast.onPress} />
     </View>;
   }else{

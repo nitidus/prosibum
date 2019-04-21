@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Dimensions, Platform, Animated, Easing } from 'react-native';
+import { Dimensions, Platform, Animated, Easing, I18nManager } from 'react-native';
 
 const _Screen = Dimensions.get('window'),
       _LAUNCHED_MENU_SCREEN_X_POSITION_IN_PERCENTAGE_FORMAT = (Platform.OS === 'ios')? ((_Screen.width >= 1000 || _Screen.height >= 1000)? 35: 72): ((_Screen.width >= 1000 || _Screen.height >= 1000)? 37.3: 72),
-      _LAUNCHED_MENU_SCREEN_X_POSITION = (_Screen.width * _LAUNCHED_MENU_SCREEN_X_POSITION_IN_PERCENTAGE_FORMAT) / 100,
-      _X_POSITION_ANIMATION_RANGE = [0, _LAUNCHED_MENU_SCREEN_X_POSITION];
+      _LAUNCHED_MENU_SCREEN_X_POSITION_PREREQUISITE = (_Screen.width * _LAUNCHED_MENU_SCREEN_X_POSITION_IN_PERCENTAGE_FORMAT) / 100,
+      _LAUNCHED_MENU_SCREEN_X_POSITION = ((I18nManager.isRTL)? (-1 * _LAUNCHED_MENU_SCREEN_X_POSITION_PREREQUISITE): _LAUNCHED_MENU_SCREEN_X_POSITION_PREREQUISITE),
+      _X_POSITION_ANIMATION_RANGE = ((I18nManager.isRTL)? [_LAUNCHED_MENU_SCREEN_X_POSITION, 0]: [0, _LAUNCHED_MENU_SCREEN_X_POSITION]);
 
 const _SHARED = {
   _MENU_CARD_PULLING: {
@@ -15,14 +16,14 @@ const _SHARED = {
           {
             scaleX: animatedValue.interpolate({
               inputRange: _X_POSITION_ANIMATION_RANGE,
-              outputRange: [1, 0.85],
+              outputRange: ((I18nManager.isRTL)? [0.85, 1]: [1, 0.85]),
               extrapolate: 'clamp'
             })
           },
             {
               scaleY: animatedValue.interpolate({
               inputRange: _X_POSITION_ANIMATION_RANGE,
-              outputRange: [1, 0.85],
+              outputRange: ((I18nManager.isRTL)? [0.85, 1]: [1, 0.85]),
               extrapolate: 'clamp'
             })
           }
@@ -41,19 +42,19 @@ export const MenuCardPulling = {
         ..._SHARED_ANIMATIONS,
         shadowOpacity: animatedValue.interpolate({
           inputRange: _X_POSITION_ANIMATION_RANGE,
-          outputRange: [0, 0.15],
+          outputRange: ((I18nManager.isRTL)? [0.15, 0]: [0, 0.15]),
           extrapolate: 'clamp'
         }),
         shadowRadius: animatedValue.interpolate({
           inputRange: _X_POSITION_ANIMATION_RANGE,
-          outputRange: [0, 30],
+          outputRange: ((I18nManager.isRTL)? [30, 0]: [0, 30]),
           extrapolate: 'clamp'
         }),
         shadowOffset: {
           width: 0,
           height: animatedValue.interpolate({
             inputRange: _X_POSITION_ANIMATION_RANGE,
-            outputRange: [0, 30],
+            outputRange: ((I18nManager.isRTL)? [30, 0]: [0, 30]),
             extrapolate: 'clamp'
           })
         }
@@ -66,7 +67,7 @@ export const MenuCardPulling = {
         ..._SHARED_ANIMATIONS,
         zIndex: animatedValue.interpolate({
           inputRange: _X_POSITION_ANIMATION_RANGE,
-          outputRange: [-1, 1000000],
+          outputRange: ((I18nManager.isRTL)? [1000000, -1]: [-1, 1000000]),
           extrapolate: 'clamp'
         })
       }

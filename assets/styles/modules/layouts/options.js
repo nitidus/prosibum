@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, Dimensions, I18nManager } from 'react-native';
 
 import { Functions } from '../../../modules/index';
 
@@ -13,7 +13,10 @@ const { width, height } = Dimensions.get('window'),
 var _CUSTOM_CONTENT = {
       marginVertical: 15,
       marginHorizontal: 15
-    };
+    },
+    _CUSTOM_BUTTON_CONTAINER = {};
+
+_CUSTOM_BUTTON_CONTAINER[((I18nManager.isRTL)? 'left': 'right')] = 15;
 
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
@@ -35,9 +38,9 @@ module.exports = StyleSheet.create({
   ButtonContainer: {
     position: 'absolute',
     height: 64,
-    right: 15,
     borderRadius: 5,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    ..._CUSTOM_BUTTON_CONTAINER
   },
   FullButtonContent: {
     height: '100%',

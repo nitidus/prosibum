@@ -487,6 +487,7 @@ export const Input = (props) => {
             <TextInput
               style={[
                 Styles.TextInputConatiner,
+                Styles.ReverseTextInputConatiner,
                 { width: '72%' }
               ]}
               autoCapitalize={attitude.autoCapitalize}

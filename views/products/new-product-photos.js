@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, Text, Image, Animated, Easing } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, I18nManager, Text, Image, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -86,7 +86,10 @@ class NewProductPhotos extends Component<{}> {
                     },
                     _PHOTO_CONTENT = photoItem.content,
                     _PHOTO_URI = '',
-                    _SINGLE_PHOTO_OTHER_PROPS = {};
+                    _SINGLE_PHOTO_OTHER_PROPS = {},
+                    PHOTO_OPTION_CUSTOM_CONTAINER = {
+                      height: ((Platform.OS !== 'ios') && (_Screen.width >= 1000 || _Screen.height >= 1000))? Styles.PhotoContainer.height + 11: Styles.PhotoContainer.height
+                    };
 
                 if (i < totalPhotos.length){
                   _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical
@@ -100,12 +103,11 @@ class NewProductPhotos extends Component<{}> {
                   _SINGLE_PHOTO_OTHER_PROPS.gradient = Global.colors.pair.aqrulean;
                 }
 
+                PHOTO_OPTION_CUSTOM_CONTAINER[((I18nManager.isRTL)? 'left': 'right')] = Styles.Content.marginHorizontal;
+
                 return (
                   <Options
-                    style={{
-                      right: Styles.Content.marginHorizontal,
-                      height: ((Platform.OS !== 'ios') && (_Screen.width >= 1000 || _Screen.height >= 1000))? Styles.PhotoContainer.height + 11: Styles.PhotoContainer.height
-                    }}
+                    style={PHOTO_OPTION_CUSTOM_CONTAINER}
                     onDeletePress={_PHOTO_DELETE_ACTION}
                     {...__CONSTANTS.content.list.state.normal.options}>
                       <Input

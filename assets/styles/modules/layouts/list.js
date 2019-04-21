@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, Dimensions, I18nManager } from 'react-native';
 
 import {
   colors, fonts
@@ -51,7 +51,7 @@ module.exports = StyleSheet.create({
   },
   Row: {
     justifyContent: 'flex-start',
-    flexDirection: 'row',
+    flexDirection: (I18nManager.isRTL)? 'row-reverse': 'row',
     backgroundColor: colors.single.mercury,
     ..._CUSTOM_ROW
   },
@@ -60,6 +60,7 @@ module.exports = StyleSheet.create({
     display: 'flex',
     fontFamily: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_DEFAULT_TEXT_STYLE
   },
   DefaultBackButtonTextStyle: {

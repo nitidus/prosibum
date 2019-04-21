@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, Text, Image, Keyboard, Animated, Easing } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, I18nManager, Text, Image, Keyboard, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -100,7 +100,10 @@ class NewProductPrices extends Component<{}> {
                     },
                     _PHOTO_DELETE_ACTION = () => props.setProductPrices(props.newProduct.prices.filter((checkingItem, j) => {
                       return (checkingItem._id != priceItem._id);
-                    }));
+                    })),
+                    PRICE_OPTION_CUSTOM_CONTAINER = {
+                      height: Styles.PriceContainer.height
+                    };
 
                 if (i < totalPrices.length){
                   _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
@@ -129,12 +132,11 @@ class NewProductPrices extends Component<{}> {
                         }
                       }));
 
+                PRICE_OPTION_CUSTOM_CONTAINER[((I18nManager.isRTL)? 'left': 'right')] = Styles.Content.marginHorizontal;
+
                 return (
                   <Options
-                    style={{
-                      right: Styles.Content.marginHorizontal,
-                      height: Styles.PriceContainer.height
-                    }}
+                    style={PRICE_OPTION_CUSTOM_CONTAINER}
                     onDeletePress={_PHOTO_DELETE_ACTION}
                     animatedValueX={priceItem.animation}
                     {...__CONSTANTS.content.list.state.normal.options}>
