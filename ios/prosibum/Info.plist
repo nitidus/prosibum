@@ -76,6 +76,12 @@
 		<string>SF-Pro-Text-RegularItalic.ttf</string>
 		<string>SF-Pro-Text-Semibold.ttf</string>
 		<string>SF-Pro-Text-SemiboldItalic.ttf</string>
+		<string>Vazir-Black-FD.ttf</string>
+		<string>Vazir-Bold-FD.ttf</string>
+		<string>Vazir-FD.ttf</string>
+		<string>Vazir-Light-FD.ttf</string>
+		<string>Vazir-Medium-FD.ttf</string>
+		<string>Vazir-Thin-FD.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

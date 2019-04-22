@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform, I18nManager } from 'react-native';
 
 import { Functions } from '../../../../../../modules/index';
 
@@ -142,12 +142,12 @@ module.exports = StyleSheet.create({
     justifyContent: 'center'
   },
   RoleTitle: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     ..._CUSTOM_ROLE_TITLE
   },
   RoleSubtitle: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
     ..._CUSTOM_ROLE_SUBTITLE
   },

@@ -4,43 +4,51 @@
       "normal": {
         "headline": {
           "title": {
-            "en": "Dear User"
+            "en": "Dear User",
+            "fa": "کاربر گرامی"
           },
           "subtitle": {
-            "en": "Please enter your\nuser account details."
+            "en": "Please enter your\nuser account details.",
+            "fa": "لطفا جزئیات حساب کاربری\nخود را وارد نمایید."
           }
         },
         "firstInputGroup": {
           "first": {
             "type": "PHONE-LINK",
             "title": {
-              "en": "Phone Number"
+              "en": "Phone Number",
+              "fa": "شماره موبایل"
             },
             "validation": {
               "message": {
-                "en": "Check your phone number format"
+                "en": "Check your phone number format",
+                "fa": "ساختار شماره موبایل بررسی شود"
               }
             }
           },
           "second": {
             "type": "EMAIL",
             "title": {
-              "en": "Email"
+              "en": "Email",
+              "fa": "ایمیل"
             },
             "validation": {
               "message": {
-                "en": "Check your email format"
+                "en": "Check your email format",
+                "fa": "ساختار ایمیل بررسی شود"
               }
             }
           },
           "third": {
             "type": "PASSWORD",
             "title": {
-              "en": "Password"
+              "en": "Password",
+              "fa": "گذرواژه"
             },
             "validation": {
               "message": {
-                "en": "Password must contain 8 characters"
+                "en": "Password must contain 8 characters",
+                "fa": "گذرواژه شامل ۸ کاراکتر است"
               }
             }
           }
@@ -50,7 +58,8 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Signup"
+                "en": "Signup",
+                "fa": "ثبت‌نام"
               }
             },
             "loading": {
@@ -62,7 +71,8 @@
         },
         "quickLink": {
           "title": {
-            "en": "Already have an account?"
+            "en": "Already have an account?",
+            "fa": "قبلا حساب کاربری ایجاد کردید؟"
           }
         },
         "modals": {
@@ -76,23 +86,27 @@
       "invitation": {
         "headline": {
           "title": {
-            "en": "Dear User"
+            "en": "Dear User",
+            "fa": "کاربر گرامی"
           },
           "subtitle": {
-            "en": "Please complete your\nregisteration based on invitation."
+            "en": "Please complete your\nregisteration based on invitation.",
+            "fa": ""
           }
         },
         "firstInputGroup": {
           "first": {
             "type": "TEXT",
             "title": {
-              "en": "First Name"
+              "en": "First Name",
+              "fa": "نام"
             }
           },
           "second": {
             "type": "TEXT",
             "title": {
-              "en": "Last Name"
+              "en": "Last Name",
+              "fa": "نام خانوادگی"
             }
           }
         },
@@ -100,13 +114,15 @@
           "first": {
             "type": "PHONE-LINK",
             "title": {
-              "en": "Phone Number"
+              "en": "Phone Number",
+              "fa": "شماره موبایل"
             }
           },
           "second": {
             "type": "PASSWORD",
             "title": {
-              "en": "Password"
+              "en": "Password",
+              "fa": "گذرواژه"
             }
           }
         },
@@ -115,7 +131,8 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Complete Registeration"
+                "en": "Complete Registeration",
+                "fa": "تکمیل ثبت‌نام"
               }
             },
             "loading": {

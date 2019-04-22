@@ -91,13 +91,13 @@ module.exports = StyleSheet.create({
   },
   BriefDetailTitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2.5)) - 65),
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailSubtitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2.5)) - 65),
     ..._CUSTOM_BRIEF_DETAIL_SUBTITLE
   },
@@ -106,7 +106,7 @@ module.exports = StyleSheet.create({
   },
   BriefDetailRowText: {
     color: colors.single.romance,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_ROW_TEXT
   },
   BriefDetailRowIcon: {

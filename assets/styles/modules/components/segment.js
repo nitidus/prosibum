@@ -60,7 +60,7 @@ module.exports = StyleSheet.create({
   },
   DualSegmentTabInnerContentTitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_DUAL_SEGMENT_TAB_INNER_CONTENT_TITLE

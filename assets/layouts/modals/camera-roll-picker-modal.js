@@ -18,7 +18,7 @@ import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions'
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.CameraRollPickerModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.camera_roll_picker_modal;
+const __CONSTANTS = layouts_constants.modals.camera_roll_picker_modal;
 
 const CameraRollPickerModal = (props) => {
   var attitude = {};

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, ScrollView, Text, TouchableOpacity, Animated, Easing } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, I18nManager, Animated, Easing } from 'react-native';
 
 import { Link, Input } from '../../../../components/index';
 import { Icon } from '../../../../layouts/icon';
@@ -90,7 +90,7 @@ export const TabItem = (props) => {
           Styles.SingleTabItemContainer,
           attitude.style
         ]}
-        onPress={() => attitude.onPress(attitude.name)}>
+        onPress={attitude.onPress}>
           {_MAIN_TEXT_COTNENT}
       </Input>
     );
@@ -147,18 +147,18 @@ export const PinnedSide = (props) => {
     <View
       style={attitude.style}>
         <Link
-          onPress={attitude.onPress}>
-            {
-              attitude.children.map((child, i) => {
-                var childProps = {...child.props};
+            onPress={attitude.onPress}>
+              {
+                attitude.children.map((child, i) => {
+                  var childProps = {...child.props};
 
-                const ultimateKey = Functions._generateNewUniqueObjectKey();
+                  const ultimateKey = Functions._generateNewUniqueObjectKey();
 
-                childProps.key = childProps.name || ultimateKey;
+                  childProps.key = childProps.name || ultimateKey;
 
-                return React.cloneElement(child, childProps);
-              })
-            }
+                  return React.cloneElement(child, childProps);
+                })
+              }
         </Link>
     </View>
   );
@@ -277,11 +277,11 @@ export const TopBar = (props) => {
                 {React.cloneElement(_CHILD, _CHILD_PROPS)}
             </View>;
           }else{
-            if ((typeof _CHILD_PROPS.data != 'undefined') || typeof _CHILD_PROPS.items != 'undefined'){
+            if ((typeof _CHILD_PROPS.data != 'undefined') || (typeof _CHILD_PROPS.items != 'undefined')){
               _TAB_ATTITUDE.data = _CHILD_PROPS.data || _CHILD_PROPS.items;
             }
 
-            if ((typeof _CHILD_PROPS.current != 'undefined') || typeof _CHILD_PROPS.currentItem != 'undefined' || typeof _CHILD_PROPS.current_item != 'undefined'){
+            if ((typeof _CHILD_PROPS.current != 'undefined') || (typeof _CHILD_PROPS.currentItem != 'undefined') || (typeof _CHILD_PROPS.current_item != 'undefined')){
               _TAB_ATTITUDE.current = _CHILD_PROPS.current || _CHILD_PROPS.currentItem || _CHILD_PROPS.current_item;
             }
 
@@ -291,17 +291,41 @@ export const TopBar = (props) => {
 
             if ((typeof _TAB_ATTITUDE.data != 'undefined') && (typeof _TAB_ATTITUDE.current != 'undefined')){
               if (_TAB_ATTITUDE.data.length > 0){
-                _TAB_ATTITUDE_CONTENT = _TAB_ATTITUDE.data.map((tabItemName, w, tabItems) => {
+                var _ATTITUDE_DATA = _TAB_ATTITUDE.data,
+                    _ATTITUDE_CURRENT_DATA = _TAB_ATTITUDE.current;
+
+                if (typeof _ATTITUDE_CURRENT_DATA == 'object'){
+                  if (typeof _CHILD_PROPS.language != 'undefined'){
+                    _TAB_ATTITUDE.language = _CHILD_PROPS.language || 'en';
+
+                    _ATTITUDE_DATA = _ATTITUDE_DATA.map((item, k) => item[_TAB_ATTITUDE.language]);
+                    _ATTITUDE_CURRENT_DATA = _ATTITUDE_CURRENT_DATA[_TAB_ATTITUDE.language];
+                  }
+                }
+
+                _TAB_ATTITUDE_CONTENT = _ATTITUDE_DATA.map((tabItemName, w, tabItems) => {
                   var _ITEM_STYLE;
 
-                  if (w < tabItems.length - 1){
-                    _ITEM_STYLE = Styles.TabItemContainer;
+                  if (I18nManager.isRTL){
+                    if (w > 0){
+                      _ITEM_STYLE = {
+                        ...Styles.TabItemContainer,
+                        marginLeft: 15
+                      };
+                    }
+                  }else{
+                    if (w < tabItems.length - 1){
+                      _ITEM_STYLE = {
+                        ...Styles.TabItemContainer,
+                        marginRight: 15
+                      };
+                    }
                   }
 
                   const _ITEM_KEY = Functions._generateNewUniqueObjectKey(w),
                         _ITEM_NAME = tabItemName,
                         _SCAPED_ITEM_NAME = Functions._convertTokenToKeyword(_ITEM_NAME),
-                        _SCAPED_CURRENT_ITEM = Functions._convertTokenToKeyword(_TAB_ATTITUDE.current);
+                        _SCAPED_CURRENT_ITEM = Functions._convertTokenToKeyword(_ATTITUDE_CURRENT_DATA);
 
                   if (_SCAPED_ITEM_NAME === _SCAPED_CURRENT_ITEM){
                     return (
@@ -310,7 +334,7 @@ export const TopBar = (props) => {
                         name={tabItemName}
                         style={_ITEM_STYLE}
                         gradient={Global.colors.pair.ongerine}
-                        onPress={_TAB_ATTITUDE.onPress} />
+                        onPress={() => _TAB_ATTITUDE.onPress(_TAB_ATTITUDE.data[w])} />
                     );
                   }else{
                     return (
@@ -322,7 +346,7 @@ export const TopBar = (props) => {
                           Styles.DisabledSingleTabItemContainer
                         ]}
                         disable={true}
-                        onPress={_TAB_ATTITUDE.onPress} />
+                        onPress={() => _TAB_ATTITUDE.onPress(_TAB_ATTITUDE.data[w])} />
                     );
                   }
                 })

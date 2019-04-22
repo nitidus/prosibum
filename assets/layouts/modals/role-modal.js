@@ -20,7 +20,7 @@ const { mapStateToProps, mapDispatchToProps } = LayoutsActions.RoleModal;
 import { layouts_constants } from '../../flows/knowledge/index';
 import { name as appName } from '../../../app.json';
 import { GLOBAL } from '../../flows/states/types/index';
-const __CONSTANTS = layouts_constants.role_modal;
+const __CONSTANTS = layouts_constants.modals.role_modal;
 
 const _componentWillCheckValidation = (props) => {
   const _PROPS = props.roleModal;

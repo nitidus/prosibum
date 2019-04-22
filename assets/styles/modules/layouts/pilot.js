@@ -43,13 +43,11 @@ var _CUSTOM_CONTAINER = {
       fontSize: 17
     },
     _CUSTOM_TAB_ITEMS = {
-      marginRight: 60
+      marginRight: (I18nManager.isRTL)? 87: 60
     },
     _CUSTOM_TAB_ITEMS_TEXT = {
       fontSize: 12
     };
-
-_CUSTOM_TAB_ITEMS[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] = 60;
 
 if (Platform.OS === 'ios'){
   if (width >= 1000 || height >= 1000){
@@ -77,7 +75,7 @@ if (Platform.OS === 'ios'){
       }
     };
 
-    _CUSTOM_TAB_ITEMS[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] *= 2;
+    _CUSTOM_TAB_ITEMS.marginRight *= 2;
 
     _CUSTOM_HEADER_TITLE.fontSize += 2;
 
@@ -125,7 +123,7 @@ if (Platform.OS === 'ios'){
 
     _CUSTOM_TAB_ITEMS_TEXT.fontSize += 5;
 
-    _CUSTOM_TAB_ITEMS[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] *= 3;
+    _CUSTOM_TAB_ITEMS.marginRight *= 3;
 
     _CUSTOM_HEADER_TITLE.fontSize += 15;
     _CUSTOM_HEADER_SUBTITLE.fontSize += 5;
@@ -200,17 +198,17 @@ module.exports = StyleSheet.create({
     flex: 1
   },
   ComplexHeaderTitle: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     ..._CUSTOM_HEADER_TITLE
   },
   ComplexHeaderSubtitle: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.lavenderGray,
     ..._CUSTOM_HEADER_SUBTITLE
   },
   HeaderTitle: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     flexGrow: 1,
     flex: 1,
@@ -226,7 +224,7 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_SINGLE_TAB_ITEM_CONTAINER
   },
   SingleTabItemContent: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',
@@ -239,8 +237,6 @@ module.exports = StyleSheet.create({
     color: colors.single.rangoonGreen
   },
   TabItemContainer: {
-    marginRight: (I18nManager.isRTL)? 0: (_CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom),
-    marginLeft: (I18nManager.isRTL)? (_CUSTOM_TOP_BAR_CONTAINER.paddingVertical || _CUSTOM_TOP_BAR_CONTAINER.paddingBottom): 0,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     flexGrow: 1
   },
@@ -258,7 +254,7 @@ module.exports = StyleSheet.create({
     marginBottom: 4
   },
   TabItemsText: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.lavenderGray,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',

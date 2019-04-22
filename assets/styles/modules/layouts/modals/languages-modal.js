@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, Dimensions, I18nManager } from 'react-native';
 
 import { Functions } from '../../../../modules/index';
 
@@ -69,12 +69,12 @@ module.exports = StyleSheet.create({
   },
   CarouselItemTitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_CAROUSEL_ITEM_TITLE
   },
   CarouselItemSubtitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     marginTop: 7,
     ..._CUSTOM_CAROUSEL_ITEM_SUBTITLE
   },

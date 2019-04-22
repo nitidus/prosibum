@@ -6,34 +6,40 @@
     "content": [
       {
         "title": {
-          "en": "Dashboard"
+          "en": "Dashboard",
+          "fa": "داشبورد"
         }
       },
       {
         "title": {
-          "en": "Products"
+          "en": "Products",
+          "fa": "محصولات"
         },
         "tabs": [
           {
             "title": {
-              "en": "Published"
+              "en": "Published",
+              "fa": "منتشرشده"
             }
           },
           {
             "title": {
-              "en": "Drafted"
+              "en": "Drafted",
+              "fa": "پیش‌نویس"
             }
           },
           {
             "title": {
-              "en": "Suspended"
+              "en": "Suspended",
+              "fa": "معلق‌شده"
             }
           }
         ]
       },
       {
         "title": {
-          "en": "Messages"
+          "en": "Messages",
+          "fa": "پیام‌ها"
         }
       }
     ]

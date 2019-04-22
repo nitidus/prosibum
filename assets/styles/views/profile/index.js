@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform, I18nManager } from 'react-native';
 
 import { colors, fonts } from '../../global';
 
@@ -72,7 +72,7 @@ module.exports = StyleSheet.create({
   },
   BrandRoleCarouselErrorContent: {
     color: colors.single.romance,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BUTTON_TITLE
   },
   QuickLink: {

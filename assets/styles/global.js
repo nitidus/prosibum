@@ -131,6 +131,14 @@ module.exports = {
       textRegularItalic: 'SFProText-RegularItalic',
       textSemibold: 'SFProText-Semibold',
       textSemiboldItalic: 'SFProText-SemiboldItalic',
+    },
+    vazir: {
+      thin: 'Vazir-Thin-FD',
+      medium: 'Vazir-Medium-FD',
+      light: 'Vazir-Light-FD',
+      regular: 'Vazir-FD',
+      bold: 'Vazir-Bold-FD',
+      black: 'Vazir-Black-FD'
     }
   }
 };

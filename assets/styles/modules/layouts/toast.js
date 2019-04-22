@@ -56,7 +56,7 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.single.lavenderGray
   },
   MessageText: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
     textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_MESSAGE_TEXT

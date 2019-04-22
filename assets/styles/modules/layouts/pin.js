@@ -88,13 +88,13 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_PIN_DEFAULT_BUTTON_NAVIGATOR_CONTAINNER
   },
   PinTitle: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     textAlign: 'left',
     ..._CUSTOM_PIN_TITLE
   },
   PinSubtitle: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     textAlign: 'left',
     ..._CUSTOM_PIN_SUBTITLE

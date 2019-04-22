@@ -16,8 +16,9 @@ store.subscribe(() => {
 export default class App extends Component<> {
   render() {
     return (
-      <Provider store={store}>
-        <RootStack />
+      <Provider
+        store={store}>
+          <RootStack />
       </Provider>
     );
   }

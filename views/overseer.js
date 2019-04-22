@@ -35,7 +35,7 @@ class Overseer extends Component<{}> {
           _LANGUAGE = _NATIVE_SETTINGS.language,
           _LANGUAGE_KEY = Functions._convertTokenToKeyword(_LANGUAGE.key),
           _TABS = __CONSTANTS.pilot.content.map((tab, i) => {
-            return Functions._convertKeywordToToken(tab.title[_LANGUAGE_KEY]);
+            return tab.title;
           });
 
     this._language = _LANGUAGE;
@@ -50,7 +50,7 @@ class Overseer extends Component<{}> {
 
   render() {
     const { props } = this,
-          _CURRENT_TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(props.overseer.currentBottomTab);
+          _CURRENT_TAB_IN_KEY_FORMAT = (Object.keys(props.overseer.currentBottomTab).length > 0)? Functions._convertTokenToKey(props.overseer.currentBottomTab.en): '';
 
     var _ROOT_CONTENT,
         _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
@@ -67,12 +67,17 @@ class Overseer extends Component<{}> {
         };
         _OTHER_PROPS.rightIcon = 'for-you';
 
-        RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab];
+        if ((props.overseer.topTabs.length === 0) && (Object.keys(props.overseer.currentTopTab).length === 0)){
+          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
+          _CONTENT_OTHER_PROPS.sub = _OTHER_PROPS.currentTopTab[_LANGUAGE];
+        }
+
+        RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
         break;
 
       case 'PRODUCTS':
         const _CURRENT_TAB_CONTENT_INDEX = __CONSTANTS.pilot.content.findIndex((item, i) => {
-          return Functions._convertTokenToKey(item.title[_LANGUAGE]) === _CURRENT_TAB_IN_KEY_FORMAT;
+          return Functions._convertTokenToKey(item.title.en) === _CURRENT_TAB_IN_KEY_FORMAT;
         });
 
         if (_CURRENT_TAB_CONTENT_INDEX > -1){
@@ -85,9 +90,9 @@ class Overseer extends Component<{}> {
           };
           _OTHER_PROPS.rightIcon = 'plus';
 
-          if ((props.overseer.topTabs.length === 0) && (props.overseer.currentTopTab == '')){
+          if ((props.overseer.topTabs.length === 0) && (Object.keys(props.overseer.currentTopTab).length === 0)){
             const _INITIALIZED_TABS = __CONSTANTS.pilot.content[_CURRENT_TAB_CONTENT_INDEX].tabs.map((item, i) => {
-              return item.title[_LANGUAGE];
+              return item.title;
             });
 
             props.setTopPilotTabs(_INITIALIZED_TABS);
@@ -98,16 +103,20 @@ class Overseer extends Component<{}> {
           _OTHER_PROPS.currentTopTab = props.overseer.currentTopTab;
           _OTHER_PROPS.onTopBarPress = (tabName) => props.setTopPilotCurrentTab(tabName);
 
-          _CONTENT_OTHER_PROPS.sub = _OTHER_PROPS.currentTopTab;
+          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
+          _CONTENT_OTHER_PROPS.sub = _OTHER_PROPS.currentTopTab[_LANGUAGE];
         }
 
-        RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab];
+        RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
         break;
 
       case 'MESSAGES':
-        // _OTHER_PROPS.tailPilotChildren = <Text>hello world</Text>;
+        if ((props.overseer.topTabs.length === 0) && (Object.keys(props.overseer.currentTopTab).length === 0)){
+          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
+          _CONTENT_OTHER_PROPS.sub = _OTHER_PROPS.currentTopTab[_LANGUAGE];
+        }
 
-        RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab];
+        RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
         break;
     }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet, Platform, Dimensions, I18nManager } from 'react-native';
 
 import {
   colors, fonts
@@ -30,13 +30,13 @@ module.exports = StyleSheet.create({
 
   },
   Title: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     textAlign: 'center',
     ..._CUSTOM_TITLE
   },
   Subtitle: {
-    fontFamily: fonts.sanFrancisco.textMedium,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.medium: fonts.sanFrancisco.textMedium,
     color: colors.single.rangoonGreen,
     textAlign: 'center',
     ..._CUSTOM_SUBTITLE

@@ -609,9 +609,21 @@ export const Input = (props) => {
 
     case 'phone-link':
     case 'phone-number-link':
+      var _PHONE_CUSTOM_STYLES = [
+        Styles.TextInputLinkContainer
+      ];
+
+      if (I18nManager.isRTL){
+        _PHONE_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
+      }else{
+        _PHONE_CUSTOM_STYLES.push({
+          left: 18
+        });
+      }
+
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.StaticTextInputLinkContainer}
+          containerStyle={_PHONE_CUSTOM_STYLES}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -635,7 +647,12 @@ export const Input = (props) => {
             attitude.style
           ]}>
             <TextInput
-              style={Styles.TextInputConatiner}
+              style={[
+                Styles.TextInputConatiner,
+                {
+                  textAlign: 'left'
+                }
+              ]}
               keyboardType="phone-pad"
               value={attitude.value}
               placeholder={attitude.placeholder}

@@ -22,7 +22,7 @@ if (Platform.OS !== 'ios'){
 
 module.exports = StyleSheet.create({
   TextInputLink: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.lavenderGray,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',

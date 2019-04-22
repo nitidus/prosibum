@@ -10,6 +10,9 @@ const Styles = Modules.Layouts.DrawerMenu;
 import { Functions } from '../modules/index';
 const { Preparation } = Functions;
 
+import { layouts_constants } from '../flows/knowledge/index';
+const __CONSTANTS = layouts_constants.drawer_menu;
+
 export const DrawerMenuPinnedProfile = (props) => {
   var attitude = {};
 
@@ -49,7 +52,7 @@ export const DrawerMenuPinnedProfile = (props) => {
         Styles.NoImagePinnedProfileContainer
       ]}>
         <Icon
-          name="person"
+          name={__CONSTANTS.profile.state.empty.icon.name}
           color={Global.colors.single.mercury}
           width={Styles.PinnedProfileContainer.width - 15}
           height={Styles.PinnedProfileContainer.height - 15} />
@@ -145,6 +148,8 @@ export const DrawerMenu = (props) => {
     attitude.onDismiss = props.onDismiss || props.onDrawerMenuDismiss || props.drawerMenuOnDismiss || props.onMenuDismiss || props.menuOnDismiss;
   }
 
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   return (
     <View
       style={Styles.Container}>
@@ -159,11 +164,11 @@ export const DrawerMenu = (props) => {
 
         <View style={Styles.MenuItemsContainer}>
           <DrawerMenuItem
-            name="Dashboard"
+            name={__CONSTANTS.topPinnedContent.firstRow.title[attitude.language]}
             onPress={() => alert('ok 1')}
             {...props} />
           <DrawerMenuItem
-            name="Profile"
+            name={__CONSTANTS.topPinnedContent.secondRow.title[attitude.language]}
             onPress={() => {
               const { navigation } = props;
 
@@ -175,11 +180,11 @@ export const DrawerMenu = (props) => {
             }}
             {...props} />
           <DrawerMenuItem
-            name="Settings"
+            name={__CONSTANTS.topPinnedContent.thirdRow.title[attitude.language]}
             onPress={() => alert('ok 3')}
             {...props} />
           <DrawerMenuItem
-            name="Logout"
+            name={__CONSTANTS.topPinnedContent.fourthRow.title[attitude.language]}
             onPress={() => Preparation._prepareLogout(props)}
             {...props} />
         </View>
@@ -189,11 +194,11 @@ export const DrawerMenu = (props) => {
             <View
               style={Styles.PinnedItemGroup}>
                 <DrawerMenuPinnedItem
-                  name="Privacy"
+                  name={__CONSTANTS.bottomPinnedContent.firstColumn.title[attitude.language]}
                   onPress={() => alert('ok 4')}
                   {...props} />
                 <DrawerMenuPinnedItem
-                  name="Terms & Conds"
+                  name={__CONSTANTS.bottomPinnedContent.secondColumn.title[attitude.language]}
                   onPress={() => alert('ok 5')}
                   {...props} />
             </View>

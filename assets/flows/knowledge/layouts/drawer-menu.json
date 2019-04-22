@@ -1,0 +1,51 @@
+{
+  "profile": {
+    "state": {
+      "empty": {
+        "icon": {
+          "name": "person"
+        }
+      }
+    }
+  },
+  "topPinnedContent": {
+    "firstRow": {
+      "title": {
+        "en": "Dashboard",
+        "fa": "داشبورد"
+      }
+    },
+    "secondRow": {
+      "title": {
+        "en": "Profile",
+        "fa": "پروفایل"
+      }
+    },
+    "thirdRow": {
+      "title": {
+        "en": "Settings",
+        "fa": "تنظیمات"
+      }
+    },
+    "fourthRow": {
+      "title": {
+        "en": "Logout",
+        "fa": "خروج"
+      }
+    }
+  },
+  "bottomPinnedContent": {
+    "firstColumn": {
+      "title": {
+        "en": "Privacy",
+        "fa": "حریم خصوصی"
+      }
+    },
+    "secondColumn": {
+      "title": {
+        "en": "Terms & Conds",
+        "fa": "شرایط و قوانین"
+      }
+    }
+  }
+}

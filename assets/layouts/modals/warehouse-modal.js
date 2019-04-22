@@ -18,7 +18,7 @@ import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions'
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.WarehouseModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.warehouse_modal;
+const __CONSTANTS = layouts_constants.modals.warehouse_modal;
 
 const _componentWillCheckValidation = (props) => {
   const _PROPS = props.warehouseModal;

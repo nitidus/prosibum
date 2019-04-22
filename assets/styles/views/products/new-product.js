@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform, I18nManager } from 'react-native';
 
 import { colors, fonts } from '../../global';
 
@@ -102,7 +102,7 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_PILOT_BUTTON.marginRight += 5;
 
     _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 16;
-
+fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     _CUSTOM_BRIEF_DETAIL_TITLE_CONTAINER.width -= 300;
     _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 1;
     _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontSize += 1;
@@ -182,17 +182,17 @@ module.exports = StyleSheet.create({
   },
   BriefDetailTitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailTitleSuffix: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX
   },
   BriefDetailSubtitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_SUBTITLE
   },
   BriefDetailRowContainer: {
@@ -200,7 +200,7 @@ module.exports = StyleSheet.create({
   },
   BriefDetailRowText: {
     color: colors.single.romance,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     marginLeft: 15,
     ..._CUSTOM_BRIEF_DETAIL_ROW_TEXT
   },
@@ -217,7 +217,7 @@ module.exports = StyleSheet.create({
   },
   DescriptionFeatureText: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_DESCRIPTION_FEATURE_TEXT
   },
   PhotoContainer: {

@@ -19,7 +19,7 @@ import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions'
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.WalletModal;
 
 import { layouts_constants, months as __MONTHS } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.wallet_modal;
+const __CONSTANTS = layouts_constants.modals.wallet_modal;
 
 const _componentWillCheckValidation = (props) => {
   const _PROPS = props.walletModal;

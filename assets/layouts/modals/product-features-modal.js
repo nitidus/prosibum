@@ -19,7 +19,7 @@ import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions'
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.ProductFeaturesModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.product_features_modal;
+const __CONSTANTS = layouts_constants.modals.product_features_modal;
 
 const _componentWillCheckValidation = (props) => {
   const _PROPS = props.productFeaturesModal;

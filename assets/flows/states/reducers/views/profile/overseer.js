@@ -2,9 +2,9 @@ import { VIEWS } from '../../../types/index';
 const { OVERSEER } = VIEWS.PROFILE;
 
 const initialState = {
-        currentTopTab: '',
+        currentTopTab: {},
         topTabs: [],
-        currentBottomTab: '',
+        currentBottomTab: {},
         bottomTabs: []
       };
 

@@ -58,7 +58,7 @@ module.exports = StyleSheet.create({
   DefaultTextStyle: {
     flexGrow: 1,
     display: 'flex',
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_DEFAULT_TEXT_STYLE

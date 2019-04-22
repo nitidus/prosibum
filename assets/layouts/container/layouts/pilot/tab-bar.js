@@ -28,6 +28,10 @@ export const TabBarItem = (props) => {
     attitude.name = props.name || props.title;
   }
 
+  if ((typeof props.iconName != 'undefined') || (typeof props.iconTitle != 'undefined') || (typeof props.icon_name != 'undefined') || (typeof props.icon_title != 'undefined')){
+    attitude.iconName = props.iconName || props.iconTitle || props.icon_name || props.icon_title;
+  }
+
   if (typeof props.style != 'undefined'){
     attitude.style = props.style;
 
@@ -58,7 +62,8 @@ export const TabBarItem = (props) => {
   attitude.activated = props.activated || props.is_activated || props.isActivated || false;
 
   const _TAB_NAME = Functions._convertTokenToKeyword(attitude.name),
-        _TAB_TITLE = Functions._convertKeywordToToken(attitude.name);
+        _TAB_TITLE = Functions._convertKeywordToToken(attitude.name),
+        _TAB_ICON_NAME = Functions._convertKeywordToToken(attitude.iconName);
 
   var _TAB_ITEM_ICON_COLOR = Global.colors.single.lavenderGray,
       _TAB_ITEM_TEXT_STYLES = [
@@ -75,7 +80,7 @@ export const TabBarItem = (props) => {
     <View
       style={Styles.SingleTabItemsContent}>
         <Icon
-          name={_TAB_TITLE}
+          name={_TAB_ICON_NAME}
           color={_TAB_ITEM_ICON_COLOR}
           style={Styles.TabItemsIcon} />
 

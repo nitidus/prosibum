@@ -218,7 +218,7 @@ class Login extends Component<{}> {
     }else{
       _LOGIN_CONTENT = (
         <ActivityIndicator/>
-      )
+      );
     }
 
     return (

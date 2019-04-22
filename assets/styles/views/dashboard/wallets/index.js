@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Dimensions, Platform, I18nManager } from 'react-native';
 
 import { Functions } from '../../../../modules/index';
 
@@ -134,17 +134,17 @@ module.exports = StyleSheet.create({
   },
   BriefDetailTitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailSubtitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_SUBTITLE
   },
   BriefDetailRowText: {
     color: colors.single.romance,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_ROW_TEXT
   },
   WalletItemContainerWithEmptyPositionContent: {

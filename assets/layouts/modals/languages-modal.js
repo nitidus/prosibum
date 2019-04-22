@@ -17,7 +17,7 @@ import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions'
 const { mapStateToProps, mapDispatchToProps } = LayoutsActions.LanguagesModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.languages_modal;
+const __CONSTANTS = layouts_constants.modals.languages_modal;
 
 const LanguagesModal = (props) => {
   var attitude = {};

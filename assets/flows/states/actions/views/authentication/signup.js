@@ -17,6 +17,12 @@ const mapDispatchToProps = (dispatch) => {
         type: SIGNUP.RESET_FORM
       });
     },
+    setLanguage: (language) => {
+      dispatch({
+        type: SIGNUP.SET_LANGUAGE,
+        payload: language
+      })
+    },
     setDemandMode: (mode) => {
       dispatch({
         type: SIGNUP.SET_DEMAND_MODE,

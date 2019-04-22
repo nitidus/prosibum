@@ -1,17 +1,20 @@
 {
   "pilot": {
     "title": {
-      "en": "New Product"
+      "en": "New Product",
+      "fa": "محصول جدید"
     },
     "subtitle": {
-      "en": "Product Identity"
+      "en": "Product Identity",
+      "fa": "هویت محصول"
     }
   },
   "content": {
     "firstInput": {
       "type": "TEXT",
       "title": {
-        "en": "Product Name"
+        "en": "Product Name",
+        "fa": "نام محصول"
       }
     },
     "firstCarousel": {
@@ -19,14 +22,16 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Warehouses"
+            "en": "Warehouses",
+            "fa": "انبارها"
           },
           "content": {
             "title": {
               "en": "Warehouse Item"
             },
             "suffix": {
-              "en": "Products"
+              "en": "Products",
+              "en": "محصولات"
             }
           }
         },
@@ -42,7 +47,8 @@
         },
         "null": {
           "title": {
-            "en": "There's no warehouse."
+            "en": "There's no warehouse.",
+            "fa": "هیچ انباری وجود ندارد."
           }
         }
       }
@@ -50,10 +56,12 @@
     "secondInput": {
       "type": "LINK",
       "link": {
-        "en": "Categories"
+        "en": "Categories",
+        "fa": "دسته‌بندی‌ها"
       },
       "title": {
-        "en": "Product Categories"
+        "en": "Product Categories",
+        "fa": "دسته‌بندی محصولات"
       }
     },
     "modalHandlerButton": {
@@ -61,7 +69,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Warehouse"
+            "en": "Append Warehouse",
+            "fa": "اضافه‌کردن انبار"
           }
         }
       }
@@ -71,7 +80,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Features"
+            "en": "Append Features",
+            "fa": "اضافه‌کردن ویژگی‌ها"
           }
         }
       }

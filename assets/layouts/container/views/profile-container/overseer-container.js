@@ -74,21 +74,27 @@ export const OverseerContainer = (props) => {
     }
   }
 
+  attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
   const { Interpolation, Events } = MenuCardPulling,
         _CONTAINER_ANIMATION = Interpolation._Container(animations.xPosition),
-        _OVERLAY_ANIMATION = Interpolation._Overlay(animations.xPosition);
+        _OVERLAY_ANIMATION = Interpolation._Overlay(animations.xPosition)
+        _DRAWER_MENU_OTHER_PROPS = {
+          language: props.language
+        };
 
-  var _CURRENT_TAB_INDEX = attitude.bottomBarTabs.findIndex((tab) => {
-        if (typeof attitude.currentBottomTab != 'undefined'){
-          const _CURRENT_TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(attitude.currentBottomTab),
-                _TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(tab);
+  var _CONTAINER_TITLE = (Object.keys(attitude.title).length > 0)? attitude.title[attitude.language]: '',
+      _CURRENT_TAB_INDEX = attitude.bottomBarTabs.findIndex((tab) => {
+        if (Object.keys(attitude.currentBottomTab).length > 0){
+          const _CURRENT_TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(attitude.currentBottomTab[attitude.language]),
+                _TAB_IN_KEY_FORMAT = Functions._convertTokenToKey(tab[attitude.language]);
 
           return (_TAB_IN_KEY_FORMAT === _CURRENT_TAB_IN_KEY_FORMAT);
         }
       }),
       _RIGHT_PINNED_ITEMS, _BOTTOM_PINNED_ITEMS, _TAIL_PINNED_CONTENT,
       _TOP_BAR_ITEMS = (typeof attitude.topBarTabs != 'undefined')? attitude.topBarTabs: [],
-      _CURRENT_TOP_BAR_ITEM = (typeof attitude.currentTopTab != 'undefined')? attitude.currentTopTab: '';
+      _CURRENT_TOP_BAR_ITEM = (typeof attitude.currentTopTab != 'undefined')? ((Object.keys(attitude.currentTopTab).length > 0)? attitude.currentTopTab: ''): '';
 
   if ((_TOP_BAR_ITEMS.length > 0) && (_CURRENT_TOP_BAR_ITEM !== '')){
     _BOTTOM_PINNED_ITEMS = (
@@ -96,7 +102,8 @@ export const OverseerContainer = (props) => {
         type="bottom"
         items={_TOP_BAR_ITEMS}
         current={_CURRENT_TOP_BAR_ITEM}
-        onPress={attitude.onTopBarPress} />
+        onPress={attitude.onTopBarPress}
+        language={attitude.language} />
     );
   }
 
@@ -139,7 +146,8 @@ export const OverseerContainer = (props) => {
       style={Styles.MajorContainer}>
         <DrawerMenu
           onDismiss={() => Events._Dismiss(animations.xPosition)}
-          {...props} />
+          {...props}
+          {..._DRAWER_MENU_OTHER_PROPS} />
 
         <Animated.View
           style={[
@@ -163,8 +171,8 @@ export const OverseerContainer = (props) => {
                 <StatusBar hidden={true} />
 
                 <Pilot
-                  title={attitude.title}
-                  {...props}>
+                  {...props}
+                  title={_CONTAINER_TITLE}>
                     <PinnedSide
                       type="left"
                       onPress={() => Events._Launch(animations.xPosition)}>
@@ -196,8 +204,9 @@ export const OverseerContainer = (props) => {
                   layout="tabs">
                     {
                       attitude.bottomBarTabs.map((tab, i) => {
-                        const _GENNERATED_KEY = Functions._generateNewUniqueObjectKey(`${tab}-${i}`),
-                              _TAB_TOKEN_NAME = Functions._convertKeywordToToken(tab);
+                        const _BOTTOM_TAB_KEY = tab.en,
+                              _GENNERATED_KEY = Functions._generateNewUniqueObjectKey(`${_BOTTOM_TAB_KEY}-${i}`),
+                              _TAB_TOKEN_NAME = Functions._convertKeywordToToken(tab[attitude.language]);
 
                         if (i === _CURRENT_TAB_INDEX){
                           return (
@@ -205,6 +214,7 @@ export const OverseerContainer = (props) => {
                               key={_GENNERATED_KEY}
                               activated={true}
                               name={_TAB_TOKEN_NAME}
+                              iconName={_BOTTOM_TAB_KEY}
                               onPress={() => attitude.onBottomBarPress(tab)} />
                           );
                         }else{
@@ -212,6 +222,7 @@ export const OverseerContainer = (props) => {
                             <TabBarItem
                               key={_GENNERATED_KEY}
                               name={_TAB_TOKEN_NAME}
+                              iconName={_BOTTOM_TAB_KEY}
                               onPress={() => attitude.onBottomBarPress(tab)} />
                           );
                         }

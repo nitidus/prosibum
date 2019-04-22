@@ -158,7 +158,7 @@ if (Platform.OS !== 'ios'){
 module.exports = StyleSheet.create({
   ContainerWithoutButton: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
@@ -214,7 +214,7 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_PHOTO_INPUT_LABEL_CONTAINER
   },
   PhotoInputLabelContent: {
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.lavenderGray,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: 'left',
@@ -222,7 +222,7 @@ module.exports = StyleSheet.create({
   },
   TextInputConatiner: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',
     alignSelf: (I18nManager.isRTL)? 'flex-start': 'flex-end',
@@ -253,7 +253,7 @@ module.exports = StyleSheet.create({
   },
   InnerInputContainer: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     borderWidth: 0,
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
@@ -282,7 +282,7 @@ module.exports = StyleSheet.create({
   },
   ButtonTitle: {
     color: colors.single.rangoonGreen,
-    fontFamily: fonts.sanFrancisco.textBold,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BUTTON_TITLE
   },
   CreditCardContainer: {

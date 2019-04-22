@@ -5,6 +5,7 @@ import { Functions } from '../../../../../modules/index';
 
 const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
       initialState = {
+        language: {},
         demandMode: '',
         firstName: '',
         lastName: '',
@@ -33,6 +34,12 @@ export default (state = initialState, action) => {
       return {
         ...initialState,
         demandMode: state.demandMode
+      };
+      break;
+    case SIGNUP.SET_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload
       };
       break;
     case SIGNUP.SET_DEMAND_MODE:
