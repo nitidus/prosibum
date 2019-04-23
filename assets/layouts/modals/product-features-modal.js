@@ -175,7 +175,12 @@ const ProductFeaturesModal = (props) => {
               name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.type}
               data={props.productFeaturesModal.features}
               firstItem={_SELECTED_INDEX}
-              style={Styles.DetailContainer}
+              style={[
+                Styles.DetailContainer,
+                {
+                  direction: 'ltr'
+                }
+              ]}
               itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
               onLayout={({ item, index }) => {
                 var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -189,25 +194,44 @@ const ProductFeaturesModal = (props) => {
                     type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.type}
                     gradient={_ITEM_GRADIENT}
                     style={[
-                      Styles.DetailItemContainer,
-                      Styles.LTR_ContentAlignment
+                      Styles.DetailItemContainer
                     ]}
                     disable={true}>
                     <View
-                      style={Styles.DetailItemMasterInfoContent}>
+                      style={[
+                        Styles.DetailItemMasterInfoContent,
+                        {
+                          alignSelf: 'flex-start'
+                        }
+                      ]}>
                         <Text
-                          style={Styles.BriefDetailTitle}>
+                          style={[
+                            Styles.BriefDetailTitle,
+                            {
+                              textAlign: 'left'
+                            }
+                          ]}>
                             {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.title[attitude.language])}
                         </Text>
                     </View>
                     <View
-                      style={Styles.DetailItemMasterSubInfoContent}>
+                      style={[
+                        Styles.DetailItemMasterSubInfoContent,
+                        {
+                          alignSelf: 'flex-start'
+                        }
+                      ]}>
                         <Icon
                           name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.icon.name}
                           color={Global.colors.single.romance} />
 
                         <Text
-                          style={Styles.BriefDetailRowText}>
+                          style={[
+                            Styles.BriefDetailRowText,
+                            {
+                              marginLeft: 15
+                            }
+                          ]}>
                             {Functions._convertKeywordToToken(item.key)}
                         </Text>
                     </View>
@@ -284,7 +308,12 @@ const ProductFeaturesModal = (props) => {
                         name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
                         data={props.productFeaturesModal.units}
                         firstItem={_SELECTED_UNIT_INDEX}
-                        style={Styles.DetailContainer}
+                        style={[
+                          Styles.DetailContainer,
+                          {
+                            direction: 'ltr'
+                          }
+                        ]}
                         itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
                         onLayout={({ item, index }) => {
                           var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -297,26 +326,43 @@ const ProductFeaturesModal = (props) => {
                             <Input
                               type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
                               gradient={_ITEM_GRADIENT}
-                              style={[
-                                Styles.DetailItemContainer,
-                                Styles.LTR_ContentAlignment
-                              ]}
+                              style={Styles.DetailItemContainer}
                               disable={true}>
                               <View
-                                style={Styles.DetailItemMasterInfoContent}>
+                                style={[
+                                  Styles.DetailItemMasterInfoContent,
+                                  {
+                                    alignSelf: 'flex-start'
+                                  }
+                                ]}>
                                   <Text
-                                    style={Styles.BriefDetailTitle}>
+                                    style={[
+                                      Styles.BriefDetailTitle,
+                                      {
+                                        textAlign: 'left'
+                                      }
+                                    ]}>
                                       {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])}
                                   </Text>
                               </View>
                               <View
-                                style={Styles.DetailItemMasterSubInfoContent}>
+                                style={[
+                                  Styles.DetailItemMasterSubInfoContent,
+                                  {
+                                    alignSelf: 'flex-start'
+                                  }
+                                ]}>
                                   <Icon
                                     name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
                                     color={Global.colors.single.romance} />
 
                                   <Text
-                                    style={Styles.BriefDetailRowText}>
+                                    style={[
+                                      Styles.BriefDetailRowText,
+                                      {
+                                        marginLeft: 15
+                                      }
+                                    ]}>
                                       {Functions._convertKeywordToToken(item.key)}
                                   </Text>
                               </View>

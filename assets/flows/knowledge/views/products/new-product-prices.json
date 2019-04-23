@@ -1,10 +1,12 @@
 {
   "pilot": {
     "title": {
-      "en": "New Product"
+      "en": "New Product",
+      "fa": "محصول جدید"
     },
     "subtitle": {
-      "en": "Product Prices"
+      "en": "Product Prices",
+      "fa": "قیمت‌های محصول"
     },
     "rightIcon": "plus"
   },
@@ -30,22 +32,26 @@
                 "firstInput": {
                   "type": "TEXT",
                   "title": {
-                    "en": "Price Name"
+                    "en": "Price Name",
+                    "fa": "نام قیمت"
                   }
                 },
                 "secondInput": {
                   "type": "NUMERIC",
                   "title": {
-                    "en": "Price Value"
+                    "en": "Price Value",
+                    "fa": "مقدار قیمت"
                   }
                 },
                 "thirdInput": {
                   "type": "LINK",
                   "title": {
-                    "en": "Price Unit"
+                    "en": "Price Unit",
+                    "fa": "واحد قیمت"
                   },
                   "link": {
-                    "en": "Units"
+                    "en": "Units",
+                    "fa": "واحدها"
                   }
                 }
               }
@@ -54,7 +60,8 @@
         },
         "null": {
           "title": {
-            "en": "No prices have been appended yet."
+            "en": "No prices have been appended yet.",
+            "fa": "هنوز هیچ قیمتی اضافه نشده است."
           }
         }
       }
@@ -69,7 +76,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Price"
+            "en": "Append Price",
+            "fa": "اضافه کردن قیمت"
           }
         }
       }
@@ -79,7 +87,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Shipping Method"
+            "en": "Append Shipping Method",
+            "fa": "اضافه کردن شیوه‌های حمل"
           }
         }
       }

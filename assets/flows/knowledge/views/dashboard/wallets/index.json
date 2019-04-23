@@ -6,27 +6,32 @@
     "content": [
       {
         "title": {
-          "en": "Dollar"
+          "en": "Dollar",
+          "fa": "دلار"
         }
       },
       {
         "title": {
-          "en": "Transaction Point"
+          "en": "Transaction Point",
+          "fa": "ترنزکشن پوینت"
         }
       },
       {
         "title": {
-          "en": "Rial"
+          "en": "Rial",
+          "fa": "ریال"
         }
       },
       {
         "title": {
-          "en": "Pound"
+          "en": "Pound",
+          "fa": "پوند"
         }
       },
       {
         "title": {
-          "en": "Euro"
+          "en": "Euro",
+          "fa": "یورو"
         }
       }
     ]
@@ -44,16 +49,19 @@
         "transactionsAmount": {
           "icon": "grading",
           "suffix": {
-            "en": "Transaction"
+            "en": "Transaction",
+            "fa": "تراکنش"
           }
         },
         "transactionsDeposit": {
           "icon": "pay",
           "sign": {
-            "en": "$"
+            "en": "$",
+            "en": "ریال"
           },
           "suffix": {
-            "en": "Deposit"
+            "en": "Deposit",
+            "fa": "واریز"
           }
         }
       }
@@ -62,23 +70,28 @@
   "modalHandlerButton": {
     "type": "BUTTON",
     "title": {
-      "en": "Charge The Wallet"
+      "en": "Charge The Wallet",
+      "fa": "شارژ کیف پول"
     }
   },
   "firstPin": {
     "title": {
-      "en": "Wallet Turnover"
+      "en": "Wallet Turnover",
+      "fa": "گردش مالی کیف پول"
     },
     "subtitle": {
       "sign": {
-        "en": "$"
+        "en": "$",
+        "fa": "رریال"
       },
       "suffix": {
-        "en": "Withdraw"
+        "en": "Withdraw",
+        "fa": "برداشت"
       }
     }
   },
   "link": {
-    "en": "There's no wallet."
+    "en": "There's no wallet.",
+    "fa": "هیچ کیف پولی موجود نیست."
   }
 }

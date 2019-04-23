@@ -1,7 +1,8 @@
 {
   "pilot": {
     "title": {
-      "en": "Roles"
+      "en": "Roles",
+      "fa": "نقش‌ها"
     }
   },
   "content": {
@@ -22,7 +23,8 @@
       }
     },
     "link": {
-      "en": "There's no role."
+      "en": "There's no role.",
+      "fa": "هیچ نقشی وجود ندارد."
     }
   }
 }

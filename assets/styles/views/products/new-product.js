@@ -160,18 +160,26 @@ module.exports = StyleSheet.create({
     padding: 18
   },
   CustomizedFeatureDetailItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    alignItems: 'flex-start',
     height: 100,
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
     padding: 18
+  },
+  DetailItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    alignItems: 'flex-start'
   },
   DetailItemContent: {
     flexDirection: 'row',
     alignItems: 'center'
   },
   DetailItemMasterInfoContent: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     justifyContent: 'center'
   },
   DetailItemMasterSubInfoContent: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -181,16 +189,19 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_BRIEF_DETAIL_TITLE_CONTAINER
   },
   BriefDetailTitle: {
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailTitleSuffix: {
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX
   },
   BriefDetailSubtitle: {
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_SUBTITLE
@@ -236,12 +247,6 @@ module.exports = StyleSheet.create({
   },
   Center_ContentAlignment: {
     alignItems: 'center'
-  },
-  LTR_ContentAlignment: {
-    alignItems: 'flex-start'
-  },
-  RTL_ContentAlignment: {
-    alignItems: 'flex-end'
   },
   __Gobal_Icons_In_Pilot: {
     ..._CUSTOM___GLOBAL_ICONS_IN_PILOT

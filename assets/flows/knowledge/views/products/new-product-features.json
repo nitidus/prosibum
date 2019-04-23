@@ -1,10 +1,12 @@
 {
   "pilot": {
     "title": {
-      "en": "New Product"
+      "en": "New Product",
+      "fa": "محصول جدید"
     },
     "subtitle": {
-      "en": "Product Features"
+      "en": "Product Features",
+      "fa": "ویژگی‌های محصول جدید"
     },
     "rightIcon": "plus"
   },
@@ -14,17 +16,20 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Units Feature"
+            "en": "Units Feature",
+            "fa": "ویژگی واحدهای اندازه‌گیری"
           },
           "content": {
             "title": {
               "suffix": {
-                "en": "Unit Type"
+                "en": "Unit Type",
+                "fa": "نوع واحد"
               }
             },
             "firstFeature": {
               "title": {
-                "en": "Minimum Order"
+                "en": "Minimum Order",
+                "fa": "حداقل تعداد سفارش"
               },
               "icon": {
                 "name": "grading"
@@ -32,7 +37,8 @@
             },
             "secondFeature": {
               "title": {
-                "en": "Maximum Order"
+                "en": "Maximum Order",
+                "fa": "حداکثر تعداد سفارش"
               },
               "icon": {
                 "name": "grading"
@@ -40,7 +46,8 @@
             },
             "thirdFeature": {
               "title": {
-                "en": "Quantity"
+                "en": "Quantity",
+                "fa": "تعداد"
               },
               "icon": {
                 "name": "grading"
@@ -50,7 +57,8 @@
         },
         "null": {
           "title": {
-            "en": "No features have been appended yet."
+            "en": "No features have been appended yet.",
+            "fa": "هنوز هیچ ویژگی اضافه نشده است."
           }
         }
       }
@@ -65,7 +73,8 @@
       "type": "BUTTON",
       "title": {
         "suffix": {
-          "en": "Customized"
+          "en": "Customized",
+          "fa": "شخصی‌سازی‌شده"
         }
       },
       "options": {
@@ -77,7 +86,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Feature"
+            "en": "Append Feature",
+            "fa": "اضافه کردن ویژگی"
           }
         }
       }
@@ -87,7 +97,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Photos"
+            "en": "Append Photos",
+            "fa": "اضافه کردن تصاویر"
           }
         }
       }

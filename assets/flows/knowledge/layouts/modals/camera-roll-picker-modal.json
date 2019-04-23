@@ -13,25 +13,32 @@
             "type": "BUTTON",
             "context": [
               {
-                "en": "Album"
+                "en": "Album",
+                "fa": "آلبوم"
               },
               {
-                "en": "All"
+                "en": "All",
+                "fa": "همه"
               },
               {
-                "en": "Event"
+                "en": "Event",
+                "fa": "رویداد"
               },
               {
-                "en": "Faces"
+                "en": "Faces",
+                "fa": "صورت‌ها"
               },
               {
-                "en": "Library"
+                "en": "Library",
+                "fa": "آرشیو‌شده"
               },
               {
-                "en": "Photo Stream"
+                "en": "Photo Stream",
+                "fa": "تصاویر فضای ابری"
               },
               {
-                "en": "Saved Photos"
+                "en": "Saved Photos",
+                "fa": "تصاویر ذخیره‌شده"
               }
             ]
           }

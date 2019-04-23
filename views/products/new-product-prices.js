@@ -132,7 +132,7 @@ class NewProductPrices extends Component<{}> {
                         }
                       }));
 
-                PRICE_OPTION_CUSTOM_CONTAINER[((I18nManager.isRTL)? 'left': 'right')] = Styles.Content.marginHorizontal;
+                PRICE_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
 
                 return (
                   <Options

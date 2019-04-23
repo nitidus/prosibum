@@ -13,10 +13,7 @@ const { width, height } = Dimensions.get('window'),
 var _CUSTOM_CONTENT = {
       marginVertical: 15,
       marginHorizontal: 15
-    },
-    _CUSTOM_BUTTON_CONTAINER = {};
-
-_CUSTOM_BUTTON_CONTAINER[((I18nManager.isRTL)? 'left': 'right')] = 15;
+    };
 
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
@@ -36,11 +33,12 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_CONTENT
   },
   ButtonContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     position: 'absolute',
     height: 64,
     borderRadius: 5,
     overflow: 'hidden',
-    ..._CUSTOM_BUTTON_CONTAINER
+    right: 15
   },
   FullButtonContent: {
     height: '100%',

@@ -19,7 +19,8 @@
         "state": {
           "normal": {
             "title": {
-              "en": "Change"
+              "en": "Change",
+              "fa": "تغییر بده"
             }
           }
         }

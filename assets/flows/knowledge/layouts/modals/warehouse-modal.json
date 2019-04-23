@@ -7,7 +7,8 @@
       "firstInput": {
         "type": "TEXT",
         "title": {
-          "en": "Warehouse Name"
+          "en": "Warehouse Name",
+          "fa": "نام انبار"
         }
       },
       "submitInput": {
@@ -15,7 +16,8 @@
         "state": {
           "normal": {
             "title": {
-              "en": "Append It"
+              "en": "Append It",
+              "fa": "اضافه کن"
             }
           }
         }

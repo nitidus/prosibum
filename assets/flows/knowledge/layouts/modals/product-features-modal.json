@@ -12,7 +12,8 @@
           "self": {
             "type": "BUTTON",
             "title": {
-              "en": "Feature Type"
+              "en": "Feature Type",
+              "fa": "نوع ویژگی"
             },
             "icon": {
               "name": "grading"
@@ -27,7 +28,8 @@
                     "self": {
                       "type": "BUTTON",
                       "title": {
-                        "en": "Unit Type"
+                        "en": "Unit Type",
+                        "fa": "نوع واحد"
                       },
                       "icon": {
                         "name": "grading"
@@ -35,7 +37,8 @@
                     },
                     "empty": {
                       "title": {
-                        "en": "There's no unit."
+                        "en": "There's no unit.",
+                        "fa": "هیچ واحدی وجود ندارد."
                       }
                     }
                   }
@@ -43,7 +46,8 @@
                 "firstInput": {
                   "type": "NUMERIC",
                   "title": {
-                    "en": "Minimum Order Quantity"
+                    "en": "Minimum Order Quantity",
+                    "fa": "حداقل تعداد سفارش"
                   },
                   "options": {
                     "maxLength": 9
@@ -52,7 +56,8 @@
                 "secondInput": {
                   "type": "NUMERIC",
                   "title": {
-                    "en": "Maximum Order Quantity"
+                    "en": "Maximum Order Quantity",
+                    "fa": "حداکثر تعداد سفارش"
                   },
                   "options": {
                     "maxLength": 9
@@ -61,7 +66,8 @@
                 "thirdInput": {
                   "type": "NUMERIC",
                   "title": {
-                    "en": "Quantity"
+                    "en": "Quantity",
+                    "fa": "تعداد"
                   },
                   "options": {
                     "maxLength": 9
@@ -72,7 +78,8 @@
                 "firstInput": {
                   "type": "TEXT",
                   "title": {
-                    "en": "Description"
+                    "en": "Description",
+                    "fa": "توضیحات"
                   },
                   "options": {
                     "multiline": true
@@ -83,13 +90,15 @@
                 "firstInput": {
                   "type": "TEXT",
                   "title": {
-                    "en": "Customized Feature Name"
+                    "en": "Customized Feature Name",
+                    "fa": "نام ویژگی شخصی‌سازی‌شده"
                   }
                 },
                 "secondInput": {
                   "type": "TEXT",
                   "title": {
-                    "en": "Customized Feature Value"
+                    "en": "Customized Feature Value",
+                    "fa": "مقدار ویژگی شخصی‌سازی‌شده"
                   }
                 }
               }
@@ -97,7 +106,8 @@
           },
           "empty": {
             "title": {
-              "en": "There's no feature."
+              "en": "There's no feature.",
+              "fa": "هیچ ویژگی وجود ندارد."
             }
           }
         }
@@ -105,7 +115,8 @@
       "submitInput": {
         "type": "BUTTON",
         "prefix": {
-          "en": "Append"
+          "en": "Append",
+          "fa": "اضافه کن"
         }
       }
     }

@@ -198,12 +198,16 @@ module.exports = StyleSheet.create({
     flex: 1
   },
   ComplexHeaderTitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     ..._CUSTOM_HEADER_TITLE
   },
   ComplexHeaderSubtitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
+    textAlign: 'left',
     color: colors.single.lavenderGray,
     ..._CUSTOM_HEADER_SUBTITLE
   },

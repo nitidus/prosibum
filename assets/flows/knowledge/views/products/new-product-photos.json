@@ -1,10 +1,12 @@
 {
   "pilot": {
     "title": {
-      "en": "New Product"
+      "en": "New Product",
+      "fa": "محصول جدید"
     },
     "subtitle": {
-      "en": "Product Photos"
+      "en": "Product Photos",
+      "fa": "تصاویر محصول"
     },
     "rightIcon": "plus"
   },
@@ -15,7 +17,8 @@
         "normal": {
           "type": "PHOTO",
           "title": {
-            "en": "Product Photo"
+            "en": "Product Photo",
+            "fa": "تصویر محصول"
           },
           "options": {
             "horizontalOnly": true
@@ -23,7 +26,8 @@
         },
         "null": {
           "title": {
-            "en": "No photos have been appended yet."
+            "en": "No photos have been appended yet.",
+            "fa": "هنوز هیچ تصویری ایجاد نشده است."
           }
         }
       }
@@ -38,7 +42,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Feature"
+            "en": "Append Photo",
+            "fa": "اضافه کردن تصویر"
           }
         }
       }
@@ -48,7 +53,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Prices"
+            "en": "Append Prices",
+            "fa": "اضافه کردن قیمت‌ها"
           }
         }
       }

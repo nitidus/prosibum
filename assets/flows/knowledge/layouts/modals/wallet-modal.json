@@ -13,7 +13,8 @@
             "self": {
               "type": "BUTTON",
               "title": {
-                "en": "Wallet Type"
+                "en": "Wallet Type",
+                "fa": "نوع کیف پول"
               }
             }
           }
@@ -21,7 +22,8 @@
         "firstInput": {
           "type": "TEXT",
           "title": {
-            "en": "Wallet Name"
+            "en": "Wallet Name",
+            "fa": "نام کیف پول"
           }
         },
         "submitInput": {
@@ -29,7 +31,8 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Increase Credit"
+                "en": "Increase Credit",
+                "fa": "افزایش اعتبار"
               }
             }
           }
@@ -39,7 +42,8 @@
         "firstInput": {
           "type": "NUMERIC",
           "title": {
-            "en": "Credit Amount"
+            "en": "Credit Amount",
+            "fa": "میزان اعتبار"
           }
         },
         "optionalLinkInput": {
@@ -47,7 +51,8 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Choose plan"
+                "en": "Choose plan",
+                "fa": "انتخاب طرح"
               }
             }
           }
@@ -57,14 +62,16 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Checkout"
+                "en": "Checkout",
+                "fa": "پرداخت"
               }
             }
           }
         },
         "quickLink": {
           "title": {
-            "en": "Want to change currency or wallet name?"
+            "en": "Want to change currency or wallet name?",
+            "fa": "قصد تغییر نام کیف پول یا نوع ارز را دارید؟"
           }
         }
       },
@@ -74,7 +81,8 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Plans"
+                "en": "Plans",
+                "fa": "طرح‌ها"
               },
               "content": {
                 "title": {
@@ -86,7 +94,8 @@
             },
             "loading": {
               "title": {
-                "en": "Plans Amount"
+                "en": "Plans Amount",
+                "fa": "میزان طرح"
               }
             }
           }
@@ -96,14 +105,16 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Checkout"
+                "en": "Checkout",
+                "fa": "پرداخت"
               }
             }
           }
         },
         "quickLink": {
           "title": {
-            "en": "You don't want use the default plans?"
+            "en": "You don't want use the default plans?",
+            "fa": "قصد تغییر طرح پیشفرض را دارید؟"
           }
         }
       },
@@ -111,20 +122,23 @@
         "firstInput": {
           "type": "credit-card",
           "title": {
-            "en": "Card Number"
+            "en": "Card Number",
+            "fa": "شماره کارت"
           }
         },
         "firstCarousel": {
           "type": "BUTTON",
           "title": {
-            "en": "Expiration Month"
+            "en": "Expiration Month",
+            "fa": "ماه انقضا"
           },
           "content": {
             "title": {
               "en": "Expiration Month Item"
             },
             "splitter": {
-              "en": ","
+              "en": ",",
+              "fa": ","
             }
           },
           "options": {
@@ -135,7 +149,8 @@
         "secondCarousel": {
           "type": "BUTTON",
           "title": {
-            "en": "Expiration Year"
+            "en": "Expiration Year",
+            "fa": "سال انقضا"
           },
           "content": {
             "title": {
@@ -150,7 +165,8 @@
         "secondInput": {
           "type": "NUMERIC",
           "title": {
-            "en": "3-digit CVV"
+            "en": "3-digit CVV",
+            "fa": "CVV سه رقمی"
           }
         },
         "submitInput": {
@@ -158,7 +174,8 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Checkout"
+                "en": "Checkout",
+                "fa": "پرداخت"
               }
             }
           }
@@ -167,12 +184,14 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Want to change wallet initial credit?"
+                "en": "Want to change wallet initial credit?",
+                "fa": "قصد تغییر میزان اولیه کیف پول را دارید؟"
               }
             },
             "plan": {
               "title": {
-                "en": "Want to change wallet initial plan?"
+                "en": "Want to change wallet initial plan?",
+                "fa": "قصد تغییر طرح اولیه کیف پول را دارید؟"
               }
             }
           }

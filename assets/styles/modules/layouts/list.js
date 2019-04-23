@@ -51,7 +51,8 @@ module.exports = StyleSheet.create({
   },
   Row: {
     justifyContent: 'flex-start',
-    flexDirection: (I18nManager.isRTL)? 'row-reverse': 'row',
+    flexDirection: 'row',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     backgroundColor: colors.single.mercury,
     ..._CUSTOM_ROW
   },
@@ -60,7 +61,7 @@ module.exports = StyleSheet.create({
     display: 'flex',
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
-    textAlign: (I18nManager.isRTL)? 'right': 'left',
+    textAlign: 'left',
     ..._CUSTOM_DEFAULT_TEXT_STYLE
   },
   DefaultBackButtonTextStyle: {

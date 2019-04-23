@@ -459,9 +459,33 @@ export const Input = (props) => {
 
     case 'link':
     case 'text-link':
+      var _LINK_CUSTOM_STYLES = [
+            Styles.TextInputLinkContainer
+          ],
+          _LINK_TEXT_CUSTOM_STYLES = [
+            Styles.TextInputConatiner
+          ];
+
+      if (I18nManager.isRTL){
+        _LINK_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
+        _LINK_TEXT_CUSTOM_STYLES.push(Styles.NormalTextInputConatiner);
+        _LINK_TEXT_CUSTOM_STYLES.push({
+          width: '72%',
+          textAlign: 'right'
+        });
+      }else{
+        _LINK_CUSTOM_STYLES.push({
+          right: 18
+        });
+        _LINK_TEXT_CUSTOM_STYLES.push(Styles.ReverseTextInputConatiner)
+        _LINK_TEXT_CUSTOM_STYLES.push({
+          width: '72%'
+        });
+      }
+
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.TextInputLinkContainer}
+          containerStyle={_LINK_CUSTOM_STYLES}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -485,11 +509,7 @@ export const Input = (props) => {
             attitude.style
           ]}>
             <TextInput
-              style={[
-                Styles.TextInputConatiner,
-                Styles.ReverseTextInputConatiner,
-                { width: '72%' }
-              ]}
+              style={_LINK_TEXT_CUSTOM_STYLES}
               autoCapitalize={attitude.autoCapitalize}
               value={attitude.value}
               placeholder={attitude.placeholder}

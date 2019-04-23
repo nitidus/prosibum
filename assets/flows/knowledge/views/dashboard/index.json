@@ -14,25 +14,29 @@
     "content": [
       {
         "title": {
-          "en": "Wallets"
+          "en": "Wallets",
+          "fa": "کیف‌پول‌ها"
         },
         "screen": {
           "name": "Wallets"
         },
         "unit": {
-          "en": "PCS"
+          "en": "PCS",
+          "fa": "عدد"
         },
         "gradientKey": "chaid"
       },
       {
         "title": {
-          "en": "Roles"
+          "en": "Roles",
+          "fa": "نقش‌ها"
         },
         "screen": {
           "name": "Roles"
         },
         "unit": {
-          "en": "PCS"
+          "en": "PCS",
+          "fa": "عدد"
         },
         "gradientKey": "analue"
       }

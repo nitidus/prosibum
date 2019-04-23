@@ -139,7 +139,7 @@ const ProductCategoriesModal = (props) => {
               }
             }
 
-            _ICON_CUSTOM_STYLE[((I18nManager.isRTL)? 'marginLeft': 'marginRight')] = Styles.Content.marginVertical;
+            _ICON_CUSTOM_STYLE.marginRight = Styles.Content.marginVertical;
 
             return (
               <Icon

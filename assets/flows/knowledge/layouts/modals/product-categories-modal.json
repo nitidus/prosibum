@@ -21,7 +21,8 @@
           },
           "empty": {
             "title": {
-              "en": "There's no Product categories."
+              "en": "There's no Product categories.",
+              "fa": "هیچ دسته‌بندی وجود ندارد."
             }
           }
         }
@@ -31,7 +32,8 @@
         "state": {
           "normal": {
             "title": {
-              "en": "Approve It"
+              "en": "Approve It",
+              "fa": "تایید کن"
             }
           }
         }

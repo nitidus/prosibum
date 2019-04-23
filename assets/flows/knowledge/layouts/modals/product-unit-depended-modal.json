@@ -14,12 +14,14 @@
             "content": {
               "title": {
                 "suffix": {
-                  "en": "Unit Type"
+                  "en": "Unit Type",
+                  "fa": "نوع واحد"
                 }
               },
               "firstFeature": {
                 "title": {
-                  "en": "Minimum Order"
+                  "en": "Minimum Order",
+                  "fa": "حداقل سفارش"
                 },
                 "icon": {
                   "name": "grading"
@@ -27,7 +29,8 @@
               },
               "secondFeature": {
                 "title": {
-                  "en": "Maximum Order"
+                  "en": "Maximum Order",
+                  "fa": "حداکثر سفارش"
                 },
                 "icon": {
                   "name": "grading"
@@ -35,7 +38,8 @@
               },
               "thirdFeature": {
                 "title": {
-                  "en": "Quantity"
+                  "en": "Quantity",
+                  "fa": "تعداد"
                 },
                 "icon": {
                   "name": "grading"
@@ -45,7 +49,8 @@
           },
           "null": {
             "title": {
-              "en": "No units have been appended yet."
+              "en": "No units have been appended yet.",
+              "fa": "هیچ واحدی اضافه نشده است."
             }
           }
         }
@@ -53,10 +58,12 @@
       "submitInput": {
         "type": "BUTTON",
         "prefix": {
-          "en": "Append"
+          "en": "Append",
+          "fa": "اضافه کن"
         },
         "suffix": {
-          "en": "Unit"
+          "en": "Unit",
+          "fa": "واحد"
         }
       }
     }

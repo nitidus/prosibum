@@ -7,13 +7,15 @@
   "firstInput": {
     "type": "PHOTO",
     "title": {
-      "en": "Brand Photo"
+      "en": "Brand Photo",
+      "fa": "تصویر برند"
     }
   },
   "secondInput": {
     "type": "TEXT",
     "title": {
-      "en": "Brand Name"
+      "en": "Brand Name",
+      "fa": "نام برند"
     }
   },
   "firstCarouselContainer": {
@@ -34,7 +36,8 @@
               "en": "Brand Role Error"
             },
             "content": {
-              "en": "Retry To Fetch"
+              "en": "Retry To Fetch",
+              "fa": "تلاش مجدد"
             }
           }
         }
@@ -43,7 +46,8 @@
   },
   "quickLink": {
     "title": {
-      "en": "You've not specified your subsets?"
+      "en": "You've not specified your subsets?",
+      "fa": "هنوز زیرمجموعه‌های خود را مشخص نکرده‌اید؟"
     }
   },
   "submitInput": {
@@ -51,7 +55,8 @@
     "state": {
       "normal": {
         "title": {
-          "en": "Save"
+          "en": "Save",
+          "fa": "ذخیره"
         }
       },
       "loading": {

@@ -6,19 +6,24 @@
     "subtitle": {
       "suffix": [
         {
-          "en": "Dollar"
+          "en": "Dollar",
+          "fa": "دلار"
         },
         {
-          "en": "Transaction Point"
+          "en": "Transaction Point",
+          "fa": "تررنزکشن پوینت"
         },
         {
-          "en": "Rial"
+          "en": "Rial",
+          "fa": "ریال"
         },
         {
-          "en": "Pound"
+          "en": "Pound",
+          "fa": "پوند"
         },
         {
-          "en": "Euro"
+          "en": "Euro",
+          "fa": "یورو"
         }
       ]
     }
@@ -28,18 +33,21 @@
     "state": {
       "deposit": {
         "title": {
-          "en": "Deposit Transaction"
+          "en": "Deposit Transaction",
+          "fa": "تراکنش واریز"
         }
       },
       "withdraw": {
         "title": {
-          "en": "Withdraw Transaction"
+          "en": "Withdraw Transaction",
+          "fa": "ترراکنش برداشت"
         }
       }
     },
     "previous_balance": {
       "sign": {
-        "en": "$"
+        "en": "$",
+        "fa": "ریال"
       },
       "icon": {
         "name": "output",
@@ -48,22 +56,26 @@
         }
       },
       "suffix": {
-        "en": "Previous Balance"
+        "en": "Previous Balance",
+        "fa": "موجودی قبلی"
       }
     },
     "difference_balance": {
       "sign": {
-        "en": "$"
+        "en": "$",
+        "fa": "ریال"
       },
       "icon": {
         "name": "pay"
       },
       "suffix": {
-        "en": "Difference Balance"
+        "en": "Difference Balance",
+        "fa": "میزان تغییر موجودی"
       }
     }
   },
   "link": {
-    "en": "There's no transaction."
+    "en": "There's no transaction.",
+    "fa": "هیچ تراکنشی وجود ندارد."
   }
 }

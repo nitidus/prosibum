@@ -103,7 +103,7 @@ class NewProductPhotos extends Component<{}> {
                   _SINGLE_PHOTO_OTHER_PROPS.gradient = Global.colors.pair.aqrulean;
                 }
 
-                PHOTO_OPTION_CUSTOM_CONTAINER[((I18nManager.isRTL)? 'left': 'right')] = Styles.Content.marginHorizontal;
+                PHOTO_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
 
                 return (
                   <Options

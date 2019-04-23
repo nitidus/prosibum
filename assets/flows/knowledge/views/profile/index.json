@@ -1,23 +1,29 @@
 {
   "pilot": {
     "title": {
-      "en": "Profile"
+      "en": "Profile",
+      "fa": "پروفایل"
     },
     "tabs": [
       {
-        "en": "Personal"
+        "en": "Personal",
+        "fa": "شخصی"
       },
       {
-        "en": "Technical"
+        "en": "Technical",
+        "fa": "فنی"
       },
       {
-        "en": "Certification"
+        "en": "Certification",
+        "fa": "مجوزها"
       },
       {
-        "en": "History"
+        "en": "History",
+        "fa": "تاریخچه"
       },
       {
-        "en": "Postal"
+        "en": "Postal",
+        "fa": "پستی"
       }
     ]
   }

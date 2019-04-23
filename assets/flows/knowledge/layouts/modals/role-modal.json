@@ -17,7 +17,8 @@
       "firstInput": {
         "type": "EMAIL",
         "title": {
-          "en": "Email"
+          "en": "Email",
+          "fa": "ایمیل"
         }
       },
       "submitInput": {
@@ -25,7 +26,8 @@
         "state": {
           "normal": {
             "title": {
-              "en": "Send Invitation"
+              "en": "Send Invitation",
+              "fa": "ارسال دعوتنامه"
             }
           }
         }
@@ -33,7 +35,8 @@
     },
     "noContent": {
       "title": {
-        "en": "There's no defined sub-role."
+        "en": "There's no defined sub-role.",
+        "fa": "هیچ زیر نقشی وجود ندارد."
       }
     }
   }

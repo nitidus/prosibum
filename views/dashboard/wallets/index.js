@@ -110,7 +110,7 @@ class Wallets extends Component<{}> {
                         _ITEM_GRADIENT = Global.colors.pair.analue;
                       }
 
-                      _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix[_LANGUAGE]}${(item.transactions.amount > 1)? 's': ''}`;
+                      _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix[_LANGUAGE]}${((item.transactions.amount > 1) && (_LANGUAGE == 'en'))? 's': ''}`;
 
                       return (
                         <Input

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, KeyboardAvoidingView, Text, TouchableWithoutFeedback, Platform, Animated, Easing } from 'react-native';
+import { StatusBar, View, KeyboardAvoidingView, Text, TouchableWithoutFeedback, Platform, I18nManager, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
 import { Pilot, TabBarItem, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
@@ -71,7 +71,7 @@ export const NewProductContainer = (props) => {
                 }
               }}>
                 <Icon
-                  name="arrow left"
+                  name={`arrow ${(I18nManager.isRTL)? 'right': 'left'}`}
                   width={Styles.__Gobal_Icons_In_Pilot.width} />
             </PinnedSide>
 
