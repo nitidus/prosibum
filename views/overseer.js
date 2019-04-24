@@ -58,7 +58,9 @@ class Overseer extends Component<{}> {
         _OTHER_PROPS = {
           language: this._language
         },
-        _CONTENT_OTHER_PROPS = {};
+        _CONTENT_OTHER_PROPS = {
+          language: this._language
+        };
 
     switch (_CURRENT_TAB_IN_KEY_FORMAT) {
       case 'DASHBOARD':
@@ -67,10 +69,8 @@ class Overseer extends Component<{}> {
         };
         _OTHER_PROPS.rightIcon = 'for-you';
 
-        if ((props.overseer.topTabs.length === 0) && (Object.keys(props.overseer.currentTopTab).length === 0)){
-          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
-          _CONTENT_OTHER_PROPS.sub = _OTHER_PROPS.currentTopTab[_LANGUAGE];
-        }
+        _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
+        _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab[_LANGUAGE];
 
         RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
         break;
@@ -104,17 +104,15 @@ class Overseer extends Component<{}> {
           _OTHER_PROPS.onTopBarPress = (tabName) => props.setTopPilotCurrentTab(tabName);
 
           _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
-          _CONTENT_OTHER_PROPS.sub = _OTHER_PROPS.currentTopTab[_LANGUAGE];
+          _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab[_LANGUAGE];
         }
 
         RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
         break;
 
       case 'MESSAGES':
-        if ((props.overseer.topTabs.length === 0) && (Object.keys(props.overseer.currentTopTab).length === 0)){
-          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
-          _CONTENT_OTHER_PROPS.sub = _OTHER_PROPS.currentTopTab[_LANGUAGE];
-        }
+        _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
+        _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab[_LANGUAGE];
 
         RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
         break;

@@ -50,11 +50,15 @@ module.exports = StyleSheet.create({
   Container: {
     justifyContent: 'center'
   },
+  CarouselContainer: {
+    direction: 'ltr'
+  },
   Content: {
     ..._CUSTOM_CONTENT
   },
   DetailContainer: {
     height: 'auto',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     marginTop: _CUSTOM_CONTENT.marginVertical
   },
   BriefDetailContainer: {

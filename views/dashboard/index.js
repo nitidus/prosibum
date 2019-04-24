@@ -35,24 +35,31 @@ export const Dashboard = (props) => {
           name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarousel.title.en)}
           data={[
             {
-              key: "wallets",
+              name: {
+                en: "wallets",
+                fa: "کیف‌پول‌ها"
+              },
               value: 8
             },
             {
-              key: "roles",
+              name: {
+                en: "roles",
+                fa: "نقش‌ها"
+              },
               value: 12
             }
           ]}
           firstItem={0}
           itemWidth={_SCREEN.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
+          style={Styles.CarouselContainer}
           onLayout={({ item, i }) => {
             const _CAROUSEL_CURRENT_ITEM_INDEX = _FIRST_CAROUSEL_ITEMS.findIndex((briefDetailItem, j) => {
-                    const _ITEM = Functions._convertTokenToKeyword(item.key),
+                    const _ITEM = Functions._convertTokenToKeyword(item.name.en),
                           _CURRENT_ITEM = Functions._convertTokenToKeyword(briefDetailItem.title.en);
 
                     return (_ITEM === _CURRENT_ITEM);
                   }),
-                  _ITEM_KEY = Functions._convertTokenToKeyword(item.key),
+                  _ITEM_KEY = Functions._convertTokenToKeyword(item.name[attitude.language]),
                   _ITEM_TITLE = Functions._convertKeywordToToken(_FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].title[[attitude.language]]),
                   _ITEM_TARGET_SCREEN = _FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].screen.name,
                   _ITEM_UNIT = _FIRST_CAROUSEL_ITEMS[_CAROUSEL_CURRENT_ITEM_INDEX].unit[[attitude.language]],
