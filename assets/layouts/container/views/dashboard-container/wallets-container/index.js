@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Text, Animated, Easing } from 'react-native';
+import { StatusBar, View, Text, I18nManager, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../../styles/index';
 import { Input } from '../../../../../components/index';
@@ -85,19 +85,23 @@ export const WalletsContainer = (props) => {
 
   const _TABS = (typeof attitude.pilotData != 'undefined')? attitude.pilotData.map((tabItem, i) => {
           return Functions._returnCurrencyDependOnLanguage(tabItem.type || tabItem);
-        }): [];
-        _CURRENT_TAB_CONTENT = (typeof attitude.currentPilotItem != 'undefined')? ((typeof attitude.currentPilotItem.type != 'undefined')? attitude.currentPilotItem.type: ''): '',
+        }): [],
+        _CURRENT_TAB_CONTENT = ((typeof attitude.currentPilotItem.type != 'undefined')? attitude.currentPilotItem.type: ''),
+        _CURRENT_TAB_INDEX = _CURRENT_TAB_CONTENT,
         _CURRENT_TAB = Functions._returnCurrencyDependOnLanguage(_CURRENT_TAB_CONTENT) || '';
 
   var _BOTTOM_PINNED_ITEMS;
 
-  if ((_TABS.length > 0) && (_CURRENT_TAB_CONTENT !== '')){
+  if ((_TABS.length > 0) && (Object.keys(_CURRENT_TAB).length > 0)){
     _BOTTOM_PINNED_ITEMS = (
       <PinnedSide
         type="bottom"
-        items={_TABS}
-        current={_CURRENT_TAB}
-        onPress={attitude.onPilotTabItemPress} />
+        items={attitude.pilotData}
+        current={attitude.currentPilotItem}
+        shownItems={_TABS}
+        shownCurrent={_CURRENT_TAB}
+        onPress={attitude.onPilotTabItemPress}
+        language={attitude.language} />
     );
   }
 
@@ -117,7 +121,7 @@ export const WalletsContainer = (props) => {
                 navigation.navigate('Overseer');
               }}>
                 <Icon
-                  name="arrow left"
+                  name={`arrow ${(I18nManager.isRTL)? 'right': 'left'}`}
                   width={Styles.__Gobal_Icons_In_Pilot.width} />
             </PinnedSide>
             <PinnedSide

@@ -2,6 +2,7 @@ import { AsyncStorage, CameraRoll, PermissionsAndroid, Platform, NativeModules, 
 import RNFetchBlob from 'rn-fetch-blob';
 import Lodash from 'lodash';
 import Moment from 'moment';
+import 'moment/min/locales.min';
 
 import Utils from '../utils';
 const { ObjectID } = Utils.Structures;
@@ -154,8 +155,12 @@ module.exports = {
       throw new Error('You should define a numerical value.')
     }
   },
-  _convertDateToHumanReadableFormat: (isoDate) => {
+  _convertDateToHumanReadableFormat: (isoDate, language) => {
+    const _LANGUAGE = language || 'en';
+
     if (typeof isoDate == 'string'){
+      Moment.locale(_LANGUAGE);
+
       return Moment(isoDate).fromNow();
     }else{
       throw new Error("You should define the date as ISO date in string format.");
@@ -222,16 +227,16 @@ module.exports = {
       const _CURRENCY_TYPE_KEY = module.exports._convertTokenToKey(currency);
 
       const _PILOT_TABS_TITLE = __WALLETS.pilot.content.map((item, j) => {
-          return item.title;
-        }),
-        _FOUNDED_TAB_NAME_INDEX = _PILOT_TABS_TITLE.findIndex((item) => {
-          return (_CURRENCY_TYPE_KEY === module.exports._convertTokenToKey(item.en));
-        });
+              return item.title;
+            }),
+            _FOUNDED_TAB_NAME_INDEX = _PILOT_TABS_TITLE.findIndex((item) => {
+              return (_CURRENCY_TYPE_KEY === module.exports._convertTokenToKey(item.en));
+            });
 
       if (_FOUNDED_TAB_NAME_INDEX > -1) {
-        return _PILOT_TABS_TITLE[_FOUNDED_TAB_NAME_INDEX].en;
+        return _PILOT_TABS_TITLE[_FOUNDED_TAB_NAME_INDEX];
       } else {
-        return module.exports._convertKeywordToToken(currency);
+        return currency;
       }
     }
   },

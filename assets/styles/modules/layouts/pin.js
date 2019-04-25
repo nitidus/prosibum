@@ -78,7 +78,8 @@ module.exports = StyleSheet.create({
   },
   PinContent: {
     flexDirection: 'row',
-    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    alignItems: 'center'
   },
   PinDefaultContentItemContainer: {
     flexGrow: 1

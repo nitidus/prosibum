@@ -119,6 +119,7 @@ module.exports = StyleSheet.create({
     alignItems: 'center'
   },
   WalletItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     ..._CUSTOM_WALLET_ITEM_CONTAINER,
     padding: 18
   },
@@ -133,11 +134,15 @@ module.exports = StyleSheet.create({
     marginRight: 18
   },
   BriefDetailTitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailSubtitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_SUBTITLE

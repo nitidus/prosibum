@@ -1,7 +1,8 @@
 {
   "pilot": {
     "title": {
-      "en": "Wallets"
+      "en": "Wallets",
+      "fa": "کیف‌پول‌ها"
     },
     "content": [
       {
@@ -82,7 +83,7 @@
     "subtitle": {
       "sign": {
         "en": "$",
-        "fa": "رریال"
+        "fa": "ریال"
       },
       "suffix": {
         "en": "Withdraw",
