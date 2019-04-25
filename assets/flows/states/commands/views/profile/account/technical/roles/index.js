@@ -22,7 +22,27 @@ module.exports = {
         const _FINAL_RESPONSE = _ROLES.data;
 
         if (_FINAL_RESPONSE.meta.code === 200){
-          const _DATA = _FINAL_RESPONSE.data;
+          var _ALL_LOCALE_BASED_ROLES = Functions._getAllRolesBaseOnLocale(),
+                _DATA = _FINAL_RESPONSE.data;
+
+          if (_DATA.length > 0){
+            _DATA = _DATA.map((tabItem, i) => {
+              const _ROW = tabItem,
+                    _ROLE = _ROW.role,
+                    _LOCALE_BASED_ROLE_INDEX = _ALL_LOCALE_BASED_ROLES.findIndex((indexCheckingItem, j) => {
+                      const _INDEX_CHECKING_ROLE = Functions._convertTokenToKey(indexCheckingItem.title.en),
+                            _ROLE_KEY = Functions._convertTokenToKey(_ROLE);
+
+                      return (_ROLE_KEY === _INDEX_CHECKING_ROLE);
+                    }),
+                    _LOCALE_BASED_ROLE = _ALL_LOCALE_BASED_ROLES[_LOCALE_BASED_ROLE_INDEX].title;
+
+              return {
+                ..._ROW,
+                role: _LOCALE_BASED_ROLE
+              };
+            });
+          }
 
           dispatch({
             type: ROLES.FETCH_AVAILABLE_ROLES_TYPE,

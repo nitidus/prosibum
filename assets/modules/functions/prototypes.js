@@ -6,7 +6,7 @@ import Moment from 'moment';
 import Utils from '../utils';
 const { ObjectID } = Utils.Structures;
 
-import { countries as __COUNTRIES, languages as __LANGUAGES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
+import { countries as __COUNTRIES, languages as __LANGUAGES, roles as __ROLES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
 const __WALLETS = __VIEWS_CONSTANTS.dashboard.wallets;
 
 import GLOBAL from '../global';
@@ -362,6 +362,23 @@ module.exports = {
       }
     })
   },
+  _getAllRolesBaseOnLocale: () => {
+    return __ROLES;
+  },
+  _getAppropriateRoleBaseOnLocale: (selectedRole, language) => {
+    const _FOUNDED_ROLE_INDEX = __ROLES.findIndex((role) => {
+            const _ROLE = module.exports._convertTokenToKey(role.title.en),
+                  _SELECTED_ROLE = module.exports._convertTokenToKey(selectedRole);
+
+                  return (_SELECTED_ROLE === _ROLE);
+          });
+
+    if (_FOUNDED_ROLE_INDEX > -1){
+      return __ROLES[_FOUNDED_ROLE_INDEX].title[language];
+    }else{
+      return false;
+    }
+  },
   _generateNextOffset: (offset, limit) => {
     if (typeof offset == 'object') {
       return {
@@ -567,8 +584,8 @@ module.exports = {
 
       if (typeof _NATIVE_SETTINGS.language != 'undefined'){
         const _FOUNDED_LANGUAGE_INDEX = __LANGUAGES.findIndex((language) => {
-                const _CURRENT_LANGUAGE = module.exports._convertTokenToKeyword(language.key),
-                      _TARGET_LANGUAGE = module.exports._convertTokenToKeyword(_NATIVE_SETTINGS.language);
+                const _CURRENT_LANGUAGE = module.exports._convertTokenToKey(language.key),
+                      _TARGET_LANGUAGE = module.exports._convertTokenToKey(_NATIVE_SETTINGS.language);
 
                 return (_CURRENT_LANGUAGE === _TARGET_LANGUAGE);
               }),

@@ -79,9 +79,9 @@ const CameraRollPickerModal = (props) => {
         }
 
   if (attitude.visibility === true){
-    if (props.cameraRollPickerModal.groupTypes.length === 0 && props.cameraRollPickerModal.currentGroupType === ''){
+    if (props.cameraRollPickerModal.groupTypes.length === 0 && Object.keys(props.cameraRollPickerModal.currentGroupType).length === 0){
       const _GROUP_TYPES = __CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.context.map((item, i) => {
-        return Functions._convertKeywordToToken(item[attitude.language]);
+        return item;
       });
 
       props.setCameraRollGroupTypes(_GROUP_TYPES);
@@ -140,8 +140,8 @@ const CameraRollPickerModal = (props) => {
   }
 
   const _CURRENT_GROUP_TYPE_INDEX = props.cameraRollPickerModal.groupTypes.findIndex((item) => {
-          const _GROUP_TYPE = item,
-                _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType;
+          const _GROUP_TYPE = item.en,
+                _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType.en;
 
           return (_CURRENT_GROUP_TYPE === _GROUP_TYPE)
         });
@@ -162,8 +162,8 @@ const CameraRollPickerModal = (props) => {
           itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
           firstItem={_CURRENT_GROUP_TYPE_INDEX}
           onLayout={({ item, index }) => {
-            var _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType,
-                _ITEM_NAME = item.toLowerCase(),
+            var _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType[attitude.language],
+                _ITEM_NAME = item[attitude.language],
                 _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
 
             if (_CURRENT_GROUP_TYPE === item){

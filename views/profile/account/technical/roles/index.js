@@ -104,10 +104,10 @@ class Roles extends Component<{}> {
                 const _ROW = tabItem,
                       _ROLE = _ROW.role;
 
-                return Functions._convertKeywordToToken(_ROLE || _ROLE[_LANGUAGE]);
+                return _ROLE.en;
               }),
               _CURRENT_TAB_CONTENT = (typeof props.roles.currentTab.role != 'undefined')? props.roles.currentTab.role: '',
-              _CURRENT_TAB = Functions._convertKeywordToToken(_CURRENT_TAB_CONTENT);
+              _CURRENT_TAB = _CURRENT_TAB_CONTENT.en;
 
         var _TAB_CONTENT;
 
@@ -132,7 +132,12 @@ class Roles extends Component<{}> {
             _TAB_CONTENT = (
               <ScrollView
                 showsVerticalScrollIndicator={true}
-                contentContainerStyle={Styles.Content}>
+                contentContainerStyle={[
+                  Styles.Content,
+                  {
+                    direction: 'ltr'
+                  }
+                ]}>
                   {
                     props.roles.roles.map((role, i) => {
                       var _SINGLE_ROW_CONTENT,
@@ -150,7 +155,13 @@ class Roles extends Component<{}> {
                                 height={Styles.__Global_Icons_In_Role.height}
                                 style={Styles.ProfileContentWithNoPhoto} />
                             </View>
-                          );
+                          ),
+                          _TARGET_ROLE = '',
+                          _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(role.usergroup.role, _LANGUAGE);
+
+                          if (_DID_FETCH_APPROPRIATE_ROLE !== false){
+                            _TARGET_ROLE = _DID_FETCH_APPROPRIATE_ROLE;
+                          }
 
                       if (typeof role.user != 'undefined'){
                         if ((typeof role.user.profile != 'undefined') && ((typeof role.user.profile.photo != 'undefined') || (typeof role.user.profile_photo != 'undefined') || (typeof role.user.profilePhoto != 'undefined') || (typeof role.userProfilePhoto != 'undefined') || (typeof role.user_profile_photo != 'undefined') || (typeof role.profile_photo != 'undefined') || (typeof role.profilePhoto != 'undefined') || (typeof role.profile != 'undefined'))){
@@ -260,7 +271,7 @@ class Roles extends Component<{}> {
 
                                       <Text
                                         style={Styles.RoleSubtitle}>
-                                          {Functions._convertKeywordToToken(role.usergroup.role)}
+                                          {_TARGET_ROLE}
                                       </Text>
                                   </View>
                               </View>
@@ -316,7 +327,7 @@ class Roles extends Component<{}> {
                                     style={Styles.RoleDetailContent}>
                                       <Text
                                         style={Styles.RoleTitle}>
-                                          {Functions._convertKeywordToToken(role.usergroup.role)}
+                                          {_TARGET_ROLE}
                                       </Text>
                                   </View>
                               </View>
@@ -350,7 +361,7 @@ class Roles extends Component<{}> {
             pilotItems={props.roles.tabs}
             currentPilotItem={props.roles.currentTab}
             onPilotTabItemPress={async (item) => {
-              const _SELECTED_ITEM_INDEX = __TABS.indexOf(item);
+              const _SELECTED_ITEM_INDEX = __TABS.indexOf(item.role.en);
 
               props.setPilotCurrentTab(props.roles.tabs[_SELECTED_ITEM_INDEX]);
 

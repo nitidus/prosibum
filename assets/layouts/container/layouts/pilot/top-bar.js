@@ -294,6 +294,11 @@ export const TopBar = (props) => {
                 var _ATTITUDE_DATA = _TAB_ATTITUDE.data,
                     _ATTITUDE_CURRENT_DATA = _TAB_ATTITUDE.current;
 
+                if ((typeof _CHILD_PROPS.shownItems != 'undefined') && (typeof _CHILD_PROPS.shownCurrent != 'undefined')){
+                  _ATTITUDE_DATA = _CHILD_PROPS.shownItems;
+                  _ATTITUDE_CURRENT_DATA = _CHILD_PROPS.shownCurrent;
+                }
+
                 if (typeof _ATTITUDE_CURRENT_DATA == 'object'){
                   if (typeof _CHILD_PROPS.language != 'undefined'){
                     _TAB_ATTITUDE.language = _CHILD_PROPS.language || 'en';

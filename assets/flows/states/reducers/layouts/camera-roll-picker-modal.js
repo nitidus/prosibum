@@ -3,7 +3,7 @@ const { CAMERA_ROLL_PICKER_MODAL } = LAYOUTS;
 
 const initialState = {
   groupTypes: [],
-  currentGroupType: '',
+  currentGroupType: {},
   cameraRollItems: []
 };
 

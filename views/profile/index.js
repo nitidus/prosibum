@@ -23,12 +23,16 @@ class Profile extends Component<{}> {
 
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { props } = this,
           { tabs } = __CONSTANTS.pilot,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language,
           __TABS = tabs.map((tabItem, i) => {
-            return tabItem.en;
+            return tabItem;
           });
+
+    this._language = _LANGUAGE;
 
     props.setPilotTabs(__TABS);
     props.setPilotCurrentTab(__TABS[0]);
@@ -36,42 +40,55 @@ class Profile extends Component<{}> {
 
   render() {
     const { props } = this,
-          _CURRENT_TAB = Functions._convertTokenToKeyword(props.userProfile.currentTab);
+          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
+          _CURRENT_TAB = (Object.keys(props.userProfile.currentTab).length > 0)? Functions._convertTokenToKeyword(props.userProfile.currentTab.en): '',
+          _CONTAINER_OTHER_PROPS = {
+            language: this._language
+          },
+          _OTHER_PROPS = {
+            language: this._language
+          };
 
     var _TAB_CONTENT;
 
     switch (_CURRENT_TAB) {
       case 'personal':
         _TAB_CONTENT = <PersonalTab
-          {...props} />;
+          {...props}
+          {..._OTHER_PROPS} />;
         break;
       case 'technical':
         _TAB_CONTENT = <TechnicalTab
-          {...props} />;
+          {...props}
+          {..._OTHER_PROPS} />;
         break;
       case 'certification':
         _TAB_CONTENT = <CertificationTab
-          {...props} />
+          {...props}
+          {..._OTHER_PROPS} />
         break;
       case 'history':
         _TAB_CONTENT = <HistoryTab
-          {...props} />
+          {...props}
+          {..._OTHER_PROPS} />
         break;
       case 'postal':
         _TAB_CONTENT = <PostalTab
-          {...props} />
+          {...props}
+          {..._OTHER_PROPS} />
         break;
     }
 
     return (
       <Container
-        title={__CONSTANTS.pilot.title.en}
+        title={__CONSTANTS.pilot.title[_LANGUAGE]}
         pilotItems={props.userProfile.tabs}
         currentPilotItem={props.userProfile.currentTab}
         onPilotTabItemPress={(item) => {
           props.setPilotCurrentTab(item);
         }}
-        {...props}>
+        {...props}
+        {..._CONTAINER_OTHER_PROPS}>
           {_TAB_CONTENT}
       </Container>
     )

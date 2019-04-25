@@ -83,6 +83,7 @@ module.exports = StyleSheet.create({
     paddingBottom: 0
   },
   CameraRollGroupTypesContainer: {
+    direction: 'ltr',
     marginBottom: _CUSTOM_CAMERA_ROLL_ROW_CONTAINER.marginBottom
   },
   CameraRollMajorContainer: {

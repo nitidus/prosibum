@@ -2,7 +2,7 @@ import { VIEWS } from '../../../types/index';
 const { USER_PROFILE } = VIEWS.PROFILE;
 
 const initialState = {
-        currentTab: '',
+        currentTab: {},
         tabs: []
       };
 

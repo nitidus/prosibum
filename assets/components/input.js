@@ -13,6 +13,9 @@ const Styles = Modules.Components.Input;
 
 import { Functions } from '../modules/index';
 
+import { components_constants } from '../flows/knowledge/index';
+const __CONSTANTS = components_constants.input;
+
 const _SCREEN = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((_SCREEN.height === 812 || _SCREEN.width === 812));
 
@@ -175,6 +178,8 @@ export const Input = (props) => {
         if (typeof props.gradient != 'undefined'){
           attitude.gradient = props.gradient;
         }
+
+        attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
 
         attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
 
@@ -777,7 +782,7 @@ export const Input = (props) => {
           </ImageBackground>
         );
 
-        _CAMERAROLL_CONTENT_VERB_MODE = 'Edit';
+        _CAMERAROLL_CONTENT_VERB_MODE = __CONSTANTS.cameraRollPicker.state.filled.verb[attitude.language];
       }else{
         _CAMERAROLL_CONTENT = (
           <View
@@ -790,7 +795,7 @@ export const Input = (props) => {
           </View>
         );
 
-        _CAMERAROLL_CONTENT_VERB_MODE = 'Choose';
+        _CAMERAROLL_CONTENT_VERB_MODE = __CONSTANTS.cameraRollPicker.state.empty.verb[attitude.language];
       }
 
       if (typeof attitude.onLongPress != 'undefined'){

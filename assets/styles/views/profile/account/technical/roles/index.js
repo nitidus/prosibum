@@ -115,6 +115,7 @@ module.exports = StyleSheet.create({
     alignItems: 'center'
   },
   RoleItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     shadowColor: colors.single.rangoonGreen,
     alignItems: 'flex-start',
     elevation: 1,
@@ -142,11 +143,15 @@ module.exports = StyleSheet.create({
     justifyContent: 'center'
   },
   RoleTitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     ..._CUSTOM_ROLE_TITLE
   },
   RoleSubtitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
     ..._CUSTOM_ROLE_SUBTITLE

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Text, Animated, Easing } from 'react-native';
+import { StatusBar, View, Text, I18nManager, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../../../styles/index';
 import { Input } from '../../../../../../components/index';
@@ -50,7 +50,7 @@ export const RolesContainer = (props) => {
 
   attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
 
-  var _CHILDREN_CONTENT, _DEPENDED_RIGHT_PINNED_SIDE,
+  var _CHILDREN_CONTENT, _DEPENDED_RIGHT_PINNED_SIDE, _BOTTOM_PINNED_ITEMS,
       roleModalOtherProps = {
         language: props.language
       };;
@@ -69,14 +69,27 @@ export const RolesContainer = (props) => {
     }
   }
 
-  const _TABS = attitude.pilotData.map((tabItem, i) => {
+  const _TABS = (typeof attitude.pilotData != 'undefined')? attitude.pilotData.map((tabItem, i) => {
           const _ROW = tabItem,
                 _ROLE = _ROW.role;
 
-          return Functions._convertKeywordToToken(_ROLE || _ROLE[attitude.language]);
-        }),
-        _CURRENT_TAB_CONTENT = (typeof attitude.currentPilotItem != 'undefined')? ((typeof attitude.currentPilotItem.role != 'undefined')? attitude.currentPilotItem.role: ''): '',
-        _CURRENT_TAB = Functions._convertKeywordToToken(_CURRENT_TAB_CONTENT);
+          return _ROLE;
+        }): [],
+        _CURRENT_ROLE = attitude.currentPilotItem.role,
+        _CURRENT_TAB = (typeof _CURRENT_ROLE != 'undefined')? ((Object.keys(_CURRENT_ROLE).length > 0)? _CURRENT_ROLE: ''): '';
+
+  if ((_TABS.length > 0) && (_CURRENT_TAB !== '')){
+    _BOTTOM_PINNED_ITEMS = (
+      <PinnedSide
+        type="bottom"
+        items={attitude.pilotData}
+        current={attitude.currentPilotItem}
+        shownItems={_TABS}
+        shownCurrent={_CURRENT_TAB}
+        onPress={attitude.onPilotTabItemPress}
+        language={attitude.language} />
+    );
+  }
 
   return (
     <View
@@ -94,7 +107,7 @@ export const RolesContainer = (props) => {
                 navigation.navigate('Overseer');
               }}>
                 <Icon
-                  name="arrow left"
+                  name={`arrow ${(I18nManager.isRTL)? 'right': 'left'}`}
                   width={Styles.__Gobal_Icons_In_Pilot.width} />
             </PinnedSide>
 
@@ -107,11 +120,7 @@ export const RolesContainer = (props) => {
                   height={Styles.__Gobal_Icons_In_Pilot.height} />
             </PinnedSide>
 
-            <PinnedSide
-              type="bottom"
-              items={_TABS}
-              current={_CURRENT_TAB}
-              onPress={attitude.onPilotTabItemPress} />
+            {_BOTTOM_PINNED_ITEMS}
         </Pilot>
 
         <RoleModal

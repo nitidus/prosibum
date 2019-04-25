@@ -1,0 +1,18 @@
+{
+  "cameraRollPicker": {
+    "state": {
+      "filled": {
+        "verb": {
+          "en": "Edit",
+          "fa": "ویرایش"
+        }
+      },
+      "empty": {
+        "verb": {
+          "en": "Choose",
+          "fa": "انتخاب"
+        }
+      }
+    }
+  }
+}

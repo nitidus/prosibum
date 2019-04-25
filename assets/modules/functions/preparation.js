@@ -105,7 +105,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'Roles': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
@@ -180,7 +180,7 @@ module.exports = {
   _prepareCameraRoll: async (props) => {
     const { navigation } = props,
           _SEED = {
-            groupTypes: props.cameraRollPickerModal.currentGroupType
+            groupTypes: (Object.keys(props.cameraRollPickerModal.currentGroupType).length > 0)? props.cameraRollPickerModal.currentGroupType.en: ''
           };
 
     const _FETCHED_CAMERA_ROLL_ITEMS = await Prototypes._retrieveLocalStoragePhotosWithOptions(_SEED),

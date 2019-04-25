@@ -100,11 +100,18 @@ class TechnicalTab extends Component<{}> {
         </Input>;
       }else{
         if (typeof props.technicalTab.brandRole.role != 'undefined'){
+          var _BRAND_ROLE = '',
+              _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(props.technicalTab.brandRole.role, _LANGUAGE);
+
+          if (_DID_FETCH_APPROPRIATE_ROLE !== false){
+            _BRAND_ROLE = _DID_FETCH_APPROPRIATE_ROLE;
+          }
+
           _BRAND_ROLE_CAROUSEL_CONTENT = <Input
             type={__CONSTANTS.firstCarouselContainer.content.self.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.firstCarouselContainer.content.self.state.loading.title.en)}
             gradient={Global.colors.pair.aqrulean}
-            value={Functions._convertKeywordToToken(props.technicalTab.brandRole.role)}
+            value={_BRAND_ROLE}
             style={[
               Styles.BrandRoleCarouselContainer,
               {
@@ -161,7 +168,7 @@ class TechnicalTab extends Component<{}> {
             visible={props.technicalTab.cameraRollPickerModalVisibility}
             onBlur={(status) => props.setCameraRollPickerModalVisibility(status)}
             onPress={(photo) => props.setBrandProfilePhoto(photo)}
-            {..._CAMERA_ROLL_OTHER_PROPS}/>
+            {..._CAMERA_ROLL_OTHER_PROPS} />
 
           <Input
             type={__CONSTANTS.firstInput.type}
@@ -169,7 +176,8 @@ class TechnicalTab extends Component<{}> {
             value={__CONSTANTS.firstInput.title[_LANGUAGE]}
             style={Styles.SingleInput}
             photoURI={_PHOTO_URI}
-            onPress={() => props.setCameraRollPickerModalVisibility(true)} />
+            onPress={() => props.setCameraRollPickerModalVisibility(true)}
+            {..._CAMERA_ROLL_OTHER_PROPS} />
 
           {_BRAND_NAME_DEPENDED_HANDLER_CONTENT}
 
