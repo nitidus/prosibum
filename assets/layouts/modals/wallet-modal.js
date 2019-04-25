@@ -207,15 +207,16 @@ export const WalletModal = (props) => {
             itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
             firstItem={_CURRENT_CURRENCY_INDEX}
             onLayout={({ item, index }) => {
-              var _CURRENT_CURRENCY = Functions._returnCurrencyDependOnLanguage(props.walletModal.currentCurrency.type || props.walletModal.currentCurrency),
-                  _CURRENCY_NAME = item.toLowerCase(),
-                  _CURRENCY_VALUE = Functions._returnCurrencyDependOnLanguage(_CURRENCY_NAME);
+              var _UNKNOWN_LOCALE_CURRENT_CURRENCY = (props.walletModal.currentCurrency.type || props.walletModal.currentCurrency),
+                  _CURRENT_CURRENCY = Functions._returnCurrencyDependOnLanguage(_UNKNOWN_LOCALE_CURRENT_CURRENCY, attitude.language);
+                  _CURRENCY_NAME = item;
+                  _CURRENCY_VALUE = _CURRENCY_NAME[attitude.language];
 
-              if (_CURRENT_CURRENCY === item){
+              if (_CURRENT_CURRENCY === _CURRENCY_VALUE){
                 return (
                   <Input
                     type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.type}
-                    name={_CURRENCY_NAME}
+                    name={Functions._convertTokenToKeyword(_CURRENCY_NAME.en)}
                     gradient={Global.colors.pair.aqrulean}
                     style={[
                       Styles.WalletItemContainer,
@@ -236,7 +237,7 @@ export const WalletModal = (props) => {
                 return (
                   <Input
                     type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.type}
-                    name={_CURRENCY_NAME}
+                    name={Functions._convertTokenToKeyword(_CURRENCY_NAME.en)}
                     gradient={Global.colors.pair.tilan}
                     style={[
                       Styles.WalletItemContainer,
@@ -429,7 +430,7 @@ export const WalletModal = (props) => {
               onLayout={({ item, index }) => {
                 const _CURRENT_PLAN = props.walletModal.walletCurrentInitialCreditPlan,
                       _PLAN_NAME = Functions._convertKeywordToToken(item.name),
-                      _PLAN_CURRENCY_TYPE = (Functions._convertTokenToKey(item.taxonomy.value) == 'TRANSACTION_POINT')? 'T.P': Functions._convertKeywordToToken(item.taxonomy.value),
+                      _PLAN_CURRENCY_TYPE = (Functions._convertTokenToKey(item.taxonomy.value) == 'TRANSACTION_POINT')? ((attitude.language == 'fa')? 'ترنزکشن پوینت': 'T.P'): Functions._convertKeywordToToken(item.taxonomy.value),
                       _PLAN_PRICE = Functions._convertDigitsToMoneyFormat(item.price),
                       _PLAN_PRICE_SIGN = '$';
 
@@ -453,7 +454,7 @@ export const WalletModal = (props) => {
                         style={Styles.DetailItemMasterInfoContent}>
                           <Text
                             style={Styles.BriefDetailTitle}>
-                              {_PLAN_NAME} Plan
+                              {_PLAN_NAME} {(attitude.language == 'fa')? 'طرح': 'Plan'}
                           </Text>
                       </View>
 

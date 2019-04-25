@@ -48,180 +48,189 @@ class NewProductPhotos extends Component<{}> {
   }
 
   render() {
-    const { props } = this,
-          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en',
-          _CAMERA_ROLL_OTHER_PROPS = {
-            language: this._language
-          };
+    const { props } = this;
 
-    var _PHOTOS_CONTENT;
+    if (typeof this._language != 'undefined'){
+      const _LANGUAGE = Functions._convertTokenToKeyword(this._language.key),
+            _CAMERA_ROLL_OTHER_PROPS = {
+              language: this._language
+            };
 
-    const _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
-          _VALIDATED = this._componentWillCheckValidation(props);
+      var _PHOTOS_CONTENT;
 
-    if (props.newProduct.photos.length > 0){
-      _PHOTOS_CONTENT = (
-        <ScrollView
-          showsVerticalScrollIndicator={true}
-          contentContainerStyle={Styles.FeaturesContainer}>
-            {
-              props.newProduct.photos.map((photoItem, i, totalPhotos) => {
-                var _CUSTOM_STYLE = {
-                      marginHorizontal: Styles.Content.marginHorizontal
-                    },
-                    _PHOTO_DELETE_ACTION = () => {
-                      const _TARGET_PHOTOS_NODE = props.newProduct.photos.filter((checkingItem, j) => {
-                        return (checkingItem._id != photoItem._id);
-                      });
+      const _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
+            _VALIDATED = this._componentWillCheckValidation(props);
 
-                      props.setProductPhotos(_TARGET_PHOTOS_NODE);
+      if (props.newProduct.photos.length > 0){
+        _PHOTOS_CONTENT = (
+          <ScrollView
+            showsVerticalScrollIndicator={true}
+            contentContainerStyle={Styles.FeaturesContainer}>
+              {
+                props.newProduct.photos.map((photoItem, i, totalPhotos) => {
+                  var _CUSTOM_STYLE = {
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      },
+                      _PHOTO_DELETE_ACTION = () => {
+                        const _TARGET_PHOTOS_NODE = props.newProduct.photos.filter((checkingItem, j) => {
+                          return (checkingItem._id != photoItem._id);
+                        });
 
-                      if (_TARGET_PHOTOS_NODE.length > 0){
-                        if (photoItem._id === props.newProduct.primaryPhoto._id){
-                          props.setProductPrimaryPhoto(_TARGET_PHOTOS_NODE[0]);
+                        props.setProductPhotos(_TARGET_PHOTOS_NODE);
+
+                        if (_TARGET_PHOTOS_NODE.length > 0){
+                          if (photoItem._id === props.newProduct.primaryPhoto._id){
+                            props.setProductPrimaryPhoto(_TARGET_PHOTOS_NODE[0]);
+                          }
+                        }else{
+                          props.setProductPrimaryPhoto({});
                         }
-                      }else{
-                        props.setProductPrimaryPhoto({});
-                      }
-                    },
-                    _PHOTO_CONTENT = photoItem.content,
-                    _PHOTO_URI = '',
-                    _SINGLE_PHOTO_OTHER_PROPS = {},
-                    PHOTO_OPTION_CUSTOM_CONTAINER = {
-                      height: ((Platform.OS !== 'ios') && (_Screen.width >= 1000 || _Screen.height >= 1000))? Styles.PhotoContainer.height + 11: Styles.PhotoContainer.height
-                    };
+                      },
+                      _PHOTO_CONTENT = photoItem.content,
+                      _PHOTO_URI = '',
+                      _SINGLE_PHOTO_OTHER_PROPS = {
+                        language: this._language
+                      },
+                      PHOTO_OPTION_CUSTOM_CONTAINER = {
+                        height: ((Platform.OS !== 'ios') && (_Screen.width >= 1000 || _Screen.height >= 1000))? Styles.PhotoContainer.height + 11: Styles.PhotoContainer.height
+                      };
 
-                if (i < totalPhotos.length){
-                  _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical
-                }
+                  if (i < totalPhotos.length){
+                    _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical
+                  }
 
-                if ((Object.keys(_PHOTO_CONTENT).length > 0) && (typeof _PHOTO_CONTENT.image != 'undefined')){
-                  _PHOTO_URI = _PHOTO_CONTENT.image.uri;
-                }
+                  if ((Object.keys(_PHOTO_CONTENT).length > 0) && (typeof _PHOTO_CONTENT.image != 'undefined')){
+                    _PHOTO_URI = _PHOTO_CONTENT.image.uri;
+                  }
 
-                if (photoItem._id === props.newProduct.primaryPhoto._id){
-                  _SINGLE_PHOTO_OTHER_PROPS.gradient = Global.colors.pair.aqrulean;
-                }
+                  if (photoItem._id === props.newProduct.primaryPhoto._id){
+                    _SINGLE_PHOTO_OTHER_PROPS.gradient = Global.colors.pair.aqrulean;
+                  }
 
-                PHOTO_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
+                  PHOTO_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
 
-                return (
-                  <Options
-                    style={PHOTO_OPTION_CUSTOM_CONTAINER}
-                    onDeletePress={_PHOTO_DELETE_ACTION}
-                    {...__CONSTANTS.content.list.state.normal.options}>
-                      <Input
-                        type={__CONSTANTS.content.list.state.normal.type}
-                        name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.state.normal.title.en)}
-                        value={__CONSTANTS.content.list.state.normal.title[_LANGUAGE]}
-                        style={_CUSTOM_STYLE}
-                        photoURI={_PHOTO_URI}
-                        onPress={() => {
-                          props.setProductPhotoModalVisibility(true);
-                          props.setOnFetchingModePhoto(photoItem);
-                        }}
-                        onLongPress={() => {
-                          props.setProductPrimaryPhoto(photoItem);
-                        }}
-                        {..._SINGLE_PHOTO_OTHER_PROPS} />
-                  </Options>
-                );
-              })
+                  return (
+                    <Options
+                      style={PHOTO_OPTION_CUSTOM_CONTAINER}
+                      onDeletePress={_PHOTO_DELETE_ACTION}
+                      {...__CONSTANTS.content.list.state.normal.options}>
+                        <Input
+                          type={__CONSTANTS.content.list.state.normal.type}
+                          name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.state.normal.title.en)}
+                          value={__CONSTANTS.content.list.state.normal.title[_LANGUAGE]}
+                          style={_CUSTOM_STYLE}
+                          photoURI={_PHOTO_URI}
+                          onPress={() => {
+                            props.setProductPhotoModalVisibility(true);
+                            props.setOnFetchingModePhoto(photoItem);
+                          }}
+                          onLongPress={() => {
+                            props.setProductPrimaryPhoto(photoItem);
+                          }}
+                          {..._SINGLE_PHOTO_OTHER_PROPS} />
+                    </Options>
+                  );
+                })
+              }
+
+              <Input
+                type={__CONSTANTS.content.appendHandlerButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.appendHandlerButton.state.normal.title.en)}
+                value={__CONSTANTS.content.appendHandlerButton.state.normal.title[_LANGUAGE]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal,
+                  marginBottom: Styles.Content.marginVertical
+                }}
+                onPress={() => props.appendProductPhoto({
+                  _id: Functions._generateNewBSONObjectID(),
+                  content: {}
+                })} />
+
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal
+                }}
+                onPress={() => {
+                  const { navigation } = props;
+
+                  navigation.navigate('NewProductPrices');
+                }}
+                forcedDisable={_VALIDATED} />
+          </ScrollView>
+        );
+      }else{
+        _PHOTOS_CONTENT = (
+          <View
+            style={[
+              Styles.Content,
+              Styles.EmptyContent
+            ]}>
+              <Link
+                containerStyle={Styles.EmptyContentLink}
+                value={__CONSTANTS.content.list.state.null.title[_LANGUAGE]} />
+          </View>
+        );
+      }
+
+      return (
+        <Container
+          title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
+          subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
+          rightIcon={__CONSTANTS.pilot.rightIcon}
+          onRightIconPress={() => {
+            const _TARGET_PHOTO_NODE = {
+              _id: Functions._generateNewBSONObjectID(),
+              content: {}
+            };
+
+            if (Object.keys(props.newProduct.primaryPhoto).length === 0){
+              props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
             }
 
-            <Input
-              type={__CONSTANTS.content.appendHandlerButton.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.content.appendHandlerButton.state.normal.title.en)}
-              value={__CONSTANTS.content.appendHandlerButton.state.normal.title[_LANGUAGE]}
-              gradient={Global.colors.pair.ongerine}
-              style={{
-                marginHorizontal: Styles.Content.marginHorizontal,
-                marginBottom: Styles.Content.marginVertical
-              }}
-              onPress={() => props.appendProductPhoto({
-                _id: Functions._generateNewBSONObjectID(),
-                content: {}
-              })} />
+            props.appendProductPhoto(_TARGET_PHOTO_NODE);
+          }}
+          {...props}>
+            {_PHOTOS_CONTENT}
 
-            <Input
-              type={__CONSTANTS.content.submitButton.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-              value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
-              gradient={Global.colors.pair.ongerine}
-              style={{
-                marginHorizontal: Styles.Content.marginHorizontal
-              }}
-              onPress={() => {
-                const { navigation } = props;
+            <CameraRollPickerModal
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalContainer.title.en)}
+              visible={props.newProduct.productPhotoModalVisibility}
+              onBlur={(status) => props.setProductPhotoModalVisibility(status)}
+              onPress={(photo) => props.setProductPhotos(props.newProduct.photos.map((photoItem, i) => {
+                const _ON_FETCHING_MODE_PHOTO = props.newProduct.onFetchingModePhoto;
 
-                navigation.navigate('NewProductPrices');
-              }}
-              forcedDisable={_VALIDATED} />
-        </ScrollView>
+                if (photoItem._id === _ON_FETCHING_MODE_PHOTO._id){
+                  const _TARGET_PHOTO_NODE = {
+                    ...photoItem,
+                    content: photo
+                  };
+
+                  if (Object.keys(props.newProduct.primaryPhoto).length === 0){
+                    props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
+                  }else{
+                    if (props.newProduct.primaryPhoto._id === photoItem._id){
+                      props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
+                    }
+                  }
+
+                  return _TARGET_PHOTO_NODE;
+                }else{
+                  return photoItem;
+                }
+              }))}
+              {..._CAMERA_ROLL_OTHER_PROPS}/>
+        </Container>
       );
     }else{
-      _PHOTOS_CONTENT = (
-        <View
-          style={[
-            Styles.Content,
-            Styles.EmptyContent
-          ]}>
-            <Link
-              containerStyle={Styles.EmptyContentLink}
-              value={__CONSTANTS.content.list.state.null.title[_LANGUAGE]} />
-        </View>
+      return (
+        <ActivityIndicator/>
       );
     }
-
-    return (
-      <Container
-        title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
-        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
-        rightIcon={__CONSTANTS.pilot.rightIcon}
-        onRightIconPress={() => {
-          const _TARGET_PHOTO_NODE = {
-            _id: Functions._generateNewBSONObjectID(),
-            content: {}
-          };
-
-          if (Object.keys(props.newProduct.primaryPhoto).length === 0){
-            props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
-          }
-
-          props.appendProductPhoto(_TARGET_PHOTO_NODE);
-        }}
-        {...props}>
-          {_PHOTOS_CONTENT}
-
-          <CameraRollPickerModal
-            name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalContainer.title.en)}
-            visible={props.newProduct.productPhotoModalVisibility}
-            onBlur={(status) => props.setProductPhotoModalVisibility(status)}
-            onPress={(photo) => props.setProductPhotos(props.newProduct.photos.map((photoItem, i) => {
-              const _ON_FETCHING_MODE_PHOTO = props.newProduct.onFetchingModePhoto;
-
-              if (photoItem._id === _ON_FETCHING_MODE_PHOTO._id){
-                const _TARGET_PHOTO_NODE = {
-                  ...photoItem,
-                  content: photo
-                };
-
-                if (Object.keys(props.newProduct.primaryPhoto).length === 0){
-                  props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
-                }else{
-                  if (props.newProduct.primaryPhoto._id === photoItem._id){
-                    props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
-                  }
-                }
-
-                return _TARGET_PHOTO_NODE;
-              }else{
-                return photoItem;
-              }
-            }))}
-            {..._CAMERA_ROLL_OTHER_PROPS}/>
-      </Container>
-    );
   }
 }
 

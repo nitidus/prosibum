@@ -15,7 +15,7 @@
               "title": {
                 "suffix": {
                   "en": "Unit Type",
-                  "fa": "نوع واحد"
+                  "fa": "نوع واحد اندازه‌گیری"
                 }
               },
               "firstFeature": {
@@ -59,11 +59,11 @@
         "type": "BUTTON",
         "prefix": {
           "en": "Append",
-          "fa": "اضافه کن"
+          "fa": "اضافه کردن"
         },
         "suffix": {
           "en": "Unit",
-          "fa": "واحد"
+          "fa": "(واحد)"
         }
       }
     }

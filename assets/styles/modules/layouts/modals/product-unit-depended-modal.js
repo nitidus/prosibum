@@ -42,7 +42,7 @@ var _CUSTOM_CONTENT = {
       fontSize: 14
     };
 
-_CUSTOM_BRIEF_DETAIL_ROW_TEXT[((I18nManager.isRTL)? 'marginRight': 'marginLeft')] = 15;
+_CUSTOM_BRIEF_DETAIL_ROW_TEXT.marginLeft = 15;
 
 if (Platform.OS !== 'ios'){
   if (width >= 1000 || height >= 1000){
@@ -85,10 +85,12 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_CONTENT
   },
   DetailContainer: {
+    direction: 'ltr',
     height: 'auto',
     marginBottom: _CUSTOM_CONTENT.marginVertical
   },
   DetailItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     height: 178,
     padding: 18
   },

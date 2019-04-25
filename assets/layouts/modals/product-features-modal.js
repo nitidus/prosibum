@@ -175,12 +175,7 @@ const ProductFeaturesModal = (props) => {
               name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.type}
               data={props.productFeaturesModal.features}
               firstItem={_SELECTED_INDEX}
-              style={[
-                Styles.DetailContainer,
-                {
-                  direction: 'ltr'
-                }
-              ]}
+              style={Styles.DetailContainer}
               itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
               onLayout={({ item, index }) => {
                 var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -197,44 +192,24 @@ const ProductFeaturesModal = (props) => {
                       Styles.DetailItemContainer
                     ]}
                     disable={true}>
-                    <View
-                      style={[
-                        Styles.DetailItemMasterInfoContent,
-                        {
-                          alignSelf: 'flex-start'
-                        }
-                      ]}>
-                        <Text
-                          style={[
-                            Styles.BriefDetailTitle,
-                            {
-                              textAlign: 'left'
-                            }
-                          ]}>
-                            {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.title[attitude.language])}
-                        </Text>
-                    </View>
-                    <View
-                      style={[
-                        Styles.DetailItemMasterSubInfoContent,
-                        {
-                          alignSelf: 'flex-start'
-                        }
-                      ]}>
-                        <Icon
-                          name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.icon.name}
-                          color={Global.colors.single.romance} />
+                      <View
+                        style={Styles.DetailItemMasterInfoContent}>
+                          <Text
+                            style={Styles.BriefDetailTitle}>
+                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.title[attitude.language])}
+                          </Text>
+                      </View>
+                      <View
+                        style={Styles.DetailItemMasterSubInfoContent}>
+                          <Icon
+                            name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.icon.name}
+                            color={Global.colors.single.romance} />
 
-                        <Text
-                          style={[
-                            Styles.BriefDetailRowText,
-                            {
-                              marginLeft: 15
-                            }
-                          ]}>
-                            {Functions._convertKeywordToToken(item.key)}
-                        </Text>
-                    </View>
+                          <Text
+                            style={Styles.BriefDetailRowText}>
+                              {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language)}
+                          </Text>
+                      </View>
                   </Input>
                 )
               }}
@@ -308,12 +283,7 @@ const ProductFeaturesModal = (props) => {
                         name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
                         data={props.productFeaturesModal.units}
                         firstItem={_SELECTED_UNIT_INDEX}
-                        style={[
-                          Styles.DetailContainer,
-                          {
-                            direction: 'ltr'
-                          }
-                        ]}
+                        style={Styles.DetailContainer}
                         itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
                         onLayout={({ item, index }) => {
                           var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -330,40 +300,26 @@ const ProductFeaturesModal = (props) => {
                               disable={true}>
                               <View
                                 style={[
-                                  Styles.DetailItemMasterInfoContent,
-                                  {
-                                    alignSelf: 'flex-start'
-                                  }
+                                  Styles.DetailItemMasterInfoContent
                                 ]}>
                                   <Text
                                     style={[
-                                      Styles.BriefDetailTitle,
-                                      {
-                                        textAlign: 'left'
-                                      }
+                                      Styles.BriefDetailTitle
                                     ]}>
                                       {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])}
                                   </Text>
                               </View>
                               <View
-                                style={[
-                                  Styles.DetailItemMasterSubInfoContent,
-                                  {
-                                    alignSelf: 'flex-start'
-                                  }
-                                ]}>
+                                style={Styles.DetailItemMasterSubInfoContent}>
                                   <Icon
                                     name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
                                     color={Global.colors.single.romance} />
 
                                   <Text
                                     style={[
-                                      Styles.BriefDetailRowText,
-                                      {
-                                        marginLeft: 15
-                                      }
+                                      Styles.BriefDetailRowText
                                     ]}>
-                                      {Functions._convertKeywordToToken(item.key)}
+                                      {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language)}
                                   </Text>
                               </View>
                             </Input>
@@ -504,7 +460,7 @@ const ProductFeaturesModal = (props) => {
             <Input
               type={__CONSTANTS.modalContainer.content.submitInput.type}
               gradient={Global.colors.pair.ongerine}
-              value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._convertKeywordToToken(props.productFeaturesModal.currentFeature.key)}`}
+              value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._getAppropriateTaxonomyBaseOnLocale(props.productFeaturesModal.currentFeature.key, attitude.language)}`}
               style={{
                 marginHorizontal: Styles.Content.marginHorizontal
               }}

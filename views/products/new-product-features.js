@@ -124,7 +124,7 @@ class NewProductFeatures extends Component<{}> {
                                           style={Styles.BriefDetailTitleContainer}>
                                           <Text
                                             style={Styles.BriefDetailTitle}>
-                                              {Functions._convertKeywordToToken(item.unit.key)}
+                                              {Functions._getAppropriateTaxonomyBaseOnLocale(item.unit.key, _LANGUAGE, _FEATURE_NAME)}
                                           </Text>
                                           <Text
                                             style={Styles.BriefDetailTitleSuffix}>

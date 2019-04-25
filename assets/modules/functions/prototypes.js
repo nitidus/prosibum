@@ -7,7 +7,13 @@ import 'moment/min/locales.min';
 import Utils from '../utils';
 const { ObjectID } = Utils.Structures;
 
-import { countries as __COUNTRIES, languages as __LANGUAGES, roles as __ROLES, views_constants as __VIEWS_CONSTANTS } from '../../flows/knowledge/index';
+import {
+  countries as __COUNTRIES,
+  languages as __LANGUAGES,
+  roles as __ROLES,
+  taxonomies as __TAXONOMIES,
+  views_constants as __VIEWS_CONSTANTS
+} from '../../flows/knowledge/index';
 const __WALLETS = __VIEWS_CONSTANTS.dashboard.wallets;
 
 import GLOBAL from '../global';
@@ -380,6 +386,34 @@ module.exports = {
 
     if (_FOUNDED_ROLE_INDEX > -1){
       return __ROLES[_FOUNDED_ROLE_INDEX].title[language];
+    }else{
+      return false;
+    }
+  },
+  _getAppropriateTaxonomyBaseOnLocale: (selectedTaxonomyValue, language, selectedTaxonomy) => {
+    var _SELECTED_TAXONOMY = '';
+
+    if (typeof selectedTaxonomy != 'undefined'){
+      _SELECTED_TAXONOMY = module.exports._convertTokenToKey(selectedTaxonomy);
+    }
+
+    const _FOUNDED_TAXONOMY_INDEX = __TAXONOMIES.findIndex((taxonomy) => {
+            const _TAXONOMY_VALUE = module.exports._convertTokenToKey(taxonomy.value.en),
+                  _SELECTED_TAXONOMY_VALUE = module.exports._convertTokenToKey(selectedTaxonomyValue);
+
+            if (_SELECTED_TAXONOMY != ''){
+              const _TAXONOMY_KEY = module.exports._convertTokenToKey(taxonomy.key);
+
+              if (_SELECTED_TAXONOMY === _TAXONOMY_KEY){
+                return (_SELECTED_TAXONOMY_VALUE === _TAXONOMY_VALUE);
+              }
+            }else{
+              return (_SELECTED_TAXONOMY_VALUE === _TAXONOMY_VALUE);
+            }
+          });
+
+    if (_FOUNDED_TAXONOMY_INDEX > -1){
+      return __TAXONOMIES[_FOUNDED_TAXONOMY_INDEX].value[language];
     }else{
       return false;
     }

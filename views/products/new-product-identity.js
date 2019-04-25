@@ -113,7 +113,8 @@ class NewProductIdentity extends Component<{}> {
                 firstItem={_SELECTED_WAREHOUSE_INDEX}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
                 style={{
-                  marginBottom: Styles.Content.marginVertical
+                  marginBottom: Styles.Content.marginVertical,
+                  direction: 'ltr'
                 }}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.tilan;

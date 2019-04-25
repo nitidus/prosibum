@@ -156,7 +156,7 @@ const ProductUnitDependedModal = (props) => {
                           style={Styles.BriefDetailTitleContainer}>
                           <Text
                             style={Styles.BriefDetailTitle}>
-                              {Functions._convertKeywordToToken(_UNIT.key)}
+                              {Functions._getAppropriateTaxonomyBaseOnLocale(_UNIT.key, attitude.language)}
                           </Text>
                           <Text
                             style={Styles.BriefDetailTitleSuffix}>
@@ -216,7 +216,7 @@ const ProductUnitDependedModal = (props) => {
           <Input
             type={__CONSTANTS.modalContainer.content.submitInput.type}
             gradient={Global.colors.pair.ongerine}
-            value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._convertKeywordToToken(props.productUnitDependedModal.selectedUnit.unit.key)} ${__CONSTANTS.modalContainer.content.submitInput.suffix[attitude.language]}`}
+            value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._getAppropriateTaxonomyBaseOnLocale(props.productUnitDependedModal.selectedUnit.unit.key, attitude.language)} ${__CONSTANTS.modalContainer.content.submitInput.suffix[attitude.language]}`}
             style={{
               marginHorizontal: Styles.Content.marginHorizontal
             }}

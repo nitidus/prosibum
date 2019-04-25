@@ -71,10 +71,12 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_CONTENT
   },
   DetailContainer: {
+    direction: 'ltr',
     height: 'auto',
     marginBottom: _CUSTOM_CONTENT.marginVertical
   },
   DetailItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     height: 118,
     padding: 18
   },
@@ -83,19 +85,25 @@ module.exports = StyleSheet.create({
     alignItems: 'center'
   },
   DetailItemMasterInfoContent: {
+    width: '100%',
     justifyContent: 'center'
   },
   DetailItemMasterSubInfoContent: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center'
   },
   BriefDetailTitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2.5)) - 65),
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailSubtitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2.5)) - 65),
@@ -107,6 +115,7 @@ module.exports = StyleSheet.create({
   BriefDetailRowText: {
     color: colors.single.romance,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
+    marginLeft: _CUSTOM_CONTENT.marginVertical,
     ..._CUSTOM_BRIEF_DETAIL_ROW_TEXT
   },
   BriefDetailRowIcon: {

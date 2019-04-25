@@ -438,7 +438,7 @@ export const Input = (props) => {
           ]}>
             <TextInput
               style={[
-                Styles.TextInputConatiner,
+                Styles.TextInputContainer,
                 { width: '76%', flexGrow: 1 }
               ]}
               autoCapitalize={attitude.autoCapitalize}
@@ -468,12 +468,12 @@ export const Input = (props) => {
             Styles.TextInputLinkContainer
           ],
           _LINK_TEXT_CUSTOM_STYLES = [
-            Styles.TextInputConatiner
+            Styles.TextInputContainer
           ];
 
       if (I18nManager.isRTL){
         _LINK_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
-        _LINK_TEXT_CUSTOM_STYLES.push(Styles.NormalTextInputConatiner);
+        _LINK_TEXT_CUSTOM_STYLES.push(Styles.NormalTextInputContainer);
         _LINK_TEXT_CUSTOM_STYLES.push({
           width: '72%',
           textAlign: 'right'
@@ -482,7 +482,7 @@ export const Input = (props) => {
         _LINK_CUSTOM_STYLES.push({
           right: 18
         });
-        _LINK_TEXT_CUSTOM_STYLES.push(Styles.ReverseTextInputConatiner)
+        _LINK_TEXT_CUSTOM_STYLES.push(Styles.ReverseTextInputContainer)
         _LINK_TEXT_CUSTOM_STYLES.push({
           width: '72%'
         });
@@ -560,8 +560,8 @@ export const Input = (props) => {
           ]}>
             <TextInput
               style={[
-                Styles.TextInputConatiner,
-                Styles.ReverseTextInputConatiner,
+                Styles.TextInputContainer,
+                Styles.ReverseTextInputContainer,
                 { width: '72%' }
               ]}
               autoCapitalize="none"
@@ -611,8 +611,8 @@ export const Input = (props) => {
           ]}>
             <TextInput
               style={[
-                Styles.TextInputConatiner,
-                Styles.ReverseTextInputConatiner,
+                Styles.TextInputContainer,
+                Styles.ReverseTextInputContainer,
                 { width: '72%' }
               ]}
               keyboardType="numeric"
@@ -673,7 +673,7 @@ export const Input = (props) => {
           ]}>
             <TextInput
               style={[
-                Styles.TextInputConatiner,
+                Styles.TextInputContainer,
                 {
                   textAlign: 'left'
                 }
@@ -731,8 +731,8 @@ export const Input = (props) => {
           ]}>
             <TextInput
               style={[
-                Styles.TextInputConatiner,
-                Styles.NormalTextInputConatiner,
+                Styles.TextInputContainer,
+                Styles.NormalTextInputContainer,
                 { width: '72%' }
               ]}
               autoCapitalize="none"

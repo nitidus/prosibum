@@ -1,0 +1,31 @@
+[{
+  "key": "Unit",
+  "value":{
+    "en": "Kilogram",
+    "fa": "کیلوگرم"
+  }
+}, {
+  "key": "Unit",
+  "value":{
+    "en": "Box",
+    "fa": "جعبه"
+  }
+}, {
+  "key": "Product Feature",
+  "value":{
+    "en": "Customized",
+    "fa": "ویژگی شخصی‌سازی‌شده"
+  }
+}, {
+  "key": "Product Feature",
+  "value":{
+    "en": "Description",
+    "fa": "توضیحات"
+  }
+}, {
+  "key": "Product Feature",
+  "value":{
+    "en": "Unit",
+    "fa": "واحد اندازه‌گیری"
+  }
+}]

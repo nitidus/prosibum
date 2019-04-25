@@ -74,9 +74,11 @@ module.exports = StyleSheet.create({
   },
   WalletContainer: {
     marginBottom: 15,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    direction: 'ltr'
   },
   WalletItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     height: 'auto',
     padding: 18
   },
@@ -100,10 +102,12 @@ module.exports = StyleSheet.create({
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal
   },
   DetailContainer: {
+    direction: 'ltr',
     height: 'auto',
     marginBottom: _CUSTOM_CONTENT.marginVertical
   },
   DetailItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     height: 160,
     padding: 18
   },
@@ -122,12 +126,16 @@ module.exports = StyleSheet.create({
     marginRight: 15
   },
   BriefDetailTitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2.5)) - 65),
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailSubtitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2.5)) - 65),

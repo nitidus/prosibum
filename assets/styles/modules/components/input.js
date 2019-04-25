@@ -220,21 +220,20 @@ module.exports = StyleSheet.create({
     textAlign: 'left',
     ..._CUSTOM_PHOTO_INPUT_LABEL_CONTENT
   },
-  TextInputConatiner: {
+  TextInputContainer: {
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',
     alignSelf: (I18nManager.isRTL)? 'flex-start': 'flex-end',
-    paddingLeft: (I18nManager.isRTL)? 0: 16,
-    paddingRight: (I18nManager.isRTL)? 16: 0,
+    paddingLeft: 16,
     ..._CUSTOM_TEXT_INPUT_CONTAINER
   },
-  NormalTextInputConatiner: {
+  NormalTextInputContainer: {
     paddingHorizontal: 16,
     alignSelf: 'flex-start',
   },
-  ReverseTextInputConatiner: {
+  ReverseTextInputContainer: {
     alignSelf: (I18nManager.isRTL)? 'flex-end': 'flex-start',
   },
   TextInputLinkContainer: {
