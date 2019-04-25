@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Text, Animated, Easing } from 'react-native';
+import { StatusBar, View, Text, I18nManager, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../../../styles/index';
 import { Input } from '../../../../../../components/index';
@@ -90,7 +90,7 @@ export const SelectedRoleContainer = (props) => {
                 attitude.onBackPress();
               }}>
                 <Icon
-                  name="arrow left"
+                  name={`arrow ${(I18nManager.isRTL)? 'right': 'left'}`}
                   width={Styles.__Gobal_Icons_In_Pilot.width} />
             </PinnedSide>
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, KeyboardAvoidingView, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -144,46 +144,55 @@ const RoleModal = (props) => {
 
     const _VALIDATED = _componentWillCheckValidation(props);
 
-    _MODAL_CONTENT = (
-      <View>
-        <Carousel
-          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
-          data={_USER_GROUP_ROLES}
-          style={Styles.RolesContainer}
-          itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
-          firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
-          onLayout={({ item, index }) => {
-            var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.roleModal.currentRole.role || props.roleModal.currentRole),
-                _ITEM_NAME = item.toLowerCase(),
-                _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
+    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
 
-            if (_CURRENT_USER_GROUP === item){
-              return (
-                <Input
-                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                  name={_ITEM_NAME}
-                  value={_ITEM_VALUE}
-                  gradient={Global.colors.pair.aqrulean}
-                  disable={true}/>
-              );
-            }else{
-              return (
-                <Input
-                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                  name={_ITEM_NAME}
-                  value={_ITEM_VALUE}
-                  gradient={Global.colors.pair.ongerine}
-                  disable={true}/>
-              );
-            }
-          }}
-          onSnap={(selectedItemIndex) => props.setCurrentRole(props.roleModal.roles[selectedItemIndex])}/>
+    _MODAL_CONTENT = (
+      <KeyboardAvoidingView
+        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}
+        name={__CONSTANTS.modalContainer.context.title.en}>
+          <Carousel
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
+            data={_USER_GROUP_ROLES}
+            style={Styles.RolesContainer}
+            itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
+            firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
+            onLayout={({ item, index }) => {
+              var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.roleModal.currentRole.role || props.roleModal.currentRole),
+                  _ITEM_NAME = item.toLowerCase(),
+                  _ROLE = '',
+                  _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(item, attitude.language);
+
+                  if (_DID_FETCH_APPROPRIATE_ROLE !== false){
+                    _ROLE = _DID_FETCH_APPROPRIATE_ROLE;
+                  }
+
+              if (_CURRENT_USER_GROUP === item){
+                return (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                    name={_ITEM_NAME}
+                    value={_ROLE}
+                    gradient={Global.colors.pair.aqrulean}
+                    disable={true}/>
+                );
+              }else{
+                return (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                    name={_ITEM_NAME}
+                    value={_ROLE}
+                    gradient={Global.colors.pair.ongerine}
+                    disable={true}/>
+                );
+              }
+            }}
+            onSnap={(selectedItemIndex) => props.setCurrentRole(props.roleModal.roles[selectedItemIndex])}/>
 
           <Input
             type={__CONSTANTS.modalContainer.content.firstInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
             placeholder={__CONSTANTS.modalContainer.content.firstInput.title[attitude.language]}
-            value={props.roleModal.token}
+            value={props.roleModal.email}
             style={Styles.TokenInput}
             autoCapitalize="none"
             onChangeText={(currentValue) => props.setEmail(currentValue)} />
@@ -252,7 +261,7 @@ const RoleModal = (props) => {
               });
             }}
             forcedDisable={_VALIDATED}/>
-      </View>
+      </KeyboardAvoidingView>
     );
 
   }else{

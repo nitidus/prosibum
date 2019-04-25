@@ -34,6 +34,7 @@ module.exports = StyleSheet.create({
     marginBottom: 15
   },
   RolesContainer: {
+    direction: 'ltr',
     marginBottom: 15,
     flexDirection: 'row'
   },

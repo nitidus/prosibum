@@ -35,10 +35,10 @@ const mapDispatchToProps = (dispatch) => {
         payload: currentRole
       })
     },
-    setEmail: (token) => {
+    setEmail: (email) => {
       dispatch({
         type: ROLE_MODAL.SET_EMAIL,
-        payload: token
+        payload: email
       })
     },
     fetchAvailableRolesType: async (groupType, usergroup) => CMD._getRolesTypeWithGroupType(groupType, usergroup, dispatch),

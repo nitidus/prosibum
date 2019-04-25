@@ -104,7 +104,13 @@ class SelectedRole extends Component<{}> {
                           width={Styles.BriefDetailProfileContainerWithNoPhoto.width - 15} />
                     </View>
                   ),
-                  _PREFERED_CONTENT_TEXT = '';
+                  _PREFERED_CONTENT_TEXT = '',
+                  _TARGET_USER_ROLE = '',
+                  _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(_ITEM_VALUE.role, _LANGUAGE);
+
+                  if (_DID_FETCH_APPROPRIATE_ROLE !== false){
+                    _TARGET_USER_ROLE = _DID_FETCH_APPROPRIATE_ROLE;
+                  }
 
               if (typeof _ITEM_VALUE.profile != 'undefined'){
                 _PROFILE_CONTENT = (
@@ -138,7 +144,7 @@ class SelectedRole extends Component<{}> {
                       style={Styles.DetailItemMasterInfoContent}>
                         <Text
                           style={Styles.BriefDetailTitle}>
-                            {_ITEM_VALUE.role}
+                            {_TARGET_USER_ROLE}
                         </Text>
                         <Text
                           style={Styles.BriefDetailSubtitle}>
@@ -253,7 +259,12 @@ class SelectedRole extends Component<{}> {
         _SELECTED_ROLE_SUB_ROLES_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={true}
-            contentContainerStyle={Styles.Content}>
+            contentContainerStyle={[
+              Styles.Content,
+              {
+                direction: 'ltr'
+              }
+            ]}>
               {
                 props.selectedRole.roles.map((role, i) => {
                   var _SINGLE_ROW_CONTENT,
@@ -271,7 +282,13 @@ class SelectedRole extends Component<{}> {
                             height={Styles.__Global_Icons_In_Role.height}
                             style={Styles.ProfileContentWithNoPhoto} />
                         </View>
-                      );
+                      ),
+                      _TARGET_ROLE = '',
+                      _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(role.usergroup.role, _LANGUAGE);
+
+                      if (_DID_FETCH_APPROPRIATE_ROLE !== false){
+                        _TARGET_ROLE = _DID_FETCH_APPROPRIATE_ROLE;
+                      }
 
                   if (typeof role.user != 'undefined'){
                     if ((typeof role.user.profile != 'undefined') && ((typeof role.user.profile.photo != 'undefined') || (typeof role.user.profile_photo != 'undefined') || (typeof role.user.profilePhoto != 'undefined') || (typeof role.userProfilePhoto != 'undefined') || (typeof role.user_profile_photo != 'undefined') || (typeof role.profile_photo != 'undefined') || (typeof role.profilePhoto != 'undefined') || (typeof role.profile != 'undefined'))){
@@ -372,7 +389,7 @@ class SelectedRole extends Component<{}> {
 
                                   <Text
                                     style={Styles.RoleSubtitle}>
-                                      {Functions._convertKeywordToToken(role.usergroup.role)}
+                                      {_TARGET_ROLE}
                                   </Text>
                               </View>
                           </View>
@@ -419,7 +436,7 @@ class SelectedRole extends Component<{}> {
                                 style={Styles.RoleDetailContent}>
                                   <Text
                                     style={Styles.RoleTitle}>
-                                      {Functions._convertKeywordToToken(role.usergroup.role)}
+                                      {_TARGET_ROLE}
                                   </Text>
                               </View>
                           </View>

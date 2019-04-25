@@ -118,6 +118,7 @@ module.exports = StyleSheet.create({
     alignItems: 'center'
   },
   DetailContainer: {
+    direction: 'ltr',
     marginTop: _CUSTOM_CONTENT.marginVertical
   },
   DetailItemContainer: {
@@ -126,7 +127,8 @@ module.exports = StyleSheet.create({
   },
   DetailItemContent: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr'
   },
   DetailItemMasterInfoContent: {
     justifyContent: 'center'
@@ -151,15 +153,17 @@ module.exports = StyleSheet.create({
     width: 65,
     height: 65,
     borderRadius: 5,
-    marginRight: 18
+    marginHorizontal: (_CUSTOM_ROLE_ITEM_CONTAINER.paddingHorizontal - 2)
   },
   BriefDetailProfileContainer: {
     width: 65,
     height: 65,
     borderRadius: 5,
-    marginRight: _CUSTOM_CONTENT.marginHorizontal
+    marginHorizontal: (_CUSTOM_ROLE_ITEM_CONTAINER.paddingHorizontal - 2)
   },
   BriefDetailTitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     fontSize: 26,
@@ -167,6 +171,8 @@ module.exports = StyleSheet.create({
     marginBottom: 5
   },
   BriefDetailSubtitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     fontSize: 14,
@@ -184,6 +190,7 @@ module.exports = StyleSheet.create({
 
   },
   RoleItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     shadowColor: colors.single.rangoonGreen,
     alignItems: 'flex-start',
     elevation: 1,
@@ -211,11 +218,15 @@ module.exports = StyleSheet.create({
     justifyContent: 'center'
   },
   RoleTitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.rangoonGreen,
     ..._CUSTOM_ROLE_TITLE
   },
   RoleSubtitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
     ..._CUSTOM_ROLE_SUBTITLE

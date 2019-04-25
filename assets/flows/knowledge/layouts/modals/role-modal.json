@@ -3,6 +3,11 @@
     "title": {
       "en": "Roles Modal"
     },
+    "context": {
+      "title": {
+        "en": "Roles Modal Content Container"
+      }
+    },
     "content": {
       "firstCarouselContainer": {
         "title": {
