@@ -21,8 +21,10 @@ if (width >= 1000 || height >= 1000){
 }
 
 if (Platform.OS !== 'ios'){
-  _CUSTOM_TITLE.fontWeight = 'bold';
-  _CUSTOM_SUBTITLE.fontWeight = '400';
+  if (!I18nManager.isRTL){
+    _CUSTOM_TITLE.fontWeight = 'bold';
+    _CUSTOM_SUBTITLE.fontWeight = '400';
+  }
 }
 
 module.exports = StyleSheet.create({

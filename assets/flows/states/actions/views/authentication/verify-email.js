@@ -6,7 +6,8 @@ const CMD = ViewsCMD.Authentication.VerifyEmail;
 
 const mapStateToProps = (state) => {
   return {
-    verifyEmail: state.VerifyEmail
+    verifyEmail: state.VerifyEmail,
+    login: state.Login
   };
 }
 

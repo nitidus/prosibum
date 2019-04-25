@@ -62,9 +62,11 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontSize += 1;
   }
 
-  _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
-  _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontWeight = 'bold';
-  _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
+  if (!I18nManager.isRTL){
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
+    _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontWeight = 'bold';
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
+  }
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;

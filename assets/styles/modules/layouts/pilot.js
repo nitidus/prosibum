@@ -152,11 +152,14 @@ if (Platform.OS === 'ios'){
   }
 
   _CUSTOM_CONTAINER.elevation = 2;
-  _CUSTOM_HEADER_TITLE.fontWeight = 'bold';
-  _CUSTOM_HEADER_SUBTITLE.fontWeight = 'bold';
-  _CUSTOM_TAB_ITEMS_TEXT.fontWeight = 'bold';
 
-  _CUSTOM_SINGLE_TAB_ITEM_CONTENT.fontWeight = '500';
+  if (!I18nManager.isRTL){
+    _CUSTOM_HEADER_TITLE.fontWeight = 'bold';
+    _CUSTOM_HEADER_SUBTITLE.fontWeight = 'bold';
+    _CUSTOM_TAB_ITEMS_TEXT.fontWeight = 'bold';
+
+    _CUSTOM_SINGLE_TAB_ITEM_CONTENT.fontWeight = '500';
+  }
 }
 
 module.exports = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { StatusBar, View, Platform } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -120,8 +120,6 @@ class Login extends Component<{}> {
           forcedDisable={_VALIDATED} />;
       }
 
-      const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
-
       var _WARNING_MESSAGE = '';
 
       if (props.login.token != ''){
@@ -144,75 +142,78 @@ class Login extends Component<{}> {
       }
 
       _LOGIN_CONTENT = (
-        <React.Fragment>
-          {_TOP_PINNED_TOAST}
-
-          <View style={Styles.Content}>
-            <Headline
-              style={Styles.Headline}
-              title={__CONSTANTS.headline.title[_LANGUAGE]}
-              subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
-
-            <InputGroup
-              style={Styles.InputGroup}>
-              <Input
-                type={__CONSTANTS.firstInputGroup.first.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.first.title[_LANGUAGE]}
-                value={props.login.token}
-                autoCapitalize="none"
-                onChangeText={(currentValue) => props.setToken(currentValue)} />
-              <Input
-                type={__CONSTANTS.firstInputGroup.second.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.second.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.second.title[_LANGUAGE]}
-                value={props.login.password}
-                link={__CONSTANTS.firstInputGroup.second.link[_LANGUAGE]}
-                onPress={() => {
-                  const { navigation } = props;
-
-                  props.setToken('');
-                  // props.setPassword('');
-
-                  navigation.navigate('ForgottenPassword');
-                }}
-                onChangeText={(currentValue) => props.setPassword(currentValue)} />
-            </InputGroup>
-
-            {_SUBMIT_BUTTON_CONTENT}
+        <React.Fragment
+          name={Functions._convertTokenToKeyword(__CONSTANTS.container.title.en)}>
+            {_TOP_PINNED_TOAST}
 
             <View
-              style={Styles.TailContainer}>
-                <Link
-                  containerStyle={Styles.QuickLink}
-                  value={__CONSTANTS.quickLink.title[_LANGUAGE]}
-                  onPress={() => {
-                    const { navigation } = props;
+              name={Functions._convertTokenToKeyword(__CONSTANTS.container.title.en)}
+              style={Styles.Content}>
+                <Headline
+                  style={Styles.Headline}
+                  title={__CONSTANTS.headline.title[_LANGUAGE]}
+                  subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
 
-                    // props.setToken('');
-                    // props.setPassword('');
-
-                    navigation.navigate('Signup');
-                  }} />
-
+                <InputGroup
+                  style={Styles.InputGroup}>
                   <Input
-                    type={"button"}
-                    name="language-modal-handler"
-                    gradient={Global.colors.pair.ongerine}
-                    style={Styles.LanguageHandlerButton}
-                    onPress={() => props.setLanguagesModalVisibility(true)}>
-                      <Icon
-                        name="globe"
-                        height={Styles.LanguageHandlerButtonIcon.height} />
-                  </Input>
-            </View>
-          </View>
+                    type={__CONSTANTS.firstInputGroup.first.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
+                    placeholder={__CONSTANTS.firstInputGroup.first.title[_LANGUAGE]}
+                    value={props.login.token}
+                    autoCapitalize="none"
+                    onChangeText={(currentValue) => props.setToken(currentValue)} />
+                  <Input
+                    type={__CONSTANTS.firstInputGroup.second.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.second.title.en)}
+                    placeholder={__CONSTANTS.firstInputGroup.second.title[_LANGUAGE]}
+                    value={props.login.password}
+                    link={__CONSTANTS.firstInputGroup.second.link[_LANGUAGE]}
+                    onPress={() => {
+                      const { navigation } = props;
 
-          <LanguagesModal
-            visibility={props.login.languagesModalVisibility}
-            onBlur={() => props.setLanguagesModalVisibility(false)}
-            onPress={async () => await this._fetchLanguageFromNativeSettings(props)}
-            {..._LANGUAGES_MODAL_OTHER_PROPS} />
+                      props.setToken('');
+                      // props.setPassword('');
+
+                      navigation.navigate('ForgottenPassword');
+                    }}
+                    onChangeText={(currentValue) => props.setPassword(currentValue)} />
+                </InputGroup>
+
+                {_SUBMIT_BUTTON_CONTENT}
+
+                <View
+                  style={Styles.TailContainer}>
+                    <Link
+                      containerStyle={Styles.QuickLink}
+                      value={__CONSTANTS.quickLink.title[_LANGUAGE]}
+                      onPress={() => {
+                        const { navigation } = props;
+
+                        // props.setToken('');
+                        // props.setPassword('');
+
+                        navigation.navigate('Signup');
+                      }} />
+
+                      <Input
+                        type={"button"}
+                        name="language-modal-handler"
+                        gradient={Global.colors.pair.ongerine}
+                        style={Styles.LanguageHandlerButton}
+                        onPress={() => props.setLanguagesModalVisibility(true)}>
+                          <Icon
+                            name="globe"
+                            height={Styles.LanguageHandlerButtonIcon.height} />
+                      </Input>
+                </View>
+            </View>
+
+            <LanguagesModal
+              visibility={props.login.languagesModalVisibility}
+              onBlur={() => props.setLanguagesModalVisibility(false)}
+              onPress={async () => await this._fetchLanguageFromNativeSettings(props)}
+              {..._LANGUAGES_MODAL_OTHER_PROPS} />
         </React.Fragment>
       );
     }else{

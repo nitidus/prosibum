@@ -51,12 +51,14 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 1;
   }
 
-  _CUSTOM_WALLET_ITEM_TITLE.fontWeight = '500';
-  _CUSTOM_WALLET_ITEM_SUBTITLE.fontWeight = '500';
+  if (!I18nManager.isRTL){
+    _CUSTOM_WALLET_ITEM_TITLE.fontWeight = '500';
+    _CUSTOM_WALLET_ITEM_SUBTITLE.fontWeight = '500';
 
-  _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = '500';
-  _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = '500';
-  _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontWeight = '500';
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = '500';
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = '500';
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontWeight = '500';
+  }
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;

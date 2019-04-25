@@ -640,6 +640,13 @@ export const Input = (props) => {
 
       if (I18nManager.isRTL){
         _PHONE_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
+
+        if (Platform.OS !== 'ios'){
+          _PHONE_CUSTOM_STYLES.push({
+            right: 18,
+            left: 'auto'
+          });
+        }
       }else{
         _PHONE_CUSTOM_STYLES.push({
           left: 18
@@ -702,6 +709,13 @@ export const Input = (props) => {
 
       if (I18nManager.isRTL){
         _PASSWORD_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
+
+        if (Platform.OS !== 'ios'){
+          _PASSWORD_CUSTOM_STYLES.push({
+            right: 18,
+            left: 'auto'
+          });
+        }
       }
 
       var _LINK_CONTENT = (

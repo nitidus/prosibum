@@ -17,7 +17,9 @@ if (width >= 1000 || height >= 1000){
 }
 
 if (Platform.OS !== 'ios'){
-  _CUSTOM_TEXT_INPUT_LINK.fontWeight = '500';
+  if (!I18nManager.isRTL){
+    _CUSTOM_TEXT_INPUT_LINK.fontWeight = '500';
+  }
 }
 
 module.exports = StyleSheet.create({

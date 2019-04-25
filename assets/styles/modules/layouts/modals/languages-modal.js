@@ -36,8 +36,10 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_CAROUSEL_ITEM_SUBTITLE.fontSize += 1;
   }
 
-  _CUSTOM_CAROUSEL_ITEM_TITLE.fontWeight = '500';
-  _CUSTOM_CAROUSEL_ITEM_SUBTITLE.fontWeight = '500';
+  if (!I18nManager.isRTL){
+    _CUSTOM_CAROUSEL_ITEM_TITLE.fontWeight = '500';
+    _CUSTOM_CAROUSEL_ITEM_SUBTITLE.fontWeight = '500';
+  }
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CAROUSEL_ITEM_CONTAINER.height += 5;

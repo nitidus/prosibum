@@ -76,8 +76,10 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_ROLE_TITLE.fontSize += 2;
   }
 
-  _CUSTOM_ROLE_TITLE.fontWeight = '500';
-  _CUSTOM_ROLE_SUBTITLE.fontWeight = '500';
+  if (!I18nManager.isRTL){
+    _CUSTOM_ROLE_TITLE.fontWeight = '500';
+    _CUSTOM_ROLE_SUBTITLE.fontWeight = '500';
+  }
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;

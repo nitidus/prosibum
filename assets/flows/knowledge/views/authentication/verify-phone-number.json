@@ -1,24 +1,28 @@
 {
   "headline": {
     "title": {
-      "en": "Dear User"
+      "en": "Dear User",
+      "fa": "کاربر گرامی"
     },
     "subtitle": {
-      "en": "Please enter the\nsent confirmation code."
+      "en": "Please enter the\nsent confirmation code.",
+      "fa": "لطفا کد تایید ارسال‌شده\nرا وارد نمایید."
     }
   },
   "firstInputGroup": {
     "first": {
       "type": "NUMERIC",
       "title": {
-        "en": "Confirmation Code"
+        "en": "Confirmation Code",
+        "fa": "کد تایید"
       },
       "options": {
         "maxLength": 6
       },
       "validation": {
         "message": {
-          "en": "Code must be 6 digit"
+          "en": "Code must be 6 digit",
+          "fa": "کد باید ۶ رقمی باشد"
         }
       }
     }
@@ -28,7 +32,8 @@
     "state": {
       "normal": {
         "title": {
-          "en": "Verify Phone Number"
+          "en": "Verify Phone Number",
+          "fa": "اعتبارسنجی کد"
         }
       },
       "loading": {
@@ -40,7 +45,8 @@
   },
   "quickLink": {
     "title": {
-      "en": "Wrong Number?"
+      "en": "Wrong Number?",
+      "fa": "عدد اشتباه است؟"
     }
   }
 }

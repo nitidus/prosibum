@@ -1,4 +1,9 @@
 {
+  "container": {
+    "title": {
+      "en": "Login Form Container"
+    }
+  },
   "headline": {
     "title": {
       "en": "Welcome",

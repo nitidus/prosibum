@@ -33,7 +33,9 @@ if (Platform.OS !== 'ios'){
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 2;
   }
 
-  _CUSTOM_BUTTON_TITLE.fontWeight = '500';
+  if (!I18nManager.isRTL){
+    _CUSTOM_BUTTON_TITLE.fontWeight = '500';
+  }
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_SCROLLABLE_CONTAINER.marginHorizontal = 162;

@@ -51,8 +51,10 @@ if (Platform.OS === 'ios'){
     _CUSTOM_PIN_SUBTITLE.fontSize += 1;
   }
 
-  _CUSTOM_PIN_TITLE.fontWeight = 'bold';
-  _CUSTOM_PIN_SUBTITLE.fontWeight = 'bold';
+  if (!I18nManager.isRTL){
+    _CUSTOM_PIN_TITLE.fontWeight = 'bold';
+    _CUSTOM_PIN_SUBTITLE.fontWeight = 'bold';
+  }
 }
 
 module.exports = StyleSheet.create({

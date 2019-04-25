@@ -142,49 +142,51 @@ class Signup extends Component<{}> {
             }
 
             _MAIN_CONTENT = (
-              <View style={Styles.Content}>
-                <Headline
-                  style={Styles.Headline}
-                  title={__CONSTANTS.content.state.invitation.headline.title[_LANGUAGE]}
-                  subtitle={__CONSTANTS.content.state.invitation.headline.subtitle[_LANGUAGE]} />
+              <View
+                style={Styles.Content}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.container.title.en)}>
+                  <Headline
+                    style={Styles.Headline}
+                    title={__CONSTANTS.content.state.invitation.headline.title[_LANGUAGE]}
+                    subtitle={__CONSTANTS.content.state.invitation.headline.subtitle[_LANGUAGE]} />
 
-                <InputGroup
-                  style={Styles.FirstInputGroupInvitationState}>
-                  <Input
-                    type={__CONSTANTS.content.state.invitation.firstInputGroup.first.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.firstInputGroup.first.title.en)}
-                    placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.first.title[_LANGUAGE]}
-                    value={props.signup.firstName}
-                    onChangeText={(currentValue) => props.setFirstName(currentValue)} />
-                  <Input
-                    type={__CONSTANTS.content.state.invitation.firstInputGroup.second.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.firstInputGroup.second.title.en)}
-                    placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.second.title[_LANGUAGE]}
-                    value={props.signup.lastName}
-                    onChangeText={(currentValue) => props.setLastName(currentValue)} />
-                </InputGroup>
+                  <InputGroup
+                    style={Styles.FirstInputGroupInvitationState}>
+                    <Input
+                      type={__CONSTANTS.content.state.invitation.firstInputGroup.first.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.firstInputGroup.first.title.en)}
+                      placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.first.title[_LANGUAGE]}
+                      value={props.signup.firstName}
+                      onChangeText={(currentValue) => props.setFirstName(currentValue)} />
+                    <Input
+                      type={__CONSTANTS.content.state.invitation.firstInputGroup.second.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.firstInputGroup.second.title.en)}
+                      placeholder={__CONSTANTS.content.state.invitation.firstInputGroup.second.title[_LANGUAGE]}
+                      value={props.signup.lastName}
+                      onChangeText={(currentValue) => props.setLastName(currentValue)} />
+                  </InputGroup>
 
-                <InputGroup
-                  style={Styles.SecondInputGroupInvitationState}>
-                  <Input
-                    type={__CONSTANTS.content.state.invitation.secondInputGroup.first.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.secondInputGroup.first.title.en)}
-                    placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.first.title[_LANGUAGE]}
-                    value={props.signup.phone.number}
-                    link={props.signup.phone.dialCode.area_code}
-                    onPress={() => props.setCountriesCodesModalVisibility(true)}
-                    onChangeText={(currentValue) => props.setPhoneNumber({
-                      number: currentValue
-                    })} />
-                  <Input
-                    type={__CONSTANTS.content.state.invitation.secondInputGroup.second.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.secondInputGroup.second.title.en)}
-                    placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.second.title[_LANGUAGE]}
-                    value={props.signup.password}
-                    onChangeText={(currentValue) => props.setPassword(currentValue)} />
-                </InputGroup>
+                  <InputGroup
+                    style={Styles.SecondInputGroupInvitationState}>
+                    <Input
+                      type={__CONSTANTS.content.state.invitation.secondInputGroup.first.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.secondInputGroup.first.title.en)}
+                      placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.first.title[_LANGUAGE]}
+                      value={props.signup.phone.number}
+                      link={props.signup.phone.dialCode.area_code}
+                      onPress={() => props.setCountriesCodesModalVisibility(true)}
+                      onChangeText={(currentValue) => props.setPhoneNumber({
+                        number: currentValue
+                      })} />
+                    <Input
+                      type={__CONSTANTS.content.state.invitation.secondInputGroup.second.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.secondInputGroup.second.title.en)}
+                      placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.second.title[_LANGUAGE]}
+                      value={props.signup.password}
+                      onChangeText={(currentValue) => props.setPassword(currentValue)} />
+                  </InputGroup>
 
-                {_SUBMIT_BUTTON_CONTENT}
+                  {_SUBMIT_BUTTON_CONTENT}
               </View>
             );
           }else{
@@ -257,41 +259,43 @@ class Signup extends Component<{}> {
           }
 
           _MAIN_CONTENT = (
-            <View style={Styles.Content}>
-              <Headline
-                style={Styles.Headline}
-                title={__CONSTANTS.content.state.normal.headline.title[_LANGUAGE]}
-                subtitle={__CONSTANTS.content.state.normal.headline.subtitle[_LANGUAGE]} />
+            <View
+              style={Styles.Content}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.container.title.en)}>
+                <Headline
+                  style={Styles.Headline}
+                  title={__CONSTANTS.content.state.normal.headline.title[_LANGUAGE]}
+                  subtitle={__CONSTANTS.content.state.normal.headline.subtitle[_LANGUAGE]} />
 
-              <InputGroup
-                style={Styles.FirstInputGroupNormalState}>
-                <Input
-                  type={__CONSTANTS.content.state.normal.firstInputGroup.first.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.first.title.en)}
-                  placeholder={__CONSTANTS.content.state.normal.firstInputGroup.first.title[_LANGUAGE]}
-                  value={props.signup.phone.number}
-                  link={_AREA_CODE}
-                  onPress={() => props.setCountriesCodesModalVisibility(true)}
-                  onChangeText={(currentValue) => props.setPhoneNumber({
-                    number: currentValue
-                  })} />
-                <Input
-                  type={__CONSTANTS.content.state.normal.firstInputGroup.second.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.second.title.en)}
-                  placeholder={__CONSTANTS.content.state.normal.firstInputGroup.second.title[_LANGUAGE]}
-                  value={props.signup.email}
-                  onChangeText={(currentValue) => props.setEmail(currentValue)} />
-                <Input
-                  type={__CONSTANTS.content.state.normal.firstInputGroup.third.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.third.title.en)}
-                  placeholder={__CONSTANTS.content.state.normal.firstInputGroup.third.title[_LANGUAGE]}
-                  value={props.signup.password}
-                  onChangeText={(currentValue) => props.setPassword(currentValue)} />
-              </InputGroup>
+                <InputGroup
+                  style={Styles.FirstInputGroupNormalState}>
+                  <Input
+                    type={__CONSTANTS.content.state.normal.firstInputGroup.first.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.first.title.en)}
+                    placeholder={__CONSTANTS.content.state.normal.firstInputGroup.first.title[_LANGUAGE]}
+                    value={props.signup.phone.number}
+                    link={_AREA_CODE}
+                    onPress={() => props.setCountriesCodesModalVisibility(true)}
+                    onChangeText={(currentValue) => props.setPhoneNumber({
+                      number: currentValue
+                    })} />
+                  <Input
+                    type={__CONSTANTS.content.state.normal.firstInputGroup.second.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.second.title.en)}
+                    placeholder={__CONSTANTS.content.state.normal.firstInputGroup.second.title[_LANGUAGE]}
+                    value={props.signup.email}
+                    onChangeText={(currentValue) => props.setEmail(currentValue)} />
+                  <Input
+                    type={__CONSTANTS.content.state.normal.firstInputGroup.third.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.firstInputGroup.third.title.en)}
+                    placeholder={__CONSTANTS.content.state.normal.firstInputGroup.third.title[_LANGUAGE]}
+                    value={props.signup.password}
+                    onChangeText={(currentValue) => props.setPassword(currentValue)} />
+                </InputGroup>
 
-              {_SUBMIT_BUTTON_CONTENT}
+                {_SUBMIT_BUTTON_CONTENT}
 
-              <Link
+                <Link
                 containerStyle={Styles.QuickLink}
                 value={__CONSTANTS.content.state.normal.quickLink.title[_LANGUAGE]}
                 onPress={() => {
@@ -310,18 +314,19 @@ class Signup extends Component<{}> {
       const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
 
       _SIGNUP_CONTENT = (
-        <React.Fragment>
-          {_TOP_PINNED_TOAST}
+        <React.Fragment
+          name={Functions._convertTokenToKeyword(__CONSTANTS.majorContainer.title.en)}>
+            {_TOP_PINNED_TOAST}
 
-          <CountriesCodesModal
-            visible={props.signup.countriesCodesModalVisibility}
-            onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
-            selectedItem={props.signup.phone.dialCode}
-            onPress={(currentValue) => props.setPhoneNumber({
-              dialCode: currentValue
-            })} />
+            <CountriesCodesModal
+              visible={props.signup.countriesCodesModalVisibility}
+              onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
+              selectedItem={props.signup.phone.dialCode}
+              onPress={(currentValue) => props.setPhoneNumber({
+                dialCode: currentValue
+              })} />
 
-          {_MAIN_CONTENT}
+            {_MAIN_CONTENT}
         </React.Fragment>
       );
     }else{

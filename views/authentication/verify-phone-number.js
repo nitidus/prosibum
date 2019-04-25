@@ -77,7 +77,7 @@ class VerifyPhoneNumber extends Component<{}> {
 
     const _VALIDATED = this._componentWillCheckValidation(props),
           _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
-
+console.log(_LANGUAGE)
     if (props.signup.subscribeLoading){
       _SUBMIT_BUTTON_CONTENT = <Input
         type={__CONSTANTS.submitInput.type}

@@ -3,7 +3,8 @@ const { FORGOTTEN_PASSWORD } = VIEWS.AUTHENTICATION;
 
 const mapStateToProps = (state) => {
   return {
-    forgottenPassword: state.ForgottenPassword
+    forgottenPassword: state.ForgottenPassword,
+    login: state.Login
   };
 }
 

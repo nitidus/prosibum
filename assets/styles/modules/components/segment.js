@@ -29,7 +29,9 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_DUAL_SEGMENT_TAB_INNER_CONTENT_TITLE.fontSize += 7;
   }
 
-  _CUSTOM_DUAL_SEGMENT_TAB_INNER_CONTENT_TITLE.fontWeight = '500';
+  if (!I18nManager.isRTL){
+    _CUSTOM_DUAL_SEGMENT_TAB_INNER_CONTENT_TITLE.fontWeight = '500';
+  }
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_DUAL_SEGMENT_TAB_INNER_CONTENT.width = ( width / 2 ) - ( 162 + 7.5 );

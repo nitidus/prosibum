@@ -1,4 +1,14 @@
 {
+  "container": {
+    "title": {
+      "en": "Signup Form Container"
+    }
+  },
+  "majorContainer": {
+    "title": {
+      "en": "Signup Form Major Container"
+    }
+  },
   "content": {
     "state": {
       "normal": {

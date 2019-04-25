@@ -79,9 +79,11 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_TRANSACTION_PIN.marginBottom = _CUSTOM_CONTENT.marginHorizontal;
   }
 
-  _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
-  _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
-  _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontWeight = 'bold';
+  if (!I18nManager.isRTL){
+    _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
+    _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontWeight = 'bold';
+  }
 }else{
   if (width >= 1000 || height >= 1000){
     _CUSTOM_CONTENT.marginHorizontal = 162;

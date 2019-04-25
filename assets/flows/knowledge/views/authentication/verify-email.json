@@ -1,15 +1,18 @@
 {
   "headline": {
     "title": {
-      "en": "Dear User"
+      "en": "Dear User",
+      "fa": "کاربر گرامی"
     },
     "subtitle": {
       "state": {
         "normal": {
-          "en": "Your email has been\nverified successfully."
+          "en": "Your email has been\nverified successfully.",
+          "fa": "ایمیل شما با موفقیت\nفعال گردید."
         },
         "disconnect": {
-          "en": "Your email verification\nprocess has been failed."
+          "en": "Your email verification\nprocess has been failed.",
+          "fa": "فعال‌سازی ایمل شما\nانجام نشد."
         }
       }
     }
@@ -18,10 +21,12 @@
     "title": {
       "state": {
         "normal": {
-          "en": "Would you like to login?"
+          "en": "Would you like to login?",
+          "fa": "مایلید که وارد حساب‌کاربری خود شوید؟"
         },
         "disconnect": {
-          "en": "already verified your account?"
+          "en": "already verified your account?",
+          "fa": "قبلا حساب خود را فعال کردید؟"
         }
       }
     }

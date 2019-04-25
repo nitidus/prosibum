@@ -29,7 +29,9 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_MESSAGE_TEXT.fontSize += 6;
   }
 
-  _CUSTOM_MESSAGE_TEXT.fontWeight = '400';
+  if (!I18nManager.isRTL){
+    _CUSTOM_MESSAGE_TEXT.fontWeight = '400';
+  }
 }else{
   if (_IS_IPHONE_X){
     _CONTAINER_DEPENDED_HEIGHT.height += 30;
@@ -58,7 +60,7 @@ module.exports = StyleSheet.create({
   MessageText: {
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     color: colors.single.romance,
-    textAlign: (I18nManager.isRTL)? 'right': 'left',
+    textAlign: 'left',
     ..._CUSTOM_MESSAGE_TEXT
   },
   ToastLink: {

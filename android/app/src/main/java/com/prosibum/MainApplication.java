@@ -3,7 +3,6 @@ package com.prosibum;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.wix.interactable.Interactable;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.horcrux.svg.SvgPackage;
@@ -29,7 +28,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactNativeRestartPackage(),
             new Interactable(),
             new RNFetchBlobPackage(),
             new SvgPackage(),

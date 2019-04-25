@@ -57,49 +57,61 @@ class VerifyEmail extends Component<{}> {
     const { props } = this,
           { navigation: { state: { params } } } = props;
 
-    var _MAIN_CONTENT,
-        _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
+    if (typeof props.login != 'undefined'){
+      if (Object.keys(props.login.language).length > 0){
+        var _MAIN_CONTENT,
+            _LANGUAGE = Functions._convertTokenToKeyword(props.login.language.key);
 
-    if (props.verifyEmail.verifyTheUserEmailAddressLoading){
-      _MAIN_CONTENT = (
+        if (props.verifyEmail.verifyTheUserEmailAddressLoading){
+          _MAIN_CONTENT = (
+            <ActivityIndicator />
+          );
+        }else{
+          var _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.normal[_LANGUAGE],
+              _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.normal[_LANGUAGE];
+
+          if (!props.verifyEmail.connected.status){
+            _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.disconnect[_LANGUAGE];
+            _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.disconnect[_LANGUAGE];
+          }
+
+          _MAIN_CONTENT = (
+            <View style={Styles.Content}>
+              <Headline
+                style={Styles.Headline}
+                title={__CONSTANTS.headline.title[_LANGUAGE]}
+                subtitle={_HEADLINE_SUBTITLE} />
+
+              <Link
+                containerStyle={Styles.QuickLink}
+                value={_QUICK_LINK_CONTENT}
+                onPress={() => {
+                  const { navigation } = props;
+
+                  navigation.navigate('Login');
+                }} />
+            </View>
+          );
+        }
+
+        const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
+
+        return (
+          <Container
+            style={Styles.Container}>
+              {_MAIN_CONTENT}
+          </Container>
+        );
+      }else{
+        return (
+          <ActivityIndicator />
+        );
+      }
+    }else{
+      return (
         <ActivityIndicator />
       );
-    }else{
-      var _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.normal[_LANGUAGE],
-          _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.normal[_LANGUAGE];
-
-      if (!props.verifyEmail.connected.status){
-        _HEADLINE_SUBTITLE = __CONSTANTS.headline.subtitle.state.disconnect[_LANGUAGE];
-        _QUICK_LINK_CONTENT = __CONSTANTS.quickLink.title.state.disconnect[_LANGUAGE];
-      }
-
-      _MAIN_CONTENT = (
-        <View style={Styles.Content}>
-          <Headline
-            style={Styles.Headline}
-            title={__CONSTANTS.headline.title[_LANGUAGE]}
-            subtitle={_HEADLINE_SUBTITLE} />
-
-          <Link
-            containerStyle={Styles.QuickLink}
-            value={_QUICK_LINK_CONTENT}
-            onPress={() => {
-              const { navigation } = props;
-
-              navigation.navigate('Login');
-            }} />
-        </View>
-      );
     }
-
-    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
-
-    return (
-      <Container
-        style={Styles.Container}>
-          {_MAIN_CONTENT}
-      </Container>
-    )
   }
 }
 

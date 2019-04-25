@@ -36,7 +36,9 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_DEFAULT_BACK_BUTTON_TEXT_STYLE.lineHeight = 20;
   }
 
-  _CUSTOM_DEFAULT_TEXT_STYLE.fontWeight = 'bold';
+  if (!I18nManager.isRTL){
+    _CUSTOM_DEFAULT_TEXT_STYLE.fontWeight = 'bold';
+  }
 }
 
 module.exports = StyleSheet.create({
