@@ -11,7 +11,7 @@
         },
         {
           "en": "Transaction Point",
-          "fa": "تررنزکشن پوینت"
+          "fa": "ترنزکشن پوینت"
         },
         {
           "en": "Rial",
@@ -40,7 +40,7 @@
       "withdraw": {
         "title": {
           "en": "Withdraw Transaction",
-          "fa": "ترراکنش برداشت"
+          "fa": "تراکنش برداشت"
         }
       }
     },

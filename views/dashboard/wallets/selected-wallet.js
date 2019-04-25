@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, Text, Image } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, I18nManager, Text, Image } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -109,12 +109,25 @@ class SelectedWallet extends Component<{}> {
                 _TARGET_SIGN = (_POSSIBLE_SUBTITLE_SUFFIX_INDEX > -1)? __CONSTANTS.pilot.subtitle.suffix[_POSSIBLE_SUBTITLE_SUFFIX_INDEX][_LANGUAGE]: props.selectedWallet.referenceWallet.currency.sign;
 
           _CONTAINER_TITLE = Functions._convertKeywordToToken(Functions._stripLongString(props.selectedWallet.referenceWallet.name, 13));
-          _CONTAINER_SUBTITLE = `${Functions._convertDigitsToMoneyFormat(props.selectedWallet.referenceWallet.balance)} ${_TARGET_SIGN}`;
+          _CONTAINER_SUBTITLE = `${_TARGET_SIGN}${Functions._convertDigitsToMoneyFormat(props.selectedWallet.referenceWallet.balance)}`;
+
+          if (I18nManager.isRTL){
+            if ((_TARGET_SIGN === "ریال") || (_TARGET_SIGN === "تومان") || (_TARGET_SIGN === "درهم") || (_TARGET_SIGN === "لیر")){
+              _CONTAINER_SUBTITLE = `${Functions._convertDigitsToMoneyFormat((props.selectedWallet.referenceWallet.balance * 10000), 0)} ${_TARGET_SIGN}`;
+            }else if ((_TARGET_SIGN === "ترنزکشن پوینت")) {
+              _CONTAINER_SUBTITLE = `${Functions._convertDigitsToMoneyFormat(props.selectedWallet.referenceWallet.balance)} ${_TARGET_SIGN}`;
+            }
+          }
 
           _TAB_CONTENT = (
             <ScrollView
               showsVerticalScrollIndicator={true}
-              contentContainerStyle={Styles.Content}>
+              contentContainerStyle={[
+                Styles.Content,
+                {
+                  direction: 'ltr'
+                }
+              ]}>
                 {
                   props.selectedWallet.transactions.map((transaction, i) => {
                     var _ITEM_STYLE = [
@@ -123,7 +136,7 @@ class SelectedWallet extends Component<{}> {
                         ],
                         _ITEM_GRADIENT = Global.colors.pair.peroly,
                         _ITEM_TITLE = __CONSTANTS.transactions.state.withdraw.title[_LANGUAGE],
-                        _ITEM_HUMAN_READABLE_CREATED_DATE = Functions._convertDateToHumanReadableFormat(transaction.created_at),
+                        _ITEM_HUMAN_READABLE_CREATED_DATE = Functions._convertDateToHumanReadableFormat(transaction.created_at, _LANGUAGE),
                         _ITEM_BALANCE_DIFFERENCE_AMOUNT = Math.abs(transaction.new_balance - transaction.previous_balance);
 
                     if (transaction.new_balance > transaction.previous_balance){
@@ -135,6 +148,26 @@ class SelectedWallet extends Component<{}> {
                       _ITEM_STYLE.push({
                         marginBottom: Styles.Content.marginVertical
                       });
+                    }
+
+                    var _PREVIOUS_BALANCE = `${__CONSTANTS.transactions.previous_balance.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(transaction.previous_balance)} ${__CONSTANTS.transactions.previous_balance.suffix[_LANGUAGE]}`,
+                        _NEW_BALANCE = `${__CONSTANTS.transactions.difference_balance.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(_ITEM_BALANCE_DIFFERENCE_AMOUNT)} ${__CONSTANTS.transactions.difference_balance.suffix[_LANGUAGE]}`;
+
+                    if (I18nManager.isRTL){
+                      const _PREVIOUS_BALANCE_SIGN = __CONSTANTS.transactions.previous_balance.sign[_LANGUAGE],
+                            _NEW_BALANCE_SIGN = __CONSTANTS.transactions.difference_balance.sign[_LANGUAGE];
+
+                      if ((_PREVIOUS_BALANCE_SIGN === "ریال") || (_PREVIOUS_BALANCE_SIGN === "تومان") || (_PREVIOUS_BALANCE_SIGN === "درهم") || (_PREVIOUS_BALANCE_SIGN === "لیر")){
+                        _PREVIOUS_BALANCE = `${Functions._convertDigitsToMoneyFormat((transaction.previous_balance * 10000), 0)} ${_PREVIOUS_BALANCE_SIGN} ${__CONSTANTS.transactions.previous_balance.suffix[_LANGUAGE]}`;
+                      }else if ((_PREVIOUS_BALANCE_SIGN === "ترنزکشن پوینت")) {
+                        _PREVIOUS_BALANCE = `${Functions._convertDigitsToMoneyFormat(transaction.previous_balance)} ${_PREVIOUS_BALANCE_SIGN} ${__CONSTANTS.transactions.previous_balance.suffix[_LANGUAGE]}`;
+                      }
+
+                      if ((_NEW_BALANCE_SIGN === "ریال") || (_NEW_BALANCE_SIGN === "تومان") || (_NEW_BALANCE_SIGN === "درهم") || (_NEW_BALANCE_SIGN === "لیر")){
+                        _NEW_BALANCE = `${Functions._convertDigitsToMoneyFormat((_ITEM_BALANCE_DIFFERENCE_AMOUNT * 10000), 0)} ${_NEW_BALANCE_SIGN} ${__CONSTANTS.transactions.difference_balance.suffix[_LANGUAGE]}`;
+                      }else if ((_NEW_BALANCE_SIGN === "ترنزکشن پوینت")) {
+                        _NEW_BALANCE = `${Functions._convertDigitsToMoneyFormat(_ITEM_BALANCE_DIFFERENCE_AMOUNT)} ${_NEW_BALANCE_SIGN} ${__CONSTANTS.transactions.difference_balance.suffix[_LANGUAGE]}`;
+                      }
                     }
 
                     return (
@@ -170,7 +203,7 @@ class SelectedWallet extends Component<{}> {
                               </View>
                               <Text
                                 style={Styles.BriefDetailRowText}>
-                                  {`${__CONSTANTS.transactions.previous_balance.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(transaction.previous_balance)} ${__CONSTANTS.transactions.previous_balance.suffix[_LANGUAGE]}`}
+                                  {_PREVIOUS_BALANCE}
                               </Text>
                           </View>
                           <View
@@ -187,7 +220,7 @@ class SelectedWallet extends Component<{}> {
                               </View>
                               <Text
                                 style={Styles.BriefDetailRowText}>
-                                  {`${__CONSTANTS.transactions.difference_balance.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(_ITEM_BALANCE_DIFFERENCE_AMOUNT)} ${__CONSTANTS.transactions.difference_balance.suffix[_LANGUAGE]}`}
+                                  {_NEW_BALANCE}
                               </Text>
                           </View>
                       </Input>

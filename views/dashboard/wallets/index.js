@@ -97,10 +97,12 @@ class Wallets extends Component<{}> {
               var _LOCALE_BASED_PIN_SUBTITLE = `${__CONSTANTS.firstPin.subtitle.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(props.wallets.selectedWallet.transactions.withdraw)} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`;
 
               if (I18nManager.isRTL){
-                const _TARGET_SIGN = __CONSTANTS.firstPin.subtitle.sign[_LANGUAGE];
+                const _TARGET_WITHDRAW_SIGN = __CONSTANTS.firstPin.subtitle.sign[_LANGUAGE];
 
-                if ((_TARGET_SIGN === "ریال") || (_TARGET_SIGN === "تومان") || (_TARGET_SIGN === "درهم") || (_TARGET_SIGN === "لیر")){
-                  _LOCALE_BASED_PIN_SUBTITLE = `${Functions._convertDigitsToMoneyFormat((props.wallets.selectedWallet.transactions.withdraw * 1000), 0)} ${__CONSTANTS.firstPin.subtitle.sign[_LANGUAGE]} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`;
+                if ((_TARGET_WITHDRAW_SIGN === "ریال") || (_TARGET_WITHDRAW_SIGN === "تومان") || (_TARGET_WITHDRAW_SIGN === "درهم") || (_TARGET_WITHDRAW_SIGN === "لیر")){
+                  _LOCALE_BASED_PIN_SUBTITLE = `${Functions._convertDigitsToMoneyFormat((props.wallets.selectedWallet.transactions.withdraw * 10000), 0)} ${_TARGET_WITHDRAW_SIGN} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`;
+                }else if ((_TARGET_WITHDRAW_SIGN === "ترنزکشن پوینت")) {
+                  _LOCALE_BASED_PIN_SUBTITLE = `${Functions._convertDigitsToMoneyFormat(props.wallets.selectedWallet.transactions.withdraw)} ${_TARGET_WITHDRAW_SIGN} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`;
                 }
               }
 
@@ -117,13 +119,24 @@ class Wallets extends Component<{}> {
                       firstItem={_SELECTED_WALLET_INDEX}
                       itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
                       onLayout={({ item, index }) => {
-                        var _ITEM_GRADIENT = Global.colors.pair.tilan;
+                        var _ITEM_GRADIENT = Global.colors.pair.tilan,
+                            _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix[_LANGUAGE]}${((item.transactions.amount > 1) && (_LANGUAGE == 'en'))? 's': ''}`;
 
                         if (_SELECTED_WALLET_INDEX === index){
                           _ITEM_GRADIENT = Global.colors.pair.analue;
                         }
 
-                        _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix[_LANGUAGE]}${((item.transactions.amount > 1) && (_LANGUAGE == 'en'))? 's': ''}`;
+                        var _LOCALE_BASED_DEPOSIT = `${__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign[_LANGUAGE]}${Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} ${__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix[_LANGUAGE]}`;
+
+                        if (I18nManager.isRTL){
+                          const _TARGET_DEPOSIT_SIGN = __CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign[_LANGUAGE];
+
+                          if ((_TARGET_DEPOSIT_SIGN === "ریال") || (_TARGET_DEPOSIT_SIGN === "تومان") || (_TARGET_DEPOSIT_SIGN === "درهم") || (_TARGET_DEPOSIT_SIGN === "لیر")){
+                            _LOCALE_BASED_DEPOSIT = `${Functions._convertDigitsToMoneyFormat((item.transactions.deposit * 10000), 0)} ${_TARGET_DEPOSIT_SIGN} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`;
+                          }else if ((_TARGET_DEPOSIT_SIGN === "ترنزکشن پوینت")) {
+                            _LOCALE_BASED_DEPOSIT = `${Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} ${_TARGET_DEPOSIT_SIGN} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`;
+                          }
+                        }
 
                         return (
                           <Input
@@ -173,7 +186,7 @@ class Wallets extends Component<{}> {
                                   </View>
                                   <Text
                                     style={Styles.BriefDetailRowText}>
-                                      {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign[_LANGUAGE]}{Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} {__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix[_LANGUAGE]}
+                                      {_LOCALE_BASED_DEPOSIT}
                                   </Text>
                               </View>
                           </Input>

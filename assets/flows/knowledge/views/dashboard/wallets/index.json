@@ -58,7 +58,7 @@
           "icon": "pay",
           "sign": {
             "en": "$",
-            "en": "ریال"
+            "fa": "ریال"
           },
           "suffix": {
             "en": "Deposit",
