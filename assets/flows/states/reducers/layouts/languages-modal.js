@@ -3,7 +3,7 @@ const { LANGUAGES_MODAL } = LAYOUTS;
 
 const initialState = {
   visibility: false,
-  selectedLanguage: 0,
+  selectedLanguage: {},
   languages: []
 };
 
