@@ -1,4 +1,10 @@
 {
+  "emptySecretKey": {
+    "title": {
+      "en": "There's no valid secret key.",
+      "fa": "کد تایید صحیحی وجود ندارد."
+    }
+  },
   "headline": {
     "title": {
       "en": "Dear User",

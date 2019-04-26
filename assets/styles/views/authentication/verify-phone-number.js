@@ -41,5 +41,10 @@ module.exports = StyleSheet.create({
   QuickLink: {
     marginVertical: 38,
     alignItems: 'center'
+  },
+  EmptySecretKey: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

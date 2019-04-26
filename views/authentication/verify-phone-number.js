@@ -73,92 +73,113 @@ class VerifyPhoneNumber extends Component<{}> {
   render() {
     const { props } = this;
 
-    var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
+    if (typeof props.login != 'undefined'){
+      if (Object.keys(props.login.language).length > 0){
+        const _LANGUAGE = Functions._convertTokenToKeyword(props.login.language.key);
+        
+        if (props.signup.secretKey != ''){
+          var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
 
-    const _VALIDATED = this._componentWillCheckValidation(props),
-          _LANGUAGE = (typeof this._language != 'undefined')? Functions._convertTokenToKeyword(this._language.key): 'en';
-console.log(_LANGUAGE)
-    if (props.signup.subscribeLoading){
-      _SUBMIT_BUTTON_CONTENT = <Input
-        type={__CONSTANTS.submitInput.type}
-        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
-        gradient={Global.colors.pair.ongerine}
-        style={Styles.SubmitButton}
-        disable={true}>
+          const _VALIDATED = this._componentWillCheckValidation(props);
+
+          if (props.signup.subscribeLoading){
+            _SUBMIT_BUTTON_CONTENT = <Input
+              type={__CONSTANTS.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.loading.title.en)}
+              gradient={Global.colors.pair.ongerine}
+              style={Styles.SubmitButton}
+              disable={true}>
+                <ActivityIndicator />
+              </Input>;
+          }else{
+            if (!props.signup.connected.status){
+              _TOP_PINNED_TOAST = <Toast
+                message={props.signup.connected.content}
+                launched={!props.signup.connected.status}
+                color={Global.colors.single.carminePink}
+                onPress={() => Preparation._prepareSubscribeTokenToSubmit(props)} />;
+            }
+
+            _SUBMIT_BUTTON_CONTENT = <Input
+              style={Styles.SubmitButton}
+              type={__CONSTANTS.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+              value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
+              gradient={Global.colors.pair.ongerine}
+              onPress={() => Preparation._prepareSubscribeTokenToSubmit(props)}
+              forcedDisable={_VALIDATED} />;
+          }
+
+          const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
+
+          var _WARNING_MESSAGE = '';
+
+          if (props.signup.validationToken != ''){
+            if (!Functions._checkIsAValidNumericOnlyField(props.signup.validationToken, 6)){
+              _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
+            }
+          }
+
+          if (_WARNING_MESSAGE != ''){
+            _TOP_PINNED_TOAST = <Toast
+              message={_WARNING_MESSAGE}
+              launched={true}
+              color={Global.colors.pair.ongerine.orangeYellow} />;
+          }
+
+          return (
+          <Container
+            style={Styles.Container}>
+              {_TOP_PINNED_TOAST}
+
+              <View style={Styles.Content}>
+                <Headline
+                  style={Styles.Headline}
+                  title={__CONSTANTS.headline.title[_LANGUAGE]}
+                  subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
+
+                  <Input
+                    type={__CONSTANTS.firstInputGroup.first.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
+                    placeholder={__CONSTANTS.firstInputGroup.first.title[_LANGUAGE]}
+                    value={props.signup.validationToken}
+                    style={Styles.FirstInput}
+                    onChangeText={(currentValue) => props.setValidationToken(currentValue)}
+                    {...__CONSTANTS.firstInputGroup.first.options} />
+
+                  {_SUBMIT_BUTTON_CONTENT}
+
+                  <Link
+                    containerStyle={Styles.QuickLink}
+                    value={__CONSTANTS.quickLink.title[_LANGUAGE]}
+                    onPress={() => {
+                      const { navigation } = this.props;
+
+                      // props.setValidationToken('');
+                      // props.setSecretKey('');
+
+                      navigation.goBack();
+                    }} />
+              </View>
+          </Container>
+        );
+        }else{
+          return (
+            <Link
+              containerStyle={Styles.EmptySecretKey}
+              value={__CONSTANTS.emptySecretKey.title[_LANGUAGE]} />
+          );
+        }
+      }else{
+        return (
           <ActivityIndicator />
-        </Input>;
+        );
+      }
     }else{
-      if (!props.signup.connected.status){
-        _TOP_PINNED_TOAST = <Toast
-          message={props.signup.connected.content}
-          launched={!props.signup.connected.status}
-          color={Global.colors.single.carminePink}
-          onPress={() => Preparation._prepareSubscribeTokenToSubmit(props)} />;
-      }
-
-      _SUBMIT_BUTTON_CONTENT = <Input
-        style={Styles.SubmitButton}
-        type={__CONSTANTS.submitInput.type}
-        name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-        value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
-        gradient={Global.colors.pair.ongerine}
-        onPress={() => Preparation._prepareSubscribeTokenToSubmit(props)}
-        forcedDisable={_VALIDATED} />;
+      return (
+        <ActivityIndicator />
+      );
     }
-
-    const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
-
-    var _WARNING_MESSAGE = '';
-
-    if (props.signup.validationToken != ''){
-      if (!Functions._checkIsAValidNumericOnlyField(props.signup.validationToken, 6)){
-        _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
-      }
-    }
-
-    if (_WARNING_MESSAGE != ''){
-      _TOP_PINNED_TOAST = <Toast
-        message={_WARNING_MESSAGE}
-        launched={true}
-        color={Global.colors.pair.ongerine.orangeYellow} />;
-    }
-
-    return (
-      <Container
-        style={Styles.Container}>
-          {_TOP_PINNED_TOAST}
-
-          <View style={Styles.Content}>
-            <Headline
-              style={Styles.Headline}
-              title={__CONSTANTS.headline.title[_LANGUAGE]}
-              subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
-
-              <Input
-                type={__CONSTANTS.firstInputGroup.first.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
-                placeholder={__CONSTANTS.firstInputGroup.first.title[_LANGUAGE]}
-                value={props.signup.validationToken}
-                style={Styles.FirstInput}
-                onChangeText={(currentValue) => props.setValidationToken(currentValue)}
-                {...__CONSTANTS.firstInputGroup.first.options} />
-
-              {_SUBMIT_BUTTON_CONTENT}
-
-              <Link
-                containerStyle={Styles.QuickLink}
-                value={__CONSTANTS.quickLink.title[_LANGUAGE]}
-                onPress={() => {
-                  const { navigation } = this.props;
-
-                  // props.setValidationToken('');
-                  // props.setSecretKey('');
-
-                  navigation.goBack();
-                }} />
-          </View>
-      </Container>
-    );
   }
 }
 

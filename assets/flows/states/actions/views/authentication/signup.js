@@ -6,7 +6,8 @@ const CMD = ViewsCMD.Authentication.Signup;
 
 const mapStateToProps = (state) => {
   return {
-    signup: state.Signup
+    signup: state.Signup,
+    login: state.Login
   };
 }
 
