@@ -1,9 +1,9 @@
 import { LAYOUTS } from '../../types/index';
-const { PRODUCT_UNIT_DEPENDED_MODAL } = LAYOUTS;
+const { PRODUCT_UNITS_DEPENDED_MODAL } = LAYOUTS;
 
 const mapStateToProps = (state) => {
   return {
-    productUnitDependedModal: state.ProductUnitDependedModal
+    productUnitsDependedModal: state.ProductUnitsDependedModal
   };
 }
 
@@ -11,27 +11,27 @@ const mapDispatchToProps = (dispatch) => {
   return {
     resetModal: () => {
       dispatch({
-        type: PRODUCT_UNIT_DEPENDED_MODAL.RESET_MODAL
+        type: PRODUCT_UNITS_DEPENDED_MODAL.RESET_MODAL
       })
     },
     setSelectedUnit: (unit) => {
       dispatch({
-        type: PRODUCT_UNIT_DEPENDED_MODAL.SET_SELECTED_UNIT,
+        type: PRODUCT_UNITS_DEPENDED_MODAL.SET_SELECTED_UNIT,
         payload: unit
       })
     },
     setUnits: (units) => {
       dispatch({
-        type: PRODUCT_UNIT_DEPENDED_MODAL.SET_UNITS,
+        type: PRODUCT_UNITS_DEPENDED_MODAL.SET_UNITS,
         payload: units
       })
     }
   };
 }
 
-const ProductUnitDependedModal = {
+const ProductUnitsDependedModal = {
   mapStateToProps,
   mapDispatchToProps
 };
 
-module.exports = ProductUnitDependedModal;
+module.exports = ProductUnitsDependedModal;

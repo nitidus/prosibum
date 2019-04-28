@@ -113,7 +113,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: shippingPlan
       })
     },
-    setOnFetchingModeShippingMethod: (shippingPlan) => {
+    setOnFetchingModeShippingPlan: (shippingPlan) => {
       dispatch({
         type: NEW_PRODUCT.SET_SELECTED_PRODUCT_SHIPPING_PLANS_MODE_ON,
         payload: shippingPlan

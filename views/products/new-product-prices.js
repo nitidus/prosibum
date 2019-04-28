@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Interactable from 'react-native-interactable';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, Options, ProductUnitDependedModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, Options, ProductUnitsDependedModal } from '../../assets/layouts/index';
 import { Input, InputGroup, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewProduct,
@@ -221,14 +221,14 @@ class NewProductPrices extends Component<{}> {
         {...props}>
           {_PRICES_CONTENT}
 
-          <ProductUnitDependedModal
+          <ProductUnitsDependedModal
             data={_UNITS}
             visibility={props.newProduct.productUnitDependedModalVisibility}
             onBlur={() => props.setProductUnitDependedModalVisibility(false)}
             onProgressSuccess={(response) => props.setProductPrices(props.newProduct.prices.map((priceItem, i) => {
-              const _ON_FETCHING_MODE_PHOTO = props.newProduct.onFetchingModePrice;
+              const _ON_FETCHING_MODE_PRICE = props.newProduct.onFetchingModePrice;
 
-              if (priceItem._id === _ON_FETCHING_MODE_PHOTO._id){
+              if (priceItem._id === _ON_FETCHING_MODE_PRICE._id){
                 const _TARGET_PRICE_NODE = {
                   ...priceItem,
                   unit: response.unit

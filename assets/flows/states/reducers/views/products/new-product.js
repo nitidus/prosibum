@@ -13,7 +13,7 @@ const initialState = {
         prices: [],
         onFetchingModePrice: {},
         shippingPlans: [],
-        onFetchingModeShippingMethod: {},
+        onFetchingModeShippingPlan: {},
         warehouseModalVisibility: false,
         productCategoriesModalVisibility: false,
         productFeaturesModalVisibility: false,
@@ -171,7 +171,7 @@ export default (state = initialState, action) => {
     case NEW_PRODUCT.SET_SELECTED_PRODUCT_SHIPPING_PLANS_MODE_ON:
       return {
         ...state,
-        onFetchingModeShippingMethod: action.payload
+        onFetchingModeShippingPlan: action.payload
       };
       break;
     case NEW_PRODUCT.SET_WAREHOUSE_MODAL_VISIBILITY:

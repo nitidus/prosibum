@@ -32,8 +32,8 @@
                 "firstInput": {
                   "type": "LINK",
                   "title": {
-                    "en": "Price Unit",
-                    "fa": "واحد قیمت"
+                    "en": "Unit Name",
+                    "fa": "واحد اندازه‌گیری"
                   },
                   "link": {
                     "en": "Units",
@@ -61,11 +61,6 @@
             "fa": "هنوز هیچ روش حمل‌ونقلی اضافه نشده است."
           }
         }
-      }
-    },
-    "modalContainer": {
-      "title": {
-        "en": "Product Photo Modal"
       }
     },
     "appendHandlerButton": {

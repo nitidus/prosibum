@@ -6,7 +6,8 @@ import wallet_modal from './layouts/modals/wallet-modal.json';
 import warehouse_modal from './layouts/modals/warehouse-modal.json';
 import product_categories_modal from './layouts/modals/product-categories-modal.json';
 import product_features_modal from './layouts/modals/product-features-modal.json';
-import product_unit_depended_modal from './layouts/modals/product-unit-depended-modal.json';
+import product_units_depended_modal from './layouts/modals/product-units-depended-modal.json';
+import product_shipping_methods_modal from './layouts/modals/product-shipping-methods-modal.json';
 
 import list from './layouts/list.json';
 import drawer_menu from './layouts/drawer-menu.json';
@@ -21,7 +22,8 @@ module.exports = {
     warehouse_modal,
     product_categories_modal,
     product_features_modal,
-    product_unit_depended_modal
+    product_units_depended_modal,
+    product_shipping_methods_modal
   },
   list,
   drawer_menu

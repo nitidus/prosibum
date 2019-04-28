@@ -8,7 +8,7 @@ import Options from './layouts/options';
 import Pin from './layouts/pin';
 import DrawerMenu from './layouts/drawer-menu';
 
-import { LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitDependedModal } from './layouts/modals/index';
+import { LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitsDependedModal, ProductShippingMethodsModal } from './layouts/modals/index';
 
 module.exports = {
   Container,
@@ -16,7 +16,7 @@ module.exports = {
   List,
   Toast,
   Modal,
-  LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitDependedModal,
+  LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitsDependedModal, ProductShippingMethodsModal,
   Pilot,
   Options,
   Pin,

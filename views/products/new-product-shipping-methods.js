@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Interactable from 'react-native-interactable';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, Options, ProductUnitDependedModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, Options, ProductUnitsDependedModal, ProductShippingMethodsModal } from '../../assets/layouts/index';
 import { Input, InputGroup, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewProduct,
@@ -86,6 +86,9 @@ class NewProductShippingMethods extends Component<{}> {
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_UNIT_DEPENDED_OTHER_PROPS = {
               language: this._language
+            },
+            _PRODUCT_SHIPPING_METHODS_OTHER_PROPS = {
+              language: this._language
             };
 
       if (props.newProduct.shippingPlans.length > 0){
@@ -110,28 +113,8 @@ class NewProductShippingMethods extends Component<{}> {
                     _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
                   }
 
-                  // const _PRICE_NAME = priceItem.name,
-                  //       _PRICE_VALUE = (priceItem.value > 0)? priceItem.value.toString(): '',
-                  //       _PRICE_UNIT = (Object.keys(priceItem.unit).length > 0)? Functions._convertKeywordToToken(priceItem.unit.key): '',
-                  //       _PRICE_SUB_FIELD_ON_CHANGE_ACTION = (currentValue, changingKey) => props.setProductPrices(props.newProduct.prices.map((checkingPriceItem, j) => {
-                  //         if (checkingPriceItem._id === priceItem._id){
-                  //           var _TARGET_PRICE_CHANGED_NODE = checkingPriceItem;
-                  //
-                  //           if (typeof changingKey != 'undefined'){
-                  //             if (changingKey != ''){
-                  //               _TARGET_PRICE_CHANGED_NODE[changingKey] = (!isNaN(currentValue))? parseFloat(currentValue): currentValue;
-                  //
-                  //               return _TARGET_PRICE_CHANGED_NODE;
-                  //             }else{
-                  //               return checkingPriceItem;
-                  //             }
-                  //           }else{
-                  //             return checkingPriceItem;
-                  //           }
-                  //         }else{
-                  //           return checkingPriceItem;
-                  //         }
-                  //       }));
+                  const _SHIPPING_PLAN_UNIT = (Object.keys(shippingPlanItem.unit).length > 0)? Functions._convertKeywordToToken(shippingPlanItem.unit.key): '',
+                        _SHIPPING_PLAN_METHOD = (Object.keys(shippingPlanItem.shippingMethod).length > 0)? Functions._convertKeywordToToken(shippingPlanItem.shippingMethod.key): '';
 
                   SHIPPING_METHOD_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
 
@@ -149,11 +132,11 @@ class NewProductShippingMethods extends Component<{}> {
                               link={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.firstInput.link[_LANGUAGE]}
                               name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.firstInput.title.en)}
                               placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.firstInput.title[_LANGUAGE]}
-                              value={"_PRICE_UNIT"}
+                              value={_SHIPPING_PLAN_UNIT}
                               onPress={() => {
-                                // Keyboard.dismiss();
-                                // props.setOnFetchingModePrice(priceItem);
-                                // props.setProductUnitDependedModalVisibility(true);
+                                Keyboard.dismiss();
+                                props.setOnFetchingModeShippingPlan(shippingPlanItem);
+                                props.setProductUnitDependedModalVisibility(true);
                               }}
                               disable={true} />
 
@@ -162,11 +145,11 @@ class NewProductShippingMethods extends Component<{}> {
                               link={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.secondInput.link[_LANGUAGE]}
                               name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.secondInput.title.en)}
                               placeholder={__CONSTANTS.content.list.state.normal.content.firstInputGroup.context.secondInput.title[_LANGUAGE]}
-                              value={"_PRICE_UNIT"}
+                              value={_SHIPPING_PLAN_METHOD}
                               onPress={() => {
-                                // Keyboard.dismiss();
-                                // props.setOnFetchingModePrice(priceItem);
-                                // props.setProductUnitDependedModalVisibility(true);
+                                Keyboard.dismiss();
+                                props.setOnFetchingModeShippingPlan(shippingPlanItem);
+                                props.setProductShippingMethodsModalVisibility(true);
                               }}
                               disable={true} />
                         </InputGroup>
@@ -231,42 +214,59 @@ class NewProductShippingMethods extends Component<{}> {
       }
 
       return (
-      <Container
-        title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
-        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
-        rightIcon={__CONSTANTS.pilot.rightIcon}
-        onRightIconPress={() => props.appendProductShippingPlan({
-          _id: Functions._generateNewBSONObjectID(),
-          unit: {},
-          shippingMethod: {},
-          animation: new Animated.Value(0)
-        })}
-        {...props}>
-          {_SHIPPING_METHODS_CONTENT}
+        <Container
+          title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
+          subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
+          rightIcon={__CONSTANTS.pilot.rightIcon}
+          onRightIconPress={() => props.appendProductShippingPlan({
+            _id: Functions._generateNewBSONObjectID(),
+            unit: {},
+            shippingMethod: {},
+            animation: new Animated.Value(0)
+          })}
+          {...props}>
+            {_SHIPPING_METHODS_CONTENT}
 
-          <ProductUnitDependedModal
-            data={_UNITS}
-            visibility={props.newProduct.productUnitDependedModalVisibility}
-            onBlur={() => props.setProductUnitDependedModalVisibility(false)}
-            onProgressSuccess={(response) => {
-              // props.setProductPrices(props.newProduct.prices.map((priceItem, i) => {
-              //   const _ON_FETCHING_MODE_PHOTO = props.newProduct.onFetchingModePrice;
-              //
-              //   if (priceItem._id === _ON_FETCHING_MODE_PHOTO._id){
-              //     const _TARGET_PRICE_NODE = {
-              //       ...priceItem,
-              //       unit: response.unit
-              //     };
-              //
-              //     return _TARGET_PRICE_NODE;
-              //   }else{
-              //     return priceItem;
-              //   }
-              // }))
-            }}
-            {..._PRODUCT_UNIT_DEPENDED_OTHER_PROPS} />
-      </Container>
-    );
+            <ProductUnitsDependedModal
+              data={_UNITS}
+              visibility={props.newProduct.productUnitDependedModalVisibility}
+              onBlur={() => props.setProductUnitDependedModalVisibility(false)}
+              onProgressSuccess={(response) => props.setProductShippingPlans(props.newProduct.shippingPlans.map((shippingPlanItem, i) => {
+                const _ON_FETCHING_MODE_SHIPPING_METHOD = props.newProduct.onFetchingModeShippingPlan;
+
+                if (shippingPlanItem._id === _ON_FETCHING_MODE_SHIPPING_METHOD._id){
+                  const _TARGET_SHIPPING_PLAN_NODE = {
+                    ...shippingPlanItem,
+                    unit: response.unit
+                  };
+
+                  return _TARGET_SHIPPING_PLAN_NODE;
+                }else{
+                  return shippingPlanItem;
+                }
+              }))}
+              {..._PRODUCT_UNIT_DEPENDED_OTHER_PROPS} />
+
+            <ProductShippingMethodsModal
+              visibility={props.newProduct.shippingMethodsModalVisibility}
+              onBlur={() => props.setProductShippingMethodsModalVisibility(false)}
+              onProgressSuccess={(response) => props.setProductShippingPlans(props.newProduct.shippingPlans.map((shippingPlanItem, i) => {
+                const _ON_FETCHING_MODE_SHIPPING_METHOD = props.newProduct.onFetchingModeShippingPlan;
+
+                if (shippingPlanItem._id === _ON_FETCHING_MODE_SHIPPING_METHOD._id){
+                  const _TARGET_SHIPPING_PLAN_NODE = {
+                    ...shippingPlanItem,
+                    shippingMethod: response
+                  };
+
+                  return _TARGET_SHIPPING_PLAN_NODE;
+                }else{
+                  return shippingPlanItem;
+                }
+              }))}
+              {..._PRODUCT_SHIPPING_METHODS_OTHER_PROPS} />
+        </Container>
+      );
     }else{
       return (
         <ActivityIndicator/>

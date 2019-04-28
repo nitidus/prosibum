@@ -28,4 +28,22 @@
     "en": "Unit",
     "fa": "واحد اندازه‌گیری"
   }
+}, {
+  "key": "Product Shipping Method",
+  "value":{
+    "en": "Free",
+    "fa": "رایگان"
+  }
+}, {
+  "key": "Product Shipping Method",
+  "value":{
+    "en": "System Calculation",
+    "fa": "محسابه سیستمی"
+  }
+}, {
+  "key": "Product Shipping Method",
+  "value":{
+    "en": "Internal Calculation",
+    "fa": "محاسبه داخلی"
+  }
 }]

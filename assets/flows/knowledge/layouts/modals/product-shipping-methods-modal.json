@@ -1,0 +1,38 @@
+{
+  "modalContainer": {
+    "title": {
+      "en": "Product Shipping Methods Modal"
+    },
+    "content": {
+      "carousel": {
+        "type": "BUTTON",
+        "state": {
+          "normal": {
+            "title": {
+              "en": "Shipping Methods"
+            },
+            "content": {
+              "title": {
+                "en": "Shipping Type",
+                "fa": "نوع حمل‌ونقل"
+              }
+            }
+          },
+          "null": {
+            "title": {
+              "en": "No shipping methods have been appended yet.",
+              "fa": "هیچ روش حمل‌ونقلی اضافه نشده است."
+            }
+          }
+        }
+      },
+      "submitInput": {
+        "type": "BUTTON",
+        "prefix": {
+          "en": "Append",
+          "fa": "اضافه کردن"
+        }
+      }
+    }
+  }
+}

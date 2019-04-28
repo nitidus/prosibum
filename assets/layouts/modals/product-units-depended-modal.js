@@ -10,19 +10,19 @@ import { ActivityIndicator } from '../activity-indicator';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
 import { Input, Carousel, Link } from '../../components/index';
-const Styles = Modules.Layouts.ProductUnitDependedModal;
+const Styles = Modules.Layouts.ProductUnitsDependedModal;
 
 import { Functions } from '../../modules/index';
 const { Preparation } = Functions;
 
 import { Layouts as LayoutsActions } from '../../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = LayoutsActions.ProductUnitDependedModal;
+const { mapStateToProps, mapDispatchToProps } = LayoutsActions.ProductUnitsDependedModal;
 
 import { layouts_constants } from '../../flows/knowledge/index';
-const __CONSTANTS = layouts_constants.modals.product_unit_depended_modal;
+const __CONSTANTS = layouts_constants.modals.product_units_depended_modal;
 
 const _componentWillCheckValidation = (props) => {
-  const _PROPS = props.productUnitDependedModal;
+  const _PROPS = props.productUnitsDependedModal;
 
   var _FORM_FIELDS_VALIDITY = false;
 
@@ -33,7 +33,7 @@ const _componentWillCheckValidation = (props) => {
   return !_FORM_FIELDS_VALIDITY;
 }
 
-const ProductUnitDependedModal = (props) => {
+const ProductUnitsDependedModal = (props) => {
   var attitude = {};
 
   if (typeof props.key != 'undefined'){
@@ -83,8 +83,8 @@ const ProductUnitDependedModal = (props) => {
 
   if (attitude.visibility === true){
     if (
-      (props.productUnitDependedModal.units.length === 0) &&
-      (Object.keys(props.productUnitDependedModal.selectedUnit).length === 0)
+      (props.productUnitsDependedModal.units.length === 0) &&
+      (Object.keys(props.productUnitsDependedModal.selectedUnit).length === 0)
     ){
       if ((typeof props.data != 'undefined') || (typeof props.dataSource != 'undefined') || (typeof props.data_source != 'undefined') || (typeof props.source != 'undefined') || (typeof props.units != 'undefined')){
         attitude.data = props.data || props.dataSource || props.data_source || props.source || props.units;
@@ -116,16 +116,21 @@ const ProductUnitDependedModal = (props) => {
 
   var _MODAL_CONTENT;
 
-  if (props.productUnitDependedModal.units.length > 0){
-    const _SELECTED_INDEX = props.productUnitDependedModal.units.findIndex((unit, i) => {
-            return unit._id === props.productUnitDependedModal.selectedUnit._id;
+  if (props.productUnitsDependedModal.units.length > 0){
+    const _SELECTED_INDEX = props.productUnitsDependedModal.units.findIndex((unitItem, i) => {
+            if ((typeof unitItem.unit != 'undefined') && (typeof props.productUnitsDependedModal.selectedUnit.unit != 'undefined')){
+              const _UNIT = unitItem.unit._id,
+                    _SELECTED_UNIT = props.productUnitsDependedModal.selectedUnit.unit._id;
+
+              return (_UNIT === _SELECTED_UNIT);
+            }
           });
 
       _MODAL_CONTENT = [
         (
           <Carousel
             name={__CONSTANTS.modalContainer.content.carousel.state.normal.title.en}
-            data={props.productUnitDependedModal.units}
+            data={props.productUnitsDependedModal.units}
             firstItem={_SELECTED_INDEX}
             style={Styles.DetailContainer}
             itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
@@ -210,18 +215,18 @@ const ProductUnitDependedModal = (props) => {
                 </Input>
               )
             }}
-            onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productUnitDependedModal.units[selectedItemIndex])}/>
+            onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productUnitsDependedModal.units[selectedItemIndex])}/>
         ),
         (
           <Input
             type={__CONSTANTS.modalContainer.content.submitInput.type}
             gradient={Global.colors.pair.ongerine}
-            value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._getAppropriateTaxonomyBaseOnLocale(props.productUnitDependedModal.selectedUnit.unit.key, attitude.language)} ${__CONSTANTS.modalContainer.content.submitInput.suffix[attitude.language]}`}
+            value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._getAppropriateTaxonomyBaseOnLocale(props.productUnitsDependedModal.selectedUnit.unit.key, attitude.language)} ${__CONSTANTS.modalContainer.content.submitInput.suffix[attitude.language]}`}
             style={{
               marginHorizontal: Styles.Content.marginHorizontal
             }}
             onPress={() => {
-              attitude.onProgressSuccess(props.productUnitDependedModal.selectedUnit);
+              attitude.onProgressSuccess(props.productUnitsDependedModal.selectedUnit);
               MODAL.ON_BLUR(false);
             }}
             forcedDisable={_VALIDATED} />
@@ -258,4 +263,4 @@ const ProductUnitDependedModal = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductUnitDependedModal);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductUnitsDependedModal);

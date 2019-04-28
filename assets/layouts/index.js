@@ -3,7 +3,7 @@ import { ActivityIndicator } from './activity-indicator';
 import Toast from './toast';
 import { Pin } from './pin';
 import { Modal } from './modal';
-import { LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitDependedModal } from './modals/index';
+import { LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitsDependedModal, ProductShippingMethodsModal } from './modals/index';
 import { Icon } from './icon';
 import List from './list';
 import { TopBar, PinnedSide, TabItem } from './container/layouts/pilot/top-bar';
@@ -18,7 +18,7 @@ module.exports = {
   Toast,
   Pin,
   Modal,
-  LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitDependedModal,
+  LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitsDependedModal, ProductShippingMethodsModal,
   Icon,
   List,
   Pilot, TabBar, TabBarItem, TopBar, PinnedSide, TabItem, Options,
