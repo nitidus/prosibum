@@ -78,7 +78,5 @@ module.exports = {
         })
       }
     }
-  },
-  _getAvailableShippingTypes: async (dispatch) => {},
-  _getAvailablePaymentTypes: async (dispatch) => {}
+  }
 };

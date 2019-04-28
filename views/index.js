@@ -22,6 +22,7 @@ import Wallets from './dashboard/wallets';
   import NewProductFeatures from './products/new-product-features';
   import NewProductPhotos from './products/new-product-photos';
   import NewProductPrices from './products/new-product-prices';
+  import NewProductShippingMethods from './products/new-product-shipping-methods';
 
 //Authentication Screens
 import Login from './authentication/login';
@@ -40,7 +41,8 @@ const ProductsStack = createStackNavigator({
   NewProductIdentity,
   NewProductFeatures,
   NewProductPhotos,
-  NewProductPrices
+  NewProductPrices,
+  NewProductShippingMethods
 }, {
   headerMode: 'none'
 });

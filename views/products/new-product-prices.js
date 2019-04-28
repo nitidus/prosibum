@@ -32,31 +32,6 @@ class NewProductPrices extends Component<{}> {
           _LANGUAGE = _NATIVE_SETTINGS.language;
 
     this._language = _LANGUAGE;
-
-    props.setProductFeatures([
-      {
-        "feature":{
-          "_id":"5ca681d9d0a37b307e733050","created_at":"2019-04-04T22:14:48.903Z","modified_at":"2019-04-04T22:14:48.903Z","key":"UNIT"
-        },
-        "unit":{
-          "_id":"5ca6848ed0a37b307e733054","created_at":"2019-04-04T22:26:21.819Z","modified_at":"2019-04-04T22:26:21.819Z","key":"BOX"
-        },
-        "minimumOrderQuantity":20,
-        "maximumOrderQuantity":2000,
-        "quantity":20000
-      },
-      {
-        "feature":{
-          "_id":"5ca681d9d0a37b307e733050","created_at":"2019-04-04T22:14:48.903Z","modified_at":"2019-04-04T22:14:48.903Z","key":"UNIT"
-        },
-        "unit":{
-          "_id":"5ca684a9d0a37b307e733055","created_at":"2019-04-04T22:26:48.960Z","modified_at":"2019-04-04T22:26:48.960Z","key":"KILOGRAM"
-        },
-        "minimumOrderQuantity":30,
-        "maximumOrderQuantity":3000,
-        "quantity":30000
-      }
-    ])
   }
 
   _componentWillCheckValidation(props) {
@@ -92,14 +67,14 @@ class NewProductPrices extends Component<{}> {
         _PRICES_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={true}
-            contentContainerStyle={Styles.FeaturesContainer}
+            contentContainerStyle={Styles.ScrollableListContainer}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.title.en)}>
               {
                 props.newProduct.prices.map((priceItem, i, totalPrices) => {
                   var _CUSTOM_STYLE = {
                         marginHorizontal: Styles.Content.marginHorizontal
                       },
-                      _PHOTO_DELETE_ACTION = () => props.setProductPrices(props.newProduct.prices.filter((checkingItem, j) => {
+                      _PRICE_DELETE_ACTION = () => props.setProductPrices(props.newProduct.prices.filter((checkingItem, j) => {
                         return (checkingItem._id != priceItem._id);
                       })),
                       PRICE_OPTION_CUSTOM_CONTAINER = {
@@ -138,7 +113,7 @@ class NewProductPrices extends Component<{}> {
                   return (
                     <Options
                       style={PRICE_OPTION_CUSTOM_CONTAINER}
-                      onDeletePress={_PHOTO_DELETE_ACTION}
+                      onDeletePress={_PRICE_DELETE_ACTION}
                       animatedValueX={priceItem.animation}
                       {...__CONSTANTS.content.list.state.normal.options}>
                         <InputGroup

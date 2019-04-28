@@ -12,19 +12,15 @@ const initialState = {
         onFetchingModePhoto: {},
         prices: [],
         onFetchingModePrice: {},
-        promotions: [],
-        discounts: [],
         shippingPlans: [],
-        shippingTypes: [],
-        paymentTypes: [],
+        onFetchingModeShippingMethod: {},
         warehouseModalVisibility: false,
         productCategoriesModalVisibility: false,
         productFeaturesModalVisibility: false,
         productPhotoModalVisibility: false,
         productUnitDependedModalVisibility: false,
         warehousesLoading: false,
-        shippingTypesLoading: false,
-        paymentTypesLoading: false,
+        shippingMethodsModalVisibility: false,
         connected: {
           status: true,
           content: ''
@@ -152,79 +148,30 @@ export default (state = initialState, action) => {
         onFetchingModePrice: action.payload
       };
       break;
-    case NEW_PRODUCT.SET_PRODUCT_PROMOTIONS:
-      return {
-        ...state,
-        promotions: action.payload
-      };
-      break;
-    case NEW_PRODUCT.APPEND_PRODUCT_PROMOTION:
-      return {
-        ...state,
-        promotions: [
-          ...state.promotions,
-          {
-            ...action.payload,
-            _id: action.payload._id,
-            name: action.payload.name,
-            value: action.payload.value,
-            unit: action.payload.unit
-          }
-        ]
-      };
-      break;
-    case NEW_PRODUCT.SET_PRODUCT_DISCOUNTS:
-      return {
-        ...state,
-        discounts: action.payload
-      };
-      break;
-    case NEW_PRODUCT.APPEND_PRODUCT_DISCOUNT:
-      return {
-        ...state,
-        discounts: [
-          ...state.discounts,
-          {
-            ...action.payload,
-            _id: action.payload._id,
-            name: action.payload.name,
-            amount: action.payload.amount,
-            price: action.payload.price,
-            priority: action.payload.priority
-          }
-        ]
-      };
-      break;
     case NEW_PRODUCT.SET_PRODUCT_SHIPPING_PLANS:
       return {
         ...state,
         shippingPlans: action.payload
       };
       break;
-    case NEW_PRODUCT.APPEND_PRODUCT_SHIPPING_PLAN_USING_PRICE:
+    case NEW_PRODUCT.APPEND_PRODUCT_SHIPPING_PLAN:
       return {
         ...state,
         shippingPlans: [
           ...state.shippingPlans,
           {
             ...action.payload,
-            price: action.payload.price,
-            shippingType: action.payload.shippingType
+            _id: action.payload._id,
+            unit: action.payload.unit,
+            shippingMethod: action.payload.shippingMethod
           }
         ]
       };
       break;
-    case NEW_PRODUCT.APPEND_PRODUCT_SHIPPING_PLAN_USING_PROMOTION:
+    case NEW_PRODUCT.SET_SELECTED_PRODUCT_SHIPPING_PLANS_MODE_ON:
       return {
         ...state,
-        shippingPlans: [
-          ...state.shippingPlans,
-          {
-            ...action.payload,
-            promotion: action.payload.promotion,
-            shippingType: action.payload.shippingType
-          }
-        ]
+        onFetchingModeShippingMethod: action.payload
       };
       break;
     case NEW_PRODUCT.SET_WAREHOUSE_MODAL_VISIBILITY:
@@ -257,40 +204,22 @@ export default (state = initialState, action) => {
         productUnitDependedModalVisibility: action.payload
       };
       break;
+    case NEW_PRODUCT.SET_PRODUCT_SHIPPING_METHODS_MODAL_VISIBILITY:
+      return {
+        ...state,
+        shippingMethodsModalVisibility: action.payload
+      };
+      break;
     case NEW_PRODUCT.FETCH_AVAILABLE_WAREHOUSES:
       return {
         ...state,
         warehouses: action.payload
       };
       break;
-    case NEW_PRODUCT.FETCH_AVAILABLE_SHIPPING_TYPES:
-      return {
-        ...state,
-        shippingTypes: action.payload
-      };
-      break;
-    case NEW_PRODUCT.FETCH_AVAILABLE_PAYMENT_TYPES:
-      return {
-        ...state,
-        paymentTypes: action.payload
-      };
-      break;
     case NEW_PRODUCT.SET_WAREHOUSES_LOADING_STATUS:
       return {
         ...state,
         warehousesLoading: action.payload
-      };
-      break;
-    case NEW_PRODUCT.SET_SHIPPING_TYPE_LOADING_STATUS:
-      return {
-        ...state,
-        shippingTypesLoading: action.payload
-      };
-      break;
-    case NEW_PRODUCT.SET_PAYMENT_TYPES_LOADING_STATUS:
-      return {
-        ...state,
-        paymentTypesLoading: action.payload
       };
       break;
     case NEW_PRODUCT.SET_CONNECTED_STATUS:

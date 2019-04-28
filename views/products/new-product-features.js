@@ -65,7 +65,7 @@ class NewProductFeatures extends Component<{}> {
         _FEATURES_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={true}
-            contentContainerStyle={Styles.FeaturesContainer}>
+            contentContainerStyle={Styles.ScrollableListContainer}>
               {
                 props.newProduct.features.map((featureItem, i, totalFeatures) => {
                   const _FEATURE_NAME = Functions._convertTokenToKeyword(featureItem.feature.key);

@@ -65,7 +65,7 @@ class NewProductPhotos extends Component<{}> {
         _PHOTOS_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={true}
-            contentContainerStyle={Styles.FeaturesContainer}>
+            contentContainerStyle={Styles.ScrollableListContainer}>
               {
                 props.newProduct.photos.map((photoItem, i, totalPhotos) => {
                   var _CUSTOM_STYLE = {

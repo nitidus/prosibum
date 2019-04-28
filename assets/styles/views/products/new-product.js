@@ -46,6 +46,9 @@ var _CUSTOM_CONTENT = {
     _CUSTOM_PRICE_CONTAINER = {
       height: 180
     },
+    _CUSTOM_SHIPPING_METHODS_CONTAINER = {
+      height: 121
+    },
     _CUSTOM_DESCRIPTION_FEATURE = {
       height: 68,
       padding: 18
@@ -75,6 +78,7 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_PHOTO_CONTAINER.height += 38;
     _CUSTOM_PRICE_CONTAINER.height += 38;
+    _CUSTOM_SHIPPING_METHODS_CONTAINER.height += 38;
   }else{
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.height += 2;
     _CUSTOM___GLOBAL_ICONS_IN_PILOT.width += 2;
@@ -88,6 +92,7 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_PHOTO_CONTAINER.height += 4;
     _CUSTOM_PRICE_CONTAINER.height += 4;
+    _CUSTOM_SHIPPING_METHODS_CONTAINER.height += 4;
   }
 
   if (!I18nManager.isRTL){
@@ -113,6 +118,7 @@ fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
 
     _CUSTOM_PHOTO_CONTAINER.height += 10;
     _CUSTOM_PRICE_CONTAINER.height += 10;
+    _CUSTOM_SHIPPING_METHODS_CONTAINER.height += 10;
   }else{
     if (!_IS_IPHONE_X){
       _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 1;
@@ -139,6 +145,9 @@ module.exports = StyleSheet.create({
   },
   EmptyContentLink: {
     alignItems: 'center'
+  },
+  EmptyContentLinkContext: {
+    textAlign: 'center'
   },
   RegularItemContainer: {
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
@@ -227,7 +236,7 @@ module.exports = StyleSheet.create({
   BriefDetailRowIcon: {
 
   },
-  FeaturesContainer: {
+  ScrollableListContainer: {
     marginVertical: _CUSTOM_CONTENT.marginVertical
   },
   DescriptionFeature: {
@@ -245,6 +254,9 @@ module.exports = StyleSheet.create({
   },
   PriceContainer: {
     ..._CUSTOM_PRICE_CONTAINER
+  },
+  ShippingMethodsContainer: {
+    ..._CUSTOM_SHIPPING_METHODS_CONTAINER
   },
   BottomPinnedContainer: {
     flexGrow: 1,

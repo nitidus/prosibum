@@ -101,46 +101,22 @@ const mapDispatchToProps = (dispatch) => {
         payload: unitFeature
       })
     },
-    setProductPromotions: (promotions) => {
-      dispatch({
-        type: NEW_PRODUCT.SET_PRODUCT_PROMOTIONS,
-        payload: promotions
-      })
-    },
-    appendProductPromotion: (promotion) => {
-      dispatch({
-        type: NEW_PRODUCT.APPEND_PRODUCT_PROMOTION,
-        payload: promotion
-      })
-    },
-    setProductDiscounts: (discounts) => {
-      dispatch({
-        type: NEW_PRODUCT.SET_PRODUCT_DISCOUNTS,
-        payload: discounts
-      })
-    },
-    appendProductDiscount: (discount) => {
-      dispatch({
-        type: NEW_PRODUCT.APPEND_PRODUCT_DISCOUNT,
-        payload: discount
-      })
-    },
     setProductShippingPlans: (shippingPlans) => {
       dispatch({
         type: NEW_PRODUCT.SET_PRODUCT_SHIPPING_PLANS,
         payload: shippingPlans
       })
     },
-    appendProductShippingPlanUsingPrice: (shippingPlan) => {
+    appendProductShippingPlan: (shippingPlan) => {
       dispatch({
-        type: NEW_PRODUCT.APPEND_PRODUCT_SHIPPING_PLAN_USING_PRICE,
+        type: NEW_PRODUCT.APPEND_PRODUCT_SHIPPING_PLAN,
         payload: shippingPlan
       })
     },
-    appendProductShippingPlanUsingPromotion: (shippingPlans) => {
+    setOnFetchingModeShippingMethod: (shippingPlan) => {
       dispatch({
-        type: NEW_PRODUCT.APPEND_PRODUCT_SHIPPING_PLAN_USING_PROMOTION,
-        payload: shippingPlans
+        type: NEW_PRODUCT.SET_SELECTED_PRODUCT_SHIPPING_PLANS_MODE_ON,
+        payload: shippingPlan
       })
     },
     setWarehouseModalVisibility: (visibilityStatus) => {
@@ -173,24 +149,16 @@ const mapDispatchToProps = (dispatch) => {
         payload: visibilityStatus
       })
     },
+    setProductShippingMethodsModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_PRODUCT_SHIPPING_METHODS_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
     fetchAvailableWarehouses: async (token) =>  CMD._getAvailableWarehousesWithToken(token, dispatch),
-    fetchAvailableShippingTypes: async () =>  CMD._getAvailableShippingTypes(dispatch),
-    fetchAvailablePaymentTypes: async () =>  CMD._getAvailablePaymentTypes(dispatch),
     setWarehousesLoadingStatus: (status) => {
       dispatch({
         type: NEW_PRODUCT.SET_WAREHOUSES_LOADING_STATUS,
-        payload: status
-      })
-    },
-    setShippingTypesLoadingStatus: (status) => {
-      dispatch({
-        type: NEW_PRODUCT.SET_SHIPPING_TYPES_LOADING_STATUS,
-        payload: status
-      })
-    },
-    setPaymentTypesLoadingStatus: (status) => {
-      dispatch({
-        type: NEW_PRODUCT.SET_PAYMENT_TYPES_LOADING_STATUS,
         payload: status
       })
     }
