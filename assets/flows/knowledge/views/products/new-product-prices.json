@@ -39,8 +39,8 @@
                 "secondInput": {
                   "type": "NUMERIC",
                   "title": {
-                    "en": "Price Value",
-                    "fa": "مقدار قیمت"
+                    "en": "Price Value (in Dollar)",
+                    "fa": "مقدار قیمت (به ریال)"
                   }
                 },
                 "thirdInput": {

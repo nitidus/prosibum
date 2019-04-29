@@ -58,7 +58,6 @@ var _CUSTOM_TEXT_INPUT_LINK = {
     _CUSTOM_BUTTON_TITLE = {
       fontSize: 18
     },
-    _CUSTOM_TEXT_INPUT_LINK_CONTAINER = {},
     _CUSTOM_REVERSE_TEXT_INPUT_LINK_CONTAINER = {}
     _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER = {};
 
@@ -98,7 +97,6 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BUTTON_CONTAINER.borderRadius += 2;
     _CUSTOM_BUTTON_TITLE.fontSize += 8;
 
-    _CUSTOM_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'left': 'right'] = 23;
     _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER[/*(I18nManager.isRTL)? 'right': */'left'] = 23;
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical += 3;
@@ -111,7 +109,6 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.paddingHorizontal += 3;
 
-    _CUSTOM_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'left': 'right'] = 18;
     _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER[/*(I18nManager.isRTL)? 'right': */'left'] = 18;
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical -= 2;
@@ -152,7 +149,6 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_TEXT_INPUT_CONTAINER.width = '81.5%';
   }
 
-  _CUSTOM_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'left': 'right'] = 18;
   _CUSTOM_REVERSE_TEXT_INPUT_LINK_CONTAINER[(I18nManager.isRTL)? 'right': 'left'] = 18;
   _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER[/*(I18nManager.isRTL)? 'right': */'left'] = 18;
 }
@@ -170,6 +166,8 @@ module.exports = StyleSheet.create({
   ContainerWithButton: {
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     ..._CUSTOM_CONTAINER_WITH_BUTTON
   },
@@ -223,31 +221,17 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_PHOTO_INPUT_LABEL_CONTENT
   },
   TextInputContainer: {
+    flex: 1,
+    flexGrow: 1,
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',
-    alignSelf: (I18nManager.isRTL)? 'flex-start': 'flex-end',
     paddingLeft: 16,
     ..._CUSTOM_TEXT_INPUT_CONTAINER
   },
-  NormalTextInputContainer: {
-    paddingHorizontal: 16,
-    alignSelf: 'flex-start',
-  },
-  ReverseTextInputContainer: {
-    alignSelf: (I18nManager.isRTL)? 'flex-end': 'flex-start',
-  },
   TextInputLinkContainer: {
-    position: 'absolute',
-    ..._CUSTOM_TEXT_INPUT_LINK_CONTAINER
-  },
-  ReverseTextInputLinkContainer: {
-    ..._CUSTOM_REVERSE_TEXT_INPUT_LINK_CONTAINER
-  },
-  StaticTextInputLinkContainer: {
-    position: 'absolute',
-    ..._CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER
+    paddingHorizontal: 16
   },
   TextInputLink: {
     ..._CUSTOM_TEXT_INPUT_LINK

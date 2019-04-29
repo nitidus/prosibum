@@ -2,6 +2,7 @@ import { VIEWS } from '../../../types/index';
 const { NEW_PRODUCT } = VIEWS.PRODUCTS;
 
 const initialState = {
+        language: {},
         name: '',
         currentWarehouse: {},
         warehouses: [],
@@ -29,6 +30,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case NEW_PRODUCT.SET_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload
+      };
+      break;
     case NEW_PRODUCT.RESET_PRODUCT_FORMS:
       return {
         ...initialState

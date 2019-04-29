@@ -27,11 +27,14 @@ class NewProductFeatures extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this,
-          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
-          _LANGUAGE = _NATIVE_SETTINGS.language;
+    const { props } = this;
 
-    this._language = _LANGUAGE;
+    if (Object.keys(props.newProduct.language).length === 0){
+      const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+            _LANGUAGE = _NATIVE_SETTINGS.language;
+
+      await props.setLanguage(_LANGUAGE);
+    }
   }
 
   _componentWillCheckValidation(props) {
@@ -49,16 +52,16 @@ class NewProductFeatures extends Component<{}> {
   render() {
     const { props } = this;
 
-    if (typeof this._language != 'undefined'){
+    if (Object.keys(props.newProduct.language).length > 0){
       var _FEATURES_CONTENT,
           _UNIT_FEATURES = [],
           _FEATURES_ANIMATED_VALUES = [];
 
-      const _LANGUAGE = Functions._convertTokenToKeyword(this._language.key),
+      const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
             _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_FEATURES_OTHER_PROPS = {
-              language: this._language
+              language: props.newProduct.language
             };
 
       if (props.newProduct.features.length > 0){

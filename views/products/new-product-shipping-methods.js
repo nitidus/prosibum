@@ -27,36 +27,14 @@ class NewProductShippingMethods extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this,
-          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
-          _LANGUAGE = _NATIVE_SETTINGS.language;
+    const { props } = this;
 
-    this._language = _LANGUAGE;
+    if (Object.keys(props.newProduct.language).length === 0){
+      const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+            _LANGUAGE = _NATIVE_SETTINGS.language;
 
-    props.setProductFeatures([
-      {
-        "feature":{
-          "_id":"5ca681d9d0a37b307e733050","created_at":"2019-04-04T22:14:48.903Z","modified_at":"2019-04-04T22:14:48.903Z","key":"UNIT"
-        },
-        "unit":{
-          "_id":"5ca6848ed0a37b307e733054","created_at":"2019-04-04T22:26:21.819Z","modified_at":"2019-04-04T22:26:21.819Z","key":"BOX"
-        },
-        "minimumOrderQuantity":20,
-        "maximumOrderQuantity":2000,
-        "quantity":20000
-      },
-      {
-        "feature":{
-          "_id":"5ca681d9d0a37b307e733050","created_at":"2019-04-04T22:14:48.903Z","modified_at":"2019-04-04T22:14:48.903Z","key":"UNIT"
-        },
-        "unit":{
-          "_id":"5ca684a9d0a37b307e733055","created_at":"2019-04-04T22:26:48.960Z","modified_at":"2019-04-04T22:26:48.960Z","key":"KILOGRAM"
-        },
-        "minimumOrderQuantity":30,
-        "maximumOrderQuantity":3000,
-        "quantity":30000
-      }
-    ])
+      await props.setLanguage(_LANGUAGE);
+    }
   }
 
   _componentWillCheckValidation(props) {
@@ -65,9 +43,8 @@ class NewProductShippingMethods extends Component<{}> {
     var _FORM_FIELDS_VALIDITY = false;
 
     // if (_PROPS.prices.length > 0){
-    //   if (_PROPS.prices.every((price) => ((((price.name != '') && (price.value > 0))? ((Functions._checkIsAValidTextOnlyField(price.name, 7)) && (Functions._checkIsAValidCurrencyValueOnlyField(price.value.toString()))): false) &&
-    //   (Object.keys(price.unit).length > 0)))){
-    //     _FORM_FIELDS_VALIDITY = true;
+    //   if (_PROPS.shippingPlans.every((shippingPlan) => ((Object.keys(shippingPlan.unit).length > 0) && (Object.keys(shippingPlan.shippingMethod).length > 0)))){
+        _FORM_FIELDS_VALIDITY = true;
     //   }
     // }
 
@@ -77,18 +54,18 @@ class NewProductShippingMethods extends Component<{}> {
   render() {
     const { props } = this;
 
-    if (typeof this._language != 'undefined'){
+    if (Object.keys(props.newProduct.language).length > 0){
       var _SHIPPING_METHODS_CONTENT,
           _UNITS = [];
 
-      const _LANGUAGE = Functions._convertTokenToKeyword(this._language.key),
+      const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
             _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_UNIT_DEPENDED_OTHER_PROPS = {
-              language: this._language
+              language: props.newProduct.language
             },
             _PRODUCT_SHIPPING_METHODS_OTHER_PROPS = {
-              language: this._language
+              language: props.newProduct.language
             };
 
       if (props.newProduct.shippingPlans.length > 0){
@@ -113,8 +90,8 @@ class NewProductShippingMethods extends Component<{}> {
                     _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
                   }
 
-                  const _SHIPPING_PLAN_UNIT = (Object.keys(shippingPlanItem.unit).length > 0)? Functions._convertKeywordToToken(shippingPlanItem.unit.key): '',
-                        _SHIPPING_PLAN_METHOD = (Object.keys(shippingPlanItem.shippingMethod).length > 0)? Functions._convertKeywordToToken(shippingPlanItem.shippingMethod.key): '';
+                  const _SHIPPING_PLAN_UNIT = (Object.keys(shippingPlanItem.unit).length > 0)? Functions._getAppropriateTaxonomyBaseOnLocale(shippingPlanItem.unit.key, _LANGUAGE): '',
+                      _SHIPPING_PLAN_METHOD = (Object.keys(shippingPlanItem.shippingMethod).length > 0)? Functions._getAppropriateTaxonomyBaseOnLocale(shippingPlanItem.shippingMethod.key, _LANGUAGE): '';
 
                   SHIPPING_METHOD_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
 
@@ -182,10 +159,59 @@ class NewProductShippingMethods extends Component<{}> {
                   style={{
                     marginHorizontal: Styles.Content.marginHorizontal
                   }}
-                  onPress={() => {
+                  onPress={async () => {
                     const { navigation } = props;
 
                     navigation.navigate('NewProductShippingMethods');
+                    let _SEED = {
+                      name: props.newProduct.name,
+                      warehouse_id: props.newProduct.currentWarehouse._id,
+                      category_id: props.newProduct.category._id,
+                      features: props.newProduct.features.map((item, i) => {
+                        if (typeof item.unit != 'undefined'){
+                          return {
+                            ...item,
+                            feature_id: item.feature._id,
+                            unit_id: item.unit._id
+                          };
+                        }else{
+                          return {
+                            ...item,
+                            feature_id: item.feature._id
+                          };
+                        }
+                      }),
+                      photos: props.newProduct.photos.map(async (item, i) => {
+                        const _PHOTO_NODE_URI = item.content.image.uri,
+                              _PHOTO_URI = await Functions._fetchBase64BlobFromPhoto(_PHOTO_NODE_URI);
+
+                        if (props.newProduct.primaryPhoto._id === item._id){
+                          return {
+                            content: _PHOTO_URI,
+                            primary: true
+                          };
+                        }else{
+                          return {
+                            content: _PHOTO_URI
+                          };
+                        }
+                      }),
+                      prices: props.newProduct.prices.map((item, i) => {
+                        return {
+                          name: item.name,
+                          value: item.value,
+                          unit_id: item.unit._id
+                        };
+                      }),
+                      shipping_plans: props.newProduct.shippingPlans.map((item, i) => {
+                        return {
+                          unit_id: item.unit._id,
+                          shipping_method_id: item.shippingMethod._id
+                        };
+                      })
+                    };
+
+                    console.log(_SEED)
                   }}
                   forcedDisable={_VALIDATED} />
           </ScrollView>

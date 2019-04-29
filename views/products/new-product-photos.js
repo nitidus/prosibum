@@ -27,11 +27,14 @@ class NewProductPhotos extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this,
-          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
-          _LANGUAGE = _NATIVE_SETTINGS.language;
+    const { props } = this;
 
-    this._language = _LANGUAGE;
+    if (Object.keys(props.newProduct.language).length === 0){
+      const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+            _LANGUAGE = _NATIVE_SETTINGS.language;
+
+      await props.setLanguage(_LANGUAGE);
+    }
   }
 
   _componentWillCheckValidation(props) {
@@ -50,10 +53,10 @@ class NewProductPhotos extends Component<{}> {
   render() {
     const { props } = this;
 
-    if (typeof this._language != 'undefined'){
-      const _LANGUAGE = Functions._convertTokenToKeyword(this._language.key),
+    if (Object.keys(props.newProduct.language).length > 0){
+      const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
             _CAMERA_ROLL_OTHER_PROPS = {
-              language: this._language
+              language: props.newProduct.language
             };
 
       var _PHOTOS_CONTENT;

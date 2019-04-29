@@ -324,7 +324,15 @@ export const Input = (props) => {
           placeholderTextColor={Global.colors.single.mercury}
           selectionColor={Global.colors.single.mercury}
           underlineColorAndroid={Global.colors.single.transparent}
-          onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+          onChangeText={(currentValue) => {
+            if (I18nManager.isRTL){
+              const _FINILIZED_DIGITS = Functions._convertDigitsToEnglish(currentValue);
+
+              return attitude.onChangeText(_FINILIZED_DIGITS);
+            }else{
+              return attitude.onChangeText(currentValue);
+            }
+          }}
           onBlur={attitude.onBlur}
           onFocus={attitude.onFocus}
           editable={!attitude.disable}
@@ -464,46 +472,13 @@ export const Input = (props) => {
 
     case 'link':
     case 'text-link':
-      var _LINK_CUSTOM_STYLES = [
-            Styles.TextInputLinkContainer
-          ],
-          _LINK_TEXT_CUSTOM_STYLES = [
-            Styles.TextInputContainer
-          ];
-
-      if (I18nManager.isRTL){
-        _LINK_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
-        _LINK_TEXT_CUSTOM_STYLES.push(Styles.NormalTextInputContainer);
-        _LINK_TEXT_CUSTOM_STYLES.push({
-          width: '72%',
-          textAlign: 'right'
-        });
-      }else{
-        _LINK_CUSTOM_STYLES.push({
-          right: 18
-        });
-        _LINK_TEXT_CUSTOM_STYLES.push(Styles.ReverseTextInputContainer)
-        _LINK_TEXT_CUSTOM_STYLES.push({
-          width: '72%'
-        });
-      }
-
       var _LINK_CONTENT = (
         <Link
-          containerStyle={_LINK_CUSTOM_STYLES}
+          containerStyle={Styles.TextInputLinkContainer}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
       );
-
-      // if (attitude.disable){
-      //   _LINK_CONTENT = (
-      //     <Link
-      //       containerStyle={Styles.TextInputLinkContainer}
-      //       style={Styles.TextInputLink}
-      //       value={attitude.link} />
-      //   );
-      // }
 
       return (
         <View
@@ -514,7 +489,7 @@ export const Input = (props) => {
             attitude.style
           ]}>
             <TextInput
-              style={_LINK_TEXT_CUSTOM_STYLES}
+              style={Styles.TextInputContainer}
               autoCapitalize={attitude.autoCapitalize}
               value={attitude.value}
               placeholder={attitude.placeholder}
@@ -541,15 +516,6 @@ export const Input = (props) => {
           onPress={attitude.onPress} />
       );
 
-      // if (attitude.disable){
-      //   _LINK_CONTENT = (
-      //     <Link
-      //       containerStyle={Styles.TextInputLinkContainer}
-      //       style={Styles.TextInputLink}
-      //       value={attitude.link} />
-      //   );
-      // }
-
       return (
         <View
           key={attitude.key}
@@ -559,11 +525,7 @@ export const Input = (props) => {
             attitude.style
           ]}>
             <TextInput
-              style={[
-                Styles.TextInputContainer,
-                Styles.ReverseTextInputContainer,
-                { width: '72%' }
-              ]}
+              style={Styles.TextInputContainer}
               autoCapitalize="none"
               keyboardType="email-address"
               autoCorrect={false}
@@ -592,15 +554,6 @@ export const Input = (props) => {
           onPress={attitude.onPress} />
       );
 
-      // if (attitude.disable){
-      //   _LINK_CONTENT = (
-      //     <Link
-      //       containerStyle={Styles.TextInputLinkContainer}
-      //       style={Styles.TextInputLink}
-      //       value={attitude.link} />
-      //   );
-      // }
-
       return (
         <View
           key={attitude.key}
@@ -610,18 +563,22 @@ export const Input = (props) => {
             attitude.style
           ]}>
             <TextInput
-              style={[
-                Styles.TextInputContainer,
-                Styles.ReverseTextInputContainer,
-                { width: '72%' }
-              ]}
+              style={Styles.TextInputContainer}
               keyboardType="numeric"
               value={attitude.value}
               placeholder={attitude.placeholder}
               placeholderTextColor={Global.colors.single.mercury}
               selectionColor={Global.colors.single.mercury}
               underlineColorAndroid={Global.colors.single.transparent}
-              onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+              onChangeText={(currentValue) => {
+                if (I18nManager.isRTL){
+                  const _FINILIZED_DIGITS = Functions._convertDigitsToEnglish(currentValue);
+
+                  return attitude.onChangeText(_FINILIZED_DIGITS);
+                }else{
+                  return attitude.onChangeText(currentValue);
+                }
+              }}
               onBlur={attitude.onBlur}
               onFocus={attitude.onFocus}
               editable={!attitude.disable}
@@ -634,48 +591,29 @@ export const Input = (props) => {
 
     case 'phone-link':
     case 'phone-number-link':
-      var _PHONE_CUSTOM_STYLES = [
-        Styles.TextInputLinkContainer
-      ];
+      var _LINK_CONTAINER_STYLES = [
+            Styles.ContainerWithButton
+          ],
+          _LINK_CONTENT = (
+            <Link
+              containerStyle={Styles.TextInputLinkContainer}
+              style={Styles.TextInputLink}
+              value={attitude.link}
+              onPress={attitude.onPress} />
+          );
 
-      if (I18nManager.isRTL){
-        _PHONE_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
-
-        if (Platform.OS !== 'ios'){
-          _PHONE_CUSTOM_STYLES.push({
-            right: 18,
-            left: 'auto'
-          });
-        }
-      }else{
-        _PHONE_CUSTOM_STYLES.push({
-          left: 18
+      if (!I18nManager.isRTL){
+        _LINK_CONTAINER_STYLES.push({
+          direction: 'rtl'
         });
       }
-
-      var _LINK_CONTENT = (
-        <Link
-          containerStyle={_PHONE_CUSTOM_STYLES}
-          style={Styles.TextInputLink}
-          value={attitude.link}
-          onPress={attitude.onPress} />
-      );
-
-      // if (attitude.disable){
-      //   _LINK_CONTENT = (
-      //     <Link
-      //       containerStyle={Styles.StaticTextInputLinkContainer}
-      //       style={Styles.TextInputLink}
-      //       value={attitude.link} />
-      //   );
-      // }
 
       return (
         <View
           key={attitude.key}
           name={attitude.name}
           style={[
-            Styles.ContainerWithButton,
+            _LINK_CONTAINER_STYLES,
             attitude.style
           ]}>
             <TextInput
@@ -703,37 +641,13 @@ export const Input = (props) => {
       break;
 
     case 'password-link':
-      var _PASSWORD_CUSTOM_STYLES = [
-        Styles.TextInputLinkContainer
-      ];
-
-      if (I18nManager.isRTL){
-        _PASSWORD_CUSTOM_STYLES.push(Styles.ReverseTextInputLinkContainer);
-
-        if (Platform.OS !== 'ios'){
-          _PASSWORD_CUSTOM_STYLES.push({
-            right: 18,
-            left: 'auto'
-          });
-        }
-      }
-
       var _LINK_CONTENT = (
         <Link
-          containerStyle={_PASSWORD_CUSTOM_STYLES}
+          containerStyle={Styles.TextInputLinkContainer}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
       );
-
-      // if (attitude.disable){
-      //   _LINK_CONTENT = (
-      //     <Link
-      //       containerStyle={Styles.TextInputLinkContainer}
-      //       style={Styles.TextInputLink}
-      //       value={attitude.link} />
-      //   );
-      // }
 
       return (
         <View
@@ -744,11 +658,7 @@ export const Input = (props) => {
             attitude.style
           ]}>
             <TextInput
-              style={[
-                Styles.TextInputContainer,
-                Styles.NormalTextInputContainer,
-                { width: '72%' }
-              ]}
+              style={Styles.TextInputContainer}
               autoCapitalize="none"
               secureTextEntry={true}
               value={attitude.value}

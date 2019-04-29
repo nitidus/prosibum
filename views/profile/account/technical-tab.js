@@ -220,21 +220,21 @@ class TechnicalTab extends Component<{}> {
                 // }
 
                 if (props.technicalTab.brandProfilePhoto != ''){
-                  Functions._fetchBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto, async (photoURI) => {
-                    if (_AUTH.brand_profile_photo !== photoURI){
-                      if (typeof _SEED.brand != 'undefined'){
-                        _SEED.brand.photo = photoURI;
-                      }else{
-                        _SEED.brand = {
-                          photo: photoURI
-                        };
-                      }
-                    }
+                  const _PHOTO_URI = await Functions._fetchBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto);
 
-                    await props.editUserTechnicalData(_SEED);
-                  });
+                  if (_AUTH.brand_profile_photo !== _PHOTO_URI){
+                    if (typeof _SEED.brand != 'undefined'){
+                      _SEED.brand.photo = _PHOTO_URI;
+                    }else{
+                      _SEED.brand = {
+                        photo: _PHOTO_URI
+                      };
+                    }
+                  }
+
+                  await props.editUserTechnicalData(_SEED);
                 }else{
-                    await props.editUserTechnicalData(_SEED);
+                  await props.editUserTechnicalData(_SEED);
                 }
               }
             }}

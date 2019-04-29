@@ -12,6 +12,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setLanguage: (language) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_LANGUAGE,
+        payload: language
+      })
+    },
     resetProductForms: () => {
       dispatch({
         type: NEW_PRODUCT.RESET_PRODUCT_FORMS

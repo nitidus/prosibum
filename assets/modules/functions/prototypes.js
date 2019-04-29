@@ -707,53 +707,52 @@ module.exports = {
       }
     }
   },
-  _fetchBase64BlobFromPhoto: (photo, callback, bufferSize) => {
-    if (typeof callback != 'undefined') {
-      const _BASE64_CONFIG = {
-        NAME: 'base64',
-        MIME_TYPE: 'image/png'
-      };
+  _fetchBase64BlobFromPhoto: (photo, bufferSize) => {
+    const _BASE64_CONFIG = {
+      NAME: 'base64',
+      MIME_TYPE: 'image/jpeg'
+    };
 
-      var _BUFFER_SIZE = bufferSize || 4096,
-        _URI = photo;
+    var _BUFFER_SIZE = bufferSize || 4096,
+      _URI = photo;
 
-      if (typeof photo.image != 'undefined') {
-        const {
-          width,
-          height,
-          uri
-        } = photo.image,
-          _SIZE_IN_BYTES = Math.floor(((width * height) * 16) / 8),
-          _SIZE_IN_BYTES_MULTIPLES_OF_THREE = (_SIZE_IN_BYTES % 3 === 0) ? _SIZE_IN_BYTES : (_SIZE_IN_BYTES - (_SIZE_IN_BYTES % 3));
+    if (typeof photo.image != 'undefined') {
+      const {
+        width,
+        height,
+        uri
+      } = photo.image,
+        _SIZE_IN_BYTES = Math.floor(((width * height) * 16) / 8),
+        _SIZE_IN_BYTES_MULTIPLES_OF_THREE = (_SIZE_IN_BYTES % 3 === 0) ? _SIZE_IN_BYTES : (_SIZE_IN_BYTES - (_SIZE_IN_BYTES % 3));
 
-        if ((_SIZE_IN_BYTES_MULTIPLES_OF_THREE >= (2 * 1024 * 1024)) && (_SIZE_IN_BYTES_MULTIPLES_OF_THREE < (5 * 1024 * 1024))) {
-          _BUFFER_SIZE = _BUFFER_SIZE * (2 * 3);
-        } else if ((_SIZE_IN_BYTES_MULTIPLES_OF_THREE >= (5 * 1024 * 1024)) && (_SIZE_IN_BYTES_MULTIPLES_OF_THREE < (8 * 1024 * 1024))) {
-          _BUFFER_SIZE = _BUFFER_SIZE * (5 * 3);
-        } else {
-          _BUFFER_SIZE = _SIZE_IN_BYTES_MULTIPLES_OF_THREE;
-        }
-
-        _URI = uri;
+      if ((_SIZE_IN_BYTES_MULTIPLES_OF_THREE >= (2 * 1024 * 1024)) && (_SIZE_IN_BYTES_MULTIPLES_OF_THREE < (5 * 1024 * 1024))) {
+        _BUFFER_SIZE = _BUFFER_SIZE * (2 * 3);
+      } else if ((_SIZE_IN_BYTES_MULTIPLES_OF_THREE >= (5 * 1024 * 1024)) && (_SIZE_IN_BYTES_MULTIPLES_OF_THREE < (8 * 1024 * 1024))) {
+        _BUFFER_SIZE = _BUFFER_SIZE * (5 * 3);
+      } else {
+        _BUFFER_SIZE = _SIZE_IN_BYTES_MULTIPLES_OF_THREE;
       }
 
-      RNFetchBlob.fs.readStream(_URI, _BASE64_CONFIG.NAME, _BUFFER_SIZE)
-        .then((stream) => {
-          var dataStream = `data:${_BASE64_CONFIG.MIME_TYPE};${_BASE64_CONFIG.NAME},`;
-
-          stream.open();
-
-          stream.onData((chunk) => {
-            dataStream += chunk;
-          })
-
-          stream.onEnd(() => {
-            callback(dataStream);
-          })
-        })
-        .catch((error) => {
-          module.exports._fetchBase64BlobFromPhoto(photo, callback, _BUFFER_SIZE * 3);
-        })
+      _URI = uri;
     }
+
+    return new Promise((resolve, reject) => {
+      let dataStream = '';
+
+      RNFetchBlob.fs.readStream(_URI, _BASE64_CONFIG.NAME, _BUFFER_SIZE)
+      .then((stream) => {
+        stream.open();
+        stream.onData((chunk) => {
+          dataStream += chunk;
+        })
+
+        stream.onEnd(() => {
+          resolve(`data:${_BASE64_CONFIG.MIME_TYPE};${_BASE64_CONFIG.NAME},${dataStream}`);
+        })
+      })
+      .catch((error) => {
+        resolve(module.exports._fetchBase64BlobFromPhoto(photo, _BUFFER_SIZE * 3));
+      })
+    })
   }
 };

@@ -36,7 +36,9 @@ const _componentWillCheckValidation = (props) => {
                 _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
 
           if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
-            _FORM_FIELDS_VALIDITY = true;
+            if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
+              _FORM_FIELDS_VALIDITY = true;
+            }
           }
         }
         break;

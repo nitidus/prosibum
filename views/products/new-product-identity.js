@@ -28,13 +28,11 @@ class NewProductIdentity extends Component<{}> {
   async componentDidMount() {
     const { props } = this,
           _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
-          _LANGUAGE = _NATIVE_SETTINGS.language;
+          _LANGUAGE = await _NATIVE_SETTINGS.language;
 
-    this._language = _LANGUAGE;
-
-    await props.resetProductForms();
-
-    await props.fetchAvailableWarehouses();
+    props.resetProductForms();
+    props.setLanguage(_LANGUAGE);
+    props.fetchAvailableWarehouses();
   }
 
   _componentWillCheckValidation(props) {
@@ -54,14 +52,14 @@ class NewProductIdentity extends Component<{}> {
   render() {
     const { props } = this;
 
-    if (typeof this._language != 'undefined'){
-      const _LANGUAGE = Functions._convertTokenToKeyword(this._language.key),
-      _WAREHOUSES_OTHER_PROPS = {
-        language: this._language
-      },
-      _PRODUCT_CATEGORIES_OTHER_PROPS = {
-        language: this._language
-      }
+    if (Object.keys(props.newProduct.language).length > 0){
+      const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
+            _WAREHOUSES_OTHER_PROPS = {
+              language: props.newProduct.language
+            },
+            _PRODUCT_CATEGORIES_OTHER_PROPS = {
+              language: props.newProduct.language
+            }
 
       var _WAREHOUSE_CONTENT;
 
@@ -225,7 +223,7 @@ class NewProductIdentity extends Component<{}> {
                   onPress={() => {
                     const { navigation } = props;
 
-                    navigation.navigate('NewProductPhotos');
+                    navigation.navigate('NewProductFeatures');
                   }}
                   forcedDisable={_VALIDATED} />
             </View>

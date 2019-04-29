@@ -27,11 +27,14 @@ class NewProductPrices extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this,
-          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
-          _LANGUAGE = _NATIVE_SETTINGS.language;
+    const { props } = this;
 
-    this._language = _LANGUAGE;
+    if (Object.keys(props.newProduct.language).length === 0){
+      const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+            _LANGUAGE = _NATIVE_SETTINGS.language;
+
+      await props.setLanguage(_LANGUAGE);
+    }
   }
 
   _componentWillCheckValidation(props) {
@@ -52,15 +55,15 @@ class NewProductPrices extends Component<{}> {
   render() {
     const { props } = this;
 
-    if (typeof this._language != 'undefined'){
+    if (Object.keys(props.newProduct.language).length > 0){
       var _PRICES_CONTENT,
           _UNITS = [];
 
-      const _LANGUAGE = Functions._convertTokenToKeyword(this._language.key),
+      const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
             _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_UNIT_DEPENDED_OTHER_PROPS = {
-              language: this._language
+              language: props.newProduct.language
             };
 
       if (props.newProduct.prices.length > 0){
@@ -87,7 +90,7 @@ class NewProductPrices extends Component<{}> {
 
                   const _PRICE_NAME = priceItem.name,
                         _PRICE_VALUE = (priceItem.value > 0)? priceItem.value.toString(): '',
-                        _PRICE_UNIT = (Object.keys(priceItem.unit).length > 0)? Functions._convertKeywordToToken(priceItem.unit.key): '',
+                        _PRICE_UNIT = (Object.keys(priceItem.unit).length > 0)? Functions._getAppropriateTaxonomyBaseOnLocale(priceItem.unit.key, _LANGUAGE): '',
                         _PRICE_SUB_FIELD_ON_CHANGE_ACTION = (currentValue, changingKey) => props.setProductPrices(props.newProduct.prices.map((checkingPriceItem, j) => {
                           if (checkingPriceItem._id === priceItem._id){
                             var _TARGET_PRICE_CHANGED_NODE = checkingPriceItem;
