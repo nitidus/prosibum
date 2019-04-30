@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, I18nManager, Text, Image } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, Keyboard, I18nManager, Text, Image } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -219,10 +219,12 @@ class Wallets extends Component<{}> {
                                 }
                               };
 
+                              Keyboard.dismiss();
                               props.setWalletModalVisibility(visibilityStatus);
                             }
                           };
 
+                          Keyboard.dismiss();
                           props.setWalletModalVisibility(true);
                         }}/>
 

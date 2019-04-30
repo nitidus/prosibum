@@ -109,7 +109,7 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_PILOT_BUTTON.marginRight += 5;
 
     _CUSTOM_WAREHOUSE_ITEM_CONTAINER.height += 16;
-fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
+
     _CUSTOM_BRIEF_DETAIL_TITLE_CONTAINER.width -= 300;
     _CUSTOM_BRIEF_DETAIL_TITLE.fontSize += 1;
     _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontSize += 1;

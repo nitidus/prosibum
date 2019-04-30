@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, KeyboardAvoidingView, Platform, Dimensions, Text } from 'react-native';
+import { StatusBar, View, KeyboardAvoidingView, Platform, Keyboard, Dimensions, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -174,7 +174,10 @@ class Signup extends Component<{}> {
                       placeholder={__CONSTANTS.content.state.invitation.secondInputGroup.first.title[_LANGUAGE]}
                       value={props.signup.phone.number}
                       link={props.signup.phone.dialCode.area_code}
-                      onPress={() => props.setCountriesCodesModalVisibility(true)}
+                      onPress={() => {
+                        Keyboard.dismiss();
+                        props.setCountriesCodesModalVisibility(true);
+                      }}
                       onChangeText={(currentValue) => props.setPhoneNumber({
                         number: currentValue
                       })} />
@@ -275,7 +278,10 @@ class Signup extends Component<{}> {
                     placeholder={__CONSTANTS.content.state.normal.firstInputGroup.first.title[_LANGUAGE]}
                     value={props.signup.phone.number}
                     link={_AREA_CODE}
-                    onPress={() => props.setCountriesCodesModalVisibility(true)}
+                    onPress={() => {
+                      Keyboard.dismiss();
+                      props.setCountriesCodesModalVisibility(true);
+                    }}
                     onChangeText={(currentValue) => props.setPhoneNumber({
                       number: currentValue
                     })} />

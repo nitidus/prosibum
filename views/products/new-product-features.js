@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, I18nManager, Text, Image, Animated, Easing } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, Keyboard, I18nManager, Text, Image, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -290,7 +290,10 @@ class NewProductFeatures extends Component<{}> {
                   marginHorizontal: Styles.Content.marginHorizontal,
                   marginBottom: Styles.Content.marginVertical
                 }}
-                onPress={() => props.setProductFeaturesModalVisibility(true)} />
+                onPress={() => {
+                  Keyboard.dismiss();
+                  props.setProductFeaturesModalVisibility(true);
+                }} />
 
               <Input
                 type={__CONSTANTS.content.submitButton.type}
@@ -327,7 +330,10 @@ class NewProductFeatures extends Component<{}> {
           title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
           subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
           rightIcon={__CONSTANTS.pilot.rightIcon}
-          onRightIconPress={() => props.setProductFeaturesModalVisibility(true)}
+          onRightIconPress={() => {
+            Keyboard.dismiss();
+            props.setProductFeaturesModalVisibility(true);
+          }}
           {...props}>
             {_FEATURES_CONTENT}
 

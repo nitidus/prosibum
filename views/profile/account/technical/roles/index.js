@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, Image, Keyboard } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -367,7 +367,10 @@ class Roles extends Component<{}> {
 
               await props.fetchAvailableRoles(props.roles.tabs[_SELECTED_ITEM_INDEX]);
             }}
-            onAddRolePress={(visibilityStatus) => props.setRolesModalVisibility(visibilityStatus)}
+            onAddRolePress={(visibilityStatus) => {
+              Keyboard.dismiss();
+              props.setRolesModalVisibility(visibilityStatus);
+            }}
             rolesModalVisibility={props.roles.rolesModalVisibility}
             referenceRole={props.roles.selectedReferenceRole}
             onRolesAbsorb={async (response) => {

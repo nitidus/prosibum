@@ -3,7 +3,11 @@ const { NEW_PRODUCT } = VIEWS.PRODUCTS;
 
 const initialState = {
         language: {},
+        productQuery: '',
+        productQueryItems: [],
+        product: {},
         name: '',
+        internalName: '',
         currentWarehouse: {},
         warehouses: [],
         category: {},
@@ -20,8 +24,10 @@ const initialState = {
         productFeaturesModalVisibility: false,
         productPhotoModalVisibility: false,
         productUnitDependedModalVisibility: false,
-        warehousesLoading: false,
         shippingMethodsModalVisibility: false,
+        warehousesLoading: false,
+        productQueryItemsLoading: false,
+        productLoading: false,
         connected: {
           status: true,
           content: ''
@@ -41,10 +47,28 @@ export default (state = initialState, action) => {
         ...initialState
       };
       break;
-    case NEW_PRODUCT.SET_PRODUCT_NAME:
+    case NEW_PRODUCT.SET_PRODUCT_QUERY:
       return {
         ...state,
-        name: action.payload
+        productQuery: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_PRODUCT_QUERY_ITEMS:
+      return {
+        ...state,
+        productQueryItems: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_PRODUCT:
+      return {
+        ...state,
+        product: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_PRODUCT_INTERNAL_NAME:
+      return {
+        ...state,
+        internalName: action.payload
       };
       break;
     case NEW_PRODUCT.SET_CURRENT_WAREHOUSE:
@@ -223,10 +247,34 @@ export default (state = initialState, action) => {
         warehouses: action.payload
       };
       break;
+    case NEW_PRODUCT.FETCH_AVAILABLE_PRODUCTS_BASED_ON_QUERY:
+      return {
+        ...state,
+        productQueryItems: action.payload
+      };
+      break;
+    case NEW_PRODUCT.FETCH_PRODUCT_BASED_ON_CATEGORY:
+      return {
+        ...state,
+        product: action.payload
+      };
+      break;
     case NEW_PRODUCT.SET_WAREHOUSES_LOADING_STATUS:
       return {
         ...state,
         warehousesLoading: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_FETCH_AVAILABLE_PRODUCTS_BASED_ON_QUERY_LOADING_STATUS:
+      return {
+        ...state,
+        productQueryItemsLoading: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_FETCH_PRODUCT_BASED_ON_CATEGORY_LOADING_STATUS:
+      return {
+        ...state,
+        productLoading: action.payload
       };
       break;
     case NEW_PRODUCT.SET_CONNECTED_STATUS:

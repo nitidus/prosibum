@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Dimensions } from 'react-native';
+import { View, ScrollView, Text, Dimensions, Keyboard } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -176,7 +176,10 @@ class TechnicalTab extends Component<{}> {
             value={__CONSTANTS.firstInput.title[_LANGUAGE]}
             style={Styles.SingleInput}
             photoURI={_PHOTO_URI}
-            onPress={() => props.setCameraRollPickerModalVisibility(true)}
+            onPress={() => {
+              Keyboard.dismiss();
+              props.setCameraRollPickerModalVisibility(true);
+            }}
             {..._CAMERA_ROLL_OTHER_PROPS} />
 
           {_BRAND_NAME_DEPENDED_HANDLER_CONTENT}

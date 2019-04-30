@@ -23,10 +23,28 @@ const mapDispatchToProps = (dispatch) => {
         type: NEW_PRODUCT.RESET_PRODUCT_FORMS
       })
     },
-    setProductName: (name) => {
+    setProduct: (product) => {
       dispatch({
-        type: NEW_PRODUCT.SET_PRODUCT_NAME,
-        payload: name
+        type: NEW_PRODUCT.SET_PRODUCT,
+        payload: product
+      })
+    },
+    setProductInternalName: (internalName) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_PRODUCT_INTERNAL_NAME,
+        payload: internalName
+      })
+    },
+    setProductQuery: (query) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_PRODUCT_QUERY,
+        payload: query
+      })
+    },
+    setProductQueryItems: (items) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_PRODUCT_QUERY_ITEMS,
+        payload: items
       })
     },
     setCurrentWarehouse: (warehouse) => {
@@ -162,9 +180,23 @@ const mapDispatchToProps = (dispatch) => {
       })
     },
     fetchAvailableWarehouses: async (token) =>  CMD._getAvailableWarehousesWithToken(token, dispatch),
+    fetchAvailableProductsBasedOnQuery: async (query) =>  CMD._getAvailableProductsBasedOnQuery(query, dispatch),
+    fetchProductBasedOnCategory: async (category) =>  CMD._getProductsBasedOnCategory(category, dispatch),
     setWarehousesLoadingStatus: (status) => {
       dispatch({
         type: NEW_PRODUCT.SET_WAREHOUSES_LOADING_STATUS,
+        payload: status
+      })
+    },
+    setProductQueryItemsLoadingStatus: (status) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_FETCH_AVAILABLE_PRODUCTS_BASED_ON_QUERY_LOADING_STATUS,
+        payload: status
+      })
+    },
+    setProductLoadingStatus: (status) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_FETCH_PRODUCT_BASED_ON_CATEGORY_LOADING_STATUS,
         payload: status
       })
     }

@@ -164,15 +164,25 @@ class NewProductShippingMethods extends Component<{}> {
 
                     navigation.navigate('NewProductShippingMethods');
                     let _SEED = {
-                      name: props.newProduct.name,
+                      name: props.newProduct.internalName,
                       warehouse_id: props.newProduct.currentWarehouse._id,
-                      category_id: props.newProduct.category._id,
+                      product_id: props.newProduct.product._id,
                       features: props.newProduct.features.map((item, i) => {
                         if (typeof item.unit != 'undefined'){
                           return {
                             ...item,
                             feature_id: item.feature._id,
-                            unit_id: item.unit._id
+                            unit_id: item.unit._id,
+                            minimum_order_quantity: minimumOrderQuantity,
+                            maximum_order_quantity: maximumOrderQuantity,
+                            quantity: quantity
+                          };
+                        }else if ((typeof item.featureName != 'undefined') && (typeof item.featureValue != 'undefined')) {
+                          return {
+                            ...item,
+                            feature_id: item.feature._id,
+                            feature_name: featureName,
+                            feature_value: featureValue
                           };
                         }else{
                           return {
@@ -197,9 +207,19 @@ class NewProductShippingMethods extends Component<{}> {
                         }
                       }),
                       prices: props.newProduct.prices.map((item, i) => {
+                        let _PRICE_VALUE = item.value;
+
+                        if (I18nManager.isRTL){
+                          if (_PRICE_VALUE >= 10000){
+                            _PRICE_VALUE /= 10000;
+                          }else if ((_PRICE_VALUE >= 1000) && (_PRICE_VALUE < 10000)) {
+                            _PRICE_VALUE /= 1000;
+                          }
+                        }
+
                         return {
                           name: item.name,
-                          value: item.value,
+                          value: _PRICE_VALUE,
                           unit_id: item.unit._id
                         };
                       }),

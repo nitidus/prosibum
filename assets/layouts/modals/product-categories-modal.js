@@ -82,6 +82,8 @@ const ProductCategoriesModal = (props) => {
     attitude.onProgressSuccess = props.onProgressSuccess || props.onProgressComplete || props.onProgressDone || props.onTaskSuccess || props.onTaskComplete || props.onTaskDone || props.onDutySuccess || props.onDutyComplete || props.onDutyDone || props.onObligationSuccess || props.onObligationComplete || props.onObligationDone || props.onSuccessProgress || props.onCompleteProgress || props.onDoneProgress || props.onSuccessTask || props.onCompleteTask || props.onDoneTask || props.onSuccessDuty || props.onCompleteDuty || props.onDoneDuty || props.onSuccessObligation || props.onCompleteObligation || props.onDoneObligation;
   }
 
+  attitude.isAddModeOn = (typeof (props.isAddModeOn || props.addModeOn || props.isAddingModeOn || props.addingModeOn || props.isAdding || props.addMode) != 'undefined')? true: false;
+
   attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
 
   if (attitude.visibility === true){
@@ -157,8 +159,12 @@ const ProductCategoriesModal = (props) => {
           value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title[attitude.language]}
           gradient={Global.colors.pair.ongerine}
           onPress={() => {
-            attitude.onProgressSuccess(props.productCategoriesModal.currentCategory);
-            attitude.onBlur(false);
+            if (attitude.isAddModeOn !== true){
+              attitude.onProgressSuccess(props.productCategoriesModal.currentCategory);
+              attitude.onBlur(false);
+            }else{
+              alert('ok')
+            }
           }}
           forcedDisable={_VALIDATED}/>
       </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Image, Dimensions } from 'react-native';
+import { View, ScrollView, Text, Image, Dimensions, Keyboard } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -469,7 +469,10 @@ class SelectedRole extends Component<{}> {
         title={_PREPARED_PERSONAL_CONTACT_INFO.CONTAINER_TITLE}
         referenceRole={props.selectedRole.selectedReferenceRole}
         rolesModalVisibility={props.selectedRole.rolesModalVisibility}
-        onAddRolePress={(visibilityStatus) => props.setRolesModalVisibility(visibilityStatus)}
+        onAddRolePress={(visibilityStatus) => {
+          Keyboard.dismiss();
+          props.setRolesModalVisibility(visibilityStatus);
+        }}
         onRolesAbsorb={async (response) => {
           //We can use response later
           await props.fetchAvailableRoles(this.attitude.data.usergroup, this.attitude.data.reference_id);

@@ -1,0 +1,57 @@
+{
+  "pilot": {
+    "title": {
+      "en": "New Product",
+      "fa": "محصول جدید"
+    },
+    "subtitle": {
+      "en": "Product Identity Detection",
+      "fa": "تشخیص هویت محصول"
+    }
+  },
+  "content": {
+    "firstInput": {
+      "type": "TEXT",
+      "title": {
+        "en": "Search for The Desired Product",
+        "fa": "محصول مورد نظر را جستجو کنید"
+      }
+    },
+    "firstFlatList": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Query Products"
+          },
+          "content": {
+            "title": {
+              "en": "Query Products Item"
+            }
+          }
+        },
+        "loading": {
+          "title": {
+            "en": "Query Products"
+          }
+        },
+        "disconected": {
+          "title": {
+            "en": "Query Products Disconected Situation"
+          }
+        },
+        "null": {
+          "type": "BUTTON",
+          "state": {
+            "normal": {
+              "title": {
+                "en": "Request for New Category",
+                "fa": "درخواست برای دسته‌بندی جدید"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

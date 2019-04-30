@@ -30,7 +30,6 @@ class NewProductIdentity extends Component<{}> {
           _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
           _LANGUAGE = await _NATIVE_SETTINGS.language;
 
-    props.resetProductForms();
     props.setLanguage(_LANGUAGE);
     props.fetchAvailableWarehouses();
   }
@@ -40,9 +39,15 @@ class NewProductIdentity extends Component<{}> {
 
     var _FORM_FIELDS_VALIDITY = false;
 
-    if ((_PROPS.name != '') && (Object.keys(_PROPS.currentWarehouse).length > 0) && (Object.keys(_PROPS.category).length > 0)){
-      if (_PROPS.name.length > 7){
-        _FORM_FIELDS_VALIDITY = true;
+    if ((_PROPS.internalName != '') && (Object.keys(_PROPS.currentWarehouse).length > 0) && (Object.keys(_PROPS.category).length > 0)){
+      if (_PROPS.internalName.length > 7){
+        if (Object.keys(_PROPS.product).length > 0){
+          const _FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX = new RegExp(`\.*${_PROPS.product.name}\.*`, 'gi');
+
+          if (_PROPS.internalName.match(_FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX)){
+            _FORM_FIELDS_VALIDITY = true;
+          }
+        }
       }
     }
 
@@ -59,7 +64,7 @@ class NewProductIdentity extends Component<{}> {
             },
             _PRODUCT_CATEGORIES_OTHER_PROPS = {
               language: props.newProduct.language
-            }
+            };
 
       var _WAREHOUSE_CONTENT;
 
@@ -173,14 +178,14 @@ class NewProductIdentity extends Component<{}> {
               type={__CONSTANTS.content.firstInput.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}
               placeholder={__CONSTANTS.content.firstInput.title[_LANGUAGE]}
-              value={props.newProduct.name}
+              value={props.newProduct.internalName}
               style={[
                 Styles.RegularItemContainer,
                 {
                   marginTop: Styles.Content.marginVertical
                 }
               ]}
-              onChangeText={(currentValue) => props.setProductName(currentValue)} />
+              onChangeText={(currentValue) => props.setProductInternalName(currentValue)} />
 
             {_WAREHOUSE_CONTENT}
 
@@ -211,7 +216,10 @@ class NewProductIdentity extends Component<{}> {
                     marginHorizontal: Styles.Content.marginHorizontal,
                     marginBottom: Styles.Content.marginVertical
                   }}
-                  onPress={() => props.setWarehouseModalVisibility(true)} />
+                  onPress={() => {
+                    Keyboard.dismiss();
+                    props.setWarehouseModalVisibility(true)
+                  }} />
                 <Input
                   type={__CONSTANTS.content.submitButton.type}
                   name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
@@ -220,10 +228,14 @@ class NewProductIdentity extends Component<{}> {
                   style={{
                     marginHorizontal: Styles.Content.marginHorizontal
                   }}
-                  onPress={() => {
+                  onPress={async () => {
                     const { navigation } = props;
 
-                    navigation.navigate('NewProductFeatures');
+                    if (props.newProduct.category._id !== props.newProduct.product.category._id){
+                      await props.fetchProductBasedOnCategory(props.newProduct.category)
+                    }
+
+                    await navigation.navigate('NewProductFeatures');
                   }}
                   forcedDisable={_VALIDATED} />
             </View>

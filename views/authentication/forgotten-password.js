@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { StatusBar, View, KeyboardAvoidingView, Platform, Keyboard } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -155,7 +155,10 @@ class ForgottenPassword extends Component<{}> {
                           placeholder={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title[_LANGUAGE]}
                           value={props.forgottenPassword.phone.number}
                           link={props.forgottenPassword.phone.dialCode.area_code}
-                          onPress={() => props.setCountriesCodesModalVisibility(true)}
+                          onPress={() => {
+                            Keyboard.dismiss();
+                            props.setCountriesCodesModalVisibility(true);
+                          }}
                           onChangeText={(currentValue) => props.setPhoneNumber({
                             number: currentValue
                           })} />

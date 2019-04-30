@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, I18nManager, Text, Image, Animated, Easing } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, Keyboard, I18nManager, Text, Image, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -124,6 +124,7 @@ class NewProductPhotos extends Component<{}> {
                           style={_CUSTOM_STYLE}
                           photoURI={_PHOTO_URI}
                           onPress={() => {
+                            Keyboard.dismiss();
                             props.setProductPhotoModalVisibility(true);
                             props.setOnFetchingModePhoto(photoItem);
                           }}
