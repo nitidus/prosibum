@@ -27,9 +27,23 @@ const _componentWillCheckValidation = (props) => {
 
   var _FORM_FIELDS_VALIDITY = false;
 
-  if (Object.keys(_PROPS.currentCategory).length > 0){
-    if (_PROPS.currentCategory.key != ''){
-      _FORM_FIELDS_VALIDITY = true;
+  if (_PROPS.isAddingMode === true){
+    switch (_PROPS.currentHiddenTabIndex) {
+      case 1:
+        if (_PROPS.newCategoryName != ''){
+          _FORM_FIELDS_VALIDITY = true;
+        }
+        break;
+      case 0:
+      default:
+        _FORM_FIELDS_VALIDITY = true;
+        break;
+    }
+  }else{
+    if (Object.keys(_PROPS.currentCategory).length > 0){
+      if (_PROPS.currentCategory.key != ''){
+        _FORM_FIELDS_VALIDITY = true;
+      }
     }
   }
 
@@ -93,6 +107,7 @@ const ProductCategoriesModal = (props) => {
       (props.productCategoriesModal.categoriesLoading === false)
     ){
       props.fetchAvailableProductCategories();
+      props.setIsAddingMode(attitude.isAddModeOn);
     }
   }
 
@@ -110,10 +125,10 @@ const ProductCategoriesModal = (props) => {
 
   const _VALIDATED = _componentWillCheckValidation(props);
 
-  var _LIST_CONTENT;
+  var _PRODUCT_CATEGORIES_CONTENT;
 
   if (props.productCategoriesModal.categoriesLoading === true){
-    _LIST_CONTENT = (
+    _PRODUCT_CATEGORIES_CONTENT = (
       <Input
         type={__CONSTANTS.modalContainer.content.firstList.state.loading.type}
         name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstList.state.loading.title.en)}
@@ -125,50 +140,122 @@ const ProductCategoriesModal = (props) => {
       </Input>
     );
   }else{
-    _LIST_CONTENT = (
-      <View>
-        <List
-          dataSource={props.productCategoriesModal.categories}
-          onLayout={(color) => {
-            var _OTHER_ICON_PROPS = {},
-                _ICON_CUSTOM_STYLE = {};
+    let _BUTTON_NAME = __CONSTANTS.modalContainer.content.submitInput.state.normal.title.en,
+        _BUTTON_VALUE = __CONSTANTS.modalContainer.content.submitInput.state.normal.title[attitude.language];
 
-            if (Platform.OS !== 'ios'){
-              if (_Screen.width >= 1000 || _Screen.height >= 1000){
-                _OTHER_ICON_PROPS.height = 28;
-              }else{
-                _OTHER_ICON_PROPS.height = 25;
+    if (props.productCategoriesModal.isAddingMode === true){
+      if (props.productCategoriesModal.currentHiddenTabIndex !== 1){
+        _BUTTON_NAME = __CONSTANTS.modalContainer.content.submitInput.state.adding.title.en;
+        _BUTTON_VALUE = __CONSTANTS.modalContainer.content.submitInput.state.adding.title[attitude.language];
+      }
+    }
+
+    _PRODUCT_CATEGORIES_CONTENT = (
+      <View
+        name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.title.en)}>
+          <List
+            dataSource={props.productCategoriesModal.categories}
+            onLayout={(color) => {
+              var _OTHER_ICON_PROPS = {},
+                  _ICON_CUSTOM_STYLE = {};
+
+              if (Platform.OS !== 'ios'){
+                if (_Screen.width >= 1000 || _Screen.height >= 1000){
+                  _OTHER_ICON_PROPS.height = 28;
+                }else{
+                  _OTHER_ICON_PROPS.height = 25;
+                }
               }
-            }
 
-            _ICON_CUSTOM_STYLE.marginRight = Styles.Content.marginVertical;
+              _ICON_CUSTOM_STYLE.marginRight = Styles.Content.marginVertical;
 
-            return (
-              <Icon
-                name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
-                color={color}
-                style={_ICON_CUSTOM_STYLE}
-                {..._OTHER_ICON_PROPS}/>
-            );
-          }}
-          onPress={(response) => props.setCurrentCategory(response)}/>
+              return (
+                <Icon
+                  name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
+                  color={color}
+                  style={_ICON_CUSTOM_STYLE}
+                  {..._OTHER_ICON_PROPS}/>
+              );
+            }}
+            onPress={(response) => props.setCurrentCategory(response)}/>
 
-        <Input
-          type={__CONSTANTS.modalContainer.content.submitInput.type}
-          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
-          value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title[attitude.language]}
-          gradient={Global.colors.pair.ongerine}
-          onPress={() => {
-            if (attitude.isAddModeOn !== true){
-              attitude.onProgressSuccess(props.productCategoriesModal.currentCategory);
-              attitude.onBlur(false);
-            }else{
-              alert('ok')
-            }
-          }}
-          forcedDisable={_VALIDATED}/>
+          <Input
+            type={__CONSTANTS.modalContainer.content.submitInput.type}
+            name={Functions._convertTokenToKeyword(_BUTTON_NAME)}
+            value={_BUTTON_VALUE}
+            gradient={Global.colors.pair.ongerine}
+            onPress={() => {
+              if (attitude.isAddModeOn !== true){
+                attitude.onProgressSuccess(props.productCategoriesModal.currentCategory);
+                attitude.onBlur(false);
+              }else{
+                props.setCurrentHiddenTabIndex(1);
+              }
+            }}
+            forcedDisable={_VALIDATED}/>
       </View>
     );
+
+    if (props.productCategoriesModal.isAddingMode === true){
+      if (props.productCategoriesModal.currentHiddenTabIndex === 1){
+        const _ITEMS_CENTER_STYLE = {
+          alignItems: 'center'
+        };
+
+        _PRODUCT_CATEGORIES_CONTENT = (
+          <View
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.title.en)}>
+              <Input
+                type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title.en)}
+                placeholder={__CONSTANTS.modalContainer.content.firstHiddenTab.firstInput.title[attitude.language]}
+                value={props.productCategoriesModal.newCategoryName}
+                style={[
+                  Styles.RegularItemContainer,
+                  {
+                    marginBottom: Styles.Content.marginVertical
+                  }
+                ]}
+                onChangeText={(currentValue) => props.setNewCategoryName(currentValue)} />
+
+              <Input
+                type={__CONSTANTS.modalContainer.content.submitInput.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+                value={__CONSTANTS.modalContainer.content.submitInput.state.normal.title[attitude.language]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginBottom: Styles.Content.marginVertical
+                }}
+                onPress={async () => {
+                  if (props.productCategoriesModal.isAddingMode === true){
+                    let _ANCESTORS = props.productCategoriesModal.currentCategory.ancestors || [],
+                        _SEED = {
+                          value: props.productCategoriesModal.newCategoryName.trim()
+                        };
+
+                    if (Object.keys(props.productCategoriesModal.currentCategory).length > 0){
+                      _ANCESTORS.push(props.productCategoriesModal.currentCategory._id);
+                    }
+
+                    if (_ANCESTORS.length > 0){
+                      _SEED.ancestors = _ANCESTORS;
+                    }
+
+                    await props.appendCategory(_SEED);
+                    await attitude.onBlur(false);
+                    await props.resetModal();
+                  }
+                }}
+                forcedDisable={_VALIDATED}/>
+
+              <Link
+                containerStyle={_ITEMS_CENTER_STYLE}
+                value={__CONSTANTS.modalContainer.content.secondHiddenTab.link.title[attitude.language]}
+                onPress={() => props.setCurrentHiddenTabIndex(0)} />
+          </View>
+        );
+      }
+    }
   }
 
   return (
@@ -185,7 +272,7 @@ const ProductCategoriesModal = (props) => {
         }
       ]}
       swipeDirection="down">
-        {_LIST_CONTENT}
+        {_PRODUCT_CATEGORIES_CONTENT}
     </Modal>
   );
 };

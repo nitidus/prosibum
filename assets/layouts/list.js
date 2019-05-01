@@ -115,6 +115,8 @@ const List = (props) => {
         _PREV_TARGET_LEAF = _TARGET_LEAF.previous,
         _NEW_TARGET_LEAF = _TARGET_LEAF.new;
 
+  var _IS_PARENT_INSERTED = false;
+
   if (_DATA_SOURCE.length > 0){
     return (
       <ScrollView
@@ -139,10 +141,12 @@ const List = (props) => {
               if (Object.keys(_NEW_SELECTED_ROW).length > 0){
                 if (typeof _NEW_SELECTED_ROW.children != 'undefined'){
                   if (_NEW_SELECTED_ROW.children.every(child => _TOTAL_VISIBLE_ITEMS_TOKEN.includes(child))){
-                    if ((_TOTAL_VISIBLE_ITEMS_TOKEN.includes(item._id)) && (item.ancestors.includes(_NEW_SELECTED_ROW._id))){
+                    if ((_TOTAL_VISIBLE_ITEMS_TOKEN.includes(item._id)) && (item.ancestors.includes(_NEW_SELECTED_ROW._id)) && (_IS_PARENT_INSERTED === false)){
                       const _TOTAL_VISIBLE_ITEMS  = totalItems.filter((depthCheckItem, j) => {
                         return _NEW_SELECTED_ROW.children.includes(depthCheckItem._id);
                       });
+
+                      _IS_PARENT_INSERTED = true;
 
                       return (
                         <View
@@ -193,6 +197,8 @@ const List = (props) => {
                                 }
 
                                 props.setCurrentDepth(_DEPTH - 1);
+
+                                _IS_PARENT_INSERTED = false;
                               }}>
                                 <Text
                                   style={[
@@ -259,6 +265,8 @@ const List = (props) => {
                                         });
 
                                         attitude.onPress(nestedItem);
+
+                                        _IS_PARENT_INSERTED = false;
                                       }}
                                       onLongPress={() => {
                                         if (nestedItem._id !== props.list.targetLeaf.new._id){
@@ -388,6 +396,8 @@ const List = (props) => {
                           });
 
                           attitude.onPress(item);
+
+                          _IS_PARENT_INSERTED = false;
                         }}
                         onLongPress={() => {
                           if (item._id !== props.list.targetLeaf.new._id){

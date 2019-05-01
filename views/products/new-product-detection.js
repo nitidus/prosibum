@@ -202,7 +202,7 @@ class NewProductDetection extends Component<{}> {
               {_PRODUCTS_QUERY_CONTENT}
 
               <ProductCategoriesModal
-                visibility={/*props.newProduct.productCategoriesModalVisibility*/true}
+                visibility={props.newProduct.productCategoriesModalVisibility}
                 onBlur={() => props.setProductCategoriesModalVisibility(false)}
                 onProgressSuccess={(response) => props.setCategory(response)}
                 {..._PRODUCT_CATEGORIES_OTHER_PROPS}

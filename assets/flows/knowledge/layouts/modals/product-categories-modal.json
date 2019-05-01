@@ -4,6 +4,9 @@
       "en": "Product Categories Modal"
     },
     "content": {
+      "title": {
+        "en": "Product Categories Modal Container"
+      },
       "firstList": {
         "state": {
           "normal": {
@@ -35,6 +38,29 @@
               "en": "Approve It",
               "fa": "تایید کن"
             }
+          },
+          "adding": {
+            "title": {
+              "en": "Create New Category",
+              "fa": "ایجاد دسته‌بندی جدید"
+            }
+          }
+        }
+      },
+      "firstHiddenTab": {
+        "firstInput": {
+          "type": "TEXT",
+          "title": {
+            "en": "New Category Name",
+            "fa": "نام دسته‌بندی جدید"
+          }
+        }
+      },
+      "secondHiddenTab": {
+        "link": {
+          "title": {
+            "en": "Would you change the parent category?",
+            "fa": "مایلید دسته‌بندی مرجع را تغییر دهید؟"
           }
         }
       }
