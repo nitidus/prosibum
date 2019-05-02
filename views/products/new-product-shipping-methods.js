@@ -55,7 +55,7 @@ class NewProductShippingMethods extends Component<{}> {
     const { props } = this;
 
     if (Object.keys(props.newProduct.language).length > 0){
-      var _SHIPPING_METHODS_CONTENT,
+      var _SHIPPING_METHODS_CONTENT_, _APPEND_PRODUCT_BUTTON,
           _UNITS = [];
 
       const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
@@ -69,6 +69,51 @@ class NewProductShippingMethods extends Component<{}> {
             };
 
       if (props.newProduct.shippingPlans.length > 0){
+        if (props.newProduct.appendProductLoading){
+          _APPEND_PRODUCT_BUTTON = (
+            <Input
+              type={__CONSTANTS.content.submitButton.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+              gradient={Global.colors.pair.ongerine}
+              style={{
+                marginHorizontal: Styles.Content.marginHorizontal
+              }}
+              disable={true}>
+                <ActivityIndicator/>
+            </Input>
+          );
+        }else{
+          if (!props.newProduct.connected.status){
+            _APPEND_PRODUCT_BUTTON = (
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={props.newProduct.connected.content}
+                style={[
+                  Styles.ErrorContainer,
+                  {
+                    marginHorizontal: Styles.Content.marginHorizontal
+                  }
+                ]}
+                textStyle={Styles.WarehouseErrorContent}
+                onPress={async () => await Preparation._prepareProductToAppend(props)} />
+            );
+          }else{
+            _APPEND_PRODUCT_BUTTON = (
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal
+                }}
+                onPress={async () => await Preparation._prepareProductToAppend(props)}
+                forcedDisable={_VALIDATED} />
+            );
+          }
+        }
+
         _SHIPPING_METHODS_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={true}
@@ -136,102 +181,23 @@ class NewProductShippingMethods extends Component<{}> {
                 })
               }
 
-                <Input
-                  type={__CONSTANTS.content.appendHandlerButton.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.appendHandlerButton.state.normal.title.en)}
-                  value={__CONSTANTS.content.appendHandlerButton.state.normal.title[_LANGUAGE]}
-                  gradient={Global.colors.pair.ongerine}
-                  style={{
-                    marginHorizontal: Styles.Content.marginHorizontal,
-                    marginBottom: Styles.Content.marginVertical
-                  }}
-                  onPress={() => props.appendProductShippingPlan({
-                    _id: Functions._generateNewBSONObjectID(),
-                    unit: {},
-                    shippingMethod: {},
-                    animation: new Animated.Value(0)
-                  })} />
+              <Input
+                type={__CONSTANTS.content.appendHandlerButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.appendHandlerButton.state.normal.title.en)}
+                value={__CONSTANTS.content.appendHandlerButton.state.normal.title[_LANGUAGE]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal,
+                  marginBottom: Styles.Content.marginVertical
+                }}
+                onPress={() => props.appendProductShippingPlan({
+                  _id: Functions._generateNewBSONObjectID(),
+                  unit: {},
+                  shippingMethod: {},
+                  animation: new Animated.Value(0)
+                })} />
 
-                <Input
-                  type={__CONSTANTS.content.submitButton.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-                  value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
-                  gradient={Global.colors.pair.ongerine}
-                  style={{
-                    marginHorizontal: Styles.Content.marginHorizontal
-                  }}
-                  onPress={async () => {
-                    const { navigation } = props;
-
-                    // navigation.navigate('NewProductShippingMethods');
-                    let _SEED = {
-                      name: props.newProduct.internalName,
-                      warehouse_id: props.newProduct.currentWarehouse._id,
-                      product_id: props.newProduct.product._id,
-                      features: props.newProduct.features.map((item, i) => {
-                        if (typeof item.unit != 'undefined'){
-                          return {
-                            feature_id: item.feature._id,
-                            unit_id: item.unit._id,
-                            minimum_order_quantity: item.minimumOrderQuantity,
-                            maximum_order_quantity: item.maximumOrderQuantity,
-                            quantity: item.quantity
-                          };
-                        }else if ((typeof item.featureName != 'undefined') && (typeof item.featureValue != 'undefined')) {
-                          return {
-                            feature_id: item.feature._id,
-                            feature_name: item.featureName,
-                            feature_value: item.featureValue
-                          };
-                        }else{
-                          return {
-                            feature_id: item.feature._id
-                          };
-                        }
-                      }),
-                      photos: await Promise.all(props.newProduct.photos.map(async (item, i) => {
-                        const _PHOTO_NODE_URI = item.content,
-                              _PHOTO_URI = await Functions._fetchBase64BlobFromPhoto(_PHOTO_NODE_URI);
-
-                        if (props.newProduct.primaryPhoto._id === item._id){
-                          return {
-                            content: _PHOTO_URI,
-                            primary: true
-                          };
-                        }else{
-                          return {
-                            content: _PHOTO_URI
-                          };
-                        }
-                      })),
-                      prices: props.newProduct.prices.map((item, i) => {
-                        let _PRICE_VALUE = item.value;
-
-                        if (I18nManager.isRTL){
-                          if (_PRICE_VALUE >= 10000){
-                            _PRICE_VALUE /= 10000;
-                          }else if ((_PRICE_VALUE >= 1000) && (_PRICE_VALUE < 10000)) {
-                            _PRICE_VALUE /= 1000;
-                          }
-                        }
-
-                        return {
-                          name: item.name,
-                          value: parseFloat(_PRICE_VALUE),
-                          unit_id: item.unit._id
-                        };
-                      }),
-                      shipping_plans: props.newProduct.shippingPlans.map((item, i) => {
-                        return {
-                          unit_id: item.unit._id,
-                          shipping_method_id: item.shippingMethod._id
-                        };
-                      })
-                    };
-
-                    console.log(_SEED)
-                  }}
-                  forcedDisable={_VALIDATED} />
+              {_APPEND_PRODUCT_BUTTON}
           </ScrollView>
         );
       }else{

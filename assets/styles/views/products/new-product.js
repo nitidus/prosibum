@@ -158,6 +158,12 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_WAREHOUSE_ITEM_CONTAINER,
     padding: 18
   },
+  ErrorContainer: {
+    backgroundColor: colors.single.carminePink
+  },
+  ErrorContent: {
+    color: colors.single.romance
+  },
   WarehouseErrorContainer: {
     backgroundColor: colors.single.carminePink
   },

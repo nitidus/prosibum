@@ -28,6 +28,7 @@ const initialState = {
         warehousesLoading: false,
         productQueryItemsLoading: false,
         productLoading: false,
+        appendProductLoading: false,
         connected: {
           status: true,
           content: ''
@@ -259,6 +260,9 @@ export default (state = initialState, action) => {
         product: action.payload
       };
       break;
+    case NEW_PRODUCT.APPEND_PRODUCT_ON_DEMAND:
+      return state;
+      break;
     case NEW_PRODUCT.SET_WAREHOUSES_LOADING_STATUS:
       return {
         ...state,
@@ -275,6 +279,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         productLoading: action.payload
+      };
+      break;
+    case NEW_PRODUCT.APPEND_PRODUCT_LOADING_STATUS:
+      return {
+        ...state,
+        appendProductLoading: action.payload
       };
       break;
     case NEW_PRODUCT.SET_CONNECTED_STATUS:

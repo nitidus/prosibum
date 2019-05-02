@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform, I18nManager } from 'react-native';
 import Prototypes from './prototypes';
 import GLOBAL from '../global';
 
@@ -176,6 +176,80 @@ module.exports = {
           break;
       }
     });
+  },
+  _prepareProductToAppend: async (props) => {
+    const { navigation } = props;
+
+    let _SEED = {
+      name: props.newProduct.internalName,
+      warehouse_id: props.newProduct.currentWarehouse._id,
+      product_id: props.newProduct.product._id,
+      features: props.newProduct.features.map((item, i) => {
+        if (typeof item.unit != 'undefined'){
+          return {
+            feature_id: item.feature._id,
+            unit_id: item.unit._id,
+            minimum_order_quantity: item.minimumOrderQuantity,
+            maximum_order_quantity: item.maximumOrderQuantity,
+            quantity: item.quantity
+          };
+        }else if ((typeof item.featureName != 'undefined') && (typeof item.featureValue != 'undefined')) {
+          return {
+            feature_id: item.feature._id,
+            feature_name: item.featureName,
+            feature_value: item.featureValue
+          };
+        }else{
+          return {
+            feature_id: item.feature._id
+          };
+        }
+      }),
+      photos: await Promise.all(props.newProduct.photos.map(async (item, i) => {
+        const _PHOTO_NODE_URI = item.content,
+              _PHOTO_URI = await Prototypes._fetchBase64BlobFromPhoto(_PHOTO_NODE_URI);
+
+        if (props.newProduct.primaryPhoto._id === item._id){
+          return {
+            content: _PHOTO_URI,
+            primary: true
+          };
+        }else{
+          return {
+            content: _PHOTO_URI
+          };
+        }
+      })),
+      prices: props.newProduct.prices.map((item, i) => {
+        let _PRICE_VALUE = item.value;
+
+        if (I18nManager.isRTL){
+          if (_PRICE_VALUE >= 10000){
+            _PRICE_VALUE /= 10000;
+          }else if ((_PRICE_VALUE >= 1000) && (_PRICE_VALUE < 10000)) {
+            _PRICE_VALUE /= 1000;
+          }
+        }
+
+        return {
+          name: item.name,
+          value: parseFloat(_PRICE_VALUE),
+          unit_id: item.unit._id
+        };
+      }),
+      shipping_plans: props.newProduct.shippingPlans.map((item, i) => {
+        return {
+          unit_id: item.unit._id,
+          shipping_method_id: item.shippingMethod._id
+        };
+      })
+    };
+
+    await props.appendProductOnDemand(_SEED);
+
+    if (await props.newProduct.connected.status){
+      navigation.navigate('Overseer');
+    }
   },
   _prepareCameraRoll: async (props) => {
     const { navigation } = props,

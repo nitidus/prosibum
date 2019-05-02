@@ -182,6 +182,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchAvailableWarehouses: async (token) =>  CMD._getAvailableWarehousesWithToken(token, dispatch),
     fetchAvailableProductsBasedOnQuery: async (query) =>  CMD._getAvailableProductsBasedOnQuery(query, dispatch),
     fetchProductBasedOnCategory: async (category) =>  CMD._getProductsBasedOnCategory(category, dispatch),
+    appendProductOnDemand: async (product) =>  CMD._appendProductOnDemand(product, dispatch),
     setWarehousesLoadingStatus: (status) => {
       dispatch({
         type: NEW_PRODUCT.SET_WAREHOUSES_LOADING_STATUS,
@@ -197,6 +198,12 @@ const mapDispatchToProps = (dispatch) => {
     setProductLoadingStatus: (status) => {
       dispatch({
         type: NEW_PRODUCT.SET_FETCH_PRODUCT_BASED_ON_CATEGORY_LOADING_STATUS,
+        payload: status
+      })
+    },
+    setAppendProductLoadingStatus: (status) => {
+      dispatch({
+        type: NEW_PRODUCT.APPEND_PRODUCT_LOADING_STATUS,
         payload: status
       })
     }
