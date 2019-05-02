@@ -42,11 +42,11 @@ class NewProductShippingMethods extends Component<{}> {
 
     var _FORM_FIELDS_VALIDITY = false;
 
-    // if (_PROPS.prices.length > 0){
-    //   if (_PROPS.shippingPlans.every((shippingPlan) => ((Object.keys(shippingPlan.unit).length > 0) && (Object.keys(shippingPlan.shippingMethod).length > 0)))){
+    if (_PROPS.prices.length > 0){
+      if (_PROPS.shippingPlans.every((shippingPlan) => ((Object.keys(shippingPlan.unit).length > 0) && (Object.keys(shippingPlan.shippingMethod).length > 0)))){
         _FORM_FIELDS_VALIDITY = true;
-    //   }
-    // }
+      }
+    }
 
     return !_FORM_FIELDS_VALIDITY;
   }
@@ -90,8 +90,9 @@ class NewProductShippingMethods extends Component<{}> {
                     _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
                   }
 
-                  const _SHIPPING_PLAN_UNIT = (Object.keys(shippingPlanItem.unit).length > 0)? Functions._getAppropriateTaxonomyBaseOnLocale(shippingPlanItem.unit.key, _LANGUAGE): '',
-                      _SHIPPING_PLAN_METHOD = (Object.keys(shippingPlanItem.shippingMethod).length > 0)? Functions._getAppropriateTaxonomyBaseOnLocale(shippingPlanItem.shippingMethod.key, _LANGUAGE): '';
+                  const _SHIPPING_PLAN_UNIT_FEATURE = (Object.keys(shippingPlanItem.unit).length > 0)? shippingPlanItem.unit: {},
+                        _SHIPPING_PLAN_UNIT = (Object.keys(_SHIPPING_PLAN_UNIT_FEATURE).length > 0)? ((Object.keys(_SHIPPING_PLAN_UNIT_FEATURE.unit).length > 0)? Functions._getAppropriateTaxonomyBaseOnLocale(_SHIPPING_PLAN_UNIT_FEATURE.unit.key, _LANGUAGE): ''): '',
+                        _SHIPPING_PLAN_METHOD = (Object.keys(shippingPlanItem.shippingMethod).length > 0)? Functions._getAppropriateTaxonomyBaseOnLocale(shippingPlanItem.shippingMethod.key, _LANGUAGE): '';
 
                   SHIPPING_METHOD_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
 
@@ -162,7 +163,7 @@ class NewProductShippingMethods extends Component<{}> {
                   onPress={async () => {
                     const { navigation } = props;
 
-                    navigation.navigate('NewProductShippingMethods');
+                    // navigation.navigate('NewProductShippingMethods');
                     let _SEED = {
                       name: props.newProduct.internalName,
                       warehouse_id: props.newProduct.currentWarehouse._id,
@@ -170,29 +171,26 @@ class NewProductShippingMethods extends Component<{}> {
                       features: props.newProduct.features.map((item, i) => {
                         if (typeof item.unit != 'undefined'){
                           return {
-                            ...item,
                             feature_id: item.feature._id,
                             unit_id: item.unit._id,
-                            minimum_order_quantity: minimumOrderQuantity,
-                            maximum_order_quantity: maximumOrderQuantity,
-                            quantity: quantity
+                            minimum_order_quantity: item.minimumOrderQuantity,
+                            maximum_order_quantity: item.maximumOrderQuantity,
+                            quantity: item.quantity
                           };
                         }else if ((typeof item.featureName != 'undefined') && (typeof item.featureValue != 'undefined')) {
                           return {
-                            ...item,
                             feature_id: item.feature._id,
-                            feature_name: featureName,
-                            feature_value: featureValue
+                            feature_name: item.featureName,
+                            feature_value: item.featureValue
                           };
                         }else{
                           return {
-                            ...item,
                             feature_id: item.feature._id
                           };
                         }
                       }),
-                      photos: props.newProduct.photos.map(async (item, i) => {
-                        const _PHOTO_NODE_URI = item.content.image.uri,
+                      photos: await Promise.all(props.newProduct.photos.map(async (item, i) => {
+                        const _PHOTO_NODE_URI = item.content,
                               _PHOTO_URI = await Functions._fetchBase64BlobFromPhoto(_PHOTO_NODE_URI);
 
                         if (props.newProduct.primaryPhoto._id === item._id){
@@ -205,7 +203,7 @@ class NewProductShippingMethods extends Component<{}> {
                             content: _PHOTO_URI
                           };
                         }
-                      }),
+                      })),
                       prices: props.newProduct.prices.map((item, i) => {
                         let _PRICE_VALUE = item.value;
 
@@ -219,7 +217,7 @@ class NewProductShippingMethods extends Component<{}> {
 
                         return {
                           name: item.name,
-                          value: _PRICE_VALUE,
+                          value: parseFloat(_PRICE_VALUE),
                           unit_id: item.unit._id
                         };
                       }),
@@ -283,7 +281,7 @@ class NewProductShippingMethods extends Component<{}> {
                 if (shippingPlanItem._id === _ON_FETCHING_MODE_SHIPPING_METHOD._id){
                   const _TARGET_SHIPPING_PLAN_NODE = {
                     ...shippingPlanItem,
-                    unit: response.unit
+                    unit: response
                   };
 
                   return _TARGET_SHIPPING_PLAN_NODE;

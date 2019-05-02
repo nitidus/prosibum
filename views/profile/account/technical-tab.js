@@ -222,8 +222,8 @@ class TechnicalTab extends Component<{}> {
                 //
                 // }
 
-                if (props.technicalTab.brandProfilePhoto != ''){
-                  const _PHOTO_URI = await Functions._fetchBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto);
+                if (Object.keys(props.technicalTab.brandProfilePhoto).length > 0){
+                  const _PHOTO_URI = await Functions._fethBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto);
 
                   if (_AUTH.brand_profile_photo !== _PHOTO_URI){
                     if (typeof _SEED.brand != 'undefined'){

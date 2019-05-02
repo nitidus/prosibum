@@ -707,14 +707,15 @@ module.exports = {
       }
     }
   },
-  _fetchBase64BlobFromPhoto: (photo, bufferSize) => {
+  _fetchBase64BlobFromPhoto: async (photo, async, bufferSize) => {
     const _BASE64_CONFIG = {
       NAME: 'base64',
-      MIME_TYPE: 'image/jpeg'
+      MIME_TYPE: 'image/jpg'
     };
 
     var _BUFFER_SIZE = bufferSize || 4096,
-      _URI = photo;
+        _ASYNC = async || true,
+        _URI = photo;
 
     if (typeof photo.image != 'undefined') {
       const {
@@ -736,23 +737,27 @@ module.exports = {
       _URI = uri;
     }
 
-    return new Promise((resolve, reject) => {
-      let dataStream = '';
+    if (_ASYNC === true){
+      return new Promise((resolve, reject) => {
+        let dataStream = '';
 
-      RNFetchBlob.fs.readStream(_URI, _BASE64_CONFIG.NAME, _BUFFER_SIZE)
-      .then((stream) => {
-        stream.open();
-        stream.onData((chunk) => {
-          dataStream += chunk;
-        })
+        RNFetchBlob.fs.readStream(_URI, _BASE64_CONFIG.NAME, _BUFFER_SIZE)
+        .then((stream) => {
+          stream.open();
+          stream.onData((chunk) => {
+            dataStream += chunk;
+          })
 
-        stream.onEnd(() => {
-          resolve(`data:${_BASE64_CONFIG.MIME_TYPE};${_BASE64_CONFIG.NAME},${dataStream}`);
+          stream.onEnd(() => {
+            resolve(`data:${_BASE64_CONFIG.MIME_TYPE};${_BASE64_CONFIG.NAME},${dataStream}`);
+          })
         })
-      })
-      .catch((error) => {
-        resolve(module.exports._fetchBase64BlobFromPhoto(photo, _BUFFER_SIZE * 3));
-      })
-    })
+        .catch((error) => {
+          resolve(module.exports._fetchBase64BlobFromPhoto(photo, _BUFFER_SIZE * 3));
+        })
+      });
+    }else{
+      return RNFetchBlob.fs.readFile(_URI, _BASE64_CONFIG.NAME);
+    }
   }
 };
