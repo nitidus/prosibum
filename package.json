@@ -32,6 +32,7 @@
     "redux-logger": "^3.0.6",
     "rn-credit-card-type": "^1.0.3",
     "rn-fetch-blob": "^0.10.15",
+    "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "util": "^0.11.1"
   },
