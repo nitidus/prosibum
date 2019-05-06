@@ -808,6 +808,23 @@ export const WalletModal = (props) => {
               );
             }
           }
+        }else{
+          if (!props.walletModal.connected.status){
+            _FINAL_BUTTON = (
+              <Input
+                type={__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.state.normal.title.en)}
+                value={props.walletModal.connected.content}
+                style={[
+                  Styles.WarningContainer,
+                  {
+                    backgroundColor: Global.colors.single.carminePink,
+                    marginBottom: Styles.Content.marginVertical
+                  }
+                ]}
+                textStyle={Styles.WarningContent} />
+            );
+          }
         }
       }
 

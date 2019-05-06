@@ -1,0 +1,132 @@
+[
+  {
+    "key": "card_declined",
+    "subkey": "generic_decline",
+    "message": {
+      "en": "Your card was declined.",
+      "fa": "کارت شما پذیرفته نیست."
+    }
+  },
+  {
+    "key": "card_declined",
+    "subkey": "insufficient_funds",
+    "message": {
+      "en": "Your card doesn't have insufficient funds.",
+      "fa": "کارت شما موجودی کافی ندارد."
+    }
+  },
+  {
+    "key": "card_declined",
+    "subkey": "lost_card",
+    "message": {
+      "en": "Your card has been lost.",
+      "fa": "کارت شما مفقود شده است."
+    }
+  },
+  {
+    "key": "card_declined",
+    "subkey": "stolen_card",
+    "message": {
+      "en": "Your card has been stolen.",
+      "fa": "کارت شما دزدیده شده است."
+    }
+  },
+  {
+    "key": "expired_card",
+    "message": {
+      "en": "Your card has been expired.",
+      "fa": "کارت شما منقضی شده است."
+    }
+  },
+  {
+    "key": "incorrect_cvc",
+    "message": {
+      "en": "Your card CVC is incorrect.",
+      "fa": "کد سه رقمی کارت شما اشتباه می‌باشد."
+    }
+  },
+  {
+    "key": "processing_error",
+    "message": {
+      "en": "Your transaction couldn't be processed.",
+      "fa": "فرآیند مربوط به تراکنش شما دچار مشکل گردیده است."
+    }
+  },
+  {
+    "key": "incorrect_number",
+    "message": {
+      "en": "Your credit card number is incorrect.",
+      "fa": "شماره کارت شما اشتباه است."
+    }
+  },
+  {
+    "key": "invalid_expiry_month",
+    "message": {
+      "en": "Your credit card expiration month is incorrect.",
+      "fa": "ماه انقضا کارت اعتباری شما اشتباه است."
+    }
+  },
+  {
+    "key": "invalid_expiry_year",
+    "message": {
+      "en": "Your credit card number expiration year is incorrect.",
+      "fa": "سال اننقضا کارت اعتباری شما اشتباه است."
+    }
+  },
+  {
+    "key": "invalid_cvc",
+    "message": {
+      "en": "Your card CVC is incorrect.",
+      "fa": "کد سه رقمی کارت شما اشتباه می‌باشد."
+    }
+  },
+  {
+    "key": "invalid_number",
+    "message": {
+      "en": "Your credit card number is incorrect.",
+      "fa": "شماره کارت شما اشتباه است."
+    }
+  },
+  {
+    "key": "restricted_card",
+    "message": {
+      "en": "Your credit card has been stolen or lost.",
+      "fa": "کارت شما دزدیده شده یا مفقود گردیده است."
+    }
+  },
+  {
+    "key": "reenter_transaction",
+    "message": {
+      "en": "Your transaction couldn't be processed.",
+      "fa": "فرآیند مربوط به تراکنش شما دچار مشکل گردیده است."
+    }
+  },
+  {
+    "key": "testmode_decline",
+    "message": {
+      "en": "You can't use test mode credit cards.",
+      "fa": "شما نمی‌توانید از شماره کارت‌های آزمایشی استفاده نمایید."
+    }
+  },
+  {
+    "key": "transaction_not_allowed",
+    "message": {
+      "en": "Your transaction couldn't be processed.",
+      "fa": "فرآیند مربوط به تراکنش شما دچار مشکل گردیده است."
+    }
+  },
+  {
+    "key": "try_again_later",
+    "message": {
+      "en": "Your transaction couldn't be processed.",
+      "fa": "فرآیند مربوط به تراکنش شما دچار مشکل گردیده است."
+    }
+  },
+  {
+    "key": "withdrawal_count_limit_exceeded",
+    "message": {
+      "en": "You can't withdraw out of your limit.",
+      "fa": "شما امکان برداشت بیشتر از اندازه مجاز را ندارید."
+    }
+  }
+]

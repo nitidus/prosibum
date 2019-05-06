@@ -162,7 +162,7 @@ const ProductFeaturesModal = (props) => {
           textStyle={{
             color: Global.colors.single.romance
           }}
-          value={props.wallets.connected.content}
+          value={props.productFeaturesModal.connected.content}
           disable={true}/>
       );
     }else{
@@ -266,7 +266,7 @@ const ProductFeaturesModal = (props) => {
                     textStyle={{
                       color: Global.colors.single.romance
                     }}
-                    value={props.wallets.connected.content}
+                    value={props.productFeaturesModal.connected.content}
                     disable={true}/>
                 );
               }else{

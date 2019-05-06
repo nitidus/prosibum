@@ -3,6 +3,7 @@ import languages from './global/languages.json';
 import months from './global/months.json';
 import roles from './global/roles.json';
 import taxonomies from './global/taxonomies.json';
+import messages from './global/messages.json';
 
 import views_constants from './views-constants';
 import layouts_constants from './layouts-constants';
@@ -14,6 +15,7 @@ module.exports = {
   months,
   roles,
   taxonomies,
+  messages,
   views_constants,
   layouts_constants,
   components_constants
