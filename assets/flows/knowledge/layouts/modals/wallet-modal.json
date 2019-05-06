@@ -36,6 +36,14 @@
               }
             }
           }
+        },
+        "verification": {
+          "firstInput": {
+            "warnning": {
+              "en": "Wallet name must be 7 characters at least.",
+              "fa": "نام کیف پول باید حداقل ۷ کاراکتر باشد."
+            }
+          }
         }
       },
       "secondHiddenTab": {
@@ -72,6 +80,14 @@
           "title": {
             "en": "Want to change currency or wallet name?",
             "fa": "قصد تغییر نام کیف پول یا نوع ارز را دارید؟"
+          }
+        },
+        "verification": {
+          "firstInput": {
+            "warnning": {
+              "en": "Credit amount must be a two digits number at least.",
+              "fa": "میزان اعتبار باید عددی حداقل دو رقمی باشد."
+            }
           }
         }
       },
@@ -193,6 +209,20 @@
                 "en": "Want to change wallet initial plan?",
                 "fa": "قصد تغییر طرح اولیه کیف پول را دارید؟"
               }
+            }
+          }
+        },
+        "verification": {
+          "firstInput": {
+            "warnning": {
+              "en": "Credit card number must be 16 digits.",
+              "fa": "شماره کارت باید ۱۶ رقم باشد."
+            }
+          },
+          "secondInput": {
+            "warnning": {
+              "en": "CVV must be 3 digits.",
+              "fa": "کد امنیتی روی کارت باید ۳ رقمی باشد."
             }
           }
         }

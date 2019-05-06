@@ -183,7 +183,43 @@ export const WalletModal = (props) => {
               disable={true}>
                 <ActivityIndicator/>
             </Input>
+          ),
+          _CURRENCIES_CONTENT_SUBMIT_BUTTON = (
+            <Input
+              type={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.state.normal.title.en)}
+              value={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.state.normal.title[attitude.language]}
+              gradient={Global.colors.pair.ongerine}
+              style={[
+                Styles.NormalContent,
+                {
+                  marginBottom: Styles.Content.marginBottom
+                }
+              ]}
+              onPress={() => {
+                const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 1;
+
+                props.setCurrentHiddenTabIndex(_TARGET_INDEX);
+              }}
+              forcedDisable={_VALIDATED} />
           );
+
+      if (_VALIDATED){
+        if (props.walletModal.walletName != ''){
+          const _IS_WALLET_NAME_VALID = Functions._checkIsAValidTextOnlyField(props.walletModal.walletName, 7);
+
+          if (!_IS_WALLET_NAME_VALID){
+            _CURRENCIES_CONTENT_SUBMIT_BUTTON = (
+              <Input
+                type={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.state.normal.title.en)}
+                value={__CONSTANTS.modalContainer.content.firstHiddenTab.verification.firstInput.warnning[attitude.language]}
+                style={Styles.WarningContainer}
+                textStyle={Styles.WarningContent} />
+            );
+          }
+        }
+      }
 
       if ((attitude.visibility === true) && (props.walletModal.currencies.length > 0)){
         _CURRENCIES = props.walletModal.currencies.map((currency, i) => {
@@ -208,53 +244,35 @@ export const WalletModal = (props) => {
             firstItem={_CURRENT_CURRENCY_INDEX}
             onLayout={({ item, index }) => {
               var _UNKNOWN_LOCALE_CURRENT_CURRENCY = (props.walletModal.currentCurrency.type || props.walletModal.currentCurrency),
-                  _CURRENT_CURRENCY = Functions._returnCurrencyDependOnLanguage(_UNKNOWN_LOCALE_CURRENT_CURRENCY, attitude.language);
+                  _CURRENT_CURRENCY = Functions._returnCurrencyDependOnLanguage(_UNKNOWN_LOCALE_CURRENT_CURRENCY);
                   _CURRENCY_NAME = item;
-                  _CURRENCY_VALUE = _CURRENCY_NAME[attitude.language];
+                  _CURRENCY_VALUE = _CURRENCY_NAME[attitude.language],
+                  _ITEM_GRADIENT = Global.colors.pair.tilan;
 
-              if (_CURRENT_CURRENCY === _CURRENCY_VALUE){
-                return (
-                  <Input
-                    type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.type}
-                    name={Functions._convertTokenToKeyword(_CURRENCY_NAME.en)}
-                    gradient={Global.colors.pair.aqrulean}
-                    style={[
-                      Styles.WalletItemContainer,
-                      Styles.LTR_ContentAlignment
-                    ]}
-                    disable={true}>
-                      <Text
-                        style={Styles.WalletItemTitle}>
-                          {_CURRENCY_VALUE}
-                      </Text>
-                      <Text
-                        style={Styles.WalletItemSubtitle}>
-                          {__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.title[attitude.language]}
-                      </Text>
-                  </Input>
-                );
-              }else{
-                return (
-                  <Input
-                    type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.type}
-                    name={Functions._convertTokenToKeyword(_CURRENCY_NAME.en)}
-                    gradient={Global.colors.pair.tilan}
-                    style={[
-                      Styles.WalletItemContainer,
-                      Styles.LTR_ContentAlignment
-                    ]}
-                    disable={true}>
-                      <Text
-                        style={Styles.WalletItemTitle}>
-                          {_CURRENCY_VALUE}
-                      </Text>
-                      <Text
-                        style={Styles.WalletItemSubtitle}>
-                          {__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.title[attitude.language]}
-                      </Text>
-                  </Input>
-                );
+              if (_CURRENT_CURRENCY.en === _CURRENCY_NAME.en){
+                _ITEM_GRADIENT = Global.colors.pair.aqrulean;
               }
+
+              return (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.type}
+                  name={Functions._convertTokenToKeyword(_CURRENCY_NAME.en)}
+                  gradient={_ITEM_GRADIENT}
+                  style={[
+                    Styles.WalletItemContainer,
+                    Styles.LTR_ContentAlignment
+                  ]}
+                  disable={true}>
+                    <Text
+                      style={Styles.WalletItemTitle}>
+                        {_CURRENCY_VALUE}
+                    </Text>
+                    <Text
+                      style={Styles.WalletItemSubtitle}>
+                        {__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.content.self.title[attitude.language]}
+                    </Text>
+                </Input>
+              );
             }}
             onSnap={(selectedItemIndex) => props.setCurrentCurrency(props.walletModal.currencies[selectedItemIndex])}/>
         );
@@ -271,25 +289,7 @@ export const WalletModal = (props) => {
             onChangeText={(currentValue) => props.setWalletName(currentValue)} />
         ),
         _CURRENCIES_CONTENT,
-        (
-          <Input
-            type={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.state.normal.title.en)}
-            value={__CONSTANTS.modalContainer.content.firstHiddenTab.submitInput.state.normal.title[attitude.language]}
-            gradient={Global.colors.pair.ongerine}
-            style={[
-              Styles.NormalContent,
-              {
-                marginBottom: Styles.Content.marginBottom
-              }
-            ]}
-            onPress={() => {
-              const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 1;
-
-              props.setCurrentHiddenTabIndex(_TARGET_INDEX);
-            }}
-            forcedDisable={_VALIDATED} />
-        )
+        _CURRENCIES_CONTENT_SUBMIT_BUTTON
       ];
       break;
     case 1:
@@ -336,29 +336,53 @@ export const WalletModal = (props) => {
           ];
         }
 
+        var _CREDIT_AMOUNT_CONTENT_SUBMIT_BUTTON = (
+          <Input
+            type={__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.state.normal.title.en)}
+            value={__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.state.normal.title[attitude.language]}
+            gradient={Global.colors.pair.ongerine}
+            style={[
+              Styles.NormalContent,
+              {
+                marginBottom: Styles.Content.marginVertical
+              }
+            ]}
+            onPress={() => {
+              var _INDEX_COEFFICIENT = 2;
+
+              const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 2;
+
+              props.setCurrentHiddenTabIndex(_TARGET_INDEX);
+            }}
+            forcedDisable={_VALIDATED} />
+        );
+
+        if (_VALIDATED){
+          if (props.walletModal.walletInitialCreditAmount > 0){
+            const _IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID = Functions._checkIsAValidNumericOnlyField(props.walletModal.walletInitialCreditAmount.toString(), 2);
+
+            if (!_IS_WALLET_INITIAL_CREDIT_AMOUNT_VALID){
+              _CREDIT_AMOUNT_CONTENT_SUBMIT_BUTTON = (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.state.normal.title.en)}
+                  value={__CONSTANTS.modalContainer.content.secondHiddenTab.verification.firstInput.warnning[attitude.language]}
+                  style={[
+                    Styles.WarningContainer,
+                    {
+                      marginBottom: Styles.Content.marginVertical
+                    }
+                  ]}
+                  textStyle={Styles.WarningContent} />
+              );
+            }
+          }
+        }
+
         _CURRENT_TAB_CONTENT = [
           ..._CURRENT_TAB_CONTENT,
-          (
-            <Input
-              type={__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.state.normal.title.en)}
-              value={__CONSTANTS.modalContainer.content.secondHiddenTab.submitInput.state.normal.title[attitude.language]}
-              gradient={Global.colors.pair.ongerine}
-              style={[
-                Styles.NormalContent,
-                {
-                  marginBottom: Styles.Content.marginVertical
-                }
-              ]}
-              onPress={() => {
-                var _INDEX_COEFFICIENT = 2;
-
-                const _TARGET_INDEX = props.walletModal.currentHiddenTabIndex + 2;
-
-                props.setCurrentHiddenTabIndex(_TARGET_INDEX);
-              }}
-              forcedDisable={_VALIDATED} />
-          )
+          _CREDIT_AMOUNT_CONTENT_SUBMIT_BUTTON
         ];
 
         if (Object.keys(props.walletModal.wallet).length === 0){
@@ -762,6 +786,29 @@ export const WalletModal = (props) => {
             }}
             forcedDisable={_VALIDATED} />
         );
+
+        if (_VALIDATED){
+          if ((props.walletModal.creditCard.number.extracted != '') || (props.walletModal.creditCard.cvv != '')){
+            const _IS_CREDIT_CARD_NUMBER_VALID = (props.walletModal.creditCard.number.extracted.length === 16)? false: true,
+                  _IS_CREDIT_CARD_CVV_VALID = Functions._checkIsAValidCreditCardCVV(props.walletModal.creditCard.cvv);
+
+            if ((!_IS_CREDIT_CARD_NUMBER_VALID) || (!_IS_CREDIT_CARD_CVV_VALID)){
+              _FINAL_BUTTON = (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.state.normal.title.en)}
+                  value={`${__CONSTANTS.modalContainer.content.fourthHiddenTab.verification.firstInput.warnning[attitude.language]}\n${__CONSTANTS.modalContainer.content.fourthHiddenTab.verification.secondInput.warnning[attitude.language]}`}
+                  style={[
+                    Styles.WarningContainer,
+                    {
+                      marginBottom: Styles.Content.marginVertical
+                    }
+                  ]}
+                  textStyle={Styles.WarningContent} />
+              );
+            }
+          }
+        }
       }
 
       _CURRENT_TAB_CONTENT = [

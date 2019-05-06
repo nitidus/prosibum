@@ -103,6 +103,17 @@ module.exports = StyleSheet.create({
     width: width - (_CUSTOM_CONTENT.marginHorizontal * 2),
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal
   },
+  WarningContainer: {
+    height: 'auto',
+    width: width - (_CUSTOM_CONTENT.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
+    marginBottom: _CUSTOM_CONTENT.marginBottom,
+    backgroundColor: colors.pair.ongerine.orangeYellow,
+    padding: 18
+  },
+  WarningContent: {
+    textAlign: 'center'
+  },
   DetailContainer: {
     direction: 'ltr',
     height: 'auto',
