@@ -56,8 +56,8 @@ export const WalletsContainer = (props) => {
     otherProps.onBlur = attitude.onAddWalletPress = props.onAddWalletPress || props.onRightPinnedPress || props.onLeftPinnedPress;
   }
 
-  if ((typeof props.onWalletAbsorb != 'undefined') || (typeof props.onWalletAppend != 'undefined') || (typeof props.onWalletMerge != 'undefined') || (typeof props.onWalletImbibe != 'undefined') || (typeof props.onAbsorbWallet != 'undefined') || (typeof props.onAppendWallet != 'undefined') || (typeof props.onMergeWallet != 'undefined') || (typeof props.onImbibeWallet != 'undefined')){
-    otherProps.onProgressSuccess = attitude.onWalletAbsorb = props.onWalletAbsorb || props.onWalletAppend || props.onWalletMerge || props.onWalletImbibe || props.onAbsorbWallet || props.onAppendWallet || props.onMergeWallet || props.onImbibeWallet;
+  if ((typeof props.onProgressSuccess != 'undefined') || (typeof props.onWalletAbsorb != 'undefined') || (typeof props.onWalletAppend != 'undefined') || (typeof props.onWalletMerge != 'undefined') || (typeof props.onWalletImbibe != 'undefined') || (typeof props.onAbsorbWallet != 'undefined') || (typeof props.onAppendWallet != 'undefined') || (typeof props.onMergeWallet != 'undefined') || (typeof props.onImbibeWallet != 'undefined')){
+    otherProps.onProgressSuccess = attitude.onWalletAbsorb = props.onProgressSuccess || props.onWalletAbsorb || props.onWalletAppend || props.onWalletMerge || props.onWalletImbibe || props.onAbsorbWallet || props.onAppendWallet || props.onMergeWallet || props.onImbibeWallet;
   }
 
   attitude.walletModalVisibility = props.walletModalVisibility || props.walletModalVisible || props.walletModalIsVisible || false;
@@ -104,7 +104,7 @@ export const WalletsContainer = (props) => {
         language={attitude.language} />
     );
   }
-
+  
   return (
     <View
       style={Styles.Container}>

@@ -132,9 +132,9 @@ class Wallets extends Component<{}> {
                           const _TARGET_DEPOSIT_SIGN = __CONSTANTS.firstCarousel.items.content.transactionsDeposit.sign[_LANGUAGE];
 
                           if ((_TARGET_DEPOSIT_SIGN === "ریال") || (_TARGET_DEPOSIT_SIGN === "تومان") || (_TARGET_DEPOSIT_SIGN === "درهم") || (_TARGET_DEPOSIT_SIGN === "لیر")){
-                            _LOCALE_BASED_DEPOSIT = `${Functions._convertDigitsToMoneyFormat((item.transactions.deposit * 10000), 0)} ${_TARGET_DEPOSIT_SIGN} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`;
+                            _LOCALE_BASED_DEPOSIT = `${Functions._convertDigitsToMoneyFormat((item.transactions.deposit * 10000), 0)} ${_TARGET_DEPOSIT_SIGN} ${__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix[_LANGUAGE]}`;
                           }else if ((_TARGET_DEPOSIT_SIGN === "ترنزکشن پوینت")) {
-                            _LOCALE_BASED_DEPOSIT = `${Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} ${_TARGET_DEPOSIT_SIGN} ${__CONSTANTS.firstPin.subtitle.suffix[_LANGUAGE]}`;
+                            _LOCALE_BASED_DEPOSIT = `${Functions._convertDigitsToMoneyFormat(item.transactions.deposit)} ${_TARGET_DEPOSIT_SIGN} ${__CONSTANTS.firstCarousel.items.content.transactionsDeposit.suffix[_LANGUAGE]}`;
                           }
                         }
 
@@ -213,7 +213,7 @@ class Wallets extends Component<{}> {
                                 pilotItems: props.wallets.tabs,
                                 currentPilotItem: props.wallets.currentTab,
                                 onAddWalletPress: (visibilityStatus) => props.setWalletModalVisibility(visibilityStatus),
-                                onWalletAbsorb: async (response) => {
+                                onProgressSuccess: async (response) => {
                                   //We can use response later
                                   // await props.fetchAvailableWallets(props.roles.currentTab);
                                 }
@@ -221,7 +221,26 @@ class Wallets extends Component<{}> {
 
                               Keyboard.dismiss();
                               props.setWalletModalVisibility(visibilityStatus);
-                            }
+                            },
+                            onProgressSuccess: async (response) => props.setWallets(props.wallets.wallets.map((wallet, i) => {
+                              if (wallet._id === props.wallets.selectedWallet._id) {
+                                const _FINAL_WALLET = {
+                                  ...wallet,
+                                  balance: response.new_balance,
+                                  transactions: {
+                                    ...wallet.transactions,
+                                    amount: (wallet.transactions.amount + 1),
+                                    deposit: response.new_balance
+                                  }
+                                };
+
+                                props.setSelectedWallet(_FINAL_WALLET);
+
+                                return _FINAL_WALLET;
+                              }else{
+                                return wallet;
+                              }
+                            }))
                           };
 
                           Keyboard.dismiss();
@@ -260,7 +279,7 @@ class Wallets extends Component<{}> {
               pilotItems: props.wallets.tabs,
               currentPilotItem: props.wallets.currentTab,
               onAddWalletPress: (visibilityStatus) => props.setWalletModalVisibility(visibilityStatus),
-              onWalletAbsorb: async (response) => {
+              onProgressSuccess: async (response) => {
                 //We can use response later
                 // await props.fetchAvailableWallets(props.roles.currentTab);
               }
@@ -268,8 +287,8 @@ class Wallets extends Component<{}> {
           }
 
           OTHER_PROPS = {
-            ...OTHER_PROPS,
-            ...containerOtherProps
+            ...containerOtherProps,
+            ...OTHER_PROPS
           };
 
           return (

@@ -123,9 +123,10 @@ class SelectedWallet extends Component<{}> {
             <ScrollView
               showsVerticalScrollIndicator={true}
               contentContainerStyle={[
-                Styles.Content,
                 {
-                  direction: 'ltr'
+                  direction: 'ltr',
+                  paddingVertical: Styles.Content.marginVertical,
+                  paddingHorizontal: Styles.Content.marginHorizontal
                 }
               ]}>
                 {

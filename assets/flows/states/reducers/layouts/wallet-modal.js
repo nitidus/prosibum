@@ -22,7 +22,7 @@ const initialState = {
     cvv: ''
   },
   walletInitialCreditPlansLoading: false,
-  appendWalletToResourcesLoading: false,
+  appendToResourcesLoading: false,
   appendedResource: {},
   connected: {
     status: true,
@@ -159,7 +159,7 @@ export default (state = initialState, action) => {
     case WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS:
       return {
         ...state,
-        appendWalletToResourcesLoading: action.payload
+        appendToResourcesLoading: action.payload
       };
       break;
     case WALLET_MODAL.SET_CONNECTED_STATUS:

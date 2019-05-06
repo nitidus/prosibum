@@ -41,6 +41,12 @@ export default (state = initialState, action) => {
         walletModalVisibility: action.payload
       };
       break;
+    case WALLETS.SET_WALLETS:
+      return {
+        ...state,
+        wallets: action.payload
+      };
+      break;
     case WALLETS.FETCH_AVAILABLE_WALLETS:
       return {
         ...state,

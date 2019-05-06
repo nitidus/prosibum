@@ -30,6 +30,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: wallet
       })
     },
+    setWallets: (wallets) => {
+      dispatch({
+        type: WALLETS.SET_WALLETS,
+        payload: wallets
+      })
+    },
     setWalletModalVisibility: (visibilityStatus) => {
       dispatch({
         type: WALLETS.SET_WALLET_MODAL_VISIBILITY,

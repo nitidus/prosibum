@@ -49,7 +49,7 @@ const _componentWillCheckValidation = (props) => {
     case 3:
       if ((_PROPS.creditCard.number.extracted != '') && ((Object.keys(_PROPS.creditCard.expirationDate.month).length > 0) && (typeof _PROPS.creditCard.expirationDate.month.value != 'undefined')) && (_PROPS.creditCard.expirationDate.year != '') && (_PROPS.creditCard.cvv != '')){
         const _IS_CREDIT_CARD_NUMBER_VALID = Functions._checkIsAValidCreditCardNumber(_PROPS.creditCard.number.extracted),
-              _IS_CREDIT_CARD_EXPIRATION_DATE_VALID = Functions._checkIsAValidCreditCardExpirationDate(_PROPS.creditCard.expirationDate.month.value, _PROPS.creditCard.expirationDate.year),
+              _IS_CREDIT_CARD_EXPIRATION_DATE_VALID = Functions._checkIsAValidCreditCardExpirationDate(_PROPS.creditCard.expirationDate.month.value.toString(), _PROPS.creditCard.expirationDate.year),
               _IS_CREDIT_CARD_CVV_VALID = Functions._checkIsAValidCreditCardCVV(_PROPS.creditCard.cvv);
 
         if (_IS_CREDIT_CARD_NUMBER_VALID && _IS_CREDIT_CARD_EXPIRATION_DATE_VALID && _IS_CREDIT_CARD_CVV_VALID){
@@ -638,43 +638,26 @@ export const WalletModal = (props) => {
         );
       }
 
-      _CURRENT_TAB_CONTENT = [
-        (
+      var _FINAL_BUTTON;
+
+      if (props.walletModal.appendToResourcesLoading === true){
+        _FINAL_BUTTON = (
           <Input
-            type={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title[attitude.language]}
+            type={__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.state.normal.title.en)}
+            value={__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.state.normal.title[attitude.language]}
+            gradient={Global.colors.pair.ongerine}
             style={[
               Styles.NormalContent,
               {
                 marginBottom: Styles.Content.marginVertical
               }
-            ]}
-            value={props.walletModal.creditCard.number.formatted}
-            onChangeText={(currentValue) => props.setCreditCardNumber({
-              formatted: currentValue,
-              extracted: currentValue.replace(/\s+/g, '')
-            })}
-            maxLength={19} />
-        ),
-        _EXPIRATION_MONTH_CONTENT,
-        _EXPIRATION_YEAR_CONTENT,
-        (
-          <Input
-            type={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.title[attitude.language]}
-            style={[
-              Styles.NormalContent,
-              {
-                marginBottom: Styles.Content.marginVertical
-              }
-            ]}
-            value={props.walletModal.creditCard.cvv}
-            onChangeText={(currentValue) => props.setCreditCardCVV(currentValue)}
-            maxLength={3} />
-        ),
-        (
+            ]}>
+              <ActivityIndicator/>
+          </Input>
+        );
+      }else{
+        _FINAL_BUTTON = (
           <Input
             type={__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.submitInput.state.normal.title.en)}
@@ -739,7 +722,10 @@ export const WalletModal = (props) => {
                 }
 
                 await props.chargeWallet(_RULES, async (response, state) => {
-                  await MODAL.ON_PROGRESS_SUCCESS(response);
+                  if (attitude.onProgressSuccess){
+                    await MODAL.ON_PROGRESS_SUCCESS(response);
+                  }
+
                   await MODAL.ON_BLUR(state);
                 });
               }else{
@@ -766,13 +752,55 @@ export const WalletModal = (props) => {
                 }
 
                 await props.appendWalletToResource(_RULES, async (response, state) => {
-                  await MODAL.ON_PROGRESS_SUCCESS(response);
+                  if (attitude.onProgressSuccess){
+                    await MODAL.ON_PROGRESS_SUCCESS(response);
+                  }
+
                   await MODAL.ON_BLUR(state);
                 });
               }
             }}
             forcedDisable={_VALIDATED} />
+        );
+      }
+
+      _CURRENT_TAB_CONTENT = [
+        (
+          <Input
+            type={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title.en)}
+            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstInput.title[attitude.language]}
+            style={[
+              Styles.NormalContent,
+              {
+                marginBottom: Styles.Content.marginVertical
+              }
+            ]}
+            value={props.walletModal.creditCard.number.formatted}
+            onChangeText={(currentValue) => props.setCreditCardNumber({
+              formatted: currentValue,
+              extracted: currentValue.replace(/\s+/g, '')
+            })}
+            maxLength={19} />
         ),
+        _EXPIRATION_MONTH_CONTENT,
+        _EXPIRATION_YEAR_CONTENT,
+        (
+          <Input
+            type={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.title.en)}
+            placeholder={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondInput.title[attitude.language]}
+            style={[
+              Styles.NormalContent,
+              {
+                marginBottom: Styles.Content.marginVertical
+              }
+            ]}
+            value={props.walletModal.creditCard.cvv}
+            onChangeText={(currentValue) => props.setCreditCardCVV(currentValue)}
+            maxLength={3} />
+        ),
+        _FINAL_BUTTON,
         (
           <Link
             containerStyle={[
