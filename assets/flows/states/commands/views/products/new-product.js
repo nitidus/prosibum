@@ -215,6 +215,58 @@ module.exports = {
       }
     }
   },
+  _getAvailableProductsBasedOnQueryOnDemand: async (query, dispatch) => {
+    dispatch({
+      type: NEW_PRODUCT.SET_FETCH_AVAILABLE_PRODUCTS_BASED_ON_QUERY_LOADING_STATUS,
+      payload: true
+    })
+
+    const _QUERY = query.trim();
+
+    socket.emit('collection/find/token', {
+      collection: 'search',
+      token: 'products',
+      data: {
+        query: query
+      }
+    })
+
+    socket.on('collection/founded/token', (response) => {
+      if (response.meta.code === 200){
+        const _DATA = response.data;
+
+        dispatch({
+          type: NEW_PRODUCT.FETCH_AVAILABLE_PRODUCTS_BASED_ON_QUERY,
+          payload: _DATA
+        })
+
+        dispatch({
+          type: NEW_PRODUCT.SET_FETCH_AVAILABLE_PRODUCTS_BASED_ON_QUERY_LOADING_STATUS,
+          payload: false
+        })
+
+        dispatch({
+          type: NEW_PRODUCT.SET_CONNECTED_STATUS,
+          payload: {
+            status: true
+          }
+        })
+      }else{
+        dispatch({
+          type: NEW_PRODUCT.SET_FETCH_AVAILABLE_PRODUCTS_BASED_ON_QUERY_LOADING_STATUS,
+          payload: false
+        })
+
+        dispatch({
+          type: NEW_PRODUCT.SET_CONNECTED_STATUS,
+          payload: {
+            status: false,
+            content: response.meta.error_message
+          }
+        })
+      }
+    })
+  },
   _appendProductOnDemand: async (product, dispatch) => {
     dispatch({
       type: NEW_PRODUCT.APPEND_PRODUCT_LOADING_STATUS,
@@ -257,7 +309,7 @@ module.exports = {
           type: NEW_PRODUCT.SET_CONNECTED_STATUS,
           payload: {
             status: false,
-            content: _FINAL_RESPONSE.meta.error_message
+            content: response.meta.error_message
           }
         })
       }

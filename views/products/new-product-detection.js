@@ -83,7 +83,7 @@ class NewProductDetection extends Component<{}> {
               ]}
               textStyle={Styles.WarehouseErrorContent}
               value={props.newProduct.connected.content}
-              onPress={async () => await props.fetchAvailableProductsBasedOnQuery(props.newProduct.productQuery)}/>
+              onPress={async () => await props.fetchAvailableProductsBasedOnQueryOnDemand(props.newProduct.productQuery)}/>
           );
         }else{
           if (props.newProduct.productQueryItems.length > 0){
@@ -189,7 +189,7 @@ class NewProductDetection extends Component<{}> {
               ]}
               onChangeText={async (currentValue) => {
                 if (currentValue.length >= 3){
-                  await props.fetchAvailableProductsBasedOnQuery(currentValue);
+                  await props.fetchAvailableProductsBasedOnQueryOnDemand(currentValue);
                 }else{
                   if ((props.newProduct.productQuery.length > currentValue.length) && (props.newProduct.productQueryItems.length > 0)){
                     await props.setProductQueryItems([]);
