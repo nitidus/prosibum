@@ -12,6 +12,7 @@ import {
   languages as __LANGUAGES,
   roles as __ROLES,
   taxonomies as __TAXONOMIES,
+  messages as __MESSAGES,
   views_constants as __VIEWS_CONSTANTS
 } from '../../flows/knowledge/index';
 const __WALLETS = __VIEWS_CONSTANTS.dashboard.wallets;
@@ -372,6 +373,20 @@ module.exports = {
         return country;
       }
     })
+  },
+  _getAppropriateMessageBaseOnLocale: (selectedMessageKey, language) => {
+    const _FOUNDED_MESSAGE_KEY_INDEX = __MESSAGES.findIndex((message) => {
+            const _MESSAGES_VALUE = (typeof message.subkey != 'undefined')? module.exports._convertTokenToKey(message.subkey): module.exports._convertTokenToKey(message.key),
+                  _SELECTED_MESSAGE_VALUE = module.exports._convertTokenToKey(selectedMessageKey);
+
+            return (_SELECTED_MESSAGE_VALUE === _MESSAGES_VALUE);
+          });
+
+    if (_FOUNDED_MESSAGE_KEY_INDEX > -1){
+      return __MESSAGES[_FOUNDED_MESSAGE_KEY_INDEX].value[language];
+    }else{
+      return false;
+    }
   },
   _getAllRolesBaseOnLocale: () => {
     return __ROLES;

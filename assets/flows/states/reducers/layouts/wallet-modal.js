@@ -167,9 +167,16 @@ export default (state = initialState, action) => {
         ...state,
         connected: {
           ...state.connected,
+          ...action.payload,
           status: action.payload.status,
           content: action.payload.content || ''
         }
+      };
+      break;
+    case WALLET_MODAL.RESET_CONNECTION:
+      return {
+        ...state,
+        connected: initialState.connected
       };
       break;
 

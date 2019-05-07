@@ -119,6 +119,12 @@ module.exports = {
 
           callback(_DATA, false);
         }else{
+          let _INTERNAL_ERROR = _FINAL_RESPONSE;
+
+          _INTERNAL_ERROR.content = _INTERNAL_ERROR.meta.error_message;
+
+          delete _INTERNAL_ERROR.meta;
+
           dispatch({
             type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
             payload: false
@@ -127,8 +133,8 @@ module.exports = {
           dispatch({
             type: WALLET_MODAL.SET_CONNECTED_STATUS,
             payload: {
-              status: false,
-              content: _FINAL_RESPONSE.meta.error_message
+              ..._INTERNAL_ERROR,
+              status: false
             }
           })
         }

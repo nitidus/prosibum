@@ -177,6 +177,97 @@ module.exports = {
       }
     });
   },
+  _prepareWalletTransaction: async (props, { attitude, MODAL }) => {
+    var _RULES = {};
+
+    if (props.walletModal.creditCard.number.extracted != ''){
+      _RULES.card = {
+        ..._RULES.card,
+        number: props.walletModal.creditCard.number.extracted
+      }
+    }
+
+    if (Object.keys(props.walletModal.creditCard.expirationDate.month).length > 0){
+      _RULES.card = {
+        ..._RULES.card,
+        exp_month: parseInt(props.walletModal.creditCard.expirationDate.month.value)
+      }
+    }
+
+    if (props.walletModal.creditCard.expirationDate.year != ''){
+      _RULES.card = {
+        ..._RULES.card,
+        exp_year: parseInt(props.walletModal.creditCard.expirationDate.year)
+      }
+    }
+
+    if (props.walletModal.creditCard.cvv != ''){
+      _RULES.card = {
+        ..._RULES.card,
+        cvc: props.walletModal.creditCard.cvv
+      }
+    }
+
+    if (Object.keys(props.walletModal.wallet).length > 0){
+      if (typeof props.walletModal.wallet._id != 'undefined'){
+        _RULES.wallet_id = props.walletModal.wallet._id;
+      }
+
+      if ((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0)){
+        if (props.walletModal.walletInitialCreditAmount === 0){
+          _RULES.plan_id = props.walletModal.walletCurrentInitialCreditPlan._id;
+          _RULES.amount = parseInt(props.walletModal.walletCurrentInitialCreditPlan.price);
+          _RULES.balance = parseInt(props.walletModal.walletCurrentInitialCreditPlan.amount);
+        }else{
+          _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
+          _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
+        }
+      }else{
+        if (props.walletModal.walletInitialCreditAmount > 0){
+          _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
+          _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
+        }
+      }
+
+      await props.chargeWallet(_RULES, async (response, state) => {
+        if (attitude.onProgressSuccess){
+          await MODAL.ON_PROGRESS_SUCCESS(response);
+        }
+
+        await MODAL.ON_BLUR(state);
+      });
+    }else{
+      if (typeof props.walletModal.currentCurrency._id != 'undefined'){
+        _RULES.currency_id = props.walletModal.currentCurrency._id;
+      }
+
+      if (props.walletModal.walletName != ''){
+        _RULES.wallet_name = props.walletModal.walletName;
+      }
+
+      if ((Object.keys(props.walletModal.walletCurrentInitialCreditPlan).length > 0) && (props.walletModal.walletInitialCreditPlans.length > 0)){
+        if (props.walletModal.walletInitialCreditAmount === 0){
+          _RULES.plan_id = props.walletModal.walletCurrentInitialCreditPlan._id;
+        }else{
+          _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
+          _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
+        }
+      }else{
+        if (props.walletModal.walletInitialCreditAmount > 0){
+          _RULES.amount = parseInt(props.walletModal.walletInitialCreditAmount);
+          _RULES.balance = parseInt(props.walletModal.walletInitialCreditAmount);
+        }
+      }
+
+      await props.appendWalletToResource(_RULES, async (response, state) => {
+        if (attitude.onProgressSuccess){
+          await MODAL.ON_PROGRESS_SUCCESS(response);
+        }
+
+        await MODAL.ON_BLUR(state);
+      });
+    }
+  },
   _prepareProductToAppend: async (props) => {
     const { navigation } = props;
 

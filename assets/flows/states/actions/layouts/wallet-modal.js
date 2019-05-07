@@ -103,7 +103,12 @@ const mapDispatchToProps = (dispatch) => {
         type: WALLET_MODAL.SET_MULTI_PURPOSE_REQUEST_TO_RESOURCE_LOADING_STATUS,
         payload: loadingStatus
       })
-    }
+    },
+    resetConnection: () => {
+      dispatch({
+        type: WALLET_MODAL.RESET_CONNECTION
+      })
+    },
   };
 }
 
