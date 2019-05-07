@@ -91,12 +91,20 @@ class NewProductFeatures extends Component<{}> {
                       }else{
                         _UNIT_FEATURES.push(featureItem);
 
+                        let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+                            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newProduct.features.length > 1)? ((Platform.OS !== 'ios')? 4: 2): 2);
+
+                        if (Platform.OS !== 'ios'){
+                          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+                          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+                        }
+
                         return (
                           <Carousel
                             name={Functions._convertTokenToKeyword(__CONSTANTS.content.carousel.state.normal.title.en)}
                             data={_UNIT_FEATURES}
                             firstItem={_SELECTED_FEATURE_INDEX}
-                            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+                            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
                             style={[
                               Styles.DetailContainer,
                               _CUSTOM_STYLE
@@ -180,7 +188,8 @@ class NewProductFeatures extends Component<{}> {
                                     </View>
                                 </Input>
                               );
-                            }} />
+                            }}
+                            {..._FIRST_CAROUSEL_OTHER_OPTIONS} />
                         );
                       }
                       break;

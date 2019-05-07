@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, Animated, Easing } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, Platform, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -146,6 +146,14 @@ const CameraRollPickerModal = (props) => {
           return (_CURRENT_GROUP_TYPE === _GROUP_TYPE)
         });
 
+  let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+      _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.cameraRollPickerModal.groupTypes.length > 1)? ((Platform.OS !== 'ios')? 4: 2): 2);
+
+  if (Platform.OS !== 'ios'){
+    _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+    _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+  }
+
   return (
     <Modal
       name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
@@ -159,34 +167,29 @@ const CameraRollPickerModal = (props) => {
           name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
           data={props.cameraRollPickerModal.groupTypes}
           style={Styles.CameraRollGroupTypesContainer}
-          itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
+          itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
           firstItem={_CURRENT_GROUP_TYPE_INDEX}
           onLayout={({ item, index }) => {
             var _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType[attitude.language],
                 _ITEM_NAME = item[attitude.language],
-                _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME);
+                _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME),
+                _ITEM_GRADIENT = Global.colors.pair.ongerine;
 
-            if (_CURRENT_GROUP_TYPE === item){
-              return (
-                <Input
-                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                  name={_ITEM_NAME}
-                  value={_ITEM_VALUE}
-                  gradient={Global.colors.pair.aqrulean}
-                  disable={true}/>
-              );
-            }else{
-              return (
-                <Input
-                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                  name={_ITEM_NAME}
-                  value={_ITEM_VALUE}
-                  gradient={Global.colors.pair.ongerine}
-                  disable={true}/>
-              );
+            if (props.cameraRollPickerModal.currentGroupType.en === item.en){
+              _ITEM_GRADIENT = Global.colors.pair.aqrulean;
             }
+
+            return (
+              <Input
+                type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                name={_ITEM_NAME}
+                value={_ITEM_VALUE}
+                gradient={_ITEM_GRADIENT}
+                disable={true}/>
+            );
           }}
-          onSnap={(selectedItemIndex) => props.setCurrentCameraRollGroupType(props.cameraRollPickerModal.groupTypes[selectedItemIndex])}/>
+          onSnap={(selectedItemIndex) => props.setCurrentCameraRollGroupType(props.cameraRollPickerModal.groupTypes[selectedItemIndex])}
+          {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
 
         <KeyboardAvoidingView
           style={Styles.CameraRollMajorContainer}>

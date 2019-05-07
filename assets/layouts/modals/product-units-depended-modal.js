@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -126,6 +126,14 @@ const ProductUnitsDependedModal = (props) => {
             }
           });
 
+      let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+          _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productUnitsDependedModal.units.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+      if (Platform.OS !== 'ios'){
+        _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+        _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+      }
+
       _MODAL_CONTENT = [
         (
           <Carousel
@@ -142,7 +150,7 @@ const ProductUnitsDependedModal = (props) => {
 
               var _ITEM_GRADIENT = Global.colors.pair.ongerine;
 
-              if (index === _SELECTED_INDEX){
+              if (item.unit._id === props.productUnitsDependedModal.selectedUnit.unit._id){
                 _ITEM_GRADIENT = Global.colors.pair.aqrulean;
               }
 
@@ -215,7 +223,8 @@ const ProductUnitsDependedModal = (props) => {
                 </Input>
               )
             }}
-            onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productUnitsDependedModal.units[selectedItemIndex])}/>
+            onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productUnitsDependedModal.units[selectedItemIndex])}
+            {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
         ),
         (
           <Input

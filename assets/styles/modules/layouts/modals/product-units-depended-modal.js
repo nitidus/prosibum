@@ -66,6 +66,7 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_BRIEF_DETAIL_TITLE.fontWeight = 'bold';
     _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX.fontWeight = 'bold';
     _CUSTOM_BRIEF_DETAIL_SUBTITLE.fontWeight = 'bold';
+    _CUSTOM_BRIEF_DETAIL_ROW_TEXT.fontWeight = 'bold';
   }
 }else{
   if (width >= 1000 || height >= 1000){

@@ -106,6 +106,14 @@ class Wallets extends Component<{}> {
                 }
               }
 
+              let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+                  _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.wallets.wallets.length > 1)? ((Platform.OS !== 'ios')? 4: 2): 2);
+
+              if (Platform.OS !== 'ios'){
+                _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+                _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+              }
+
               _TAB_CONTENT = (
                 <View
                   style={{flex: 1}}>
@@ -117,7 +125,7 @@ class Wallets extends Component<{}> {
                         direction: 'ltr'
                       }}
                       firstItem={_SELECTED_WALLET_INDEX}
-                      itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+                      itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
                       onLayout={({ item, index }) => {
                         var _ITEM_GRADIENT = Global.colors.pair.tilan,
                             _WALLET_TRANSACTIONS_AMOUNT_SUFFIX = `${__CONSTANTS.firstCarousel.items.content.transactionsAmount.suffix[_LANGUAGE]}${((item.transactions.amount > 1) && (_LANGUAGE == 'en'))? 's': ''}`;
@@ -192,7 +200,8 @@ class Wallets extends Component<{}> {
                           </Input>
                         );
                       }}
-                      onSnap={(selectedItemIndex) => props.setSelectedWallet(props.wallets.wallets[selectedItemIndex])}/>
+                      onSnap={(selectedItemIndex) => props.setSelectedWallet(props.wallets.wallets[selectedItemIndex])}
+                      {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
 
                     <Input
                         type={__CONSTANTS.modalHandlerButton.type}

@@ -131,12 +131,12 @@ const RoleModal = (props) => {
         const _ROW = item,
               _ROLE = _ROW.role;
 
-        return Functions._convertKeywordToToken(_ROLE || _ROLE[attitude.language]);
+        return Functions._convertKeywordToToken(_ROLE);
       }),
       _CURRENT_USER_GROUP_ROLE = props.roleModal.currentRole.role || props.roleModal.currentRole,
       _CURRENT_USER_GROUP_ROLE_INDEX = props.roleModal.roles.findIndex((item) => {
-        const _USER_GROUP_ROLE = item.role || item,
-              _CURRENT_USER_GROUP_ROLE = props.roleModal.currentRole.role || props.roleModal.currentRole;
+        const _USER_GROUP_ROLE = item,
+              _CURRENT_USER_GROUP_ROLE = props.roleModal.currentRole;
 
         return (_CURRENT_USER_GROUP_ROLE === _USER_GROUP_ROLE);
       });
@@ -146,6 +146,14 @@ const RoleModal = (props) => {
 
     const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
 
+    let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+        _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((_USER_GROUP_ROLES.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+    if (Platform.OS !== 'ios'){
+      _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+      _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+    }
+
     _MODAL_CONTENT = (
       <KeyboardAvoidingView
         behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}
@@ -154,39 +162,34 @@ const RoleModal = (props) => {
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
             data={_USER_GROUP_ROLES}
             style={Styles.RolesContainer}
-            itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * 2)}
+            itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
             firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
             onLayout={({ item, index }) => {
               var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.roleModal.currentRole.role || props.roleModal.currentRole),
                   _ITEM_NAME = item.toLowerCase(),
                   _ROLE = '',
-                  _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(item, attitude.language);
+                  _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(item, attitude.language),
+                  _ITEM_GRADIENT = Global.colors.pair.ongerine;
 
-                  if (_DID_FETCH_APPROPRIATE_ROLE !== false){
-                    _ROLE = _DID_FETCH_APPROPRIATE_ROLE;
-                  }
-
-              if (_CURRENT_USER_GROUP === item){
-                return (
-                  <Input
-                    type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                    name={_ITEM_NAME}
-                    value={_ROLE}
-                    gradient={Global.colors.pair.aqrulean}
-                    disable={true}/>
-                );
-              }else{
-                return (
-                  <Input
-                    type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                    name={_ITEM_NAME}
-                    value={_ROLE}
-                    gradient={Global.colors.pair.ongerine}
-                    disable={true}/>
-                );
+              if (_DID_FETCH_APPROPRIATE_ROLE !== false){
+                _ROLE = _DID_FETCH_APPROPRIATE_ROLE;
               }
+
+              if (Functions._convertKeywordToToken(props.roleModal.currentRole.role) === Functions._convertKeywordToToken(item)){
+                _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+              }
+
+              return (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                  name={_ITEM_NAME}
+                  value={_ROLE}
+                  gradient={_ITEM_GRADIENT}
+                  disable={true}/>
+              );
             }}
-            onSnap={(selectedItemIndex) => props.setCurrentRole(props.roleModal.roles[selectedItemIndex])}/>
+            onSnap={(selectedItemIndex) => props.setCurrentRole(props.roleModal.roles[selectedItemIndex])}
+            {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
 
           <Input
             type={__CONSTANTS.modalContainer.content.firstInput.type}

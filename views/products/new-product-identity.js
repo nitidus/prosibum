@@ -105,16 +105,24 @@ class NewProductIdentity extends Component<{}> {
           );
         }else{
           if (props.newProduct.warehouses.length > 0){
+            let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+                _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newProduct.warehouses.length > 1)? ((Platform.OS !== 'ios')? 4: 2): 2);
+
             const _SELECTED_WAREHOUSE_INDEX = props.newProduct.warehouses.findIndex((warehouse, i) => {
                     return warehouse._id === props.newProduct.currentWarehouse._id;
                   });
+
+            if (Platform.OS !== 'ios'){
+              _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+              _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+            }
 
             _WAREHOUSE_CONTENT = (
               <Carousel
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.normal.title.en)}
                 data={props.newProduct.warehouses}
                 firstItem={_SELECTED_WAREHOUSE_INDEX}
-                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
                 style={{
                   marginBottom: Styles.Content.marginVertical,
                   direction: 'ltr'
@@ -122,7 +130,7 @@ class NewProductIdentity extends Component<{}> {
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.tilan;
 
-                  if (_SELECTED_WAREHOUSE_INDEX === index){
+                  if (props.newProduct.currentWarehouse._id === item._id){
                     _ITEM_GRADIENT = Global.colors.pair.analue;
                   }
 
@@ -136,7 +144,12 @@ class NewProductIdentity extends Component<{}> {
                       gradient={_ITEM_GRADIENT}
                       disable={true}>
                         <View
-                          style={Styles.DetailItemMasterInfoContent}>
+                          style={[
+                            Styles.DetailItemMasterInfoContent,
+                            {
+                              width: (_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)) - (Styles.Content.marginHorizontal * 2)
+                            }
+                          ]}>
                             <Text
                               style={Styles.BriefDetailTitle}>
                                 {Functions._convertKeywordToToken(item.name)}
@@ -149,7 +162,8 @@ class NewProductIdentity extends Component<{}> {
                     </Input>
                   );
                 }}
-                onSnap={(selectedItemIndex) => props.setCurrentWarehouse(props.newProduct.warehouses[selectedItemIndex])}/>
+                onSnap={(selectedItemIndex) => props.setCurrentWarehouse(props.newProduct.warehouses[selectedItemIndex])}
+                {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
             );
           }else{
             _WAREHOUSE_CONTENT = (

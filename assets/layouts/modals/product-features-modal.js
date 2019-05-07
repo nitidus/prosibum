@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -171,6 +171,14 @@ const ProductFeaturesModal = (props) => {
                 return feature._id === props.productFeaturesModal.currentFeature._id;
               });
 
+        let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+            _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+        if (Platform.OS !== 'ios'){
+          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+        }
+
         _MODAL_CONTENT = [
           (
             <Carousel
@@ -178,11 +186,11 @@ const ProductFeaturesModal = (props) => {
               data={props.productFeaturesModal.features}
               firstItem={_SELECTED_INDEX}
               style={Styles.DetailContainer}
-              itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+              itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
               onLayout={({ item, index }) => {
                 var _ITEM_GRADIENT = Global.colors.pair.ongerine;
 
-                if (index === _SELECTED_INDEX){
+                if (item._id === props.productFeaturesModal.currentFeature._id){
                   _ITEM_GRADIENT = Global.colors.pair.aqrulean;
                 }
 
@@ -218,7 +226,8 @@ const ProductFeaturesModal = (props) => {
               onSnap={(selectedItemIndex) => {
                 props.setCurrentFeature(props.productFeaturesModal.features[selectedItemIndex]);
                 props.resetModalIndependly();
-              }}/>
+              }}
+              {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
           )
         ];
 
@@ -278,6 +287,14 @@ const ProductFeaturesModal = (props) => {
                           return unit._id === props.productFeaturesModal.selectedUnit._id;
                         });
 
+                  let _SECOND_CAROUSEL_OTHER_OPTIONS = {},
+                      __SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.units.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+                  if (Platform.OS !== 'ios'){
+                    _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+                    _SECOND_CAROUSEL_OTHER_OPTIONS.loop = true;
+                  }
+
                   _MODAL_CONTENT = [
                     ..._MODAL_CONTENT,
                     (
@@ -286,11 +303,11 @@ const ProductFeaturesModal = (props) => {
                         data={props.productFeaturesModal.units}
                         firstItem={_SELECTED_UNIT_INDEX}
                         style={Styles.DetailContainer}
-                        itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+                        itemWidth={_Screen.width - (Styles.Content.marginHorizontal * __SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                         onLayout={({ item, index }) => {
                           var _ITEM_GRADIENT = Global.colors.pair.ongerine;
 
-                          if (index === _SELECTED_UNIT_INDEX){
+                          if (item._id === props.productFeaturesModal.selectedUnit._id){
                             _ITEM_GRADIENT = Global.colors.pair.aqrulean;
                           }
 
@@ -327,7 +344,8 @@ const ProductFeaturesModal = (props) => {
                             </Input>
                           )
                         }}
-                        onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.units[selectedItemIndex])}/>
+                        onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.units[selectedItemIndex])}
+                        {..._SECOND_CAROUSEL_OTHER_OPTIONS}/>
                     ),
                     (
                       <Input

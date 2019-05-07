@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -105,13 +105,21 @@ const ProductShippingMethodsModal = (props) => {
 
   const _VALIDATED = _componentWillCheckValidation(props);
 
-  var _MODAL_CONTENT = <Text>ok</Text>;
+  var _MODAL_CONTENT;
 
   if (props.productShippingMethodsModal.shippingMethods.length > 0){
     const _SELECTED_INDEX = props.productShippingMethodsModal.shippingMethods.findIndex((shippingMethod, i) => {
             return shippingMethod._id === props.productShippingMethodsModal.selectedShippingMethod._id;
           }),
           _SELECTED_SHIPPING_METHOD = props.productShippingMethodsModal.selectedShippingMethod.key || '';
+
+    let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+        _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productShippingMethodsModal.shippingMethods.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+    if (Platform.OS !== 'ios'){
+      _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+      _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+    }
 
     _MODAL_CONTENT = [
       (
@@ -120,13 +128,13 @@ const ProductShippingMethodsModal = (props) => {
           data={props.productShippingMethodsModal.shippingMethods}
           firstItem={_SELECTED_INDEX}
           style={Styles.DetailContainer}
-          itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+          itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
           onLayout={({ item, index }) => {
             const _SHIPPING_METHOD = item.key;
 
             var _ITEM_GRADIENT = Global.colors.pair.ongerine;
 
-            if (index === _SELECTED_INDEX){
+            if (item._id === props.productShippingMethodsModal.selectedShippingMethod._id){
               _ITEM_GRADIENT = Global.colors.pair.aqrulean;
             }
 
@@ -153,7 +161,8 @@ const ProductShippingMethodsModal = (props) => {
               </Input>
             )
           }}
-          onSnap={(selectedItemIndex) => props.setSelectedShippingMethod(props.productShippingMethodsModal.shippingMethods[selectedItemIndex])}/>
+          onSnap={(selectedItemIndex) => props.setSelectedShippingMethod(props.productShippingMethodsModal.shippingMethods[selectedItemIndex])}
+          {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
       ),
       (
         <Input

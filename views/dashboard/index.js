@@ -14,9 +14,10 @@ const { Preparation } = Functions;
 
 export const Dashboard = (props) => {
   const { navigation } = props,
-        _FIRST_CAROUSEL_ITEMS = __CONSTANTS.firstCarousel.content,
-        _FIRST_CAROUSEL_OTHER_OPTIONS = {},
-        _ITEM_WIDTH_COEFFICIENT = (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)? 2: 4;
+        _FIRST_CAROUSEL_ITEMS = __CONSTANTS.firstCarousel.content;
+
+  let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+      _ITEM_WIDTH_COEFFICIENT = (_SCREEN.width >= 1000 || _SCREEN.height >= 1000)? 2: 4;
 
   var attitude = {};
 

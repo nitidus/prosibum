@@ -235,12 +235,20 @@ export const WalletModal = (props) => {
           return (_CURRENT_CURRENCY === _CURRENCY);
         });
 
+        let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((_CURRENCIES.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+        if (Platform.OS !== 'ios'){
+          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+        }
+
         _CURRENCIES_CONTENT = (
           <Carousel
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstHiddenTab.firstCarouselContainer.title.en)}
             data={_CURRENCIES}
             style={Styles.WalletContainer}
-            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
             firstItem={_CURRENT_CURRENCY_INDEX}
             onLayout={({ item, index }) => {
               var _UNKNOWN_LOCALE_CURRENT_CURRENCY = (props.walletModal.currentCurrency.type || props.walletModal.currentCurrency),
@@ -274,7 +282,8 @@ export const WalletModal = (props) => {
                 </Input>
               );
             }}
-            onSnap={(selectedItemIndex) => props.setCurrentCurrency(props.walletModal.currencies[selectedItemIndex])}/>
+            onSnap={(selectedItemIndex) => props.setCurrentCurrency(props.walletModal.currencies[selectedItemIndex])}
+            {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
         );
       }
 
@@ -442,7 +451,15 @@ export const WalletModal = (props) => {
                         _PLAN_TOKEN = planItem._id;
 
                   return (_CURRENT_PLAN_TOKEN === _PLAN_TOKEN);
-                })
+                });
+
+          let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+              _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((_PLANS_CAROUSEL_DATA.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+          if (Platform.OS !== 'ios'){
+            _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+            _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+          }
 
           _PLANS_CONTENT = (
             <Carousel
@@ -450,7 +467,7 @@ export const WalletModal = (props) => {
               data={_PLANS_CAROUSEL_DATA}
               firstItem={_FIRST_INDEX}
               style={Styles.DetailContainer}
-              itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
+              itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
               onLayout={({ item, index }) => {
                 const _CURRENT_PLAN = props.walletModal.walletCurrentInitialCreditPlan,
                       _PLAN_NAME = Functions._convertKeywordToToken(item.name),
@@ -514,7 +531,8 @@ export const WalletModal = (props) => {
                   </Input>
                 );
               }}
-              onSnap={(selectedItemIndex) => props.setWalletCurrentInitialCreditPlan(props.walletModal.walletInitialCreditPlans[selectedItemIndex])}/>
+              onSnap={(selectedItemIndex) => props.setWalletCurrentInitialCreditPlan(props.walletModal.walletInitialCreditPlans[selectedItemIndex])}
+              {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
           );
         }
       }
