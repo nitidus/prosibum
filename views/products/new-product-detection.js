@@ -87,10 +87,7 @@ class NewProductDetection extends Component<{}> {
           );
         }else{
           if (props.newProduct.productQueryItems.length > 0){
-            const _SELECTED_WAREHOUSE_INDEX = props.newProduct.warehouses.findIndex((warehouse, i) => {
-                    return warehouse._id === props.newProduct.currentWarehouse._id;
-                  }),
-                  _PRODUCTS_QUERY_CONTENT_CUSTOM_STYLE = {
+            const _PRODUCTS_QUERY_CONTENT_CUSTOM_STYLE = {
                     paddingHorizontal: Styles.Content.marginHorizontal
                   };
 
@@ -123,7 +120,7 @@ class NewProductDetection extends Component<{}> {
                           _id: _CATEGORY._id,
                           color: Global.colors.single.lavenderGray,
                           depth: (typeof _CATEGORY.ancestors != 'undefined')? _CATEGORY.ancestors.length: 0,
-                          key: _CATEGORY.value,
+                          key: _CATEGORY.key,
                           created_at: _CATEGORY.created_at,
                           modified_at: _CATEGORY.modified_at
                         });
@@ -138,7 +135,7 @@ class NewProductDetection extends Component<{}> {
                             </Text>
                             <Text
                               style={Styles.BriefDetailSubtitle}>
-                                {item.category.value}
+                                {item.category.key}
                             </Text>
                         </View>
                     </Input>
