@@ -1,0 +1,65 @@
+{
+  "pilot": {
+    "title": {
+      "en": "New Fragment",
+      "fa": "تنوع محصول جدید"
+    },
+    "subtitle": {
+      "en": "Fragment Identity",
+      "fa": "هویت تنوع محصول"
+    }
+  },
+  "content": {
+    "firstInput": {
+      "type": "TEXT",
+      "title": {
+        "en": "Product Name",
+        "fa": "نام محصول"
+      }
+    },
+    "firstCarousel": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Units",
+            "fa": "واحدهای اندازه‌گیری"
+          },
+          "content": {
+            "title": {
+              "en": "Unit Item"
+            }
+          }
+        },
+        "null": {
+          "title": {
+            "en": "No unit appended.",
+            "fa": "هیچ واحد اندازه‌گیری اضافه نشده است."
+          }
+        }
+      }
+    },
+    "modalHandlerButton": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Append Unit",
+            "fa": "اضافه کردن واحد اندازه‌گیری"
+          }
+        }
+      }
+    },
+    "submitButton": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Fill The Inventory Detail",
+            "fa": "پُرکردن جزئیات موجودی"
+          }
+        }
+      }
+    }
+  }
+}

@@ -5,22 +5,22 @@ const _Screen = Dimensions.get('window');
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, ProductCategoriesModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon } from '../../assets/layouts/index';
 import { Input, Link } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
-const Styles = Views.Products.NewProduct,
-      Container = ViewsContainer.Products.NewProductContainer;
+const Styles = Views.Products.NewFragment,
+      Container = ViewsContainer.Products.NewFragmentContainer;
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewProduct;
+const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewFragment;
 
 import { views_constants } from '../../assets/flows/knowledge/index';
-const __CONSTANTS = views_constants.products.new_product_detection;
+const __CONSTANTS = views_constants.products.new_fragment_detection;
 
 import { Functions } from '../../assets/modules/index';
 const { Preparation } = Functions;
 
-class NewProductDetection extends Component<{}> {
+class NewFragmentDetection extends Component<{}> {
   static navigationOptions = {
 
   };
@@ -30,27 +30,27 @@ class NewProductDetection extends Component<{}> {
           _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
           _LANGUAGE = await _NATIVE_SETTINGS.language;
 
-    props.resetProductForms();
+    props.resetForms();
     props.setLanguage(_LANGUAGE);
   }
 
   render() {
     const { props } = this;
 
-    if (Object.keys(props.newProduct.language).length > 0){
-      const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
+    if (Object.keys(props.newFragment.language).length > 0){
+      const _LANGUAGE = Functions._convertTokenToKeyword(props.newFragment.language.key),
             _WAREHOUSES_OTHER_PROPS = {
-              language: props.newProduct.language
+              language: props.newFragment.language
             },
             _PRODUCT_CATEGORIES_OTHER_PROPS = {
-              language: props.newProduct.language
+              language: props.newFragment.language
             };
 
       var _PRODUCTS_QUERY_CONTENT = (
         <View/>
       );
 
-      if (props.newProduct.productQueryItemsLoading){
+      if (props.newFragment.queryItemsLoading){
         _PRODUCTS_QUERY_CONTENT = (
           <Input
             type={__CONSTANTS.content.firstFlatList.type}
@@ -68,7 +68,7 @@ class NewProductDetection extends Component<{}> {
           </Input>
         );
       }else{
-        if (!props.newProduct.connected.status){
+        if (!props.newFragment.connected.status){
           _PRODUCTS_QUERY_CONTENT = (
             <Input
               type={__CONSTANTS.content.firstFlatList.type}
@@ -82,11 +82,11 @@ class NewProductDetection extends Component<{}> {
                 }
               ]}
               textStyle={Styles.WarehouseErrorContent}
-              value={props.newProduct.connected.content}
-              onPress={async () => await props.fetchAvailableProductsBasedOnQueryOnDemand(props.newProduct.productQuery)}/>
+              value={props.newFragment.connected.content}
+              onPress={async () => await props.fetchAvailableProductsBasedOnQueryOnDemand(props.newFragment.productQuery)}/>
           );
         }else{
-          if (props.newProduct.productQueryItems.length > 0){
+          if (props.newFragment.queryItems.length > 0){
             const _PRODUCTS_QUERY_CONTENT_CUSTOM_STYLE = {
                     paddingHorizontal: Styles.Content.marginHorizontal
                   };
@@ -94,7 +94,7 @@ class NewProductDetection extends Component<{}> {
             _PRODUCTS_QUERY_CONTENT = (
               <FlatList
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstFlatList.state.normal.title.en)}
-                data={props.newProduct.productQueryItems}
+                data={props.newFragment.queryItems}
                 contentContainerStyle={_PRODUCTS_QUERY_CONTENT_CUSTOM_STYLE}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }, i) => {
@@ -114,18 +114,9 @@ class NewProductDetection extends Component<{}> {
                               _CATEGORY = item.category;
 
                         props.setProduct(item);
-                        props.setProductInternalName(item.name);
+                        props.setName(item.name);
 
-                        props.setCategory({
-                          _id: _CATEGORY._id,
-                          color: Global.colors.single.lavenderGray,
-                          depth: (typeof _CATEGORY.ancestors != 'undefined')? _CATEGORY.ancestors.length: 0,
-                          key: _CATEGORY.key,
-                          created_at: _CATEGORY.created_at,
-                          modified_at: _CATEGORY.modified_at
-                        });
-
-                        navigation.navigate('NewProductIdentity');
+                        navigation.navigate('NewFragmentIdentity');
                       }}>
                         <View
                           style={Styles.DetailItemMasterInfoContent}>
@@ -143,7 +134,7 @@ class NewProductDetection extends Component<{}> {
                 }}/>
             );
           }else{
-            if (props.newProduct.productQuery.length >= 3){
+            if (props.newFragment.query.length >= 3){
               _PRODUCTS_QUERY_CONTENT = (
                 <View
                   style={{
@@ -158,8 +149,10 @@ class NewProductDetection extends Component<{}> {
                         marginHorizontal: Styles.Content.marginHorizontal
                       }}
                       onPress={() => {
+                        const { navigation } = props;
+
                         Keyboard.dismiss();
-                        props.setProductCategoriesModalVisibility(true);
+                        navigation.navigate('NewProductIdentity');
                       }} />
                 </View>
               );
@@ -177,7 +170,7 @@ class NewProductDetection extends Component<{}> {
               type={__CONSTANTS.content.firstInput.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}
               placeholder={__CONSTANTS.content.firstInput.title[_LANGUAGE]}
-              value={props.newProduct.productQuery}
+              value={props.newFragment.query}
               style={[
                 Styles.RegularItemContainer,
                 {
@@ -188,22 +181,15 @@ class NewProductDetection extends Component<{}> {
                 if (currentValue.length >= 3){
                   await props.fetchAvailableProductsBasedOnQueryOnDemand(currentValue);
                 }else{
-                  if ((props.newProduct.productQuery.length > currentValue.length) && (props.newProduct.productQueryItems.length > 0)){
-                    await props.setProductQueryItems([]);
+                  if ((props.newFragment.query.length > currentValue.length) && (props.newFragment.queryItems.length > 0)){
+                    await props.setQueryItems([]);
                   }
                 }
 
-                await props.setProductQuery(currentValue);
+                await props.setQuery(currentValue);
               }} />
 
               {_PRODUCTS_QUERY_CONTENT}
-
-              <ProductCategoriesModal
-                visibility={props.newProduct.productCategoriesModalVisibility}
-                onBlur={() => props.setProductCategoriesModalVisibility(false)}
-                onProgressSuccess={(response) => props.setCategory(response)}
-                {..._PRODUCT_CATEGORIES_OTHER_PROPS}
-                isAdding />
         </Container>
       );
     }else{
@@ -214,4 +200,4 @@ class NewProductDetection extends Component<{}> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProductDetection);
+export default connect(mapStateToProps, mapDispatchToProps)(NewFragmentDetection);

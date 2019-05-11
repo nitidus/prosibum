@@ -43,6 +43,12 @@ export default (state = initialState, action) => {
         currentFeature: action.payload
       };
       break;
+    case PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURES:
+      return {
+        ...state,
+        features: action.payload
+      };
+      break;
     case PRODUCT_FEATURES_MODAL.SET_SELECTED_UNIT:
       return {
         ...state,

@@ -1,12 +1,12 @@
 {
   "pilot": {
     "title": {
-      "en": "New Product",
-      "fa": "محصول جدید"
+      "en": "New Fragment",
+      "fa": "تنوع محصول جدید"
     },
     "subtitle": {
-      "en": "Product Identity Detection",
-      "fa": "تشخیص هویت محصول"
+      "en": "Fragment Identity Detection",
+      "fa": "تشخیص هویت تنوع محصول"
     }
   },
   "content": {
@@ -45,8 +45,8 @@
           "state": {
             "normal": {
               "title": {
-                "en": "Request for New Category",
-                "fa": "درخواست برای دسته‌بندی جدید"
+                "en": "Request for New Product",
+                "fa": "درخواست برای محصول جدید"
               }
             }
           }

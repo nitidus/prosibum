@@ -28,6 +28,7 @@ import { WalletsContainer } from './views/dashboard-container/wallets-container'
 
 //Products
 import { NewProductContainer } from './views/products-container/new-product-container';
+import { NewFragmentContainer } from './views/products-container/new-fragment-container';
 
 module.exports = {
   Layouts: {
@@ -61,7 +62,8 @@ module.exports = {
       WalletsContainer
     },
     Products: {
-      NewProductContainer
+      NewProductContainer,
+      NewFragmentContainer
     }
   }
 };

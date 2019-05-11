@@ -84,7 +84,7 @@ class Overseer extends Component<{}> {
           _OTHER_PROPS.onRightIconPress = () => {
             const { navigation } = props;
 
-            navigation.navigate('NewProductDetection', {
+            navigation.navigate('NewFragmentDetection', {
               isRoot: true
             });
           };

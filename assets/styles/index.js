@@ -28,6 +28,9 @@ import Wallets from './views/dashboard/wallets';
   //New Product
   import NewProduct from './views/products/new-product';
 
+  //New Fragment
+  import NewFragment from './views/products/new-fragment';
+
 /*** Modules ***/
 
 //Components
@@ -62,7 +65,8 @@ module.exports = {
       Self: Dashboard
     },
     Products: {
-      NewProduct
+      NewProduct,
+      NewFragment
     }
   },
   Modules: {

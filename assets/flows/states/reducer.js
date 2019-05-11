@@ -41,6 +41,7 @@ import UserProfile from './reducers/views/profile/user-profile';
 
 //Products
 import NewProduct from './reducers/views/products/new-product';
+import NewFragment from './reducers/views/products/new-fragment';
 
 /* Sub Views Reducers */
 
@@ -55,7 +56,7 @@ export default () => {
           Overseer, UserProfile,
             Roles, SelectedRole,
             Wallets, SelectedWallet,
-            NewProduct,
+            NewProduct, NewFragment,
           TechnicalTab
         }),
         middeware = applyMiddleware(logger);

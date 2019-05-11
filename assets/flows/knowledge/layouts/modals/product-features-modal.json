@@ -105,9 +105,19 @@
             }
           },
           "empty": {
-            "title": {
-              "en": "There's no feature.",
-              "fa": "هیچ ویژگی وجود ندارد."
+            "state": {
+              "unit": {
+                "title": {
+                  "en": "No unit has been remain.",
+                  "fa": "هیچ واحد اندازه‌گیری باقی نمانده است."
+                }
+              },
+              "complex": {
+                "title": {
+                  "en": "There's no feature.",
+                  "fa": "هیچ ویژگی وجود ندارد."
+                }
+              }
             }
           }
         }

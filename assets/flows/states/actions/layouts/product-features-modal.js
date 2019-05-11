@@ -28,6 +28,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: feature
       })
     },
+    setFeatures: (features) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURES,
+        payload: features
+      })
+    },
     setMinimumOrderQuantity: (minimumOrderQuantity) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_MINIMUM_ORDER_QUANTITY,
