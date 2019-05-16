@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 import { VIEWS, GLOBAL } from '../../../types/index';
 const { NEW_FRAGMENT } = VIEWS.PRODUCTS,
-      socket = io(GLOBAL.URLS.INTERFAS.HOST_NAME);
+      socket = io(GLOBAL.URLS.INTERFAS.SOCKET_NAME);
 
 import { Functions } from '../../../../../modules/index';
 

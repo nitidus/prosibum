@@ -5,6 +5,15 @@
    <BuildAction
       parallelizeBuildables = "NO"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "echo &quot;.env.prod&quot; &gt; /tmp/envfile&#10;">
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -28,9 +37,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "prosibum.app"
-               BlueprintName = "prosibum"
+               BlueprintIdentifier = "7AE89C03228CFC0500F74447"
+               BuildableName = "pickopack.app"
+               BlueprintName = "pickopack"
                ReferencedContainer = "container:prosibum.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -70,9 +79,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "prosibum.app"
-            BlueprintName = "prosibum"
+            BlueprintIdentifier = "7AE89C03228CFC0500F74447"
+            BuildableName = "pickopack.app"
+            BlueprintName = "pickopack"
             ReferencedContainer = "container:prosibum.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -89,13 +98,22 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "&#10;">
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "prosibum.app"
-            BlueprintName = "prosibum"
+            BlueprintIdentifier = "7AE89C03228CFC0500F74447"
+            BuildableName = "pickopack.app"
+            BlueprintName = "pickopack"
             ReferencedContainer = "container:prosibum.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -108,16 +126,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "prosibum.app"
-            BlueprintName = "prosibum"
-            ReferencedContainer = "container:prosibum.xcodeproj">
+            BlueprintIdentifier = "83CBBA2D1A601D0E00E9B192"
+            BuildableName = "libReact.a"
+            BlueprintName = "React"
+            ReferencedContainer = "container:../node_modules/react-native/React/React.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

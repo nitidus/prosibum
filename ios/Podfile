@@ -27,6 +27,9 @@ target 'prosibum' do
 
     pod 'Interactable', :path => '../node_modules/react-native-interactable'
 
+
+    pod 'react-native-config', :path => '../node_modules/react-native-config'
+
   end
 
   target 'prosibumTests' do
