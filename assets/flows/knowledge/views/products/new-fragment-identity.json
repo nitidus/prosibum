@@ -29,6 +29,10 @@
             "title": {
               "en": "Unit Item"
             }
+          },
+          "suffix": {
+            "en": "Unit Type",
+            "fa": "نوع واحد"
           }
         },
         "null": {

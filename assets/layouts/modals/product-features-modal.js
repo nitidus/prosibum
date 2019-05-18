@@ -180,7 +180,8 @@ const ProductFeaturesModal = (props) => {
         if (
           (props.productFeaturesModal.units.length === 0) &&
           (Object.keys(props.productFeaturesModal.selectedUnit).length === 0) &&
-          (props.productFeaturesModal.unitsLoading === false)
+          (props.productFeaturesModal.unitsLoading === false) &&
+          (attitude.visibility === true)
         ){
           props.fetchAvailableProductUnits();
         }
@@ -195,6 +196,17 @@ const ProductFeaturesModal = (props) => {
                   }
                 })
               });
+
+        if (
+          (_AVAILABLE_UNITS.length > 0) &&
+          (Object.keys(props.productFeaturesModal.selectedUnit).length > 0) &&
+          (props.productFeaturesModal.unitsLoading === false) &&
+          (attitude.visibility === true)
+        ){
+          if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
+            props.setSelectedUnit(_AVAILABLE_UNITS[0]);
+          }
+        }
 
         let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
             _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
@@ -268,6 +280,7 @@ const ProductFeaturesModal = (props) => {
                 }}
                 onPress={() => {
                   attitude.onProgressSuccess(props.productFeaturesModal.selectedUnit);
+
                   MODAL.ON_BLUR(false);
                 }} />
             )

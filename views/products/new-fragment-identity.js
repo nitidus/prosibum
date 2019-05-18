@@ -5,7 +5,7 @@ const _Screen = Dimensions.get('window');
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, ProductFeaturesModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, Options, ProductFeaturesModal } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewFragment,
@@ -69,7 +69,53 @@ class NewFragmentIdentity extends Component<{}> {
       var _UNITS_CONTENT;
 
       if (props.newFragment.units.length > 0){
-        _UNITS_CONTENT = <Text>hello</Text>
+        let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newFragment.units.length > 1)? ((Platform.OS !== 'ios')? 4: 2): 2);
+
+        if (Platform.OS !== 'ios'){
+          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+        }
+
+        _UNITS_CONTENT = (
+          <Carousel
+            name="{Functions._convertTokenToKeyword(__CONSTANTS.content.carousel.state.normal.title.en)}"
+            data={props.newFragment.units}
+            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
+            style={Styles.DetailContainer}
+            onLayout={({ item, index }) => {
+              var _UNIT_DELETE_ACTION = () => props.setUnits(props.newFragment.units.filter((checkingItem, j) => {
+                return (checkingItem._id !== item._id);
+              }));
+
+              return (
+                <Input
+                  type={__CONSTANTS.content.firstCarousel.type}
+                  style={[
+                    Styles.UnitsDetailItemContainer,
+                    Styles.LTR_ContentAlignment
+                  ]}
+                  gradient={Global.colors.pair.tilan}
+                  onLongPress={_UNIT_DELETE_ACTION}>
+                    <View
+                      style={Styles.DetailItemMasterInfoContent}>
+                        <View
+                          style={Styles.BriefDetailTitleContainer}>
+                          <Text
+                            style={Styles.BriefDetailTitle}>
+                              {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, _LANGUAGE, 'unit')}
+                          </Text>
+                          <Text
+                            style={Styles.BriefDetailTitleSuffix}>
+                              {Functions._convertKeywordToToken(__CONSTANTS.content.firstCarousel.state.normal.suffix[_LANGUAGE])}
+                          </Text>
+                        </View>
+                    </View>
+                </Input>
+              );
+            }}
+            {..._FIRST_CAROUSEL_OTHER_OPTIONS} />
+        );
       }else{
         _UNITS_CONTENT = (
           <Link

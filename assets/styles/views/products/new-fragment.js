@@ -180,6 +180,12 @@ module.exports = StyleSheet.create({
     height: 178,
     padding: 18
   },
+  UnitsDetailItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    alignItems: 'flex-start',
+    height: 118,
+    padding: 18
+  },
   CustomizedFeatureDetailItemContainer: {
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     alignItems: 'flex-start',
