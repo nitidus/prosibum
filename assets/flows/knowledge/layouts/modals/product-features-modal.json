@@ -125,8 +125,8 @@
       "submitInput": {
         "type": "BUTTON",
         "prefix": {
-          "en": "Append",
-          "fa": "اضافه کردن"
+          "en": "Append Unit",
+          "fa": "اضافه کردن واحد"
         }
       }
     }

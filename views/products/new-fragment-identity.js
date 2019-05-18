@@ -38,7 +38,7 @@ class NewFragmentIdentity extends Component<{}> {
 
     var _FORM_FIELDS_VALIDITY = false;
 
-    if ((_PROPS.name != '') && (_PROPS.features.length > 0)){
+    if ((_PROPS.name != '') && (_PROPS.units.length > 0)){
       if (_PROPS.name.length > 7){
         if (Object.keys(_PROPS.product).length > 0){
           const _FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX = new RegExp(`\.*${_PROPS.product.name}\.*`, 'gi');
@@ -61,15 +61,15 @@ class NewFragmentIdentity extends Component<{}> {
 
       const _PRODUCT_CATEGORY = (Object.keys(props.newFragment.product).length > 0)? (props.newFragment.product.category.cumulative_key || props.newFragment.product.category.key): '',
             _VALIDATED = this._componentWillCheckValidation(props),
-            _PRODUCT_FEATURES_OTHER_PROPS = {
+            _PRODUCT_UNITS_OTHER_PROPS = {
               language: props.newFragment.language,
-              features: props.newFragment.features
+              units: props.newFragment.units
             };
 
       var _UNITS_CONTENT;
 
-      if (props.newFragment.features.length > 0){
-
+      if (props.newFragment.units.length > 0){
+        _UNITS_CONTENT = <Text>hello</Text>
       }else{
         _UNITS_CONTENT = (
           <Link
@@ -109,11 +109,7 @@ class NewFragmentIdentity extends Component<{}> {
                     marginHorizontal: Styles.Content.marginHorizontal,
                     marginBottom: Styles.Content.marginVertical
                   }}
-                  onPress={async () => {
-                    const { navigation } = props;
-
-                    // await navigation.navigate('NewFragmentPrefilledFeatures');
-                  }} />
+                  onPress={() => props.setUnitsModalVisibility(true)} />
 
                 <Input
                   type={__CONSTANTS.content.submitButton.type}
@@ -132,12 +128,10 @@ class NewFragmentIdentity extends Component<{}> {
             </View>
 
             <ProductFeaturesModal
-              visibility={/*props.newFragment.featuresModalVisibility*/true}
-              onBlur={() => props.setFeaturesModalVisibility(false)}
-              onProgressSuccess={(response) => {
-                //hello
-              }}
-              {..._PRODUCT_FEATURES_OTHER_PROPS} />
+              visibility={props.newFragment.unitsModalVisibility}
+              onBlur={() => props.setUnitsModalVisibility(false)}
+              onProgressSuccess={(response) => props.appendUnit(response)}
+              {..._PRODUCT_UNITS_OTHER_PROPS} />
         </Container>
       );
     }else{

@@ -104,8 +104,8 @@ const ProductFeaturesModal = (props) => {
     attitude.onProgressSuccess = props.onProgressSuccess || props.onProgressComplete || props.onProgressDone || props.onTaskSuccess || props.onTaskComplete || props.onTaskDone || props.onDutySuccess || props.onDutyComplete || props.onDutyDone || props.onObligationSuccess || props.onObligationComplete || props.onObligationDone || props.onSuccessProgress || props.onCompleteProgress || props.onDoneProgress || props.onSuccessTask || props.onCompleteTask || props.onDoneTask || props.onSuccessDuty || props.onCompleteDuty || props.onDoneDuty || props.onSuccessObligation || props.onCompleteObligation || props.onDoneObligation;
   }
 
-  if (typeof props.features != 'undefined'){
-    attitude.features = props.features;
+  if (typeof props.units != 'undefined'){
+    attitude.units = props.units;
   }
 
   attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
@@ -116,10 +116,9 @@ const ProductFeaturesModal = (props) => {
       (Object.keys(props.productFeaturesModal.currentFeature).length === 0) &&
       (props.productFeaturesModal.featuresLoading === false)
     ){
-      if (typeof attitude.features != 'undefined'){
-        if (attitude.features.length !== props.productFeaturesModal.features.length){
-          props.setFeatures(attitude.features);
-          props.setCurrentFeature((attitude.features.length > 0)? attitude.features[0]: {});
+      if (typeof attitude.units != 'undefined'){
+        if (attitude.units.length !== props.productFeaturesModal.features.length){
+          props.setFeatures(attitude.units);
         }
       }else{
         props.fetchAvailableProductFeatures();
@@ -177,7 +176,7 @@ const ProductFeaturesModal = (props) => {
           disable={true}/>
       );
     }else{
-      if (typeof attitude.features != 'undefined'){
+      if (typeof attitude.units != 'undefined'){
         if (
           (props.productFeaturesModal.units.length === 0) &&
           (Object.keys(props.productFeaturesModal.selectedUnit).length === 0) &&
@@ -191,8 +190,8 @@ const ProductFeaturesModal = (props) => {
               }),
               _AVAILABLE_UNITS = props.productFeaturesModal.units.filter((unit, i) => {
                 return props.productFeaturesModal.features.every(feature => {
-                  if (typeof feature.unit_id != 'undefined'){
-                    return (feature.unit_id !== unit._id);
+                  if (typeof feature._id != 'undefined'){
+                    return (feature._id !== unit._id);
                   }
                 })
               });
@@ -205,7 +204,9 @@ const ProductFeaturesModal = (props) => {
           _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
         }
 
-        if (_AVAILABLE_UNITS > 0){
+        if (_AVAILABLE_UNITS.length > 0){
+          const _SELECTED_UNIT = (Object.keys(props.productFeaturesModal.selectedUnit).length > 0)? props.productFeaturesModal.selectedUnit.key: '';
+
           _MODAL_CONTENT = [
             (
               <Carousel
@@ -257,7 +258,19 @@ const ProductFeaturesModal = (props) => {
                 onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.units[selectedItemIndex])}
                 {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
             ),
-            //appending unit based modal button and validation of it
+            (
+              <Input
+                type={__CONSTANTS.modalContainer.content.submitInput.type}
+                gradient={Global.colors.pair.ongerine}
+                value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._getAppropriateTaxonomyBaseOnLocale(_SELECTED_UNIT, attitude.language)}`}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal
+                }}
+                onPress={() => {
+                  attitude.onProgressSuccess(props.productFeaturesModal.selectedUnit);
+                  MODAL.ON_BLUR(false);
+                }} />
+            )
           ];
         }else{
           _MODAL_CONTENT = (

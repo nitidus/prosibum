@@ -65,16 +65,16 @@ const mapDispatchToProps = (dispatch) => {
         payload: warehouse
       })
     },
-    setFeatures: (features) => {
+    setUnits: (units) => {
       dispatch({
-        type: NEW_FRAGMENT.SET_FEATURES,
-        payload: features
+        type: NEW_FRAGMENT.SET_UNITS,
+        payload: units
       })
     },
-    appendFeature: (feature) => {
+    appendUnit: (unit) => {
       dispatch({
-        type: NEW_FRAGMENT.APPEND_FEATURE,
-        payload: feature
+        type: NEW_FRAGMENT.APPEND_UNIT,
+        payload: unit
       })
     },
     setPrices: (prices) => {
@@ -119,9 +119,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: visibilityStatus
       })
     },
-    setFeaturesModalVisibility: (visibilityStatus) => {
+    setUnitsModalVisibility: (visibilityStatus) => {
       dispatch({
-        type: NEW_FRAGMENT.SET_FEATURES_MODAL_VISIBILITY,
+        type: NEW_FRAGMENT.SET_UNITS_MODAL_VISIBILITY,
         payload: visibilityStatus
       })
     },
@@ -150,6 +150,12 @@ const mapDispatchToProps = (dispatch) => {
     setQueryItemsLoadingStatus: (status) => {
       dispatch({
         type: NEW_FRAGMENT.QUERY_BASED_PRODUCTS_LOADING_STATUS,
+        payload: status
+      })
+    },
+    setFeaturesLoadingStatus: (status) => {
+      dispatch({
+        type: NEW_FRAGMENT.FEATURES_LOADING_STATUS,
         payload: status
       })
     },

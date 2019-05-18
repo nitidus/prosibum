@@ -9,14 +9,14 @@ const initialState = {
         name: '',
         currentWarehouse: {},
         warehouses: [],
-        features: [],
+        units: [],
         predefinedfeatures: [],
         prices: [],
         onFetchingModePrice: {},
         shippingPlans: [],
         onFetchingModeShippingPlan: {},
         warehouseModalVisibility: false,
-        featuresModalVisibility: false,
+        unitsModalVisibility: false,
         unitDependedModalVisibility: false,
         shippingMethodsModalVisibility: false,
         warehousesLoading: false,
@@ -88,17 +88,17 @@ export default (state = initialState, action) => {
         ]
       };
       break;
-    case NEW_FRAGMENT.SET_FEATURES:
+    case NEW_FRAGMENT.SET_UNITS:
       return {
         ...state,
-        features: action.payload
+        units: action.payload
       };
       break;
-    case NEW_FRAGMENT.APPEND_FEATURE:
+    case NEW_FRAGMENT.APPEND_UNIT:
       return {
         ...state,
-        features: [
-          ...state.features,
+        units: [
+          ...state.units,
           action.payload
         ]
       };
@@ -162,10 +162,10 @@ export default (state = initialState, action) => {
         warehouseModalVisibility: action.payload
       };
       break;
-    case NEW_FRAGMENT.SET_PRODUCT_FEATURES_MODAL_VISIBILITY:
+    case NEW_FRAGMENT.SET_UNITS_MODAL_VISIBILITY:
       return {
         ...state,
-        featuresModalVisibility: action.payload
+        unitsModalVisibility: action.payload
       };
       break;
     case NEW_FRAGMENT.SET_UNIT_DEPENDED_MODAL_VISIBILITY:
