@@ -4,6 +4,7 @@ const { PRODUCT_FEATURES_MODAL } = LAYOUTS;
 const initialState = {
   currentFeature: {},
   selectedUnit: {},
+  selectedWarehouse: {},
   minimumOrderQuantity: 0,
   maximumOrderQuantity: 0,
   quantity: 0,
@@ -12,8 +13,10 @@ const initialState = {
   customizedFeatureValue: '',
   features: [],
   units: [],
+  warehouses: [],
   featuresLoading: false,
   unitsLoading: false,
+  warehousesLoading: false,
   connected: {
     status: true,
     content: ''
@@ -53,6 +56,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selectedUnit: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_SELECTED_WAREHOUSE:
+      return {
+        ...state,
+        selectedWarehouse: action.payload
       };
       break;
     case PRODUCT_FEATURES_MODAL.SET_MINIMUM_ORDER_QUANTITY:
@@ -103,6 +112,12 @@ export default (state = initialState, action) => {
         units: action.payload
       };
       break;
+    case PRODUCT_FEATURES_MODAL.FETCH_AVAILABLE_PRODUCT_WAREHOUSES:
+      return {
+        ...state,
+        warehouses: action.payload
+      };
+      break;
     case PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_FEATURES_LOADING_STATUS:
       return {
         ...state,
@@ -113,6 +128,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         unitsLoading: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_WAREHOUSES_LOADING_STATUS:
+      return {
+        ...state,
+        warehousesLoading: action.payload
       };
       break;
     case PRODUCT_FEATURES_MODAL.SET_CONNECTED_STATUS:

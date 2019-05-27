@@ -8,6 +8,7 @@ import new_product_shipping_methods from './products/new-product-shipping-method
 //Fragments
 import new_fragment_detection from './products/new-fragment-detection.json';
 import new_fragment_identity from './products/new-fragment-identity.json';
+import new_fragment_features from './products/new-fragment-features.json';
 
 module.exports = {
   products_sub_views: {
@@ -15,6 +16,7 @@ module.exports = {
     new_product_identity,
     new_fragment_identity,
     new_product_features,
+    new_fragment_features,
     new_product_photos,
     new_product_prices,
     new_product_shipping_methods
@@ -23,6 +25,7 @@ module.exports = {
   new_product_identity,
   new_fragment_identity,
   new_product_features,
+  new_fragment_features,
   new_product_photos,
   new_product_prices,
   new_product_shipping_methods

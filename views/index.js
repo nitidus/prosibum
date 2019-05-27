@@ -27,6 +27,7 @@ import Wallets from './dashboard/wallets';
   //New Fragment Subsets
   import NewFragmentDetection from './products/new-fragment-detection';
   import NewFragmentIdentity from './products/new-fragment-identity';
+  import NewFragmentFeatures from './products/new-fragment-features';
 
 //Authentication Screens
 import Login from './authentication/login';
@@ -45,6 +46,7 @@ const ProductsStack = createStackNavigator({
   NewFragmentDetection,
   NewFragmentIdentity,
   NewProductIdentity,
+  NewFragmentFeatures,
   NewProductFeatures,
   NewProductPhotos,
   NewProductPrices,

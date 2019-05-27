@@ -76,8 +76,15 @@ const mapDispatchToProps = (dispatch) => {
         payload: unit
       })
     },
+    setSelectedWarehouse: (warehouse) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_SELECTED_WAREHOUSE,
+        payload: warehouse
+      })
+    },
     fetchAvailableProductFeatures: async () => CMD._getAvailableProductFeatures(dispatch),
     fetchAvailableProductUnits: async () => CMD._getAvailableProductUnits(dispatch),
+    fetchAvailableProductWarehouses: async () => CMD._getAvailableProductWarehouses(dispatch),
     setFeaturesLoadingStatus: (loadingStatus) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_FEATURES_LOADING_STATUS,
@@ -87,6 +94,12 @@ const mapDispatchToProps = (dispatch) => {
     setUnitsLoadingStatus: (loadingStatus) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_UNITS_LOADING_STATUS,
+        payload: loadingStatus
+      })
+    },
+    setWarehousesLoadingStatus: (loadingStatus) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_WAREHOUSES_LOADING_STATUS,
         payload: loadingStatus
       })
     }

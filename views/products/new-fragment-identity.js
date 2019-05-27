@@ -79,7 +79,7 @@ class NewFragmentIdentity extends Component<{}> {
 
         _UNITS_CONTENT = (
           <Carousel
-            name="{Functions._convertTokenToKeyword(__CONSTANTS.content.carousel.state.normal.title.en)}"
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.normal.title.en)}
             data={props.newFragment.units}
             itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
             style={Styles.DetailContainer}
@@ -168,7 +168,7 @@ class NewFragmentIdentity extends Component<{}> {
                   onPress={async () => {
                     const { navigation } = props;
 
-                    await navigation.navigate('NewFragmentPrefilledFeatures');
+                    await navigation.navigate('NewFragmentFeatures');
                   }}
                   forcedDisable={_VALIDATED} />
             </View>

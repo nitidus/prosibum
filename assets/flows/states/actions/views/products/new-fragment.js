@@ -47,22 +47,16 @@ const mapDispatchToProps = (dispatch) => {
         payload: items
       })
     },
-    setCurrentWarehouse: (warehouse) => {
+    setFeatures: (features) => {
       dispatch({
-        type: NEW_FRAGMENT.SET_CURRENT_WAREHOUSE,
-        payload: warehouse
+        type: NEW_FRAGMENT.SET_FEATURES,
+        payload: features
       })
     },
-    setWarehouses: (warehouses) => {
+    appendFeature: (feature) => {
       dispatch({
-        type: NEW_FRAGMENT.SET_WAREHOUSES,
-        payload: warehouses
-      })
-    },
-    appendWarehouse: (warehouse) => {
-      dispatch({
-        type: NEW_FRAGMENT.APPEND_WAREHOUSE,
-        payload: warehouse
+        type: NEW_FRAGMENT.APPEND_FEATURE,
+        payload: feature
       })
     },
     setUnits: (units) => {
@@ -113,15 +107,15 @@ const mapDispatchToProps = (dispatch) => {
         payload: shippingPlan
       })
     },
-    setWarehouseModalVisibility: (visibilityStatus) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_WAREHOUSE_MODAL_VISIBILITY,
-        payload: visibilityStatus
-      })
-    },
     setUnitsModalVisibility: (visibilityStatus) => {
       dispatch({
         type: NEW_FRAGMENT.SET_UNITS_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
+    setFeaturesModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: NEW_FRAGMENT.SET_FEATURES_MODAL_VISIBILITY,
         payload: visibilityStatus
       })
     },
@@ -137,16 +131,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: visibilityStatus
       })
     },
-    fetchAvailableWarehouses: async (token) =>  CMD._getAvailableWarehousesWithToken(token, dispatch),
     fetchAvailableProductsBasedOnQuery: async (query) =>  CMD._getAvailableProductsBasedOnQuery(query, dispatch),
     fetchAvailableProductsBasedOnQueryOnDemand: async (query) => CMD._getAvailableProductsBasedOnQueryOnDemand(query, dispatch),
     appendFragment: async (fragment) =>  CMD._appendFragmentOnDemand(fragment, dispatch),
-    setWarehousesLoadingStatus: (status) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_WAREHOUSES_LOADING_STATUS,
-        payload: status
-      })
-    },
     setQueryItemsLoadingStatus: (status) => {
       dispatch({
         type: NEW_FRAGMENT.QUERY_BASED_PRODUCTS_LOADING_STATUS,

@@ -7,16 +7,15 @@ const initialState = {
         queryItems: [],
         product: {},
         name: '',
-        currentWarehouse: {},
-        warehouses: [],
+        features: [],
         units: [],
-        predefinedfeatures: [],
         prices: [],
         onFetchingModePrice: {},
         shippingPlans: [],
         onFetchingModeShippingPlan: {},
         warehouseModalVisibility: false,
         unitsModalVisibility: false,
+        featuresModalVisibility: false,
         unitDependedModalVisibility: false,
         shippingMethodsModalVisibility: false,
         warehousesLoading: false,
@@ -67,23 +66,17 @@ export default (state = initialState, action) => {
         name: action.payload
       };
       break;
-    case NEW_FRAGMENT.SET_CURRENT_WAREHOUSE:
+    case NEW_FRAGMENT.SET_FEATURES:
       return {
         ...state,
-        currentWarehouse: action.payload
+        features: action.payload
       };
       break;
-    case NEW_FRAGMENT.SET_WAREHOUSES:
+    case NEW_FRAGMENT.APPEND_FEATURE:
       return {
         ...state,
-        warehouses: action.payload
-      };
-      break;
-    case NEW_FRAGMENT.APPEND_WAREHOUSE:
-      return {
-        ...state,
-        warehouses: [
-          ...state.warehouses,
+        features: [
+          ...state.features,
           action.payload
         ]
       };
@@ -156,16 +149,16 @@ export default (state = initialState, action) => {
         onFetchingModeShippingPlan: action.payload
       };
       break;
-    case NEW_FRAGMENT.SET_WAREHOUSE_MODAL_VISIBILITY:
-      return {
-        ...state,
-        warehouseModalVisibility: action.payload
-      };
-      break;
     case NEW_FRAGMENT.SET_UNITS_MODAL_VISIBILITY:
       return {
         ...state,
         unitsModalVisibility: action.payload
+      };
+      break;
+    case NEW_FRAGMENT.SET_FEATURES_MODAL_VISIBILITY:
+      return {
+        ...state,
+        featuresModalVisibility: action.payload
       };
       break;
     case NEW_FRAGMENT.SET_UNIT_DEPENDED_MODAL_VISIBILITY:

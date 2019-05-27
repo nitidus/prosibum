@@ -108,6 +108,10 @@ const ProductFeaturesModal = (props) => {
     attitude.units = props.units;
   }
 
+  if (typeof props.features != 'undefined'){
+    attitude.features = props.features;
+  }
+
   attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
 
   if (attitude.visibility === true){
@@ -119,6 +123,10 @@ const ProductFeaturesModal = (props) => {
       if (typeof attitude.units != 'undefined'){
         if (attitude.units.length !== props.productFeaturesModal.features.length){
           props.setFeatures(attitude.units);
+        }
+      }else if (typeof attitude.features != 'undefined') {
+        if (attitude.features.length !== props.productFeaturesModal.features.length){
+          props.setFeatures(attitude.features);
         }
       }else{
         props.fetchAvailableProductFeatures();
@@ -269,6 +277,201 @@ const ProductFeaturesModal = (props) => {
                 }}
                 onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.units[selectedItemIndex])}
                 {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
+            ),
+            (
+              <Input
+                type={__CONSTANTS.modalContainer.content.submitInput.type}
+                gradient={Global.colors.pair.ongerine}
+                value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._getAppropriateTaxonomyBaseOnLocale(_SELECTED_UNIT, attitude.language)}`}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal
+                }}
+                onPress={() => {
+                  attitude.onProgressSuccess(props.productFeaturesModal.selectedUnit);
+
+                  MODAL.ON_BLUR(false);
+                }} />
+            )
+          ];
+        }else{
+          _MODAL_CONTENT = (
+            <Link
+              containerStyle={[
+                Styles.Center_TextAlignment,
+                Styles.Center_ContentAlignment
+              ]}
+              value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
+          );
+        }
+      }else if (typeof attitude.features != 'undefined') {
+        if (
+          (props.productFeaturesModal.units.length === 0) &&
+          (Object.keys(props.productFeaturesModal.selectedUnit).length === 0) &&
+          (props.productFeaturesModal.unitsLoading === false) &&
+          (props.productFeaturesModal.warehouses.length === 0) &&
+          (Object.keys(props.productFeaturesModal.selectedWarehouse).length === 0) &&
+          (props.productFeaturesModal.warehousesLoading === false) &&
+          (attitude.visibility === true)
+        ){
+          props.fetchAvailableProductUnits();
+          props.fetchAvailableProductWarehouses();
+        }
+
+        const _SELECTED_UNIT_INDEX = props.productFeaturesModal.units.findIndex((unit, i) => {
+                return unit._id === props.productFeaturesModal.selectedUnit._id;
+              }),
+              _AVAILABLE_UNITS = props.productFeaturesModal.units.filter((unit, i) => {
+                return props.productFeaturesModal.features.every(feature => {
+                  if (typeof feature.unit_id != 'undefined'){
+                    return (feature.unit_id !== unit._id);
+                  }
+                })
+              }),
+              _SELECTED_WAREHOUSE_INDEX = props.productFeaturesModal.warehouses.findIndex((warehouse, i) => {
+                return warehouse._id === props.productFeaturesModal.selectedWarehouse._id;
+              }),
+              _AVAILABLE_WAREHOUSES = props.productFeaturesModal.warehouses.filter((warehouse, i) => {
+                return props.productFeaturesModal.features.every(feature => {
+                  if (typeof feature.warehouse != 'undefined'){
+                    return (feature.warehouse._id !== warehouse._id);
+                  }
+                })
+              });
+
+        // if (
+        //   (_AVAILABLE_UNITS.length > 0) &&
+        //   (Object.keys(props.productFeaturesModal.selectedUnit).length > 0) &&
+        //   (props.productFeaturesModal.unitsLoading === false) &&
+        //   (attitude.visibility === true)
+        // ){
+        //   if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
+        //     props.setSelectedUnit(_AVAILABLE_UNITS[0]);
+        //   }
+        // }
+        //
+        // if (
+        //   (_AVAILABLE_WAREHOUSES.length > 0) &&
+        //   (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0) &&
+        //   (props.productFeaturesModal.warehousesLoading === false) &&
+        //   (attitude.visibility === true)
+        // ){
+        //   if (props.productFeaturesModal.selectedWarehouse._id !== _AVAILABLE_WAREHOUSES[0]._id){
+        //     props.setSelectedWarehouse(_AVAILABLE_WAREHOUSES[0]);
+        //   }
+        // }
+
+        let _FIRST_CAROUSEL_OTHER_OPTIONS = _SECOND_CAROUSEL_OTHER_OPTIONS = {},
+            _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT = _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+        if (Platform.OS !== 'ios'){
+          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = _SECOND_CAROUSEL_OTHER_OPTIONS.loop = true;
+        }
+
+        if ((_AVAILABLE_UNITS.length > 0) && (_AVAILABLE_WAREHOUSES.length > 0)){
+          const _SELECTED_UNIT = (Object.keys(props.productFeaturesModal.selectedUnit).length > 0)? props.productFeaturesModal.selectedUnit.key: '',
+                _SELECTED_WAREHOUSE = (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0)? props.productFeaturesModal.selectedWarehouse.name: '';
+
+          _MODAL_CONTENT = [
+            (
+              <Carousel
+                name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
+                data={_AVAILABLE_UNITS}
+                firstItem={_SELECTED_UNIT_INDEX}
+                style={Styles.DetailContainer}
+                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
+                onLayout={({ item, index }) => {
+                  var _ITEM_GRADIENT = Global.colors.pair.ongerine;
+
+                  if (item._id === props.productFeaturesModal.selectedUnit._id){
+                    _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                  }
+
+                  return (
+                    <Input
+                      type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
+                      gradient={_ITEM_GRADIENT}
+                      style={Styles.DetailItemContainer}
+                      disable={true}>
+                      <View
+                        style={[
+                          Styles.DetailItemMasterInfoContent
+                        ]}>
+                          <Text
+                            style={[
+                              Styles.BriefDetailTitle
+                            ]}>
+                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])}
+                          </Text>
+                      </View>
+                      <View
+                        style={Styles.DetailItemMasterSubInfoContent}>
+                          <Icon
+                            name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
+                            color={Global.colors.single.romance} />
+
+                          <Text
+                            style={[
+                              Styles.BriefDetailRowText
+                            ]}>
+                              {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language)}
+                          </Text>
+                      </View>
+                    </Input>
+                  )
+                }}
+                onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.units[selectedItemIndex])}
+                {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
+            ),
+            (
+              <Carousel
+                name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
+                data={_AVAILABLE_WAREHOUSES}
+                firstItem={_SELECTED_WAREHOUSE_INDEX}
+                style={Styles.DetailContainer}
+                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
+                onLayout={({ item, index }) => {
+                  var _ITEM_GRADIENT = Global.colors.pair.ongerine;
+
+                  if (item._id === props.productFeaturesModal.selectedWarehouse._id){
+                    _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                  }
+
+                  return (
+                    <Input
+                      type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
+                      gradient={_ITEM_GRADIENT}
+                      style={Styles.DetailItemContainer}
+                      disable={true}>
+                      <View
+                        style={[
+                          Styles.DetailItemMasterInfoContent
+                        ]}>
+                          <Text
+                            style={[
+                              Styles.BriefDetailTitle
+                            ]}>
+                              {/*Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])*/'نام انبار'}
+                          </Text>
+                      </View>
+                      <View
+                        style={Styles.DetailItemMasterSubInfoContent}>
+                          <Icon
+                            name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
+                            color={Global.colors.single.romance} />
+
+                          <Text
+                            style={[
+                              Styles.BriefDetailRowText
+                            ]}>
+                              {item.name}
+                          </Text>
+                      </View>
+                    </Input>
+                  )
+                }}
+                onSnap={(selectedItemIndex) => props.setSelectedWarehouse(props.productFeaturesModal.warehouses[selectedItemIndex])}
+                {..._SECOND_CAROUSEL_OTHER_OPTIONS}/>
             ),
             (
               <Input
