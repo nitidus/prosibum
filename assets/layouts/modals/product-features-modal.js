@@ -32,7 +32,7 @@ const _componentWillCheckValidation = (props) => {
     if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
       const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 2),
             _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2),
-            _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
+            _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 2);
 
       if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
         if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
@@ -48,7 +48,7 @@ const _componentWillCheckValidation = (props) => {
           if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
             const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 2),
                   _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2),
-                  _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
+                  _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 2);
 
             if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
               if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
@@ -393,6 +393,117 @@ const ProductFeaturesModal = (props) => {
                 _MAX_ORDER_QTY = (props.productFeaturesModal.maximumOrderQuantity > 0)? props.productFeaturesModal.maximumOrderQuantity: '',
                 _QTY = (props.productFeaturesModal.quantity > 0)? props.productFeaturesModal.quantity: '';
 
+          var _FINAL_BUTTON = (
+            <Input
+              type={__CONSTANTS.modalContainer.content.submitInput.type}
+              gradient={Global.colors.pair.ongerine}
+              value={__CONSTANTS.modalContainer.content.submitInput.fullName[attitude.language]}
+              style={{
+                marginHorizontal: Styles.Content.marginHorizontal
+              }}
+              onPress={() => {
+                const _FOUNDED_INDEX_OF_UNIT_FEATURE = props.productFeaturesModal.features.findIndex((singleFeature, k) => {
+                  return (Functions._convertTokenToKeyword(singleFeature.key) == 'unit');
+                });
+
+                if (_FOUNDED_INDEX_OF_UNIT_FEATURE > -1){
+                  attitude.onProgressSuccess({
+                    _id: Functions._generateNewBSONObjectID(),
+                    feature_id: props.productFeaturesModal.features[_FOUNDED_INDEX_OF_UNIT_FEATURE]._id,
+                    unit: props.productFeaturesModal.selectedUnit,
+                    warehouse: props.productFeaturesModal.selectedWarehouse,
+                    minimum_order_quantity: props.productFeaturesModal.minimumOrderQuantity,
+                    maximum_order_quantity: props.productFeaturesModal.maximumOrderQuantity,
+                    quantity: props.productFeaturesModal.quantity
+                  });
+
+                  MODAL.ON_BLUR(false);
+                }
+              }}
+              forcedDisable={_VALIDATED} />
+          );
+
+          if (_VALIDATED){
+            var _MESSAGE = '';
+
+            if ((props.productFeaturesModal.minimumOrderQuantity > 0) && (props.productFeaturesModal.maximumOrderQuantity > 0) && (props.productFeaturesModal.quantity > 0)){
+              const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.minimumOrderQuantity.toString(), 2),
+                    _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.maximumOrderQuantity.toString(), 2),
+                    _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.quantity.toString(), 2);
+
+              if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
+                if (props.productFeaturesModal.maximumOrderQuantity < props.productFeaturesModal.minimumOrderQuantity){
+                  _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.firstPart[attitude.language]}`;
+                }
+
+                if (props.productFeaturesModal.quantity < props.productFeaturesModal.minimumOrderQuantity){
+                  _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.secondPart[attitude.language]}`;
+                }
+              }else{
+                let countOfMessageItem = 0;
+
+                if (_IS_MAX_ORDER_QTY_VALID === false){
+                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.firstPart[attitude.language]}`;
+                  countOfMessageItem++;
+                }
+
+                if (_IS_MIN_ORDER_QTY_VALID === false){
+                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.secondPart[attitude.language]}`;
+                  countOfMessageItem++;
+                }
+
+                if (_IS_QTY_VALID === false){
+                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.thirdPart[attitude.language]}`;
+                  countOfMessageItem++;
+                }
+
+                if (countOfMessageItem > 1){
+                  _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.more[attitude.language]}`;
+                }else{
+                  _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.one[attitude.language]}`;
+                }
+              }
+            }else{
+              let countOfMessageItem = 0;
+
+              if (props.productFeaturesModal.maximumOrderQuantity === 0){
+                _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.firstPart[attitude.language]}`;
+                countOfMessageItem++;
+              }
+
+              if (props.productFeaturesModal.minimumOrderQuantity === 0){
+                _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.secondPart[attitude.language]}`;
+                countOfMessageItem++;
+              }
+
+              if (props.productFeaturesModal.quantity === 0){
+                _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.thirdPart[attitude.language]}`;
+                countOfMessageItem++;
+              }
+
+              if (countOfMessageItem > 1){
+                _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.more[attitude.language]}`;
+              }else{
+                _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.one[attitude.language]}`;
+              }
+            }
+
+            if (_MESSAGE != ''){
+              _FINAL_BUTTON = (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.submitInput.type}
+                  value={_MESSAGE}
+                  style={[
+                    Styles.WarningContainer,
+                    {
+                      marginBottom: Styles.Content.marginVertical
+                    }
+                  ]}
+                  textStyle={Styles.WarningContent} />
+              );
+            }
+          }
+
           _MODAL_CONTENT = [
             (
               <Carousel
@@ -542,35 +653,7 @@ const ProductFeaturesModal = (props) => {
                   onChangeText={(currentValue) => props.setQuantity(parseInt(currentValue))}
                   {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.options} />
             ),
-            (
-              <Input
-                type={__CONSTANTS.modalContainer.content.submitInput.type}
-                gradient={Global.colors.pair.ongerine}
-                value={__CONSTANTS.modalContainer.content.submitInput.fullName[attitude.language]}
-                style={{
-                  marginHorizontal: Styles.Content.marginHorizontal
-                }}
-                onPress={() => {
-                  const _FOUNDED_INDEX_OF_UNIT_FEATURE = props.productFeaturesModal.features.findIndex((singleFeature, k) => {
-                    return (Functions._convertTokenToKeyword(singleFeature.key) == 'unit');
-                  });
-
-                  if (_FOUNDED_INDEX_OF_UNIT_FEATURE > -1){
-                    attitude.onProgressSuccess({
-                      _id: Functions._generateNewBSONObjectID(),
-                      feature_id: props.productFeaturesModal.features[_FOUNDED_INDEX_OF_UNIT_FEATURE]._id,
-                      unit: props.productFeaturesModal.selectedUnit,
-                      warehouse: props.productFeaturesModal.selectedWarehouse,
-                      minimum_order_quantity: props.productFeaturesModal.minimumOrderQuantity,
-                			maximum_order_quantity: props.productFeaturesModal.maximumOrderQuantity,
-                			quantity: props.productFeaturesModal.quantity
-                    });
-
-                    MODAL.ON_BLUR(false);
-                  }
-                }}
-                forcedDisable={_VALIDATED} />
-            )
+            _FINAL_BUTTON
           ];
         }else{
           _MODAL_CONTENT = (

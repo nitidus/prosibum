@@ -82,6 +82,17 @@ module.exports = StyleSheet.create({
     height: 118,
     padding: 18
   },
+  WarningContainer: {
+    height: 'auto',
+    width: width - (_CUSTOM_CONTENT.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
+    marginBottom: _CUSTOM_CONTENT.marginBottom,
+    backgroundColor: colors.pair.ongerine.orangeYellow,
+    padding: 18
+  },
+  WarningContent: {
+    textAlign: 'center'
+  },
   DetailItemContent: {
     flexDirection: 'row',
     alignItems: 'center'

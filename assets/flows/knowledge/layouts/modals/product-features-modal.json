@@ -204,6 +204,70 @@
           "en": "Append composition of unit",
           "fa": "اضافه کردن ترکیب واحد اندازه‌گیری"
         }
+      },
+      "warning": {
+        "firstLevel": {
+          "firstPart": {
+            "en": "Maximum order quantity",
+            "fa": "حداکثر تعداد سفارش"
+          },
+          "secondPart": {
+            "en": "Minimum order quantity",
+            "fa": "حداقل تعداد سفارش"
+          },
+          "thirdPart": {
+            "en": "quantity",
+            "fa": "تعداد موجودی"
+          },
+          "verbComposition": {
+            "one": {
+              "en": "can not be empty.",
+              "fa": "نمی‌تواند خالی باشد."
+            },
+            "more": {
+              "en": "can not be empty.",
+              "fa": "نمی‌توانند خالی باشند."
+            }
+          }
+        },
+        "secondLevel": {
+          "firstPart": {
+            "en": "Maximum order quantity",
+            "fa": "حداکثر تعداد سفارش"
+          },
+          "secondPart": {
+            "en": "Minimum order quantity",
+            "fa": "حداقل تعداد سفارش"
+          },
+          "thirdPart": {
+            "en": "quantity",
+            "fa": "تعداد موجودی"
+          },
+          "verbComposition": {
+            "one": {
+              "en": "must be 2 digit at least.",
+              "fa": "باید حداقل ۲ رقم باشد."
+            },
+            "more": {
+              "en": "must be 2 digit at least.",
+              "fa": "باید حداقل ۲ رقم باشند."
+            }
+          }
+        },
+        "thirdLevel": {
+          "firstPart": {
+            "en": "Maximum order quantity must be more than Minimum order quantity.",
+            "fa": "حداکثر تعداد سفارش باید از حداقل تعداد سفارش بیشتر باشد."
+          },
+          "secondPart": {
+            "en": "Quantity must be more than Minimum order quantity.",
+            "fa": "تعداد موجودی باید از حداقل تعداد سفارش بیشتر باشد."
+          }
+        },
+        "delimiter": {
+          "en": ",",
+          "fa": "،"
+        }
       }
     }
   }

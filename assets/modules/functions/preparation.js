@@ -105,7 +105,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'NewFragmentIdentity': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'NewFragmentFeatures': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
