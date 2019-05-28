@@ -9,19 +9,19 @@ import { Global, Views } from '../../assets/styles/index';
 import { ActivityIndicator, Toast, Icon, Options, ProductUnitsDependedModal } from '../../assets/layouts/index';
 import { Input, InputGroup, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
-const Styles = Views.Products.NewProduct,
-      Container = ViewsContainer.Products.NewProductContainer;
+const Styles = Views.Products.NewFragment,
+      Container = ViewsContainer.Products.NewFragmentContainer;
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewProduct;
+const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewFragment;
 
 import { views_constants } from '../../assets/flows/knowledge/index';
-const __CONSTANTS = views_constants.products.new_product_prices;
+const __CONSTANTS = views_constants.products.new_fragment_prices;
 
 import { Functions } from '../../assets/modules/index';
 const { Preparation } = Functions;
 
-class NewProductPrices extends Component<{}> {
+class NewFragmentPrices extends Component<{}> {
   static navigationOptions = {
 
   };
@@ -29,7 +29,7 @@ class NewProductPrices extends Component<{}> {
   async componentDidMount() {
     const { props } = this;
 
-    if (Object.keys(props.newProduct.language).length === 0){
+    if (Object.keys(props.newFragment.language).length === 0){
       const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
             _LANGUAGE = _NATIVE_SETTINGS.language;
 
@@ -38,13 +38,13 @@ class NewProductPrices extends Component<{}> {
   }
 
   _componentWillCheckValidation(props) {
-    const _PROPS = props.newProduct;
+    const _PROPS = props.newFragment;
 
     var _FORM_FIELDS_VALIDITY = false;
 
     if (_PROPS.prices.length > 0){
       if (_PROPS.prices.every((price) => ((((price.name != '') && (price.value > 0))? ((Functions._checkIsAValidTextOnlyField(price.name, 7)) && (Functions._checkIsAValidCurrencyValueOnlyField(price.value.toString()))): false) &&
-      (Object.keys(price.unit).length > 0)))){
+      (Object.keys(price.feature).length > 0)))){
         _FORM_FIELDS_VALIDITY = true;
       }
     }
@@ -55,29 +55,28 @@ class NewProductPrices extends Component<{}> {
   render() {
     const { props } = this;
 
-    if (Object.keys(props.newProduct.language).length > 0){
-      var _PRICES_CONTENT,
-          _UNITS = [];
+    if (Object.keys(props.newFragment.language).length > 0){
+      var _PRICES_CONTENT;
 
-      const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
-            _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
+      const _LANGUAGE = Functions._convertTokenToKeyword(props.newFragment.language.key),
+            _PRODUCT_TITLE = (props.newFragment.name != '')? props.newFragment.name: __CONSTANTS.pilot.title[_LANGUAGE],
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_UNIT_DEPENDED_OTHER_PROPS = {
-              language: props.newProduct.language
+              language: props.newFragment.language
             };
 
-      if (props.newProduct.prices.length > 0){
+      if (props.newFragment.prices.length > 0){
         _PRICES_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={true}
             contentContainerStyle={Styles.ScrollableListContainer}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.title.en)}>
               {
-                props.newProduct.prices.map((priceItem, i, totalPrices) => {
+                props.newFragment.prices.map((priceItem, i, totalPrices) => {
                   var _CUSTOM_STYLE = {
                         marginHorizontal: Styles.Content.marginHorizontal
                       },
-                      _PRICE_DELETE_ACTION = () => props.setProductPrices(props.newProduct.prices.filter((checkingItem, j) => {
+                      _PRICE_DELETE_ACTION = () => props.setPrices(props.newFragment.prices.filter((checkingItem, j) => {
                         return (checkingItem._id != priceItem._id);
                       })),
                       PRICE_OPTION_CUSTOM_CONTAINER = {
@@ -90,8 +89,8 @@ class NewProductPrices extends Component<{}> {
 
                   const _PRICE_NAME = priceItem.name,
                         _PRICE_VALUE = (priceItem.value > 0)? priceItem.value.toString(): '',
-                        _PRICE_UNIT = (Object.keys(priceItem.unit).length > 0)? Functions._getAppropriateTaxonomyBaseOnLocale(priceItem.unit.key, _LANGUAGE): '',
-                        _PRICE_SUB_FIELD_ON_CHANGE_ACTION = (currentValue, changingKey) => props.setProductPrices(props.newProduct.prices.map((checkingPriceItem, j) => {
+                        _PRICE_UNIT = (Object.keys(priceItem.feature).length > 0)? `${Functions._getAppropriateTaxonomyBaseOnLocale(priceItem.feature.unit.key, _LANGUAGE)}${((I18nManager.isRTL)? '،': ',')} ${priceItem.feature.warehouse.name}`: '',
+                        _PRICE_SUB_FIELD_ON_CHANGE_ACTION = (currentValue, changingKey) => props.setPrices(props.newFragment.prices.map((checkingPriceItem, j) => {
                           if (checkingPriceItem._id === priceItem._id){
                             var _TARGET_PRICE_CHANGED_NODE = checkingPriceItem;
 
@@ -145,7 +144,7 @@ class NewProductPrices extends Component<{}> {
                               onPress={() => {
                                 Keyboard.dismiss();
                                 props.setOnFetchingModePrice(priceItem);
-                                props.setProductUnitDependedModalVisibility(true);
+                                props.setUnitDependedModalVisibility(true);
                               }}
                               disable={true} />
                         </InputGroup>
@@ -154,37 +153,37 @@ class NewProductPrices extends Component<{}> {
                 })
               }
 
-                <Input
-                  type={__CONSTANTS.content.appendHandlerButton.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.appendHandlerButton.state.normal.title.en)}
-                  value={__CONSTANTS.content.appendHandlerButton.state.normal.title[_LANGUAGE]}
-                  gradient={Global.colors.pair.ongerine}
-                  style={{
-                    marginHorizontal: Styles.Content.marginHorizontal,
-                    marginBottom: Styles.Content.marginVertical
-                  }}
-                  onPress={() => props.appendProductPrice({
-                    _id: Functions._generateNewBSONObjectID(),
-                    name: '',
-                    value: 0,
-                    unit: {},
-                    animation: new Animated.Value(0)
-                  })} />
+              <Input
+                type={__CONSTANTS.content.appendHandlerButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.appendHandlerButton.state.normal.title.en)}
+                value={__CONSTANTS.content.appendHandlerButton.state.normal.title[_LANGUAGE]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal,
+                  marginBottom: Styles.Content.marginVertical
+                }}
+                onPress={() => props.appendPrice({
+                  _id: Functions._generateNewBSONObjectID(),
+                  name: '',
+                  value: 0,
+                  feature: {},
+                  animation: new Animated.Value(0)
+                })} />
 
-                <Input
-                  type={__CONSTANTS.content.submitButton.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-                  value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
-                  gradient={Global.colors.pair.ongerine}
-                  style={{
-                    marginHorizontal: Styles.Content.marginHorizontal
-                  }}
-                  onPress={() => {
-                    const { navigation } = props;
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal
+                }}
+                onPress={() => {
+                  const { navigation } = props;
 
-                    navigation.navigate('NewProductShippingMethods');
-                  }}
-                  forcedDisable={_VALIDATED} />
+                  navigation.navigate('NewFragmentShippingMethods');
+                }}
+                forcedDisable={_VALIDATED} />
           </ScrollView>
         );
       }else{
@@ -201,50 +200,42 @@ class NewProductPrices extends Component<{}> {
         );
       }
 
-      if (props.newProduct.features.length > 0){
-        _UNITS = props.newProduct.features.filter((featureItem, i) => {
-          const _FEATURE_KEY = Functions._convertTokenToKeyword(featureItem.feature.key);
-
-          return (_FEATURE_KEY == 'unit');
-        });
-      }
-
       return (
-      <Container
-        title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
-        subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
-        rightIcon={__CONSTANTS.pilot.rightIcon}
-        onRightIconPress={() => props.appendProductPrice({
-          _id: Functions._generateNewBSONObjectID(),
-          name: '',
-          value: 0,
-          unit: {},
-          animation: new Animated.Value(0)
-        })}
-        {...props}>
-          {_PRICES_CONTENT}
+        <Container
+          title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
+          subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
+          rightIcon={__CONSTANTS.pilot.rightIcon}
+          onRightIconPress={() => props.appendPrice({
+            _id: Functions._generateNewBSONObjectID(),
+            name: '',
+            value: 0,
+            feature: {},
+            animation: new Animated.Value(0)
+          })}
+          {...props}>
+            {_PRICES_CONTENT}
 
-          <ProductUnitsDependedModal
-            data={_UNITS}
-            visibility={props.newProduct.productUnitDependedModalVisibility}
-            onBlur={() => props.setProductUnitDependedModalVisibility(false)}
-            onProgressSuccess={(response) => props.setProductPrices(props.newProduct.prices.map((priceItem, i) => {
-              const _ON_FETCHING_MODE_PRICE = props.newProduct.onFetchingModePrice;
+            <ProductUnitsDependedModal
+              data={props.newFragment.features}
+              visibility={props.newFragment.unitDependedModalVisibility}
+              onBlur={() => props.setUnitDependedModalVisibility(false)}
+              onProgressSuccess={(response) => props.setPrices(props.newFragment.prices.map((priceItem, i) => {
+                const _ON_FETCHING_MODE_PRICE = props.newFragment.onFetchingModePrice;
 
-              if (priceItem._id === _ON_FETCHING_MODE_PRICE._id){
-                const _TARGET_PRICE_NODE = {
-                  ...priceItem,
-                  unit: response.unit
-                };
+                if (priceItem._id === _ON_FETCHING_MODE_PRICE._id){
+                  const _TARGET_PRICE_NODE = {
+                    ...priceItem,
+                    feature: response
+                  };
 
-                return _TARGET_PRICE_NODE;
-              }else{
-                return priceItem;
-              }
-            }))}
-            {..._PRODUCT_UNIT_DEPENDED_OTHER_PROPS} />
-      </Container>
-    );
+                  return _TARGET_PRICE_NODE;
+                }else{
+                  return priceItem;
+                }
+              }))}
+              {..._PRODUCT_UNIT_DEPENDED_OTHER_PROPS} />
+        </Container>
+      );
     }else{
       return (
         <ActivityIndicator/>
@@ -253,4 +244,4 @@ class NewProductPrices extends Component<{}> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProductPrices);
+export default connect(mapStateToProps, mapDispatchToProps)(NewFragmentPrices);

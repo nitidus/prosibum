@@ -21,13 +21,13 @@ import Wallets from './dashboard/wallets';
   import NewProductIdentity from './products/new-product-identity';
   import NewProductFeatures from './products/new-product-features';
   import NewProductPhotos from './products/new-product-photos';
-  import NewProductPrices from './products/new-product-prices';
-  import NewProductShippingMethods from './products/new-product-shipping-methods';
 
   //New Fragment Subsets
   import NewFragmentDetection from './products/new-fragment-detection';
   import NewFragmentIdentity from './products/new-fragment-identity';
   import NewFragmentFeatures from './products/new-fragment-features';
+  import NewFragmentPrices from './products/new-fragment-prices';
+  import NewFragmentShippingMethods from './products/new-fragment-shipping-methods';
 
 //Authentication Screens
 import Login from './authentication/login';
@@ -49,8 +49,8 @@ const ProductsStack = createStackNavigator({
   NewFragmentFeatures,
   NewProductFeatures,
   NewProductPhotos,
-  NewProductPrices,
-  NewProductShippingMethods
+  NewFragmentPrices,
+  NewFragmentShippingMethods
 }, {
   headerMode: 'none'
 });

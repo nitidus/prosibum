@@ -94,7 +94,7 @@ module.exports = StyleSheet.create({
   },
   DetailItemContainer: {
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
-    height: 178,
+    height: 228,
     padding: 18
   },
   DetailItemContent: {

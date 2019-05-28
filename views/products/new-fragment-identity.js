@@ -124,6 +124,63 @@ class NewFragmentIdentity extends Component<{}> {
         );
       }
 
+      let _FINAL_BUTTON = (
+        <Input
+          type={__CONSTANTS.content.submitButton.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+          value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
+          gradient={Global.colors.pair.ongerine}
+          style={{
+            marginHorizontal: Styles.Content.marginHorizontal
+          }}
+          onPress={async () => {
+            const { navigation } = props;
+
+            await navigation.navigate('NewFragmentFeatures');
+          }}
+          forcedDisable={_VALIDATED} />
+      );
+
+      if (_VALIDATED){
+        var _MESSAGE = '';
+
+        if (props.newFragment.name != ''){
+          if (props.newFragment.name.length > 7){
+            if (Object.keys(props.newFragment.product).length > 0){
+              const _FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX = new RegExp(`\.*${props.newFragment.product.name}\.*`, 'gi');
+
+              if (props.newFragment.name.match(_FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX) === null){
+                _MESSAGE += __CONSTANTS.content.firstInput.warnning.third[_LANGUAGE];
+              }
+            }
+          }else{
+            _MESSAGE += __CONSTANTS.content.firstInput.warnning.second[_LANGUAGE];
+          }
+        }else{
+          _MESSAGE += __CONSTANTS.content.firstInput.warnning.first[_LANGUAGE];
+
+          if (props.newFragment.units.length === 0){
+            _MESSAGE += `\n ${__CONSTANTS.content.firstCarousel.warnning[_LANGUAGE]}`;
+          }
+        }
+
+        if (_MESSAGE != ''){
+          _FINAL_BUTTON = (
+            <Input
+              type={__CONSTANTS.content.submitButton.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+              value={_MESSAGE}
+              style={[
+                Styles.WarningContainer,
+                {
+                  marginBottom: Styles.Content.marginVertical
+                }
+              ]}
+              textStyle={Styles.WarningContent} />
+          );
+        }
+      }
+
       return (
         <Container
           title={Functions._convertKeywordToToken(__CONSTANTS.pilot.title[_LANGUAGE])}
@@ -157,20 +214,7 @@ class NewFragmentIdentity extends Component<{}> {
                   }}
                   onPress={() => props.setUnitsModalVisibility(true)} />
 
-                <Input
-                  type={__CONSTANTS.content.submitButton.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-                  value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
-                  gradient={Global.colors.pair.ongerine}
-                  style={{
-                    marginHorizontal: Styles.Content.marginHorizontal
-                  }}
-                  onPress={async () => {
-                    const { navigation } = props;
-
-                    await navigation.navigate('NewFragmentFeatures');
-                  }}
-                  forcedDisable={_VALIDATED} />
+                {_FINAL_BUTTON}
             </View>
 
             <ProductFeaturesModal

@@ -45,6 +45,14 @@
                   "name": "grading"
                 }
               }
+            },
+            "secondContent": {
+              "title": {
+                "suffix": {
+                  "en": "Warehouse Name",
+                  "fa": "نام انبار"
+                }
+              }
             }
           },
           "null": {

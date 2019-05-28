@@ -111,7 +111,7 @@ const ProductShippingMethodsModal = (props) => {
     const _SELECTED_INDEX = props.productShippingMethodsModal.shippingMethods.findIndex((shippingMethod, i) => {
             return shippingMethod._id === props.productShippingMethodsModal.selectedShippingMethod._id;
           }),
-          _SELECTED_SHIPPING_METHOD = props.productShippingMethodsModal.selectedShippingMethod.key || '';
+          _SELECTED_SHIPPING_METHOD = props.productShippingMethodsModal.selectedShippingMethod.value || '';
 
     let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
         _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productShippingMethodsModal.shippingMethods.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
@@ -130,7 +130,7 @@ const ProductShippingMethodsModal = (props) => {
           style={Styles.DetailContainer}
           itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
           onLayout={({ item, index }) => {
-            const _SHIPPING_METHOD = item.key;
+            const _SHIPPING_METHOD = item.value;
 
             var _ITEM_GRADIENT = Global.colors.pair.ongerine;
 

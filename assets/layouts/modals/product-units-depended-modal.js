@@ -114,7 +114,7 @@ const ProductUnitsDependedModal = (props) => {
 
   const _VALIDATED = _componentWillCheckValidation(props);
 
-  var _MODAL_CONTENT;
+  var _MODAL_CONTENT = <Text>ok</Text>;
 
   if (props.productUnitsDependedModal.units.length > 0){
     const _SELECTED_INDEX = props.productUnitsDependedModal.units.findIndex((unitItem, i) => {
@@ -144,13 +144,13 @@ const ProductUnitsDependedModal = (props) => {
             itemWidth={_Screen.width - (Styles.Content.marginHorizontal * 2)}
             onLayout={({ item, index }) => {
               const _UNIT = item.unit,
-                    _MIN_ORDER_QTY = (item.minimumOrderQuantity > 0)? item.minimumOrderQuantity: '',
-                    _MAX_ORDER_QTY = (item.maximumOrderQuantity > 0)? item.maximumOrderQuantity: '',
+                    _MIN_ORDER_QTY = (item.minimum_order_quantity > 0)? item.minimum_order_quantity: '',
+                    _MAX_ORDER_QTY = (item.maximum_order_quantity > 0)? item.maximum_order_quantity: '',
                     _QTY = (item.quantity > 0)? item.quantity: '';
 
               var _ITEM_GRADIENT = Global.colors.pair.ongerine;
 
-              if (item.unit._id === props.productUnitsDependedModal.selectedUnit.unit._id){
+              if (item._id === props.productUnitsDependedModal.selectedUnit._id){
                 _ITEM_GRADIENT = Global.colors.pair.aqrulean;
               }
 
@@ -178,6 +178,20 @@ const ProductUnitsDependedModal = (props) => {
                         </View>
                     </View>
                     <View
+                      style={Styles.DetailItemMasterInfoContent}>
+                        <View
+                          style={Styles.BriefDetailTitleContainer}>
+                          <Text
+                            style={Styles.BriefDetailTitle}>
+                              {item.warehouse.name}
+                          </Text>
+                          <Text
+                            style={Styles.BriefDetailTitleSuffix}>
+                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.secondContent.title.suffix[attitude.language])}
+                          </Text>
+                        </View>
+                    </View>
+                    <View
                       style={[
                         Styles.DetailItemMasterSubInfoContent,
                         {
@@ -190,7 +204,7 @@ const ProductUnitsDependedModal = (props) => {
 
                         <Text
                           style={Styles.BriefDetailRowText}>
-                            {Functions._convertNumberToHumanReadableFormat(item.minimumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.firstFeature.title[attitude.language])}
+                            {Functions._convertNumberToHumanReadableFormat(item.minimum_order_quantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.firstFeature.title[attitude.language])}
                         </Text>
                     </View>
                     <View
@@ -206,7 +220,7 @@ const ProductUnitsDependedModal = (props) => {
 
                         <Text
                           style={Styles.BriefDetailRowText}>
-                            {Functions._convertNumberToHumanReadableFormat(item.maximumOrderQuantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.secondFeature.title[attitude.language])}
+                            {Functions._convertNumberToHumanReadableFormat(item.maximum_order_quantity)} {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.secondFeature.title[attitude.language])}
                         </Text>
                     </View>
                     <View

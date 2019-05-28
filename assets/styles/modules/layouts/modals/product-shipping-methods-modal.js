@@ -93,6 +93,7 @@ module.exports = StyleSheet.create({
   },
   DetailItemContainer: {
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    alignItems: 'flex-start',
     height: 118,
     padding: 18
   },
@@ -113,16 +114,22 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_BRIEF_DETAIL_TITLE_CONTAINER
   },
   BriefDetailTitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE
   },
   BriefDetailTitleSuffix: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX
   },
   BriefDetailSubtitle: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: 'left',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     ..._CUSTOM_BRIEF_DETAIL_SUBTITLE

@@ -112,7 +112,7 @@ export default (state = initialState, action) => {
             _id: action.payload._id,
             name: action.payload.name,
             value: action.payload.value,
-            unit: action.payload.unit
+            feature: action.payload.feature
           }
         ]
       };
@@ -137,7 +137,7 @@ export default (state = initialState, action) => {
           {
             ...action.payload,
             _id: action.payload._id,
-            unit: action.payload.unit,
+            feature: action.payload.feature,
             shippingMethod: action.payload.shippingMethod
           }
         ]
