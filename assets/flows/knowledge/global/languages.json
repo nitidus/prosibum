@@ -1,10 +1,12 @@
 [{
   "key": "en",
   "name": "English",
-  "native": "English"
+  "native": "English",
+  "currency": "USD"
 }, {
   "key": "fa",
   "name": "Persian",
   "native": "فارسی",
+  "currency": "RIR",
   "rtl": true
 }]

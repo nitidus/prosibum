@@ -105,7 +105,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'NewFragmentFeatures': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
@@ -269,74 +269,54 @@ module.exports = {
     }
   },
   _prepareProductToAppend: async (props) => {
-    const { navigation } = props;
+    const { navigation } = props,
+          _PROPS = props.newFragment;
 
     let _SEED = {
-      name: props.newProduct.internalName,
-      warehouse_id: props.newProduct.currentWarehouse._id,
-      product_id: props.newProduct.product._id,
+      name: _PROPS.name,
+      product_id: _PROPS.product._id,
       features: props.newProduct.features.map((item, i) => {
-        if (typeof item.unit != 'undefined'){
-          return {
-            feature_id: item.feature._id,
-            unit_id: item.unit._id,
-            minimum_order_quantity: item.minimumOrderQuantity,
-            maximum_order_quantity: item.maximumOrderQuantity,
-            quantity: item.quantity
-          };
-        }else if ((typeof item.featureName != 'undefined') && (typeof item.featureValue != 'undefined')) {
-          return {
-            feature_id: item.feature._id,
-            feature_name: item.featureName,
-            feature_value: item.featureValue
-          };
-        }else{
-          return {
-            feature_id: item.feature._id
-          };
-        }
-      }),
-      photos: await Promise.all(props.newProduct.photos.map(async (item, i) => {
-        const _PHOTO_NODE_URI = item.content,
-              _PHOTO_URI = await Prototypes._fetchBase64BlobFromPhoto(_PHOTO_NODE_URI);
+        let finalResponse = {
+          feature_id: item.feature._id,
+          unit_id: item.unit._id,
+          warehouse: {
+            _id: item.warehouse._id
+          },
+          minimum_order_quantity: item.minimum_order_quantity,
+          maximum_order_quantity: item.maximum_order_quantity,
+          quantity: item.quantity
+        };
 
-        if (props.newProduct.primaryPhoto._id === item._id){
-          return {
-            content: _PHOTO_URI,
-            primary: true
-          };
-        }else{
-          return {
-            content: _PHOTO_URI
-          };
-        }
-      })),
-      prices: props.newProduct.prices.map((item, i) => {
-        let _PRICE_VALUE = item.value;
-
-        if (I18nManager.isRTL){
-          if (_PRICE_VALUE >= 10000){
-            _PRICE_VALUE /= 10000;
-          }else if ((_PRICE_VALUE >= 1000) && (_PRICE_VALUE < 10000)) {
-            _PRICE_VALUE /= 1000;
+        if (typeof item.primary != 'undefined'){
+          if (item.primary === true){
+            finalResponse.primary = true;
           }
         }
 
+        return finalResponse;
+      }),
+      prices: props.newProduct.prices.map((item, i) => {
         return {
           name: item.name,
-          value: parseFloat(_PRICE_VALUE),
-          unit_id: item.unit._id
+          values: [
+            {
+              content: parseFloat(item.value),
+              currency: _PROPS.currency.key,
+              language: _PROPS.language.key
+            }
+          ],
+          feature_reference_id: item.feature._id
         };
       }),
       shipping_plans: props.newProduct.shippingPlans.map((item, i) => {
         return {
-          unit_id: item.unit._id,
+          feature_reference_id: item.feature._id,
           shipping_method_id: item.shippingMethod._id
         };
       })
     };
 
-    await props.appendProductOnDemand(_SEED);
+    await props.appendFragment(_SEED);
 
     if (await props.newProduct.connected.status){
       navigation.navigate('Overseer');

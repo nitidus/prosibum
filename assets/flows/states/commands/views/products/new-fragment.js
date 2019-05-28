@@ -132,33 +132,64 @@ module.exports = {
       payload: true
     })
 
-    socket.emit('collection/insert', {
-      collection: 'fragments',
-      data: fragment
-    })
+    try {
+      const _SERIALIZED_AUTH = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.AUTH),
+            _AUTH = JSON.parse(_SERIALIZED_AUTH);
 
-    socket.on('collection/inserted/fragments', (response) => {
-      if (response.meta.code === 200){
-        const _DATA = response.data;
+      let finalData = {
+        end_user_id: _AUTH._id,
+        ...fragment
+      };
 
-        if (_DATA.length > 0){
+      if (typeof _AUTH.cardinal_id != 'undefined'){
+        finalData.cardinal_id = _AUTH.cardinal_id;
+      }
+
+      socket.emit('collection/insert', {
+        collection: 'fragments',
+        data: finalData
+      })
+
+      socket.on('collection/inserted/fragments', (response) => {
+        if (response.meta.code === 200){
+          const _DATA = response.data;
+
+          if (_DATA.length > 0){
+            dispatch({
+              type: NEW_FRAGMENT.APPEND_FRAGMENT
+            })
+          }
+
           dispatch({
-            type: NEW_FRAGMENT.APPEND_FRAGMENT
+            type: NEW_FRAGMENT.APPEND_FRAGMENT_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
+            payload: {
+              status: true
+            }
+          })
+        }else{
+          dispatch({
+            type: NEW_FRAGMENT.APPEND_FRAGMENT_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
+            payload: {
+              status: false,
+              content: response.meta.error_message
+            }
           })
         }
+      })
+    } catch (error) {
+      if (error){
+        const _ERROR_MESSAGE = error.message || error.request._response;
 
-        dispatch({
-          type: NEW_FRAGMENT.APPEND_FRAGMENT_LOADING_STATUS,
-          payload: false
-        })
-
-        dispatch({
-          type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
-          payload: {
-            status: true
-          }
-        })
-      }else{
         dispatch({
           type: NEW_FRAGMENT.APPEND_FRAGMENT_LOADING_STATUS,
           payload: false
@@ -168,10 +199,10 @@ module.exports = {
           type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
           payload: {
             status: false,
-            content: response.meta.error_message
+            content: _ERROR_MESSAGE
           }
         })
       }
-    })
+    }
   }
 };

@@ -66,6 +66,23 @@ class NewFragmentPrices extends Component<{}> {
             };
 
       if (props.newFragment.prices.length > 0){
+        var _FINAL_BUTTON = (
+          <Input
+            type={__CONSTANTS.content.submitButton.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+            value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
+            gradient={Global.colors.pair.ongerine}
+            style={{
+              marginHorizontal: Styles.Content.marginHorizontal
+            }}
+            onPress={() => {
+              const { navigation } = props;
+
+              navigation.navigate('NewFragmentShippingMethods');
+            }}
+            forcedDisable={_VALIDATED} />
+        );
+
         _PRICES_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={true}
@@ -170,20 +187,7 @@ class NewFragmentPrices extends Component<{}> {
                   animation: new Animated.Value(0)
                 })} />
 
-              <Input
-                type={__CONSTANTS.content.submitButton.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
-                gradient={Global.colors.pair.ongerine}
-                style={{
-                  marginHorizontal: Styles.Content.marginHorizontal
-                }}
-                onPress={() => {
-                  const { navigation } = props;
-
-                  navigation.navigate('NewFragmentShippingMethods');
-                }}
-                forcedDisable={_VALIDATED} />
+              {_FINAL_BUTTON}
           </ScrollView>
         );
       }else{
