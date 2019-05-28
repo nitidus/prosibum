@@ -53,6 +53,14 @@
                 "name": "grading"
               }
             }
+          },
+          "secondContent": {
+            "title": {
+              "suffix": {
+                "en": "Warehouse Name",
+                "fa": "نام انبار"
+              }
+            }
           }
         },
         "null": {
@@ -97,8 +105,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Photos",
-            "fa": "اضافه کردن تصاویر"
+            "en": "Append Prices",
+            "fa": "اضافه کردن قیمت‌ها "
           }
         }
       }

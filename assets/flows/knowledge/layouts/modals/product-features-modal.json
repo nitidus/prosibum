@@ -122,11 +122,87 @@
           }
         }
       },
+      "secondCarousel": {
+        "title": {
+          "en": "Product Warehouse"
+        },
+        "content": {
+          "self": {
+            "type": "BUTTON",
+            "title": {
+              "en": "Warehouse Name",
+              "fa": "نام انبار"
+            },
+            "icon": {
+              "name": "grading"
+            },
+            "context": {
+              "firstCarousel": {
+                "title": {
+                  "en": "Warehouses Carousel"
+                },
+                "content": {
+                  "self": {
+                    "type": "BUTTON",
+                    "title": {
+                      "en": "Warehouse Name",
+                      "fa": "نام انبار"
+                    },
+                    "icon": {
+                      "name": "grading"
+                    }
+                  },
+                  "empty": {
+                    "title": {
+                      "en": "There's no warehouse.",
+                      "fa": "هیچ انباری وجود ندارد."
+                    }
+                  }
+                }
+              },
+              "firstInput": {
+                "type": "NUMERIC",
+                "title": {
+                  "en": "Minimum Order Quantity",
+                  "fa": "حداقل تعداد سفارش"
+                },
+                "options": {
+                  "maxLength": 9
+                }
+              },
+              "secondInput": {
+                "type": "NUMERIC",
+                "title": {
+                  "en": "Maximum Order Quantity",
+                  "fa": "حداکثر تعداد سفارش"
+                },
+                "options": {
+                  "maxLength": 9
+                }
+              },
+              "thirdInput": {
+                "type": "NUMERIC",
+                "title": {
+                  "en": "Quantity",
+                  "fa": "تعداد"
+                },
+                "options": {
+                  "maxLength": 9
+                }
+              }
+            }
+          }
+        }
+      },
       "submitInput": {
         "type": "BUTTON",
         "prefix": {
           "en": "Append Unit",
           "fa": "اضافه کردن واحد"
+        },
+        "fullName": {
+          "en": "Append composition of unit",
+          "fa": "اضافه کردن ترکیب واحد اندازه‌گیری"
         }
       }
     }

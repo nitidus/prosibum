@@ -34,6 +34,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: features
       })
     },
+    setPatternBasedFeatures: (patternBasedFeatures) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURES_BASED_ON_PATTERN,
+        payload: patternBasedFeatures
+      })
+    },
     setMinimumOrderQuantity: (minimumOrderQuantity) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_MINIMUM_ORDER_QUANTITY,

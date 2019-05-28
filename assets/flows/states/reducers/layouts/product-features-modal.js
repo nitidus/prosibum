@@ -12,6 +12,7 @@ const initialState = {
   customizedFeatureName: '',
   customizedFeatureValue: '',
   features: [],
+  patternBasedFeatures: [],
   units: [],
   warehouses: [],
   featuresLoading: false,
@@ -104,6 +105,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         features: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURE_BASED_ON_PATTERN:
+      return {
+        ...state,
+        patternBasedFeatures: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURES_BASED_ON_PATTERN:
+      return {
+        ...state,
+        patternBasedFeatures: action.payload
       };
       break;
     case PRODUCT_FEATURES_MODAL.FETCH_AVAILABLE_PRODUCT_UNITS:

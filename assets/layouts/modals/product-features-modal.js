@@ -26,32 +26,48 @@ const _componentWillCheckValidation = (props) => {
 
   var _FORM_FIELDS_VALIDITY = false;
 
-  if (Object.keys(_PROPS.currentFeature).length > 0){
-    switch (Functions._convertTokenToKeyword(_PROPS.currentFeature.key)) {
-      case 'unit':
-      default:
-        if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
-          const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 2),
-                _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2),
-                _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
+  if (typeof props.units != 'undefined'){
+    _FORM_FIELDS_VALIDITY = true;
+  }else if (typeof props.features != 'undefined') {
+    if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
+      const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 2),
+            _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2),
+            _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
 
-          if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
-            if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
-              _FORM_FIELDS_VALIDITY = true;
+      if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
+        if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
+          _FORM_FIELDS_VALIDITY = true;
+        }
+      }
+    }
+  }else{
+    if (Object.keys(_PROPS.currentFeature).length > 0){
+      switch (Functions._convertTokenToKeyword(_PROPS.currentFeature.key)) {
+        case 'unit':
+        default:
+          if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
+            const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 2),
+                  _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2),
+                  _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
+
+            if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
+              if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
+                _FORM_FIELDS_VALIDITY = true;
+              }
             }
           }
-        }
-        break;
-      case 'description':
-        if (_PROPS.description != ''){
-          _FORM_FIELDS_VALIDITY = true;
-        }
-        break;
-      case 'customized':
-        if ((_PROPS.customizedFeatureName != '') && (_PROPS.customizedFeatureValue != '')){
-          _FORM_FIELDS_VALIDITY = true;
-        }
-        break;
+          break;
+        case 'description':
+          if (_PROPS.description != ''){
+            _FORM_FIELDS_VALIDITY = true;
+          }
+          break;
+        case 'customized':
+          if ((_PROPS.customizedFeatureName != '') && (_PROPS.customizedFeatureValue != '')){
+            _FORM_FIELDS_VALIDITY = true;
+          }
+          break;
+      }
     }
   }
 
@@ -125,9 +141,11 @@ const ProductFeaturesModal = (props) => {
           props.setFeatures(attitude.units);
         }
       }else if (typeof attitude.features != 'undefined') {
-        if (attitude.features.length !== props.productFeaturesModal.features.length){
-          props.setFeatures(attitude.features);
+        if (props.productFeaturesModal.patternBasedFeatures.length === 0){
+          props.setPatternBasedFeatures(attitude.features);
         }
+
+        props.fetchAvailableProductFeatures();
       }else{
         props.fetchAvailableProductFeatures();
       }
@@ -317,48 +335,48 @@ const ProductFeaturesModal = (props) => {
           props.fetchAvailableProductWarehouses();
         }
 
-        const _SELECTED_UNIT_INDEX = props.productFeaturesModal.units.findIndex((unit, i) => {
-                return unit._id === props.productFeaturesModal.selectedUnit._id;
-              }),
-              _AVAILABLE_UNITS = props.productFeaturesModal.units.filter((unit, i) => {
-                return props.productFeaturesModal.features.every(feature => {
-                  if (typeof feature.unit_id != 'undefined'){
-                    return (feature.unit_id !== unit._id);
-                  }
-                })
-              }),
-              _SELECTED_WAREHOUSE_INDEX = props.productFeaturesModal.warehouses.findIndex((warehouse, i) => {
+        const _SELECTED_WAREHOUSE_INDEX = props.productFeaturesModal.warehouses.findIndex((warehouse, i) => {
                 return warehouse._id === props.productFeaturesModal.selectedWarehouse._id;
               }),
-              _AVAILABLE_WAREHOUSES = props.productFeaturesModal.warehouses.filter((warehouse, i) => {
-                return props.productFeaturesModal.features.every(feature => {
-                  if (typeof feature.warehouse != 'undefined'){
-                    return (feature.warehouse._id !== warehouse._id);
-                  }
-                })
-              });
+              _AVAILABLE_WAREHOUSES = props.productFeaturesModal.warehouses,
+              _SELECTED_UNIT_INDEX = props.productFeaturesModal.units.findIndex((unit, i) => {
+                return unit._id === props.productFeaturesModal.selectedUnit._id;
+              }),
+              _AVAILABLE_UNITS = props.productFeaturesModal.units;
 
-        // if (
-        //   (_AVAILABLE_UNITS.length > 0) &&
-        //   (Object.keys(props.productFeaturesModal.selectedUnit).length > 0) &&
-        //   (props.productFeaturesModal.unitsLoading === false) &&
-        //   (attitude.visibility === true)
-        // ){
-        //   if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
-        //     props.setSelectedUnit(_AVAILABLE_UNITS[0]);
-        //   }
-        // }
-        //
-        // if (
-        //   (_AVAILABLE_WAREHOUSES.length > 0) &&
-        //   (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0) &&
-        //   (props.productFeaturesModal.warehousesLoading === false) &&
-        //   (attitude.visibility === true)
-        // ){
-        //   if (props.productFeaturesModal.selectedWarehouse._id !== _AVAILABLE_WAREHOUSES[0]._id){
-        //     props.setSelectedWarehouse(_AVAILABLE_WAREHOUSES[0]);
-        //   }
-        // }
+        if (
+          (_AVAILABLE_UNITS.length > 0) &&
+          (Object.keys(props.productFeaturesModal.selectedUnit).length > 0) &&
+          (props.productFeaturesModal.unitsLoading === false) &&
+          (attitude.visibility === true)
+        ){
+          const _DOES_SELECTED_UNIT_EXIST = _AVAILABLE_UNITS.findIndex((unit) => {
+            return (unit._id === props.productFeaturesModal.selectedUnit._id);
+          })
+
+          if (_DOES_SELECTED_UNIT_EXIST === -1){
+            if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
+              props.setSelectedUnit(_AVAILABLE_UNITS[0]);
+            }
+          }
+        }
+
+        if (
+          (_AVAILABLE_WAREHOUSES.length > 0) &&
+          (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0) &&
+          (props.productFeaturesModal.warehousesLoading === false) &&
+          (attitude.visibility === true)
+        ){
+          const _DOES_SELECTED_WAREHOUSE_EXIST = _AVAILABLE_WAREHOUSES.findIndex((warehouse) => {
+            return (warehouse._id === props.productFeaturesModal.selectedWarehouse._id);
+          })
+
+          if (_DOES_SELECTED_WAREHOUSE_EXIST === -1){
+            if (props.productFeaturesModal.selectedWarehouse._id !== _AVAILABLE_WAREHOUSES[0]._id){
+              props.setSelectedWarehouse(_AVAILABLE_WAREHOUSES[0]);
+            }
+          }
+        }
 
         let _FIRST_CAROUSEL_OTHER_OPTIONS = _SECOND_CAROUSEL_OTHER_OPTIONS = {},
             _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT = _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
@@ -368,9 +386,12 @@ const ProductFeaturesModal = (props) => {
           _FIRST_CAROUSEL_OTHER_OPTIONS.loop = _SECOND_CAROUSEL_OTHER_OPTIONS.loop = true;
         }
 
-        if ((_AVAILABLE_UNITS.length > 0) && (_AVAILABLE_WAREHOUSES.length > 0)){
+        if (_AVAILABLE_UNITS.length > 0){
           const _SELECTED_UNIT = (Object.keys(props.productFeaturesModal.selectedUnit).length > 0)? props.productFeaturesModal.selectedUnit.key: '',
-                _SELECTED_WAREHOUSE = (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0)? props.productFeaturesModal.selectedWarehouse.name: '';
+                _SELECTED_WAREHOUSE = (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0)? props.productFeaturesModal.selectedWarehouse.name: '',
+                _MIN_ORDER_QTY = (props.productFeaturesModal.minimumOrderQuantity > 0)? props.productFeaturesModal.minimumOrderQuantity: '',
+                _MAX_ORDER_QTY = (props.productFeaturesModal.maximumOrderQuantity > 0)? props.productFeaturesModal.maximumOrderQuantity: '',
+                _QTY = (props.productFeaturesModal.quantity > 0)? props.productFeaturesModal.quantity: '';
 
           _MODAL_CONTENT = [
             (
@@ -425,7 +446,7 @@ const ProductFeaturesModal = (props) => {
             ),
             (
               <Carousel
-                name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
+                name={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.title.en}
                 data={_AVAILABLE_WAREHOUSES}
                 firstItem={_SELECTED_WAREHOUSE_INDEX}
                 style={Styles.DetailContainer}
@@ -439,7 +460,7 @@ const ProductFeaturesModal = (props) => {
 
                   return (
                     <Input
-                      type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
+                      type={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.type}
                       gradient={_ITEM_GRADIENT}
                       style={Styles.DetailItemContainer}
                       disable={true}>
@@ -451,13 +472,13 @@ const ProductFeaturesModal = (props) => {
                             style={[
                               Styles.BriefDetailTitle
                             ]}>
-                              {/*Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])*/'نام انبار'}
+                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.title[attitude.language])}
                           </Text>
                       </View>
                       <View
                         style={Styles.DetailItemMasterSubInfoContent}>
                           <Icon
-                            name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
+                            name={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.icon.name}
                             color={Global.colors.single.romance} />
 
                           <Text
@@ -475,17 +496,80 @@ const ProductFeaturesModal = (props) => {
             ),
             (
               <Input
+                type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title.en)}
+                placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title[attitude.language]}
+                value={_MIN_ORDER_QTY}
+                style={[
+                  Styles.RegularItemContainer,
+                  {
+                    marginBottom: Styles.Content.marginVertical,
+                    marginHorizontal: Styles.Content.marginHorizontal
+                  }
+                ]}
+                onChangeText={(currentValue) => props.setMinimumOrderQuantity(parseInt(currentValue))}
+                {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.options} />
+            ),
+            (
+              <Input
+                type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en)}
+                placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title[attitude.language]}
+                value={_MAX_ORDER_QTY}
+                style={[
+                  Styles.RegularItemContainer,
+                  {
+                    marginBottom: Styles.Content.marginVertical,
+                    marginHorizontal: Styles.Content.marginHorizontal
+                  }
+                ]}
+                onChangeText={(currentValue) => props.setMaximumOrderQuantity(parseInt(currentValue))}
+                {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.options} />
+            ),
+            (
+              <Input
+                  type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title.en)}
+                  placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title[attitude.language]}
+                  value={_QTY}
+                  style={[
+                    Styles.RegularItemContainer,
+                    {
+                      marginBottom: Styles.Content.marginVertical,
+                      marginHorizontal: Styles.Content.marginHorizontal
+                    }
+                  ]}
+                  onChangeText={(currentValue) => props.setQuantity(parseInt(currentValue))}
+                  {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.options} />
+            ),
+            (
+              <Input
                 type={__CONSTANTS.modalContainer.content.submitInput.type}
                 gradient={Global.colors.pair.ongerine}
-                value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._getAppropriateTaxonomyBaseOnLocale(_SELECTED_UNIT, attitude.language)}`}
+                value={__CONSTANTS.modalContainer.content.submitInput.fullName[attitude.language]}
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal
                 }}
                 onPress={() => {
-                  attitude.onProgressSuccess(props.productFeaturesModal.selectedUnit);
+                  const _FOUNDED_INDEX_OF_UNIT_FEATURE = props.productFeaturesModal.features.findIndex((singleFeature, k) => {
+                    return (Functions._convertTokenToKeyword(singleFeature.key) == 'unit');
+                  });
 
-                  MODAL.ON_BLUR(false);
-                }} />
+                  if (_FOUNDED_INDEX_OF_UNIT_FEATURE > -1){
+                    attitude.onProgressSuccess({
+                      _id: Functions._generateNewBSONObjectID(),
+                      feature_id: props.productFeaturesModal.features[_FOUNDED_INDEX_OF_UNIT_FEATURE]._id,
+                      unit: props.productFeaturesModal.selectedUnit,
+                      warehouse: props.productFeaturesModal.selectedWarehouse,
+                      minimum_order_quantity: props.productFeaturesModal.minimumOrderQuantity,
+                			maximum_order_quantity: props.productFeaturesModal.maximumOrderQuantity,
+                			quantity: props.productFeaturesModal.quantity
+                    });
+
+                    MODAL.ON_BLUR(false);
+                  }
+                }}
+                forcedDisable={_VALIDATED} />
             )
           ];
         }else{
