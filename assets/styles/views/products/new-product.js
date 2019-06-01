@@ -50,7 +50,9 @@ var _CUSTOM_CONTENT = {
       height: 121
     },
     _CUSTOM_DESCRIPTION_FEATURE = {
-      height: 68,
+      height: 108
+    },
+    _CUSTOM_DESCRIPTION_FEATURE_CONTENT = {
       padding: 18
     },
     _CUSTOM_DESCRIPTION_FEATURE_TEXT = {
@@ -266,6 +268,10 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.single.wildSand,
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
     ..._CUSTOM_DESCRIPTION_FEATURE
+  },
+  DescriptionFeatureContent: {
+    alignItems: 'flex-start',
+    ..._CUSTOM_DESCRIPTION_FEATURE_CONTENT
   },
   DescriptionFeatureText: {
     color: colors.single.rangoonGreen,

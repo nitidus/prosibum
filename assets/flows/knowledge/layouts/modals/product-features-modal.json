@@ -197,8 +197,8 @@
       "submitInput": {
         "type": "BUTTON",
         "prefix": {
-          "en": "Append Unit",
-          "fa": "اضافه کردن واحد"
+          "en": "Append",
+          "fa": "اضافه کردن"
         },
         "fullName": {
           "en": "Append composition of unit",
@@ -264,9 +264,37 @@
             "fa": "تعداد موجودی باید از حداقل تعداد سفارش بیشتر باشد."
           }
         },
+        "fourthLevel": {
+          "en": "Description can not be empty.",
+          "fa": "توضیحات نمی‌تواند خالی باشد."
+        },
+        "fifthLevel": {
+          "firstPart": {
+            "en": "Name",
+            "fa": "نام"
+          },
+          "secondPart": {
+            "en": "Value",
+            "fa": "مقدار"
+          },
+          "verbComposition": {
+            "one": {
+              "en": "of customized field can not be empty.",
+              "fa": "فیلد شخصی‌سازی‌شده نمی‌تواند خالی باشد."
+            },
+            "more": {
+              "en": "of customized fields can not be empty.",
+              "fa": "فیلدهای شخصی‌سازی‌شده نمی‌توانند خالی باشند."
+            }
+          }
+        },
         "delimiter": {
           "en": ",",
           "fa": "،"
+        },
+        "finalDelimiter": {
+          "en": "and",
+          "fa": "و"
         }
       }
     }

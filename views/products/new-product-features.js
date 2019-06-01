@@ -67,14 +67,14 @@ class NewProductFeatures extends Component<{}> {
       if (props.newProduct.features.length > 0){
         _FEATURES_CONTENT = (
           <ScrollView
-            showsVerticalScrollIndicator={true}
+            showsVerticalScrollIndicator={false}
             contentContainerStyle={Styles.ScrollableListContainer}>
               {
                 props.newProduct.features.map((featureItem, i, totalFeatures) => {
                   const _FEATURE_NAME = Functions._convertTokenToKeyword(featureItem.feature.key);
 
                   var _CUSTOM_STYLE = {},
-                      _FEATURE_DELETE_ACTION = () => props.setProductFeatures(props.newProduct.features.filter((checkingItem, j) => {
+                      _FEATURE_DELETE_ACTION = () => props.setFeatures(props.newProduct.features.filter((checkingItem, j) => {
                         return (checkingItem.feature._id != featureItem.feature._id);
                       }));
 
@@ -112,7 +112,7 @@ class NewProductFeatures extends Component<{}> {
                             onLayout={({ item, index }) => {
                               var _ITEM_GRADIENT = Global.colors.pair.tilan;
 
-                              _FEATURE_DELETE_ACTION = () => props.setProductFeatures(props.newProduct.features.filter((checkingItem, j) => {
+                              _FEATURE_DELETE_ACTION = () => props.setFeatures(props.newProduct.features.filter((checkingItem, j) => {
                                 if (typeof checkingItem.unit != 'undefined') {
                                   return (checkingItem.unit._id !== item.unit._id);
                                 }else{
@@ -195,59 +195,42 @@ class NewProductFeatures extends Component<{}> {
                       break;
 
                     case 'description':
-                      var _COUNTED_LINE_OF_DESCRIPTION = Functions._countNumberOfOccurrencesStringInString(featureItem.description, '\n'),
-                          DESCRIPTION_FEATURE_OPTION_CUSTOM_CONTAINER = {
-                            height: (_COUNTED_LINE_OF_DESCRIPTION > 1)? (_COUNTED_LINE_OF_DESCRIPTION * (Styles.DescriptionFeature.height / 2)): Styles.DescriptionFeature.height
+                      const DESCRIPTION_FEATURE_OPTION_CUSTOM_CONTAINER = {
+                            height: Styles.DescriptionFeature.height,
+                            right: Styles.Content.marginHorizontal
                           };
 
-                      if (_COUNTED_LINE_OF_DESCRIPTION > 5){
-                        if (Platform.OS !== 'ios'){
-                          if (_Screen.width >= 1000 || _Screen.height >= 1000){
-                            _COUNTED_LINE_OF_DESCRIPTION = _COUNTED_LINE_OF_DESCRIPTION;
-                          }else{
-                            _COUNTED_LINE_OF_DESCRIPTION -= (_COUNTED_LINE_OF_DESCRIPTION / 5);
-                          }
-                        }else{
-                          _COUNTED_LINE_OF_DESCRIPTION -= (_COUNTED_LINE_OF_DESCRIPTION / 5);
-                        }
-                      }else{
-                        if (Platform.OS !== 'ios'){
-                          if (_Screen.width >= 1000 || _Screen.height >= 1000){
-                            _COUNTED_LINE_OF_DESCRIPTION += (_COUNTED_LINE_OF_DESCRIPTION / 5);
-                          }
-                        }
-                      }
-
-                      DESCRIPTION_FEATURE_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
+                      _FEATURE_DELETE_ACTION = () => props.setFeatures(props.newProduct.features.filter((checkingItem, j) => {
+                        return (checkingItem.description != featureItem.description);
+                      }))
 
                       return (
                         <Options
                           style={DESCRIPTION_FEATURE_OPTION_CUSTOM_CONTAINER}
                           onDeletePress={_FEATURE_DELETE_ACTION}
                           {...__CONSTANTS.content.description.options}>
-                            <Input
-                              type={__CONSTANTS.content.description.type}
+                            <ScrollView
+                              showsVerticalScrollIndicator={false}
+                              contentContainerStyle={Styles.DescriptionFeatureContent}
                               style={[
                                 Styles.DescriptionFeature,
-                                {
-                                  ..._CUSTOM_STYLE,
-                                  alignItems: 'flex-start',
-                                  height: (_COUNTED_LINE_OF_DESCRIPTION > 1)? (_COUNTED_LINE_OF_DESCRIPTION * (Styles.DescriptionFeature.height / 2)): Styles.DescriptionFeature.height
-                                }
-                              ]}
-                              textStyle={Styles.DescriptionFeatureText}
-                              value={featureItem.description}
-                              onLongPress={_FEATURE_DELETE_ACTION}/>
+                                _CUSTOM_STYLE
+                              ]}>
+                                <Text>{featureItem.description}</Text>
+                            </ScrollView>
                         </Options>
                       );
                       break;
 
                     case 'customized':
                       var CUSTOMIZED_FEATURE_OPTION_CUSTOM_CONTAINER = {
-                        height: Styles.CustomizedFeatureDetailItemContainer.height
+                        height: Styles.CustomizedFeatureDetailItemContainer.height,
+                        right: Styles.Content.marginHorizontal
                       };
 
-                      CUSTOMIZED_FEATURE_OPTION_CUSTOM_CONTAINER.right = Styles.Content.marginHorizontal;
+                      _FEATURE_DELETE_ACTION = () => props.setFeatures(props.newProduct.features.filter((checkingItem, j) => {
+                        return (checkingItem.featureName != featureItem.featureName);
+                      }))
 
                       return (
                         <Options
@@ -301,7 +284,7 @@ class NewProductFeatures extends Component<{}> {
                 }}
                 onPress={() => {
                   Keyboard.dismiss();
-                  props.setProductFeaturesModalVisibility(true);
+                  props.setFeaturesModalVisibility(true);
                 }} />
 
               <Input
@@ -341,15 +324,15 @@ class NewProductFeatures extends Component<{}> {
           rightIcon={__CONSTANTS.pilot.rightIcon}
           onRightIconPress={() => {
             Keyboard.dismiss();
-            props.setProductFeaturesModalVisibility(true);
+            props.setFeaturesModalVisibility(true);
           }}
           {...props}>
             {_FEATURES_CONTENT}
 
             <ProductFeaturesModal
-              visibility={props.newProduct.productFeaturesModalVisibility}
-              onBlur={() => props.setProductFeaturesModalVisibility(false)}
-              onProgressSuccess={(response) => props.appendProductFeature(response)}
+              visibility={props.newProduct.featuresModalVisibility}
+              onBlur={() => props.setFeaturesModalVisibility(false)}
+              onProgressSuccess={(response) => props.appendFeature(response)}
               {..._PRODUCT_FEATURES_OTHER_PROPS} />
         </Container>
       );

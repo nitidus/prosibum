@@ -147,7 +147,7 @@ const ProductFeaturesModal = (props) => {
 
         props.fetchAvailableProductFeatures();
       }else{
-        props.fetchAvailableProductFeatures();
+        props.fetchAvailableProductFeatures([ 'unit' ]);
       }
     }
   }
@@ -976,7 +976,7 @@ const ProductFeaturesModal = (props) => {
           }
 
           if (_IS_ALL_EXTRA_DEPENDED_FIELDS_PREPARED){
-            _MODAL_CONTENT.push(
+            var _FINAL_BUTTON = (
               <Input
                 type={__CONSTANTS.modalContainer.content.submitInput.type}
                 gradient={Global.colors.pair.ongerine}
@@ -1017,6 +1017,120 @@ const ProductFeaturesModal = (props) => {
                 }}
                 forcedDisable={_VALIDATED} />
             );
+
+            if (_VALIDATED){
+              var _MESSAGE = '';
+
+              switch (Functions._convertTokenToKeyword(props.productFeaturesModal.currentFeature.key)) {
+                case 'unit':
+                default:
+                  if ((props.productFeaturesModal.minimumOrderQuantity > 0) && (props.productFeaturesModal.maximumOrderQuantity > 0) && (props.productFeaturesModal.quantity > 0)){
+                    const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.minimumOrderQuantity.toString(), 2),
+                          _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.maximumOrderQuantity.toString(), 2),
+                          _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.quantity.toString(), 2);
+
+                    if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
+                      if (props.productFeaturesModal.maximumOrderQuantity < props.productFeaturesModal.minimumOrderQuantity){
+                        _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.firstPart[attitude.language]}`;
+                      }
+
+                      if (props.productFeaturesModal.quantity < props.productFeaturesModal.minimumOrderQuantity){
+                        _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.secondPart[attitude.language]}`;
+                      }
+                    }else{
+                      let countOfMessageItem = 0;
+
+                      if (_IS_MAX_ORDER_QTY_VALID === false){
+                        _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.firstPart[attitude.language]}`;
+                        countOfMessageItem++;
+                      }
+
+                      if (_IS_MIN_ORDER_QTY_VALID === false){
+                        _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.secondPart[attitude.language]}`;
+                        countOfMessageItem++;
+                      }
+
+                      if (_IS_QTY_VALID === false){
+                        _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.thirdPart[attitude.language]}`;
+                        countOfMessageItem++;
+                      }
+
+                      if (countOfMessageItem > 1){
+                        _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.more[attitude.language]}`;
+                      }else{
+                        _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.one[attitude.language]}`;
+                      }
+                    }
+                  }else{
+                    let countOfMessageItem = 0;
+
+                    if (props.productFeaturesModal.maximumOrderQuantity === 0){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.firstPart[attitude.language]}`;
+                      countOfMessageItem++;
+                    }
+
+                    if (props.productFeaturesModal.minimumOrderQuantity === 0){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.secondPart[attitude.language]}`;
+                      countOfMessageItem++;
+                    }
+
+                    if (props.productFeaturesModal.quantity === 0){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.thirdPart[attitude.language]}`;
+                      countOfMessageItem++;
+                    }
+
+                    if (countOfMessageItem > 1){
+                      _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.more[attitude.language]}`;
+                    }else{
+                      _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.one[attitude.language]}`;
+                    }
+                  }
+                  break;
+                case 'description':
+                  if (props.productFeaturesModal.description == ''){
+                    _MESSAGE += __CONSTANTS.modalContainer.content.warning.fourthLevel[attitude.language];
+                  }
+                  break;
+                case 'customized':
+                  let countOfMessageItem = 0;
+
+                  if (props.productFeaturesModal.customizedFeatureName == ''){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.fifthLevel.firstPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
+
+                  if (props.productFeaturesModal.customizedFeatureValue == ''){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.fifthLevel.secondPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
+
+                  _MESSAGE = _MESSAGE.replace(__CONSTANTS.modalContainer.content.warning.delimiter[attitude.language], ` ${__CONSTANTS.modalContainer.content.warning.finalDelimiter[attitude.language]}`);
+
+                  if (countOfMessageItem > 1){
+                    _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.fifthLevel.verbComposition.more[attitude.language]}`;
+                  }else{
+                    _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.fifthLevel.verbComposition.one[attitude.language]}`;
+                  }
+                  break;
+              }
+
+              if (_MESSAGE != ''){
+                _FINAL_BUTTON = (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.submitInput.type}
+                    value={_MESSAGE}
+                    style={[
+                      Styles.WarningContainer,
+                      {
+                        marginBottom: Styles.Content.marginVertical
+                      }
+                    ]}
+                    textStyle={Styles.WarningContent} />
+                );
+              }
+            }
+
+            _MODAL_CONTENT.push(_FINAL_BUTTON);
           }
         }else{
           _MODAL_CONTENT = (

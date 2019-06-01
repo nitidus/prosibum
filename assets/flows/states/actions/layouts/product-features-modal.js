@@ -88,7 +88,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: warehouse
       })
     },
-    fetchAvailableProductFeatures: async () => CMD._getAvailableProductFeatures(dispatch),
+    fetchAvailableProductFeatures: async (exludedItems) => CMD._getAvailableProductFeatures(exludedItems, dispatch),
     fetchAvailableProductUnits: async () => CMD._getAvailableProductUnits(dispatch),
     fetchAvailableProductWarehouses: async () => CMD._getAvailableProductWarehouses(dispatch),
     setFeaturesLoadingStatus: (loadingStatus) => {
