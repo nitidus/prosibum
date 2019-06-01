@@ -95,7 +95,7 @@ class NewFragmentShippingMethods extends Component<{}> {
                   }
                 ]}
                 textStyle={Styles.WarehouseErrorContent}
-                onPress={async () => await Preparation._prepareProductToAppend(props)} />
+                onPress={async () => await Preparation._prepareFragmentToAppend(props)} />
             );
           }else{
             _APPEND_PRODUCT_BUTTON = (
@@ -107,7 +107,7 @@ class NewFragmentShippingMethods extends Component<{}> {
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal
                 }}
-                onPress={async () => await Preparation._prepareProductToAppend(props)}
+                onPress={async () => await Preparation._prepareFragmentToAppend(props)}
                 forcedDisable={_VALIDATED} />
             );
           }

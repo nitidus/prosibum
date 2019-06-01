@@ -105,7 +105,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'NewProductPhotos': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'NewProductFeatures': 'Authentication');
   },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
@@ -270,12 +270,64 @@ module.exports = {
   },
   _prepareProductToAppend: async (props) => {
     const { navigation } = props,
+          _PROPS = props.newProduct;
+
+    let _SEED = {
+      name: _PROPS.name,
+      category_id: _PROPS.category._id,
+      tags: _PROPS.tags,
+      inventory_units: _PROPS.inventoryUnits.map((unit, i) => {
+        return unit._id;
+      }),
+      features: _PROPS.features.map((item, i) => {
+        let finalResponse = {
+          feature_id: item.feature._id
+        };
+
+        switch (Prototypes._convertTokenToKeyword(item.feature.key)) {
+          case 'description':
+            finalResponse.description = item.description;
+            break;
+
+          case 'customized':
+            finalResponse.feature_name = item.featureName;
+            finalResponse.feature_value = item.featureValue;
+            break;
+        }
+
+        return finalResponse;
+      }),
+      photos: await Promise.all(_PROPS.photos.map(async (item, i) => {
+        const _PHOTO_NODE_URI = item.content,
+              _PHOTO_URI = await Prototypes._fetchBase64BlobFromPhoto(_PHOTO_NODE_URI);
+
+        if (_PROPS.primaryPhoto._id === item._id){
+          return {
+            content: _PHOTO_URI,
+            primary: true
+          };
+        }else{
+          return {
+            content: _PHOTO_URI
+          };
+        }
+      }))
+    };
+
+    await props.appendProduct(_SEED);
+
+    if (await _PROPS.connected.status){
+      navigation.navigate('Overseer');
+    }
+  },
+  _prepareFragmentToAppend: async (props) => {
+    const { navigation } = props,
           _PROPS = props.newFragment;
 
     let _SEED = {
       name: _PROPS.name,
       product_id: _PROPS.product._id,
-      features: props.newProduct.features.map((item, i) => {
+      features: _PROPS.features.map((item, i) => {
         let finalResponse = {
           feature_id: item.feature._id,
           unit_id: item.unit._id,
@@ -295,7 +347,7 @@ module.exports = {
 
         return finalResponse;
       }),
-      prices: props.newProduct.prices.map((item, i) => {
+      prices: _PROPS.prices.map((item, i) => {
         return {
           name: item.name,
           values: [
@@ -308,7 +360,7 @@ module.exports = {
           feature_reference_id: item.feature._id
         };
       }),
-      shipping_plans: props.newProduct.shippingPlans.map((item, i) => {
+      shipping_plans: _PROPS.shippingPlans.map((item, i) => {
         return {
           feature_reference_id: item.feature._id,
           shipping_method_id: item.shippingMethod._id
@@ -318,7 +370,7 @@ module.exports = {
 
     await props.appendFragment(_SEED);
 
-    if (await props.newProduct.connected.status){
+    if (await _PROPS.connected.status){
       navigation.navigate('Overseer');
     }
   },
