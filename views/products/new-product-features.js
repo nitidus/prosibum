@@ -216,7 +216,10 @@ class NewProductFeatures extends Component<{}> {
                                 Styles.DescriptionFeature,
                                 _CUSTOM_STYLE
                               ]}>
-                                <Text>{featureItem.description}</Text>
+                                <Text
+                                  style={Styles.DescriptionFeatureText}>
+                                    {featureItem.description}
+                                </Text>
                             </ScrollView>
                         </Options>
                       );

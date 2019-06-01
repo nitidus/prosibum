@@ -41,7 +41,7 @@ class Overseer extends Component<{}> {
     this._language = _LANGUAGE;
 
     props.setBottomPilotTabs(_TABS);
-    props.setBottomPilotCurrentTab(_TABS[1]);
+    props.setBottomPilotCurrentTab(_TABS[0]);
   }
 
   componentWillReceiveProps(props) {

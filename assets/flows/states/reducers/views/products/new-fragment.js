@@ -22,7 +22,7 @@ const initialState = {
         queryItemsLoading: false,
         featuresLoading: false,
         productLoading: false,
-        appendProductLoading: false,
+        appendFragmentLoading: false,
         connected: {
           status: true,
           content: ''
@@ -203,7 +203,7 @@ export default (state = initialState, action) => {
     case NEW_FRAGMENT.APPEND_FRAGMENT_LOADING_STATUS:
       return {
         ...state,
-        appendProductLoading: action.payload
+        appendFragmentLoading: action.payload
       };
       break;
     case NEW_FRAGMENT.SET_CONNECTED_STATUS:

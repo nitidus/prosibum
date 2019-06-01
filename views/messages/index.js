@@ -11,6 +11,6 @@ export const Messages = (props) => {
   attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
 
   return (
-    <View><Text>{props.sub}, {props.main} page.</Text></View>
+    <View><Text>{props.sub}, {props.main}.</Text></View>
   )
 }

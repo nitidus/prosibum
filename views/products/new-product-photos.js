@@ -65,23 +65,52 @@ class NewProductPhotos extends Component<{}> {
             _VALIDATED = this._componentWillCheckValidation(props);
 
       if (props.newProduct.photos.length > 0){
-        var _FINAL_BUTTON = (
-          <Input
-            type={__CONSTANTS.content.submitButton.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-            value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
-            gradient={Global.colors.pair.ongerine}
-            style={{
-              marginHorizontal: Styles.Content.marginHorizontal
-            }}
-            onPress={() => {
-              const { navigation } = props;
+        var _FINAL_BUTTON;
 
-              // navigation.navigate('NewProductPrices');
-              alert('ok')
-            }}
-            forcedDisable={_VALIDATED} />
-        );
+        if (props.newProduct.appendProductLoading){
+          _FINAL_BUTTON = (
+            <Input
+              type={__CONSTANTS.content.submitButton.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+              gradient={Global.colors.pair.ongerine}
+              style={{
+                marginHorizontal: Styles.Content.marginHorizontal
+              }}
+              disable={true}>
+                <ActivityIndicator/>
+            </Input>
+          );
+        }else{
+          if (!props.newProduct.connected.status){
+            _FINAL_BUTTON = (
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={props.newFragment.connected.content}
+                style={[
+                  Styles.ErrorContainer,
+                  {
+                    marginHorizontal: Styles.Content.marginHorizontal
+                  }
+                ]}
+                textStyle={Styles.ErrorContent}
+                onPress={async () => await Preparation._prepareFragmentToAppend(props)} />
+            );
+          }else{
+            _FINAL_BUTTON = (
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal
+                }}
+                onPress={async () => await Preparation._prepareProductToAppend(props)}
+                forcedDisable={_VALIDATED} />
+            );
+          }
+        }
 
         if (_VALIDATED) {
           var _MESSAGE = '';

@@ -68,7 +68,7 @@ class NewFragmentShippingMethods extends Component<{}> {
             };
 
       if (props.newFragment.shippingPlans.length > 0){
-        if (props.newFragment.appendProductLoading){
+        if (props.newFragment.appendFragmentLoading){
           _APPEND_PRODUCT_BUTTON = (
             <Input
               type={__CONSTANTS.content.submitButton.type}
