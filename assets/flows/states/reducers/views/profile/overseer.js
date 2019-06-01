@@ -5,7 +5,8 @@ const initialState = {
         currentTopTab: {},
         topTabs: [],
         currentBottomTab: {},
-        bottomTabs: []
+        bottomTabs: [],
+        currentUserDetail: {}
       };
 
 export default (state = initialState, action) => {
@@ -32,6 +33,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         bottomTabs: action.payload
+      };
+      break;
+    case OVERSEER.SET_CURRENT_USER_DETAIL:
+      return {
+        ...state,
+        currentUserDetail: action.payload
       };
       break;
 

@@ -32,6 +32,12 @@ const mapDispatchToProps = (dispatch) => {
         type: OVERSEER.SET_BOTTOM_PILOT_TAB_BAR_TABS,
         payload: pilotTabs
       })
+    },
+    setCurrentUserDetail: (detail) => {
+      dispatch({
+        type: OVERSEER.SET_CURRENT_USER_DETAIL,
+        payload: detail
+      })
     }
   };
 }

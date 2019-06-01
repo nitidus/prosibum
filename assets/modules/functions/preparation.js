@@ -107,6 +107,26 @@ module.exports = {
 
     navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
   },
+  _prepareCurrentUserInformation: async (props, pilot) => {
+    const _NATIVE_SETTINGS = await Prototypes._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language,
+          _LANGUAGE_KEY = Prototypes._convertTokenToKeyword(_LANGUAGE.key),
+          _TABS = pilot.map((tab, i) => {
+            return tab.title;
+          }),
+          _SERIALIZED_AUTH = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
+
+    this._language = _LANGUAGE;
+
+    props.setBottomPilotTabs(_TABS);
+    props.setBottomPilotCurrentTab(_TABS[0]);
+
+    if (_SERIALIZED_AUTH !== false){
+      const _AUTH = JSON.parse(_SERIALIZED_AUTH);
+
+      props.setCurrentUserDetail(_AUTH);
+    }
+  },
   _prepareSignupComponentToSubmit: async (props) => {
     const { navigation, signup } = props,
           _SUBSCRIBED_USER = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.SUBSCRIBE_DEPEND_ON_PHONE_NUMBER);

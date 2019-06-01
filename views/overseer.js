@@ -30,18 +30,9 @@ class Overseer extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this,
-          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
-          _LANGUAGE = _NATIVE_SETTINGS.language,
-          _LANGUAGE_KEY = Functions._convertTokenToKeyword(_LANGUAGE.key),
-          _TABS = __CONSTANTS.pilot.content.map((tab, i) => {
-            return tab.title;
-          });
+    const { props } = this;
 
-    this._language = _LANGUAGE;
-
-    props.setBottomPilotTabs(_TABS);
-    props.setBottomPilotCurrentTab(_TABS[0]);
+    await Preparation._prepareCurrentUserInformation(props, __CONSTANTS.pilot.content);
   }
 
   componentWillReceiveProps(props) {

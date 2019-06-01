@@ -142,10 +142,19 @@ export const DrawerMenuItem = (props) => {
 }
 
 export const DrawerMenu = (props) => {
-  var attitude = {};
+  var attitude = {},
+      pinnedProfileOtherProps = {};
 
   if ((typeof props.onDismiss != 'undefined') || (typeof props.onDrawerMenuDismiss != 'undefined') || (typeof props.drawerMenuOnDismiss != 'undefined') || (typeof props.onMenuDismiss != 'undefined') || (typeof props.menuOnDismiss != 'undefined')){
     attitude.onDismiss = props.onDismiss || props.onDrawerMenuDismiss || props.drawerMenuOnDismiss || props.onMenuDismiss || props.menuOnDismiss;
+  }
+
+  if (Object.keys(props.overseer.currentUserDetail).length > 0){
+    if (typeof props.overseer.currentUserDetail.personal != 'undefined'){
+      if (typeof props.overseer.currentUserDetail.personal.profile != 'undefined'){
+        pinnedProfileOtherProps.src = props.overseer.currentUserDetail.personal.profile;
+      }
+    }
   }
 
   attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
@@ -154,13 +163,13 @@ export const DrawerMenu = (props) => {
     <View
       style={Styles.Container}>
         <DrawerMenuPinnedProfile
-          src="https://bit.ly/2LJj1V2"
           onPress={() => {
             const { navigation } = props;
 
             navigation.navigate('Profile');
           }}
-          {...props} />
+          {...props}
+          {...pinnedProfileOtherProps} />
 
         <View style={Styles.MenuItemsContainer}>
           <DrawerMenuItem
