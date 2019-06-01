@@ -16,6 +16,9 @@ var _CUSTOM_TEXT_INPUT_LINK = {
       fontSize: 18,
       height: 59
     },
+    _CUSTOM_INNER_INPUT_CONTAINER_FOR_TAGS = {
+      fontSize: 18
+    },
     _CUSTOM_MASTER_CONTAINER = {
       borderWidth: 2,
       borderRadius: 5
@@ -30,6 +33,16 @@ var _CUSTOM_TEXT_INPUT_LINK = {
       borderWidth: 2,
       borderRadius: 5,
       paddingHorizontal: 16
+    },
+    _CUSTOM_CONTAINER_WITH_TAGS = {
+      minHeight: 109,
+      borderWidth: 2,
+      borderRadius: 5,
+      paddingHorizontal: 16,
+      paddingTop: 16
+    },
+    _CUSTOM_CONTAINER_WITH_TAGS_INPUT = {
+      fontSize: 18,
     },
     _CUSTOM_CONTAINER_WITH_BUTTON = {
       borderWidth: 2,
@@ -66,6 +79,8 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_INNER_INPUT_CONTAINER.height += 20;
     _CUSTOM_INNER_INPUT_CONTAINER.fontSize += 6;
 
+    _CUSTOM_INNER_INPUT_CONTAINER_FOR_TAGS.fontSize += 6;
+
     _CUSTOM_TEXT_INPUT_CONTAINER.height += 20;
     _CUSTOM_TEXT_INPUT_CONTAINER.fontSize += 6;
     _CUSTOM_TEXT_INPUT_CONTAINER.width = '85%';
@@ -75,6 +90,13 @@ if (Platform.OS !== 'ios'){
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.borderWidth += 1;
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.borderRadius += 2;
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.paddingHorizontal += 10;
+
+    _CUSTOM_CONTAINER_WITH_TAGS.minHeight += 20;
+    _CUSTOM_CONTAINER_WITH_TAGS.borderWidth += 1;
+    _CUSTOM_CONTAINER_WITH_TAGS.borderRadius += 2;
+    _CUSTOM_CONTAINER_WITH_TAGS.paddingHorizontal += 10;
+    _CUSTOM_CONTAINER_WITH_TAGS.paddingTop += 10;
+    _CUSTOM_CONTAINER_WITH_TAGS_INPUT.fontSize += 6;
 
     _CUSTOM_CONTAINER_WITH_BUTTON.borderWidth += 1;
     _CUSTOM_CONTAINER_WITH_BUTTON.borderRadius += 2;
@@ -109,6 +131,9 @@ if (Platform.OS !== 'ios'){
 
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.paddingHorizontal += 3;
 
+    _CUSTOM_CONTAINER_WITH_TAGS.paddingHorizontal += 3;
+    _CUSTOM_CONTAINER_WITH_TAGS.paddingTop += 3;
+
     _CUSTOM_STATIC_TEXT_INPUT_LINK_CONTAINER[/*(I18nManager.isRTL)? 'right': */'left'] = 18;
 
     _CUSTOM_TEXT_INPUT_LINK.paddingVertical -= 2;
@@ -124,8 +149,10 @@ if (Platform.OS !== 'ios'){
 
   if (!I18nManager.isRTL){
     _CUSTOM_INNER_INPUT_CONTAINER.fontWeight = '500';
+    _CUSTOM_INNER_INPUT_CONTAINER_FOR_TAGS.fontWeight = '500';
     _CUSTOM_TEXT_INPUT_CONTAINER.fontWeight = '500';
     _CUSTOM_CONTAINER_WITHOUT_BUTTON.fontWeight = '500';
+    _CUSTOM_CONTAINER_WITH_TAGS_INPUT.fontWeight = '500';
     _CUSTOM_BUTTON_TITLE.fontWeight = '500';
     _CUSTOM_PHOTO_INPUT_LABEL_CONTENT.fontWeight = '500';
   }
@@ -171,6 +198,24 @@ module.exports = StyleSheet.create({
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     ..._CUSTOM_CONTAINER_WITH_BUTTON
   },
+  ContainerWithTags: {
+    borderColor: colors.single.mercury,
+    backgroundColor: colors.single.romance,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    alignItems: 'flex-start',
+    ..._CUSTOM_CONTAINER_WITH_TAGS
+  },
+  ContainerWithTagsContent: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  ContainerWithTagsInput: {
+    color: colors.single.rangoonGreen,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
+    ..._CUSTOM_CONTAINER_WITH_TAGS_INPUT
+  },
   ContainerWithIcon: {
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,
@@ -178,6 +223,23 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     ..._CUSTOM_CONTAINER_WITH_BUTTON
+  },
+  TagItemContainer: {
+    flexDirection: 'row',
+    marginRight: _CUSTOM_CONTAINER_WITH_TAGS.paddingHorizontal,
+    marginBottom: _CUSTOM_CONTAINER_WITH_TAGS.paddingHorizontal,
+    paddingHorizontal: _CUSTOM_CONTAINER_WITH_TAGS.paddingHorizontal,
+    height: _CUSTOM_CONTAINER_WITHOUT_BUTTON.height - 19
+  },
+  TagItemContentIcon: {
+    marginRight: _CUSTOM_CONTAINER_WITH_TAGS.paddingHorizontal
+  },
+  TagItemContentText: {
+    color: colors.single.rangoonGreen,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left',
+    ..._CUSTOM_CONTAINER_WITH_TAGS_INPUT
   },
   PhotoInputContainer: {
     flexDirection: 'row',
@@ -244,6 +306,15 @@ module.exports = StyleSheet.create({
     backgroundColor: colors.single.romance,
     borderRadius: 0,
     ..._CUSTOM_INNER_INPUT_CONTAINER
+  },
+  InnerInputContainerForTags: {
+    color: colors.single.rangoonGreen,
+    fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
+    borderWidth: 0,
+    borderColor: colors.single.mercury,
+    backgroundColor: colors.single.romance,
+    borderRadius: 0,
+    ..._CUSTOM_INNER_INPUT_CONTAINER_FOR_TAGS
   },
   MasterContainer: {
     borderColor: colors.single.mercury,

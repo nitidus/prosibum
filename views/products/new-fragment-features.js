@@ -79,7 +79,7 @@ class NewFragmentFeatures extends Component<{}> {
       if (props.newFragment.features.length > 0){
         _FEATURES_CONTENT = (
           <ScrollView
-            showsVerticalScrollIndicator={true}
+            showsVerticalScrollIndicator={false}
             contentContainerStyle={Styles.ScrollableListContainer}>
               <Carousel
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.carousel.state.normal.title.en)}

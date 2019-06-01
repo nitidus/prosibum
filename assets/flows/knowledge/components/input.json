@@ -1,4 +1,27 @@
 {
+  "tags": {
+    "tag": {
+      "type": "BUTTON",
+      "title": {
+        "en": "Tag"
+      },
+      "content": {
+        "firstLink": {
+          "title": {
+            "en": "Tag Close Button"
+          },
+          "context": {
+            "icon": "close"
+          }
+        }
+      }
+    },
+    "input": {
+      "options": {
+        "returnKeyType": "done"
+      }
+    }
+  },
   "cameraRollPicker": {
     "state": {
       "filled": {

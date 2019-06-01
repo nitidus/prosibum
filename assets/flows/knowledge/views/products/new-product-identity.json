@@ -10,50 +10,15 @@
     }
   },
   "content": {
-    "firstInput": {
-      "type": "TEXT",
+    "title": {
+      "en": "New Product Identity"
+    },
+    "firstInputGroup": {
       "title": {
-        "en": "Product Name",
-        "fa": "نام محصول"
+        "en": "Product Identity InputGroup"
       }
     },
-    "firstCarousel": {
-      "type": "BUTTON",
-      "state": {
-        "normal": {
-          "title": {
-            "en": "Warehouses",
-            "fa": "انبارها"
-          },
-          "content": {
-            "title": {
-              "en": "Warehouse Item"
-            },
-            "suffix": {
-              "en": "Product",
-              "fa": "محصول"
-            }
-          }
-        },
-        "loading": {
-          "title": {
-            "en": "Warehouses Loading"
-          }
-        },
-        "disconected": {
-          "title": {
-            "en": "Warehouses Disconected Situation"
-          }
-        },
-        "null": {
-          "title": {
-            "en": "There's no warehouse.",
-            "fa": "هیچ انباری وجود ندارد."
-          }
-        }
-      }
-    },
-    "secondInput": {
+    "firstInput": {
       "type": "LINK",
       "link": {
         "en": "Categories",
@@ -62,6 +27,70 @@
       "title": {
         "en": "Product Categories",
         "fa": "دسته‌بندی محصولات"
+      },
+      "warning": {
+        "en": "You should select one category at least.",
+        "fa": "حتما باید یک دسته‌بندی انتخاب کنید."
+      }
+    },
+    "secondInput": {
+      "type": "TEXT",
+      "title": {
+        "en": "Product Name",
+        "fa": "نام محصول"
+      },
+      "warning": {
+        "first": {
+          "en": "Product name can not be empty.",
+          "fa": "نام محصول نمی‌تواند خالی باشد."
+        },
+        "second": {
+          "en": "Product name must be more than 7 characters.",
+          "fa": "نام محصول باید بیشتر از ۷ کاراکتر باشد"
+        },
+        "third": {
+          "en": "Product name can not be exactly the same as category name.",
+          "fa": "نام محصول دقیقا نمی‌تواند با عنوان دسته‌بندی برابر باشد."
+        },
+        "fourth": {
+          "en": "Product name must contains category name.",
+          "fa": "نام محصول باید شامل عنوان دسته‌بندی باشد."
+        }
+      }
+    },
+    "firstCarousel": {
+      "type": "BUTTON",
+      "state": {
+        "normal": {
+          "title": {
+            "en": "Units",
+            "fa": "واحدهای اندازه‌گیری"
+          },
+          "content": {
+            "title": {
+              "en": "Unit Item"
+            }
+          },
+          "suffix": {
+            "en": "Unit Type",
+            "fa": "نوع واحد"
+          }
+        }
+      },
+      "warning": {
+        "en": "No unit has been appended.",
+        "fa": "هیچ واحد اندازه‌گیری اضافه نکرده‌اید."
+      }
+    },
+    "thirdInput": {
+      "type": "TAGS",
+      "title": {
+        "en": "Product Tags",
+        "fa": "عناوین دیگر، عناوین چند زبانه و تگ‌ها"
+      },
+      "warning": {
+        "en": "No tag or title has been appended.",
+        "fa": "هیچ تگ یا عنوانی اضافه نکرده‌اید."
       }
     },
     "modalHandlerButton": {
@@ -69,8 +98,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Warehouse",
-            "fa": "اضافه‌کردن انبار"
+            "en": "Append Unit",
+            "fa": "اضافه کردن واحد اندازه‌گیری"
           }
         }
       }

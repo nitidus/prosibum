@@ -85,7 +85,7 @@ class NewFragmentPrices extends Component<{}> {
 
         _PRICES_CONTENT = (
           <ScrollView
-            showsVerticalScrollIndicator={true}
+            showsVerticalScrollIndicator={false}
             contentContainerStyle={Styles.ScrollableListContainer}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.list.title.en)}>
               {

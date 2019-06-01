@@ -23,16 +23,46 @@ const mapDispatchToProps = (dispatch) => {
         type: NEW_PRODUCT.RESET_FORMS
       })
     },
+    setCategory: (category) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_CATEGORY,
+        payload: category
+      })
+    },
     setName: (name) => {
       dispatch({
         type: NEW_PRODUCT.SET_NAME,
         payload: name
       })
     },
-    setCategory: (category) => {
+    setInprocessTag: (tag) => {
       dispatch({
-        type: NEW_PRODUCT.SET_CATEGORY,
-        payload: category
+        type: NEW_PRODUCT.SET_INPROCESS_TAG,
+        payload: tag
+      })
+    },
+    setTags: (tags) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_TAGS,
+        payload: tags
+      })
+    },
+    appendTag: (tag) => {
+      dispatch({
+        type: NEW_PRODUCT.APPEND_TAG,
+        payload: tag
+      })
+    },
+    setInvenntoryUnits: (units) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_INVENTORY_UNITS,
+        payload: units
+      })
+    },
+    appendInvenntoryUnit: (unit) => {
+      dispatch({
+        type: NEW_PRODUCT.APPEND_INVENTORY_UNIT,
+        payload: unit
       })
     },
     setFeatures: (features) => {
@@ -74,6 +104,12 @@ const mapDispatchToProps = (dispatch) => {
     setCategoriesModalVisibility: (visibilityStatus) => {
       dispatch({
         type: NEW_PRODUCT.SET_CATEGORIES_MODAL_VISIBILITY,
+        payload: visibilityStatus
+      })
+    },
+    setUnitsModalVisibility: (visibilityStatus) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_UNITS_MODAL_VISIBILITY,
         payload: visibilityStatus
       })
     },

@@ -3,13 +3,17 @@ const { NEW_PRODUCT } = VIEWS.PRODUCTS;
 
 const initialState = {
         language: {},
-        name: '',
         category: {},
+        name: '',
+        inprocessTag: '',
+        tags: [],
+        inventoryUnits: [],
         features: [],
         photos: [],
         primaryPhoto: {},
         onFetchingModePhoto: {},
         categoriesModalVisibility: false,
+        unitsModalVisibility: false,
         featuresModalVisibility: false,
         photoModalVisibility: false,
         appendProductLoading: false,
@@ -32,16 +36,52 @@ export default (state = initialState, action) => {
         ...initialState
       };
       break;
+    case NEW_PRODUCT.SET_CATEGORY:
+      return {
+        ...state,
+        category: action.payload
+      };
+      break;
     case NEW_PRODUCT.SET_NAME:
       return {
         ...state,
         name: action.payload
       };
       break;
-    case NEW_PRODUCT.SET_CATEGORY:
+    case NEW_PRODUCT.SET_INPROCESS_TAG:
       return {
         ...state,
-        category: action.payload
+        inprocessTag: action.payload
+      };
+      break;
+    case NEW_PRODUCT.APPEND_TAG:
+      return {
+        ...state,
+        tags: [
+          ...state.tags,
+          action.payload
+        ]
+      };
+      break;
+    case NEW_PRODUCT.SET_TAGS:
+      return {
+        ...state,
+        tags: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_INVENTORY_UNITS:
+      return {
+        ...state,
+        inventoryUnits: action.payload
+      };
+      break;
+    case NEW_PRODUCT.APPEND_INVENTORY_UNIT:
+      return {
+        ...state,
+        inventoryUnits: [
+          ...state.inventoryUnits,
+          action.payload
+        ]
       };
       break;
     case NEW_PRODUCT.SET_FEATURES:
@@ -102,6 +142,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         categoriesModalVisibility: action.payload
+      };
+      break;
+    case NEW_PRODUCT.SET_UNITS_MODAL_VISIBILITY:
+      return {
+        ...state,
+        unitsModalVisibility: action.payload
       };
       break;
     case NEW_PRODUCT.SET_FEATURES_MODAL_VISIBILITY:

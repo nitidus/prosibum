@@ -158,6 +158,17 @@ module.exports = StyleSheet.create({
     ..._CUSTOM_WAREHOUSE_ITEM_CONTAINER,
     padding: 18
   },
+  WarningContainer: {
+    height: 'auto',
+    width: width - (_CUSTOM_CONTENT.marginHorizontal * 2),
+    marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
+    marginBottom: _CUSTOM_CONTENT.marginBottom,
+    backgroundColor: colors.pair.ongerine.orangeYellow,
+    padding: 18
+  },
+  WarningContent: {
+    textAlign: 'center'
+  },
   ErrorContainer: {
     backgroundColor: colors.single.carminePink
   },
@@ -178,6 +189,12 @@ module.exports = StyleSheet.create({
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     alignItems: 'flex-start',
     height: 178,
+    padding: 18
+  },
+  UnitsDetailItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    alignItems: 'flex-start',
+    height: 118,
     padding: 18
   },
   CustomizedFeatureDetailItemContainer: {

@@ -96,6 +96,53 @@ export const Input = (props) => {
         attitude.onBlur = props.onBlur || function (){};
         attitude.onFocus = props.onFocus || function (){};
         break;
+      case 'tags':
+      case 'tag':
+      case 'chips':
+      case 'chip':
+      case 'badges':
+      case 'badge':
+        if (typeof props.placeholder != 'undefined'){
+          attitude.placeholder = props.placeholder;
+        }
+
+        if (typeof props.value != 'undefined'){
+          attitude.value = props.value || '';
+        }
+
+        attitude.tags = props.tags || props.chips || props.badges || props.data || props.source || [];
+        otherProps.multiline = attitude.multiline = false;
+        otherProps.blurOnSubmit = attitude.blurOnSubmit = false;
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
+        }
+
+        attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
+        }
+
+        if ((typeof props.onSubmitEditing != 'undefined') || (typeof props.onSubmit != 'undefined')){
+          attitude.onSubmitEditing = props.onSubmitEditing || props.onSubmit;
+        }
+
+        if ((typeof props.onRemove != 'undefined') || (typeof props.onRemoveTag != 'undefined')){
+          attitude.onRemove = props.onRemove || props.onRemoveTag;
+        }
+
+        if (attitude.type === 'text'){
+          attitude.autoCapitalize = props.autoCapitalize || 'words';
+        }
+
+        if (typeof props.gradient != 'undefined'){
+          attitude.gradient = props.gradient;
+        }
+
+        attitude.onBlur = props.onBlur || function (){};
+        attitude.onFocus = props.onFocus || function (){};
+        break;
       case 'credit-card':
       case 'debit-card':
       case 'creditcard':
@@ -387,6 +434,95 @@ export const Input = (props) => {
           onFocus={attitude.onFocus}
           editable={!attitude.disable}
           {...otherProps} />
+      );
+      break;
+
+    case 'tags':
+    case 'tag':
+    case 'chips':
+    case 'chip':
+    case 'badges':
+    case 'badge':
+      var _TAGS_CONTAINER_STYLES = [
+            Styles.ContainerWithTags
+          ],
+          _TAGS_INPUT_STYLES= [
+            Styles.ContainerWithTagsInput
+          ],
+          _TAGS_CONTENT;
+
+      _TAGS_CONTAINER_STYLES.push(attitude.style)
+
+      if (attitude.tags.length > 0){
+        let otherGlobalTagProps = {};
+
+        if (typeof attitude.gradient != 'undefined'){
+          otherGlobalTagProps.gradient = attitude.gradient;
+        }
+
+        _TAGS_INPUT_STYLES.push({
+          marginBottom: Styles.ContainerWithTags.paddingTop
+        });
+
+        _TAGS_CONTENT = (
+          <View
+            style={Styles.ContainerWithTagsContent}>
+              {
+                attitude.tags.map((tag, i) => {
+                  return (
+                    <Input
+                      type={__CONSTANTS.tags.tag.type}
+                      name={`${Functions._convertTokenToKeyword(__CONSTANTS.tags.tag.title.en)}-${i}`}
+                      style={Styles.TagItemContainer}
+                      disable={true}
+                      {...otherGlobalTagProps}>
+                        <Link
+                          name={`${Functions._convertTokenToKeyword(__CONSTANTS.tags.tag.content.firstLink.title.en)}-${i}`}
+                          onPress={() => attitude.onRemove(tag)}>
+                            <Icon
+                              name={__CONSTANTS.tags.tag.content.firstLink.context.icon}
+                              style={Styles.TagItemContentIcon}/>
+                        </Link>
+
+                        <Text
+                          style={Styles.TagItemContentText}>
+                            {tag}
+                        </Text>
+                    </Input>
+                  );
+                })
+              }
+          </View>
+        );
+      }
+
+      return (
+        <View
+          style={_TAGS_CONTAINER_STYLES}>
+            {_TAGS_CONTENT}
+
+            <TextInput
+              key={attitude.key}
+              name={attitude.name}
+              style={_TAGS_INPUT_STYLES}
+              autoCapitalize={attitude.autoCapitalize}
+              value={attitude.value}
+              placeholder={attitude.placeholder}
+              placeholderTextColor={Global.colors.single.mercury}
+              selectionColor={Global.colors.single.mercury}
+              underlineColorAndroid={Global.colors.single.transparent}
+              onChangeText={(currentValue) => attitude.onChangeText(currentValue)}
+              onSubmitEditing={({nativeEvent: { text, eventCount, target }}) => {
+                if (text != ''){
+                  attitude.onSubmitEditing(text);
+                }
+              }}
+              onBlur={attitude.onBlur}
+              onFocus={attitude.onFocus}
+              editable={!attitude.disable}
+              {...otherProps}
+              {...__CONSTANTS.tags.input.options} />
+        </View>
       );
       break;
 
@@ -948,6 +1084,16 @@ export const InputGroup = (props) => {
             case 'email':
             case 'numeric':
             case 'password':
+            case 'tags':
+            case 'tag':
+            case 'chips':
+            case 'chip':
+            case 'badges':
+            case 'badge':
+            case 'credit-card':
+            case 'debit-card':
+            case 'creditcard':
+            case 'debitcard':
             case 'link':
             case 'text-link':
             case 'email-link':
@@ -955,6 +1101,13 @@ export const InputGroup = (props) => {
             case 'phone-link':
             case 'phone-number-link':
             case 'password-link':
+            case 'photo':
+            case 'photo-picker':
+            case 'cameraroll':
+            case 'cameraroll-picker':
+            case 'camera-roll':
+            case 'camera-roll-picker':
+            case 'button':
               return child;
               break;
           }
@@ -1010,6 +1163,20 @@ export const InputGroup = (props) => {
                   childProps.style
                 ];
 
+            switch (child.props.type.toLowerCase()) {
+              case 'tags':
+              case 'tag':
+              case 'chips':
+              case 'chip':
+              case 'badges':
+              case 'badge':
+                childStyle = [
+                  Styles.InnerInputContainerForTags,
+                  childProps.style
+                ];
+                break;
+            }
+
             if (i > 0){
               var _BORDER_TOP_WIDTH = 2;
 
@@ -1017,13 +1184,32 @@ export const InputGroup = (props) => {
                 _BORDER_TOP_WIDTH += 1;
               }
 
-              childStyle = [
-                Styles.InnerInputContainer,
-                {
-                  borderTopWidth: _BORDER_TOP_WIDTH
-                },
-                childProps.style
-              ];
+              switch (child.props.type.toLowerCase()) {
+                case 'tags':
+                case 'tag':
+                case 'chips':
+                case 'chip':
+                case 'badges':
+                case 'badge':
+                  childStyle = [
+                    Styles.InnerInputContainerForTags,
+                    {
+                      borderTopWidth: _BORDER_TOP_WIDTH
+                    },
+                    childProps.style
+                  ];
+                  break;
+
+                default:
+                  childStyle = [
+                    Styles.InnerInputContainer,
+                    {
+                      borderTopWidth: _BORDER_TOP_WIDTH
+                    },
+                    childProps.style
+                  ];
+                  break;
+              }
             }
 
             /*if (typeof childProps.link != 'undefined'){
