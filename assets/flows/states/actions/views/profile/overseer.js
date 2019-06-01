@@ -9,6 +9,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setLanguage: (language) => {
+      dispatch({
+        type: OVERSEER.SET_LANGUAGE,
+        payload: language
+      })
+    },
     setTopPilotCurrentTab: (pilotCurrentTab) => {
       dispatch({
         type: OVERSEER.SET_TOP_PILOT_BAR_CURRENT_TAB,

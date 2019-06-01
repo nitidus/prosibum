@@ -116,7 +116,13 @@ module.exports = {
           }),
           _SERIALIZED_AUTH = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    this._language = _LANGUAGE;
+    if (Object.keys(props.overseer.language).length === 0){
+      props.setLanguage(_LANGUAGE);
+    }else{
+      if (props.overseer.language.key !== _LANGUAGE.key){
+        props.setLanguage(_LANGUAGE);
+      }
+    }
 
     props.setBottomPilotTabs(_TABS);
     props.setBottomPilotCurrentTab(_TABS[0]);

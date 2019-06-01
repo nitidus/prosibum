@@ -2,6 +2,7 @@ import { VIEWS } from '../../../types/index';
 const { OVERSEER } = VIEWS.PROFILE;
 
 const initialState = {
+        language: {},
         currentTopTab: {},
         topTabs: [],
         currentBottomTab: {},
@@ -11,6 +12,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case OVERSEER.SET_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload
+      };
+      break;
     case OVERSEER.SET_TOP_PILOT_BAR_CURRENT_TAB:
       return {
         ...state,
