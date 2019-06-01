@@ -65,6 +65,56 @@ class NewProductPhotos extends Component<{}> {
             _VALIDATED = this._componentWillCheckValidation(props);
 
       if (props.newProduct.photos.length > 0){
+        var _FINAL_BUTTON = (
+          <Input
+            type={__CONSTANTS.content.submitButton.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+            value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
+            gradient={Global.colors.pair.ongerine}
+            style={{
+              marginHorizontal: Styles.Content.marginHorizontal
+            }}
+            onPress={() => {
+              const { navigation } = props;
+
+              // navigation.navigate('NewProductPrices');
+              alert('ok')
+            }}
+            forcedDisable={_VALIDATED} />
+        );
+
+        if (_VALIDATED) {
+          var _MESSAGE = '';
+
+          if (props.newProduct.photos.length > 0){
+            if (props.newProduct.photos.every((photo) => (Object.keys(photo.content).length > 0)) === false){
+              _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.content.warning.firstLevel[_LANGUAGE]}`;
+            }
+          }else{
+            _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.content.warning.secondLevel[_LANGUAGE]}`;
+          }
+
+          if (Object.keys(props.newProduct.primaryPhoto).length === 0){
+            _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.content.warning.thirdLevel[_LANGUAGE]}`;
+          }
+
+          if (_MESSAGE != ''){
+            _FINAL_BUTTON = (
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={_MESSAGE}
+                style={[
+                  Styles.WarningContainer,
+                  {
+                    marginBottom: Styles.Content.marginVertical
+                  }
+                ]}
+                textStyle={Styles.WarningContent} />
+            );
+          }
+        }
+
         _PHOTOS_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={true}
@@ -79,14 +129,14 @@ class NewProductPhotos extends Component<{}> {
                           return (checkingItem._id != photoItem._id);
                         });
 
-                        props.setProductPhotos(_TARGET_PHOTOS_NODE);
+                        props.setPhotos(_TARGET_PHOTOS_NODE);
 
                         if (_TARGET_PHOTOS_NODE.length > 0){
                           if (photoItem._id === props.newProduct.primaryPhoto._id){
-                            props.setProductPrimaryPhoto(_TARGET_PHOTOS_NODE[0]);
+                            props.setPrimaryPhoto(_TARGET_PHOTOS_NODE[0]);
                           }
                         }else{
-                          props.setProductPrimaryPhoto({});
+                          props.setPrimaryPhoto({});
                         }
                       },
                       _PHOTO_CONTENT = photoItem.content,
@@ -125,11 +175,13 @@ class NewProductPhotos extends Component<{}> {
                           photoURI={_PHOTO_URI}
                           onPress={() => {
                             Keyboard.dismiss();
-                            props.setProductPhotoModalVisibility(true);
+                            props.setPhotoModalVisibility(true);
                             props.setOnFetchingModePhoto(photoItem);
                           }}
                           onLongPress={() => {
-                            props.setProductPrimaryPhoto(photoItem);
+                            if (_PHOTO_URI != ''){
+                              props.setPrimaryPhoto(photoItem);
+                            }
                           }}
                           {..._SINGLE_PHOTO_OTHER_PROPS} />
                     </Options>
@@ -146,25 +198,12 @@ class NewProductPhotos extends Component<{}> {
                   marginHorizontal: Styles.Content.marginHorizontal,
                   marginBottom: Styles.Content.marginVertical
                 }}
-                onPress={() => props.appendProductPhoto({
+                onPress={() => props.appendPhoto({
                   _id: Functions._generateNewBSONObjectID(),
                   content: {}
                 })} />
 
-              <Input
-                type={__CONSTANTS.content.submitButton.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
-                gradient={Global.colors.pair.ongerine}
-                style={{
-                  marginHorizontal: Styles.Content.marginHorizontal
-                }}
-                onPress={() => {
-                  const { navigation } = props;
-
-                  navigation.navigate('NewProductPrices');
-                }}
-                forcedDisable={_VALIDATED} />
+              {_FINAL_BUTTON}
           </ScrollView>
         );
       }else{
@@ -193,19 +232,19 @@ class NewProductPhotos extends Component<{}> {
             };
 
             if (Object.keys(props.newProduct.primaryPhoto).length === 0){
-              props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
+              props.setPrimaryPhoto(_TARGET_PHOTO_NODE);
             }
 
-            props.appendProductPhoto(_TARGET_PHOTO_NODE);
+            props.appendPhoto(_TARGET_PHOTO_NODE);
           }}
           {...props}>
             {_PHOTOS_CONTENT}
 
             <CameraRollPickerModal
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalContainer.title.en)}
-              visible={props.newProduct.productPhotoModalVisibility}
-              onBlur={(status) => props.setProductPhotoModalVisibility(status)}
-              onPress={(photo) => props.setProductPhotos(props.newProduct.photos.map((photoItem, i) => {
+              visible={props.newProduct.photoModalVisibility}
+              onBlur={(status) => props.setPhotoModalVisibility(status)}
+              onPress={(photo) => props.setPhotos(props.newProduct.photos.map((photoItem, i) => {
                 const _ON_FETCHING_MODE_PHOTO = props.newProduct.onFetchingModePhoto;
 
                 if (photoItem._id === _ON_FETCHING_MODE_PHOTO._id){
@@ -215,10 +254,10 @@ class NewProductPhotos extends Component<{}> {
                   };
 
                   if (Object.keys(props.newProduct.primaryPhoto).length === 0){
-                    props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
+                    props.setPrimaryPhoto(_TARGET_PHOTO_NODE);
                   }else{
                     if (props.newProduct.primaryPhoto._id === photoItem._id){
-                      props.setProductPrimaryPhoto(_TARGET_PHOTO_NODE);
+                      props.setPrimaryPhoto(_TARGET_PHOTO_NODE);
                     }
                   }
 

@@ -58,6 +58,20 @@
           }
         }
       }
+    },
+    "warning": {
+      "firstLevel": {
+        "en": "No instance of feature has been created.",
+        "fa": "هیچ نمونه‌ای از ویژگی تصویر ایجاد نکرده‌اید."
+      },
+      "secondLevel": {
+        "en": "You should attach photo for instances.",
+        "fa": "برای نمونه‌ها باید تصویر مشخص کنید."
+      },
+      "thirdLevel": {
+        "en": "Product primary photo has not been selected.",
+        "fa": "تصویر اصلی محصول انتخاب نشده است."
+      }
     }
   }
 }
