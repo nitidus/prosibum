@@ -35,9 +35,7 @@ class TechnicalTab extends Component<{}> {
       const _PRIORITY_TOKEN = Preparation._prepareBrandRolePriority(props);
 
       if (_PRIORITY_TOKEN.current === _PRIORITY_TOKEN.range.min){
-        if (_PROPS.brandName != ''){
-          _FORM_FIELDS_VALIDITY = true;
-        }
+        _FORM_FIELDS_VALIDITY = true;
       }else{
         _FORM_FIELDS_VALIDITY = true;
       }
@@ -223,7 +221,7 @@ class TechnicalTab extends Component<{}> {
                 // }
 
                 if (Object.keys(props.technicalTab.brandProfilePhoto).length > 0){
-                  const _PHOTO_URI = await Functions._fethBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto);
+                  const _PHOTO_URI = await Functions._fetchBase64BlobFromPhoto(props.technicalTab.brandProfilePhoto);
 
                   if (_AUTH.brand_profile_photo !== _PHOTO_URI){
                     if (typeof _SEED.brand != 'undefined'){
