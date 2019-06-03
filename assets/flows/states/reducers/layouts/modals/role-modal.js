@@ -1,4 +1,4 @@
-import { LAYOUTS } from '../../types/index';
+import { LAYOUTS } from '../../../types/index';
 const { ROLE_MODAL } = LAYOUTS;
 
 const initialState = {

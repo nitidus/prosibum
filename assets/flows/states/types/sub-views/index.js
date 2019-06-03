@@ -1,4 +1,4 @@
-export const SUB_VIEWS = {
+module.exports = {
   USER_PROFILE: {
     PERSONAL_TAB: {
       SET_USER_FIRST_NAME: 'USER_PROFILE/PERSONAL_TAB/SET_USER_FIRST_NAME',

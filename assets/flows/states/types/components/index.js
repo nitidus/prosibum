@@ -1,4 +1,4 @@
-export const COMPONENTS = {
+module.exports = {
   SEGMENT: {
     SET_CHILDREN_VISIBILITY: 'SEGMENT/SET_CHILDREN_VISIBILITY'
   }

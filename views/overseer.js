@@ -16,7 +16,7 @@ const { mapStateToProps, mapDispatchToProps } = ViewsActions.Profile.Overseer;
 import { views_constants } from '../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.overseer;
 
-import { Dashboard } from './dashboard';
+import Dashboard from './dashboard';
 import { Products } from './products';
 import { Messages } from './messages';
 const __COMPONENTS = {

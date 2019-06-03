@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, Dimensions, Platform } from 'react-native';
+const _SCREEN = Dimensions.get('window');
+
+import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
 import { Input, Carousel } from '../../assets/components/index';
-const Styles = Views.Dashboard.Self,
-      _SCREEN = Dimensions.get('window');
+const Styles = Views.Dashboard.Self;
+
+import { Views as ViewsActions } from '../../assets/flows/states/actions';
+const { mapStateToProps, mapDispatchToProps } = ViewsActions.Dashboard.Self;
 
 import { views_constants } from '../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.dashboard.self;
@@ -12,7 +17,7 @@ const __CONSTANTS = views_constants.dashboard.self;
 import { Functions } from '../../assets/modules/index';
 const { Preparation } = Functions;
 
-export const Dashboard = (props) => {
+const Dashboard = (props) => {
   const { navigation } = props,
         _FIRST_CAROUSEL_ITEMS = __CONSTANTS.firstCarousel.content;
 
@@ -22,6 +27,12 @@ export const Dashboard = (props) => {
   var attitude = {};
 
   attitude.language = (typeof props.language != 'undefined')? Functions._convertTokenToKeyword(props.language.key): 'en';
+
+  if (
+    (Object.keys(props.dashboard.overallDetail).length === 0) && (props.dashboard.loadingOverallDetail === false)
+  ){
+    props.fetchCurrentUserOverallDetail();
+  }
 
   if (Platform.OS !== 'ios'){
     _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
@@ -92,3 +103,5 @@ export const Dashboard = (props) => {
     </ScrollView>
   )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

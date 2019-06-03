@@ -1,4 +1,4 @@
-import { LAYOUTS } from '../../types/index';
+import { LAYOUTS } from '../../../types/index';
 const { CAMERA_ROLL_PICKER_MODAL } = LAYOUTS;
 
 const initialState = {
