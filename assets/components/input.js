@@ -1156,7 +1156,7 @@ export const InputGroup = (props) => {
         attitude.style
       ]}>
         {
-          attitude.children.map((child, i) => {
+          props.children.map((child, i) => {
             var childProps = {...child.props},
                 childStyle = [
                   Styles.InnerInputContainer,
