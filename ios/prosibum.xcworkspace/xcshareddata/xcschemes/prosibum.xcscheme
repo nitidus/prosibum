@@ -38,7 +38,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "prosibum [dev].app"
+               BuildableName = "prosibum.app"
                BlueprintName = "prosibum"
                ReferencedContainer = "container:prosibum.xcodeproj">
             </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "prosibum [dev].app"
+            BuildableName = "prosibum.app"
             BlueprintName = "prosibum"
             ReferencedContainer = "container:prosibum.xcodeproj">
          </BuildableReference>
@@ -112,7 +112,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "prosibum [dev].app"
+            BuildableName = "prosibum.app"
             BlueprintName = "prosibum"
             ReferencedContainer = "container:prosibum.xcodeproj">
          </BuildableReference>
@@ -131,7 +131,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "prosibum [dev].app"
+            BuildableName = "prosibum.app"
             BlueprintName = "prosibum"
             ReferencedContainer = "container:prosibum.xcodeproj">
          </BuildableReference>

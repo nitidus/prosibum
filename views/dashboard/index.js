@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, Dimensions, Platform } from 'react-native';
+import { View, ScrollView, Text, Dimensions, Platform, I18nManager } from 'react-native';
 const _SCREEN = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -79,6 +79,12 @@ const Dashboard = (props) => {
       if (Platform.OS !== 'ios'){
         _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
         _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+
+        if (I18nManager.isRTL){
+          _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+            flexDirection: 'row-reverse'
+          };
+        }
       }
 
       _FIRST_CAROUSEL_CONTENT = (

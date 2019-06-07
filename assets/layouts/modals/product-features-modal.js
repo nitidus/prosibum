@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -245,6 +245,12 @@ const ProductFeaturesModal = (props) => {
 
         if (Platform.OS !== 'ios'){
           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+          if (I18nManager.isRTL){
+            _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+              flexDirection: 'row-reverse'
+            };
+          }
         }
 
         if (_AVAILABLE_UNITS.length > 0){
@@ -257,9 +263,6 @@ const ProductFeaturesModal = (props) => {
                 data={_AVAILABLE_UNITS}
                 firstItem={_SELECTED_UNIT_INDEX}
                 style={Styles.DetailContainer}
-                contentContainerCustomStyle={{
-                  flexDirection: 'row-reverse'
-                }}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -391,6 +394,12 @@ const ProductFeaturesModal = (props) => {
 
         if (Platform.OS !== 'ios'){
           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+          if (I18nManager.isRTL){
+            _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = _SECOND_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+              flexDirection: 'row-reverse'
+            };
+          }
         }
 
         if (_AVAILABLE_UNITS.length > 0){
@@ -689,6 +698,12 @@ const ProductFeaturesModal = (props) => {
 
           if (Platform.OS !== 'ios'){
             _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+            if (I18nManager.isRTL){
+              _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+                flexDirection: 'row-reverse'
+              };
+            }
           }
 
           _MODAL_CONTENT = [
@@ -807,6 +822,12 @@ const ProductFeaturesModal = (props) => {
 
                     if (Platform.OS !== 'ios'){
                       _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+                      if (I18nManager.isRTL){
+                        _SECOND_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+                          flexDirection: 'row-reverse'
+                        };
+                      }
                     }
 
                     _MODAL_CONTENT = [

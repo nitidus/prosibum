@@ -97,6 +97,12 @@ class NewProductFeatures extends Component<{}> {
                         if (Platform.OS !== 'ios'){
                           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
                           _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+
+                          if (I18nManager.isRTL){
+                            _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+                              flexDirection: 'row-reverse'
+                            };
+                          }
                         }
 
                         return (

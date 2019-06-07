@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Text, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -118,6 +118,12 @@ const ProductShippingMethodsModal = (props) => {
 
     if (Platform.OS !== 'ios'){
       _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+      if (I18nManager.isRTL){
+        _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+          flexDirection: 'row-reverse'
+        };
+      }
     }
 
     _MODAL_CONTENT = [

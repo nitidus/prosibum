@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, Text, Image, Keyboard } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, I18nManager, Text, Image, Keyboard } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -94,6 +94,12 @@ class NewProductIdentity extends Component<{}> {
         if (Platform.OS !== 'ios'){
           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
           _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+
+          if (I18nManager.isRTL){
+            _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+              flexDirection: 'row-reverse'
+            };
+          }
         }
 
         _UNITS_CONTENT = (
