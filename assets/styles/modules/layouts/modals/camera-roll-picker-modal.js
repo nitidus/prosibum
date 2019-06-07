@@ -92,6 +92,9 @@ module.exports = StyleSheet.create({
   CameraRollContainer: {
     ..._CUSTOM_CAMERA_ROLL_CONTAINER
   },
+  CameraRollEmptyContainer: {
+    height: _CUSTOM_CAMERA_ROLL_CONTAINER.height / 5
+  },
   CameraRollRowContainer: {
     flex: 1,
     width: '100%',

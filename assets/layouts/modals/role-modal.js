@@ -151,7 +151,6 @@ const RoleModal = (props) => {
 
     if (Platform.OS !== 'ios'){
       _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-      _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
     }
 
     _MODAL_CONTENT = (

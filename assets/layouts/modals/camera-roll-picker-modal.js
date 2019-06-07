@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Global, Modules } from '../../styles/index';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
-import { Input, Carousel } from '../../components/index';
+import { Input, Link, Carousel } from '../../components/index';
 const Styles = Modules.Layouts.CameraRollPickerModal;
 
 import { Functions } from '../../modules/index';
@@ -98,45 +98,61 @@ const CameraRollPickerModal = (props) => {
       _CAMERA_ROLL_ITEMS_CONTENT;
 
   if (_CAMERA_ROLL_ITEMS.length > 0){
-    _CAMERA_ROLL_ITEMS_CONTENT = _CAMERA_ROLL_ITEMS.map((photosRow, i) => {
-      return (
-        <View
-          style={Styles.CameraRollRowContainer}
-          key={i}>
-            {
-              photosRow.map((photo, j) => {
-                var _SINGLE_IMAGE_STYLES = [
-                  Styles.CameraRollItemContainer
-                ];
+    _CAMERA_ROLL_ITEMS_CONTENT = (
+      <ScrollView
+        style={Styles.CameraRollContainer}
+        showsVerticalScrollIndicator={false}>
+          {
+            _CAMERA_ROLL_ITEMS.map((photosRow, i) => {
+              return (
+                <View
+                  style={Styles.CameraRollRowContainer}
+                  key={i}>
+                    {
+                      photosRow.map((photo, j) => {
+                        var _SINGLE_IMAGE_STYLES = [
+                          Styles.CameraRollItemContainer
+                        ];
 
-                if ((j + 1) % _ROW_CHUNK_SIZE === 0){
-                  _SINGLE_IMAGE_STYLES.push({
-                    marginRight: 0
-                  });
-                }
+                        if ((j + 1) % _ROW_CHUNK_SIZE === 0){
+                          _SINGLE_IMAGE_STYLES.push({
+                            marginRight: 0
+                          });
+                        }
 
-                const _PHOTO_NODE = photo.node,
-                      _PHOTO_URI = _PHOTO_NODE.image.uri;
+                        const _PHOTO_NODE = photo.node,
+                              _PHOTO_URI = _PHOTO_NODE.image.uri;
 
-                return (
-                  <TouchableOpacity
-                    key={j}
-                    activeOpacity={MODAL.ITEMS.ACTIVE_OPACITY}
-                    style={_SINGLE_IMAGE_STYLES}
-                    onPress={() => {
-                      MODAL.ON_BLUR(false);
-                      attitude.onPress(_PHOTO_NODE);
-                    }}>
-                      <Image
-                        style={Styles.CameraRollItemContent}
-                        source={{ uri: _PHOTO_URI }} />
-                  </TouchableOpacity>
-                );
-              })
-            }
-        </View>
-      )
-    });
+                        return (
+                          <TouchableOpacity
+                            key={j}
+                            activeOpacity={MODAL.ITEMS.ACTIVE_OPACITY}
+                            style={_SINGLE_IMAGE_STYLES}
+                            onPress={() => {
+                              MODAL.ON_BLUR(false);
+                              attitude.onPress(_PHOTO_NODE);
+                            }}>
+                              <Image
+                                style={Styles.CameraRollItemContent}
+                                source={{ uri: _PHOTO_URI }} />
+                          </TouchableOpacity>
+                        );
+                      })
+                    }
+                </View>
+              )
+            })
+          }
+      </ScrollView>
+    );
+  }else{
+    _CAMERA_ROLL_ITEMS_CONTENT = (
+      <View
+        style={Styles.CameraRollEmptyContainer}>
+          <Link
+            value={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.empty[attitude.language]} />
+      </View>
+    );
   }
 
   const _CURRENT_GROUP_TYPE_INDEX = props.cameraRollPickerModal.groupTypes.findIndex((item) => {
@@ -147,11 +163,43 @@ const CameraRollPickerModal = (props) => {
         });
 
   let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+      _FIRST_CAROUSEL_CONTENT = <View/>,
       _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.cameraRollPickerModal.groupTypes.length > 1)? ((Platform.OS !== 'ios')? 4: 2): 2);
 
   if (Platform.OS !== 'ios'){
     _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-    _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+  }
+
+  if (Platform.OS === 'ios'){
+    _FIRST_CAROUSEL_CONTENT = (
+      <Carousel
+        name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
+        data={props.cameraRollPickerModal.groupTypes}
+        style={Styles.CameraRollGroupTypesContainer}
+        itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
+        firstItem={_CURRENT_GROUP_TYPE_INDEX}
+        onLayout={({ item, index }) => {
+          var _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType[attitude.language],
+              _ITEM_NAME = item[attitude.language],
+              _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME),
+              _ITEM_GRADIENT = Global.colors.pair.ongerine;
+
+          if (props.cameraRollPickerModal.currentGroupType.en === item.en){
+            _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+          }
+
+          return (
+            <Input
+              type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+              name={_ITEM_NAME}
+              value={_ITEM_VALUE}
+              gradient={_ITEM_GRADIENT}
+              disable={true}/>
+          );
+        }}
+        onSnap={(selectedItemIndex) => props.setCurrentCameraRollGroupType(props.cameraRollPickerModal.groupTypes[selectedItemIndex])}
+        {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
+    );
   }
 
   return (
@@ -163,41 +211,11 @@ const CameraRollPickerModal = (props) => {
       onPress={attitude.onPress}
       style={Styles.ModalContainer}
       swipeDirection="down">
-        <Carousel
-          name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
-          data={props.cameraRollPickerModal.groupTypes}
-          style={Styles.CameraRollGroupTypesContainer}
-          itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
-          firstItem={_CURRENT_GROUP_TYPE_INDEX}
-          onLayout={({ item, index }) => {
-            var _CURRENT_GROUP_TYPE = props.cameraRollPickerModal.currentGroupType[attitude.language],
-                _ITEM_NAME = item[attitude.language],
-                _ITEM_VALUE = Functions._convertKeywordToToken(_ITEM_NAME),
-                _ITEM_GRADIENT = Global.colors.pair.ongerine;
-
-            if (props.cameraRollPickerModal.currentGroupType.en === item.en){
-              _ITEM_GRADIENT = Global.colors.pair.aqrulean;
-            }
-
-            return (
-              <Input
-                type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                name={_ITEM_NAME}
-                value={_ITEM_VALUE}
-                gradient={_ITEM_GRADIENT}
-                disable={true}/>
-            );
-          }}
-          onSnap={(selectedItemIndex) => props.setCurrentCameraRollGroupType(props.cameraRollPickerModal.groupTypes[selectedItemIndex])}
-          {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
+        {_FIRST_CAROUSEL_CONTENT}
 
         <KeyboardAvoidingView
           style={Styles.CameraRollMajorContainer}>
-            <ScrollView
-              style={Styles.CameraRollContainer}
-              showsVerticalScrollIndicator={false}>
-                {_CAMERA_ROLL_ITEMS_CONTENT}
-            </ScrollView>
+            {_CAMERA_ROLL_ITEMS_CONTENT}
         </KeyboardAvoidingView>
     </Modal>
   )

@@ -89,7 +89,7 @@ class NewProductIdentity extends Component<{}> {
 
       if (props.newProduct.inventoryUnits.length > 0){
         let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
-            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newProduct.inventoryUnits.length > 1)? ((Platform.OS !== 'ios')? 4: 2): 2);
+            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newProduct.inventoryUnits.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
 
         if (Platform.OS !== 'ios'){
           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
@@ -107,6 +107,9 @@ class NewProductIdentity extends Component<{}> {
                 marginTop: Styles.Content.marginVertical
               }
             ]}
+            contentContainerCustomStyle={{
+              flexDirection: 'row-reverse'
+            }}
             onLayout={({ item, index }) => {
               var _UNIT_DELETE_ACTION = () => props.setInvenntoryUnits(props.newProduct.inventoryUnits.filter((checkingItem, j) => {
                 return (checkingItem._id !== item._id);

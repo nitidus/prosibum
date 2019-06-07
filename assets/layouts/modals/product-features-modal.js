@@ -229,8 +229,14 @@ const ProductFeaturesModal = (props) => {
           (props.productFeaturesModal.unitsLoading === false) &&
           (attitude.visibility === true)
         ){
-          if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
-            props.setSelectedUnit(_AVAILABLE_UNITS[0]);
+          const _DOES_SELECTED_UNIT_EXIST = _AVAILABLE_UNITS.findIndex((unit) => {
+            return (unit._id === props.productFeaturesModal.selectedUnit._id);
+          })
+
+          if (_DOES_SELECTED_UNIT_EXIST === -1){
+            if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
+              props.setSelectedUnit(_AVAILABLE_UNITS[0]);
+            }
           }
         }
 
@@ -239,7 +245,6 @@ const ProductFeaturesModal = (props) => {
 
         if (Platform.OS !== 'ios'){
           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
         }
 
         if (_AVAILABLE_UNITS.length > 0){
@@ -252,6 +257,9 @@ const ProductFeaturesModal = (props) => {
                 data={_AVAILABLE_UNITS}
                 firstItem={_SELECTED_UNIT_INDEX}
                 style={Styles.DetailContainer}
+                contentContainerCustomStyle={{
+                  flexDirection: 'row-reverse'
+                }}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -383,7 +391,6 @@ const ProductFeaturesModal = (props) => {
 
         if (Platform.OS !== 'ios'){
           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = _SECOND_CAROUSEL_OTHER_OPTIONS.loop = true;
         }
 
         if (_AVAILABLE_UNITS.length > 0){
@@ -511,6 +518,9 @@ const ProductFeaturesModal = (props) => {
                 data={_AVAILABLE_UNITS}
                 firstItem={_SELECTED_UNIT_INDEX}
                 style={Styles.DetailContainer}
+                contentContainerCustomStyle={{
+                  flexDirection: 'row-reverse'
+                }}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -561,6 +571,9 @@ const ProductFeaturesModal = (props) => {
                 data={_AVAILABLE_WAREHOUSES}
                 firstItem={_SELECTED_WAREHOUSE_INDEX}
                 style={Styles.DetailContainer}
+                contentContainerCustomStyle={{
+                  flexDirection: 'row-reverse'
+                }}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -676,7 +689,6 @@ const ProductFeaturesModal = (props) => {
 
           if (Platform.OS !== 'ios'){
             _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-            _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
           }
 
           _MODAL_CONTENT = [
@@ -686,6 +698,9 @@ const ProductFeaturesModal = (props) => {
                 data={props.productFeaturesModal.features}
                 firstItem={_SELECTED_INDEX}
                 style={Styles.DetailContainer}
+                contentContainerCustomStyle={{
+                  flexDirection: 'row-reverse'
+                }}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -792,7 +807,6 @@ const ProductFeaturesModal = (props) => {
 
                     if (Platform.OS !== 'ios'){
                       _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-                      _SECOND_CAROUSEL_OTHER_OPTIONS.loop = true;
                     }
 
                     _MODAL_CONTENT = [
@@ -803,6 +817,9 @@ const ProductFeaturesModal = (props) => {
                           data={props.productFeaturesModal.units}
                           firstItem={_SELECTED_UNIT_INDEX}
                           style={Styles.DetailContainer}
+                          contentContainerCustomStyle={{
+                            flexDirection: 'row-reverse'
+                          }}
                           itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                           onLayout={({ item, index }) => {
                             var _ITEM_GRADIENT = Global.colors.pair.ongerine;

@@ -111,7 +111,6 @@ class Wallets extends Component<{}> {
 
               if (Platform.OS !== 'ios'){
                 _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-                _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
               }
 
               _TAB_CONTENT = (

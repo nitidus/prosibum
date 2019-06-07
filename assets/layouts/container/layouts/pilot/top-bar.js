@@ -240,9 +240,9 @@ export const TopBar = (props) => {
       _RIGHT_SIDE_CONTENT = <View style={Styles.PinnedSide} />,
       _BOTTOM_WIDE_CONTENT, _TAIL_WIDE_CONTENT;
 
-  if ((typeof attitude.children != 'undefined') && ((attitude.children.length <= 2) || (attitude.children.length <= 3) || (attitude.children.length <= 4))){
-    for (var i = 0; i < attitude.children.length; i++) {
-      var _CHILD = attitude.children[i],
+  if ((typeof props.children != 'undefined') && ((props.children.length <= 2) || (props.children.length <= 3) || (props.children.length <= 4))){
+    for (var i = 0; i < props.children.length; i++) {
+      var _CHILD = props.children[i],
           _CHILD_PROPS = {..._CHILD.props, navigation},
           _CHILD_TYPE = _CHILD.props.type.toLowerCase();
 

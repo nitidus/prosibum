@@ -210,10 +210,12 @@ module.exports = StyleSheet.create({
     flexWrap: 'wrap'
   },
   ContainerWithTagsInput: {
+    width: '100%',
     color: colors.single.rangoonGreen,
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',
+    marginTop: -15,
     ..._CUSTOM_CONTAINER_WITH_TAGS_INPUT
   },
   ContainerWithIcon: {

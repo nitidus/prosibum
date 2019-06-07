@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Carrousel, { getInputRangeFromIndexes } from 'react-native-snap-carousel';
+import Carrousel, { getInputRangeFromIndexes } from 'react-native-snap-carousel-rtl-optimized';
 
 import { View, Text, Animated, Easing, Dimensions, Platform } from 'react-native';
 
@@ -54,6 +54,32 @@ export const Carousel = (props) => {
     }
   }
 
+  if (typeof props.containerCustomStyle != 'undefined'){
+    attitude.containerCustomStyle = props.containerCustomStyle;
+
+    if (typeof attitude.containerCustomStyle == 'object' && Array.isArray(attitude.containerCustomStyle)){
+      attitude.containerCustomStyle = attitude.containerCustomStyle.reduce((total, item) => {
+        return {
+          ...total,
+          ...item
+        };
+      })
+    }
+  }
+
+  if (typeof props.contentContainerCustomStyle != 'undefined'){
+    attitude.contentContainerCustomStyle = props.contentContainerCustomStyle;
+
+    if (typeof attitude.contentContainerCustomStyle == 'object' && Array.isArray(attitude.contentContainerCustomStyle)){
+      attitude.contentContainerCustomStyle = attitude.contentContainerCustomStyle.reduce((total, item) => {
+        return {
+          ...total,
+          ...item
+        };
+      })
+    }
+  }
+
   if ((typeof props.onLayout != 'undefined') || (typeof props.onLayout != 'undefined') || (typeof props.carouselOnLayout != 'undefined') || (typeof props.onCarouselItemLayout != 'undefined') || (typeof props.carouselItemOnLayout != 'undefined') || (typeof props.onItemLayout != 'undefined') || (typeof props.itemOnLayout != 'undefined')){
     attitude.onLayout = props.onLayout || props.onLayout || props.carouselOnLayout || props.onCarouselItemLayout || props.carouselItemOnLayout || props.onItemLayout || props.itemOnLayout;
   }
@@ -90,6 +116,8 @@ export const Carousel = (props) => {
           onSnapToItem={attitude.onSnap}
           useScrollView={attitude.useScrollView}
           enableMomentum={attitude.enableMomentum}
+          containerCustomStyle={attitude.containerCustomStyle}
+          contentContainerCustomStyle={attitude.contentContainerCustomStyle}
           loop={attitude.loop} />
     </View>
   )

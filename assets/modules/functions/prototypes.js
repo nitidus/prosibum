@@ -613,12 +613,12 @@ module.exports = {
         if (_KEY == 'language'){
           if (typeof _TARGET_SETTINGS[_KEY].rtl != 'undefined'){
             if (_TARGET_SETTINGS[_KEY].rtl === true){
-              I18nManager.forceRTL(true);
+              I18nManager.allowRTL(true);
             }else{
-              I18nManager.forceRTL(false);
+              I18nManager.allowRTL(false);
             }
           }else{
-            I18nManager.forceRTL(false);
+            I18nManager.allowRTL(false);
           }
         }
 
@@ -649,7 +649,7 @@ module.exports = {
 
         if (typeof _NATIVE_SETTINGS.language.rtl != 'undefined'){
           if (_NATIVE_SETTINGS.language.rtl === true){
-            I18nManager.forceRTL(true);
+            I18nManager.allowRTL(true);
           }
         }
       }
