@@ -156,10 +156,6 @@
               "en": ",",
               "fa": ","
             }
-          },
-          "options": {
-            "layout": "default",
-            "loop": true
           }
         },
         "secondCarousel": {
@@ -172,10 +168,6 @@
             "title": {
               "en": "Expiration Year Item"
             }
-          },
-          "options": {
-            "layout": "default",
-            "loop": true
           }
         },
         "secondInput": {

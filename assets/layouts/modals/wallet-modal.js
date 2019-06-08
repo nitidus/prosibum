@@ -620,6 +620,19 @@ export const WalletModal = (props) => {
       const _EXPIRATION_DATE_CAROUSEL_ITEM_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? ((Platform.OS === 'ios')? 2.9: 2.8): 6;
 
       if (__MONTHS[attitude.language].length > 0){
+        let _FIRST_CAROUSEL_OTHER_OPTIONS = {};
+
+        if (Platform.OS !== 'ios'){
+          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+
+          if (I18nManager.isRTL){
+            _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+              flexDirection: 'row-reverse'
+            };
+          }
+        }
+
         _EXPIRATION_MONTH_CONTENT = (
           <Carousel
             name={__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.title.en}
@@ -658,11 +671,24 @@ export const WalletModal = (props) => {
                 value: selectedItemIndex + 1
               })
             }}
-            {...__CONSTANTS.modalContainer.content.fourthHiddenTab.firstCarousel.options}/>
+            {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
         );
       }
 
       if (_SELECTED_YEARS_RANGE.length > 0){
+        let _SECOND_CAROUSEL_OTHER_OPTIONS = {};
+
+        if (Platform.OS !== 'ios'){
+          _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+          _SECOND_CAROUSEL_OTHER_OPTIONS.loop = true;
+
+          if (I18nManager.isRTL){
+            _SECOND_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+              flexDirection: 'row-reverse'
+            };
+          }
+        }
+
         _EXPIRATION_YEAR_CONTENT = (
           <Carousel
             name={__CONSTANTS.modalContainer.content.fourthHiddenTab.secondCarousel.title.en}
@@ -698,7 +724,7 @@ export const WalletModal = (props) => {
 
               props.setCreditCardExpirationYear(_SELECTED_YEARS_RANGE[selectedItemIndex].toString());
             }}
-            {...__CONSTANTS.modalContainer.content.fourthHiddenTab.secondCarousel.options}/>
+            {..._SECOND_CAROUSEL_OTHER_OPTIONS}/>
         );
       }
 
