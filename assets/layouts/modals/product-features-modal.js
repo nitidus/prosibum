@@ -527,9 +527,6 @@ const ProductFeaturesModal = (props) => {
                 data={_AVAILABLE_UNITS}
                 firstItem={_SELECTED_UNIT_INDEX}
                 style={Styles.DetailContainer}
-                contentContainerCustomStyle={{
-                  flexDirection: 'row-reverse'
-                }}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -580,9 +577,6 @@ const ProductFeaturesModal = (props) => {
                 data={_AVAILABLE_WAREHOUSES}
                 firstItem={_SELECTED_WAREHOUSE_INDEX}
                 style={Styles.DetailContainer}
-                contentContainerCustomStyle={{
-                  flexDirection: 'row-reverse'
-                }}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -713,9 +707,6 @@ const ProductFeaturesModal = (props) => {
                 data={props.productFeaturesModal.features}
                 firstItem={_SELECTED_INDEX}
                 style={Styles.DetailContainer}
-                contentContainerCustomStyle={{
-                  flexDirection: 'row-reverse'
-                }}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
                   var _ITEM_GRADIENT = Global.colors.pair.ongerine;
@@ -838,9 +829,6 @@ const ProductFeaturesModal = (props) => {
                           data={props.productFeaturesModal.units}
                           firstItem={_SELECTED_UNIT_INDEX}
                           style={Styles.DetailContainer}
-                          contentContainerCustomStyle={{
-                            flexDirection: 'row-reverse'
-                          }}
                           itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                           onLayout={({ item, index }) => {
                             var _ITEM_GRADIENT = Global.colors.pair.ongerine;
