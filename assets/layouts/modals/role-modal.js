@@ -147,64 +147,7 @@ const RoleModal = (props) => {
     const _KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR = (Platform.OS === 'ios')? 'height': '';
 
     let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
-        _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((_USER_GROUP_ROLES.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
-
-    if (Platform.OS !== 'ios'){
-      _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-
-      if (I18nManager.isRTL){
-        _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
-          flexDirection: 'row-reverse'
-        };
-      }
-    }
-
-    _MODAL_CONTENT = (
-      <KeyboardAvoidingView
-        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}
-        name={__CONSTANTS.modalContainer.context.title.en}>
-          <Carousel
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
-            data={_USER_GROUP_ROLES}
-            style={Styles.RolesContainer}
-            itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
-            firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
-            onLayout={({ item, index }) => {
-              var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.roleModal.currentRole.role || props.roleModal.currentRole),
-                  _ITEM_NAME = item.toLowerCase(),
-                  _ROLE = '',
-                  _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(item, attitude.language),
-                  _ITEM_GRADIENT = Global.colors.pair.ongerine;
-
-              if (_DID_FETCH_APPROPRIATE_ROLE !== false){
-                _ROLE = _DID_FETCH_APPROPRIATE_ROLE;
-              }
-
-              if (Functions._convertKeywordToToken(props.roleModal.currentRole.role) === Functions._convertKeywordToToken(item)){
-                _ITEM_GRADIENT = Global.colors.pair.aqrulean;
-              }
-
-              return (
-                <Input
-                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
-                  name={_ITEM_NAME}
-                  value={_ROLE}
-                  gradient={_ITEM_GRADIENT}
-                  disable={true}/>
-              );
-            }}
-            onSnap={(selectedItemIndex) => props.setCurrentRole(props.roleModal.roles[selectedItemIndex])}
-            {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
-
-          <Input
-            type={__CONSTANTS.modalContainer.content.firstInput.type}
-            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
-            placeholder={__CONSTANTS.modalContainer.content.firstInput.title[attitude.language]}
-            value={props.roleModal.email}
-            style={Styles.TokenInput}
-            autoCapitalize="none"
-            onChangeText={(currentValue) => props.setEmail(currentValue)} />
-
+        _FINAL_BUTTON = (
           <Input
             type={__CONSTANTS.modalContainer.content.submitInput.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
@@ -269,6 +212,96 @@ const RoleModal = (props) => {
               });
             }}
             forcedDisable={_VALIDATED}/>
+        ),
+        _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((_USER_GROUP_ROLES.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+    if (Platform.OS !== 'ios'){
+      _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+      if (I18nManager.isRTL){
+        _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+          flexDirection: 'row-reverse'
+        };
+      }
+    }
+
+    if (_VALIDATED){
+      var _MESSAGE = '';
+
+      if (props.roleModal.email != ''){
+        const _IS_EMAIL_VALID = Functions._checkIsAValidEmail(props.roleModal.email)
+
+        if (!_IS_EMAIL_VALID){
+          _MESSAGE += __CONSTANTS.modalContainer.warning.firstLevel[attitude.language];
+        }
+      }else{
+        _MESSAGE += __CONSTANTS.modalContainer.warning.secondLevel[attitude.language];
+      }
+
+      if (_MESSAGE != ''){
+        _FINAL_BUTTON = (
+          <Input
+            type={__CONSTANTS.modalContainer.content.submitInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.submitInput.state.normal.title.en)}
+            value={_MESSAGE}
+            style={[
+              Styles.WarningContainer,
+              {
+                marginBottom: Styles.Content.marginVertical
+              }
+            ]}
+            textStyle={Styles.WarningContent} />
+        );
+      }
+    }
+
+    _MODAL_CONTENT = (
+      <KeyboardAvoidingView
+        behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}
+        name={__CONSTANTS.modalContainer.context.title.en}>
+          <Carousel
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarouselContainer.title.en)}
+            data={_USER_GROUP_ROLES}
+            style={Styles.RolesContainer}
+            itemWidth={_Screen.width - (Styles.__Global.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
+            firstItem={_CURRENT_USER_GROUP_ROLE_INDEX}
+            onLayout={({ item, index }) => {
+              var _CURRENT_USER_GROUP = Functions._convertKeywordToToken(props.roleModal.currentRole.role || props.roleModal.currentRole),
+                  _ITEM_NAME = item.toLowerCase(),
+                  _ROLE = '',
+                  _DID_FETCH_APPROPRIATE_ROLE = Functions._getAppropriateRoleBaseOnLocale(item, attitude.language),
+                  _ITEM_GRADIENT = Global.colors.pair.ongerine;
+
+              if (_DID_FETCH_APPROPRIATE_ROLE !== false){
+                _ROLE = _DID_FETCH_APPROPRIATE_ROLE;
+              }
+
+              if (Functions._convertKeywordToToken(props.roleModal.currentRole.role) === Functions._convertKeywordToToken(item)){
+                _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+              }
+
+              return (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.self.type}
+                  name={_ITEM_NAME}
+                  value={_ROLE}
+                  gradient={_ITEM_GRADIENT}
+                  disable={true}/>
+              );
+            }}
+            onSnap={(selectedItemIndex) => props.setCurrentRole(props.roleModal.roles[selectedItemIndex])}
+            {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
+
+          <Input
+            type={__CONSTANTS.modalContainer.content.firstInput.type}
+            name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
+            placeholder={__CONSTANTS.modalContainer.content.firstInput.title[attitude.language]}
+            value={props.roleModal.email}
+            style={Styles.TokenInput}
+            autoCapitalize="none"
+            onChangeText={(currentValue) => props.setEmail(currentValue)} />
+
+          {_FINAL_BUTTON}
       </KeyboardAvoidingView>
     );
 

@@ -43,6 +43,16 @@
         "en": "There's no defined sub-role.",
         "fa": "هیچ زیر نقشی وجود ندارد."
       }
+    },
+    "warning": {
+      "firstLevel": {
+        "en": "You didn't enter the email structure correctly.",
+        "fa": "ساختار ایمیل را درست وارد کنید."
+      },
+      "secondLevel": {
+        "en": "Please fill the email field.",
+        "fa": "لطفا فیلد ایمیل را پر کنید،"
+      }
     }
   }
 }
