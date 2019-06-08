@@ -674,7 +674,7 @@ module.exports = {
   },
   _retrieveLocalStoragePhotosWithOptions: async (options) => {
     var _CAMERA_ROLL_OPTIONS = {
-      first: 20,
+      first: 1000,
       mimeTypes: [
         'image/jpeg', 'image/png'
       ],

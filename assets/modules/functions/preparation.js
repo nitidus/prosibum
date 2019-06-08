@@ -105,7 +105,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'Profile': 'Authentication');
   },
   _prepareCurrentUserInformation: async (props, pilot) => {
     const _NATIVE_SETTINGS = await Prototypes._getDefaultNativeSettings(),
@@ -449,7 +449,7 @@ module.exports = {
         _BRAND_ROLE = '';
 
     if (_AUTH !== null){
-      _BRAND_PROFILE_PHOTO = _AUTH.brand_profile_photo || {};
+      _BRAND_PROFILE_PHOTO = `${GLOBAL.URLS.INTERFAS.SOCKET_NAME}/${_AUTH.brand_profile_photo}` || {};
       _BRAND_NAME = _AUTH.brand_name || '';
       _BRAND_ROLE = _AUTH.brand_role || props.technicalTab.brandRoles[0];
     }
