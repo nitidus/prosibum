@@ -12,6 +12,7 @@ module.exports = {
       blackSqueeze: '#F3F8FB',
       rangoonGreen: '#171717',
       lavenderGray: '#BBBCC5',
+      aluminium: '#84858c',
       mercury: '#E2E2E2',
       wildSand: '#F2F2F2',
       romance: '#FDFDFD',

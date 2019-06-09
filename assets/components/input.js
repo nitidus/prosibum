@@ -516,8 +516,16 @@ export const Input = (props) => {
                 if (text != ''){
                   attitude.onSubmitEditing(text);
                 }
+
+                Keyboard.dismiss();
               }}
-              onBlur={attitude.onBlur}
+              onBlur={() => {
+                attitude.onBlur();
+
+                if (attitude.value != ''){
+                  attitude.onSubmitEditing(attitude.value);
+                }
+              }}
               onFocus={attitude.onFocus}
               editable={!attitude.disable}
               {...otherProps}
@@ -608,9 +616,18 @@ export const Input = (props) => {
 
     case 'link':
     case 'text-link':
+      var _EXTRA_STYLE_FOR_LINK = {};
+
+      if (attitude.disable === true){
+        _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+      }
+
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.TextInputLinkContainer}
+          containerStyle={[
+            Styles.TextInputLinkContainer,
+            _EXTRA_STYLE_FOR_LINK
+          ]}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -644,9 +661,18 @@ export const Input = (props) => {
       break;
 
     case 'email-link':
+      var _EXTRA_STYLE_FOR_LINK = {};
+
+      if (attitude.disable === true){
+        _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+      }
+
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.TextInputLinkContainer}
+          containerStyle={[
+            Styles.TextInputLinkContainer,
+            _EXTRA_STYLE_FOR_LINK
+          ]}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -682,9 +708,18 @@ export const Input = (props) => {
       break;
 
     case 'numeric-link':
+      var _EXTRA_STYLE_FOR_LINK = {};
+
+      if (attitude.disable === true){
+        _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+      }
+
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.TextInputLinkContainer}
+          containerStyle={[
+            Styles.TextInputLinkContainer,
+            _EXTRA_STYLE_FOR_LINK
+          ]}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />
@@ -727,12 +762,21 @@ export const Input = (props) => {
 
     case 'phone-link':
     case 'phone-number-link':
+      var _EXTRA_STYLE_FOR_LINK = {};
+
+      if (attitude.disable === true){
+        _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+      }
+
       var _LINK_CONTAINER_STYLES = [
             Styles.ContainerWithButton
           ],
           _LINK_CONTENT = (
             <Link
-              containerStyle={Styles.TextInputLinkContainer}
+              containerStyle={[
+                Styles.TextInputLinkContainer,
+                _EXTRA_STYLE_FOR_LINK
+              ]}
               style={Styles.TextInputLink}
               value={attitude.link}
               onPress={attitude.onPress} />
@@ -777,9 +821,18 @@ export const Input = (props) => {
       break;
 
     case 'password-link':
+      var _EXTRA_STYLE_FOR_LINK = {};
+
+      if (attitude.disable === true){
+        _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+      }
+
       var _LINK_CONTENT = (
         <Link
-          containerStyle={Styles.TextInputLinkContainer}
+          containerStyle={[
+            Styles.TextInputLinkContainer,
+            _EXTRA_STYLE_FOR_LINK
+          ]}
           style={Styles.TextInputLink}
           value={attitude.link}
           onPress={attitude.onPress} />

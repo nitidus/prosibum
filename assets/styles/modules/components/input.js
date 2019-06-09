@@ -265,6 +265,11 @@ module.exports = StyleSheet.create({
   PhotoContainerWithoutPhoto: {
     backgroundColor: colors.single.mercury
   },
+  FilledContainer: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%'
+  },
   PhotoContainerOverlay: {
     position: 'absolute',
     top: 0,
@@ -279,7 +284,7 @@ module.exports = StyleSheet.create({
   },
   PhotoInputLabelContent: {
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
-    color: colors.single.lavenderGray,
+    color: colors.single.aluminium,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: 'left',
     ..._CUSTOM_PHOTO_INPUT_LABEL_CONTENT
@@ -298,6 +303,7 @@ module.exports = StyleSheet.create({
     paddingHorizontal: 16
   },
   TextInputLink: {
+    color: colors.single.aluminium,
     ..._CUSTOM_TEXT_INPUT_LINK
   },
   InnerInputContainer: {
