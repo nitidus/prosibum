@@ -263,10 +263,12 @@ class NewProductFeatures extends Component<{}> {
                                         style={Styles.BriefDetailTitle}>
                                           {Functions._convertKeywordToToken(featureItem.featureName)}
                                       </Text>
-                                      <Text
-                                        style={Styles.BriefDetailTitleSuffix}>
-                                          {Functions._convertKeywordToToken(__CONSTANTS.content.customized.title.suffix[_LANGUAGE])}
-                                      </Text>
+                                      {
+                                        // <Text
+                                        //   style={Styles.BriefDetailTitleSuffix}>
+                                        //     {Functions._convertKeywordToToken(__CONSTANTS.content.customized.title.suffix[_LANGUAGE])}
+                                        // </Text>
+                                      }
                                     </View>
 
                                     <Text

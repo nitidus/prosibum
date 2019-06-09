@@ -129,10 +129,12 @@ class NewFragmentFeatures extends Component<{}> {
                                 style={Styles.BriefDetailTitle}>
                                   {Functions._getAppropriateTaxonomyBaseOnLocale(item.unit.key, _LANGUAGE, 'unit')}
                               </Text>
-                              <Text
-                                style={Styles.BriefDetailTitleSuffix}>
-                                  {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.title.suffix[_LANGUAGE])}
-                              </Text>
+                              {
+                                // <Text
+                                //   style={Styles.BriefDetailTitleSuffix}>
+                                //     {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.title.suffix[_LANGUAGE])}
+                                // </Text>
+                              }
                             </View>
                         </View>
                         <View
@@ -143,10 +145,12 @@ class NewFragmentFeatures extends Component<{}> {
                                 style={Styles.BriefDetailTitle}>
                                   {item.warehouse.name}
                               </Text>
-                              <Text
-                                style={Styles.BriefDetailTitleSuffix}>
-                                  {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.secondContent.title.suffix[_LANGUAGE])}
-                              </Text>
+                              {
+                                // <Text
+                                //   style={Styles.BriefDetailTitleSuffix}>
+                                //     {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.secondContent.title.suffix[_LANGUAGE])}
+                                // </Text>
+                              }
                             </View>
                         </View>
                         <View

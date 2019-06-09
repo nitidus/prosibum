@@ -46,8 +46,8 @@
             },
             "thirdFeature": {
               "title": {
-                "en": "Quantity",
-                "fa": "تعداد"
+                "en": "Inventory Quantity",
+                "fa": "تعداد موجودی"
               },
               "icon": {
                 "name": "grading"
