@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, FlatList, Text, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -30,9 +30,9 @@ const _componentWillCheckValidation = (props) => {
     _FORM_FIELDS_VALIDITY = true;
   }else if (typeof props.features != 'undefined') {
     if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
-      const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 2),
-            _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2),
-            _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 2);
+      const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 1),
+            _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 1),
+            _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
 
       if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
         if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
@@ -46,9 +46,9 @@ const _componentWillCheckValidation = (props) => {
         case 'unit':
         default:
           if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
-            const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 2),
-                  _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 2),
-                  _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 2);
+            const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 1),
+                  _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 1),
+                  _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
 
             if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
               if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
@@ -212,10 +212,7 @@ const ProductFeaturesModal = (props) => {
           props.fetchAvailableProductUnits();
         }
 
-        const _SELECTED_UNIT_INDEX = props.productFeaturesModal.units.findIndex((unit, i) => {
-                return unit._id === props.productFeaturesModal.selectedUnit._id;
-              }),
-              _AVAILABLE_UNITS = props.productFeaturesModal.units.filter((unit, i) => {
+        const _AVAILABLE_UNITS = props.productFeaturesModal.units.filter((unit, i) => {
                 return props.productFeaturesModal.features.every(feature => {
                   if (typeof feature._id != 'undefined'){
                     return (feature._id !== unit._id);
@@ -223,105 +220,67 @@ const ProductFeaturesModal = (props) => {
                 })
               });
 
-        if (
-          (_AVAILABLE_UNITS.length > 0) &&
-          (Object.keys(props.productFeaturesModal.selectedUnit).length > 0) &&
-          (props.productFeaturesModal.unitsLoading === false) &&
-          (attitude.visibility === true)
-        ){
-          const _DOES_SELECTED_UNIT_EXIST = _AVAILABLE_UNITS.findIndex((unit) => {
-            return (unit._id === props.productFeaturesModal.selectedUnit._id);
-          })
-
-          if (_DOES_SELECTED_UNIT_EXIST === -1){
-            if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
-              props.setSelectedUnit(_AVAILABLE_UNITS[0]);
-            }
-          }
-        }
-
-        let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
-            _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
-
-        if (Platform.OS !== 'ios'){
-          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-
-          if (I18nManager.isRTL){
-            _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
-              flexDirection: 'row-reverse'
-            };
-          }
-        }
-
         if (_AVAILABLE_UNITS.length > 0){
-          const _SELECTED_UNIT = (Object.keys(props.productFeaturesModal.selectedUnit).length > 0)? props.productFeaturesModal.selectedUnit.key: '';
-
-          _MODAL_CONTENT = [
-            (
-              <Carousel
-                name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
-                data={_AVAILABLE_UNITS}
-                firstItem={_SELECTED_UNIT_INDEX}
-                style={Styles.DetailContainer}
-                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
-                onLayout={({ item, index }) => {
-                  var _ITEM_GRADIENT = Global.colors.pair.ongerine;
-
-                  if (item._id === props.productFeaturesModal.selectedUnit._id){
-                    _ITEM_GRADIENT = Global.colors.pair.aqrulean;
-                  }
-
-                  return (
-                    <Input
-                      type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
-                      gradient={_ITEM_GRADIENT}
-                      style={Styles.DetailItemContainer}
-                      disable={true}>
-                      <View
-                        style={[
-                          Styles.DetailItemMasterInfoContent
-                        ]}>
-                          <Text
-                            style={[
-                              Styles.BriefDetailTitle
-                            ]}>
-                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])}
-                          </Text>
-                      </View>
-                      <View
-                        style={Styles.DetailItemMasterSubInfoContent}>
-                          <Icon
-                            name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
-                            color={Global.colors.single.romance} />
-
-                          <Text
-                            style={[
-                              Styles.BriefDetailRowText
-                            ]}>
-                              {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language)}
-                          </Text>
-                      </View>
-                    </Input>
-                  )
-                }}
-                onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.units[selectedItemIndex])}
-                {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
-            ),
-            (
-              <Input
-                type={__CONSTANTS.modalContainer.content.submitInput.type}
-                gradient={Global.colors.pair.ongerine}
-                value={`${__CONSTANTS.modalContainer.content.submitInput.prefix[attitude.language]} ${Functions._getAppropriateTaxonomyBaseOnLocale(_SELECTED_UNIT, attitude.language)}`}
-                style={{
+          _MODAL_CONTENT = (
+            <FlatList
+              name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
+              data={_AVAILABLE_UNITS}
+              style={[
+                Styles.DetailContainer,
+                {
                   marginHorizontal: Styles.Content.marginHorizontal
-                }}
-                onPress={() => {
-                  attitude.onProgressSuccess(props.productFeaturesModal.selectedUnit);
+                }
+              ]}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item, index }) => {
+                var _ITEM_GRADIENT = Global.colors.pair.ongerine,
+                    _CUSTOM_STYLE = {};
 
-                  MODAL.ON_BLUR(false);
-                }} />
-            )
-          ];
+                if (index < (_AVAILABLE_UNITS.length - 1)){
+                  _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
+                }
+
+                return (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
+                    gradient={_ITEM_GRADIENT}
+                    style={[
+                      Styles.DetailItemContainer,
+                      _CUSTOM_STYLE
+                    ]}
+                    onPress={() => {
+                      attitude.onProgressSuccess(item);
+
+                      MODAL.ON_BLUR(false);
+                    }}>
+                    <View
+                      style={[
+                        Styles.DetailItemMasterInfoContent
+                      ]}>
+                        <Text
+                          style={[
+                            Styles.BriefDetailTitle
+                          ]}>
+                            {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])}
+                        </Text>
+                    </View>
+                    <View
+                      style={Styles.DetailItemMasterSubInfoContent}>
+                        <Icon
+                          name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
+                          color={Global.colors.single.romance} />
+
+                        <Text
+                          style={[
+                            Styles.BriefDetailRowText
+                          ]}>
+                            {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language)}
+                        </Text>
+                    </View>
+                  </Input>
+                )
+              }} />
+          );
         }else{
           _MODAL_CONTENT = (
             <Link
@@ -1051,9 +1010,9 @@ const ProductFeaturesModal = (props) => {
                 case 'unit':
                 default:
                   if ((props.productFeaturesModal.minimumOrderQuantity > 0) && (props.productFeaturesModal.maximumOrderQuantity > 0) && (props.productFeaturesModal.quantity > 0)){
-                    const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.minimumOrderQuantity.toString(), 2),
-                          _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.maximumOrderQuantity.toString(), 2),
-                          _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.quantity.toString(), 2);
+                    const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(props.productFeaturesModal.minimumOrderQuantity.toString(), 1),
+                          _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(props.productFeaturesModal.maximumOrderQuantity.toString(), 1),
+                          _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.quantity.toString(), 1);
 
                     if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
                       if (props.productFeaturesModal.maximumOrderQuantity < props.productFeaturesModal.minimumOrderQuantity){

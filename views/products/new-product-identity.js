@@ -229,6 +229,7 @@ class NewProductIdentity extends Component<{}> {
                       disable={true} />
 
                     <Input
+                      reference={(currentInput) => this[Functions._convertTokenToKeyword(__CONSTANTS.content.secondInput.title.en)] = currentInput}
                       type={__CONSTANTS.content.secondInput.type}
                       name={Functions._convertTokenToKeyword(__CONSTANTS.content.secondInput.title.en)}
                       placeholder={__CONSTANTS.content.secondInput.title[_LANGUAGE]}
@@ -280,6 +281,8 @@ class NewProductIdentity extends Component<{}> {
 
                 await props.setCategory(response);
                 await props.setName(_CATEGORY_NAME);
+
+                this[Functions._convertTokenToKeyword(__CONSTANTS.content.secondInput.title.en)].focus();
               }}
               {..._PRODUCT_CATEGORIES_OTHER_PROPS} />
 

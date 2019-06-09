@@ -245,12 +245,12 @@
           },
           "verbComposition": {
             "one": {
-              "en": "must be 2 digit at least.",
-              "fa": "باید حداقل ۲ رقم باشد."
+              "en": "must be one digit at least.",
+              "fa": "باید حداقل یک رقم باشد."
             },
             "more": {
-              "en": "must be 2 digit at least.",
-              "fa": "باید حداقل ۲ رقم باشند."
+              "en": "must be one digit at least.",
+              "fa": "باید حداقل یک رقم باشند."
             }
           }
         },

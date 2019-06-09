@@ -61,6 +61,10 @@ export const Input = (props) => {
           otherProps.maxLength = attitude.maxLength = props.maxLength;
         }
 
+        if (typeof props.reference != 'undefined'){
+          otherProps.ref = attitude.ref = props.reference;
+        }
+
         attitude.onBlur = props.onBlur || function (){};
         attitude.onFocus = props.onFocus || function (){};
         break;
@@ -91,6 +95,10 @@ export const Input = (props) => {
 
         if (typeof props.maxLength != 'undefined'){
           otherProps.maxLength = attitude.maxLength = props.maxLength;
+        }
+
+        if (typeof props.reference != 'undefined'){
+          otherProps.ref = attitude.ref = props.reference;
         }
 
         attitude.onBlur = props.onBlur || function (){};
@@ -140,6 +148,10 @@ export const Input = (props) => {
           attitude.gradient = props.gradient;
         }
 
+        if (typeof props.reference != 'undefined'){
+          otherProps.ref = attitude.ref = props.reference;
+        }
+
         attitude.onBlur = props.onBlur || function (){};
         attitude.onFocus = props.onFocus || function (){};
         break;
@@ -163,6 +175,10 @@ export const Input = (props) => {
 
         if (typeof props.maxLength != 'undefined'){
           otherProps.maxLength = attitude.maxLength = props.maxLength;
+        }
+
+        if (typeof props.reference != 'undefined'){
+          otherProps.ref = attitude.ref = props.reference;
         }
 
         attitude.onBlur = props.onBlur || function (){};
@@ -199,6 +215,10 @@ export const Input = (props) => {
 
         if (typeof props.maxLength != 'undefined'){
           otherProps.maxLength = attitude.maxLength = props.maxLength;
+        }
+
+        if (typeof props.reference != 'undefined'){
+          otherProps.ref = attitude.ref = props.reference;
         }
 
         attitude.onBlur = props.onBlur || function (){};
@@ -611,7 +631,7 @@ export const Input = (props) => {
 
               {_DETECTED_CREDIT_CARD_TYPE_CONTENT}
         </View>
-      )
+      );
       break;
 
     case 'link':

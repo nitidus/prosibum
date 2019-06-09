@@ -311,15 +311,22 @@ module.exports = {
   _checkIsAValidNumericOnlyField: (content, targetLength) => {
     const _TARGET_LENGTH = targetLength || 16,
           _TARGET_REGEX = new RegExp(`^[0-9]{${_TARGET_LENGTH},}$`, 'g'),
-          _IS_TEXT_ONLY_VALID = content.match(_TARGET_REGEX);
+          _IS_NUMERIC_ONLY_VALID = content.match(_TARGET_REGEX);
 
-    return (_IS_TEXT_ONLY_VALID !== null) ? true : false;
+    return (_IS_NUMERIC_ONLY_VALID !== null) ? true : false;
   },
-  _checkIsAValidCurrencyValueOnlyField: (content, targetLength) => {
-    const _TARGET_REGEX = new RegExp(`^[0-9]+(\.[0-9]{1,2})?$`, 'g'),
-          _IS_TEXT_ONLY_VALID = content.match(_TARGET_REGEX);
+  _checkIsAValidFloatNumericOnlyField: (content, targetLength) => {
+    const _TARGET_LENGTH = targetLength || 16,
+          _TARGET_REGEX = new RegExp(`^([0-9]+(\.[0-9]+)?){${_TARGET_LENGTH},}$`, 'g'),
+          _IS_FLOAT_NUMERIC_ONLY_VALID = content.match(_TARGET_REGEX);
 
-    return (_IS_TEXT_ONLY_VALID !== null) ? true : false;
+    return (_IS_FLOAT_NUMERIC_ONLY_VALID !== null) ? true : false;
+  },
+  _checkIsAValidCurrencyValueOnlyField: (content) => {
+    const _TARGET_REGEX = new RegExp(`^[0-9]+(\.[0-9]{1,2})?$`, 'g'),
+          _IS_CURRENCY_ONLY_VALID = content.match(_TARGET_REGEX);
+
+    return (_IS_CURRENCY_ONLY_VALID !== null) ? true : false;
   },
   _checkIsAValidTextOnlyField: (content, targetLength) => {
     const _TARGET_LENGTH = targetLength || 16,

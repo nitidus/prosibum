@@ -106,7 +106,7 @@ const CountriesCodesModal = (props) => {
           contentContainerStyle={Styles.MajorContainer}
           style={Styles.Container}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }, i) => {
+          renderItem={({ item, index }) => {
             var _SELECTED_COUNTRY_CODE = attitude.selectedItem || 0,
                 _ITEM_NAME = item.code.toLowerCase(),
                 _ITEM_VALUE = (item.name.length > 21)? `${item.name.slice(0, 20)}...`: item.name,
