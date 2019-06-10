@@ -234,10 +234,22 @@ const ProductFeaturesModal = (props) => {
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item, index }) => {
                 var _ITEM_GRADIENT = Global.colors.pair.ongerine,
-                    _CUSTOM_STYLE = {};
+                    _CUSTOM_STYLE = {},
+                    _EXTRA_UNIT_FEATURES = '',
+                    _FINAL_UNIT_COMPLEX = '';
 
                 if (index < (_AVAILABLE_UNITS.length - 1)){
                   _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
+                }
+
+                if (typeof item.extra_features != 'undefined'){
+                  for (var extra_feature in item.extra_features) {
+                    _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(item.extra_features[extra_feature], attitude.language, `unit ${extra_feature}`);
+                  }
+
+                  _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
+                }else{
+                  _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit');
                 }
 
                 return (
@@ -274,7 +286,7 @@ const ProductFeaturesModal = (props) => {
                           style={[
                             Styles.BriefDetailRowText
                           ]}>
-                            {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language)}
+                            {_FINAL_UNIT_COMPLEX}
                         </Text>
                     </View>
                   </Input>
@@ -488,10 +500,22 @@ const ProductFeaturesModal = (props) => {
                 style={Styles.DetailContainer}
                 itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                 onLayout={({ item, index }) => {
-                  var _ITEM_GRADIENT = Global.colors.pair.ongerine;
+                  var _ITEM_GRADIENT = Global.colors.pair.ongerine,
+                      _EXTRA_UNIT_FEATURES = '',
+                      _FINAL_UNIT_COMPLEX = '';
 
                   if (item._id === props.productFeaturesModal.selectedUnit._id){
                     _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                  }
+
+                  if (typeof item.extra_features != 'undefined'){
+                    for (var extra_feature in item.extra_features) {
+                      _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(item.extra_features[extra_feature], attitude.language, `unit ${extra_feature}`);
+                    }
+
+                    _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
+                  }else{
+                    _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit');
                   }
 
                   return (
@@ -521,7 +545,7 @@ const ProductFeaturesModal = (props) => {
                             style={[
                               Styles.BriefDetailRowText
                             ]}>
-                              {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language)}
+                              {_FINAL_UNIT_COMPLEX}
                           </Text>
                       </View>
                     </Input>
@@ -790,10 +814,23 @@ const ProductFeaturesModal = (props) => {
                           style={Styles.DetailContainer}
                           itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                           onLayout={({ item, index }) => {
-                            var _ITEM_GRADIENT = Global.colors.pair.ongerine;
+                            var _ITEM_GRADIENT = Global.colors.pair.ongerine,
+                                _EXTRA_UNIT_FEATURES = '',
+                                _FINAL_UNIT_COMPLEX = '';
 
                             if (item._id === props.productFeaturesModal.selectedUnit._id){
                               _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                            }
+
+
+                            if (typeof item.extra_features != 'undefined'){
+                              for (var extra_feature in item.extra_features) {
+                                _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(item.extra_features[extra_feature], attitude.language, `unit ${extra_feature}`);
+                              }
+
+                              _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
+                            }else{
+                              _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit');
                             }
 
                             return (
@@ -823,7 +860,7 @@ const ProductFeaturesModal = (props) => {
                                       style={[
                                         Styles.BriefDetailRowText
                                       ]}>
-                                        {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language)}
+                                        {_FINAL_UNIT_COMPLEX}
                                     </Text>
                                 </View>
                               </Input>

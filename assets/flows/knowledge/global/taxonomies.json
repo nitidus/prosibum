@@ -11,6 +11,18 @@
     "fa": "جعبه"
   }
 }, {
+  "key": "Unit Capacity",
+  "value":{
+    "en": "24th",
+    "fa": "۲۴ تایی"
+  }
+}, {
+  "key": "Unit Capacity",
+  "value":{
+    "en": "12th",
+    "fa": "۱۲ تایی"
+  }
+}, {
   "key": "Product Feature",
   "value":{
     "en": "Customized",

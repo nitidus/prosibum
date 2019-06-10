@@ -153,10 +153,22 @@ const ProductUnitsDependedModal = (props) => {
                     _MAX_ORDER_QTY = (item.maximum_order_quantity > 0)? item.maximum_order_quantity: '',
                     _QTY = (item.quantity > 0)? item.quantity: '';
 
-              var _ITEM_GRADIENT = Global.colors.pair.ongerine;
+              var _ITEM_GRADIENT = Global.colors.pair.ongerine,
+                  _EXTRA_UNIT_FEATURES = '',
+                  _FINAL_UNIT_COMPLEX = '';
 
               if (item._id === props.productUnitsDependedModal.selectedUnit._id){
                 _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+              }
+
+              if (typeof _UNIT.extra_features != 'undefined'){
+                for (var extra_feature in _UNIT.extra_features) {
+                  _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(_UNIT.extra_features[extra_feature], attitude.language, `unit ${extra_feature}`);
+                }
+
+                _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(_UNIT.key, attitude.language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
+              }else{
+                _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(_UNIT.key, attitude.language, 'unit');
               }
 
               return (
@@ -174,12 +186,14 @@ const ProductUnitsDependedModal = (props) => {
                           style={Styles.BriefDetailTitleContainer}>
                           <Text
                             style={Styles.BriefDetailTitle}>
-                              {Functions._getAppropriateTaxonomyBaseOnLocale(_UNIT.key, attitude.language)}
+                              {_FINAL_UNIT_COMPLEX}
                           </Text>
-                          <Text
-                            style={Styles.BriefDetailTitleSuffix}>
-                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.title.suffix[attitude.language])}
-                          </Text>
+                          {
+                            // <Text
+                            //   style={Styles.BriefDetailTitleSuffix}>
+                            //     {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.carousel.state.normal.content.title.suffix[attitude.language])}
+                            // </Text>
+                          }
                         </View>
                     </View>
                     <View

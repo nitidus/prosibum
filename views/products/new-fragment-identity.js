@@ -91,8 +91,20 @@ class NewFragmentIdentity extends Component<{}> {
             style={Styles.DetailContainer}
             onLayout={({ item, index }) => {
               var _UNIT_DELETE_ACTION = () => props.setUnits(props.newFragment.units.filter((checkingItem, j) => {
-                return (checkingItem._id !== item._id);
-              }));
+                    return (checkingItem._id !== item._id);
+                  })),
+                  _EXTRA_UNIT_FEATURES = '',
+                  _FINAL_UNIT_COMPLEX = '';
+
+              if (typeof item.extra_features != 'undefined'){
+                for (var extra_feature in item.extra_features) {
+                  _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(item.extra_features[extra_feature], _LANGUAGE, `unit ${extra_feature}`);
+                }
+
+                _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(item.key, _LANGUAGE, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
+              }else{
+                _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(item.key, _LANGUAGE, 'unit');
+              }
 
               return (
                 <Input
@@ -109,12 +121,14 @@ class NewFragmentIdentity extends Component<{}> {
                           style={Styles.BriefDetailTitleContainer}>
                           <Text
                             style={Styles.BriefDetailTitle}>
-                              {Functions._getAppropriateTaxonomyBaseOnLocale(item.key, _LANGUAGE, 'unit')}
+                              {_FINAL_UNIT_COMPLEX}
                           </Text>
-                          <Text
-                            style={Styles.BriefDetailTitleSuffix}>
-                              {Functions._convertKeywordToToken(__CONSTANTS.content.firstCarousel.state.normal.suffix[_LANGUAGE])}
-                          </Text>
+                          {
+                            // <Text
+                            //   style={Styles.BriefDetailTitleSuffix}>
+                            //     {Functions._convertKeywordToToken(__CONSTANTS.content.firstCarousel.state.normal.suffix[_LANGUAGE])}
+                            // </Text>
+                          }
                         </View>
                     </View>
                 </Input>
