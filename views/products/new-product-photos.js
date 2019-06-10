@@ -271,6 +271,7 @@ class NewProductPhotos extends Component<{}> {
 
             <CameraRollPickerModal
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalContainer.title.en)}
+              modalTitle={__CONSTANTS.content.list.state.normal.title[_LANGUAGE]}
               visible={props.newProduct.photoModalVisibility}
               onBlur={(status) => props.setPhotoModalVisibility(status)}
               onPress={(photo) => props.setPhotos(props.newProduct.photos.map((photoItem, i) => {

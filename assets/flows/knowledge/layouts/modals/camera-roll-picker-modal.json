@@ -47,6 +47,19 @@
             "fa": "هیچ تصویری هنوز اضافه نکرده‌اید."
           }
         }
+      },
+      "firstInput": {
+        "type": "BUTTON",
+        "title": {
+          "en": "Default Picker",
+          "fa": "انتخابگر پیشفرض"
+        },
+        "modal": {
+          "prefix": {
+            "en": "Select",
+            "fa": "انتخاب"
+          }
+        }
       }
     }
   }

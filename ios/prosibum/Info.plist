@@ -41,9 +41,15 @@
 		<true/>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) app requires access to the photo library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) app requires access to the camera.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) app requires access to save photos on the photo library.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) app requires access to use your microphone (for videos).</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Pro-Display-Black.ttf</string>

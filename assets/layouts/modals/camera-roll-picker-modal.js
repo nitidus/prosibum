@@ -4,6 +4,7 @@ import { View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Image, Dimens
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
+import ImagePicker from 'react-native-image-picker';
 
 import { Global, Modules } from '../../styles/index';
 import { Icon } from '../icon';
@@ -52,6 +53,10 @@ const CameraRollPickerModal = (props) => {
     }
   }else{
     attitude.style = {};
+  }
+
+  if ((typeof props.modalTitle != 'undefined') || (typeof props.modalName != 'undefined')){
+    attitude.modalTitle = props.modalTitle || props.modalName;
   }
 
   if ((typeof props.selectedItem != 'undefined') || (typeof props.selected != 'undefined') || (typeof props.selectedRow != 'undefined') || (typeof props.firstItem != 'undefined') || (typeof props.onModalClose != 'undefined') || (typeof props.modalOnClose != 'undefined')){
@@ -205,6 +210,54 @@ const CameraRollPickerModal = (props) => {
         }}
         onSnap={(selectedItemIndex) => props.setCurrentCameraRollGroupType(props.cameraRollPickerModal.groupTypes[selectedItemIndex])}
         {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
+    );
+  }else{
+    _FIRST_CAROUSEL_CONTENT = (
+      <Input
+        type={__CONSTANTS.modalContainer.content.firstInput.type}
+        name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstInput.title.en)}
+        value={__CONSTANTS.modalContainer.content.firstInput.title[attitude.language]}
+        gradient={Global.colors.pair.ongerine}
+        style={{
+          marginBottom: Styles.__Global.marginHorizontal,
+          marginHorizontal: (Platform.OS === 'ios')? Styles.__Global.marginHorizontal: Styles.__Global.marginHorizontal * 1.7
+        }}
+        onPress={() => {
+          let options = {
+            title: `${__CONSTANTS.modalContainer.content.firstInput.modal.prefix[attitude.language]} ${attitude.modalTitle}`,
+            storageOptions: {
+              skipBackup: true,
+              path: "images"
+            }
+          };
+
+          if (Platform.OS === 'ios'){
+            options.storageOptions.cameraRoll = true;
+            options.storageOptions.waitUntilSaved = true;
+          }
+
+          ImagePicker.showImagePicker(options, (response) => {
+            if (response.didCancel){
+              Preparation._prepareCameraRoll(props);
+            }else if (response.error){
+              Preparation._prepareCameraRoll(props);
+            }else{
+              const source = {
+                ...response,
+                image: {
+                  width: response.width,
+                  height: response.height,
+                  uri: (Platform.OS !== 'ios') ? response.uri : response.uri.replace('file://', '')
+                }
+              };
+
+              Preparation._prepareCameraRoll(props);
+
+              MODAL.ON_BLUR(false);
+              attitude.onPress(source);
+            }
+          });
+        }}/>
     );
   }
 

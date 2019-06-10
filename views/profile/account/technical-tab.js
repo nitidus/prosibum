@@ -165,6 +165,7 @@ class TechnicalTab extends Component<{}> {
         contentContainerStyle={Styles.ScrollableContainer}>
           <CameraRollPickerModal
             name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.title.en)}
+            modalTitle={__CONSTANTS.firstInput.title[_LANGUAGE]}
             visible={props.technicalTab.cameraRollPickerModalVisibility}
             onBlur={(status) => props.setCameraRollPickerModalVisibility(status)}
             onPress={(photo) => props.setBrandProfilePhoto(photo)}
