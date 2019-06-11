@@ -105,7 +105,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'NewProductDescription': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'NewFragmentDetection': 'Authentication');
   },
   _prepareCurrentUserInformation: async (props, pilot) => {
     const _NATIVE_SETTINGS = await Prototypes._getDefaultNativeSettings(),
@@ -294,6 +294,32 @@ module.exports = {
       });
     }
   },
+  _prepareUnitAsASingleString: (unit, language) => {
+    var _EXTRA_UNIT_FEATURES = '',
+        _FINAL_UNIT_COMPLEX = '',
+        _FINAL_UNIT_COMPLEX_SUFFIX = '';
+
+    if (typeof unit.extra_features != 'undefined'){
+      for (var extra_feature in unit.extra_features) {
+        if (typeof unit.extra_features[extra_feature] == 'string'){
+          _EXTRA_UNIT_FEATURES += Prototypes._getAppropriateTaxonomyBaseOnLocale(unit.extra_features[extra_feature], language, `unit ${extra_feature}`);
+        }else if (typeof unit.extra_features[extra_feature] == 'boolean'){
+          if (Prototypes._convertTokenToKeyword(extra_feature) == 'detachable'){
+            _FINAL_UNIT_COMPLEX_SUFFIX += `(${Prototypes._getAppropriateTaxonomyBaseOnLocale('Possibility to Detachable sales', language, `unit ${extra_feature}`)})`;
+          }
+        }
+      }
+
+      _FINAL_UNIT_COMPLEX = `${Prototypes._getAppropriateTaxonomyBaseOnLocale(unit.key, language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
+    }else{
+      _FINAL_UNIT_COMPLEX = Prototypes._getAppropriateTaxonomyBaseOnLocale(unit.key, language, 'unit');
+    }
+
+    return {
+      title: _FINAL_UNIT_COMPLEX,
+      subtitle: _FINAL_UNIT_COMPLEX_SUFFIX
+    };
+  },
   _prepareProductToAppend: async (props) => {
     const { navigation } = props,
           _PROPS = props.newProduct;
@@ -305,16 +331,13 @@ module.exports = {
       inventory_units: _PROPS.inventoryUnits.map((unit, i) => {
         return unit._id;
       }),
+      description: _PROPS.description,
       features: _PROPS.features.map((item, i) => {
         let finalResponse = {
           feature_id: item.feature._id
         };
 
         switch (Prototypes._convertTokenToKeyword(item.feature.key)) {
-          case 'description':
-            finalResponse.description = item.description;
-            break;
-
           case 'customized':
             finalResponse.feature_name = item.featureName;
             finalResponse.feature_value = item.featureValue;
@@ -339,12 +362,12 @@ module.exports = {
         }
       }))
     };
-
-    await props.appendProduct(_SEED);
-
-    if (await _PROPS.connected.status){
-      navigation.navigate('Overseer');
-    }
+console.log(_SEED)
+    // await props.appendProduct(_SEED);
+    //
+    // if (await _PROPS.connected.status){
+    //   navigation.navigate('Overseer');
+    // }
   },
   _prepareFragmentToAppend: async (props) => {
     const { navigation } = props,

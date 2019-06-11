@@ -29,16 +29,30 @@ const _componentWillCheckValidation = (props) => {
   if (typeof props.units != 'undefined'){
     _FORM_FIELDS_VALIDITY = true;
   }else if (typeof props.features != 'undefined') {
-    if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0) && (_PROPS.quantity > 0)){
-      const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 1),
-            _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 1),
-            _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
+    switch (_PROPS.currentHiddenTabIndex) {
+      case 0:
+      default:
+        if (_PROPS.quantity > 0){
+          const _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(_PROPS.quantity.toString(), 1);
 
-      if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
-        if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.quantity >= _PROPS.minimumOrderQuantity)){
-          _FORM_FIELDS_VALIDITY = true;
+          if (_IS_QTY_VALID){
+            _FORM_FIELDS_VALIDITY = true;
+          }
         }
-      }
+        break;
+
+      case 1:
+        if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0)){
+          const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 1),
+                _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 1);
+
+          if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID){
+            if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.minimumOrderQuantity) <= _PROPS.quantity){
+              _FORM_FIELDS_VALIDITY = true;
+            }
+          }
+        }
+        break;
     }
   }else{
     if (Object.keys(_PROPS.currentFeature).length > 0){
@@ -143,9 +157,11 @@ const ProductFeaturesModal = (props) => {
       }else if (typeof attitude.features != 'undefined') {
         if (props.productFeaturesModal.patternBasedFeatures.length === 0){
           props.setPatternBasedFeatures(attitude.features);
-        }
 
-        props.fetchAvailableProductFeatures();
+          if (attitude.features.length > 0){
+            props.setSelectedUnit(attitude.features[0]);
+          }
+        }
       }else{
         props.fetchAvailableProductFeatures([ 'unit' ]);
       }
@@ -235,21 +251,10 @@ const ProductFeaturesModal = (props) => {
               renderItem={({ item, index }) => {
                 var _ITEM_GRADIENT = Global.colors.pair.ongerine,
                     _CUSTOM_STYLE = {},
-                    _EXTRA_UNIT_FEATURES = '',
-                    _FINAL_UNIT_COMPLEX = '';
+                    _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item, attitude.language);
 
                 if (index < (_AVAILABLE_UNITS.length - 1)){
                   _CUSTOM_STYLE.marginBottom = Styles.Content.marginVertical;
-                }
-
-                if (typeof item.extra_features != 'undefined'){
-                  for (var extra_feature in item.extra_features) {
-                    _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(item.extra_features[extra_feature], attitude.language, `unit ${extra_feature}`);
-                  }
-
-                  _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
-                }else{
-                  _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit');
                 }
 
                 return (
@@ -286,7 +291,7 @@ const ProductFeaturesModal = (props) => {
                           style={[
                             Styles.BriefDetailRowText
                           ]}>
-                            {_FINAL_UNIT_COMPLEX}
+                            {_FINAL_UNIT_COMPLEX.title} {_FINAL_UNIT_COMPLEX.subtitle}
                         </Text>
                     </View>
                   </Input>
@@ -304,365 +309,439 @@ const ProductFeaturesModal = (props) => {
           );
         }
       }else if (typeof attitude.features != 'undefined') {
-        if (
-          (props.productFeaturesModal.units.length === 0) &&
-          (Object.keys(props.productFeaturesModal.selectedUnit).length === 0) &&
-          (props.productFeaturesModal.unitsLoading === false) &&
-          (props.productFeaturesModal.warehouses.length === 0) &&
-          (Object.keys(props.productFeaturesModal.selectedWarehouse).length === 0) &&
-          (props.productFeaturesModal.warehousesLoading === false) &&
-          (attitude.visibility === true)
-        ){
-          props.fetchAvailableProductUnits();
-          props.fetchAvailableProductWarehouses();
-        }
-
-        const _SELECTED_WAREHOUSE_INDEX = props.productFeaturesModal.warehouses.findIndex((warehouse, i) => {
-                return warehouse._id === props.productFeaturesModal.selectedWarehouse._id;
-              }),
-              _AVAILABLE_WAREHOUSES = props.productFeaturesModal.warehouses,
-              _SELECTED_UNIT_INDEX = props.productFeaturesModal.units.findIndex((unit, i) => {
-                return unit._id === props.productFeaturesModal.selectedUnit._id;
-              }),
-              _AVAILABLE_UNITS = props.productFeaturesModal.units;
-
-        if (
-          (_AVAILABLE_UNITS.length > 0) &&
-          (Object.keys(props.productFeaturesModal.selectedUnit).length > 0) &&
-          (props.productFeaturesModal.unitsLoading === false) &&
-          (attitude.visibility === true)
-        ){
-          const _DOES_SELECTED_UNIT_EXIST = _AVAILABLE_UNITS.findIndex((unit) => {
-            return (unit._id === props.productFeaturesModal.selectedUnit._id);
-          })
-
-          if (_DOES_SELECTED_UNIT_EXIST === -1){
-            if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
-              props.setSelectedUnit(_AVAILABLE_UNITS[0]);
-            }
-          }
-        }
-
-        if (
-          (_AVAILABLE_WAREHOUSES.length > 0) &&
-          (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0) &&
-          (props.productFeaturesModal.warehousesLoading === false) &&
-          (attitude.visibility === true)
-        ){
-          const _DOES_SELECTED_WAREHOUSE_EXIST = _AVAILABLE_WAREHOUSES.findIndex((warehouse) => {
-            return (warehouse._id === props.productFeaturesModal.selectedWarehouse._id);
-          })
-
-          if (_DOES_SELECTED_WAREHOUSE_EXIST === -1){
-            if (props.productFeaturesModal.selectedWarehouse._id !== _AVAILABLE_WAREHOUSES[0]._id){
-              props.setSelectedWarehouse(_AVAILABLE_WAREHOUSES[0]);
-            }
-          }
-        }
-
-        let _FIRST_CAROUSEL_OTHER_OPTIONS = _SECOND_CAROUSEL_OTHER_OPTIONS = {},
-            _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT = _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
-
-        if (Platform.OS !== 'ios'){
-          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-
-          if (I18nManager.isRTL){
-            _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = _SECOND_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
-              flexDirection: 'row-reverse'
-            };
-          }
-        }
-
-        if (_AVAILABLE_UNITS.length > 0){
-          const _SELECTED_UNIT = (Object.keys(props.productFeaturesModal.selectedUnit).length > 0)? props.productFeaturesModal.selectedUnit.key: '',
-                _SELECTED_WAREHOUSE = (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0)? props.productFeaturesModal.selectedWarehouse.name: '',
-                _MIN_ORDER_QTY = (props.productFeaturesModal.minimumOrderQuantity > 0)? props.productFeaturesModal.minimumOrderQuantity: '',
-                _MAX_ORDER_QTY = (props.productFeaturesModal.maximumOrderQuantity > 0)? props.productFeaturesModal.maximumOrderQuantity: '',
-                _QTY = (props.productFeaturesModal.quantity > 0)? props.productFeaturesModal.quantity: '';
-
-          var _FINAL_BUTTON = (
-            <Input
-              type={__CONSTANTS.modalContainer.content.submitInput.type}
-              gradient={Global.colors.pair.ongerine}
-              value={__CONSTANTS.modalContainer.content.submitInput.fullName[attitude.language]}
-              style={{
-                marginHorizontal: Styles.Content.marginHorizontal
-              }}
-              onPress={() => {
-                const _FOUNDED_INDEX_OF_UNIT_FEATURE = props.productFeaturesModal.features.findIndex((singleFeature, k) => {
-                  return (Functions._convertTokenToKeyword(singleFeature.key) == 'unit');
-                });
-
-                if (_FOUNDED_INDEX_OF_UNIT_FEATURE > -1){
-                  attitude.onProgressSuccess({
-                    _id: Functions._generateNewBSONObjectID(),
-                    feature_id: props.productFeaturesModal.features[_FOUNDED_INDEX_OF_UNIT_FEATURE]._id,
-                    unit: props.productFeaturesModal.selectedUnit,
-                    warehouse: props.productFeaturesModal.selectedWarehouse,
-                    minimum_order_quantity: props.productFeaturesModal.minimumOrderQuantity,
-                    maximum_order_quantity: props.productFeaturesModal.maximumOrderQuantity,
-                    quantity: props.productFeaturesModal.quantity
+        switch (props.productFeaturesModal.currentHiddenTabIndex) {
+          case 0:
+          default:
+            const _AVAILABLE_UNITS = props.productFeaturesModal.patternBasedFeatures,
+                  _SELECTED_UNIT_INDEX = _AVAILABLE_UNITS.findIndex((unit, i) => {
+                    return unit._id === props.productFeaturesModal.selectedUnit._id;
                   });
 
-                  MODAL.ON_BLUR(false);
+            if (
+              (_AVAILABLE_UNITS.length > 0) &&
+              (Object.keys(props.productFeaturesModal.selectedUnit).length > 0) &&
+              (props.productFeaturesModal.unitsLoading === false) &&
+              (attitude.visibility === true)
+            ){
+              const _DOES_SELECTED_UNIT_EXIST = _AVAILABLE_UNITS.findIndex((unit) => {
+                return (unit._id === props.productFeaturesModal.selectedUnit._id);
+              })
+
+              if (_DOES_SELECTED_UNIT_EXIST === -1){
+                if (props.productFeaturesModal.selectedUnit._id !== _AVAILABLE_UNITS[0]._id){
+                  props.setSelectedUnit(_AVAILABLE_UNITS[0]);
                 }
-              }}
-              forcedDisable={_VALIDATED} />
-          );
-
-          if (_VALIDATED){
-            var _MESSAGE = '';
-
-            if ((props.productFeaturesModal.minimumOrderQuantity > 0) && (props.productFeaturesModal.maximumOrderQuantity > 0) && (props.productFeaturesModal.quantity > 0)){
-              const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.minimumOrderQuantity.toString(), 2),
-                    _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.maximumOrderQuantity.toString(), 2),
-                    _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.quantity.toString(), 2);
-
-              if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID && _IS_QTY_VALID){
-                if (props.productFeaturesModal.maximumOrderQuantity < props.productFeaturesModal.minimumOrderQuantity){
-                  _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.firstPart[attitude.language]}`;
-                }
-
-                if (props.productFeaturesModal.quantity < props.productFeaturesModal.minimumOrderQuantity){
-                  _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.secondPart[attitude.language]}`;
-                }
-              }else{
-                let countOfMessageItem = 0;
-
-                if (_IS_MAX_ORDER_QTY_VALID === false){
-                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.firstPart[attitude.language]}`;
-                  countOfMessageItem++;
-                }
-
-                if (_IS_MIN_ORDER_QTY_VALID === false){
-                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.secondPart[attitude.language]}`;
-                  countOfMessageItem++;
-                }
-
-                if (_IS_QTY_VALID === false){
-                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.thirdPart[attitude.language]}`;
-                  countOfMessageItem++;
-                }
-
-                if (countOfMessageItem > 1){
-                  _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.more[attitude.language]}`;
-                }else{
-                  _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.one[attitude.language]}`;
-                }
-              }
-            }else{
-              let countOfMessageItem = 0;
-
-              if (props.productFeaturesModal.maximumOrderQuantity === 0){
-                _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.firstPart[attitude.language]}`;
-                countOfMessageItem++;
-              }
-
-              if (props.productFeaturesModal.minimumOrderQuantity === 0){
-                _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.secondPart[attitude.language]}`;
-                countOfMessageItem++;
-              }
-
-              if (props.productFeaturesModal.quantity === 0){
-                _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.thirdPart[attitude.language]}`;
-                countOfMessageItem++;
-              }
-
-              if (countOfMessageItem > 1){
-                _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.more[attitude.language]}`;
-              }else{
-                _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.one[attitude.language]}`;
               }
             }
 
-            if (_MESSAGE != ''){
-              _FINAL_BUTTON = (
+            let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+                _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+            if (Platform.OS !== 'ios'){
+              _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+              if (I18nManager.isRTL){
+                _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+                  flexDirection: 'row-reverse'
+                };
+              }
+            }
+
+            if (_AVAILABLE_UNITS.length > 0){
+              const _SELECTED_UNIT = (Object.keys(props.productFeaturesModal.selectedUnit).length > 0)? props.productFeaturesModal.selectedUnit.key: '',
+                    _QTY = (props.productFeaturesModal.quantity > 0)? props.productFeaturesModal.quantity: '';
+
+              var _FINAL_BUTTON = (
                 <Input
                   type={__CONSTANTS.modalContainer.content.submitInput.type}
-                  value={_MESSAGE}
-                  style={[
-                    Styles.WarningContainer,
-                    {
-                      marginBottom: Styles.Content.marginVertical
+                  gradient={Global.colors.pair.ongerine}
+                  value={__CONSTANTS.modalContainer.content.submitInput.fullName[attitude.language]}
+                  style={{
+                    marginHorizontal: Styles.Content.marginHorizontal
+                  }}
+                  onPress={() => props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex + 1)}
+                  forcedDisable={_VALIDATED} />
+              );
+
+              if (_VALIDATED){
+                var _MESSAGE = '';
+
+                if (props.productFeaturesModal.quantity > 0){
+                  const _IS_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.quantity.toString(), 2);
+
+                  if (!_IS_QTY_VALID){
+                    let countOfMessageItem = 0;
+
+                    if (_IS_QTY_VALID === false){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.thirdPart[attitude.language]}`;
+                      countOfMessageItem++;
                     }
+
+                    if (countOfMessageItem > 1){
+                      _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.more[attitude.language]}`;
+                    }else{
+                      _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.one[attitude.language]}`;
+                    }
+                  }
+                }else{
+                  let countOfMessageItem = 0;
+
+                  if (props.productFeaturesModal.quantity === 0){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.thirdPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
+
+                  if (countOfMessageItem > 1){
+                    _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.more[attitude.language]}`;
+                  }else{
+                    _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.one[attitude.language]}`;
+                  }
+                }
+
+                if (_MESSAGE != ''){
+                  _FINAL_BUTTON = (
+                    <Input
+                      type={__CONSTANTS.modalContainer.content.submitInput.type}
+                      value={_MESSAGE}
+                      style={[
+                        Styles.WarningContainer,
+                        {
+                          marginBottom: Styles.Content.marginVertical
+                        }
+                      ]}
+                      textStyle={Styles.WarningContent} />
+                  );
+                }
+              }
+
+              _MODAL_CONTENT = [
+                (
+                  <Carousel
+                    name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
+                    data={_AVAILABLE_UNITS}
+                    firstItem={_SELECTED_UNIT_INDEX}
+                    style={Styles.DetailContainer}
+                    itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
+                    onLayout={({ item, index }) => {
+                      var _ITEM_GRADIENT = Global.colors.pair.ongerine,
+                          _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item, attitude.language);
+
+                      if (item._id === props.productFeaturesModal.selectedUnit._id){
+                        _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                      }
+
+                      return (
+                        <Input
+                          type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
+                          gradient={_ITEM_GRADIENT}
+                          style={Styles.DetailItemContainer}
+                          disable={true}>
+                          <View
+                            style={[
+                              Styles.DetailItemMasterInfoContent
+                            ]}>
+                              <Text
+                                style={[
+                                  Styles.BriefDetailTitle
+                                ]}>
+                                  {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])}
+                              </Text>
+                          </View>
+                          <View
+                            style={Styles.DetailItemMasterSubInfoContent}>
+                              <Icon
+                                name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
+                                color={Global.colors.single.romance} />
+
+                              <Text
+                                style={[
+                                  Styles.BriefDetailRowText
+                                ]}>
+                                  {_FINAL_UNIT_COMPLEX.title} {_FINAL_UNIT_COMPLEX.subtitle}
+                              </Text>
+                          </View>
+                        </Input>
+                      )
+                    }}
+                    onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.patternBasedFeatures[selectedItemIndex])}
+                    {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
+                ),
+                (
+                  <Input
+                      type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title.en)}
+                      placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title[attitude.language]}
+                      value={_QTY}
+                      style={[
+                        Styles.RegularItemContainer,
+                        {
+                          marginBottom: Styles.Content.marginVertical,
+                          marginHorizontal: Styles.Content.marginHorizontal
+                        }
+                      ]}
+                      onChangeText={(currentValue) => props.setQuantity(parseInt(currentValue))}
+                      {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.options} />
+                ),
+                _FINAL_BUTTON
+              ];
+            }else{
+              _MODAL_CONTENT = (
+                <Link
+                  containerStyle={[
+                    Styles.Center_TextAlignment,
+                    Styles.Center_ContentAlignment
                   ]}
-                  textStyle={Styles.WarningContent} />
+                  value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
               );
             }
-          }
+            break;
 
-          _MODAL_CONTENT = [
-            (
-              <Carousel
-                name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.title.en}
-                data={_AVAILABLE_UNITS}
-                firstItem={_SELECTED_UNIT_INDEX}
-                style={Styles.DetailContainer}
-                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
-                onLayout={({ item, index }) => {
-                  var _ITEM_GRADIENT = Global.colors.pair.ongerine,
-                      _EXTRA_UNIT_FEATURES = '',
-                      _FINAL_UNIT_COMPLEX = '';
+          case 1:
+            if (
+              (props.productFeaturesModal.warehouses.length === 0) &&
+              (Object.keys(props.productFeaturesModal.selectedWarehouse).length === 0) &&
+              (props.productFeaturesModal.warehousesLoading === false) &&
+              (attitude.visibility === true)
+            ){
+              props.fetchAvailableProductWarehouses();
+            }
 
-                  if (item._id === props.productFeaturesModal.selectedUnit._id){
-                    _ITEM_GRADIENT = Global.colors.pair.aqrulean;
-                  }
+            const _SELECTED_WAREHOUSE_INDEX = props.productFeaturesModal.warehouses.findIndex((warehouse, i) => {
+                    return warehouse._id === props.productFeaturesModal.selectedWarehouse._id;
+                  }),
+                  _AVAILABLE_WAREHOUSES = props.productFeaturesModal.warehouses;
 
-                  if (typeof item.extra_features != 'undefined'){
-                    for (var extra_feature in item.extra_features) {
-                      _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(item.extra_features[extra_feature], attitude.language, `unit ${extra_feature}`);
+            if (
+              (_AVAILABLE_WAREHOUSES.length > 0) &&
+              (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0) &&
+              (props.productFeaturesModal.warehousesLoading === false) &&
+              (attitude.visibility === true)
+            ){
+              const _DOES_SELECTED_WAREHOUSE_EXIST = _AVAILABLE_WAREHOUSES.findIndex((warehouse) => {
+                return (warehouse._id === props.productFeaturesModal.selectedWarehouse._id);
+              })
+
+              if (_DOES_SELECTED_WAREHOUSE_EXIST === -1){
+                if (props.productFeaturesModal.selectedWarehouse._id !== _AVAILABLE_WAREHOUSES[0]._id){
+                  props.setSelectedWarehouse(_AVAILABLE_WAREHOUSES[0]);
+                }
+              }
+            }
+
+            let _SECOND_CAROUSEL_OTHER_OPTIONS = {},
+                _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+            if (Platform.OS !== 'ios'){
+              _SECOND_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+              if (I18nManager.isRTL){
+                _SECOND_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+                  flexDirection: 'row-reverse'
+                };
+              }
+            }
+
+            if (_AVAILABLE_WAREHOUSES.length > 0){
+              const _SELECTED_WAREHOUSE = (Object.keys(props.productFeaturesModal.selectedWarehouse).length > 0)? props.productFeaturesModal.selectedWarehouse.name: '',
+                    _MIN_ORDER_QTY = (props.productFeaturesModal.minimumOrderQuantity > 0)? props.productFeaturesModal.minimumOrderQuantity: '',
+                    _MAX_ORDER_QTY = (props.productFeaturesModal.maximumOrderQuantity > 0)? props.productFeaturesModal.maximumOrderQuantity: '';
+
+              var _FINAL_BUTTON = (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.submitInput.type}
+                  gradient={Global.colors.pair.ongerine}
+                  value={__CONSTANTS.modalContainer.content.submitInput.fullName[attitude.language]}
+                  style={{
+                    marginHorizontal: Styles.Content.marginHorizontal
+                  }}
+                  onPress={() => {
+                    // const _FOUNDED_INDEX_OF_UNIT_FEATURE = props.productFeaturesModal.features.findIndex((singleFeature, k) => {
+                    //   return (Functions._convertTokenToKeyword(singleFeature.key) == 'unit');
+                    // });
+                    //
+                    // if (_FOUNDED_INDEX_OF_UNIT_FEATURE > -1){
+                    //   attitude.onProgressSuccess({
+                    //     _id: Functions._generateNewBSONObjectID(),
+                    //     feature_id: props.productFeaturesModal.features[_FOUNDED_INDEX_OF_UNIT_FEATURE]._id,
+                    //     unit: props.productFeaturesModal.selectedUnit,
+                    //     warehouse: props.productFeaturesModal.selectedWarehouse,
+                    //     minimum_order_quantity: props.productFeaturesModal.minimumOrderQuantity,
+                    //     maximum_order_quantity: props.productFeaturesModal.maximumOrderQuantity,
+                    //     quantity: props.productFeaturesModal.quantity
+                    //   });
+                    //
+                    //   MODAL.ON_BLUR(false);
+                    // }
+                  }}
+                  forcedDisable={_VALIDATED} />
+              );
+
+              if (_VALIDATED){
+                var _MESSAGE = '';
+
+                if ((props.productFeaturesModal.minimumOrderQuantity > 0) && (props.productFeaturesModal.maximumOrderQuantity > 0)){
+                  const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.minimumOrderQuantity.toString(), 2),
+                        _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.maximumOrderQuantity.toString(), 2);
+
+                  if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID){
+                    if (props.productFeaturesModal.maximumOrderQuantity < props.productFeaturesModal.minimumOrderQuantity){
+                      _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.firstPart[attitude.language]}`;
                     }
 
-                    _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
+                    if (props.productFeaturesModal.minimumOrderQuantity > props.productFeaturesModal.quantity){
+                      _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.secondPart[attitude.language]}`;
+                    }
                   }else{
-                    _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit');
-                  }
+                    let countOfMessageItem = 0;
 
-                  return (
-                    <Input
-                      type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.type}
-                      gradient={_ITEM_GRADIENT}
-                      style={Styles.DetailItemContainer}
-                      disable={true}>
-                      <View
-                        style={[
-                          Styles.DetailItemMasterInfoContent
-                        ]}>
-                          <Text
-                            style={[
-                              Styles.BriefDetailTitle
-                            ]}>
-                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.title[attitude.language])}
-                          </Text>
-                      </View>
-                      <View
-                        style={Styles.DetailItemMasterSubInfoContent}>
-                          <Icon
-                            name={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstCarousel.content.self.icon.name}
-                            color={Global.colors.single.romance} />
-
-                          <Text
-                            style={[
-                              Styles.BriefDetailRowText
-                            ]}>
-                              {_FINAL_UNIT_COMPLEX}
-                          </Text>
-                      </View>
-                    </Input>
-                  )
-                }}
-                onSnap={(selectedItemIndex) => props.setSelectedUnit(props.productFeaturesModal.units[selectedItemIndex])}
-                {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
-            ),
-            (
-              <Carousel
-                name={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.title.en}
-                data={_AVAILABLE_WAREHOUSES}
-                firstItem={_SELECTED_WAREHOUSE_INDEX}
-                style={Styles.DetailContainer}
-                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
-                onLayout={({ item, index }) => {
-                  var _ITEM_GRADIENT = Global.colors.pair.ongerine;
-
-                  if (item._id === props.productFeaturesModal.selectedWarehouse._id){
-                    _ITEM_GRADIENT = Global.colors.pair.aqrulean;
-                  }
-
-                  return (
-                    <Input
-                      type={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.type}
-                      gradient={_ITEM_GRADIENT}
-                      style={Styles.DetailItemContainer}
-                      disable={true}>
-                      <View
-                        style={[
-                          Styles.DetailItemMasterInfoContent
-                        ]}>
-                          <Text
-                            style={[
-                              Styles.BriefDetailTitle
-                            ]}>
-                              {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.title[attitude.language])}
-                          </Text>
-                      </View>
-                      <View
-                        style={Styles.DetailItemMasterSubInfoContent}>
-                          <Icon
-                            name={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.icon.name}
-                            color={Global.colors.single.romance} />
-
-                          <Text
-                            style={[
-                              Styles.BriefDetailRowText
-                            ]}>
-                              {item.name}
-                          </Text>
-                      </View>
-                    </Input>
-                  )
-                }}
-                onSnap={(selectedItemIndex) => props.setSelectedWarehouse(props.productFeaturesModal.warehouses[selectedItemIndex])}
-                {..._SECOND_CAROUSEL_OTHER_OPTIONS}/>
-            ),
-            (
-              <Input
-                type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title.en)}
-                placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title[attitude.language]}
-                value={_MIN_ORDER_QTY}
-                style={[
-                  Styles.RegularItemContainer,
-                  {
-                    marginBottom: Styles.Content.marginVertical,
-                    marginHorizontal: Styles.Content.marginHorizontal
-                  }
-                ]}
-                onChangeText={(currentValue) => props.setMinimumOrderQuantity(parseInt(currentValue))}
-                {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.options} />
-            ),
-            (
-              <Input
-                type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en)}
-                placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title[attitude.language]}
-                value={_MAX_ORDER_QTY}
-                style={[
-                  Styles.RegularItemContainer,
-                  {
-                    marginBottom: Styles.Content.marginVertical,
-                    marginHorizontal: Styles.Content.marginHorizontal
-                  }
-                ]}
-                onChangeText={(currentValue) => props.setMaximumOrderQuantity(parseInt(currentValue))}
-                {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.options} />
-            ),
-            (
-              <Input
-                  type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title.en)}
-                  placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.title[attitude.language]}
-                  value={_QTY}
-                  style={[
-                    Styles.RegularItemContainer,
-                    {
-                      marginBottom: Styles.Content.marginVertical,
-                      marginHorizontal: Styles.Content.marginHorizontal
+                    if (_IS_MAX_ORDER_QTY_VALID === false){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.firstPart[attitude.language]}`;
+                      countOfMessageItem++;
                     }
+
+                    if (_IS_MIN_ORDER_QTY_VALID === false){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.secondPart[attitude.language]}`;
+                      countOfMessageItem++;
+                    }
+
+                    if (countOfMessageItem > 1){
+                      _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.more[attitude.language]}`;
+                    }else{
+                      _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.one[attitude.language]}`;
+                    }
+                  }
+                }else{
+                  let countOfMessageItem = 0;
+
+                  if (props.productFeaturesModal.maximumOrderQuantity === 0){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.firstPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
+
+                  if (props.productFeaturesModal.minimumOrderQuantity === 0){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.secondPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
+
+                  if (countOfMessageItem > 1){
+                    _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.more[attitude.language]}`;
+                  }else{
+                    _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.firstLevel.verbComposition.one[attitude.language]}`;
+                  }
+                }
+
+                if (_MESSAGE != ''){
+                  _FINAL_BUTTON = (
+                    <Input
+                      type={__CONSTANTS.modalContainer.content.submitInput.type}
+                      value={_MESSAGE}
+                      style={[
+                        Styles.WarningContainer,
+                        {
+                          marginBottom: Styles.Content.marginVertical
+                        }
+                      ]}
+                      textStyle={Styles.WarningContent} />
+                  );
+                }
+              }
+
+              _MODAL_CONTENT = [
+                (
+                  <Carousel
+                    name={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.title.en}
+                    data={_AVAILABLE_WAREHOUSES}
+                    firstItem={_SELECTED_WAREHOUSE_INDEX}
+                    style={Styles.DetailContainer}
+                    itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
+                    onLayout={({ item, index }) => {
+                      var _ITEM_GRADIENT = Global.colors.pair.ongerine;
+
+                      if (item._id === props.productFeaturesModal.selectedWarehouse._id){
+                        _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                      }
+
+                      return (
+                        <Input
+                          type={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.type}
+                          gradient={_ITEM_GRADIENT}
+                          style={Styles.DetailItemContainer}
+                          disable={true}>
+                          <View
+                            style={[
+                              Styles.DetailItemMasterInfoContent
+                            ]}>
+                              <Text
+                                style={[
+                                  Styles.BriefDetailTitle
+                                ]}>
+                                  {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.title[attitude.language])}
+                              </Text>
+                          </View>
+                          <View
+                            style={Styles.DetailItemMasterSubInfoContent}>
+                              <Icon
+                                name={__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.content.self.icon.name}
+                                color={Global.colors.single.romance} />
+
+                              <Text
+                                style={[
+                                  Styles.BriefDetailRowText
+                                ]}>
+                                  {item.name}
+                              </Text>
+                          </View>
+                        </Input>
+                      )
+                    }}
+                    onSnap={(selectedItemIndex) => props.setSelectedWarehouse(props.productFeaturesModal.warehouses[selectedItemIndex])}
+                    {..._SECOND_CAROUSEL_OTHER_OPTIONS}/>
+                ),
+                (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title.en)}
+                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.title[attitude.language]}
+                    value={_MIN_ORDER_QTY}
+                    style={[
+                      Styles.RegularItemContainer,
+                      {
+                        marginBottom: Styles.Content.marginVertical,
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      }
+                    ]}
+                    onChangeText={(currentValue) => props.setMinimumOrderQuantity(parseInt(currentValue))}
+                    {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.options} />
+                ),
+                (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en)}
+                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title[attitude.language]}
+                    value={_MAX_ORDER_QTY}
+                    style={[
+                      Styles.RegularItemContainer,
+                      {
+                        marginBottom: Styles.Content.marginVertical,
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      }
+                    ]}
+                    onChangeText={(currentValue) => props.setMaximumOrderQuantity(parseInt(currentValue))}
+                    {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.options} />
+                ),
+                _FINAL_BUTTON
+              ];
+            }else{
+              _MODAL_CONTENT = (
+                <Link
+                  containerStyle={[
+                    Styles.Center_TextAlignment,
+                    Styles.Center_ContentAlignment
                   ]}
-                  onChangeText={(currentValue) => props.setQuantity(parseInt(currentValue))}
-                  {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.options} />
-            ),
-            _FINAL_BUTTON
-          ];
-        }else{
-          _MODAL_CONTENT = (
-            <Link
-              containerStyle={[
-                Styles.Center_TextAlignment,
-                Styles.Center_ContentAlignment
-              ]}
-              value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
-          );
+                  value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
+              );
+            }
+            break;
         }
       }else{
         if (props.productFeaturesModal.features.length > 0){
@@ -815,22 +894,10 @@ const ProductFeaturesModal = (props) => {
                           itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _SECOND_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
                           onLayout={({ item, index }) => {
                             var _ITEM_GRADIENT = Global.colors.pair.ongerine,
-                                _EXTRA_UNIT_FEATURES = '',
-                                _FINAL_UNIT_COMPLEX = '';
+                                _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item, attitude.language);
 
                             if (item._id === props.productFeaturesModal.selectedUnit._id){
                               _ITEM_GRADIENT = Global.colors.pair.aqrulean;
-                            }
-
-
-                            if (typeof item.extra_features != 'undefined'){
-                              for (var extra_feature in item.extra_features) {
-                                _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(item.extra_features[extra_feature], attitude.language, `unit ${extra_feature}`);
-                              }
-
-                              _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
-                            }else{
-                              _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(item.key, attitude.language, 'unit');
                             }
 
                             return (
@@ -860,7 +927,7 @@ const ProductFeaturesModal = (props) => {
                                       style={[
                                         Styles.BriefDetailRowText
                                       ]}>
-                                        {_FINAL_UNIT_COMPLEX}
+                                        {_FINAL_UNIT_COMPLEX.title} {_FINAL_UNIT_COMPLEX.subtitle}
                                     </Text>
                                 </View>
                               </Input>

@@ -1,5 +1,15 @@
 var editorElement = document.querySelector('#editor'),
     quill = new Quill(editorElement, {
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ 'header': 1 }, { 'header': 2 }],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'direction': 'rtl' }],
+          [{ 'size': ['small', false, 'large', 'huge'] }],
+          [{ 'align': [] }]
+        ]
+      },
       theme: 'snow'
     });
 

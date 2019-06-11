@@ -2,6 +2,7 @@ import { LAYOUTS } from '../../../types/index';
 const { PRODUCT_FEATURES_MODAL } = LAYOUTS;
 
 const initialState = {
+  currentHiddenTabIndex: 0,
   currentFeature: {},
   selectedUnit: {},
   selectedWarehouse: {},
@@ -39,6 +40,12 @@ export default (state = initialState, action) => {
         featuresLoading: state.featuresLoading,
         unitsLoading: state.unitsLoading,
         connected: state.connected
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_CURRENT_HIDDEN_TAB_INDEX:
+      return {
+        ...state,
+        currentHiddenTabIndex: action.payload
       };
       break;
     case PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURE:

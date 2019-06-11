@@ -114,7 +114,7 @@ const ProductUnitsDependedModal = (props) => {
 
   const _VALIDATED = _componentWillCheckValidation(props);
 
-  var _MODAL_CONTENT = <Text>ok</Text>;
+  var _MODAL_CONTENT;
 
   if (props.productUnitsDependedModal.units.length > 0){
     const _SELECTED_INDEX = props.productUnitsDependedModal.units.findIndex((unitItem, i) => {
@@ -154,21 +154,10 @@ const ProductUnitsDependedModal = (props) => {
                     _QTY = (item.quantity > 0)? item.quantity: '';
 
               var _ITEM_GRADIENT = Global.colors.pair.ongerine,
-                  _EXTRA_UNIT_FEATURES = '',
-                  _FINAL_UNIT_COMPLEX = '';
+                  _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(_UNIT, attitude.language);
 
               if (item._id === props.productUnitsDependedModal.selectedUnit._id){
                 _ITEM_GRADIENT = Global.colors.pair.aqrulean;
-              }
-
-              if (typeof _UNIT.extra_features != 'undefined'){
-                for (var extra_feature in _UNIT.extra_features) {
-                  _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(_UNIT.extra_features[extra_feature], attitude.language, `unit ${extra_feature}`);
-                }
-
-                _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(_UNIT.key, attitude.language, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
-              }else{
-                _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(_UNIT.key, attitude.language, 'unit');
               }
 
               return (
@@ -186,8 +175,13 @@ const ProductUnitsDependedModal = (props) => {
                           style={Styles.BriefDetailTitleContainer}>
                           <Text
                             style={Styles.BriefDetailTitle}>
-                              {_FINAL_UNIT_COMPLEX}
+                              {_FINAL_UNIT_COMPLEX.title}
                           </Text>
+                          <Text
+                            style={Styles.BriefDetailTitleSuffix}>
+                              {_FINAL_UNIT_COMPLEX.subtitle}
+                          </Text>
+
                           {
                             // <Text
                             //   style={Styles.BriefDetailTitleSuffix}>

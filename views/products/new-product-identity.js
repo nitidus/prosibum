@@ -120,18 +120,7 @@ class NewProductIdentity extends Component<{}> {
               var _UNIT_DELETE_ACTION = () => props.setInvenntoryUnits(props.newProduct.inventoryUnits.filter((checkingItem, j) => {
                 return (checkingItem._id !== item._id);
               })),
-              _EXTRA_UNIT_FEATURES = '',
-              _FINAL_UNIT_COMPLEX = '';
-
-              if (typeof item.extra_features != 'undefined'){
-                for (var extra_feature in item.extra_features) {
-                  _EXTRA_UNIT_FEATURES += Functions._getAppropriateTaxonomyBaseOnLocale(item.extra_features[extra_feature], _LANGUAGE, `unit ${extra_feature}`);
-                }
-
-                _FINAL_UNIT_COMPLEX = `${Functions._getAppropriateTaxonomyBaseOnLocale(item.key, _LANGUAGE, 'unit')} ${_EXTRA_UNIT_FEATURES}`;
-              }else{
-                _FINAL_UNIT_COMPLEX = Functions._getAppropriateTaxonomyBaseOnLocale(item.key, _LANGUAGE, 'unit');
-              }
+              _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item, _LANGUAGE);
 
               return (
                 <Input
@@ -148,8 +137,13 @@ class NewProductIdentity extends Component<{}> {
                           style={Styles.BriefDetailTitleContainer}>
                           <Text
                             style={Styles.BriefDetailTitle}>
-                              {_FINAL_UNIT_COMPLEX}
+                              {_FINAL_UNIT_COMPLEX.title}
                           </Text>
+                          <Text
+                            style={Styles.BriefDetailTitleSuffix}>
+                              {_FINAL_UNIT_COMPLEX.subtitle}
+                          </Text>
+
                           {
                             // <Text
                             //   style={Styles.BriefDetailTitleSuffix}>

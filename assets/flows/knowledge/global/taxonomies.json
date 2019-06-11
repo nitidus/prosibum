@@ -23,6 +23,12 @@
     "fa": "۱۲ تایی"
   }
 }, {
+  "key": "Unit Detachable",
+  "value":{
+    "en": "Possibility to Detachable sales",
+    "fa": "امکان فروش بصورت باز"
+  }
+}, {
   "key": "Product Feature",
   "value":{
     "en": "Customized",

@@ -62,7 +62,7 @@ class NewFragmentFeatures extends Component<{}> {
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_FEATURES_OTHER_PROPS = {
               language: props.newFragment.language,
-              features: props.newFragment.features
+              features: props.newFragment.units
             },
             _CUSTOM_STYLE = {
               marginBottom: Styles.Content.marginVertical

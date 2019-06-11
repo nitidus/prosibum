@@ -22,6 +22,12 @@ const mapDispatchToProps = (dispatch) => {
         type: PRODUCT_FEATURES_MODAL.RESET_MODAL_INDEPENDLY
       })
     },
+    setCurrentHiddenTabIndex: (index) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_CURRENT_HIDDEN_TAB_INDEX,
+        payload: index
+      })
+    },
     setCurrentFeature: (feature) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_PRODUCT_FEATURE,
