@@ -15,6 +15,7 @@ var _CUSTOM_CONTAINER = {
       shadowRadius: 0
     },
     _CUSTOM_TOP_BAR_CONTAINER = {
+      height: 117,
       shadowOffset: {
         width: 0,
         height: 0.5

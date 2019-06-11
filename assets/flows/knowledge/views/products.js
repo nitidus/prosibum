@@ -1,5 +1,6 @@
 //Products
 import new_product_identity from './products/new-product-identity.json';
+import new_product_description from './products/new-product-description.json';
 import new_product_features from './products/new-product-features.json';
 import new_product_photos from './products/new-product-photos.json';
 
@@ -17,6 +18,7 @@ module.exports = {
     new_fragment_identity,
     new_product_features,
     new_fragment_features,
+    new_product_description,
     new_product_photos,
     new_fragment_prices,
     new_fragment_shipping_methods
@@ -26,6 +28,7 @@ module.exports = {
   new_fragment_identity,
   new_product_features,
   new_fragment_features,
+  new_product_description,
   new_product_photos,
   new_fragment_prices,
   new_fragment_shipping_methods

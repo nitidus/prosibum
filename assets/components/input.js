@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { View, TouchableOpacity, Image, ImageBackground, TextInput, KeyboardAvoidingView, Keyboard, I18nManager, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
+import { View, TouchableOpacity, Image, ImageBackground, TextInput, WebView, KeyboardAvoidingView, Keyboard, I18nManager, Text, Dimensions, Platform, Animated, Easing } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 import CreditCardType from 'rn-credit-card-type';
+import RichTextEditorTemplate from './assets/html/rich-text-editor.html';
 
 import { Link } from './link';
 import { Icon } from '../layouts/icon';
@@ -60,6 +61,29 @@ export const Input = (props) => {
         if (typeof props.maxLength != 'undefined'){
           otherProps.maxLength = attitude.maxLength = props.maxLength;
         }
+
+        if (typeof props.reference != 'undefined'){
+          otherProps.ref = attitude.ref = props.reference;
+        }
+
+        attitude.onBlur = props.onBlur || function (){};
+        attitude.onFocus = props.onFocus || function (){};
+        break;
+      case 'richtext':
+      case 'rich-text':
+      case 'richtexteditor':
+      case 'rich-text-editor':
+      case 'wysiwyg':
+      case 'wysiwyg-editor':
+        if (typeof props.value != 'undefined'){
+          attitude.value = props.value || '';
+        }
+
+        if ((typeof props.onChangeText != 'undefined') || (typeof props.onChange != 'undefined')){
+          attitude.onChangeText = props.onChangeText || props.onChange;
+        }
+
+        attitude.disable = props.disable || (props.forcedDisable || props.forcedDisableAppearence) || false;
 
         if (typeof props.reference != 'undefined'){
           otherProps.ref = attitude.ref = props.reference;
@@ -373,6 +397,53 @@ export const Input = (props) => {
           onFocus={attitude.onFocus}
           editable={!attitude.disable}
           {...otherProps} />
+      );
+      break;
+
+    case 'richtext':
+    case 'rich-text':
+    case 'richtexteditor':
+    case 'rich-text-editor':
+    case 'wysiwyg':
+    case 'wysiwyg-editor':
+      return (
+        <View
+          style={[
+            Styles.NonNativeContainer,
+            attitude.style
+          ]}>
+          <WebView
+            ref={( webView ) => this[attitude.name] = webView}
+            name={attitude.name}
+            style={Styles.NonNativeContent}
+            source={RichTextEditorTemplate}
+            onMessage={(event) => {
+              let _RESPONSE = JSON.parse(event.nativeEvent.data);
+
+              switch (_RESPONSE.type) {
+                case 'event':
+                  switch (_RESPONSE.content.eventType) {
+                    case 'changeText':
+                      console.log(_RESPONSE.content.context);
+                      break;
+                  }
+                  break;
+              }
+            }}
+            onLoadStart={() => {
+              let _REQUEST = {
+                    type: 'stylesheet',
+                    content: {
+                      ...Styles.RichTextEditorContaienr,
+                      minHeight: Styles.NonNativeContainer.minHeight
+                    }
+                  },
+                  _SERIALIZED_REQUEST = JSON.stringify(_REQUEST);
+
+              this[attitude.name].postMessage(_SERIALIZED_REQUEST);
+            }}
+            {...otherProps} />
+        </View>
       );
       break;
 

@@ -19,6 +19,7 @@ import Wallets from './dashboard/wallets';
 
   //New Product Subsets
   import NewProductIdentity from './products/new-product-identity';
+  import NewProductDescription from './products/new-product-description';
   import NewProductFeatures from './products/new-product-features';
   import NewProductPhotos from './products/new-product-photos';
 
@@ -46,6 +47,7 @@ const ProductsStack = createStackNavigator({
   NewFragmentDetection,
   NewFragmentIdentity,
   NewProductIdentity,
+  NewProductDescription,
   NewFragmentFeatures,
   NewProductFeatures,
   NewProductPhotos,

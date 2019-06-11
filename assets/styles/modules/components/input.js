@@ -190,6 +190,22 @@ module.exports = StyleSheet.create({
     textAlign: (I18nManager.isRTL)? 'right': 'left',
     ..._CUSTOM_CONTAINER_WITHOUT_BUTTON
   },
+  NonNativeContainer: {
+    minHeight: 215,
+    borderColor: colors.single.mercury,
+    backgroundColor: colors.single.romance,
+    overflow: 'hidden',
+    ..._CUSTOM_CONTAINER_WITH_BUTTON
+  },
+  NonNativeContent: {
+    flex: 1
+  },
+  RichTextEditorContaienr: {
+    color: colors.single.rangoonGreen,
+    backgroundColor: colors.single.romance,
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    textAlign: (I18nManager.isRTL)? 'right': 'left'
+  },
   ContainerWithButton: {
     borderColor: colors.single.mercury,
     backgroundColor: colors.single.romance,

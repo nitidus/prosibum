@@ -1,0 +1,287 @@
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Heavy Italic'), local('SFProText-HeavyItalic'),
+        url('../../../fonts/SF-Pro-Text-HeavyItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Semibold'), local('SFProDisplay-Semibold'),
+        url('../../../fonts/SF-Pro-Display-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Light'), local('SFProDisplay-Light'),
+        url('../../../fonts/SF-Pro-Display-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Light'), local('SFProText-Light'),
+        url('../../../fonts/SF-Pro-Text-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Heavy'), local('SFProText-Heavy'),
+        url('../../../fonts/SF-Pro-Text-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Black'), local('SFProDisplay-Black'),
+        url('../../../fonts/SF-Pro-Display-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Semibold Italic'), local('SFProDisplay-SemiboldItalic'),
+        url('../../../fonts/SF-Pro-Display-SemiboldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Ultralight Italic'), local('SFProDisplay-UltralightItalic'),
+        url('../../../fonts/SF-Pro-Display-UltralightItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Medium Italic'), local('SFProDisplay-MediumItalic'),
+        url('../../../fonts/SF-Pro-Display-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Italic'), local('SFProDisplay-Italic'),
+        url('../../../fonts/SF-Pro-Display-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Bold Italic'), local('SFProDisplay-BoldItalic'),
+        url('../../../fonts/SF-Pro-Display-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Semibold Italic'), local('SFProText-SemiboldItalic'),
+        url('../../../fonts/SF-Pro-Text-SemiboldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Heavy'), local('SFProDisplay-Heavy'),
+        url('../../../fonts/SF-Pro-Display-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Thin Italic'), local('SFProDisplay-ThinItalic'),
+        url('../../../fonts/SF-Pro-Display-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Medium'), local('SFProDisplay-Medium'),
+        url('../../../fonts/SF-Pro-Display-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Black Italic'), local('SFProDisplay-BlackItalic'),
+        url('../../../fonts/SF-Pro-Display-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Thin'), local('SFProDisplay-Thin'),
+        url('../../../fonts/SF-Pro-Display-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Regular'), local('SFProDisplay-Regular'),
+        url('../../../fonts/SF-Pro-Display-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Heavy Italic'), local('SFProDisplay-HeavyItalic'),
+        url('../../../fonts/SF-Pro-Display-HeavyItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Medium'), local('SFProText-Medium'),
+        url('../../../fonts/SF-Pro-Text-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Regular'), local('SFProText-Regular'),
+        url('../../../fonts/SF-Pro-Text-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Bold'), local('SFProText-Bold'),
+        url('../../../fonts/SF-Pro-Text-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Light Italic'), local('SFProText-LightItalic'),
+        url('../../../fonts/SF-Pro-Text-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Light Italic'), local('SFProDisplay-LightItalic'),
+        url('../../../fonts/SF-Pro-Display-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Semibold'), local('SFProText-Semibold'),
+        url('../../../fonts/SF-Pro-Text-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Bold'), local('SFProDisplay-Bold'),
+        url('../../../fonts/SF-Pro-Display-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Italic'), local('SFProText-Italic'),
+        url('../../../fonts/SF-Pro-Text-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Medium Italic'), local('SFProText-MediumItalic'),
+        url('../../../fonts/SF-Pro-Text-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: local('SF Pro Display Ultralight'), local('SFProDisplay-Ultralight'),
+        url('../../../fonts/SF-Pro-Display-Ultralight.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro Text';
+    src: local('SF Pro Text Bold Italic'), local('SFProText-BoldItalic'),
+        url('../../../fonts/SF-Pro-Text-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Vazir FD';
+    src: local('Vazir Light FD'), local('Vazir-Light-FD'),
+        url('../../../fonts/Vazir-Light-FD.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Vazir FD';
+    src: local('Vazir Black FD'), local('Vazir-Black-FD'),
+        url('../../../fonts/Vazir-Black-FD.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Vazir FD';
+    src: local('Vazir FD'), local('Vazir-FD'),
+        url('../../../fonts/Vazir-FD.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Vazir FD';
+    src: local('Vazir Bold FD'), local('Vazir-Bold-FD'),
+        url('../../../fonts/Vazir-Bold-FD.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Vazir FD';
+    src: local('Vazir Medium FD'), local('Vazir-Medium-FD'),
+        url('../../../fonts/Vazir-Medium-FD.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Vazir FD';
+    src: local('Vazir Thin FD'), local('Vazir-Thin-FD'),
+        url('../../../fonts/Vazir-Thin-FD.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}

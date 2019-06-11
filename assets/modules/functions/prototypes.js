@@ -21,6 +21,8 @@ import GLOBAL from '../global';
 import { name as __APP_NAME } from '../../../app.json';
 
 module.exports = {
+  _lodash: Lodash,
+  _moment: Moment,
   _convertDigitsToEnglish: (digits) => {
     return digits.replace(/[\u0660-\u0669]/g, function(c) {
       return c.charCodeAt(0) - 0x0660;

@@ -390,12 +390,22 @@ export const TopBar = (props) => {
         style={Styles.ComplexHeaderContainer}>
           <Text
             style={Styles.ComplexHeaderTitle}>
-              {attitude.title}
+              {
+                Functions._lodash.truncate(attitude.title, {
+                  length: 16,
+                  separator: ' '
+                })
+              }
           </Text>
 
           <Text
             style={Styles.ComplexHeaderSubtitle}>
-              {attitude.subtitle}
+              {
+                Functions._lodash.truncate(attitude.subtitle, {
+                  length: 32,
+                  separator: ' '
+                })
+              }
           </Text>
       </View>
     )
