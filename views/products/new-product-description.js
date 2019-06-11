@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, Keyboard, I18nManager, Text, Image, Animated, Easing } from 'react-native';
+import { View, ScrollView, Dimensions, Platform, Keyboard, I18nManager, Text, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
 import Interactable from 'react-native-interactable';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, Options, ProductFeaturesModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Icon } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewProduct,
-      Container = ViewsContainer.Products.NewFragmentContainer;
+      Container = ViewsContainer.Products.NewProductContainer;
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
-const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewFragment;
+const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewProduct;
 
 import { views_constants } from '../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.products.new_product_description;
@@ -29,7 +29,7 @@ class NewProductDescription extends Component<{}> {
   async componentDidMount() {
     const { props } = this;
 
-    if (Object.keys(props.newFragment.language).length === 0){
+    if (Object.keys(props.newProduct.language).length === 0){
       const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
             _LANGUAGE = _NATIVE_SETTINGS.language;
 
@@ -38,13 +38,13 @@ class NewProductDescription extends Component<{}> {
   }
 
   _componentWillCheckValidation(props) {
-    const _PROPS = props.newFragment;
+    const _PROPS = props.newProduct;
 
     var _FORM_FIELDS_VALIDITY = false;
 
-    // if ((_PROPS.features.length > 0)){
-    //   _FORM_FIELDS_VALIDITY = true;
-    // }
+    if (_PROPS.description.replace(/(<([^>]+)>)/ig, "") != ''){
+      _FORM_FIELDS_VALIDITY = true;
+    }
 
     return !_FORM_FIELDS_VALIDITY;
   }
@@ -52,27 +52,38 @@ class NewProductDescription extends Component<{}> {
   render() {
     const { props } = this;
 
-    if (Object.keys(props.newFragment.language).length > 0){
-      var _FEATURES_CONTENT;
+    if (Object.keys(props.newProduct.language).length > 0){
+      var _FEATURES_CONTENT,
+          _FINAL_BUTTON;
 
-      const _LANGUAGE = Functions._convertTokenToKeyword(props.newFragment.language.key),
-            _PRODUCT_TITLE = (props.newFragment.name != '')? props.newFragment.name: __CONSTANTS.pilot.title[_LANGUAGE],
+      const _LANGUAGE = Functions._convertTokenToKeyword(props.newProduct.language.key),
+            _PRODUCT_TITLE = (props.newProduct.name != '')? props.newProduct.name: __CONSTANTS.pilot.title[_LANGUAGE],
             _VALIDATED = this._componentWillCheckValidation(props);
 
-      return (
-        <Container
-          title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
-          subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
-          {...props}>
+      if (_VALIDATED){
+        var _MESSAGE = '';
 
-          <Input
-            type="richtext"
-            name="product-description"
-            style={{
-              marginHorizontal: Styles.Content.marginHorizontal,
-              marginVertical: Styles.Content.marginVertical
-            }}/>
+        if (props.newProduct.description.replace(/(<([^>]+)>)/ig, "") == ''){
+          _MESSAGE += __CONSTANTS.content.warning[_LANGUAGE];
+        }
 
+        if (_MESSAGE != ''){
+          _FINAL_BUTTON = (
+            <Input
+              type={__CONSTANTS.content.submitButton.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+              value={_MESSAGE}
+              style={[
+                Styles.WarningContainer,
+                {
+                  marginBottom: Styles.Content.marginVertical
+                }
+              ]}
+              textStyle={Styles.WarningContent} />
+          );
+        }
+      }else{
+        _FINAL_BUTTON = (
           <Input
             type={__CONSTANTS.content.submitButton.type}
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
@@ -87,6 +98,27 @@ class NewProductDescription extends Component<{}> {
               navigation.navigate('NewFragmentPrices');
             }}
             forcedDisable={_VALIDATED} />
+        );
+      }
+
+      return (
+        <Container
+          title={Functions._convertKeywordToToken(_PRODUCT_TITLE)}
+          subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
+          {...props}>
+
+            <Input
+              type={__CONSTANTS.content.firstInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}
+              placeholder={__CONSTANTS.content.firstInput.title[_LANGUAGE]}
+              value={props.newProduct.description}
+              style={{
+                marginHorizontal: Styles.Content.marginHorizontal,
+                marginVertical: Styles.Content.marginVertical
+              }}
+              onChangeText={(currentValue) => props.setDescription(currentValue)}/>
+
+            {_FINAL_BUTTON}
         </Container>
       );
     }else{

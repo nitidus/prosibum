@@ -7,7 +7,7 @@ editorElement.addEventListener('keyup', (e) => {
   let code = e.keyCode || e.which;
 
   if (code == '9') {
-    e.target.blur();
+    quill.blur();
   }else{
     let response = {
           type: 'event',
@@ -44,6 +44,19 @@ document.addEventListener("message", (event) => {
 
           case 'minHeight':
             document.querySelector('.ql-editor').style[stylesheetAttr] = `calc(${request.content[stylesheetAttr]}px - 44px)`;
+            break;
+        }
+      }
+      break;
+
+    case 'attributes':
+    case 'attribute':
+    case 'attrs':
+    case 'attr':
+      for (var attrRow in request.content) {
+        switch (attrRow) {
+          case 'placeholder':
+            quill.root.dataset.placeholder = request.content[attrRow];
             break;
         }
       }

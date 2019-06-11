@@ -65,6 +65,12 @@ const mapDispatchToProps = (dispatch) => {
         payload: unit
       })
     },
+    setDescription: (description) => {
+      dispatch({
+        type: NEW_PRODUCT.SET_DESCRIPTION,
+        payload: description
+      })
+    },
     setFeatures: (features) => {
       dispatch({
         type: NEW_PRODUCT.SET_FEATURES,

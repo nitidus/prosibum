@@ -9,7 +9,7 @@ import { Global, Views } from '../../assets/styles/index';
 import { ActivityIndicator, Toast, Icon, Options, ProductFeaturesModal } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
-const Styles = Views.Products.NewProduct,
+const Styles = Views.Products.NewFragment,
       Container = ViewsContainer.Products.NewFragmentContainer;
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';

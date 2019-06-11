@@ -11,85 +11,11 @@
     "rightIcon": "plus"
   },
   "content": {
-    "carousel": {
-      "type": "BUTTON",
-      "state": {
-        "normal": {
-          "title": {
-            "en": "Units Feature",
-            "fa": "ویژگی واحدهای اندازه‌گیری"
-          },
-          "content": {
-            "title": {
-              "suffix": {
-                "en": "Unit Type",
-                "fa": "نوع واحد"
-              }
-            },
-            "firstFeature": {
-              "title": {
-                "en": "Minimum Order",
-                "fa": "حداقل تعداد سفارش"
-              },
-              "icon": {
-                "name": "grading"
-              }
-            },
-            "secondFeature": {
-              "title": {
-                "en": "Maximum Order",
-                "fa": "حداکثر تعداد سفارش"
-              },
-              "icon": {
-                "name": "grading"
-              }
-            },
-            "thirdFeature": {
-              "title": {
-                "en": "Quantity",
-                "fa": "تعداد"
-              },
-              "icon": {
-                "name": "grading"
-              }
-            }
-          }
-        },
-        "null": {
-          "title": {
-            "en": "No features have been appended yet.",
-            "fa": "هنوز هیچ ویژگی اضافه نشده است."
-          }
-        }
-      }
-    },
-    "description": {
-      "type": "BUTTON",
-      "options": {
-        "horizontalOnly": true
-      }
-    },
-    "customized": {
-      "type": "BUTTON",
+    "firstInput": {
+      "type": "RICHTEXT",
       "title": {
-        "suffix": {
-          "en": "Customized",
-          "fa": "شخصی‌سازی‌شده"
-        }
-      },
-      "options": {
-        "horizontalOnly": true
-      }
-    },
-    "modalHandlerButton": {
-      "type": "BUTTON",
-      "state": {
-        "normal": {
-          "title": {
-            "en": "Append Feature",
-            "fa": "اضافه کردن ویژگی"
-          }
-        }
+        "en": "Description",
+        "fa": "توضیحات"
       }
     },
     "submitButton": {
@@ -102,6 +28,10 @@
           }
         }
       }
+    },
+    "warning": {
+      "en": "You should fill the description field.",
+      "fa": "شما باید فیلد توضیحات را پر کنید."
     }
   }
 }

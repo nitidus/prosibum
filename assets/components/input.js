@@ -75,6 +75,10 @@ export const Input = (props) => {
       case 'rich-text-editor':
       case 'wysiwyg':
       case 'wysiwyg-editor':
+        if (typeof props.placeholder != 'undefined'){
+          attitude.placeholder = props.placeholder;
+        }
+
         if (typeof props.value != 'undefined'){
           attitude.value = props.value || '';
         }
@@ -424,7 +428,7 @@ export const Input = (props) => {
                 case 'event':
                   switch (_RESPONSE.content.eventType) {
                     case 'changeText':
-                      console.log(_RESPONSE.content.context);
+                      attitude.onChangeText(_RESPONSE.content.context);
                       break;
                   }
                   break;
@@ -439,6 +443,19 @@ export const Input = (props) => {
                     }
                   },
                   _SERIALIZED_REQUEST = JSON.stringify(_REQUEST);
+
+              this[attitude.name].postMessage(_SERIALIZED_REQUEST);
+
+              _REQUEST = {
+                type: 'attributes',
+                content: {}
+              };
+
+              if (typeof attitude.placeholder != 'undefined'){
+                _REQUEST.content.placeholder = attitude.placeholder;
+              }
+
+              _SERIALIZED_REQUEST = JSON.stringify(_REQUEST);
 
               this[attitude.name].postMessage(_SERIALIZED_REQUEST);
             }}

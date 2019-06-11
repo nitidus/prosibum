@@ -8,6 +8,7 @@ const initialState = {
         inprocessTag: '',
         tags: [],
         inventoryUnits: [],
+        description: '',
         features: [],
         photos: [],
         primaryPhoto: {},
@@ -82,6 +83,12 @@ export default (state = initialState, action) => {
           ...state.inventoryUnits,
           action.payload
         ]
+      };
+      break;
+    case NEW_PRODUCT.SET_DESCRIPTION:
+      return {
+        ...state,
+        description: action.payload
       };
       break;
     case NEW_PRODUCT.SET_FEATURES:
