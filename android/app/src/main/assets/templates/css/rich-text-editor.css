@@ -1,0 +1,28 @@
+#editor {
+  -webkit-overflow-scrolling: touch;
+}
+
+.ql-toolbar.ql-snow {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  z-index: 1020;
+  top: 0;
+  left: 0;
+  right: 0;
+  border: none;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.ql-container.ql-snow {
+  border: none;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  color: $rangoon-green;
+}
+
+.ql-editor {
+  font-size: 18px;
+  font-family: 'Vazir FD', 'SF Pro Display', 'SF Pro Text';
+  min-height: 171px;
+}
