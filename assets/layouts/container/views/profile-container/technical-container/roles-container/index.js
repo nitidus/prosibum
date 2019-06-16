@@ -53,7 +53,7 @@ export const RolesContainer = (props) => {
   var _CHILDREN_CONTENT, _DEPENDED_RIGHT_PINNED_SIDE, _BOTTOM_PINNED_ITEMS,
       roleModalOtherProps = {
         language: props.language
-      };;
+      };
 
   if (typeof attitude.children != 'undefined'){
     if (attitude.children.length > 0){
@@ -94,7 +94,9 @@ export const RolesContainer = (props) => {
   return (
     <View
       style={Styles.Container}>
-        <StatusBar />
+        <StatusBar
+          backgroundColor={Global.colors.single.romance}
+          barStyle="dark-content"/>
 
         <Pilot
           title={attitude.title}

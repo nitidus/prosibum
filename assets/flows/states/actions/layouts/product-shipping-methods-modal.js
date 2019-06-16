@@ -17,10 +17,10 @@ const mapDispatchToProps = (dispatch) => {
         type: PRODUCT_SHIPPING_METHODS_MODAL.RESET_MODAL
       })
     },
-    setSelectedShippingMethod: (shippinMethod) => {
+    setSelectedShippingMethod: (shippingMethod) => {
       dispatch({
         type: PRODUCT_SHIPPING_METHODS_MODAL.SET_SELECTED_SHIPPING_METHOD,
-        payload: shippinMethod
+        payload: shippingMethod
       })
     },
     fetchAvailableProductShippingMethods: async () => CMD._getAvailableProductShippingMethods(dispatch),

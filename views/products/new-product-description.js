@@ -95,7 +95,8 @@ class NewProductDescription extends Component<{}> {
             onPress={() => {
               const { navigation } = props;
 
-              navigation.navigate('NewFragmentPrices');
+              Keyboard.dismiss();
+              navigation.navigate('NewProductFeatures');
             }}
             forcedDisable={_VALIDATED} />
         );

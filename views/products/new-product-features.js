@@ -309,6 +309,7 @@ class NewProductFeatures extends Component<{}> {
                 onPress={() => {
                   const { navigation } = props;
 
+                  Keyboard.dismiss();
                   navigation.navigate('NewProductPhotos');
                 }}
                 forcedDisable={_VALIDATED} />

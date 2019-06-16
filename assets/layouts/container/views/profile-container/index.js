@@ -73,7 +73,9 @@ export const ProfileContainer = (props) => {
     <KeyboardAvoidingView
       style={Styles.Container}
       behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
-        <StatusBar />
+        <StatusBar
+          backgroundColor={Global.colors.single.romance}
+          barStyle="dark-content"/>
 
         <Pilot
           title={attitude.title}

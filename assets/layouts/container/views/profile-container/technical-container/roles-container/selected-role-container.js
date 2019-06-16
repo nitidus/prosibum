@@ -76,7 +76,9 @@ export const SelectedRoleContainer = (props) => {
   return (
     <View
       style={Styles.Container}>
-        <StatusBar />
+        <StatusBar
+          backgroundColor={Global.colors.single.romance}
+          barStyle="dark-content"/>
 
         <Pilot
           title={attitude.title}

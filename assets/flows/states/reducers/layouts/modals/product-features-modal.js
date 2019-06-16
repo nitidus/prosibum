@@ -15,10 +15,18 @@ const initialState = {
   features: [],
   patternBasedFeatures: [],
   units: [],
+  isDetachableUnit: false,
+  minimumDetachableOrderQuantity: 0,
+  maximumDetachableOrderQuantity: 0,
+  detachablePrice: 0,
   warehouses: [],
+  price: 0,
+  selectedShippingMethod: {},
+  shippingMethods: [],
   featuresLoading: false,
   unitsLoading: false,
   warehousesLoading: false,
+  shippingMethodsLoading: false,
   connected: {
     status: true,
     content: ''
@@ -132,10 +140,52 @@ export default (state = initialState, action) => {
         units: action.payload
       };
       break;
+    case PRODUCT_FEATURES_MODAL.TOGGLE_DETACHABLE_UNIT:
+      return {
+        ...state,
+        isDetachableUnit: !state.isDetachableUnit
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_MINIMUM_DETACHABLE_ORDER_QUANTITY:
+      return {
+        ...state,
+        minimumDetachableOrderQuantity: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_MAXIMUM_DETACHABLE_ORDER_QUANTITY:
+      return {
+        ...state,
+        maximumDetachableOrderQuantity: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_DETACHABLE_PRICE:
+      return {
+        ...state,
+        detachablePrice: action.payload
+      };
+      break;
     case PRODUCT_FEATURES_MODAL.FETCH_AVAILABLE_PRODUCT_WAREHOUSES:
       return {
         ...state,
         warehouses: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_PRICE:
+      return {
+        ...state,
+        price: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_SELECTED_SHIPPING_METHOD:
+      return {
+        ...state,
+        selectedShippingMethod: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.FETCH_AVAILABLE_PRODUCT_SHIPPING_METHODS:
+      return {
+        ...state,
+        shippingMethods: action.payload
       };
       break;
     case PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_FEATURES_LOADING_STATUS:
@@ -154,6 +204,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         warehousesLoading: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_SHIPPING_METHODS_LOADING_STATUS:
+      return {
+        ...state,
+        shippingMethodsLoading: action.payload
       };
       break;
     case PRODUCT_FEATURES_MODAL.SET_CONNECTED_STATUS:

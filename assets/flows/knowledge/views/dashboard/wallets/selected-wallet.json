@@ -2,30 +2,6 @@
   "pilot": {
     "title": {
       "en": "Selected Wallet"
-    },
-    "subtitle": {
-      "suffix": [
-        {
-          "en": "Dollar",
-          "fa": "دلار"
-        },
-        {
-          "en": "Transaction Point",
-          "fa": "ترنزکشن پوینت"
-        },
-        {
-          "en": "Rial",
-          "fa": "ریال"
-        },
-        {
-          "en": "Pound",
-          "fa": "پوند"
-        },
-        {
-          "en": "Euro",
-          "fa": "یورو"
-        }
-      ]
     }
   },
   "transactions": {

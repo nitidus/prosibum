@@ -13,9 +13,9 @@ import {
   roles as __ROLES,
   taxonomies as __TAXONOMIES,
   messages as __MESSAGES,
-  views_constants as __VIEWS_CONSTANTS
+  views_constants as __VIEWS_CONSTANTS,
+  currencies as __CURRENCIES
 } from '../../flows/knowledge/index';
-const __WALLETS = __VIEWS_CONSTANTS.dashboard.wallets;
 
 import GLOBAL from '../global';
 import { name as __APP_NAME } from '../../../app.json';
@@ -235,7 +235,7 @@ module.exports = {
     if (typeof currency != 'undefined' && currency != '') {
       const _CURRENCY_TYPE_KEY = module.exports._convertTokenToKey(currency);
 
-      const _PILOT_TABS_TITLE = __WALLETS.pilot.content.map((item, j) => {
+      const _PILOT_TABS_TITLE = __CURRENCIES.map((item, j) => {
               return item.title;
             }),
             _FOUNDED_TAB_NAME_INDEX = _PILOT_TABS_TITLE.findIndex((item) => {

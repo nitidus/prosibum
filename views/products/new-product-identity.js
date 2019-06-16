@@ -82,7 +82,8 @@ class NewProductIdentity extends Component<{}> {
               onPress={async () => {
                 const { navigation } = props;
 
-                await navigation.navigate('NewProductFeatures');
+                Keyboard.dismiss();
+                await navigation.navigate('NewProductDescription');
               }}
               forcedDisable={_VALIDATED} />
           );

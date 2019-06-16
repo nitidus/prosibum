@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Text, TouchableWithoutFeedback, Animated, Easing } from 'react-native';
+import { StatusBar, View, Text, TouchableWithoutFeedback, Platform, Animated, Easing } from 'react-native';
 
 import { Global, Views } from '../../../../styles/index';
 import { Pilot, TabBarItem, PinnedSide, Icon, DrawerMenu } from '../../../../layouts/index';
@@ -168,7 +168,10 @@ export const OverseerContainer = (props) => {
           ]}>
             <View
               style={Styles.MajorContent}>
-                <StatusBar hidden={true} />
+                <StatusBar
+                  hidden={(Platform.OS === 'ios')? true: false}
+                  backgroundColor={Global.colors.single.romance}
+                  barStyle="dark-content"/>
 
                 <Pilot
                   {...props}

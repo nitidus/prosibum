@@ -46,6 +46,29 @@ const mapDispatchToProps = (dispatch) => {
         payload: patternBasedFeatures
       })
     },
+    toggleDetachableUnit: () => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.TOGGLE_DETACHABLE_UNIT
+      })
+    },
+    setMinimumDetachaleOrderQuantity: (minimumDetachableOrderQuantity) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_MINIMUM_DETACHABLE_ORDER_QUANTITY,
+        payload: minimumDetachableOrderQuantity
+      })
+    },
+    setMaximumDetachaleOrderQuantity: (maximumDetachableOrderQuantity) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_MAXIMUM_DETACHABLE_ORDER_QUANTITY,
+        payload: maximumDetachableOrderQuantity
+      })
+    },
+    setDetachablePrice: (detachablePrice) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_DETACHABLE_PRICE,
+        payload: detachablePrice
+      })
+    },
     setMinimumOrderQuantity: (minimumOrderQuantity) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_MINIMUM_ORDER_QUANTITY,
@@ -94,9 +117,22 @@ const mapDispatchToProps = (dispatch) => {
         payload: warehouse
       })
     },
+    setPrice: (price) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_PRICE,
+        payload: price
+      })
+    },
+    setSelectedShippingMethod: (shippingMethod) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_SELECTED_SHIPPING_METHOD,
+        payload: shippingMethod
+      })
+    },
     fetchAvailableProductFeatures: async (exludedItems) => CMD._getAvailableProductFeatures(exludedItems, dispatch),
     fetchAvailableProductUnits: async () => CMD._getAvailableProductUnits(dispatch),
     fetchAvailableProductWarehouses: async () => CMD._getAvailableProductWarehouses(dispatch),
+    fetchAvailableProductShippingMethods: async () => CMD._getAvailableProductShippingMethods(dispatch),
     setFeaturesLoadingStatus: (loadingStatus) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_FEATURES_LOADING_STATUS,
@@ -112,6 +148,12 @@ const mapDispatchToProps = (dispatch) => {
     setWarehousesLoadingStatus: (loadingStatus) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_WAREHOUSES_LOADING_STATUS,
+        payload: loadingStatus
+      })
+    },
+    setShippingMethodsLoadingStatus: (loadingStatus) => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.SET_FETCH_AVAILABLE_PRODUCT_SHIPPING_METHODS_LOADING_STATUS,
         payload: loadingStatus
       })
     }

@@ -104,11 +104,13 @@ export const WalletsContainer = (props) => {
         language={attitude.language} />
     );
   }
-  
+
   return (
     <View
       style={Styles.Container}>
-        <StatusBar />
+        <StatusBar
+          backgroundColor={Global.colors.single.romance}
+          barStyle="dark-content"/>
 
         <Pilot
           title={attitude.title}

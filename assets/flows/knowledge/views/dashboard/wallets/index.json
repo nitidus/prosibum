@@ -3,39 +3,7 @@
     "title": {
       "en": "Wallets",
       "fa": "کیف‌پول‌ها"
-    },
-    "content": [
-      {
-        "title": {
-          "en": "Dollar",
-          "fa": "دلار"
-        }
-      },
-      {
-        "title": {
-          "en": "Transaction Point",
-          "fa": "ترنزکشن پوینت"
-        }
-      },
-      {
-        "title": {
-          "en": "Rial",
-          "fa": "ریال"
-        }
-      },
-      {
-        "title": {
-          "en": "Pound",
-          "fa": "پوند"
-        }
-      },
-      {
-        "title": {
-          "en": "Euro",
-          "fa": "یورو"
-        }
-      }
-    ]
+    }
   },
   "firstCarousel": {
     "title": {

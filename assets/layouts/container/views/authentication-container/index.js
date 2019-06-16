@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StatusBar, View, KeyboardAvoidingView, Platform } from 'react-native';
 
+import { Global } from '../../../../styles/index';
 import { Functions } from '../../../../modules/index';
 
 export const AuthenticationContainer = (props) => {
@@ -39,7 +40,10 @@ export const AuthenticationContainer = (props) => {
     <KeyboardAvoidingView
       style={attitude.style}
       behavior={_KEYBOARD_AVOIDINNG_VIEW_BEHAVIOR}>
-        <StatusBar hidden={true}/>
+        <StatusBar
+          hidden={(Platform.OS === 'ios')? true: false}
+          backgroundColor={Global.colors.single.blackSqueeze}
+          barStyle="dark-content"/>
 
         {
           attitude.children.map((child, i) => {

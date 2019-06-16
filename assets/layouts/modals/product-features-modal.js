@@ -9,7 +9,7 @@ import { Global, Modules } from '../../styles/index';
 import { ActivityIndicator } from '../activity-indicator';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
-import { Input, Carousel, Link } from '../../components/index';
+import { Input, Carousel, Link, Switch } from '../../components/index';
 const Styles = Modules.Layouts.ProductFeaturesModal;
 
 import { Functions } from '../../modules/index';
@@ -50,6 +50,31 @@ const _componentWillCheckValidation = (props) => {
             if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.minimumOrderQuantity) <= _PROPS.quantity){
               _FORM_FIELDS_VALIDITY = true;
             }
+          }
+        }
+        break;
+
+      case 2:
+        if ((_PROPS.minimumDetachableOrderQuantity > 0) && (_PROPS.maximumDetachableOrderQuantity > 0) && (_PROPS.detachablePrice > 0)){
+          const _IS_MIN_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.minimumDetachableOrderQuantity.toString(), 1),
+                _IS_MAX_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumDetachableOrderQuantity.toString(), 1),
+                _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE = Functions._checkIsAValidCurrencyValueOnlyField(_PROPS.detachablePrice.toString()),
+                _TARGET_CAPACITY = parseInt(_PROPS.selectedUnit.extra_features.capacity.replace(/(th|st|nd)/gi, ''));
+
+          if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID && _IS_MAX_DETACHABLE_ORDER_QTY_VALID && _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE){
+            if ((_PROPS.maximumDetachableOrderQuantity >= _PROPS.minimumDetachableOrderQuantity) && (_PROPS.minimumDetachableOrderQuantity) <= (_PROPS.quantity * _TARGET_CAPACITY)){
+              _FORM_FIELDS_VALIDITY = true;
+            }
+          }
+        }
+        break;
+
+      case 3:
+        if ((_PROPS.price > 0) && (_PROPS.shippingMethods.length > 0) && (Object.keys(_PROPS.selectedShippingMethod).length > 0)){
+          const _IS_PRICE_VALID_CURRENCY_VALUE = Functions._checkIsAValidCurrencyValueOnlyField(_PROPS.price.toString());
+
+          if (_IS_PRICE_VALID_CURRENCY_VALUE){
+            _FORM_FIELDS_VALIDITY = true;
           }
         }
         break;
@@ -353,13 +378,20 @@ const ProductFeaturesModal = (props) => {
 
               var _FINAL_BUTTON = (
                 <Input
-                  type={__CONSTANTS.modalContainer.content.submitInput.type}
+                  type={__CONSTANTS.modalContainer.content.firstComplexSubmitInput.type}
                   gradient={Global.colors.pair.ongerine}
-                  value={__CONSTANTS.modalContainer.content.submitInput.fullName[attitude.language]}
+                  value={__CONSTANTS.modalContainer.content.firstComplexSubmitInput.firstTab.title[attitude.language]}
                   style={{
-                    marginHorizontal: Styles.Content.marginHorizontal
+                    marginHorizontal: Styles.Content.marginHorizontal,
+                    marginBottom: Styles.Content.marginVertical
                   }}
-                  onPress={() => props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex + 1)}
+                  onPress={() => {
+                    if (props.productFeaturesModal.isDetachableUnit){
+                      props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex + 2);
+                    }else{
+                      props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex + 1);
+                    }
+                  }}
                   forcedDisable={_VALIDATED} />
               );
 
@@ -482,6 +514,16 @@ const ProductFeaturesModal = (props) => {
                       onChangeText={(currentValue) => props.setQuantity(parseInt(currentValue))}
                       {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.thirdInput.options} />
                 ),
+                (
+                  <Switch
+                    value={props.productFeaturesModal.isDetachableUnit}
+                    title={__CONSTANTS.modalContainer.content.firstSwith.title[attitude.language]}
+                    containerStyle={{
+                      marginHorizontal: Styles.Content.marginHorizontal,
+                      marginBottom: Styles.Content.marginVertical
+                    }}
+                    onChange={() => props.toggleDetachableUnit()}/>
+                ),
                 _FINAL_BUTTON
               ];
             }else{
@@ -548,31 +590,14 @@ const ProductFeaturesModal = (props) => {
 
               var _FINAL_BUTTON = (
                 <Input
-                  type={__CONSTANTS.modalContainer.content.submitInput.type}
+                  type={__CONSTANTS.modalContainer.content.firstComplexSubmitInput.type}
                   gradient={Global.colors.pair.ongerine}
-                  value={__CONSTANTS.modalContainer.content.submitInput.fullName[attitude.language]}
+                  value={__CONSTANTS.modalContainer.content.firstComplexSubmitInput.secondTab.title[attitude.language]}
                   style={{
-                    marginHorizontal: Styles.Content.marginHorizontal
+                    marginHorizontal: Styles.Content.marginHorizontal,
+                    marginBottom: Styles.Content.marginVertical
                   }}
-                  onPress={() => {
-                    // const _FOUNDED_INDEX_OF_UNIT_FEATURE = props.productFeaturesModal.features.findIndex((singleFeature, k) => {
-                    //   return (Functions._convertTokenToKeyword(singleFeature.key) == 'unit');
-                    // });
-                    //
-                    // if (_FOUNDED_INDEX_OF_UNIT_FEATURE > -1){
-                    //   attitude.onProgressSuccess({
-                    //     _id: Functions._generateNewBSONObjectID(),
-                    //     feature_id: props.productFeaturesModal.features[_FOUNDED_INDEX_OF_UNIT_FEATURE]._id,
-                    //     unit: props.productFeaturesModal.selectedUnit,
-                    //     warehouse: props.productFeaturesModal.selectedWarehouse,
-                    //     minimum_order_quantity: props.productFeaturesModal.minimumOrderQuantity,
-                    //     maximum_order_quantity: props.productFeaturesModal.maximumOrderQuantity,
-                    //     quantity: props.productFeaturesModal.quantity
-                    //   });
-                    //
-                    //   MODAL.ON_BLUR(false);
-                    // }
-                  }}
+                  onPress={() => props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex + 2)}
                   forcedDisable={_VALIDATED} />
               );
 
@@ -729,7 +754,22 @@ const ProductFeaturesModal = (props) => {
                     onChangeText={(currentValue) => props.setMaximumOrderQuantity(parseInt(currentValue))}
                     {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.options} />
                 ),
-                _FINAL_BUTTON
+                _FINAL_BUTTON,
+                (
+                  <Link
+                    containerStyle={[
+                      Styles.Center_TextAlignment,
+                      Styles.Center_ContentAlignment
+                    ]}
+                    value={((props.productFeaturesModal.isDetachableUnit)? __CONSTANTS.modalContainer.content.secondLink.state.detachable.title[attitude.language]: __CONSTANTS.modalContainer.content.secondLink.state.normal.title[attitude.language])}
+                    onPress={() => {
+                      if (props.productFeaturesModal.isDetachableUnit){
+                        props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex + 1);
+                      }else{
+                        props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex - 1);
+                      }
+                    }} />
+                )
               ];
             }else{
               _MODAL_CONTENT = (
@@ -739,6 +779,370 @@ const ProductFeaturesModal = (props) => {
                     Styles.Center_ContentAlignment
                   ]}
                   value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
+              );
+            }
+            break;
+
+          case 2:
+            const _MIN_DETACHABLE_ORDER_QTY = (props.productFeaturesModal.minimumDetachableOrderQuantity > 0)? props.productFeaturesModal.minimumDetachableOrderQuantity: '',
+                  _MAX_DETACHABLE_ORDER_QTY = (props.productFeaturesModal.maximumDetachableOrderQuantity > 0)? props.productFeaturesModal.maximumDetachableOrderQuantity: '',
+                  _DETACHABLE_PRICE = (props.productFeaturesModal.detachablePrice > 0)? props.productFeaturesModal.detachablePrice: '';
+
+            var _FINAL_BUTTON = (
+              <Input
+                type={__CONSTANTS.modalContainer.content.firstComplexSubmitInput.type}
+                gradient={Global.colors.pair.ongerine}
+                value={__CONSTANTS.modalContainer.content.firstComplexSubmitInput.thirdTab.title[attitude.language]}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal,
+                  marginBottom: Styles.Content.marginVertical
+                }}
+                onPress={() => props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex - 1)}
+                forcedDisable={_VALIDATED} />
+            );
+
+            if (_VALIDATED){
+              var _MESSAGE = '';
+
+              if ((props.productFeaturesModal.minimumDetachableOrderQuantity > 0) && (props.productFeaturesModal.maximumDetachableOrderQuantity > 0) && (props.productFeaturesModal.detachablePrice > 0)){
+                const _IS_MIN_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(props.productFeaturesModal.minimumDetachableOrderQuantity.toString(), 1),
+                      _IS_MAX_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(props.productFeaturesModal.maximumDetachableOrderQuantity.toString(), 1),
+                      _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE = Functions._checkIsAValidCurrencyValueOnlyField(props.productFeaturesModal.detachablePrice.toString()),
+                      _TARGET_CAPACITY = parseInt(props.productFeaturesModal.selectedUnit.extra_features.capacity.replace(/(th|st|nd)/gi, ''));
+
+                if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID && _IS_MAX_DETACHABLE_ORDER_QTY_VALID && _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE){
+                  if (props.productFeaturesModal.maximumDetachableOrderQuantity < props.productFeaturesModal.minimumDetachableOrderQuantity){
+                    _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.eighthLevel.firstPart[attitude.language]}`;
+                  }
+
+                  if (props.productFeaturesModal.minimumDetachableOrderQuantity > (props.productFeaturesModal.quantity * _TARGET_CAPACITY)){
+                    _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.eighthLevel.secondPart[attitude.language]}`;
+                  }
+                }else{
+                  let countOfMessageItem = 0;
+
+                  if (_IS_MAX_DETACHABLE_ORDER_QTY_VALID === false){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.sixthLevel.firstPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
+
+                  if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID === false){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.sixthLevel.secondPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
+
+                  if (_IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE === false){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.sixthLevel.thirdPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
+
+                  if (countOfMessageItem > 1){
+                    _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.sixthLevel.verbComposition.more[attitude.language]}`;
+                  }else{
+                    _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.sixthLevel.verbComposition.one[attitude.language]}`;
+                  }
+                }
+              }else{
+                let countOfMessageItem = 0;
+
+                if (props.productFeaturesModal.maximumDetachableOrderQuantity === 0){
+                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.seventhLevel.firstPart[attitude.language]}`;
+                  countOfMessageItem++;
+                }
+
+                if (props.productFeaturesModal.minimumDetachableOrderQuantity === 0){
+                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.seventhLevel.secondPart[attitude.language]}`;
+                  countOfMessageItem++;
+                }
+
+                if (props.productFeaturesModal.detachablePrice === 0){
+                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.seventhLevel.thirdPart[attitude.language]}`;
+                  countOfMessageItem++;
+                }
+
+                if (countOfMessageItem > 1){
+                  _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.seventhLevel.verbComposition.more[attitude.language]}`;
+                }else{
+                  _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.seventhLevel.verbComposition.one[attitude.language]}`;
+                }
+              }
+
+              if (_MESSAGE != ''){
+                _FINAL_BUTTON = (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.submitInput.type}
+                    value={_MESSAGE}
+                    style={[
+                      Styles.WarningContainer,
+                      {
+                        marginBottom: Styles.Content.marginVertical
+                      }
+                    ]}
+                    textStyle={Styles.WarningContent} />
+                );
+              }
+            }
+
+            _MODAL_CONTENT = [
+              (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstRelatedInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstRelatedInput.title.en)}
+                  placeholder={__CONSTANTS.modalContainer.content.firstRelatedInput.title[attitude.language]}
+                  value={_MIN_DETACHABLE_ORDER_QTY}
+                  style={[
+                    Styles.RegularItemContainer,
+                    {
+                      marginBottom: Styles.Content.marginVertical,
+                      marginHorizontal: Styles.Content.marginHorizontal
+                    }
+                  ]}
+                  onChangeText={(currentValue) => props.setMinimumDetachaleOrderQuantity(parseInt(currentValue))}
+                  {...__CONSTANTS.modalContainer.content.firstRelatedInput.options} />
+              ),
+              (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.secondRelatedInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondRelatedInput.title.en)}
+                  placeholder={__CONSTANTS.modalContainer.content.secondRelatedInput.title[attitude.language]}
+                  value={_MAX_DETACHABLE_ORDER_QTY}
+                  style={[
+                    Styles.RegularItemContainer,
+                    {
+                      marginBottom: Styles.Content.marginVertical,
+                      marginHorizontal: Styles.Content.marginHorizontal
+                    }
+                  ]}
+                  onChangeText={(currentValue) => props.setMaximumDetachaleOrderQuantity(parseInt(currentValue))}
+                  {...__CONSTANTS.modalContainer.content.secondRelatedInput.options} />
+              ),
+              (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.thirdRelatedInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.thirdRelatedInput.title.en)}
+                  placeholder={__CONSTANTS.modalContainer.content.thirdRelatedInput.title[attitude.language]}
+                  value={_DETACHABLE_PRICE}
+                  style={[
+                    Styles.RegularItemContainer,
+                    {
+                      marginBottom: Styles.Content.marginVertical,
+                      marginHorizontal: Styles.Content.marginHorizontal
+                    }
+                  ]}
+                  onChangeText={(currentValue) => props.setDetachablePrice(parseInt(currentValue))}
+                  {...__CONSTANTS.modalContainer.content.thirdRelatedInput.options} />
+              ),
+              _FINAL_BUTTON,
+              (
+                <Link
+                  containerStyle={[
+                    Styles.Center_TextAlignment,
+                    Styles.Center_ContentAlignment
+                  ]}
+                  value={__CONSTANTS.modalContainer.content.firstLink.title[attitude.language]}
+                  onPress={() => props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex - 2)} />
+              )
+            ];
+            break;
+
+          case 3:
+            if (
+              (props.productFeaturesModal.shippingMethods.length === 0) &&
+              (Object.keys(props.productFeaturesModal.selectedShippingMethod).length === 0) &&
+              (props.productFeaturesModal.shippingMethodsLoading === false) &&
+              (attitude.visibility === true)
+            ){
+              props.fetchAvailableProductShippingMethods();
+            }
+
+            const _SELECTED_SHIPPING_METHOD_INDEX = props.productFeaturesModal.shippingMethods.findIndex((shippingMethod, i) => {
+                    return shippingMethod._id === props.productFeaturesModal.selectedShippingMethod._id;
+                  }),
+                  _AVAILABLE_SHIPPINNG_METHODS = props.productFeaturesModal.shippingMethods;
+
+            let _THIRD_CAROUSEL_OTHER_OPTIONS = {},
+                _THIRD_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.productFeaturesModal.shippingMethods.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+            if (Platform.OS !== 'ios'){
+              _THIRD_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+
+              if (I18nManager.isRTL){
+                _THIRD_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+                  flexDirection: 'row-reverse'
+                };
+              }
+            }
+
+            if (_AVAILABLE_SHIPPINNG_METHODS.length > 0){
+              const _PRICE = (props.productFeaturesModal.price > 0)? props.productFeaturesModal.price: '',
+                    _SELECTED_SHIPPING_METHOD = (Object.keys(props.productFeaturesModal.selectedShippingMethod).length > 0)? props.productFeaturesModal.selectedShippingMethod.value: '';
+
+              var _FINAL_BUTTON = (
+                <Input
+                  type={__CONSTANTS.modalContainer.content.firstComplexSubmitInput.type}
+                  gradient={Global.colors.pair.ongerine}
+                  value={__CONSTANTS.modalContainer.content.firstComplexSubmitInput.fourthTab.title[attitude.language]}
+                  style={{
+                    marginHorizontal: Styles.Content.marginHorizontal,
+                    marginBottom: Styles.Content.marginVertical
+                  }}
+                  onPress={() => {
+                    let _RESPONSE = {
+                      _id: Functions._generateNewBSONObjectID(),
+                      unit: props.productFeaturesModal.selectedUnit,
+                      quantity: props.productFeaturesModal.quantity,
+                      warehouse: props.productFeaturesModal.selectedWarehouse,
+                      sales_structure: {
+                        regular: {
+                          minimum_order_quantity: props.productFeaturesModal.minimumOrderQuantity,
+                          maximum_order_quantity: props.productFeaturesModal.maximumOrderQuantity,
+                          price: [
+                            {
+                              value: props.productFeaturesModal.price,
+                              currency: 'RIR'
+                            }
+                          ]
+                        }
+                      },
+                      shipping_method: props.productFeaturesModal.selectedShippingMethod
+                    };
+
+                    if (props.productFeaturesModal.detachablePrice){
+                      _RESPONSE.sales_structure.detachable = {
+                        minimum_order_quantity: props.productFeaturesModal.minimumDetachableOrderQuantity,
+                        maximum_order_quantity: props.productFeaturesModal.maximumDetachableOrderQuantity,
+                        price: [
+                          {
+                            value: props.productFeaturesModal.detachablePrice,
+                            currency: 'RIR'
+                          }
+                        ]
+                      };
+                    }
+
+                    attitude.onProgressSuccess(_RESPONSE);
+
+                    MODAL.ON_BLUR(false);
+                  }}
+                  forcedDisable={_VALIDATED} />
+              );
+
+              if (_VALIDATED){
+                var _MESSAGE = '';
+
+                if (props.productFeaturesModal.price > 0){
+                  const _IS_PRICE_VALID_CURRENCY_VALUE = Functions._checkIsAValidCurrencyValueOnlyField(props.productFeaturesModal.price.toString());
+
+                  if (!_IS_PRICE_VALID_CURRENCY_VALUE){
+                    _MESSAGE += __CONSTANTS.modalContainer.content.warning.ninthLevel.firstPart[attitude.language];
+                  }
+                }else{
+                  _MESSAGE += __CONSTANTS.modalContainer.content.warning.ninthLevel.firstPart[attitude.language];
+                }
+
+                if (_MESSAGE != ''){
+                  _FINAL_BUTTON = (
+                    <Input
+                      type={__CONSTANTS.modalContainer.content.submitInput.type}
+                      value={_MESSAGE}
+                      style={[
+                        Styles.WarningContainer,
+                        {
+                          marginBottom: Styles.Content.marginVertical
+                        }
+                      ]}
+                      textStyle={Styles.WarningContent} />
+                  );
+                }
+              }
+
+              _MODAL_CONTENT = [
+                (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.thirdCarousel.content.self.context.firstInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.thirdCarousel.content.self.context.firstInput.title.en)}
+                    placeholder={__CONSTANTS.modalContainer.content.thirdCarousel.content.self.context.firstInput.title[attitude.language]}
+                    value={_PRICE}
+                    style={[
+                      Styles.RegularItemContainer,
+                      {
+                        marginBottom: Styles.Content.marginVertical,
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      }
+                    ]}
+                    onChangeText={(currentValue) => props.setPrice(parseInt(currentValue))}
+                    {...__CONSTANTS.modalContainer.content.thirdCarousel.content.self.context.firstInput.options} />
+                ),
+                (
+                  <Carousel
+                    name={__CONSTANTS.modalContainer.content.thirdCarousel.content.self.context.firstCarousel.title.en}
+                    data={_AVAILABLE_SHIPPINNG_METHODS}
+                    firstItem={_SELECTED_SHIPPING_METHOD_INDEX}
+                    style={Styles.DetailContainer}
+                    itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _THIRD_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
+                    onLayout={({ item, index }) => {
+                      var _ITEM_GRADIENT = Global.colors.pair.ongerine,
+                          _SHIPPING_METHOD = item.value;
+
+                      if (item._id === props.productFeaturesModal.selectedShippingMethod._id){
+                        _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                      }
+
+                      return (
+                        <Input
+                          type={__CONSTANTS.modalContainer.content.thirdCarousel.content.self.context.firstCarousel.content.self.type}
+                          gradient={_ITEM_GRADIENT}
+                          style={Styles.DetailItemContainer}
+                          disable={true}>
+                          <View
+                            style={[
+                              Styles.DetailItemMasterInfoContent
+                            ]}>
+                              <Text
+                                style={[
+                                  Styles.BriefDetailTitle
+                                ]}>
+                                  {Functions._convertKeywordToToken(__CONSTANTS.modalContainer.content.thirdCarousel.content.self.context.firstCarousel.content.self.title[attitude.language])}
+                              </Text>
+                          </View>
+                          <View
+                            style={Styles.DetailItemMasterSubInfoContent}>
+                              <Icon
+                                name={__CONSTANTS.modalContainer.content.thirdCarousel.content.self.context.firstCarousel.content.self.icon.name}
+                                color={Global.colors.single.romance} />
+
+                              <Text
+                                style={[
+                                  Styles.BriefDetailRowText
+                                ]}>
+                                  {Functions._getAppropriateTaxonomyBaseOnLocale(_SHIPPING_METHOD, attitude.language)}
+                              </Text>
+                          </View>
+                        </Input>
+                      )
+                    }}
+                    onSnap={(selectedItemIndex) => props.setSelectedShippingMethod(props.productFeaturesModal.shippingMethods[selectedItemIndex])}
+                    {..._THIRD_CAROUSEL_OTHER_OPTIONS}/>
+                ),
+                _FINAL_BUTTON,
+                (
+                  <Link
+                    containerStyle={[
+                      Styles.Center_TextAlignment,
+                      Styles.Center_ContentAlignment
+                    ]}
+                    value={__CONSTANTS.modalContainer.content.thirdLink.title[attitude.language]}
+                    onPress={() => props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex - 2)} />
+                )
+              ];
+            }else{
+              _MODAL_CONTENT = (
+                <Link
+                  containerStyle={[
+                    Styles.Center_TextAlignment,
+                    Styles.Center_ContentAlignment
+                  ]}
+                  value={__CONSTANTS.modalContainer.content.thirdCarousel.content.empty.title[attitude.language]} />
               );
             }
             break;

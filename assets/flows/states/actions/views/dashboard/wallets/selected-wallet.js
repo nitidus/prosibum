@@ -12,6 +12,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    setLanguage: (language) => {
+      dispatch({
+        type: SELECTED_WALLET.SET_LANGUAGE,
+        payload: language
+      })
+    },
     setReferenceWallet: (wallet) => {
       dispatch({
         type: SELECTED_WALLET.SET_REFERENCE_WALLET,

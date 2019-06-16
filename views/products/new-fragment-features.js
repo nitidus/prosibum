@@ -62,7 +62,8 @@ class NewFragmentFeatures extends Component<{}> {
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_FEATURES_OTHER_PROPS = {
               language: props.newFragment.language,
-              features: props.newFragment.units
+              // features: props.newFragment.units
+              features: [{"_id":"5cfe78bee8baaa340a7c5d98","extra_features":{"capacity":"12th","detachable":true},"created_at":"2019-06-10T15:35:26.380Z","modified_at":"2019-06-11T20:29:54.451Z","key":"BOX"},{"_id":"5ca6848ed0a37b307e733054","created_at":"2019-04-04T22:26:21.819Z","modified_at":"2019-06-11T20:28:06.857Z","extra_features":{"capacity":"24th","detachable":true},"key":"BOX"}]
             },
             _CUSTOM_STYLE = {
               marginBottom: Styles.Content.marginVertical
@@ -166,7 +167,7 @@ class NewFragmentFeatures extends Component<{}> {
 
                             <Text
                               style={Styles.BriefDetailRowText}>
-                                {Functions._convertNumberToHumanReadableFormat(item.minimum_order_quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.firstFeature.title[_LANGUAGE])}
+                                {Functions._convertNumberToHumanReadableFormat(item.sales_structure.regular.minimum_order_quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.firstFeature.title[_LANGUAGE])}
                             </Text>
                         </View>
                         <View
@@ -182,7 +183,7 @@ class NewFragmentFeatures extends Component<{}> {
 
                             <Text
                               style={Styles.BriefDetailRowText}>
-                                {Functions._convertNumberToHumanReadableFormat(item.maximum_order_quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.secondFeature.title[_LANGUAGE])}
+                                {Functions._convertNumberToHumanReadableFormat(item.sales_structure.regular.maximum_order_quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.secondFeature.title[_LANGUAGE])}
                             </Text>
                         </View>
                         <View

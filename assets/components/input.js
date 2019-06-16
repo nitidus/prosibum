@@ -5,10 +5,10 @@ import { View, TouchableOpacity, Image, ImageBackground, TextInput, WebView, Key
 
 import LinearGradient from 'react-native-linear-gradient';
 import CreditCardType from 'rn-credit-card-type';
-import RichTextEditorTemplate from './assets/html/rich-text-editor.html';
 
 import { Link } from './link';
 import { Icon } from '../layouts/icon';
+import { RichTextEditor } from './templates';
 import { Global, Modules } from '../styles/index';
 const Styles = Modules.Components.Input;
 
@@ -420,7 +420,7 @@ export const Input = (props) => {
             ref={( webView ) => this[attitude.name] = webView}
             name={attitude.name}
             style={Styles.NonNativeContent}
-            source={RichTextEditorTemplate}
+            source={RichTextEditor}
             onMessage={(event) => {
               let _RESPONSE = JSON.parse(event.nativeEvent.data);
 
@@ -453,6 +453,10 @@ export const Input = (props) => {
 
               if (typeof attitude.placeholder != 'undefined'){
                 _REQUEST.content.placeholder = attitude.placeholder;
+              }
+
+              if (typeof attitude.value != 'undefined'){
+                _REQUEST.content.value = attitude.value;
               }
 
               _SERIALIZED_REQUEST = JSON.stringify(_REQUEST);
@@ -728,6 +732,13 @@ export const Input = (props) => {
 
       if (attitude.disable === true){
         _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+
+        if (I18nManager.isRTL === false){
+          _EXTRA_STYLE_FOR_LINK = {
+            ..._EXTRA_STYLE_FOR_LINK,
+            flexDirection: 'row-reverse'
+          };
+        }
       }
 
       var _LINK_CONTENT = (
@@ -773,6 +784,13 @@ export const Input = (props) => {
 
       if (attitude.disable === true){
         _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+
+        if (I18nManager.isRTL === false){
+          _EXTRA_STYLE_FOR_LINK = {
+            ..._EXTRA_STYLE_FOR_LINK,
+            flexDirection: 'row-reverse'
+          };
+        }
       }
 
       var _LINK_CONTENT = (
@@ -820,6 +838,13 @@ export const Input = (props) => {
 
       if (attitude.disable === true){
         _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+
+        if (I18nManager.isRTL === false){
+          _EXTRA_STYLE_FOR_LINK = {
+            ..._EXTRA_STYLE_FOR_LINK,
+            flexDirection: 'row-reverse'
+          };
+        }
       }
 
       var _LINK_CONTENT = (
@@ -874,6 +899,13 @@ export const Input = (props) => {
 
       if (attitude.disable === true){
         _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+
+        if (I18nManager.isRTL === false){
+          _EXTRA_STYLE_FOR_LINK = {
+            ..._EXTRA_STYLE_FOR_LINK,
+            flexDirection: 'row-reverse'
+          };
+        }
       }
 
       var _LINK_CONTAINER_STYLES = [
@@ -933,6 +965,13 @@ export const Input = (props) => {
 
       if (attitude.disable === true){
         _EXTRA_STYLE_FOR_LINK = Styles.FilledContainer;
+
+        if (I18nManager.isRTL === false){
+          _EXTRA_STYLE_FOR_LINK = {
+            ..._EXTRA_STYLE_FOR_LINK,
+            flexDirection: 'row-reverse'
+          };
+        }
       }
 
       var _LINK_CONTENT = (

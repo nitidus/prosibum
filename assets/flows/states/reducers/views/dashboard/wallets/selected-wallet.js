@@ -2,6 +2,7 @@ import { VIEWS } from '../../../../types/index';
 const { SELECTED_WALLET } = VIEWS.DASHBOARD;
 
 const initialState = {
+        language: {},
         referenceWallet: {},
         transactions: [],
         loadingTransactions: false,
@@ -13,6 +14,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SELECTED_WALLET.SET_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload
+      };
+      break;
     case SELECTED_WALLET.SET_REFERENCE_WALLET:
       return {
         ...state,

@@ -1,0 +1,37 @@
+[
+  {
+    "title": {
+      "en": "Dollar",
+      "fa": "دلار"
+    },
+    "abbreviation": "USD"
+  },
+  {
+    "title": {
+      "en": "Transaction Point",
+      "fa": "ترنزکشن پوینت"
+    },
+    "abbreviation": "PTP"
+  },
+  {
+    "title": {
+      "en": "Rial",
+      "fa": "ریال"
+    },
+    "abbreviation": "RIR"
+  },
+  {
+    "title": {
+      "en": "Pound",
+      "fa": "پوند"
+    },
+    "abbreviation": "GBP"
+  },
+  {
+    "title": {
+      "en": "Euro",
+      "fa": "یورو"
+    },
+    "abbreviation": "EUR"
+  }
+]

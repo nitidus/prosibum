@@ -191,7 +191,77 @@
                 }
               }
             }
+          },
+          "empty": {
+            "title": {
+              "en": "No warehouse has been remain.",
+              "fa": "هیچ انباری باقی نمانده است."
+            }
           }
+        }
+      },
+      "thirdCarousel": {
+        "title": {
+          "en": "Product Warehouse"
+        },
+        "content": {
+          "self": {
+            "type": "BUTTON",
+            "title": {
+              "en": "Warehouse Name",
+              "fa": "نام انبار"
+            },
+            "icon": {
+              "name": "grading"
+            },
+            "context": {
+              "firstCarousel": {
+                "title": {
+                  "en": "Shipping Methods Carousel"
+                },
+                "content": {
+                  "self": {
+                    "type": "BUTTON",
+                    "title": {
+                      "en": "Shipping Type",
+                      "fa": "نوع حمل و نقل"
+                    },
+                    "icon": {
+                      "name": "grading"
+                    }
+                  },
+                  "empty": {
+                    "title": {
+                      "en": "There's no shipping method.",
+                      "fa": "هیچ نوع حمل و نقلی وجود ندارد."
+                    }
+                  }
+                }
+              },
+              "firstInput": {
+                "type": "NUMERIC",
+                "title": {
+                  "en": "Price (in Dollar)",
+                  "fa": "قیمت (به ریال)"
+                },
+                "options": {
+                  "maxLength": 9
+                }
+              }
+            }
+          },
+          "empty": {
+            "title": {
+              "en": "There's no shipping method.",
+              "fa": "هیچ نوع حمل و نقلی وجود ندارد."
+            }
+          }
+        }
+      },
+      "firstSwith": {
+        "title": {
+          "en": "Detachable Sales",
+          "fa": "فروش بصورت باز"
         }
       },
       "submitInput": {
@@ -203,6 +273,91 @@
         "fullName": {
           "en": "Append composition of unit",
           "fa": "اضافه کردن ترکیب واحد اندازه‌گیری"
+        }
+      },
+      "firstComplexSubmitInput": {
+        "type": "BUTTON",
+        "firstTab": {
+          "title": {
+            "en": "Continue",
+            "fa": "ادامه"
+          }
+        },
+        "secondTab": {
+          "title": {
+            "en": "Continue",
+            "fa": "ادامه"
+          }
+        },
+        "thirdTab": {
+          "title": {
+            "en": "Continue",
+            "fa": "ادامه"
+          }
+        },
+        "fourthTab": {
+          "title": {
+            "en": "Append The Fragment",
+            "fa": "اضافه‌کردن نمونه محصول"
+          }
+        }
+      },
+      "firstLink": {
+        "title": {
+          "en": "Change unit or inventory quantity",
+          "fa": "تغییر  واحد اندازه‌گیری یا تعداد موجودی"
+        }
+      },
+      "firstRelatedInput": {
+        "type": "NUMERIC",
+        "title": {
+          "en": "Minimum Detachable Order Quantity",
+          "fa": "حداقل تعداد سفارش بصورت باز"
+        },
+        "options": {
+          "maxLength": 9
+        }
+      },
+      "secondRelatedInput": {
+        "type": "NUMERIC",
+        "title": {
+          "en": "Maximum Detachable Order Quantity",
+          "fa": "حداکثر تعداد سفارش بصورت باز"
+        },
+        "options": {
+          "maxLength": 9
+        }
+      },
+      "thirdRelatedInput": {
+        "type": "NUMERIC",
+        "title": {
+          "en": "Detachable Price",
+          "fa": "قیمت بصورت باز"
+        },
+        "options": {
+          "maxLength": 9
+        }
+      },
+      "secondLink": {
+        "state": {
+          "detachable": {
+            "title": {
+              "en": "Change detachable ordering detail or price",
+              "fa": "تغییر جزئیات سفارش یا قیمت بصورت باز"
+            }
+          },
+          "normal": {
+            "title": {
+              "en": "Change unit or inventory quantity",
+              "fa": "تغییر واحد اندازه‌گیری یا تعداد موجودی"
+            }
+          }
+        }
+      },
+      "thirdLink": {
+        "title": {
+          "en": "Change ordering detail or warehouse",
+          "fa": "تغییر جزئیات سفارش یا انبار"
         }
       },
       "warning": {
@@ -286,6 +441,74 @@
               "en": "of customized fields can not be empty.",
               "fa": "فیلدهای شخصی‌سازی‌شده نمی‌توانند خالی باشند."
             }
+          }
+        },
+        "sixthLevel": {
+          "firstPart": {
+            "en": "Minimum Detachable Order Quantity",
+            "fa": "حداقل تعداد سفارش بصورت باز"
+          },
+          "secondPart": {
+            "en": "Maximum Detachable Order Quantity",
+            "fa": "حداکثر تعداد سفارش بصورت باز"
+          },
+          "thirdPart": {
+            "en": "Detachable Price",
+            "fa": "قیمت بصورت باز"
+          },
+          "verbComposition": {
+            "one": {
+              "en": "can not be empty.",
+              "fa": "نمی‌تواند خالی باشد."
+            },
+            "more": {
+              "en": "can not be empty.",
+              "fa": "نمی‌توانند خالی باشند."
+            }
+          }
+        },
+        "seventhLevel": {
+          "firstPart": {
+            "en": "Minimum Detachable Order Quantity",
+            "fa": "حداقل تعداد سفارش بصورت باز"
+          },
+          "secondPart": {
+            "en": "Maximum Detachable Order Quantity",
+            "fa": "حداکثر تعداد سفارش بصورت باز"
+          },
+          "thirdPart": {
+            "en": "Detachable Price",
+            "fa": "قیمت بصورت باز"
+          },
+          "verbComposition": {
+            "one": {
+              "en": "must be one digit at least.",
+              "fa": "باید حداقل یک رقم باشد."
+            },
+            "more": {
+              "en": "must be one digit at least.",
+              "fa": "باید حداقل یک رقم باشند."
+            }
+          }
+        },
+        "eighthLevel": {
+          "firstPart": {
+            "en": "Maximum detachable order quantity must be more than Minimum detachable order quantity.",
+            "fa": "حداکثر تعداد سفاش بصورت باز باید از حداقل تعداد سفارش بصورت باز بیشتر باشد."
+          },
+          "secondPart": {
+            "en": "Detachable quantity must be more than Minimum detachable order quantity.",
+            "fa": "تعداد موجودی بصورت باز باید از حداقل تعداد سفارش بیشترر باشد."
+          }
+        },
+        "ninthLevel": {
+          "firstPart": {
+            "en": "Fragment price can not be empty.",
+            "fa": "قیمت نمونه محصول نمی‌تواند خالی باشد."
+          },
+          "secondPart": {
+            "en": "The structure of price value is not equal to the currency structure.",
+            "fa": "ساختار مقدار قیمت با ساختار ارزی مطابقت ندارد."
           }
         },
         "delimiter": {

@@ -105,7 +105,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'NewFragmentDetection': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
   },
   _prepareCurrentUserInformation: async (props, pilot) => {
     const _NATIVE_SETTINGS = await Prototypes._getDefaultNativeSettings(),
@@ -362,12 +362,12 @@ module.exports = {
         }
       }))
     };
-console.log(_SEED)
-    // await props.appendProduct(_SEED);
-    //
-    // if (await _PROPS.connected.status){
-    //   navigation.navigate('Overseer');
-    // }
+
+    await props.appendProduct(_SEED);
+
+    if (await _PROPS.connected.status){
+      navigation.navigate('Overseer');
+    }
   },
   _prepareFragmentToAppend: async (props) => {
     const { navigation } = props,
