@@ -66,8 +66,8 @@
                 "thirdInput": {
                   "type": "NUMERIC",
                   "title": {
-                    "en": "Quantity",
-                    "fa": "تعداد"
+                    "en": "Inventory Quantity",
+                    "fa": "تعداد موجودی"
                   },
                   "options": {
                     "maxLength": 9
@@ -360,6 +360,12 @@
           "fa": "تغییر جزئیات سفارش یا انبار"
         }
       },
+      "secondSwith": {
+        "title": {
+          "en": "Innfinite Maximum Order Quantity",
+          "fa": "حداکثر تعداد سفارش بی‌نهایت"
+        }
+      },
       "warning": {
         "firstLevel": {
           "firstPart": {
@@ -417,6 +423,10 @@
           "secondPart": {
             "en": "Quantity must be more than Minimum order quantity.",
             "fa": "تعداد موجودی باید از حداقل تعداد سفارش بیشتر باشد."
+          },
+          "‌thirdPart": {
+            "en": "Quantity must be more than Maximum order quantity.",
+            "fa": "تعداد موجودی باید از حداکثر تعداد سفارش بیشتر باشد."
           }
         },
         "fourthLevel": {
@@ -498,7 +508,11 @@
           },
           "secondPart": {
             "en": "Detachable quantity must be more than Minimum detachable order quantity.",
-            "fa": "تعداد موجودی بصورت باز باید از حداقل تعداد سفارش بیشترر باشد."
+            "fa": "تعداد موجودی بصورت باز باید از حداقل تعداد سفارش بیشتر باشد."
+          },
+          "thirdPart": {
+            "en": "Detachable quantity must be more than Maximum detachable order quantity.",
+            "fa": "تعداد موجودی بصورت باز باید از حداکثر تعداد سفارش بیشتر باشد."
           }
         },
         "ninthLevel": {

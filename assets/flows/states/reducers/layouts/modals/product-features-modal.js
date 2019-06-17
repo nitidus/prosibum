@@ -8,6 +8,7 @@ const initialState = {
   selectedWarehouse: {},
   minimumOrderQuantity: 0,
   maximumOrderQuantity: 0,
+  isInfiniteMaximumOrderQuantity: true,
   quantity: 0,
   description: '',
   customizedFeatureName: '',
@@ -90,6 +91,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         maximumOrderQuantity: action.payload
+      };
+      break;
+    case PRODUCT_FEATURES_MODAL.TOGGLE_INFINITE_MAXIMUM_ORDER_QUANTITY:
+      return {
+        ...state,
+        isInfiniteMaximumOrderQuantity: !state.isInfiniteMaximumOrderQuantity
       };
       break;
     case PRODUCT_FEATURES_MODAL.SET_QUANTITY:

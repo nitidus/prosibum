@@ -81,6 +81,11 @@ const mapDispatchToProps = (dispatch) => {
         payload: maximumOrderQuantity
       })
     },
+    toggleInfiniteMaximumOrderQuantity: () => {
+      dispatch({
+        type: PRODUCT_FEATURES_MODAL.TOGGLE_INFINITE_MAXIMUM_ORDER_QUANTITY
+      })
+    },
     setQuantity: (quantity) => {
       dispatch({
         type: PRODUCT_FEATURES_MODAL.SET_QUANTITY,

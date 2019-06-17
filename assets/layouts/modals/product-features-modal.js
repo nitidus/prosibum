@@ -42,28 +42,50 @@ const _componentWillCheckValidation = (props) => {
         break;
 
       case 1:
-        if ((_PROPS.minimumOrderQuantity > 0) && (_PROPS.maximumOrderQuantity > 0)){
-          const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 1),
-                _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 1);
+        if (_PROPS.minimumOrderQuantity > 0){
+          const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.minimumOrderQuantity.toString(), 1);
 
-          if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID){
-            if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.minimumOrderQuantity) <= _PROPS.quantity){
-              _FORM_FIELDS_VALIDITY = true;
+          if (_PROPS.isInfiniteMaximumOrderQuantity === false){
+            if (_PROPS.maximumOrderQuantity > 0){
+              const _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumOrderQuantity.toString(), 1);
+
+              if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID){
+                if ((_PROPS.maximumOrderQuantity >= _PROPS.minimumOrderQuantity) && (_PROPS.minimumOrderQuantity <= _PROPS.quantity) && (_PROPS.maximumOrderQuantity <= _PROPS.quantity)){
+                  _FORM_FIELDS_VALIDITY = true;
+                }
+              }
+            }
+          }else{
+            if (_IS_MIN_ORDER_QTY_VALID){
+              if (_PROPS.minimumOrderQuantity <= _PROPS.quantity){
+                _FORM_FIELDS_VALIDITY = true;
+              }
             }
           }
         }
         break;
 
       case 2:
-        if ((_PROPS.minimumDetachableOrderQuantity > 0) && (_PROPS.maximumDetachableOrderQuantity > 0) && (_PROPS.detachablePrice > 0)){
+        if ((_PROPS.minimumDetachableOrderQuantity > 0) && (_PROPS.detachablePrice > 0)){
           const _IS_MIN_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.minimumDetachableOrderQuantity.toString(), 1),
-                _IS_MAX_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumDetachableOrderQuantity.toString(), 1),
                 _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE = Functions._checkIsAValidCurrencyValueOnlyField(_PROPS.detachablePrice.toString()),
                 _TARGET_CAPACITY = parseInt(_PROPS.selectedUnit.extra_features.capacity.replace(/(th|st|nd)/gi, ''));
 
-          if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID && _IS_MAX_DETACHABLE_ORDER_QTY_VALID && _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE){
-            if ((_PROPS.maximumDetachableOrderQuantity >= _PROPS.minimumDetachableOrderQuantity) && (_PROPS.minimumDetachableOrderQuantity) <= (_PROPS.quantity * _TARGET_CAPACITY)){
-              _FORM_FIELDS_VALIDITY = true;
+          if (_PROPS.isInfiniteMaximumOrderQuantity === false){
+            if (_PROPS.maximumDetachableOrderQuantity > 0){
+              const _IS_MAX_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(_PROPS.maximumDetachableOrderQuantity.toString(), 1);
+
+              if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID && _IS_MAX_DETACHABLE_ORDER_QTY_VALID && _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE){
+                if ((_PROPS.maximumDetachableOrderQuantity >= _PROPS.minimumDetachableOrderQuantity) && (_PROPS.minimumDetachableOrderQuantity <= (_PROPS.quantity * _TARGET_CAPACITY)) && (_PROPS.maximumDetachableOrderQuantity <= (_PROPS.quantity * _TARGET_CAPACITY))){
+                  _FORM_FIELDS_VALIDITY = true;
+                }
+              }
+            }
+          }else{
+            if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID && _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE){
+              if (_PROPS.minimumDetachableOrderQuantity <= (_PROPS.quantity * _TARGET_CAPACITY)){
+                _FORM_FIELDS_VALIDITY = true;
+              }
             }
           }
         }
@@ -604,25 +626,51 @@ const ProductFeaturesModal = (props) => {
               if (_VALIDATED){
                 var _MESSAGE = '';
 
-                if ((props.productFeaturesModal.minimumOrderQuantity > 0) && (props.productFeaturesModal.maximumOrderQuantity > 0)){
-                  const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.minimumOrderQuantity.toString(), 2),
-                        _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.maximumOrderQuantity.toString(), 2);
+                if (props.productFeaturesModal.minimumOrderQuantity > 0){
+                  const _IS_MIN_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.minimumOrderQuantity.toString(), 2);
 
-                  if (_IS_MIN_ORDER_QTY_VALID && _IS_MAX_ORDER_QTY_VALID){
-                    if (props.productFeaturesModal.maximumOrderQuantity < props.productFeaturesModal.minimumOrderQuantity){
-                      _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.firstPart[attitude.language]}`;
-                    }
-
+                  if (_IS_MIN_ORDER_QTY_VALID){
                     if (props.productFeaturesModal.minimumOrderQuantity > props.productFeaturesModal.quantity){
                       _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.secondPart[attitude.language]}`;
                     }
+
+                    if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                      if (props.productFeaturesModal.maximumOrderQuantity > 0){
+                        const _IS_MAX_ORDER_QTY_VALID = Functions._checkIsAValidNumericOnlyField(props.productFeaturesModal.maximumOrderQuantity.toString(), 2);
+
+                        if (_IS_MAX_ORDER_QTY_VALID){
+                          if (props.productFeaturesModal.maximumOrderQuantity < props.productFeaturesModal.minimumOrderQuantity){
+                            _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.firstPart[attitude.language]}`;
+                          }
+
+                          if (props.productFeaturesModal.maximumOrderQuantity > props.productFeaturesModal.quantity){
+                            _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.thirdLevel.thirdPart[attitude.language]}`;
+                          }
+                        }else{
+                          let countOfMessageItem = 0;
+
+                          if (_IS_MIN_ORDER_QTY_VALID === false){
+                            _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.secondPart[attitude.language]}`;
+                            countOfMessageItem++;
+                          }
+
+                          if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                            if (_IS_MAX_ORDER_QTY_VALID === false){
+                              _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.firstPart[attitude.language]}`;
+                              countOfMessageItem++;
+                            }
+                          }
+
+                          if (countOfMessageItem > 1){
+                            _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.more[attitude.language]}`;
+                          }else{
+                            _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.secondLevel.verbComposition.one[attitude.language]}`;
+                          }
+                        }
+                      }
+                    }
                   }else{
                     let countOfMessageItem = 0;
-
-                    if (_IS_MAX_ORDER_QTY_VALID === false){
-                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.firstPart[attitude.language]}`;
-                      countOfMessageItem++;
-                    }
 
                     if (_IS_MIN_ORDER_QTY_VALID === false){
                       _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.secondLevel.secondPart[attitude.language]}`;
@@ -638,14 +686,16 @@ const ProductFeaturesModal = (props) => {
                 }else{
                   let countOfMessageItem = 0;
 
-                  if (props.productFeaturesModal.maximumOrderQuantity === 0){
-                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.firstPart[attitude.language]}`;
-                    countOfMessageItem++;
-                  }
-
                   if (props.productFeaturesModal.minimumOrderQuantity === 0){
                     _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.secondPart[attitude.language]}`;
                     countOfMessageItem++;
+                  }
+
+                  if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                    if (props.productFeaturesModal.maximumOrderQuantity === 0){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.firstLevel.firstPart[attitude.language]}`;
+                      countOfMessageItem++;
+                    }
                   }
 
                   if (countOfMessageItem > 1){
@@ -739,27 +789,50 @@ const ProductFeaturesModal = (props) => {
                     {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.firstInput.options} />
                 ),
                 (
-                  <Input
-                    type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en)}
-                    placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title[attitude.language]}
-                    value={_MAX_ORDER_QTY}
-                    style={[
-                      Styles.RegularItemContainer,
-                      {
-                        marginBottom: Styles.Content.marginVertical,
-                        marginHorizontal: Styles.Content.marginHorizontal
-                      }
-                    ]}
-                    onChangeText={(currentValue) => props.setMaximumOrderQuantity(parseInt(currentValue))}
-                    {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.options} />
-                ),
+                  <Switch
+                    value={props.productFeaturesModal.isInfiniteMaximumOrderQuantity}
+                    title={__CONSTANTS.modalContainer.content.secondSwith.title[attitude.language]}
+                    containerStyle={{
+                      marginHorizontal: Styles.Content.marginHorizontal,
+                      marginBottom: Styles.Content.marginVertical
+                    }}
+                    onChange={() => props.toggleInfiniteMaximumOrderQuantity()}/>
+                )
+              ];
+
+              if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                _MODAL_CONTENT = [
+                  ..._MODAL_CONTENT,
+                  (
+                    <Input
+                      type={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title.en)}
+                      placeholder={__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.title[attitude.language]}
+                      value={_MAX_ORDER_QTY}
+                      style={[
+                        Styles.RegularItemContainer,
+                        {
+                          marginBottom: Styles.Content.marginVertical,
+                          marginHorizontal: Styles.Content.marginHorizontal
+                        }
+                      ]}
+                      onChangeText={(currentValue) => props.setMaximumOrderQuantity(parseInt(currentValue))}
+                      {...__CONSTANTS.modalContainer.content.firstCarousel.content.self.context.unit.secondInput.options} />
+                  )
+                ];
+              }
+
+              _MODAL_CONTENT = [
+                ..._MODAL_CONTENT,
                 _FINAL_BUTTON,
                 (
                   <Link
                     containerStyle={[
                       Styles.Center_TextAlignment,
-                      Styles.Center_ContentAlignment
+                      Styles.Center_ContentAlignment,
+                      {
+                        marginBottom: Styles.Content.marginVertical
+                      }
                     ]}
                     value={((props.productFeaturesModal.isDetachableUnit)? __CONSTANTS.modalContainer.content.secondLink.state.detachable.title[attitude.language]: __CONSTANTS.modalContainer.content.secondLink.state.normal.title[attitude.language])}
                     onPress={() => {
@@ -804,27 +877,58 @@ const ProductFeaturesModal = (props) => {
             if (_VALIDATED){
               var _MESSAGE = '';
 
-              if ((props.productFeaturesModal.minimumDetachableOrderQuantity > 0) && (props.productFeaturesModal.maximumDetachableOrderQuantity > 0) && (props.productFeaturesModal.detachablePrice > 0)){
+              if ((props.productFeaturesModal.minimumDetachableOrderQuantity > 0) && (props.productFeaturesModal.detachablePrice > 0)){
                 const _IS_MIN_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(props.productFeaturesModal.minimumDetachableOrderQuantity.toString(), 1),
-                      _IS_MAX_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(props.productFeaturesModal.maximumDetachableOrderQuantity.toString(), 1),
                       _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE = Functions._checkIsAValidCurrencyValueOnlyField(props.productFeaturesModal.detachablePrice.toString()),
                       _TARGET_CAPACITY = parseInt(props.productFeaturesModal.selectedUnit.extra_features.capacity.replace(/(th|st|nd)/gi, ''));
 
-                if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID && _IS_MAX_DETACHABLE_ORDER_QTY_VALID && _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE){
-                  if (props.productFeaturesModal.maximumDetachableOrderQuantity < props.productFeaturesModal.minimumDetachableOrderQuantity){
-                    _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.eighthLevel.firstPart[attitude.language]}`;
-                  }
-
+                if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID && _IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE){
                   if (props.productFeaturesModal.minimumDetachableOrderQuantity > (props.productFeaturesModal.quantity * _TARGET_CAPACITY)){
                     _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.eighthLevel.secondPart[attitude.language]}`;
                   }
+
+                  if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                    if (props.productFeaturesModal.maximumDetachableOrderQuantity > 0){
+                      const _IS_MAX_DETACHABLE_ORDER_QTY_VALID = Functions._checkIsAValidFloatNumericOnlyField(props.productFeaturesModal.maximumDetachableOrderQuantity.toString(), 1);
+
+                      if (_IS_MAX_DETACHABLE_ORDER_QTY_VALID){
+                        if (props.productFeaturesModal.maximumDetachableOrderQuantity < props.productFeaturesModal.minimumDetachableOrderQuantity){
+                          _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.eighthLevel.firstPart[attitude.language]}`;
+                        }
+
+                        if (props.productFeaturesModal.maximumDetachableOrderQuantity > (props.productFeaturesModal.quantity * _TARGET_CAPACITY)){
+                          _MESSAGE += `${((_MESSAGE != '')? '\n': '')} ${__CONSTANTS.modalContainer.content.warning.eighthLevel.thirdPart[attitude.language]}`;
+                        }
+                      }
+                    }
+                  }else{
+                    let countOfMessageItem = 0;
+
+                    if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID === false){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.sixthLevel.secondPart[attitude.language]}`;
+                      countOfMessageItem++;
+                    }
+
+                    if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                      if (_IS_MAX_DETACHABLE_ORDER_QTY_VALID === false){
+                        _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.sixthLevel.firstPart[attitude.language]}`;
+                        countOfMessageItem++;
+                      }
+                    }
+
+                    if (_IS_DETACHABLE_PRICE_VALID_CURRENCY_VALUE === false){
+                      _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.sixthLevel.thirdPart[attitude.language]}`;
+                      countOfMessageItem++;
+                    }
+
+                    if (countOfMessageItem > 1){
+                      _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.sixthLevel.verbComposition.more[attitude.language]}`;
+                    }else{
+                      _MESSAGE += ` ${__CONSTANTS.modalContainer.content.warning.sixthLevel.verbComposition.one[attitude.language]}`;
+                    }
+                  }
                 }else{
                   let countOfMessageItem = 0;
-
-                  if (_IS_MAX_DETACHABLE_ORDER_QTY_VALID === false){
-                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.sixthLevel.firstPart[attitude.language]}`;
-                    countOfMessageItem++;
-                  }
 
                   if (_IS_MIN_DETACHABLE_ORDER_QTY_VALID === false){
                     _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.sixthLevel.secondPart[attitude.language]}`;
@@ -845,14 +949,16 @@ const ProductFeaturesModal = (props) => {
               }else{
                 let countOfMessageItem = 0;
 
-                if (props.productFeaturesModal.maximumDetachableOrderQuantity === 0){
-                  _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.seventhLevel.firstPart[attitude.language]}`;
-                  countOfMessageItem++;
-                }
-
                 if (props.productFeaturesModal.minimumDetachableOrderQuantity === 0){
                   _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.seventhLevel.secondPart[attitude.language]}`;
                   countOfMessageItem++;
+                }
+
+                if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                  if (props.productFeaturesModal.maximumDetachableOrderQuantity === 0){
+                    _MESSAGE += `${((countOfMessageItem > 0)? __CONSTANTS.modalContainer.content.warning.delimiter[attitude.language]: '')} ${__CONSTANTS.modalContainer.content.warning.seventhLevel.firstPart[attitude.language]}`;
+                    countOfMessageItem++;
+                  }
                 }
 
                 if (props.productFeaturesModal.detachablePrice === 0){
@@ -899,23 +1005,33 @@ const ProductFeaturesModal = (props) => {
                   ]}
                   onChangeText={(currentValue) => props.setMinimumDetachaleOrderQuantity(parseInt(currentValue))}
                   {...__CONSTANTS.modalContainer.content.firstRelatedInput.options} />
-              ),
-              (
-                <Input
-                  type={__CONSTANTS.modalContainer.content.secondRelatedInput.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondRelatedInput.title.en)}
-                  placeholder={__CONSTANTS.modalContainer.content.secondRelatedInput.title[attitude.language]}
-                  value={_MAX_DETACHABLE_ORDER_QTY}
-                  style={[
-                    Styles.RegularItemContainer,
-                    {
-                      marginBottom: Styles.Content.marginVertical,
-                      marginHorizontal: Styles.Content.marginHorizontal
-                    }
-                  ]}
-                  onChangeText={(currentValue) => props.setMaximumDetachaleOrderQuantity(parseInt(currentValue))}
-                  {...__CONSTANTS.modalContainer.content.secondRelatedInput.options} />
-              ),
+              )
+            ];
+
+            if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+              _MODAL_CONTENT = [
+                ..._MODAL_CONTENT,
+                (
+                  <Input
+                    type={__CONSTANTS.modalContainer.content.secondRelatedInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.secondRelatedInput.title.en)}
+                    placeholder={__CONSTANTS.modalContainer.content.secondRelatedInput.title[attitude.language]}
+                    value={_MAX_DETACHABLE_ORDER_QTY}
+                    style={[
+                      Styles.RegularItemContainer,
+                      {
+                        marginBottom: Styles.Content.marginVertical,
+                        marginHorizontal: Styles.Content.marginHorizontal
+                      }
+                    ]}
+                    onChangeText={(currentValue) => props.setMaximumDetachaleOrderQuantity(parseInt(currentValue))}
+                    {...__CONSTANTS.modalContainer.content.secondRelatedInput.options} />
+                )
+              ];
+            }
+
+            _MODAL_CONTENT = [
+              ..._MODAL_CONTENT,
               (
                 <Input
                   type={__CONSTANTS.modalContainer.content.thirdRelatedInput.type}
@@ -937,7 +1053,10 @@ const ProductFeaturesModal = (props) => {
                 <Link
                   containerStyle={[
                     Styles.Center_TextAlignment,
-                    Styles.Center_ContentAlignment
+                    Styles.Center_ContentAlignment,
+                    {
+                      marginBottom: Styles.Content.marginVertical
+                    }
                   ]}
                   value={__CONSTANTS.modalContainer.content.firstLink.title[attitude.language]}
                   onPress={() => props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex - 2)} />
@@ -988,14 +1107,12 @@ const ProductFeaturesModal = (props) => {
                   }}
                   onPress={() => {
                     let _RESPONSE = {
-                      _id: Functions._generateNewBSONObjectID(),
                       unit: props.productFeaturesModal.selectedUnit,
                       quantity: props.productFeaturesModal.quantity,
                       warehouse: props.productFeaturesModal.selectedWarehouse,
                       sales_structure: {
                         regular: {
                           minimum_order_quantity: props.productFeaturesModal.minimumOrderQuantity,
-                          maximum_order_quantity: props.productFeaturesModal.maximumOrderQuantity,
                           price: [
                             {
                               value: props.productFeaturesModal.price,
@@ -1007,10 +1124,13 @@ const ProductFeaturesModal = (props) => {
                       shipping_method: props.productFeaturesModal.selectedShippingMethod
                     };
 
+                    if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                      _RESPONSE.sales_structure.regular.maximum_order_quantity = props.productFeaturesModal.maximumOrderQuantity;
+                    }
+
                     if (props.productFeaturesModal.detachablePrice){
                       _RESPONSE.sales_structure.detachable = {
                         minimum_order_quantity: props.productFeaturesModal.minimumDetachableOrderQuantity,
-                        maximum_order_quantity: props.productFeaturesModal.maximumDetachableOrderQuantity,
                         price: [
                           {
                             value: props.productFeaturesModal.detachablePrice,
@@ -1018,6 +1138,10 @@ const ProductFeaturesModal = (props) => {
                           }
                         ]
                       };
+
+                      if (props.productFeaturesModal.isInfiniteMaximumOrderQuantity === false){
+                        _RESPONSE.sales_structure.detachable.maximum_order_quantity = props.productFeaturesModal.maximumDetachableOrderQuantity;
+                      }
                     }
 
                     attitude.onProgressSuccess(_RESPONSE);
@@ -1129,7 +1253,10 @@ const ProductFeaturesModal = (props) => {
                   <Link
                     containerStyle={[
                       Styles.Center_TextAlignment,
-                      Styles.Center_ContentAlignment
+                      Styles.Center_ContentAlignment,
+                      {
+                        marginBottom: Styles.Content.marginVertical
+                      }
                     ]}
                     value={__CONSTANTS.modalContainer.content.thirdLink.title[attitude.language]}
                     onPress={() => props.setCurrentHiddenTabIndex(props.productFeaturesModal.currentHiddenTabIndex - 2)} />

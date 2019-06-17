@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Dimensions, Platform, Keyboard, I18nManager, Text, Image, Animated, Easing } from 'react-native';
+import { View, ScrollView, FlatList, Dimensions, Platform, Keyboard, I18nManager, Text, Image, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -62,11 +62,11 @@ class NewFragmentFeatures extends Component<{}> {
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_FEATURES_OTHER_PROPS = {
               language: props.newFragment.language,
-              // features: props.newFragment.units
-              features: [{"_id":"5cfe78bee8baaa340a7c5d98","extra_features":{"capacity":"12th","detachable":true},"created_at":"2019-06-10T15:35:26.380Z","modified_at":"2019-06-11T20:29:54.451Z","key":"BOX"},{"_id":"5ca6848ed0a37b307e733054","created_at":"2019-04-04T22:26:21.819Z","modified_at":"2019-06-11T20:28:06.857Z","extra_features":{"capacity":"24th","detachable":true},"key":"BOX"}]
+              features: props.newFragment.units
             },
             _CUSTOM_STYLE = {
-              marginBottom: Styles.Content.marginVertical
+              marginBottom: Styles.Content.marginVertical,
+              marginHorizontal: Styles.Content.marginHorizontal
             };
 
       let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
@@ -88,20 +88,23 @@ class NewFragmentFeatures extends Component<{}> {
           <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={Styles.ScrollableListContainer}>
-              <Carousel
+              <FlatList
                 name={Functions._convertTokenToKeyword(__CONSTANTS.content.carousel.state.normal.title.en)}
                 data={props.newFragment.features}
-                firstItem={0}
-                itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
+                contentContainerStyle={Styles.MajorContainer}
                 style={[
                   Styles.DetailContainer,
                   _CUSTOM_STYLE
                 ]}
-                onLayout={({ item, index }) => {
-                  var _ITEM_GRADIENT = Global.colors.pair.tilan;
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => {
+                  var _ITEM_GRADIENT = Global.colors.pair.tilan,
+                      _CUSTOM_ROW_STYLE = {},
+                      _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item.unit, _LANGUAGE),
+                      _MINIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT, _MAXIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT, _DETACHABLE_PRICE;
 
                   _FEATURE_DELETE_ACTION = () => props.setFeatures(props.newFragment.features.filter((checkingItem, j) => {
-                    return ((checkingItem.feature_id != item.feature_id) && (checkingItem.unit._id != item.unit._id) && (checkingItem.warehouse._id != item.warehouse._id));
+                    return ((checkingItem.unit._id != item.unit._id) && (checkingItem.warehouse._id != item.warehouse._id));
                   }));
 
                   if (typeof item.primary != 'undefined'){
@@ -110,15 +113,85 @@ class NewFragmentFeatures extends Component<{}> {
                     }
                   }
 
+                  if (index < (props.newFragment.features.length - 1)){
+                    _CUSTOM_ROW_STYLE.marginBottom = Styles.Content.marginVertical;
+                  }
+
+                  if (typeof item.sales_structure.detachable != 'undefined'){
+                    _MINIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT = (
+                      <View
+                        style={[
+                          Styles.DetailItemMasterSubInfoContent,
+                          {
+                            marginBottom: Styles.Content.marginVertical / 2
+                          }
+                        ]}>
+                          <Icon
+                            name={__CONSTANTS.content.carousel.state.normal.content.fourthFeature.icon.name}
+                            color={Global.colors.single.romance} />
+
+                          <Text
+                            style={Styles.BriefDetailRowText}>
+                              {Functions._convertNumberToHumanReadableFormat(item.sales_structure.detachable.minimum_order_quantity)}
+                              {` ${Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.fourthFeature.title[_LANGUAGE])}`}
+                          </Text>
+                      </View>
+                    );
+
+                    _MAXIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT = (
+                      <View
+                        style={[
+                          Styles.DetailItemMasterSubInfoContent,
+                          {
+                            marginBottom: Styles.Content.marginVertical / 2
+                          }
+                        ]}>
+                          <Icon
+                            name={__CONSTANTS.content.carousel.state.normal.content.firstFeature.icon.name}
+                            color={Global.colors.single.romance} />
+
+                          <Text
+                            style={Styles.BriefDetailRowText}>
+                              {((typeof item.sales_structure.detachable.maximum_order_quantity != 'undefined')? `${Functions._convertNumberToHumanReadableFormat(item.sales_structure.detachable.maximum_order_quantity)} `: `${Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.fifthFeature.extraTitle[_LANGUAGE])} `)}
+                              {` ${Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.fifthFeature.title[_LANGUAGE])}`}
+                          </Text>
+                      </View>
+                    );
+
+                    _DETACHABLE_PRICE = <View
+                      style={[
+                        Styles.DetailItemMasterSubInfoContent,
+                        {
+                          marginBottom: Styles.Content.marginVertical / 2
+                        }
+                      ]}>
+                        <Icon
+                          name={__CONSTANTS.content.carousel.state.normal.content.seventhFeature.icon.name}
+                          color={Global.colors.single.romance} />
+
+                        {
+                          item.sales_structure.detachable.price.map((singlePrice, i, totalPrices) => {
+                            return (
+                              <Text
+                                style={Styles.BriefDetailRowText}>
+                                  {Functions._convertDigitsToMoneyFormat(singlePrice.value, 0)}
+                                  {` ${Functions._getAppropriateCurrencyBaseOnLocale(singlePrice.currency, _LANGUAGE)}`}
+                                  {((i < (totalPrices.length - 1))? __CONSTANTS.content.carousel.state.normal.content.seventhFeature.delimiter[_LANGUAGE]: '')}
+                                  {` (${__CONSTANTS.content.carousel.state.normal.content.seventhFeature.title[_LANGUAGE]})`}
+                              </Text>
+                            );
+                          })
+                        }
+                    </View>;
+                  }
+
                   return (
                     <Input
                       type={__CONSTANTS.content.carousel.type}
                       style={[
                         Styles.UnitsFeatureDetailItemContainer,
                         Styles.LTR_ContentAlignment,
-                        {
-                          height: Styles.UnitsFeatureDetailItemContainer.height + 50
-                        }
+                        _CUSTOM_ROW_STYLE
                       ]}
                       gradient={_ITEM_GRADIENT}
                       onLongPress={_FEATURE_DELETE_ACTION}>
@@ -128,16 +201,15 @@ class NewFragmentFeatures extends Component<{}> {
                               style={Styles.BriefDetailTitleContainer}>
                               <Text
                                 style={Styles.BriefDetailTitle}>
-                                  {Functions._getAppropriateTaxonomyBaseOnLocale(item.unit.key, _LANGUAGE, 'unit')}
+                                  {_FINAL_UNIT_COMPLEX.title}
                               </Text>
-                              {
-                                // <Text
-                                //   style={Styles.BriefDetailTitleSuffix}>
-                                //     {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.title.suffix[_LANGUAGE])}
-                                // </Text>
-                              }
+                              <Text
+                                style={Styles.BriefDetailSubtitle}>
+                                  {_FINAL_UNIT_COMPLEX.subtitle}
+                              </Text>
                             </View>
                         </View>
+
                         <View
                           style={Styles.DetailItemMasterInfoContent}>
                             <View
@@ -146,14 +218,9 @@ class NewFragmentFeatures extends Component<{}> {
                                 style={Styles.BriefDetailTitle}>
                                   {item.warehouse.name}
                               </Text>
-                              {
-                                // <Text
-                                //   style={Styles.BriefDetailTitleSuffix}>
-                                //     {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.secondContent.title.suffix[_LANGUAGE])}
-                                // </Text>
-                              }
                             </View>
                         </View>
+
                         <View
                           style={[
                             Styles.DetailItemMasterSubInfoContent,
@@ -167,9 +234,11 @@ class NewFragmentFeatures extends Component<{}> {
 
                             <Text
                               style={Styles.BriefDetailRowText}>
-                                {Functions._convertNumberToHumanReadableFormat(item.sales_structure.regular.minimum_order_quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.firstFeature.title[_LANGUAGE])}
+                                {Functions._convertNumberToHumanReadableFormat(item.sales_structure.regular.minimum_order_quantity)}
+                                {` ${Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.firstFeature.title[_LANGUAGE])}`}
                             </Text>
                         </View>
+
                         <View
                           style={[
                             Styles.DetailItemMasterSubInfoContent,
@@ -178,16 +247,23 @@ class NewFragmentFeatures extends Component<{}> {
                             }
                           ]}>
                             <Icon
-                              name={__CONSTANTS.content.carousel.state.normal.content.secondFeature.icon.name}
+                              name={__CONSTANTS.content.carousel.state.normal.content.firstFeature.icon.name}
                               color={Global.colors.single.romance} />
 
                             <Text
                               style={Styles.BriefDetailRowText}>
-                                {Functions._convertNumberToHumanReadableFormat(item.sales_structure.regular.maximum_order_quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.secondFeature.title[_LANGUAGE])}
+                                {((typeof item.sales_structure.regular.maximum_order_quantity != 'undefined')? `${Functions._convertNumberToHumanReadableFormat(item.sales_structure.regular.maximum_order_quantity)} `: `${Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.secondFeature.extraTitle[_LANGUAGE])} `)}
+                                {` ${Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.secondFeature.title[_LANGUAGE])}`}
                             </Text>
                         </View>
+
                         <View
-                          style={Styles.DetailItemMasterSubInfoContent}>
+                          style={[
+                            Styles.DetailItemMasterSubInfoContent,
+                            {
+                              marginBottom: Styles.Content.marginVertical / 2
+                            }
+                          ]}>
                             <Icon
                               name={__CONSTANTS.content.carousel.state.normal.content.thirdFeature.icon.name}
                               color={Global.colors.single.romance} />
@@ -197,10 +273,56 @@ class NewFragmentFeatures extends Component<{}> {
                                 {Functions._convertNumberToHumanReadableFormat(item.quantity)} {Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.thirdFeature.title[_LANGUAGE])}
                             </Text>
                         </View>
+
+                        {_MINIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT}
+                        {_MAXIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT}
+                        {_DETACHABLE_PRICE}
+
+                        <View
+                          style={[
+                            Styles.DetailItemMasterSubInfoContent,
+                            {
+                              marginBottom: Styles.Content.marginVertical / 2
+                            }
+                          ]}>
+                            <Icon
+                              name={__CONSTANTS.content.carousel.state.normal.content.eigthFeature.icon.name}
+                              color={Global.colors.single.romance} />
+
+                            {
+                              item.sales_structure.regular.price.map((singlePrice, i, totalPrices) => {
+                                return (
+                                  <Text
+                                    style={Styles.BriefDetailRowText}>
+                                      {Functions._convertDigitsToMoneyFormat(singlePrice.value, 0)}
+                                      {` ${Functions._getAppropriateCurrencyBaseOnLocale(singlePrice.currency, _LANGUAGE)}`}
+                                      {((i < (totalPrices.length - 1))? __CONSTANTS.content.carousel.state.normal.content.eigthFeature.delimiter[_LANGUAGE]: '')}
+                                      {` (${__CONSTANTS.content.carousel.state.normal.content.eigthFeature.title[_LANGUAGE]})`}
+                                  </Text>
+                                );
+                              })
+                            }
+                        </View>
+
+                        <View
+                          style={[
+                            Styles.DetailItemMasterSubInfoContent,
+                            {
+                              marginBottom: Styles.Content.marginVertical / 2
+                            }
+                          ]}>
+                            <Icon
+                              name={__CONSTANTS.content.carousel.state.normal.content.ninthFeature.icon.name}
+                              color={Global.colors.single.romance} />
+
+                            <Text
+                              style={Styles.BriefDetailRowText}>
+                                {Functions._getAppropriateTaxonomyBaseOnLocale(item.shipping_method.value, _LANGUAGE)} {` (${Functions._convertKeywordToToken(__CONSTANTS.content.carousel.state.normal.content.ninthFeature.title[_LANGUAGE])})`}
+                            </Text>
+                        </View>
                     </Input>
                   );
-                }}
-                {..._FIRST_CAROUSEL_OTHER_OPTIONS} />
+                }}/>
 
               <Input
                 type={__CONSTANTS.content.modalHandlerButton.type}

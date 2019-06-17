@@ -28,7 +28,7 @@
             },
             "firstFeature": {
               "title": {
-                "en": "Minimum Order",
+                "en": "Minimum Order Quantity",
                 "fa": "حداقل تعداد سفارش"
               },
               "icon": {
@@ -37,8 +37,12 @@
             },
             "secondFeature": {
               "title": {
-                "en": "Maximum Order",
+                "en": "Maximum Order Quantity",
                 "fa": "حداکثر تعداد سفارش"
+              },
+              "extraTitle": {
+                "en": "Infinite",
+                "fa": "بی‌نهایت"
               },
               "icon": {
                 "name": "grading"
@@ -48,6 +52,72 @@
               "title": {
                 "en": "Inventory Quantity",
                 "fa": "تعداد موجودی"
+              },
+              "icon": {
+                "name": "grading"
+              }
+            },
+            "fourthFeature": {
+              "title": {
+                "en": "Minimum Detachable Order Quantity",
+                "fa": "حداقل تعداد سفارش بصورت باز"
+              },
+              "icon": {
+                "name": "grading"
+              }
+            },
+            "fifthFeature": {
+              "title": {
+                "en": "Maximum Detachable Order Quantity",
+                "fa": "حداکثر تعداد سفارش بصورت باز"
+              },
+              "extraTitle": {
+                "en": "Infinite",
+                "fa": "بی‌نهایت"
+              },
+              "icon": {
+                "name": "grading"
+              }
+            },
+            "sixthFeature": {
+              "title": {
+                "en": "Detachable Price",
+                "fa": "قیمت بصورت باز"
+              },
+              "icon": {
+                "name": "grading"
+              }
+            },
+            "seventhFeature": {
+              "title": {
+                "en": "Detachable Price",
+                "fa": "قیمت بصورت باز"
+              },
+              "icon": {
+                "name": "grading"
+              },
+              "delimiter": {
+                "en": ",",
+                "fa": "،"
+              }
+            },
+            "eigthFeature": {
+              "title": {
+                "en": "Price",
+                "fa": "قیمت"
+              },
+              "icon": {
+                "name": "grading"
+              },
+              "delimiter": {
+                "en": ",",
+                "fa": "،"
+              }
+            },
+            "ninthFeature": {
+              "title": {
+                "en": "Shipping Type",
+                "fa": "نوع حمل و نقل"
               },
               "icon": {
                 "name": "grading"

@@ -414,6 +414,21 @@ module.exports = {
       return false;
     }
   },
+  _getAppropriateCurrencyBaseOnLocale: (selectedCurrency, language) => {
+    const _FOUNDED_CURRENCY_INDEX = __CURRENCIES.findIndex((currency) => {
+            const _CURRENCY_TITLE = module.exports._convertTokenToKey(currency.title.en),
+                  _CURRENCY_ABBREVIATION = module.exports._convertTokenToKey(currency.abbreviation),
+                  _CURRENCY_KEY = module.exports._convertTokenToKey(selectedCurrency);
+
+            return ((_CURRENCY_TITLE === _CURRENCY_KEY) || (_CURRENCY_ABBREVIATION === _CURRENCY_KEY));
+          });
+    
+    if (_FOUNDED_CURRENCY_INDEX > -1){
+      return __CURRENCIES[_FOUNDED_CURRENCY_INDEX].title[language];
+    }else{
+      return false;
+    }
+  },
   _getAppropriateTaxonomyBaseOnLocale: (selectedTaxonomyValue, language, selectedTaxonomy) => {
     var _SELECTED_TAXONOMY = '';
 
