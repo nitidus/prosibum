@@ -158,19 +158,19 @@ module.exports = {
             dispatch({
               type: NEW_FRAGMENT.APPEND_FRAGMENT
             })
+
+            dispatch({
+              type: NEW_FRAGMENT.APPEND_FRAGMENT_LOADING_STATUS,
+              payload: false
+            })
+
+            dispatch({
+              type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
+              payload: {
+                status: true
+              }
+            })
           }
-
-          dispatch({
-            type: NEW_FRAGMENT.APPEND_FRAGMENT_LOADING_STATUS,
-            payload: false
-          })
-
-          dispatch({
-            type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
-            payload: {
-              status: true
-            }
-          })
         }else{
           dispatch({
             type: NEW_FRAGMENT.APPEND_FRAGMENT_LOADING_STATUS,

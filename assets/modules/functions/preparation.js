@@ -105,7 +105,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'NewFragmentDetection': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'Overseer': 'Authentication');
   },
   _prepareCurrentUserInformation: async (props, pilot) => {
     const _NATIVE_SETTINGS = await Prototypes._getDefaultNativeSettings(),
@@ -376,15 +376,12 @@ module.exports = {
     let _SEED = {
       name: _PROPS.name,
       product_id: _PROPS.product._id,
-      features: _PROPS.features.map((item, i) => {
+      content: _PROPS.features.map((item, i) => {
         let finalResponse = {
-          feature_id: item.feature._id,
           unit_id: item.unit._id,
-          warehouse: {
-            _id: item.warehouse._id
-          },
-          minimum_order_quantity: item.minimum_order_quantity,
-          maximum_order_quantity: item.maximum_order_quantity,
+          warehouse_id: item.warehouse._id,
+          sales_structure: item.sales_structure,
+          shipping_method_id: item.shipping_method._id,
           quantity: item.quantity
         };
 
@@ -395,25 +392,6 @@ module.exports = {
         }
 
         return finalResponse;
-      }),
-      prices: _PROPS.prices.map((item, i) => {
-        return {
-          name: item.name,
-          values: [
-            {
-              content: parseFloat(item.value),
-              currency: _PROPS.currency.key,
-              language: _PROPS.language.key
-            }
-          ],
-          feature_reference_id: item.feature._id
-        };
-      }),
-      shipping_plans: _PROPS.shippingPlans.map((item, i) => {
-        return {
-          feature_reference_id: item.feature._id,
-          shipping_method_id: item.shippingMethod._id
-        };
       })
     };
 

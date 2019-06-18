@@ -53,7 +53,7 @@ class NewFragmentFeatures extends Component<{}> {
     const { props } = this;
 
     if (Object.keys(props.newFragment.language).length > 0){
-      var _FEATURES_CONTENT,
+      var _FEATURES_CONTENT, _APPEND_FRAGMENT_BUTTON,
           _UNIT_FEATURES = [],
           _FEATURES_ANIMATED_VALUES = [];
 
@@ -84,6 +84,51 @@ class NewFragmentFeatures extends Component<{}> {
       }
 
       if (props.newFragment.features.length > 0){
+        if (props.newFragment.appendFragmentLoading){
+          _APPEND_PRODUCT_BUTTON = (
+            <Input
+              type={__CONSTANTS.content.submitButton.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+              gradient={Global.colors.pair.ongerine}
+              style={{
+                marginHorizontal: Styles.Content.marginHorizontal
+              }}
+              disable={true}>
+                <ActivityIndicator/>
+            </Input>
+          );
+        }else{
+          if (!props.newFragment.connected.status){
+            _APPEND_PRODUCT_BUTTON = (
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={props.newFragment.connected.content}
+                style={[
+                  Styles.ErrorContainer,
+                  {
+                    marginHorizontal: Styles.Content.marginHorizontal
+                  }
+                ]}
+                textStyle={Styles.WarehouseErrorContent}
+                onPress={async () => await Preparation._prepareFragmentToAppend(props)} />
+            );
+          }else{
+            _APPEND_FRAGMENT_BUTTON = (
+              <Input
+                type={__CONSTANTS.content.submitButton.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
+                gradient={Global.colors.pair.ongerine}
+                style={{
+                  marginHorizontal: Styles.Content.marginHorizontal
+                }}
+                onPress={async () => await Preparation._prepareFragmentToAppend(props)}
+                forcedDisable={_VALIDATED} />
+            );
+          }
+        }
+
         _FEATURES_CONTENT = (
           <ScrollView
             showsVerticalScrollIndicator={false}
@@ -338,20 +383,7 @@ class NewFragmentFeatures extends Component<{}> {
                   props.setFeaturesModalVisibility(true);
                 }} />
 
-              <Input
-                type={__CONSTANTS.content.submitButton.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-                value={__CONSTANTS.content.submitButton.state.normal.title[_LANGUAGE]}
-                gradient={Global.colors.pair.ongerine}
-                style={{
-                  marginHorizontal: Styles.Content.marginHorizontal
-                }}
-                onPress={() => {
-                  const { navigation } = props;
-
-                  navigation.navigate('NewFragmentPrices');
-                }}
-                forcedDisable={_VALIDATED} />
+              {_APPEND_FRAGMENT_BUTTON}
           </ScrollView>
         );
       }else{
