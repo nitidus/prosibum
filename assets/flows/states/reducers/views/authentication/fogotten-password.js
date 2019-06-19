@@ -11,7 +11,12 @@ const _SELECTED_DIAL_CODE = Functions._getCountryDetailWithCode(),
           number: '',
           dialCode: _SELECTED_DIAL_CODE
         },
-        countriesCodesModalVisibility: false
+        countriesCodesModalVisibility: false,
+        loading: false,
+        connected: {
+          status: true,
+          content: ''
+        }
       };
 
 export default (state = initialState, action) => {
@@ -45,6 +50,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         countriesCodesModalVisibility: action.payload
+      };
+      break;
+    case FORGOTTEN_PASSWORD.SET_LOADING_STATUS:
+      return {
+        ...state,
+        loading: action.payload
+      };
+      break;
+    case FORGOTTEN_PASSWORD.SET_CONNECTED_STATUS:
+      return {
+        ...state,
+        connected: {
+          ...state.connected,
+          status: action.payload.status,
+          content: action.payload.content || ''
+        }
       };
       break;
 

@@ -99,6 +99,29 @@ module.exports = {
 
     navigation.navigate('Authorization');
   },
+  _prepareRecoverPasswordFlow: async (props) => {
+    const { navigation } = props;
+
+    var _REQUEST = {
+      target: {
+        app_name: appName
+      }
+    };
+
+    switch (Prototypes._convertTokenToKeyword(props.forgottenPassword.requestType)) {
+      case 'phone':
+        _REQUEST.phone = `${props.forgottenPassword.phone.dialCode.area_code}${Prototypes._getRidOfZerosFromPhoneNumber(props.forgottenPassword.phone.number)}`;
+        break;
+
+      case 'email':
+        _REQUEST.email = props.forgottenPassword.email;
+        break;
+    }
+
+    props.requestForRecoverPassword(_REQUEST, () => {
+      navigation.navigate('Authorization');
+    });
+  },
   _prepareAuthority: async (self) => {
     const { props } = self,
           { navigation } = props;

@@ -12,6 +12,7 @@ const Styles = Views.Authentication.ForgottenPassword,
       MajorContainer = ViewsContainer.Authentication.AuthenticationContainer;
 
 import { Functions } from '../../assets/modules/index';
+const { Preparation } = Functions;
 
 import { Views as ViewsActions } from '../../assets/flows/states/actions';
 const { mapStateToProps, mapDispatchToProps } = ViewsActions.Authentication.ForgottenPassword;
@@ -117,7 +118,7 @@ class ForgottenPassword extends Component<{}> {
               {_TOP_PINNED_TOAST}
 
               <CountriesCodesModal
-                name={__CONSTANTS.modals.first.title.en}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.modals.first.title.en)}
                 visible={props.forgottenPassword.countriesCodesModalVisibility}
                 onBlur={(status) => props.setCountriesCodesModalVisibility(status)}
                 selectedItem={props.forgottenPassword.phone.dialCode}
@@ -125,7 +126,10 @@ class ForgottenPassword extends Component<{}> {
                   dialCode: currentValue
                 })}/>
 
-              <View style={Styles.Content}>
+              <View
+                name={Functions._convertTokenToKeyword(__CONSTANTS.title.en)}
+                style={Styles.Content}>
+
                 <Headline
                   style={Styles.Headline}
                   title={__CONSTANTS.headline.title[_LANGUAGE]}
@@ -133,7 +137,7 @@ class ForgottenPassword extends Component<{}> {
 
                 <Segment
                   style={Styles.Segment}
-                  name={__CONSTANTS.firstSegment.title.en}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.title.en)}
                   onChange={(currentValue) => props.setRequestType(currentValue)}>
                     <Container
                       active={true}
@@ -171,9 +175,7 @@ class ForgottenPassword extends Component<{}> {
                   name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
                   value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
                   gradient={Global.colors.pair.ongerine}
-                  onPress={() => {
-                    alert('ok')
-                  }}
+                  onPress={async () => await Preparation._prepareRecoverPasswordFlow(props)}
                   forcedDisable={_VALIDATED} />
 
                 <Link

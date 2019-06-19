@@ -1,6 +1,9 @@
 import { VIEWS } from '../../../types/index';
 const { FORGOTTEN_PASSWORD } = VIEWS.AUTHENTICATION;
 
+import { Views as ViewsCMD } from '../../../commands';
+const CMD = ViewsCMD.Authentication.ForgottenPassword;
+
 const mapStateToProps = (state) => {
   return {
     forgottenPassword: state.ForgottenPassword,
@@ -33,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
         type: FORGOTTEN_PASSWORD.SEND_RECOVERY_LINK
       })
     },
+    requestForRecoverPassword: async (token, callback) => CMD._sendRequestForRecoverPasswordUsingLink(token, callback, dispatch),
     setCountriesCodesModalVisibility: (visibilityStatus) => {
       dispatch({
         type: FORGOTTEN_PASSWORD.SET_COUNTRIES_CODES_MODAL_VISIBILITY,
