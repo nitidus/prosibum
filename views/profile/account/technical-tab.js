@@ -154,8 +154,10 @@ class TechnicalTab extends Component<{}> {
 
     var _PHOTO_URI;
 
-    if ((Object.keys(props.technicalTab.brandProfilePhoto).length > 0) && (typeof props.technicalTab.brandProfilePhoto.image != 'undefined')){
-      _PHOTO_URI = props.technicalTab.brandProfilePhoto.image.uri;
+    if (typeof props.technicalTab.brandProfilePhoto == 'object'){
+      if ((Object.keys(props.technicalTab.brandProfilePhoto).length > 0) && (typeof props.technicalTab.brandProfilePhoto.image != 'undefined')){
+        _PHOTO_URI = props.technicalTab.brandProfilePhoto.image.uri;
+      }
     }else if (typeof props.technicalTab.brandProfilePhoto == 'string'){
       _PHOTO_URI = props.technicalTab.brandProfilePhoto;
     }

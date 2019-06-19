@@ -422,7 +422,7 @@ module.exports = {
 
             return ((_CURRENCY_TITLE === _CURRENCY_KEY) || (_CURRENCY_ABBREVIATION === _CURRENCY_KEY));
           });
-    
+
     if (_FOUNDED_CURRENCY_INDEX > -1){
       return __CURRENCIES[_FOUNDED_CURRENCY_INDEX].title[language];
     }else{
@@ -698,7 +698,7 @@ module.exports = {
   },
   _retrieveLocalStoragePhotosWithOptions: async (options) => {
     var _CAMERA_ROLL_OPTIONS = {
-      first: 1000,
+      first: 9,
       mimeTypes: [
         'image/jpeg', 'image/png'
       ],
@@ -708,6 +708,10 @@ module.exports = {
     if (typeof options != 'undefined') {
       if (typeof options.first != 'undefined' && options.first > 0) {
         _CAMERA_ROLL_OPTIONS.first = options.first;
+      }
+
+      if (typeof options.after != 'undefined') {
+        _CAMERA_ROLL_OPTIONS.after = options.after;
       }
 
       if (typeof options.mimeTypes != 'undefined' && options.mimeTypes.length > 0) {

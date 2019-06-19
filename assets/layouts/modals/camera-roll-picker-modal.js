@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, ScrollView, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
+import { View, ScrollView, FlatList, KeyboardAvoidingView, TouchableOpacity, Image, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -104,51 +104,50 @@ const CameraRollPickerModal = (props) => {
 
   if (_CAMERA_ROLL_ITEMS.length > 0){
     _CAMERA_ROLL_ITEMS_CONTENT = (
-      <ScrollView
+      <FlatList
+        data={_CAMERA_ROLL_ITEMS}
         style={Styles.CameraRollContainer}
-        showsVerticalScrollIndicator={false}>
-          {
-            _CAMERA_ROLL_ITEMS.map((photosRow, i) => {
-              return (
-                <View
-                  style={Styles.CameraRollRowContainer}
-                  key={i}>
-                    {
-                      photosRow.map((photo, j) => {
-                        var _SINGLE_IMAGE_STYLES = [
-                          Styles.CameraRollItemContainer
-                        ];
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => {
+          return (
+            <View
+              style={Styles.CameraRollRowContainer}
+              key={i}>
+                {
+                  item.map((photo, j) => {
+                    var _SINGLE_IMAGE_STYLES = [
+                      Styles.CameraRollItemContainer
+                    ];
 
-                        if ((j + 1) % _ROW_CHUNK_SIZE === 0){
-                          _SINGLE_IMAGE_STYLES.push({
-                            marginRight: 0
-                          });
-                        }
-
-                        const _PHOTO_NODE = photo.node,
-                              _PHOTO_URI = _PHOTO_NODE.image.uri;
-
-                        return (
-                          <TouchableOpacity
-                            key={j}
-                            activeOpacity={MODAL.ITEMS.ACTIVE_OPACITY}
-                            style={_SINGLE_IMAGE_STYLES}
-                            onPress={() => {
-                              MODAL.ON_BLUR(false);
-                              attitude.onPress(_PHOTO_NODE);
-                            }}>
-                              <Image
-                                style={Styles.CameraRollItemContent}
-                                source={{ uri: _PHOTO_URI }} />
-                          </TouchableOpacity>
-                        );
-                      })
+                    if ((j + 1) % _ROW_CHUNK_SIZE === 0){
+                      _SINGLE_IMAGE_STYLES.push({
+                        marginRight: 0
+                      });
                     }
-                </View>
-              )
-            })
-          }
-      </ScrollView>
+
+                    const _PHOTO_NODE = photo.node,
+                          _PHOTO_URI = _PHOTO_NODE.image.uri;
+
+                    return (
+                      <TouchableOpacity
+                        key={j}
+                        activeOpacity={MODAL.ITEMS.ACTIVE_OPACITY}
+                        style={_SINGLE_IMAGE_STYLES}
+                        onPress={() => {
+                          MODAL.ON_BLUR(false);
+                          attitude.onPress(_PHOTO_NODE);
+                        }}>
+                          <Image
+                            style={Styles.CameraRollItemContent}
+                            source={{ uri: _PHOTO_URI }} />
+                      </TouchableOpacity>
+                    );
+                  })
+                }
+            </View>
+          );
+        }}
+        onEndReached={() => Preparation._prepareCameraRoll(props)}/>
     );
   }else{
     _CAMERA_ROLL_ITEMS_CONTENT = (

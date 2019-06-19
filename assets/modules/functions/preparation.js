@@ -425,16 +425,28 @@ module.exports = {
     }
   },
   _prepareCameraRoll: async (props) => {
-    const { navigation } = props,
+    let { navigation } = props,
           _SEED = {
             groupTypes: (Object.keys(props.cameraRollPickerModal.currentGroupType).length > 0)? props.cameraRollPickerModal.currentGroupType.en: ''
           };
 
-    const _FETCHED_CAMERA_ROLL_ITEMS = await Prototypes._retrieveLocalStoragePhotosWithOptions(_SEED),
-          _CHECK_CRITERIA_ON_FETCHED_ITEMS = ((_FETCHED_CAMERA_ROLL_ITEMS.edges.length > 0) && (_FETCHED_CAMERA_ROLL_ITEMS !== null) && (typeof _FETCHED_CAMERA_ROLL_ITEMS != 'undefined') && (_FETCHED_CAMERA_ROLL_ITEMS !== false));
+    if (typeof props.cameraRollPickerModal.endCursor != 'undefined'){
+      if (props.cameraRollPickerModal.endCursor != ''){
+        _SEED.after = props.cameraRollPickerModal.endCursor;
+      }
 
-    if (_CHECK_CRITERIA_ON_FETCHED_ITEMS){
-      props.setCameraRollItems(_FETCHED_CAMERA_ROLL_ITEMS.edges);
+      const _FETCHED_CAMERA_ROLL_ITEMS = await Prototypes._retrieveLocalStoragePhotosWithOptions(_SEED),
+            _CHECK_CRITERIA_ON_FETCHED_ITEMS = ((_FETCHED_CAMERA_ROLL_ITEMS.edges.length > 0) && (_FETCHED_CAMERA_ROLL_ITEMS !== null) && (typeof _FETCHED_CAMERA_ROLL_ITEMS != 'undefined') && (_FETCHED_CAMERA_ROLL_ITEMS !== false));
+
+      if (_CHECK_CRITERIA_ON_FETCHED_ITEMS){
+        if ((typeof _SEED.after != 'undefined') && (props.cameraRollPickerModal.cameraRollItems.length > 0)){
+          props.appendCameraRollItems(_FETCHED_CAMERA_ROLL_ITEMS.edges);
+          props.setCameraRollEndCursor(_FETCHED_CAMERA_ROLL_ITEMS.page_info.end_cursor);
+        }else{
+          props.setCameraRollItems(_FETCHED_CAMERA_ROLL_ITEMS.edges);
+          props.setCameraRollEndCursor(_FETCHED_CAMERA_ROLL_ITEMS.page_info.end_cursor);
+        }
+      }
     }
   },
   _prepareAuthDetails: async () => {

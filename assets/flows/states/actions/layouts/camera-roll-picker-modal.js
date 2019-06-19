@@ -27,6 +27,18 @@ const mapDispatchToProps = (dispatch) => {
         payload: data
       })
     },
+    appendCameraRollItems: (data) => {
+      dispatch({
+        type: CAMERA_ROLL_PICKER_MODAL.APPEND_CAMERA_ROLL_ITEMS,
+        payload: data
+      })
+    },
+    setCameraRollEndCursor: (cursor) => {
+      dispatch({
+        type: CAMERA_ROLL_PICKER_MODAL.SET_CAMERA_ROLL_END_CURSOR,
+        payload: cursor
+      })
+    },
     mergeDataWithCameraRollItems: (data) => {
       dispatch({
         type: CAMERA_ROLL_PICKER_MODAL.MERGE_DATA_WITH_CAMERA_ROLL_ITEMS,
