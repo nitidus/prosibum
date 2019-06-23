@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 
 import { VIEWS, GLOBAL } from '../../../types/index';
 const { NEW_PRODUCT } = VIEWS.PRODUCTS,
-      socket = io(GLOBAL.URLS.INTERFAS.HOST_NAME);
+      socket = io(GLOBAL.URLS.INTERFAS.SOCKET_NAME);
 
 import { Functions } from '../../../../../modules/index';
 
@@ -19,7 +19,7 @@ module.exports = {
       data: product
     })
 
-    socket.on('collection/inserted', (response) => {
+    socket.on('collection/inserted/products', (response) => {
       if (response.meta.code === 200){
         const _DATA = response.data;
 

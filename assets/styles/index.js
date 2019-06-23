@@ -8,6 +8,7 @@ import Signup from './views/authentication/signup';
 import ForgottenPassword from './views/authentication/forgotten-password';
 import VerifyPhoneNumber from './views/authentication/verify-phone-number';
 import VerifyEmail from './views/authentication/verify-email';
+import ResetPassword from './views/authentication/reset-password';
 
 //Profile
 import Overseer from './views/profile/overseer';
@@ -45,7 +46,8 @@ module.exports = {
       Signup,
       ForgottenPassword,
       VerifyPhoneNumber,
-      VerifyEmail
+      VerifyEmail,
+      ResetPassword
     },
     Profile: {
       Technical: {

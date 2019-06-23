@@ -231,7 +231,7 @@ module.exports = StyleSheet.create({
     fontFamily: (I18nManager.isRTL)? fonts.vazir.bold: fonts.sanFrancisco.textBold,
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     textAlign: (I18nManager.isRTL)? 'right': 'left',
-    marginTop: -15,
+    marginTop: -5,
     ..._CUSTOM_CONTAINER_WITH_TAGS_INPUT
   },
   ContainerWithIcon: {

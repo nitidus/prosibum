@@ -36,6 +36,7 @@ import Signup from './authentication/signup';
 import ForgottenPassword from './authentication/forgotten-password';
 import VerifyPhoneNumber from './authentication/verify-phone-number';
 import VerifyEmail from './authentication/verify-email';
+import ResetPassword from './authentication/reset-password';
 
 //Authorization Screen
 import Authorization from './authorization';
@@ -92,7 +93,8 @@ const AuthenticationStack = createStackNavigator({
   Signup,
   ForgottenPassword,
   VerifyPhoneNumber,
-  VerifyEmail
+  VerifyEmail,
+  ResetPassword
 }, {
   headerMode: 'none'
 });

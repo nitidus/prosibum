@@ -389,6 +389,7 @@ module.exports = {
     await props.appendProduct(_SEED);
 
     if (await _PROPS.connected.status){
+      props.resetForms();
       navigation.navigate('Overseer');
     }
   },
@@ -421,6 +422,7 @@ module.exports = {
     await props.appendFragment(_SEED);
 
     if (await _PROPS.connected.status){
+      props.resetForms();
       navigation.navigate('Overseer');
     }
   },

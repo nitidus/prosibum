@@ -120,25 +120,27 @@ class Login extends Component<{}> {
           forcedDisable={_VALIDATED} />;
       }
 
-      var _WARNING_MESSAGE = '';
+      if (_VALIDATED){
+        var _WARNING_MESSAGE = '';
 
-      if (props.login.token != ''){
-        if (!Functions._checkIsAValidToken(props.login.token)){
-          _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
+        if (props.login.token != ''){
+          if (!Functions._checkIsAValidToken(props.login.token)){
+            _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
+          }
         }
-      }
 
-      if (props.login.password != ''){
-        if (!Functions._checkIsAValidPassword(props.login.password)){
-          _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.second.validation.message[_LANGUAGE];
+        if (props.login.password != ''){
+          if (!Functions._checkIsAValidPassword(props.login.password)){
+            _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.second.validation.message[_LANGUAGE];
+          }
         }
-      }
 
-      if (_WARNING_MESSAGE != ''){
-        _TOP_PINNED_TOAST = <Toast
-          message={_WARNING_MESSAGE}
-          launched={true}
-          color={Global.colors.pair.ongerine.orangeYellow} />;
+        if (_WARNING_MESSAGE != ''){
+          _TOP_PINNED_TOAST = <Toast
+            message={_WARNING_MESSAGE}
+            launched={true}
+            color={Global.colors.pair.ongerine.orangeYellow} />;
+        }
       }
 
       _LOGIN_CONTENT = (
