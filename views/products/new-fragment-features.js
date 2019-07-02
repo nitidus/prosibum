@@ -18,7 +18,7 @@ const { mapStateToProps, mapDispatchToProps } = ViewsActions.Products.NewFragmen
 import { views_constants } from '../../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.products.new_fragment_features;
 
-import { Functions } from '../../assets/modules/index';
+import { Functions, Global as GLOBAL } from '../../assets/modules/index';
 const { Preparation } = Functions;
 
 class NewFragmentFeatures extends Component<{}> {
@@ -27,13 +27,21 @@ class NewFragmentFeatures extends Component<{}> {
   };
 
   async componentDidMount() {
-    const { props } = this;
+    const { props } = this,
+          { navigation: { state: { params } } } = props,
+          _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
+          _LANGUAGE = _NATIVE_SETTINGS.language;
 
-    if (Object.keys(props.newFragment.language).length === 0){
-      const _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
-            _LANGUAGE = _NATIVE_SETTINGS.language;
+    await props.setLanguage(_LANGUAGE);
 
-      await props.setLanguage(_LANGUAGE);
+    if (typeof params != 'undefined'){
+      if (Object.keys(params).length > 0){
+        props.setName(params.name);
+        props.setProduct(params.product);
+        props.setUnits(params.units);
+        props.setQuery(params.query);
+        props.setQueryItems(params.queryItems);
+      }
     }
   }
 
@@ -111,7 +119,39 @@ class NewFragmentFeatures extends Component<{}> {
                   }
                 ]}
                 textStyle={Styles.WarehouseErrorContent}
-                onPress={async () => await Preparation._prepareFragmentToAppend(props)} />
+                onPress={async () => {
+                  let _DRAFT_ITEMS = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.FRAGMENT_DRAFT),
+                      _FINAL_SEED = {
+                        features: props.newFragment.features
+                      };
+
+                  if (_DRAFT_ITEMS !== false){
+                    const _PARSED_DRAFT_ITEMS = JSON.parse(_DRAFT_ITEMS),
+                          _FOUNDED_DRAFT_INDEX = _PARSED_DRAFT_ITEMS.findIndex((item, i) => {
+                            return (item.product._id === props.newFragment.product._id);
+                          });
+
+                    if (_FOUNDED_DRAFT_INDEX > -1){
+                      _PARSED_DRAFT_ITEMS[_FOUNDED_DRAFT_INDEX] = {
+                        ..._PARSED_DRAFT_ITEMS[_FOUNDED_DRAFT_INDEX],
+                        ..._FINAL_SEED
+                      };
+                    }else{
+                      _PARSED_DRAFT_ITEMS.push(_FINAL_SEED);
+                    }
+
+                    _DRAFT_ITEMS = _PARSED_DRAFT_ITEMS;
+                  }else{
+                    _PARSED_DRAFT_ITEMS = [_FINAL_SEED];
+                  }
+
+                  const _SERIALIZED_DATA = JSON.stringify(_DRAFT_ITEMS),
+                        _DID_VERIFIED_DRAFT_ITEM = await Functions._storeDataWithKey(GLOBAL.STORAGE.FRAGMENT_DRAFT, _SERIALIZED_DATA);
+
+                  if (_DID_VERIFIED_DRAFT_ITEM !== false){
+                    await Preparation._prepareFragmentToAppend(props);
+                  }
+                }} />
             );
           }else{
             _APPEND_FRAGMENT_BUTTON = (
@@ -123,7 +163,39 @@ class NewFragmentFeatures extends Component<{}> {
                 style={{
                   marginHorizontal: Styles.Content.marginHorizontal
                 }}
-                onPress={async () => await Preparation._prepareFragmentToAppend(props)}
+                onPress={async () => {
+                  let _DRAFT_ITEMS = await Functions._retrieveDataWithKey(GLOBAL.STORAGE.FRAGMENT_DRAFT),
+                      _FINAL_SEED = {
+                        features: props.newFragment.features
+                      };
+
+                  if (_DRAFT_ITEMS !== false){
+                    const _PARSED_DRAFT_ITEMS = JSON.parse(_DRAFT_ITEMS),
+                          _FOUNDED_DRAFT_INDEX = _PARSED_DRAFT_ITEMS.findIndex((item, i) => {
+                            return (item.product._id === props.newFragment.product._id);
+                          });
+
+                    if (_FOUNDED_DRAFT_INDEX > -1){
+                      _PARSED_DRAFT_ITEMS[_FOUNDED_DRAFT_INDEX] = {
+                        ..._PARSED_DRAFT_ITEMS[_FOUNDED_DRAFT_INDEX],
+                        ..._FINAL_SEED
+                      };
+                    }else{
+                      _PARSED_DRAFT_ITEMS.push(_FINAL_SEED);
+                    }
+
+                    _DRAFT_ITEMS = _PARSED_DRAFT_ITEMS;
+                  }else{
+                    _PARSED_DRAFT_ITEMS = [_FINAL_SEED];
+                  }
+
+                  const _SERIALIZED_DATA = JSON.stringify(_DRAFT_ITEMS),
+                        _DID_VERIFIED_DRAFT_ITEM = await Functions._storeDataWithKey(GLOBAL.STORAGE.FRAGMENT_DRAFT, _SERIALIZED_DATA);
+
+                  if (_DID_VERIFIED_DRAFT_ITEM !== false){
+                    await Preparation._prepareFragmentToAppend(props);
+                  }
+                }}
                 forcedDisable={_VALIDATED} />
             );
           }

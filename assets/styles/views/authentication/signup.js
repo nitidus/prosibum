@@ -8,16 +8,26 @@ const { width, height } = Dimensions.get('window'),
 
 var _INNER_CONTENT = {};
 
-var _CONTENT = {};
+var _CONTENT = {
+      width: width - (32 * 2)
+    },
+    _CUSTOM_CONTENT = {
+      marginVertical: 15,
+      marginHorizontal: 15
+    };
 
-if (width >= 1000 || height >= 1000){
-  _CONTENT = {
-    width: (Platform.OS === 'ios')? width - (162 * 2): width - (202 * 2)
-  };
+if (Platform.OS !== 'ios'){
+  if (width >= 1000 || height >= 1000){
+    _CONTENT.width = width - (202 * 2);
+
+    _CUSTOM_CONTENT.marginHorizontal = 202;
+  }
 }else{
-  _CONTENT = {
-    width: width - (32 * 2)
-  };
+  if (width >= 1000 || height >= 1000){
+    _CONTENT.width = width - (162 * 2);
+
+    _CUSTOM_CONTENT.marginHorizontal = 162;
+  }
 }
 
 module.exports = StyleSheet.create({
@@ -51,5 +61,15 @@ module.exports = StyleSheet.create({
   QuickLink: {
     marginVertical: 38,
     alignItems: 'center'
+  },
+  WarningContainer: {
+    height: 'auto',
+    marginBottom: _CUSTOM_CONTENT.marginBottom,
+    backgroundColor: colors.pair.ongerine.orangeYellow,
+    padding: 18,
+    marginTop: 15
+  },
+  WarningContent: {
+    textAlign: 'center'
   }
 });

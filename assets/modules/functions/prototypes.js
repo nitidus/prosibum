@@ -1,5 +1,6 @@
 import { AsyncStorage, CameraRoll, PermissionsAndroid, Platform, NativeModules, I18nManager } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
+import RNRestart from 'react-native-restart';
 import Lodash from 'lodash';
 import Moment from 'moment';
 import 'moment/min/locales.min';
@@ -644,6 +645,8 @@ module.exports = {
           }else{
             I18nManager.forceRTL(false);
           }
+
+          RNRestart.Restart();
         }
 
         await module.exports._storeDataWithKey(GLOBAL.STORAGE.DEFAULT_NATIVE_SETTINGS, _SERIALIZED_TARGET_SETTINGS);
@@ -674,8 +677,14 @@ module.exports = {
         if (typeof _NATIVE_SETTINGS.language.rtl != 'undefined'){
           if (_NATIVE_SETTINGS.language.rtl === true){
             I18nManager.forceRTL(true);
+          }else{
+            I18nManager.forceRTL(false);
           }
+        }else{
+          I18nManager.forceRTL(false);
         }
+
+        RNRestart.Restart();
       }
 
       if (Object.keys(_NATIVE_SETTINGS).length > 0){

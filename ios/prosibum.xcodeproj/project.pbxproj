@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -47,11 +48,10 @@
 		7A524332225D1AFD00BDF034 /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A524306225D1ACD00BDF034 /* libInteractable.a */; };
 		7A7FC0F12156C3A30034BFA2 /* libRNBlur.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A7FC0EE2156C38E0034BFA2 /* libRNBlur.a */; };
 		7ACC742921DB905F0058847F /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACC742621DB90540058847F /* libRNFetchBlob.a */; };
+		7ACDD7CE22C9F0C200BB2B9C /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACDD7CD22C9F09600BB2B9C /* libRCTRestart.a */; };
 		7AE012612265FD4C005DA5B2 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE0125E2265FD38005DA5B2 /* libRNSVG.a */; };
-		7AE89BBC228CF1E000F74447 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE89BB9228CF1D000F74447 /* libReactNativeConfig.a */; };
 		7AE89C06228CFC0500F74447 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		7AE89C07228CFC0500F74447 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		7AE89C09228CFC0500F74447 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE89BB9228CF1D000F74447 /* libReactNativeConfig.a */; };
 		7AE89C0A228CFC0500F74447 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AE0125E2265FD38005DA5B2 /* libRNSVG.a */; };
 		7AE89C0B228CFC0500F74447 /* libInteractable.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A524306225D1ACD00BDF034 /* libInteractable.a */; };
 		7AE89C0C228CFC0500F74447 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7ACC742621DB90540058847F /* libRNFetchBlob.a */; };
@@ -71,7 +71,6 @@
 		7AE89C1A228CFC0500F74447 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		7AE89C1B228CFC0500F74447 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		7AE89C1C228CFC0500F74447 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
-		7AE89C1D228CFC0500F74447 /* libPods-prosibum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACED73152285B0EAB5B8A69 /* libPods-prosibum.a */; };
 		7AE89C1F228CFC0500F74447 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		7AE89C20228CFC0500F74447 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		7AE89C21228CFC0500F74447 /* SF-Pro-Display-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99195C1D74FA40AE8D5CC00A /* SF-Pro-Display-Black.ttf */; };
@@ -122,6 +121,7 @@
 		A82420F3E06A46C0A2C3387C /* SF-Pro-Text-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95BDE3844FE84E2492B3F167 /* SF-Pro-Text-Light.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B14781EE36D4460FADBC9C63 /* SF-Pro-Display-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 98BCDC6C90174EE696053B6C /* SF-Pro-Display-Light.ttf */; };
+		B3AC728A78E1DFEEB3E4EE07 /* libPods-prosibum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACED73152285B0EAB5B8A69 /* libPods-prosibum.a */; };
 		B667D640155D44F6A7FB4E85 /* SF-Pro-Display-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C5E548AB27E42B8B780CF30 /* SF-Pro-Display-Heavy.ttf */; };
 		BC5E997BBCD640949022AAE2 /* SF-Pro-Text-Heavy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0B1ABF6B9D834AA6A28EED4A /* SF-Pro-Text-Heavy.ttf */; };
 		C5859008945A4A8287E93AB4 /* SF-Pro-Display-HeavyItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C658A33870994D04B5B2A3A1 /* SF-Pro-Display-HeavyItalic.ttf */; };
@@ -457,6 +457,13 @@
 			remoteGlobalIDString = A15C300E1CD25C330074CB35;
 			remoteInfo = RNFetchBlob;
 		};
+		7ACDD7CC22C9F09600BB2B9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7ACDD7C822C9F09600BB2B9C /* RCTRestart.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3245CDED1BFEE35C00EABF68;
+			remoteInfo = RCTRestart;
+		};
 		7AE0125D2265FD38005DA5B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7AE012582265FD37005DA5B2 /* RNSVG.xcodeproj */;
@@ -470,20 +477,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
 			remoteInfo = "RNSVG-tvOS";
-		};
-		7AE89BB8228CF1D000F74447 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7AE89BB3228CF1D000F74447 /* ReactNativeConfig.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
-			remoteInfo = ReactNativeConfig;
-		};
-		7AE89BBA228CF1D000F74447 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7AE89BB3228CF1D000F74447 /* ReactNativeConfig.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3DF7F6AC203AA09B00D0EAB7;
-			remoteInfo = "ReactNativeConfig-tvOS";
 		};
 		832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -531,8 +524,8 @@
 		25CF97A0DB9940AD8F9EAACE /* SF-Pro-Display-UltralightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-UltralightItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-UltralightItalic.ttf"; sourceTree = "<group>"; };
 		29A417C8EC2E4DDCBC917BEC /* SF-Pro-Display-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-BoldItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-BoldItalic.ttf"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D71FD35DBA12177AEB401A8 /* Pods-prosibum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum.release.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum/Pods-prosibum.release.xcconfig"; sourceTree = "<group>"; };
 		2D7BB6400C254CC099BF7BD1 /* SF-Pro-Display-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-RegularItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-RegularItalic.ttf"; sourceTree = "<group>"; };
-		3834C34F256F2A2754754144 /* Pods-prosibum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum/Pods-prosibum.debug.xcconfig"; sourceTree = "<group>"; };
 		45D8AFB72D4BBF2D92E311E8 /* libPods-prosibumTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-prosibumTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		484D8C917527454BAC76A714 /* SF-Pro-Text-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-BoldItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-BoldItalic.ttf"; sourceTree = "<group>"; };
 		4ACED73152285B0EAB5B8A69 /* libPods-prosibum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-prosibum.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -552,8 +545,8 @@
 		7A78D11921DB8F4E002FE196 /* librn-fetch-blob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "librn-fetch-blob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A7FC0BF2156C38E0034BFA2 /* RNBlur.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
 		7ACC73F521DB90540058847F /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
+		7ACDD7C822C9F09600BB2B9C /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		7AE012582265FD37005DA5B2 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
-		7AE89BB3228CF1D000F74447 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		7AE89C49228CFC0500F74447 /* pickopack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pickopack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AE89C4A228CFC0500F74447 /* Pickopack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pickopack-Info.plist"; path = "/Users/peedes/Desktop/Developing/Distro/pre-release/prosibum/ios/Pickopack-Info.plist"; sourceTree = "<absolute>"; };
 		7C5E548AB27E42B8B780CF30 /* SF-Pro-Display-Heavy.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Heavy.ttf"; path = "../assets/fonts/SF-Pro-Display-Heavy.ttf"; sourceTree = "<group>"; };
@@ -571,6 +564,7 @@
 		98BCDC6C90174EE696053B6C /* SF-Pro-Display-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Light.ttf"; path = "../assets/fonts/SF-Pro-Display-Light.ttf"; sourceTree = "<group>"; };
 		99195C1D74FA40AE8D5CC00A /* SF-Pro-Display-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Black.ttf"; path = "../assets/fonts/SF-Pro-Display-Black.ttf"; sourceTree = "<group>"; };
 		99EA89FDA91138F577A5DEA4 /* Pods-prosibum-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum-tvOSTests/Pods-prosibum-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9B2B70134D3B9FC0FFFEC0E9 /* Pods-prosibum.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum.debug.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum/Pods-prosibum.debug.xcconfig"; sourceTree = "<group>"; };
 		A04F9D2223CB4A04AAA32CFF /* SF-Pro-Text-RegularItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-RegularItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-RegularItalic.ttf"; sourceTree = "<group>"; };
 		A151DDF3AE6F4B6888501343 /* Vazir-Thin-FD.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Thin-FD.ttf"; path = "../assets/fonts/Vazir-Thin-FD.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -578,7 +572,6 @@
 		C658A33870994D04B5B2A3A1 /* SF-Pro-Display-HeavyItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-HeavyItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-HeavyItalic.ttf"; sourceTree = "<group>"; };
 		C979A83650E64B57ABA74EBF /* SF-Pro-Text-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-MediumItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-MediumItalic.ttf"; sourceTree = "<group>"; };
 		CAC362800068E620BDBB98E1 /* Pods-prosibum-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum-tvOSTests/Pods-prosibum-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		D11F22D3DA7700B545948C2B /* Pods-prosibum.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-prosibum.release.xcconfig"; path = "Pods/Target Support Files/Pods-prosibum/Pods-prosibum.release.xcconfig"; sourceTree = "<group>"; };
 		D34A24F344044536A6D34399 /* Vazir-Light-FD.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Vazir-Light-FD.ttf"; path = "../assets/fonts/Vazir-Light-FD.ttf"; sourceTree = "<group>"; };
 		E37D001F198F40EDB01C6BFA /* SF-Pro-Display-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-LightItalic.ttf"; path = "../assets/fonts/SF-Pro-Display-LightItalic.ttf"; sourceTree = "<group>"; };
 		EACE0F5D6BA34F0A8F7C2CCA /* SF-Pro-Text-SemiboldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-SemiboldItalic.ttf"; path = "../assets/fonts/SF-Pro-Text-SemiboldItalic.ttf"; sourceTree = "<group>"; };
@@ -601,7 +594,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AE89BBC228CF1E000F74447 /* libReactNativeConfig.a in Frameworks */,
+				7ACDD7CE22C9F0C200BB2B9C /* libRCTRestart.a in Frameworks */,
 				7AE012612265FD4C005DA5B2 /* libRNSVG.a in Frameworks */,
 				7A524332225D1AFD00BDF034 /* libInteractable.a in Frameworks */,
 				7ACC742921DB905F0058847F /* libRNFetchBlob.a in Frameworks */,
@@ -623,6 +616,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				D478ACDFA8523FF62FD69793 /* libPods-prosibum.a in Frameworks */,
+				B3AC728A78E1DFEEB3E4EE07 /* libPods-prosibum.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,7 +625,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A151D8F22AEA7B30096E0D7 /* libRNImagePicker.a in Frameworks */,
-				7AE89C09228CFC0500F74447 /* libReactNativeConfig.a in Frameworks */,
 				7AE89C0A228CFC0500F74447 /* libRNSVG.a in Frameworks */,
 				7AE89C0B228CFC0500F74447 /* libInteractable.a in Frameworks */,
 				7AE89C0C228CFC0500F74447 /* libRNFetchBlob.a in Frameworks */,
@@ -652,7 +645,6 @@
 				7AE89C1A228CFC0500F74447 /* libRCTText.a in Frameworks */,
 				7AE89C1B228CFC0500F74447 /* libRCTVibration.a in Frameworks */,
 				7AE89C1C228CFC0500F74447 /* libRCTWebSocket.a in Frameworks */,
-				7AE89C1D228CFC0500F74447 /* libPods-prosibum.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +865,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7ACDD7C922C9F09600BB2B9C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7ACDD7CD22C9F09600BB2B9C /* libRCTRestart.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		7AE012592265FD37005DA5B2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -882,20 +882,11 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7AE89BB4228CF1D000F74447 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7AE89BB9228CF1D000F74447 /* libReactNativeConfig.a */,
-				7AE89BBB228CF1D000F74447 /* libReactNativeConfig-tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				7ACDD7C822C9F09600BB2B9C /* RCTRestart.xcodeproj */,
 				7A151D8922AEA7A70096E0D7 /* RNImagePicker.xcodeproj */,
-				7AE89BB3228CF1D000F74447 /* ReactNativeConfig.xcodeproj */,
 				7AE012582265FD37005DA5B2 /* RNSVG.xcodeproj */,
 				7A5242FD225D1AC800BDF034 /* Interactable.xcodeproj */,
 				7ACC73F521DB90540058847F /* RNFetchBlob.xcodeproj */,
@@ -968,12 +959,12 @@
 		E53EF5828CA4CA6DC4A41490 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3834C34F256F2A2754754144 /* Pods-prosibum.debug.xcconfig */,
-				D11F22D3DA7700B545948C2B /* Pods-prosibum.release.xcconfig */,
 				99EA89FDA91138F577A5DEA4 /* Pods-prosibum-tvOSTests.debug.xcconfig */,
 				CAC362800068E620BDBB98E1 /* Pods-prosibum-tvOSTests.release.xcconfig */,
 				056F418EAC78494C08CA336D /* Pods-prosibumTests.debug.xcconfig */,
 				069E1CEFD650B80A753300EA /* Pods-prosibumTests.release.xcconfig */,
+				9B2B70134D3B9FC0FFFEC0E9 /* Pods-prosibum.debug.xcconfig */,
+				2D71FD35DBA12177AEB401A8 /* Pods-prosibum.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1066,7 +1057,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7AE89C46228CFC0500F74447 /* Build configuration list for PBXNativeTarget "pickopack" */;
 			buildPhases = (
-				7AE89C04228CFC0500F74447 /* [CP] Check Pods Manifest.lock */,
 				7AE89C05228CFC0500F74447 /* Sources */,
 				7AE89C08228CFC0500F74447 /* Frameworks */,
 				7AE89C1E228CFC0500F74447 /* Resources */,
@@ -1160,6 +1150,10 @@
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
 				},
 				{
+					ProductGroup = 7ACDD7C922C9F09600BB2B9C /* Products */;
+					ProjectRef = 7ACDD7C822C9F09600BB2B9C /* RCTRestart.xcodeproj */;
+				},
+				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
 					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
@@ -1178,10 +1172,6 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
-				},
-				{
-					ProductGroup = 7AE89BB4228CF1D000F74447 /* Products */;
-					ProjectRef = 7AE89BB3228CF1D000F74447 /* ReactNativeConfig.xcodeproj */;
 				},
 				{
 					ProductGroup = 7A7FC0C02156C38E0034BFA2 /* Products */;
@@ -1525,6 +1515,13 @@
 			remoteRef = 7ACC742521DB90540058847F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		7ACDD7CD22C9F09600BB2B9C /* libRCTRestart.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTRestart.a;
+			remoteRef = 7ACDD7CC22C9F09600BB2B9C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		7AE0125E2265FD38005DA5B2 /* libRNSVG.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1537,20 +1534,6 @@
 			fileType = archive.ar;
 			path = "libRNSVG-tvOS.a";
 			remoteRef = 7AE0125F2265FD38005DA5B2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7AE89BB9228CF1D000F74447 /* libReactNativeConfig.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libReactNativeConfig.a;
-			remoteRef = 7AE89BB8228CF1D000F74447 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7AE89BBB228CF1D000F74447 /* libReactNativeConfig-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libReactNativeConfig-tvOS.a";
-			remoteRef = 7AE89BBA228CF1D000F74447 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		832341B51AAA6A8300B99B32 /* libRCTText.a */ = {
@@ -1683,24 +1666,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		7AE89C04228CFC0500F74447 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-prosibum-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 		7AE89C45228CFC0500F74447 /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1861,7 +1826,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3834C34F256F2A2754754144 /* Pods-prosibum.debug.xcconfig */;
+			baseConfigurationReference = 9B2B70134D3B9FC0FFFEC0E9 /* Pods-prosibum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1869,7 +1834,7 @@
 				DEVELOPMENT_TEAM = K6X49DG8VF;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+					"$(SRCROOT)/../node_modules/react-native-restart/**",
 				);
 				INFOPLIST_FILE = prosibum/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1890,14 +1855,14 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D11F22D3DA7700B545948C2B /* Pods-prosibum.release.xcconfig */;
+			baseConfigurationReference = 2D71FD35DBA12177AEB401A8 /* Pods-prosibum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K6X49DG8VF;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../node_modules/react-native-restart/ios/RCTRestart",
+					"$(SRCROOT)/../node_modules/react-native-restart/**",
 				);
 				INFOPLIST_FILE = prosibum/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1918,7 +1883,6 @@
 		};
 		7AE89C47228CFC0500F74447 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3834C34F256F2A2754754144 /* Pods-prosibum.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1947,7 +1911,6 @@
 		};
 		7AE89C48228CFC0500F74447 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D11F22D3DA7700B545948C2B /* Pods-prosibum.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;

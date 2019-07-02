@@ -346,13 +346,15 @@ const ProductFeaturesModal = (props) => {
               }} />
           );
         }else{
+          // <Link
+          //   containerStyle={[
+          //     Styles.Center_TextAlignment,
+          //     Styles.Center_ContentAlignment
+          //   ]}
+          //   value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
+
           _MODAL_CONTENT = (
-            <Link
-              containerStyle={[
-                Styles.Center_TextAlignment,
-                Styles.Center_ContentAlignment
-              ]}
-              value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
+            <ActivityIndicator/>
           );
         }
       }else if (typeof attitude.features != 'undefined') {
@@ -549,13 +551,15 @@ const ProductFeaturesModal = (props) => {
                 _FINAL_BUTTON
               ];
             }else{
+              // <Link
+              //   containerStyle={[
+              //     Styles.Center_TextAlignment,
+              //     Styles.Center_ContentAlignment
+              //   ]}
+              //   value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
+
               _MODAL_CONTENT = (
-                <Link
-                  containerStyle={[
-                    Styles.Center_TextAlignment,
-                    Styles.Center_ContentAlignment
-                  ]}
-                  value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.unit.title[attitude.language]} />
+                <ActivityIndicator/>
               );
             }
             break;
@@ -1753,13 +1757,15 @@ const ProductFeaturesModal = (props) => {
             _MODAL_CONTENT.push(_FINAL_BUTTON);
           }
         }else{
+          // <Link
+          //   containerStyle={[
+          //     Styles.Center_TextAlignment,
+          //     Styles.Center_ContentAlignment
+          //   ]}
+          //   value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.complex.title[attitude.language]} />
+
           _MODAL_CONTENT = (
-            <Link
-              containerStyle={[
-                Styles.Center_TextAlignment,
-                Styles.Center_ContentAlignment
-              ]}
-              value={__CONSTANTS.modalContainer.content.firstCarousel.content.empty.state.complex.title[attitude.language]} />
+            <ActivityIndicator/>
           );
         }
       }

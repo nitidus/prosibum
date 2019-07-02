@@ -1,0 +1,33 @@
+{
+  "state": {
+    "full": {
+      "drafted": {
+        "container": {
+          "title": {
+            "en": "Drafted Items Container"
+          },
+          "content": {
+            "type": "BUTTON",
+            "title": {
+              "en": "Drafted Item Content"
+            }
+          }
+        }
+      }
+    },
+    "empty": {
+      "published": {
+        "en": "You've not been created any published fragment.",
+        "fa": "هنوز هیچ تنوع محصول منتشر‌شده‌ای ایجاد نکرده‌اید."
+      },
+      "drafted": {
+        "en": "You've not been created any drafted fragment.",
+        "fa": "هنوز هیچ تنوع محصول پیش‌نویس‌شده‌ای ایجاد نکرده‌اید."
+      },
+      "suspended": {
+        "en": "You've not been created any suspended fragment.",
+        "fa": "هنوز هیچ تنوع محصول معلق‌شده‌ای ایجاد نکرده‌اید."
+      }
+    }
+  }
+}

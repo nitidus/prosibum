@@ -2,9 +2,9 @@ import ENV from 'react-native-config';
 
 import { Platform } from 'react-native';
 
-const __API_HOST = (Platform.OS === 'ios')? (ENV.APP_HOST_IOS || ENV.APP_HOST || 'http://localhost'): (ENV.APP_HOST_ANDROID || ENV.APP_HOST || 'http://192.168.0.105'),
-      __API_PORT = ENV.APP_HOST_PORT || 16374,
-      __API_VERSION = ENV.APP_API_VERSION || 'v1',
+const __API_HOST = (Platform.OS === 'ios')? 'http://localhost': 'http://192.168.0.105',
+      __API_PORT = 16374,
+      __API_VERSION = 'v1',
       GLOBAL = {
         TARGET: 'Wholesaler',
         URLS: {
@@ -16,7 +16,8 @@ const __API_HOST = (Platform.OS === 'ios')? (ENV.APP_HOST_IOS || ENV.APP_HOST ||
         STORAGE: {
           DEFAULT_NATIVE_SETTINGS: 'SETTINGS/DEFAULT_NATIVE',
           AUTH: 'AUTH/TOKEN',
-          SUBSCRIBE_TOKEN: 'SUBSCRIBE/TOKEN'
+          SUBSCRIBE_TOKEN: 'SUBSCRIBE/TOKEN',
+          FRAGMENT_DRAFT: 'FRAGMENT/DRAFT'
         }
       };
 

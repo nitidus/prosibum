@@ -185,13 +185,15 @@ const ProductShippingMethodsModal = (props) => {
       )
     ];
   }else{
+    // <Link
+    //   containerStyle={[
+    //     Styles.Center_TextAlignment,
+    //     Styles.Center_ContentAlignment
+    //   ]}
+    //   value={__CONSTANTS.modalContainer.content.carousel.state.null.title[attitude.language]} />
+    
     _MODAL_CONTENT = (
-      <Link
-        containerStyle={[
-          Styles.Center_TextAlignment,
-          Styles.Center_ContentAlignment
-        ]}
-        value={__CONSTANTS.modalContainer.content.carousel.state.null.title[attitude.language]} />
+      <ActivityIndicator/>
     );
   }
 

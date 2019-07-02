@@ -3,7 +3,7 @@
   "version": "0.0.10",
   "summary": "react-native-restart",
   "description": "Restart React-Native applications",
-  "homepage": "https://github.com/avishayil/react-native-restart.git",
+  "homepage": "git+https://github.com/avishayil/react-native-restart.git",
   "license": "MIT",
   "authors": {
     "Avishay Bar": "http://www.geektime.co.il"
@@ -12,7 +12,7 @@
     "ios": "8.0"
   },
   "source": {
-    "git": "https://github.com/avishayil/react-native-restart.git",
+    "git": "git+https://github.com/avishayil/react-native-restart.git",
     "tag": "0.0.10"
   },
   "source_files": "RCTRestart/*.{h,m}",

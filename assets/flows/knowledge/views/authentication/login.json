@@ -23,8 +23,14 @@
       },
       "validation": {
         "message": {
-          "en": "Check your email or phone number",
-          "fa": "ایمیل یا شماره موبایل بررسی شود"
+          "firstLevel": {
+            "en": "Email or phone number is empty.",
+            "fa": "ایمیل یا شماره موبایل خالی است."
+          },
+          "secondLevel": {
+            "en": "Check your email or phone number structure.",
+            "fa": "ساختار ایمیل یا شماره موبایل بررسی شود."
+          }
         }
       }
     },
@@ -40,8 +46,14 @@
       },
       "validation": {
         "message": {
-          "en": "Password must contain 8 characters",
-          "fa": "گذرواژه شامل ۸ کاراکتر است"
+          "firstLevel": {
+            "en": "Password is empty.",
+            "fa": "گذرواژه خالی است."
+          },
+          "secondLevel": {
+            "en": "Password must contains 8 characters including lower case and upper case letters, digits, and valid special characters.",
+            "fa": "گذرواژه ۸ کاراکتر شامل حروف کوچک و بزرگ، اعداد و کاراکترهای خاص معتبر را شامل می‌شود."
+          }
         }
       }
     }

@@ -167,11 +167,20 @@ module.exports = {
       switch (_DEMAND_MODE) {
         case 'INVITATION':
           await props.completeUserRegistration(signup.role.user._id, _SEED);
+
+          if (!props.signup.connected.status){
+            props.resetForm();
+          }
           break;
+
         default:
           await props.verifyTheUser(_SEED, () => {
             navigation.navigate('VerifyPhoneNumber');
           });
+
+          if (!props.signup.connected.status){
+            props.resetForm();
+          }
           break;
       }
     }else{
@@ -422,6 +431,23 @@ module.exports = {
     await props.appendFragment(_SEED);
 
     if (await _PROPS.connected.status){
+      const _DRAFT_ITEMS = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.FRAGMENT_DRAFT);
+
+      if (_DRAFT_ITEMS !== false){
+        const _PARSED_DRAFT_ITEMS = JSON.parse(_DRAFT_ITEMS),
+              _FINAL_DRAFT_ITEMS = _PARSED_DRAFT_ITEMS.filter((item, i) => {
+                return (item.product._id === _PROPS.product._id);
+              });
+
+        if (_FINAL_DRAFT_ITEMS.length > 0){
+          const _SERIALIZED_DATA = JSON.stringify(_FINAL_DRAFT_ITEMS);
+
+          await Prototypes._storeDataWithKey(GLOBAL.STORAGE.FRAGMENT_DRAFT, _SERIALIZED_DATA);
+        }else{
+          await Prototypes._removeDataWithKey(GLOBAL.STORAGE.FRAGMENT_DRAFT);
+        }
+      }
+
       props.resetForms();
       navigation.navigate('Overseer');
     }

@@ -31,8 +31,14 @@
             },
             "validation": {
               "message": {
-                "en": "Check your phone number format",
-                "fa": "ساختار شماره موبایل بررسی شود"
+                "firstLevel": {
+                  "en": "Phone number is empty.",
+                  "fa": "شماره موبایل خالی است."
+                },
+                "secondLevel": {
+                  "en": "Check your phone number format.",
+                  "fa": "ساختار شماره موبایل بررسی شود."
+                }
               }
             }
           },
@@ -44,8 +50,14 @@
             },
             "validation": {
               "message": {
-                "en": "Check your email format",
-                "fa": "ساختار ایمیل بررسی شود"
+                "firstLevel": {
+                  "en": "Email is empty.",
+                  "fa": "ایمیل خالی است."
+                },
+                "secondLevel": {
+                  "en": "Check your email format.",
+                  "fa": "ساختار ایمیل بررسی شود."
+                }
               }
             }
           },
@@ -57,8 +69,14 @@
             },
             "validation": {
               "message": {
-                "en": "Password must contain 8 characters",
-                "fa": "گذرواژه شامل ۸ کاراکتر است"
+                "firstLevel": {
+                  "en": "Password is empty.",
+                  "fa": "گذرواژه خالی است."
+                },
+                "secondLevel": {
+                  "en": "Password must contains 8 characters including lower case and upper case letters, digits, and valid special characters.",
+                  "fa": "گذرواژه ۸ کاراکتر شامل حروف کوچک و بزرگ، اعداد و کاراکترهای خاص معتبر را شامل می‌شود."
+                }
               }
             }
           }
@@ -110,6 +128,18 @@
             "title": {
               "en": "First Name",
               "fa": "نام"
+            },
+            "validation": {
+              "message": {
+                "firstLevel": {
+                  "en": "First name is empty.",
+                  "fa": "نام خالی است."
+                },
+                "secondLevel": {
+                  "en": "Check your first name format.",
+                  "fa": "ساختار نام بررسی شود."
+                }
+              }
             }
           },
           "second": {
@@ -117,6 +147,18 @@
             "title": {
               "en": "Last Name",
               "fa": "نام خانوادگی"
+            },
+            "validation": {
+              "message": {
+                "firstLevel": {
+                  "en": "Last name is empty.",
+                  "fa": "نام خانوادگی خالی است."
+                },
+                "secondLevel": {
+                  "en": "Check your last name format.",
+                  "fa": "ساختار نام خانوادگی بررسی شود."
+                }
+              }
             }
           }
         },
@@ -126,6 +168,18 @@
             "title": {
               "en": "Phone Number",
               "fa": "شماره موبایل"
+            },
+            "validation": {
+              "message": {
+                "firstLevel": {
+                  "en": "Phone number is empty.",
+                  "fa": "شماره موبایل خالی است."
+                },
+                "secondLevel": {
+                  "en": "Check your phone number format.",
+                  "fa": "ساختار شماره موبایل بررسی شود."
+                }
+              }
             }
           },
           "second": {
@@ -133,6 +187,18 @@
             "title": {
               "en": "Password",
               "fa": "گذرواژه"
+            },
+            "validation": {
+              "message": {
+                "firstLevel": {
+                  "en": "Password is empty.",
+                  "fa": "گذرواژه خالی است."
+                },
+                "secondLevel": {
+                  "en": "Password must contains 8 characters including lower case and upper case letters, digits, and valid special characters.",
+                  "fa": "گذرواژه ۸ کاراکتر شامل حروف کوچک و بزرگ، اعداد و کاراکترهای خاص معتبر را شامل می‌شود."
+                }
+              }
             }
           }
         },

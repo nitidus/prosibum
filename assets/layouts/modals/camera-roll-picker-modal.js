@@ -8,6 +8,7 @@ import ImagePicker from 'react-native-image-picker';
 
 import { Global, Modules } from '../../styles/index';
 import { Icon } from '../icon';
+import { ActivityIndicator } from '../activity-indicator';
 import { Modal } from '../modal';
 import { Input, Link, Carousel } from '../../components/index';
 const Styles = Modules.Layouts.CameraRollPickerModal;
@@ -150,11 +151,13 @@ const CameraRollPickerModal = (props) => {
         onEndReached={() => Preparation._prepareCameraRoll(props)}/>
     );
   }else{
+    // <Link
+    //   value={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.empty[attitude.language]} />
+    
     _CAMERA_ROLL_ITEMS_CONTENT = (
       <View
         style={Styles.CameraRollEmptyContainer}>
-          <Link
-            value={__CONSTANTS.modalContainer.content.firstCarouselContainer.content.empty[attitude.language]} />
+          <ActivityIndicator/>
       </View>
     );
   }

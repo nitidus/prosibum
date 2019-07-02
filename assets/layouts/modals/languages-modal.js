@@ -135,9 +135,9 @@ const LanguagesModal = (props) => {
                   gradient={Global.colors.pair.ongerine}
                   style={Styles.CarouselItemContainer}
                   onPress={async () => {
-                    await Functions._setDefaultNativeSettingsItemWithKey('language', item);
                     await attitude.onPress();
                     await MODAL.ON_BLUR(false);
+                    await Functions._setDefaultNativeSettingsItemWithKey('language', item);
                   }}>
                     <Text
                       style={Styles.CarouselItemTitle}>

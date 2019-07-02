@@ -26,6 +26,7 @@
     "react-native-linear-gradient": "^2.4.2",
     "react-native-loader": "^1.2.1",
     "react-native-modal-with-blur-support-background": "^1.0.0",
+    "react-native-restart": "0.0.10",
     "react-native-snap-carousel-rtl-optimized": "^3.8.0",
     "react-native-svg": "^7.0.3",
     "react-navigation": "^2.12.1",

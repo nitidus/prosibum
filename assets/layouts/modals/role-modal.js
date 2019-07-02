@@ -6,6 +6,7 @@ const _Screen = Dimensions.get('window');
 import { connect } from 'react-redux';
 
 import { Global, Modules } from '../../styles/index';
+import { ActivityIndicator } from '../activity-indicator';
 import { Icon } from '../icon';
 import { Modal } from '../modal';
 import { Input, Carousel, Link } from '../../components/index';
@@ -306,10 +307,12 @@ const RoleModal = (props) => {
     );
 
   }else{
+    // <Link
+    //   containerStyle={Styles.EmptyContent}
+    //   value={__CONSTANTS.modalContainer.noContent.title[attitude.language]} />
+
     _MODAL_CONTENT = (
-      <Link
-        containerStyle={Styles.EmptyContent}
-        value={__CONSTANTS.modalContainer.noContent.title[attitude.language]} />
+      <ActivityIndicator/>
     );
   }
 

@@ -108,37 +108,99 @@ class Signup extends Component<{}> {
             _LANGUAGE = Functions._convertTokenToKeyword(props.signup.language.key),
             _DEMAND_MODE = Functions._convertTokenToKey(props.signup.demandMode);
 
-      var _MAIN_CONTENT, _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
+      var _MAIN_CONTENT, _SUBMIT_BUTTON_CONTENT;
 
       switch (_DEMAND_MODE) {
         case 'INVITATION':
+          _SUBMIT_BUTTON_CONTENT = (
+            <Input
+              style={Styles.SubmitButtonInvitationState}
+              type={__CONSTANTS.content.state.invitation.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.normal.title.en)}
+              value={__CONSTANTS.content.state.normal.submitInput.state.normal.title[_LANGUAGE]}
+              gradient={Global.colors.pair.ongerine}
+              onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
+              forcedDisable={_VALIDATED} />
+          );
+
           if (Object.keys(props.signup.role).length > 0){
             if (props.signup.verificationLoading){
-              _SUBMIT_BUTTON_CONTENT = <Input
-                type={__CONSTANTS.content.state.invitation.submitInput.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.loading.title.en)}
-                gradient={Global.colors.pair.ongerine}
-                style={Styles.SubmitButtonInvitationState}
-                disable={true}>
+              _SUBMIT_BUTTON_CONTENT = (
+                <Input
+                  type={__CONSTANTS.content.state.invitation.submitInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.loading.title.en)}
+                  gradient={Global.colors.pair.ongerine}
+                  style={Styles.SubmitButtonInvitationState}
+                  disable={true}>
                   <ActivityIndicator />
-                </Input>;
+                </Input>
+              );
             }else{
               if (!props.signup.connected.status){
-                _TOP_PINNED_TOAST = <Toast
-                  message={props.signup.connected.content}
-                  launched={!props.signup.connected.status}
-                  color={Global.colors.single.carminePink}
-                  onPress={() => Preparation._prepareSignupComponentToSubmit(props)} />;
+                _SUBMIT_BUTTON_CONTENT = (
+                  <Input
+                    style={[
+                      Styles.SubmitButtonInvitationState,
+                      {
+                        backgroundColor: Global.colors.single.carminePink
+                      }
+                    ]}
+                    type={__CONSTANTS.content.state.invitation.submitInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.normal.title.en)}
+                    value={props.signup.connected.content}
+                    onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
+                    forcedDisable={_VALIDATED} />
+                );
+              }
+            }
+
+            if (_VALIDATED){
+              var _WARNING_MESSAGE = '';
+
+              if (props.signup.phone.number == ''){
+                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.first.validation.message.firstLevel[_LANGUAGE]}`;
+              }else{
+                if (!Functions._checkIsAValidPhoneNumber(props.signup.phone.number)){
+                  _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.first.validation.message.secondLevel[_LANGUAGE]}`;
+                }
               }
 
-              _SUBMIT_BUTTON_CONTENT = <Input
-                style={Styles.SubmitButtonInvitationState}
-                type={__CONSTANTS.content.state.invitation.submitInput.type}
-                name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.normal.title.en)}
-                value={__CONSTANTS.content.state.normal.submitInput.state.normal.title[_LANGUAGE]}
-                gradient={Global.colors.pair.ongerine}
-                onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
-                forcedDisable={_VALIDATED} />;
+              if (props.signup.firstName == ''){
+                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.firstInputGroup.first.validation.message.firstLevel[_LANGUAGE]}`;
+              }else{
+                if (!Functions._checkIsAValidTextOnlyField(props.signup.firstName)){
+                  _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.firstInputGroup.first.validation.message.secondLevel[_LANGUAGE]}`;
+                }
+              }
+
+              if (props.signup.lastName == ''){
+                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.firstInputGroup.second.validation.message.firstLevel[_LANGUAGE]}`;
+              }else{
+                if (!Functions._checkIsAValidTextOnlyField(props.signup.lastName)){
+                  _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.firstInputGroup.second.validation.message.secondLevel[_LANGUAGE]}`;
+                }
+              }
+
+              if (props.signup.password == ''){
+                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.second.validation.message.firstLevel[_LANGUAGE]}`;
+              }else{
+                if (!Functions._checkIsAValidPassword(props.signup.password)){
+                  _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.second.validation.message.secondLevel[_LANGUAGE]}`;
+                }
+              }
+
+              if (_WARNING_MESSAGE != ''){
+                _SUBMIT_BUTTON_CONTENT = (
+                  <Input
+                    type={__CONSTANTS.content.state.invitation.submitInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.invitation.submitInput.state.normal.title.en)}
+                    style={[
+                      Styles.WarningContainer
+                    ]}
+                    textStyle={Styles.WarningContent}
+                    value={_WARNING_MESSAGE} />
+                );
+              }
             }
 
             _MAIN_CONTENT = (
@@ -200,59 +262,85 @@ class Signup extends Component<{}> {
           break;
 
         default:
-          if (props.signup.verificationLoading){
-            _SUBMIT_BUTTON_CONTENT = <Input
-              type={__CONSTANTS.content.state.normal.submitInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.loading.title.en)}
-              gradient={Global.colors.pair.ongerine}
-              style={Styles.SubmitButtonNormalState}
-              disable={true}>
-                <ActivityIndicator />
-              </Input>;
-          }else{
-            if (!props.signup.connected.status){
-              _TOP_PINNED_TOAST = <Toast
-                message={props.signup.connected.content}
-                launched={!props.signup.connected.status}
-                color={Global.colors.single.carminePink}
-                onPress={() => Preparation._prepareSignupComponentToSubmit(props)} />;
-            }
-
-            _SUBMIT_BUTTON_CONTENT = <Input
+          _SUBMIT_BUTTON_CONTENT = (
+            <Input
               style={Styles.SubmitButtonNormalState}
               type={__CONSTANTS.content.state.normal.submitInput.type}
               name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.normal.title.en)}
               value={__CONSTANTS.content.state.normal.submitInput.state.normal.title[_LANGUAGE]}
               gradient={Global.colors.pair.ongerine}
               onPress={() => Preparation._prepareSignupComponentToSubmit(props)}
-              forcedDisable={_VALIDATED} />;
-          }
+              forcedDisable={_VALIDATED} />
+          );
 
-          var _WARNING_MESSAGE = '';
-
-          if (props.signup.phone.number != ''){
-            if (!Functions._checkIsAValidPhoneNumber(props.signup.phone.number)){
-              _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.first.validation.message[_LANGUAGE];
+          if (props.signup.verificationLoading){
+            _SUBMIT_BUTTON_CONTENT = (
+              <Input
+                type={__CONSTANTS.content.state.normal.submitInput.type}
+                name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.loading.title.en)}
+                gradient={Global.colors.pair.ongerine}
+                style={Styles.SubmitButtonNormalState}
+                disable={true}>
+                <ActivityIndicator />
+              </Input>
+            );
+          }else{
+            if (!props.signup.connected.status){
+              _SUBMIT_BUTTON_CONTENT = (
+                <Input
+                  type={__CONSTANTS.content.state.normal.submitInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.loading.title.en)}
+                  value={props.signup.connected.content}
+                  style={[
+                    Styles.SubmitButtonNormalState,
+                    {
+                      backgroundColor: Global.colors.single.carminePink
+                    }
+                  ]}
+                  onPress={() => Preparation._prepareSignupComponentToSubmit(props)}/>
+              );
             }
           }
 
-          if (props.signup.email != ''){
-            if (!Functions._checkIsAValidEmail(props.signup.email)){
-              _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.second.validation.message[_LANGUAGE];
-            }
-          }
+          if (_VALIDATED){
+            var _WARNING_MESSAGE = '';
 
-          if (props.signup.password != ''){
-            if (!Functions._checkIsAValidPassword(props.signup.password)){
-              _WARNING_MESSAGE = __CONSTANTS.content.state.normal.firstInputGroup.third.validation.message[_LANGUAGE];
+            if (props.signup.phone.number == ''){
+              _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.first.validation.message.firstLevel[_LANGUAGE]}`;
+            }else{
+              if (!Functions._checkIsAValidPhoneNumber(props.signup.phone.number)){
+                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.first.validation.message.secondLevel[_LANGUAGE]}`;
+              }
             }
-          }
 
-          if (_WARNING_MESSAGE != ''){
-            _TOP_PINNED_TOAST = <Toast
-              message={_WARNING_MESSAGE}
-              launched={true}
-              color={Global.colors.pair.ongerine.orangeYellow} />;
+            if (props.signup.email == ''){
+              _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.second.validation.message.firstLevel[_LANGUAGE]}`;
+            }else{
+              if (!Functions._checkIsAValidEmail(props.signup.email)){
+                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.second.validation.message.secondLevel[_LANGUAGE]}`;
+              }
+            }
+
+            if (props.signup.password == ''){
+              _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.firstLevel[_LANGUAGE]}`;
+            }else{
+              if (!Functions._checkIsAValidPassword(props.signup.password)){
+                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.secondLevel[_LANGUAGE]}`;
+              }
+            }
+
+            if (_WARNING_MESSAGE != ''){
+              _SUBMIT_BUTTON_CONTENT = (
+                <Input
+                  type={__CONSTANTS.content.state.normal.submitInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.state.normal.submitInput.state.loading.title.en)}
+                  style={[
+                    Styles.WarningContainer
+                  ]}
+                  textStyle={Styles.WarningContent}
+                  value={_WARNING_MESSAGE} />
+              );
+            }
           }
 
           var _AREA_CODE = props.signup.phone.dialCode.area_code;
@@ -322,8 +410,6 @@ class Signup extends Component<{}> {
       _SIGNUP_CONTENT = (
         <React.Fragment
           name={Functions._convertTokenToKeyword(__CONSTANTS.majorContainer.title.en)}>
-            {_TOP_PINNED_TOAST}
-
             <CountriesCodesModal
               visible={props.signup.countriesCodesModalVisibility}
               onBlur={(status) => props.setCountriesCodesModalVisibility(status)}

@@ -47,8 +47,11 @@ class NewFragmentDetection extends Component<{}> {
             };
 
       var _PRODUCTS_QUERY_CONTENT = (
-        <View/>
-      );
+            <View/>
+          ),
+          _PRODUCTS_QUERY_EXTRA_CONTENT = (
+            <View/>
+          );
 
       if (props.newFragment.queryItemsLoading){
         _PRODUCTS_QUERY_CONTENT = (
@@ -133,9 +136,31 @@ class NewFragmentDetection extends Component<{}> {
                   );
                 }}/>
             );
+
+            _PRODUCTS_QUERY_EXTRA_CONTENT = (
+              <View
+                style={{
+                  marginVertical: Styles.Content.marginVertical
+                }}>
+                  <Input
+                    type={__CONSTANTS.content.firstFlatList.state.null.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstFlatList.state.null.state.normal.title.en)}
+                    value={__CONSTANTS.content.firstFlatList.state.null.state.normal.title[_LANGUAGE]}
+                    gradient={Global.colors.pair.ongerine}
+                    style={{
+                      marginHorizontal: Styles.Content.marginHorizontal
+                    }}
+                    onPress={() => {
+                      const { navigation } = props;
+
+                      Keyboard.dismiss();
+                      navigation.navigate('NewProductIdentity');
+                    }} />
+              </View>
+            );
           }else{
             if (props.newFragment.query.length >= 3){
-              _PRODUCTS_QUERY_CONTENT = (
+              _PRODUCTS_QUERY_EXTRA_CONTENT = (
                 <View
                   style={{
                     marginBottom: Styles.Content.marginVertical
@@ -190,6 +215,8 @@ class NewFragmentDetection extends Component<{}> {
               }} />
 
               {_PRODUCTS_QUERY_CONTENT}
+
+              {_PRODUCTS_QUERY_EXTRA_CONTENT}
         </Container>
       );
     }else{

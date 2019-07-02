@@ -25,7 +25,7 @@ import Wallets from './views/dashboard/wallets';
   import SelectedWallet from './views/dashboard/wallets/selected-wallet';
 
 //Products
-
+  import Products from './views/products';
   //New Product
   import NewProduct from './views/products/new-product';
 
@@ -68,7 +68,8 @@ module.exports = {
     },
     Products: {
       NewProduct,
-      NewFragment
+      NewFragment,
+      Self: Products
     }
   },
   Modules: {

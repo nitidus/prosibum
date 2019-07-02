@@ -77,13 +77,24 @@ class Login extends Component<{}> {
     var _LOGIN_CONTENT;
 
     if (Object.keys(props.login.language).length > 0){
-      var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
-
       const _VALIDATED = this._componentWillCheckValidation(props),
             _LANGUAGE = Functions._convertTokenToKeyword(props.login.language.key),
             _LANGUAGES_MODAL_OTHER_PROPS = {
               language: props.login.language
             };
+
+      var _SUBMIT_BUTTON_CONTENT = (
+        <Input
+          style={Styles.SubmitButton}
+          type={__CONSTANTS.submitInput.type}
+          name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+          value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
+          gradient={Global.colors.pair.ongerine}
+          onPress={async () => {
+            await Preparation._prepareLogin(props);
+          }}
+          forcedDisable={_VALIDATED} />
+      );
 
       if (props.login.loading){
         _SUBMIT_BUTTON_CONTENT = <Input
@@ -95,59 +106,62 @@ class Login extends Component<{}> {
             <ActivityIndicator />
           </Input>;
       }else{
-        if (props.login.connected.status){
-          _TOP_PINNED_TOAST = <Toast
-            launched={!props.login.connected.status} />;
-        }else{
-          _TOP_PINNED_TOAST = <Toast
-            message={props.login.connected.content}
-            launched={!props.login.connected.status}
-            color={Global.colors.single.carminePink}
-            onPress={() => {
-              Preparation._prepareLogin(props)
-            }} />;
+        if (!props.login.connected.status){
+          _SUBMIT_BUTTON_CONTENT = (
+            <Input
+              style={[
+                Styles.SubmitButton,
+                {
+                  backgroundColor: Global.colors.single.carminePink
+                }
+              ]}
+              type={__CONSTANTS.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+              value={props.login.connected.content}
+              onPress={async () => {
+                await Preparation._prepareLogin(props);
+              }}
+              forcedDisable={_VALIDATED} />
+          );
         }
-
-        _SUBMIT_BUTTON_CONTENT = <Input
-          style={Styles.SubmitButton}
-          type={__CONSTANTS.submitInput.type}
-          name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-          value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
-          gradient={Global.colors.pair.ongerine}
-          onPress={async () => {
-            await Preparation._prepareLogin(props);
-          }}
-          forcedDisable={_VALIDATED} />;
       }
 
       if (_VALIDATED){
         var _WARNING_MESSAGE = '';
 
-        if (props.login.token != ''){
+        if (props.login.token == ''){
+          _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.first.validation.message.firstLevel[_LANGUAGE]}`;
+        }else{
           if (!Functions._checkIsAValidToken(props.login.token)){
-            _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.first.validation.message[_LANGUAGE];
+            _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.first.validation.message.secondLevel[_LANGUAGE]}`;
           }
         }
 
-        if (props.login.password != ''){
+        if (props.login.password == ''){
+          _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.second.validation.message.firstLevel[_LANGUAGE]}`;
+        }else{
           if (!Functions._checkIsAValidPassword(props.login.password)){
-            _WARNING_MESSAGE = __CONSTANTS.firstInputGroup.second.validation.message[_LANGUAGE];
+            _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.second.validation.message.secondLevel[_LANGUAGE]}`;
           }
         }
 
         if (_WARNING_MESSAGE != ''){
-          _TOP_PINNED_TOAST = <Toast
-            message={_WARNING_MESSAGE}
-            launched={true}
-            color={Global.colors.pair.ongerine.orangeYellow} />;
+          _SUBMIT_BUTTON_CONTENT = (
+            <Input
+              style={[
+                Styles.WarningContainer
+              ]}
+              textStyle={Styles.WarningContent}
+              type={__CONSTANTS.submitInput.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+              value={_WARNING_MESSAGE} />
+          );
         }
       }
 
       _LOGIN_CONTENT = (
         <React.Fragment
           name={Functions._convertTokenToKeyword(__CONSTANTS.container.title.en)}>
-            {_TOP_PINNED_TOAST}
-
             <View
               name={Functions._convertTokenToKeyword(__CONSTANTS.container.title.en)}
               style={Styles.Content}>

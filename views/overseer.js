@@ -17,7 +17,7 @@ import { views_constants } from '../assets/flows/knowledge/index';
 const __CONSTANTS = views_constants.overseer;
 
 import Dashboard from './dashboard';
-import { Products } from './products';
+import Products from './products';
 import { Messages } from './messages';
 const __COMPONENTS = {
   Dashboard,
@@ -62,8 +62,8 @@ class Overseer extends Component<{}> {
           };
           _OTHER_PROPS.rightIcon = 'for-you';
 
-          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
-          _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab[_LANGUAGE];
+          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab;
+          _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab;
 
           RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
           break;
@@ -96,16 +96,16 @@ class Overseer extends Component<{}> {
             _OTHER_PROPS.currentTopTab = props.overseer.currentTopTab;
             _OTHER_PROPS.onTopBarPress = (tabName) => props.setTopPilotCurrentTab(tabName);
 
-            _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
-            _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab[_LANGUAGE];
+            _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab;
+            _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab;
           }
 
           RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
           break;
 
         case 'MESSAGES':
-          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab[_LANGUAGE];
-          _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab[_LANGUAGE];
+          _CONTENT_OTHER_PROPS.main = props.overseer.currentBottomTab;
+          _CONTENT_OTHER_PROPS.sub = props.overseer.currentTopTab;
 
           RootContentComponent = __COMPONENTS[props.overseer.currentBottomTab.en];
           break;
