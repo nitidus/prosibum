@@ -184,8 +184,16 @@ class Signup extends Component<{}> {
               if (props.signup.password == ''){
                 _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.second.validation.message.firstLevel[_LANGUAGE]}`;
               }else{
-                if (!Functions._checkIsAValidPassword(props.signup.password)){
-                  _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.second.validation.message.secondLevel[_LANGUAGE]}`;
+                if (!Functions._checkIsAValidPasswordThatContainsMinimumCharacter(props.signup.password)){
+                  _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.second.validation.message.secondLevel.firstPart[_LANGUAGE]}`;
+                }else{
+                  if (!Functions._checkIsAValidPasswordThatContainsAlphabeticLetters(props.signup.password)){
+                    _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.second.validation.message.secondLevel.secondPart[_LANGUAGE]}`;
+                  }
+
+                  if (!Functions._checkIsAValidPasswordThatContainsNumericLetters(props.signup.password)){
+                    _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.invitation.secondInputGroup.second.validation.message.secondLevel.thirdPart[_LANGUAGE]}`;
+                  }
                 }
               }
 
@@ -324,8 +332,16 @@ class Signup extends Component<{}> {
             if (props.signup.password == ''){
               _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.firstLevel[_LANGUAGE]}`;
             }else{
-              if (!Functions._checkIsAValidPassword(props.signup.password)){
-                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.secondLevel[_LANGUAGE]}`;
+              if (!Functions._checkIsAValidPasswordThatContainsMinimumCharacter(props.signup.password)){
+                _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.secondLevel.firstPart[_LANGUAGE]}`;
+              }else{
+                if (!Functions._checkIsAValidPasswordThatContainsAlphabeticLetters(props.signup.password)){
+                  _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.secondLevel.secondPart[_LANGUAGE]}`;
+                }
+
+                if (!Functions._checkIsAValidPasswordThatContainsNumericLetters(props.signup.password)){
+                  _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.content.state.normal.firstInputGroup.third.validation.message.secondLevel.thirdPart[_LANGUAGE]}`;
+                }
               }
             }
 

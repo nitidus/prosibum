@@ -74,8 +74,18 @@
                   "fa": "گذرواژه خالی است."
                 },
                 "secondLevel": {
-                  "en": "Password must contains 8 characters including lower case and upper case letters, digits, and valid special characters.",
-                  "fa": "گذرواژه ۸ کاراکتر شامل حروف کوچک و بزرگ، اعداد و کاراکترهای خاص معتبر را شامل می‌شود."
+                  "firstPart": {
+                    "en": "Password must contains 8 characters.",
+                    "fa": "گذرواژه باید شامل ۸ کاراکتر باشد."
+                  },
+                  "secondPart": {
+                    "en": "Password must contains lower case and upper case letters.",
+                    "fa": "گذرواژه باید شامل حروف کوچک و بزرگ باشد."
+                  },
+                  "thirdPart": {
+                    "en": "Password must contains digits.",
+                    "fa": "گذرواژه باید شامل اعداد باشد."
+                  }
                 }
               }
             }
@@ -195,8 +205,18 @@
                   "fa": "گذرواژه خالی است."
                 },
                 "secondLevel": {
-                  "en": "Password must contains 8 characters including lower case and upper case letters, digits, and valid special characters.",
-                  "fa": "گذرواژه ۸ کاراکتر شامل حروف کوچک و بزرگ، اعداد و کاراکترهای خاص معتبر را شامل می‌شود."
+                  "firstPart": {
+                    "en": "Password must contains 8 characters.",
+                    "fa": "گذرواژه باید شامل ۸ کاراکتر باشد."
+                  },
+                  "secondPart": {
+                    "en": "Password must contains lower case and upper case letters.",
+                    "fa": "گذرواژه باید شامل حروف کوچک و بزرگ باشد."
+                  },
+                  "thirdPart": {
+                    "en": "Password must contains digits.",
+                    "fa": "گذرواژه باید شامل اعداد باشد."
+                  }
                 }
               }
             }

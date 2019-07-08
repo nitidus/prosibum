@@ -140,8 +140,16 @@ class Login extends Component<{}> {
         if (props.login.password == ''){
           _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.second.validation.message.firstLevel[_LANGUAGE]}`;
         }else{
-          if (!Functions._checkIsAValidPassword(props.login.password)){
-            _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.second.validation.message.secondLevel[_LANGUAGE]}`;
+          if (!Functions._checkIsAValidPasswordThatContainsMinimumCharacter(props.login.password)){
+            _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.second.validation.message.secondLevel.firstPart[_LANGUAGE]}`;
+          }else{
+            if (!Functions._checkIsAValidPasswordThatContainsAlphabeticLetters(props.login.password)){
+              _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.second.validation.message.secondLevel.secondPart[_LANGUAGE]}`;
+            }
+
+            if (!Functions._checkIsAValidPasswordThatContainsNumericLetters(props.login.password)){
+              _WARNING_MESSAGE += `${(_WARNING_MESSAGE != '')? '\n': ''}${__CONSTANTS.firstInputGroup.second.validation.message.secondLevel.thirdPart[_LANGUAGE]}`;
+            }
           }
         }
 

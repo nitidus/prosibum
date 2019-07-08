@@ -130,65 +130,65 @@ class ForgottenPassword extends Component<{}> {
                 name={Functions._convertTokenToKeyword(__CONSTANTS.title.en)}
                 style={Styles.Content}>
 
-                <Headline
-                  style={Styles.Headline}
-                  title={__CONSTANTS.headline.title[_LANGUAGE]}
-                  subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
+                  <Headline
+                    style={Styles.Headline}
+                    title={__CONSTANTS.headline.title[_LANGUAGE]}
+                    subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
 
-                <Segment
-                  style={Styles.Segment}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.title.en)}
-                  onChange={(currentValue) => props.setRequestType(currentValue)}>
-                    <Container
-                      active={true}
-                      name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.title.en)}
-                      title={__CONSTANTS.firstSegment.content.firstSegmentContainer.title[_LANGUAGE]}>
-                        <Input
-                          type={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.type}
-                          name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title.en)}
-                          placeholder={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title[_LANGUAGE]}
-                          value={props.forgottenPassword.email}
-                          onChangeText={(currentValue) => props.setEmail(currentValue)} />
-                    </Container>
-                    <Container
-                      name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.title.en)}
-                      title={__CONSTANTS.firstSegment.content.secondSegmentContainer.title[_LANGUAGE]}>
-                        <Input
-                          type={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.type}
-                          name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title.en)}
-                          placeholder={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title[_LANGUAGE]}
-                          value={props.forgottenPassword.phone.number}
-                          link={props.forgottenPassword.phone.dialCode.area_code}
-                          onPress={() => {
-                            Keyboard.dismiss();
-                            props.setCountriesCodesModalVisibility(true);
-                          }}
-                          onChangeText={(currentValue) => props.setPhoneNumber({
-                            number: currentValue
-                          })} />
-                    </Container>
-                </Segment>
+                  <Segment
+                    style={Styles.Segment}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.title.en)}
+                    onChange={(currentValue) => props.setRequestType(currentValue)}
+                    active={props.forgottenPassword.requestType}>
+                      <Container
+                        name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.title.en)}
+                        title={__CONSTANTS.firstSegment.content.firstSegmentContainer.title[_LANGUAGE]}>
+                          <Input
+                            type={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.type}
+                            name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title.en)}
+                            placeholder={__CONSTANTS.firstSegment.content.firstSegmentContainer.content.firstInput.title[_LANGUAGE]}
+                            value={props.forgottenPassword.email}
+                            onChangeText={(currentValue) => props.setEmail(currentValue)} />
+                      </Container>
+                      <Container
+                        name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.title.en)}
+                        title={__CONSTANTS.firstSegment.content.secondSegmentContainer.title[_LANGUAGE]}>
+                          <Input
+                            type={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.type}
+                            name={Functions._convertTokenToKeyword(__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title.en)}
+                            placeholder={__CONSTANTS.firstSegment.content.secondSegmentContainer.content.firstInput.title[_LANGUAGE]}
+                            value={props.forgottenPassword.phone.number}
+                            link={props.forgottenPassword.phone.dialCode.area_code}
+                            onPress={() => {
+                              Keyboard.dismiss();
+                              props.setCountriesCodesModalVisibility(true);
+                            }}
+                            onChangeText={(currentValue) => props.setPhoneNumber({
+                              number: currentValue
+                            })} />
+                      </Container>
+                  </Segment>
 
-                <Input
-                  style={Styles.SubmitButton}
-                  type={__CONSTANTS.submitInput.type}
-                  name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
-                  value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
-                  gradient={Global.colors.pair.ongerine}
-                  onPress={async () => await Preparation._prepareRecoverPasswordFlow(props)}
-                  forcedDisable={_VALIDATED} />
+                  <Input
+                    style={Styles.SubmitButton}
+                    type={__CONSTANTS.submitInput.type}
+                    name={Functions._convertTokenToKeyword(__CONSTANTS.submitInput.state.normal.title.en)}
+                    value={__CONSTANTS.submitInput.state.normal.title[_LANGUAGE]}
+                    gradient={Global.colors.pair.ongerine}
+                    onPress={async () => await Preparation._prepareRecoverPasswordFlow(props)}
+                    forcedDisable={_VALIDATED} />
 
-                <Link
-                  containerStyle={Styles.QuickLink}
-                  value={__CONSTANTS.quickLink.title[_LANGUAGE]}
-                  onPress={() => {
-                    const { navigation } = props;
+                  <Link
+                    containerStyle={Styles.QuickLink}
+                    value={__CONSTANTS.quickLink.title[_LANGUAGE]}
+                    onPress={() => {
+                      const { navigation } = props;
 
-                    props.setEmail('');
-                    // props.setPhoneNumber('');
+                      props.setEmail('');
+                      // props.setPhoneNumber('');
 
-                    navigation.goBack();
-                  }} />
+                      navigation.goBack();
+                    }} />
               </View>
           </MajorContainer>
         );

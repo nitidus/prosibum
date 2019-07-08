@@ -71,6 +71,10 @@ export const Modal = (props) => {
     attitude.onBlur = props.onBlur || props.onModalBlur || props.modalOnBlur || props.onClose || props.onModalClose || props.modalOnClose;
   }
 
+  if ((typeof props.onHide != 'undefined') || (typeof props.onModalHide != 'undefined')){
+    attitude.onHide = props.onHide || props.onModalHide;
+  }
+
   const MODAL = {
     BACKDROP: {
       COLOR: attitude.backdropColor
@@ -106,6 +110,7 @@ export const Modal = (props) => {
         backdropBlurAmount={attitude.backdropBlurAmount}
         style={Styles.BottomModal}
         onBackdropPress={() => MODAL.ON_BLUR(false)}
+        onModalHide={attitude.onHide}
         onSwipe={() => MODAL.ON_BLUR(false)}>
           <KeyboardAvoidingView
             style={[

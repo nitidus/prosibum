@@ -362,7 +362,22 @@ module.exports = {
     return targetNumber.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
   },
   _checkIsAValidPassword: (password) => {
-    const _IS_PASSWORD_VALID = password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\$%&#!~`\^*\(\)_\-\+\=\?><])[0-9a-zA-Z\$%&#!~`\^*\(\)_\-\+\=\?><]{8,}$/);
+    const _IS_PASSWORD_VALID = password.match(/^[A-Za-z0-9(\$%&#!~`\^*\(\)_\-\+\=\?><)?]{8,}$/);
+
+    return (_IS_PASSWORD_VALID !== null) ? true : false;
+  },
+  _checkIsAValidPasswordThatContainsMinimumCharacter: (password) => {
+    const _IS_PASSWORD_VALID = password.match(/.{8,}/);
+
+    return (_IS_PASSWORD_VALID !== null) ? true : false;
+  },
+  _checkIsAValidPasswordThatContainsAlphabeticLetters: (password) => {
+    const _IS_PASSWORD_VALID = password.match(/[A-Za-z]/g);
+
+    return (_IS_PASSWORD_VALID !== null) ? true : false;
+  },
+  _checkIsAValidPasswordThatContainsNumericLetters: (password) => {
+    const _IS_PASSWORD_VALID = password.match(/[0-9]/g);
 
     return (_IS_PASSWORD_VALID !== null) ? true : false;
   },
@@ -616,6 +631,7 @@ module.exports = {
   _getAllAvailableLanguages: () => {
     return __LANGUAGES;
   },
+  _restartTheApp: () => RNRestart.Restart(),
   _setDefaultNativeSettingsItemWithKey: async (key, value) => {
     const _DEFAULT_NATIVE_SETTINGS = await module.exports._retrieveDataWithKey(GLOBAL.STORAGE.DEFAULT_NATIVE_SETTINGS);
 
@@ -645,8 +661,6 @@ module.exports = {
           }else{
             I18nManager.forceRTL(false);
           }
-
-          RNRestart.Restart();
         }
 
         await module.exports._storeDataWithKey(GLOBAL.STORAGE.DEFAULT_NATIVE_SETTINGS, _SERIALIZED_TARGET_SETTINGS);
@@ -683,8 +697,6 @@ module.exports = {
         }else{
           I18nManager.forceRTL(false);
         }
-
-        RNRestart.Restart();
       }
 
       if (Object.keys(_NATIVE_SETTINGS).length > 0){

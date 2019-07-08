@@ -17,44 +17,6 @@ const { mapStateToProps, mapDispatchToProps } = ComponentsActions.Segment;
 const Segment = (props) => {
   var attitude = {};
 
-  if (typeof props.children != 'undefined'){
-    attitude.children = [];
-
-    var localChildrenVisibility = [];
-
-    if (Array.isArray(props.children)){
-      attitude.children = attitude.children.concat(props.children);
-    }else{
-      attitude.children.push(props.children);
-    }
-
-    attitude.children = attitude.children.filter((child, i) => {
-      var childName = child.type.name;
-
-      if (typeof childName != 'undefined' && childName.toLowerCase() == 'container'){
-        const _SEGMENT_SELECTED_NAME = child.props.name || child.props.title;
-
-        var localChildVisibility = {
-          name: Functions._convertTokenToKeyword(_SEGMENT_SELECTED_NAME)
-        };
-
-        if ((typeof child.props.active != 'undefined') && child.props.active){
-          localChildVisibility.value = true;
-        }else{
-          localChildVisibility.value = false;
-        }
-
-        localChildrenVisibility.push(localChildVisibility);
-
-        return child;
-      }
-    });
-
-    if (localChildrenVisibility.length > 0 && (props.segment.childrenVisibility.every(child => localChildrenVisibility.includes(child)))){
-      props.setChildrenVisibility(localChildrenVisibility);
-    }
-  }
-
   if (typeof props.key != 'undefined'){
     attitude.key = props.key;
   }else{
@@ -86,8 +48,39 @@ const Segment = (props) => {
     }
   }
 
-  const { children } = attitude,
-        { childrenVisibility } = props.segment;
+  var _CONTENT;
+
+  if (props.active != ''){
+    console.log('ok')
+    _CONTENT = (
+      <View
+        key="contents"
+        style={Styles.DualSegmentContents}>
+          {
+            props.children.filter((child, i) => {
+              var childProps = {...child.props},
+                  childName = childProps.children.props.name;
+
+              return (childName === props.active);
+            }).map((child, i, children) => {
+              var childProps = {...child.props},
+                  childStyle = [
+                    child.props.style
+                  ];
+
+              const ultimateKey = Functions._generateNewUniqueObjectKey();
+
+              childProps.key = childProps.name || ultimateKey;
+              childProps.style = childStyle;
+
+              childProps.active = true;
+
+              return React.cloneElement(child, childProps);
+            })
+          }
+      </View>
+    );
+  }
 
   return (
     <View
@@ -101,10 +94,16 @@ const Segment = (props) => {
           key="tabs"
           style={Styles.DualSegmentTabs}>
             {
-              childrenVisibility.map((child, i) => {
-                const _SELECTED_CHILD_TITLE = children[i].props.title || child.name;
-
-                var childTitle = Functions._convertKeywordToToken(_SELECTED_CHILD_TITLE);
+              props.children.map((childSymbol, i) => {
+                var childLocalProps = childSymbol.props,
+                    childStatusName = props.active,
+                    localProps = childLocalProps.children.props,
+                    child = {
+                      name: localProps.name,
+                      value: localProps.value
+                    },
+                    selectedChildTitle = props.children[i].props.title || child.name,
+                    childTitle = Functions._convertKeywordToToken(selectedChildTitle);
 
                 if (typeof childTitle != 'undefined'){
                   var disableSegmentStyle = {};
@@ -115,7 +114,7 @@ const Segment = (props) => {
                     disableSegmentStyle.marginLeft = 15;
                   }
 
-                  if (!child.value){
+                  if (childStatusName != child.name){
                     return (
                       <TouchableOpacity
                         key={child.name}
@@ -129,12 +128,12 @@ const Segment = (props) => {
                         onPress={() => {
                           attitude.onChangeTab(child.name);
 
-                          var localChildrenVisibility = childrenVisibility.map((singleChild, j) => {
-                            if (singleChild.value){
-                              singleChild.value = false;
-                            }else if (singleChild.name == child.name){
-                              singleChild.value = true;
-                            }
+                          var localChildrenVisibility = props.children.map((singleChildSymbol, j) => {
+                            var singleChildSymbol = singleChildSymbol.props.children.props,
+                                singleChild = {
+                                  name: singleChildSymbol.name,
+                                  value: singleChildSymbol.value
+                                };
 
                             return singleChild;
                           })
@@ -176,30 +175,8 @@ const Segment = (props) => {
               })
             }
         </View>
-        <View
-          key="contents"
-          style={Styles.DualSegmentContents}>
-            {
-              children.map((child, i, children) => {
-                var childProps = {...child.props};
 
-                var childStyle = [
-                  child.props.style
-                ];
-
-                const ultimateKey = Functions._generateNewUniqueObjectKey();
-
-                childProps.key = childProps.name || ultimateKey;
-                childProps.style = childStyle;
-
-                if (typeof childrenVisibility[i] != 'undefined'){
-                  childProps.active = props.segment.childrenVisibility[i].value;
-                }
-
-                return React.cloneElement(child, childProps);
-              })
-            }
-        </View>
+        {_CONTENT}
     </View>
   )
 }
