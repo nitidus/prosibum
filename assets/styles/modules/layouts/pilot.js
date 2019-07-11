@@ -28,10 +28,10 @@ var _CUSTOM_CONTAINER = {
       }
     },
     _CUSTOM_HEADER_TITLE = {
-      fontSize: 32
+      fontSize: 21
     },
     _CUSTOM_HEADER_SUBTITLE = {
-      fontSize: 13
+      fontSize: 11
     },
     _CUSTOM_PINNED_SIDE = {
       minWidth: 62
@@ -138,7 +138,8 @@ if (Platform.OS === 'ios'){
   }else{
     _CUSTOM_TOP_BAR_CONTAINER = {
       ..._CUSTOM_TOP_BAR_CONTAINER,
-      paddingVertical: 15
+      
+      paddingBottom: 15
     };
 
     _CUSTOM_TAB_BAR_CONTAINER = {

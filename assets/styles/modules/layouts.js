@@ -1,4 +1,5 @@
 import Container from './layouts/container';
+import Separator from './layouts/separator';
 import List from './layouts/list';
 import ActivityIndicator from './layouts/activity-indicator';
 import Toast from './layouts/toast';
@@ -12,6 +13,7 @@ import { LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, 
 
 module.exports = {
   Container,
+  Separator,
   ActivityIndicator,
   List,
   Toast,

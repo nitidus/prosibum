@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Dimensions, Platform, Text, Image, Keyboard, I18nManager } from 'react-native';
+import { View, ScrollView, Dimensions, FlatList, Platform, Text, Image, Keyboard, I18nManager } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
 
 import { Global, Views } from '../../assets/styles/index';
-import { ActivityIndicator, Toast, Icon, Options, ProductFeaturesModal } from '../../assets/layouts/index';
+import { ActivityIndicator, Toast, Icon, Separator, Options, ProductFeaturesModal } from '../../assets/layouts/index';
 import { Input, Link, Carousel } from '../../assets/components/index';
 import { Views as ViewsContainer } from '../../assets/layouts/container/index';
 const Styles = Views.Products.NewFragment,
@@ -31,17 +31,18 @@ class NewFragmentIdentity extends Component<{}> {
           _NATIVE_SETTINGS = await Functions._getDefaultNativeSettings(),
           _LANGUAGE = await _NATIVE_SETTINGS.language;
 
-    props.setLanguage(_LANGUAGE);
+    await props.setLanguage(_LANGUAGE);
+    await props.fetchAvailableProductWarehouses();
 
-    if (typeof params != 'undefined'){
-      if (Object.keys(params).length > 0){
-        props.setName(params.name);
-        props.setProduct(params.product);
-        props.setUnits(params.units);
-        props.setQuery(params.query);
-        props.setQueryItems(params.queryItems);
-      }
-    }
+    // if (typeof params != 'undefined'){
+    //   if (Object.keys(params).length > 0){
+    //     props.setName(params.name);
+    //     props.setProduct(params.product);
+    //     props.setUnits(params.units);
+    //     props.setQuery(params.query);
+    //     props.setQueryItems(params.queryItems);
+    //   }
+    // }
   }
 
   _componentWillCheckValidation(props) {
@@ -49,7 +50,7 @@ class NewFragmentIdentity extends Component<{}> {
 
     var _FORM_FIELDS_VALIDITY = false;
 
-    if ((_PROPS.name != '') && (_PROPS.units.length > 0)){
+    if ((_PROPS.name != '') && (_PROPS.features.length > 0)){
       if (_PROPS.name.length > 7){
         if (Object.keys(_PROPS.product).length > 0){
           const _FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX = new RegExp(`\.*${_PROPS.product.name}\.*`, 'gi');
@@ -74,14 +75,16 @@ class NewFragmentIdentity extends Component<{}> {
             _VALIDATED = this._componentWillCheckValidation(props),
             _PRODUCT_UNITS_OTHER_PROPS = {
               language: props.newFragment.language,
-              units: props.newFragment.units
+              units: props.newFragment.features.map((feature) => {
+                return feature.unit;
+              })
             };
 
       var _UNITS_CONTENT;
 
-      if (props.newFragment.units.length > 0){
+      if (props.newFragment.features.length > 0){
         let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
-            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newFragment.units.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newFragment.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
 
         if (Platform.OS !== 'ios'){
           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
@@ -95,57 +98,78 @@ class NewFragmentIdentity extends Component<{}> {
         }
 
         _UNITS_CONTENT = (
-          <Carousel
-            name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.normal.title.en)}
-            data={props.newFragment.units}
-            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
-            style={Styles.DetailContainer}
-            onLayout={({ item, index }) => {
-              var _UNIT_DELETE_ACTION = () => props.setUnits(props.newFragment.units.filter((checkingItem, j) => {
-                    return (checkingItem._id !== item._id);
+          <FlatList
+            name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.title.en)}
+            data={props.newFragment.features}
+            contentContainerStyle={Styles.DetailContainer}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item, index }) => {
+              var _UNIT_DELETE_ACTION = () => props.setFeatures(props.newFragment.features.filter((checkingItem, j) => {
+                    return (checkingItem.unit._id !== item.unit._id);
                   })),
-                  _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item, _LANGUAGE);
+                  _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item.unit, _LANGUAGE),
+                  _UNIT_CONTAINER_STYLE = [
+                    Styles.UnitsDetailItemContainer
+                  ],
+                  _UNIT_CONTAINER_SUBTITLE;
+
+              if (_FINAL_UNIT_COMPLEX.subtitle == ''){
+                _UNIT_CONTAINER_STYLE = [
+                  Styles.UnitsDetailItemContainerWithoutSubtitle
+                ];
+              }else{
+                _UNIT_CONTAINER_SUBTITLE = (
+                  <Text
+                    style={Styles.BriefDetailSubtitle}>
+                      {_FINAL_UNIT_COMPLEX.subtitle}
+                  </Text>
+                );
+              }
+
+              _UNIT_CONTAINER_STYLE.push({
+                marginHorizontal: Styles.Content.marginHorizontal,
+                marginBottom: Styles.Content.marginVertical
+              });
 
               return (
-                <Input
-                  type={__CONSTANTS.content.firstCarousel.type}
-                  style={[
-                    Styles.UnitsDetailItemContainer,
-                    Styles.LTR_ContentAlignment
-                  ]}
-                  gradient={Global.colors.pair.tilan}
-                  onLongPress={_UNIT_DELETE_ACTION}>
-                    <View
-                      style={Styles.DetailItemMasterInfoContent}>
-                        <View
-                          style={Styles.BriefDetailTitleContainer}>
+                <React.Fragment>
+                  <Input
+                    type={__CONSTANTS.content.firstComplex.state.normal.firstInput.type}
+                    style={_UNIT_CONTAINER_STYLE}
+                    gradient={Global.colors.pair.tilan}>
+                      <View
+                        style={Styles.DetailItemMasterInfoContent}>
                           <Text
                             style={Styles.BriefDetailTitle}>
                               {_FINAL_UNIT_COMPLEX.title}
                           </Text>
-                          <Text
-                            style={Styles.BriefDetailTitleSuffix}>
-                              {_FINAL_UNIT_COMPLEX.subtitle}
-                          </Text>
 
-                          {
-                            // <Text
-                            //   style={Styles.BriefDetailTitleSuffix}>
-                            //     {Functions._convertKeywordToToken(__CONSTANTS.content.firstCarousel.state.normal.suffix[_LANGUAGE])}
-                            // </Text>
-                          }
-                        </View>
-                    </View>
-                </Input>
+                          {_UNIT_CONTAINER_SUBTITLE}
+                      </View>
+                  </Input>
+
+                  <Separator
+                     style={{
+                       marginBottom: Styles.Content.marginVertical
+                     }}>
+                       <Link
+                         value={__CONSTANTS.content.firstComplex.state.normal.firstSeparator[_LANGUAGE]}
+                         onPress={_UNIT_DELETE_ACTION}/>
+                   </Separator>
+                </React.Fragment>
               );
-            }}
-            {..._FIRST_CAROUSEL_OTHER_OPTIONS} />
+            }}/>
         );
       }else{
         _UNITS_CONTENT = (
           <Link
-            containerStyle={Styles.EmptyContentLink}
-            value={__CONSTANTS.content.firstCarousel.state.null.title[_LANGUAGE]} />
+            containerStyle={[
+              Styles.EmptyContentLink,
+              {
+                marginBottom: Styles.Content.marginVertical
+              }
+            ]}
+            value={__CONSTANTS.content.firstComplex.state.empty.title[_LANGUAGE]} />
         );
       }
 
@@ -164,7 +188,7 @@ class NewFragmentIdentity extends Component<{}> {
                 _FINAL_SEED = {
                   name: props.newFragment.name,
                   product: props.newFragment.product,
-                  units: props.newFragment.units,
+                  features: props.newFragment.features,
                   query: props.newFragment.query,
                   queryItems: props.newFragment.queryItems
                 };
@@ -217,9 +241,9 @@ class NewFragmentIdentity extends Component<{}> {
         }else{
           _MESSAGE += __CONSTANTS.content.firstInput.warnning.first[_LANGUAGE];
 
-          if (props.newFragment.units.length === 0){
-            _MESSAGE += `\n ${__CONSTANTS.content.firstCarousel.warnning[_LANGUAGE]}`;
-          }
+          // if (props.newFragment.units.length === 0){
+          //   _MESSAGE += `\n ${__CONSTANTS.content.firstComplex.warnning[_LANGUAGE]}`;
+          // }
         }
 
         if (_MESSAGE != ''){
@@ -244,23 +268,20 @@ class NewFragmentIdentity extends Component<{}> {
           title={Functions._convertKeywordToToken(__CONSTANTS.pilot.title[_LANGUAGE])}
           subtitle={Functions._convertKeywordToToken(__CONSTANTS.pilot.subtitle[_LANGUAGE])}
           {...props}>
-            <Input
-              type={__CONSTANTS.content.firstInput.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}
-              placeholder={__CONSTANTS.content.firstInput.title[_LANGUAGE]}
-              value={props.newFragment.name}
-              style={[
-                Styles.RegularItemContainer,
-                {
-                  marginTop: Styles.Content.marginVertical
-                }
-              ]}
-              onChangeText={(currentValue) => props.setName(currentValue)} />
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={Styles.ScrollableListContainer}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.title.en)}>
+                <Input
+                  type={__CONSTANTS.content.firstInput.type}
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstInput.title.en)}
+                  placeholder={__CONSTANTS.content.firstInput.title[_LANGUAGE]}
+                  value={props.newFragment.name}
+                  style={Styles.RegularItemContainer}
+                  onChangeText={(currentValue) => props.setName(currentValue)} />
 
-            {_UNITS_CONTENT}
+                {_UNITS_CONTENT}
 
-            <View
-              style={Styles.BottomPinnedContainer}>
                 <Input
                   type={__CONSTANTS.content.modalHandlerButton.type}
                   name={Functions._convertTokenToKeyword(__CONSTANTS.content.modalHandlerButton.state.normal.title.en)}
@@ -273,12 +294,20 @@ class NewFragmentIdentity extends Component<{}> {
                   onPress={() => props.setUnitsModalVisibility(true)} />
 
                 {_FINAL_BUTTON}
-            </View>
+            </ScrollView>
 
             <ProductFeaturesModal
               visibility={props.newFragment.unitsModalVisibility}
               onBlur={() => props.setUnitsModalVisibility(false)}
-              onProgressSuccess={(response) => props.appendUnit(response)}
+              onProgressSuccess={(response) => props.appendFeature({
+                unit: response,
+                warehouse: {},
+                sales_structure: {},
+                shipping_method: {},
+                quantity: 0,
+                isInfiniteMaximumOrderQuantity: true,
+                isDetachableUnit: false
+              })}
               {..._PRODUCT_UNITS_OTHER_PROPS} />
         </Container>
       );

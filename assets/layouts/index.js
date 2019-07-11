@@ -5,6 +5,7 @@ import { Pin } from './pin';
 import { Modal } from './modal';
 import { LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitsDependedModal, ProductShippingMethodsModal } from './modals/index';
 import { Icon } from './icon';
+import { Separator } from './separator';
 import List from './list';
 import { TopBar, PinnedSide, TabItem } from './container/layouts/pilot/top-bar';
 import { TabBar, TabBarItem } from './container/layouts/pilot/tab-bar';
@@ -20,6 +21,7 @@ module.exports = {
   Modal,
   LanguagesModal, CountriesCodesModal, CameraRollPickerModal, RoleModal, WalletModal, WarehouseModal, ProductCategoriesModal, ProductFeaturesModal, ProductUnitsDependedModal, ProductShippingMethodsModal,
   Icon,
+  Separator,
   List,
   Pilot, TabBar, TabBarItem, TopBar, PinnedSide, TabItem, Options,
   DrawerMenu, DrawerMenuItem, DrawerMenuPinnedItem, DrawerMenuPinnedProfile

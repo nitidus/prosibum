@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { View, Dimensions, Platform, Animated, Easing } from 'react-native';
-import Svg, { G, Path, Rect, Circle, Ellipse, Polygon, Defs, LinearGradient, Stop } from 'react-native-svg'
+import Svg, { G, Path, Rect, Circle, Ellipse, Polygon, Defs, LinearGradient, Stop } from 'react-native-svg';
 
 import { Global } from '../styles/index';
 

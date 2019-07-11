@@ -8,16 +8,12 @@ const initialState = {
         product: {},
         name: '',
         features: [],
-        units: [],
         prices: [],
         onFetchingModePrice: {},
         shippingPlans: [],
+        warehouses: [],
         onFetchingModeShippingPlan: {},
-        warehouseModalVisibility: false,
         unitsModalVisibility: false,
-        featuresModalVisibility: false,
-        unitDependedModalVisibility: false,
-        shippingMethodsModalVisibility: false,
         warehousesLoading: false,
         queryItemsLoading: false,
         featuresLoading: false,
@@ -81,21 +77,6 @@ export default (state = initialState, action) => {
         ]
       };
       break;
-    case NEW_FRAGMENT.SET_UNITS:
-      return {
-        ...state,
-        units: action.payload
-      };
-      break;
-    case NEW_FRAGMENT.APPEND_UNIT:
-      return {
-        ...state,
-        units: [
-          ...state.units,
-          action.payload
-        ]
-      };
-      break;
     case NEW_FRAGMENT.SET_PRICES:
       return {
         ...state,
@@ -155,24 +136,6 @@ export default (state = initialState, action) => {
         unitsModalVisibility: action.payload
       };
       break;
-    case NEW_FRAGMENT.SET_FEATURES_MODAL_VISIBILITY:
-      return {
-        ...state,
-        featuresModalVisibility: action.payload
-      };
-      break;
-    case NEW_FRAGMENT.SET_UNIT_DEPENDED_MODAL_VISIBILITY:
-      return {
-        ...state,
-        unitDependedModalVisibility: action.payload
-      };
-      break;
-    case NEW_FRAGMENT.SET_SHIPPING_METHODS_MODAL_VISIBILITY:
-      return {
-        ...state,
-        shippingMethodsModalVisibility: action.payload
-      };
-      break;
     case NEW_FRAGMENT.FETCH_AVAILABLE_WAREHOUSES:
       return {
         ...state,
@@ -184,6 +147,9 @@ export default (state = initialState, action) => {
         ...state,
         queryItems: action.payload
       };
+      break;
+    case NEW_FRAGMENT.FETCH_AVAILABLE_PRODUCT_WAREHOUSES:
+      return state;
       break;
     case NEW_FRAGMENT.APPEND_FRAGMENT:
       return state;

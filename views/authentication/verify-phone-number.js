@@ -76,7 +76,7 @@ class VerifyPhoneNumber extends Component<{}> {
     if (typeof props.login != 'undefined'){
       if (Object.keys(props.login.language).length > 0){
         const _LANGUAGE = Functions._convertTokenToKeyword(props.login.language.key);
-        
+
         if (props.signup.secretKey != ''){
           var _SUBMIT_BUTTON_CONTENT, _TOP_PINNED_TOAST;
 
@@ -128,41 +128,43 @@ class VerifyPhoneNumber extends Component<{}> {
           }
 
           return (
-          <Container
-            style={Styles.Container}>
-              {_TOP_PINNED_TOAST}
+            <Container
+              style={Styles.Container}>
+                {_TOP_PINNED_TOAST}
 
-              <View style={Styles.Content}>
-                <Headline
-                  style={Styles.Headline}
-                  title={__CONSTANTS.headline.title[_LANGUAGE]}
-                  subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
+                <View
+                  name={Functions._convertTokenToKeyword(__CONSTANTS.container.title.en)}
+                  style={Styles.Content}>
+                    <Headline
+                      style={Styles.Headline}
+                      title={__CONSTANTS.headline.title[_LANGUAGE]}
+                      subtitle={__CONSTANTS.headline.subtitle[_LANGUAGE]} />
 
-                  <Input
-                    type={__CONSTANTS.firstInputGroup.first.type}
-                    name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
-                    placeholder={__CONSTANTS.firstInputGroup.first.title[_LANGUAGE]}
-                    value={props.signup.validationToken}
-                    style={Styles.FirstInput}
-                    onChangeText={(currentValue) => props.setValidationToken(currentValue)}
-                    {...__CONSTANTS.firstInputGroup.first.options} />
+                    <Input
+                      type={__CONSTANTS.firstInputGroup.first.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.firstInputGroup.first.title.en)}
+                      placeholder={__CONSTANTS.firstInputGroup.first.title[_LANGUAGE]}
+                      value={props.signup.validationToken}
+                      style={Styles.FirstInput}
+                      onChangeText={(currentValue) => props.setValidationToken(currentValue)}
+                      {...__CONSTANTS.firstInputGroup.first.options} />
 
-                  {_SUBMIT_BUTTON_CONTENT}
+                    {_SUBMIT_BUTTON_CONTENT}
 
-                  <Link
-                    containerStyle={Styles.QuickLink}
-                    value={__CONSTANTS.quickLink.title[_LANGUAGE]}
-                    onPress={() => {
-                      const { navigation } = this.props;
+                    <Link
+                      containerStyle={Styles.QuickLink}
+                      value={__CONSTANTS.quickLink.title[_LANGUAGE]}
+                      onPress={() => {
+                        const { navigation } = this.props;
 
-                      // props.setValidationToken('');
-                      // props.setSecretKey('');
+                        // props.setValidationToken('');
+                        // props.setSecretKey('');
 
-                      navigation.goBack();
-                    }} />
-              </View>
-          </Container>
-        );
+                        navigation.goBack();
+                      }} />
+                </View>
+            </Container>
+          );
         }else{
           return (
             <Link

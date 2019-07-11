@@ -362,8 +362,8 @@
       },
       "secondSwith": {
         "title": {
-          "en": "Innfinite Maximum Order Quantity",
-          "fa": "حداکثر تعداد سفارش بی‌نهایت"
+          "en": "Maximum order up to inventory limit",
+          "fa": "حداکثر سفارش تا سقف موجودی"
         }
       },
       "warning": {

@@ -10,6 +10,9 @@
     }
   },
   "content": {
+    "title": {
+      "en": "New Fragment Identity Container"
+    },
     "firstInput": {
       "type": "TEXT",
       "title": {
@@ -31,34 +34,27 @@
         }
       }
     },
-    "firstCarousel": {
-      "type": "BUTTON",
+    "firstComplex": {
+      "title": {
+        "en": "Fragment Complex Container"
+      },
       "state": {
         "normal": {
-          "title": {
-            "en": "Units",
-            "fa": "واحدهای اندازه‌گیری"
+          "firstInput": {
+            "type": "BUTTON",
+
           },
-          "content": {
-            "title": {
-              "en": "Unit Item"
-            }
-          },
-          "suffix": {
-            "en": "Unit Type",
-            "fa": "نوع واحد"
+          "firstSeparator": {
+            "en": "Remove Item",
+            "fa": "حذف بخش"
           }
         },
-        "null": {
+        "empty": {
           "title": {
-            "en": "No unit appended.",
-            "fa": "هیچ واحد اندازه‌گیری اضافه نشده است."
+            "en": "There's no composition of created fragment.",
+            "fa": "هیچ ترکیبی از نمونه محصول ایجاد شده وجود ندارد."
           }
         }
-      },
-      "warnning": {
-        "en": "Choose one unit at least.",
-        "fa": "حداقل یک واحد اندازه‌گیری انتخاب نمایید."
       }
     },
     "modalHandlerButton": {

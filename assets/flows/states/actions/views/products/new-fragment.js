@@ -59,18 +59,6 @@ const mapDispatchToProps = (dispatch) => {
         payload: feature
       })
     },
-    setUnits: (units) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_UNITS,
-        payload: units
-      })
-    },
-    appendUnit: (unit) => {
-      dispatch({
-        type: NEW_FRAGMENT.APPEND_UNIT,
-        payload: unit
-      })
-    },
     setPrices: (prices) => {
       dispatch({
         type: NEW_FRAGMENT.SET_PRICES,
@@ -113,26 +101,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: visibilityStatus
       })
     },
-    setFeaturesModalVisibility: (visibilityStatus) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_FEATURES_MODAL_VISIBILITY,
-        payload: visibilityStatus
-      })
-    },
-    setUnitDependedModalVisibility: (visibilityStatus) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_UNIT_DEPENDED_MODAL_VISIBILITY,
-        payload: visibilityStatus
-      })
-    },
-    setShippingMethodsModalVisibility: (visibilityStatus) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_SHIPPING_METHODS_MODAL_VISIBILITY,
-        payload: visibilityStatus
-      })
-    },
     fetchAvailableProductsBasedOnQuery: async (query) =>  CMD._getAvailableProductsBasedOnQuery(query, dispatch),
     fetchAvailableProductsBasedOnQueryOnDemand: async (query) => CMD._getAvailableProductsBasedOnQueryOnDemand(query, dispatch),
+    fetchAvailableProductWarehouses: async () => CMD._getAvailableProductWarehouses(dispatch),
     appendFragment: async (fragment) =>  CMD._appendFragmentOnDemand(fragment, dispatch),
     setQueryItemsLoadingStatus: (status) => {
       dispatch({
@@ -143,6 +114,12 @@ const mapDispatchToProps = (dispatch) => {
     setFeaturesLoadingStatus: (status) => {
       dispatch({
         type: NEW_FRAGMENT.FEATURES_LOADING_STATUS,
+        payload: status
+      })
+    },
+    setWarehousesLoadingStatus: (status) => {
+      dispatch({
+        type: NEW_FRAGMENT.SET_WAREHOUSES_LOADING_STATUS,
         payload: status
       })
     },
