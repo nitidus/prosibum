@@ -210,6 +210,11 @@ module.exports = StyleSheet.create({
     marginHorizontal: _CUSTOM_CONTENT.marginHorizontal,
     padding: 18
   },
+  CustomizedWarehouseDetailItemContainer: {
+    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    height: 88,
+    padding: 18
+  },
   DetailItemContainer: {
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     alignItems: 'flex-start'
@@ -219,11 +224,11 @@ module.exports = StyleSheet.create({
     alignItems: 'center'
   },
   DetailItemMasterInfoContent: {
-    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    width: '100%',
     justifyContent: 'center'
   },
   DetailItemMasterSubInfoContent: {
-    direction: (I18nManager.isRTL)? 'rtl': 'ltr',
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center'
   },

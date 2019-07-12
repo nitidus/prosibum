@@ -73,61 +73,17 @@ export default (state = initialState, action) => {
         ...state,
         features: [
           ...state.features,
-          action.payload
-        ]
-      };
-      break;
-    case NEW_FRAGMENT.SET_PRICES:
-      return {
-        ...state,
-        prices: action.payload
-      };
-      break;
-    case NEW_FRAGMENT.APPEND_PRICE:
-      return {
-        ...state,
-        prices: [
-          ...state.prices,
           {
             ...action.payload,
-            _id: action.payload._id,
-            name: action.payload.name,
-            value: action.payload.value,
-            feature: action.payload.feature
+            unit: action.payload.unit,
+            warehouse: action.payload.warehouse,
+            sales_structure: action.payload.sales_structure,
+            shipping_method: action.payload.shipping_method,
+            quantity: action.payload.quantity,
+            isInfiniteMaximumOrderQuantity: action.payload.isInfiniteMaximumOrderQuantity,
+            isDetachableUnit: action.payload.isDetachableUnit
           }
         ]
-      };
-      break;
-    case NEW_FRAGMENT.SET_SELECTED_PRICE_FETCHINNG_MODE_ON:
-      return {
-        ...state,
-        onFetchingModePrice: action.payload
-      };
-      break;
-    case NEW_FRAGMENT.SET_SHIPPING_PLANS:
-      return {
-        ...state,
-        shippingPlans: action.payload
-      };
-      break;
-    case NEW_FRAGMENT.APPEND_SHIPPING_PLAN:
-      return {
-        ...state,
-        shippingPlans: [
-          ...state.shippingPlans,
-          {
-            ...action.payload,
-            _id: action.payload._id,
-            feature: action.payload.feature,
-            shippingMethod: action.payload.shippingMethod
-          }
-        ]
-      };
-      break;
-    case NEW_FRAGMENT.SET_SELECTED_SHIPPING_PLANS_MODE_ON:
-      return {
-        ...state,
-        onFetchingModeShippingPlan: action.payload
       };
       break;
     case NEW_FRAGMENT.SET_UNITS_MODAL_VISIBILITY:
@@ -147,9 +103,6 @@ export default (state = initialState, action) => {
         ...state,
         queryItems: action.payload
       };
-      break;
-    case NEW_FRAGMENT.FETCH_AVAILABLE_PRODUCT_WAREHOUSES:
-      return state;
       break;
     case NEW_FRAGMENT.APPEND_FRAGMENT:
       return state;

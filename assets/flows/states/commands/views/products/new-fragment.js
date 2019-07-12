@@ -224,13 +224,8 @@ module.exports = {
           const _DATA = _FINAL_RESPONSE.data;
 
           dispatch({
-            type: NEW_FRAGMENT.FETCH_AVAILABLE_PRODUCT_WAREHOUSES,
+            type: NEW_FRAGMENT.FETCH_AVAILABLE_WAREHOUSES,
             payload: _DATA
-          })
-
-          dispatch({
-            type: NEW_FRAGMENT.SET_SELECTED_WAREHOUSE,
-            payload: (_DATA.length > 0)? _DATA[0]: {}
           })
 
           dispatch({

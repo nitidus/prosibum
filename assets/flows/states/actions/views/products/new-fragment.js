@@ -59,42 +59,6 @@ const mapDispatchToProps = (dispatch) => {
         payload: feature
       })
     },
-    setPrices: (prices) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_PRICES,
-        payload: prices
-      })
-    },
-    appendPrice: (price) => {
-      dispatch({
-        type: NEW_FRAGMENT.APPEND_PRICE,
-        payload: price
-      })
-    },
-    setOnFetchingModePrice: (unitFeature) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_SELECTED_PRICE_FETCHINNG_MODE_ON,
-        payload: unitFeature
-      })
-    },
-    setShippingPlans: (shippingPlans) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_SHIPPING_PLANS,
-        payload: shippingPlans
-      })
-    },
-    appendShippingPlan: (shippingPlan) => {
-      dispatch({
-        type: NEW_FRAGMENT.APPEND_SHIPPING_PLAN,
-        payload: shippingPlan
-      })
-    },
-    setOnFetchingModeShippingPlan: (shippingPlan) => {
-      dispatch({
-        type: NEW_FRAGMENT.SET_SELECTED_SHIPPING_PLANS_MODE_ON,
-        payload: shippingPlan
-      })
-    },
     setUnitsModalVisibility: (visibilityStatus) => {
       dispatch({
         type: NEW_FRAGMENT.SET_UNITS_MODAL_VISIBILITY,

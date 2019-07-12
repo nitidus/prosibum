@@ -83,82 +83,149 @@ class NewFragmentIdentity extends Component<{}> {
       var _UNITS_CONTENT;
 
       if (props.newFragment.features.length > 0){
-        let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
-            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newFragment.features.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
-
-        if (Platform.OS !== 'ios'){
-          _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
-          _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
-
-          if (I18nManager.isRTL){
-            _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
-              flexDirection: 'row-reverse'
-            };
-          }
-        }
-
         _UNITS_CONTENT = (
-          <FlatList
+          <ScrollView
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.title.en)}
-            data={props.newFragment.features}
-            contentContainerStyle={Styles.DetailContainer}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => {
-              var _UNIT_DELETE_ACTION = () => props.setFeatures(props.newFragment.features.filter((checkingItem, j) => {
-                    return (checkingItem.unit._id !== item.unit._id);
-                  })),
-                  _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item.unit, _LANGUAGE),
-                  _UNIT_CONTAINER_STYLE = [
-                    Styles.UnitsDetailItemContainer
-                  ],
-                  _UNIT_CONTAINER_SUBTITLE;
+            contentContainerStyle={Styles.DetailContainer}>
+              {
+                props.newFragment.features.map((feature) => {
+                  var _UNIT_DELETE_ACTION = () => props.setFeatures(props.newFragment.features.filter((checkingItem, j) => {
+                        return (checkingItem.unit._id !== feature.unit._id);
+                      })),
+                      _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(feature.unit, _LANGUAGE),
+                      _UNIT_CONTAINER_STYLE = [
+                        Styles.UnitsDetailItemContainer
+                      ],
+                      _SELECTED_WAREHOUSE_INDEX = props.newFragment.warehouses.findIndex((warehouse, i) => {
+                        return warehouse._id === feature.warehouse._id;
+                      }),
+                      _UNIT_CONTAINER_SUBTITLE;
 
-              if (_FINAL_UNIT_COMPLEX.subtitle == ''){
-                _UNIT_CONTAINER_STYLE = [
-                  Styles.UnitsDetailItemContainerWithoutSubtitle
-                ];
-              }else{
-                _UNIT_CONTAINER_SUBTITLE = (
-                  <Text
-                    style={Styles.BriefDetailSubtitle}>
-                      {_FINAL_UNIT_COMPLEX.subtitle}
-                  </Text>
-                );
+                  if (_FINAL_UNIT_COMPLEX.subtitle == ''){
+                    _UNIT_CONTAINER_STYLE = [
+                      Styles.UnitsDetailItemContainerWithoutSubtitle
+                    ];
+                  }else{
+                    _UNIT_CONTAINER_SUBTITLE = (
+                      <Text
+                        style={Styles.BriefDetailSubtitle}>
+                          {_FINAL_UNIT_COMPLEX.subtitle}
+                      </Text>
+                    );
+                  }
+
+                  _UNIT_CONTAINER_STYLE.push({
+                    marginHorizontal: Styles.Content.marginHorizontal,
+                    marginBottom: Styles.Content.marginVertical
+                  });
+
+                  let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
+                      _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newFragment.warehouses.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+
+                  if (Platform.OS !== 'ios'){
+                    _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
+                    _FIRST_CAROUSEL_OTHER_OPTIONS.loop = true;
+
+                    if (I18nManager.isRTL){
+                      _FIRST_CAROUSEL_OTHER_OPTIONS.contentContainerCustomStyle = {
+                        flexDirection: 'row-reverse'
+                      };
+                    }
+                  }
+
+                  return (
+                    <React.Fragment>
+                      <Input
+                        type={__CONSTANTS.content.firstComplex.state.normal.firstInput.type}
+                        style={_UNIT_CONTAINER_STYLE}
+                        gradient={Global.colors.pair.tilan}>
+                          <View
+                            style={Styles.DetailItemMasterInfoContent}>
+                              <Text
+                                style={Styles.BriefDetailTitle}>
+                                  {_FINAL_UNIT_COMPLEX.title}
+                              </Text>
+
+                              {_UNIT_CONTAINER_SUBTITLE}
+                          </View>
+                      </Input>
+
+                      <Carousel
+                        name="{__CONSTANTS.modalContainer.content.secondCarousel.content.self.context.firstCarousel.title.en}"
+                        data={props.newFragment.warehouses}
+                        firstItem={_SELECTED_WAREHOUSE_INDEX}
+                        style={[
+                          Styles.DetailContainer,
+                          {
+                            marginBottom: Styles.Content.marginVertical
+                          }
+                        ]}
+                        itemWidth={(_Screen.width / 1.2) - (Styles.Content.marginHorizontal * _FIRST_CAROUSEL_ITEM_WIDTH_COEFFICIENT)}
+                        onLayout={(warehouse) => {
+                          var _ITEM_GRADIENT = Global.colors.pair.ongerine;
+
+                          if (warehouse.item._id === feature.warehouse._id){
+                            _ITEM_GRADIENT = Global.colors.pair.aqrulean;
+                          }
+
+                          return (
+                            <Input
+                              type={"button"}
+                              gradient={_ITEM_GRADIENT}
+                              style={Styles.CustomizedWarehouseDetailItemContainer}
+                              disable={true}>
+                              <View
+                                style={[
+                                  Styles.DetailItemMasterInfoContent
+                                ]}>
+                                  <Text
+                                    style={[
+                                      Styles.BriefDetailTitle
+                                    ]}>
+                                      {"نام انبار"}
+                                  </Text>
+                              </View>
+                              <View
+                                style={Styles.DetailItemMasterSubInfoContent}>
+                                  <Icon
+                                    name={"grading"}
+                                    color={Global.colors.single.romance} />
+
+                                  <Text
+                                    style={[
+                                      Styles.BriefDetailRowText
+                                    ]}>
+                                      {warehouse.item.name}
+                                  </Text>
+                              </View>
+                            </Input>
+                          )
+                        }}
+                        onSnap={(selectedItemIndex) => {
+                          let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
+                                return (checkingItem.unit._id === feature.unit._id);
+                              }),
+                              _TOTAL_FEATURES = props.newFragment.features;
+
+                          _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].warehouse = props.newFragment.warehouses[selectedItemIndex];
+
+                          props.setFeatures(_TOTAL_FEATURES);
+                        }}
+                        {..._FIRST_CAROUSEL_OTHER_OPTIONS}/>
+
+                      <Separator
+                         style={{
+                           marginBottom: Styles.Content.marginVertical
+                         }}>
+                           <Link
+                             value={__CONSTANTS.content.firstComplex.state.normal.firstSeparator[_LANGUAGE]}
+                             onPress={_UNIT_DELETE_ACTION}/>
+                       </Separator>
+                    </React.Fragment>
+                  );
+                })
               }
-
-              _UNIT_CONTAINER_STYLE.push({
-                marginHorizontal: Styles.Content.marginHorizontal,
-                marginBottom: Styles.Content.marginVertical
-              });
-
-              return (
-                <React.Fragment>
-                  <Input
-                    type={__CONSTANTS.content.firstComplex.state.normal.firstInput.type}
-                    style={_UNIT_CONTAINER_STYLE}
-                    gradient={Global.colors.pair.tilan}>
-                      <View
-                        style={Styles.DetailItemMasterInfoContent}>
-                          <Text
-                            style={Styles.BriefDetailTitle}>
-                              {_FINAL_UNIT_COMPLEX.title}
-                          </Text>
-
-                          {_UNIT_CONTAINER_SUBTITLE}
-                      </View>
-                  </Input>
-
-                  <Separator
-                     style={{
-                       marginBottom: Styles.Content.marginVertical
-                     }}>
-                       <Link
-                         value={__CONSTANTS.content.firstComplex.state.normal.firstSeparator[_LANGUAGE]}
-                         onPress={_UNIT_DELETE_ACTION}/>
-                   </Separator>
-                </React.Fragment>
-              );
-            }}/>
+          </ScrollView>
         );
       }else{
         _UNITS_CONTENT = (
@@ -299,15 +366,19 @@ class NewFragmentIdentity extends Component<{}> {
             <ProductFeaturesModal
               visibility={props.newFragment.unitsModalVisibility}
               onBlur={() => props.setUnitsModalVisibility(false)}
-              onProgressSuccess={(response) => props.appendFeature({
-                unit: response,
-                warehouse: {},
-                sales_structure: {},
-                shipping_method: {},
-                quantity: 0,
-                isInfiniteMaximumOrderQuantity: true,
-                isDetachableUnit: false
-              })}
+              onProgressSuccess={(response) => {
+                const _WAREHOUSES = props.newFragment.warehouses;
+
+                props.appendFeature({
+                  unit: response,
+                  warehouse: (_WAREHOUSES.length > 0)? _WAREHOUSES[0]: {},
+                  sales_structure: {},
+                  shipping_method: {},
+                  quantity: 0,
+                  isInfiniteMaximumOrderQuantity: true,
+                  isDetachableUnit: false
+                });
+              }}
               {..._PRODUCT_UNITS_OTHER_PROPS} />
         </Container>
       );
