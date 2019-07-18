@@ -272,5 +272,70 @@ module.exports = {
         })
       }
     }
+  },
+  _getAvailableProductShippingMethods: async (dispatch) => {
+    dispatch({
+      type: NEW_FRAGMENT.SET_SHIPPING_METHODS_LOADING_STATUS,
+      payload: true
+    })
+
+    try {
+      const _PRODUCT_SHIPPING_METHODS = await axios.get(`${GLOBAL.URLS.INTERFAS.HOST_NAME}/taxonomies/p.s.h`);
+
+      if (_PRODUCT_SHIPPING_METHODS.status === 200){
+        const _FINAL_RESPONSE = _PRODUCT_SHIPPING_METHODS.data;
+
+        if (_FINAL_RESPONSE.meta.code === 200){
+          const _DATA = _FINAL_RESPONSE.data;
+
+          dispatch({
+            type: NEW_FRAGMENT.FETCH_AVAILABLE_SHIPPING_METHODS,
+            payload: _DATA
+          })
+
+          dispatch({
+            type: NEW_FRAGMENT.SET_SHIPPING_METHODS_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
+            payload: {
+              status: true
+            }
+          })
+        }else{
+          dispatch({
+            type: NEW_FRAGMENT.SET_SHIPPING_METHODS_LOADING_STATUS,
+            payload: false
+          })
+
+          dispatch({
+            type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
+            payload: {
+              status: false,
+              content: _FINAL_RESPONSE.meta.error_message
+            }
+          })
+        }
+      }
+    } catch (error) {
+      if (error){
+        const _ERROR_MESSAGE = error.message || error.request._response;
+
+        dispatch({
+          type: NEW_FRAGMENT.SET_SHIPPING_METHODS_LOADING_STATUS,
+          payload: false
+        })
+
+        dispatch({
+          type: NEW_FRAGMENT.SET_CONNECTED_STATUS,
+          payload: {
+            status: false,
+            content: _ERROR_MESSAGE
+          }
+        })
+      }
+    }
   }
 };

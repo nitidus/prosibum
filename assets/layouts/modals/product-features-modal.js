@@ -541,7 +541,7 @@ const ProductFeaturesModal = (props) => {
                 (
                   <Switch
                     value={props.productFeaturesModal.isDetachableUnit}
-                    title={__CONSTANTS.modalContainer.content.firstSwith.title[attitude.language]}
+                    title={__CONSTANTS.modalContainer.content.firstSwitch.title[attitude.language]}
                     containerStyle={{
                       marginHorizontal: Styles.Content.marginHorizontal,
                       marginBottom: Styles.Content.marginVertical
@@ -795,7 +795,7 @@ const ProductFeaturesModal = (props) => {
                 (
                   <Switch
                     value={props.productFeaturesModal.isInfiniteMaximumOrderQuantity}
-                    title={__CONSTANTS.modalContainer.content.secondSwith.title[attitude.language]}
+                    title={__CONSTANTS.modalContainer.content.secondSwitch.title[attitude.language]}
                     containerStyle={{
                       marginHorizontal: Styles.Content.marginHorizontal,
                       marginBottom: Styles.Content.marginVertical

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, TouchableOpacity, Text, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
+import { View, ScrollView, TouchableOpacity, Text, Dimensions, Platform, I18nManager, Animated, Easing } from 'react-native';
 const _Screen = Dimensions.get('window');
 
 import { connect } from 'react-redux';
@@ -129,31 +129,39 @@ const ProductCategoriesModal = (props) => {
     _PRODUCT_CATEGORIES_CONTENT = (
       <View
         name={Functions._convertTokenToKeyword(__CONSTANTS.modalContainer.content.title.en)}>
-          <List
-            dataSource={props.productCategoriesModal.categories}
-            onLayout={(color) => {
-              var _OTHER_ICON_PROPS = {},
-                  _ICON_CUSTOM_STYLE = {};
-
-              if (Platform.OS !== 'ios'){
-                if (_Screen.width >= 1000 || _Screen.height >= 1000){
-                  _OTHER_ICON_PROPS.height = 28;
-                }else{
-                  _OTHER_ICON_PROPS.height = 25;
-                }
+          <ScrollView
+            style={[
+              Styles.MainContainer,
+              {
+                marginBottom: Styles.Content.marginVertical
               }
+            ]}>
+              <List
+                dataSource={props.productCategoriesModal.categories}
+                onLayout={(color) => {
+                  var _OTHER_ICON_PROPS = {},
+                      _ICON_CUSTOM_STYLE = {};
 
-              _ICON_CUSTOM_STYLE.marginRight = Styles.Content.marginVertical;
+                  if (Platform.OS !== 'ios'){
+                    if (_Screen.width >= 1000 || _Screen.height >= 1000){
+                      _OTHER_ICON_PROPS.height = 28;
+                    }else{
+                      _OTHER_ICON_PROPS.height = 25;
+                    }
+                  }
 
-              return (
-                <Icon
-                  name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
-                  color={color}
-                  style={_ICON_CUSTOM_STYLE}
-                  {..._OTHER_ICON_PROPS}/>
-              );
-            }}
-            onPress={(response) => props.setCurrentCategory(response)}/>
+                  _ICON_CUSTOM_STYLE.marginRight = Styles.Content.marginVertical;
+
+                  return (
+                    <Icon
+                      name={__CONSTANTS.modalContainer.content.firstList.state.normal.extraContent.icon.name}
+                      color={color}
+                      style={_ICON_CUSTOM_STYLE}
+                      {..._OTHER_ICON_PROPS}/>
+                  );
+                }}
+                onPress={(response) => props.setCurrentCategory(response)}/>
+          </ScrollView>
 
           <Input
             type={__CONSTANTS.modalContainer.content.submitInput.type}

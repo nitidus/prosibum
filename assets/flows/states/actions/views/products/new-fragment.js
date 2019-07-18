@@ -68,6 +68,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchAvailableProductsBasedOnQuery: async (query) =>  CMD._getAvailableProductsBasedOnQuery(query, dispatch),
     fetchAvailableProductsBasedOnQueryOnDemand: async (query) => CMD._getAvailableProductsBasedOnQueryOnDemand(query, dispatch),
     fetchAvailableProductWarehouses: async () => CMD._getAvailableProductWarehouses(dispatch),
+    fetchAvailableProductShippingMethods: async () => CMD._getAvailableProductShippingMethods(dispatch),
     appendFragment: async (fragment) =>  CMD._appendFragmentOnDemand(fragment, dispatch),
     setQueryItemsLoadingStatus: (status) => {
       dispatch({
@@ -84,6 +85,12 @@ const mapDispatchToProps = (dispatch) => {
     setWarehousesLoadingStatus: (status) => {
       dispatch({
         type: NEW_FRAGMENT.SET_WAREHOUSES_LOADING_STATUS,
+        payload: status
+      })
+    },
+    setShippingMethodsLoadingStatus: (status) => {
+      dispatch({
+        type: NEW_FRAGMENT.SET_SHIPPING_METHODS_LOADING_STATUS,
         payload: status
       })
     },

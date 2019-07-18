@@ -53,7 +53,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: tag
       })
     },
-    setInvenntoryUnits: (units) => {
+    setInventoryUnits: (units) => {
       dispatch({
         type: NEW_PRODUCT.SET_INVENTORY_UNITS,
         payload: units

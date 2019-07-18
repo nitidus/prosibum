@@ -32,6 +32,9 @@ module.exports = StyleSheet.create({
   Content: {
     ..._CUSTOM_CONTENT
   },
+  MainContainer: {
+    height: 220
+  },
   Center_TextAlignment: {
     textAlign: 'center'
   },

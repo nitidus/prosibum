@@ -107,7 +107,7 @@ class NewProductIdentity extends Component<{}> {
           <Carousel
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.normal.title.en)}
             data={props.newProduct.inventoryUnits}
-            itemWidth={_Screen.width - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
+            itemWidth={(_Screen.width / 1.2) - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
             style={[
               Styles.DetailContainer,
               {
@@ -118,40 +118,34 @@ class NewProductIdentity extends Component<{}> {
               flexDirection: 'row-reverse'
             }}
             onLayout={({ item, index }) => {
-              var _UNIT_DELETE_ACTION = () => props.setInvenntoryUnits(props.newProduct.inventoryUnits.filter((checkingItem, j) => {
+              var _UNIT_DELETE_ACTION = () => props.setInventoryUnits(props.newProduct.inventoryUnits.filter((checkingItem, j) => {
                 return (checkingItem._id !== item._id);
               })),
-              _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item, _LANGUAGE);
+              _FINAL_UNIT_COMPLEX = Preparation._prepareUnitAsASingleString(item, _LANGUAGE),
+              _UNIT_CONTAINER_STYLE = [
+                Styles.UnitsDetailItemContainer
+              ],
+              _UNIT_CONTAINER_SUBTITLE = (
+                <Text
+                  style={Styles.BriefDetailSubtitle}>
+                    {_FINAL_UNIT_COMPLEX.subtitle}
+                </Text>
+              );
 
               return (
                 <Input
                   type={__CONSTANTS.content.firstCarousel.type}
-                  style={[
-                    Styles.UnitsDetailItemContainer,
-                    Styles.LTR_ContentAlignment
-                  ]}
+                  style={_UNIT_CONTAINER_STYLE}
                   gradient={Global.colors.pair.tilan}
                   onLongPress={_UNIT_DELETE_ACTION}>
                     <View
                       style={Styles.DetailItemMasterInfoContent}>
-                        <View
-                          style={Styles.BriefDetailTitleContainer}>
-                          <Text
-                            style={Styles.BriefDetailTitle}>
-                              {_FINAL_UNIT_COMPLEX.title}
-                          </Text>
-                          <Text
-                            style={Styles.BriefDetailTitleSuffix}>
-                              {_FINAL_UNIT_COMPLEX.subtitle}
-                          </Text>
+                        <Text
+                          style={Styles.BriefDetailTitle}>
+                            {_FINAL_UNIT_COMPLEX.title}
+                        </Text>
 
-                          {
-                            // <Text
-                            //   style={Styles.BriefDetailTitleSuffix}>
-                            //     {Functions._convertKeywordToToken(__CONSTANTS.content.firstCarousel.state.normal.suffix[_LANGUAGE])}
-                            // </Text>
-                          }
-                        </View>
+                        {_UNIT_CONTAINER_SUBTITLE}
                     </View>
                 </Input>
               );

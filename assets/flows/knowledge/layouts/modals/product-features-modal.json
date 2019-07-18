@@ -258,7 +258,7 @@
           }
         }
       },
-      "firstSwith": {
+      "firstSwitch": {
         "title": {
           "en": "Detachable Sales",
           "fa": "فروش بصورت باز"
@@ -360,7 +360,7 @@
           "fa": "تغییر جزئیات سفارش یا انبار"
         }
       },
-      "secondSwith": {
+      "secondSwitch": {
         "title": {
           "en": "Maximum order up to inventory limit",
           "fa": "حداکثر سفارش تا سقف موجودی"

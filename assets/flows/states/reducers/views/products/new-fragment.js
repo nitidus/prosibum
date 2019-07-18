@@ -10,11 +10,12 @@ const initialState = {
         features: [],
         prices: [],
         onFetchingModePrice: {},
-        shippingPlans: [],
         warehouses: [],
+        shippingMethods: [],
         onFetchingModeShippingPlan: {},
         unitsModalVisibility: false,
         warehousesLoading: false,
+        shippingMethodsLoading: false,
         queryItemsLoading: false,
         featuresLoading: false,
         productLoading: false,
@@ -98,6 +99,12 @@ export default (state = initialState, action) => {
         warehouses: action.payload
       };
       break;
+    case NEW_FRAGMENT.FETCH_AVAILABLE_SHIPPING_METHODS:
+      return {
+        ...state,
+        shippingMethods: action.payload
+      };
+      break;
     case NEW_FRAGMENT.FETCH_AVAILABLE_PRODUCTS_BASED_ON_QUERY:
       return {
         ...state,
@@ -111,6 +118,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         warehousesLoading: action.payload
+      };
+      break;
+    case NEW_FRAGMENT.SET_SHIPPING_METHODS_LOADING_STATUS:
+      return {
+        ...state,
+        shippingMethodsLoading: action.payload
       };
       break;
     case NEW_FRAGMENT.QUERY_BASED_PRODUCTS_LOADING_STATUS:

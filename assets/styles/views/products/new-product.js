@@ -21,15 +21,15 @@ var _CUSTOM_CONTENT = {
       marginBottom: 5
     },
     _CUSTOM_BRIEF_DETAIL_TITLE = {
-      fontSize: 26
+      fontSize: 19
     },
     _CUSTOM_BRIEF_DETAIL_TITLE_SUFFIX = {
-      fontSize: 14,
+      fontSize: 11,
       marginLeft: 5,
       marginBottom: 3
     },
     _CUSTOM_BRIEF_DETAIL_SUBTITLE = {
-      fontSize: 14,
+      fontSize: 11,
       width: ((width - (_CUSTOM_CONTENT.marginHorizontal * 2)) - 42),
       marginBottom: 10
     },
@@ -38,7 +38,7 @@ var _CUSTOM_CONTENT = {
       width: 15
     },
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT = {
-      fontSize: 14
+      fontSize: 11
     },
     _CUSTOM_PHOTO_CONTAINER = {
       height: 144
@@ -190,13 +190,13 @@ module.exports = StyleSheet.create({
   UnitsFeatureDetailItemContainer: {
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     alignItems: 'flex-start',
-    height: 178,
+    height: 'auto',
     padding: 18
   },
   UnitsDetailItemContainer: {
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
     alignItems: 'flex-start',
-    height: 118,
+    height: 88,
     padding: 18
   },
   CustomizedFeatureDetailItemContainer: {

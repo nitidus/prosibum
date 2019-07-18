@@ -42,7 +42,117 @@
         "normal": {
           "firstInput": {
             "type": "BUTTON",
-
+            "title": {
+              "en": "Unit Container"
+            }
+          },
+          "firstCarousel": {
+            "type": "BUTTON",
+            "title": {
+              "en": "Warehouse Carousel"
+            },
+            "content": {
+              "title": {
+                "en": "Warehouse Name",
+                "fa": "نام انبار"
+              },
+              "icon": "grading"
+            }
+          },
+          "secondInput": {
+            "type": "NUMERIC",
+            "title": {
+              "en": "Minimum Order Quantity",
+              "fa": "حداقل تعداد سفارش"
+            },
+            "options": {
+              "maxLength": 9
+            }
+          },
+          "firstSwitch": {
+            "title": {
+              "en": "Maximum order up to inventory limit",
+              "fa": "حداکثر سفارش تا سقف موجودی"
+            }
+          },
+          "thirdInput": {
+            "type": "NUMERIC",
+            "title": {
+              "en": "Maximum Order Quantity",
+              "fa": "حداکثر تعداد سفارش"
+            },
+            "options": {
+              "maxLength": 9
+            }
+          },
+          "fourthInput": {
+            "type": "NUMERIC",
+            "title": {
+              "en": "Inventory Quantity",
+              "fa": "تعداد موجودی"
+            },
+            "options": {
+              "maxLength": 9
+            }
+          },
+          "fifthInput": {
+            "type": "NUMERIC",
+            "title": {
+              "en": "Product Price (in Dollar)",
+              "fa": "قیمت محصول (به ریال)"
+            },
+            "options": {
+              "maxLength": 9
+            }
+          },
+          "secondSwitch": {
+            "title": {
+              "en": "Detachable Sales",
+              "fa": "فروش بصورت باز"
+            }
+          },
+          "sixthInput": {
+            "type": "NUMERIC",
+            "title": {
+              "en": "Minimum Detachable Order Quantity",
+              "fa": "حداقل تعداد سفارش بصورت باز"
+            },
+            "options": {
+              "maxLength": 9
+            }
+          },
+          "seventhInput": {
+            "type": "NUMERIC",
+            "title": {
+              "en": "Maximum Detachable Order Quantity",
+              "fa": "حداکثر تعداد سفارش بصورت باز"
+            },
+            "options": {
+              "maxLength": 9
+            }
+          },
+          "eighthInput": {
+            "type": "NUMERIC",
+            "title": {
+              "en": "Detachable Product Price",
+              "fa": "قیمت محصول بصورت باز"
+            },
+            "options": {
+              "maxLength": 9
+            }
+          },
+          "secondCarousel": {
+            "type": "BUTTON",
+            "title": {
+              "en": "Shipping Methods Carousel"
+            },
+            "content": {
+              "title": {
+                "en": "Shipping Method Type",
+                "fa": "نوع حمل و نقل"
+              },
+              "icon": "grading"
+            }
           },
           "firstSeparator": {
             "en": "Remove Item",
@@ -73,8 +183,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Fill The Inventory Detail",
-            "fa": "پُرکردن جزئیات موجودی"
+            "en": "Register",
+            "fa": "ثبت"
           }
         }
       }

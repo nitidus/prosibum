@@ -15,21 +15,21 @@ var _CUSTOM_CONTENT = {
       marginHorizontal: 32
     },
     _CUSTOM_WALLET_ITEM_TITLE = {
-      fontSize: 26,
+      fontSize: 19,
       marginBottom: 3
     },
     _CUSTOM_WALLET_ITEM_SUBTITLE = {
-      fontSize: 14
+      fontSize: 11
     },
     _CUSTOM_BRIEF_DETAIL_TITLE = {
-      fontSize: 26,
+      fontSize: 19,
       marginBottom: 15
     },
     _CUSTOM_BRIEF_DETAIL_SUBTITLE = {
-      fontSize: 14
+      fontSize: 11
     },
     _CUSTOM_BRIEF_DETAIL_ROW_TEXT = {
-      fontSize: 14
+      fontSize: 11
     };
 
 _CUSTOM_BRIEF_DETAIL_ROW_TEXT[((I18nManager.isRTL)? 'marginRight': 'marginLeft')] = 15;
@@ -79,7 +79,7 @@ module.exports = StyleSheet.create({
   },
   DetailItemContainer: {
     direction: (I18nManager.isRTL)? 'rtl': 'ltr',
-    height: 118,
+    height: 88,
     padding: 18
   },
   WarningContainer: {

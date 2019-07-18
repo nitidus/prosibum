@@ -11,14 +11,14 @@ const { width, height } = Dimensions.get('window'),
       _IS_IPHONE_X = (Platform.OS === 'ios') && ((height === 812 || width === 812));
 
 var _CUSTOM_CAROUSEL_ITEM_CONTAINER = {
-      height: 90,
+      height: 88,
       paddingHorizontal: 15
     },
     _CUSTOM_CAROUSEL_ITEM_TITLE = {
-      fontSize: 26
+      fontSize: 19
     },
     _CUSTOM_CAROUSEL_ITEM_SUBTITLE = {
-      fontSize: 14
+      fontSize: 11
     };
 
 if (Platform.OS !== 'ios'){
