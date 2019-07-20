@@ -128,7 +128,7 @@ module.exports = {
 
     const _DID_TOKEN_CREATED = await Prototypes._retrieveDataWithKey(GLOBAL.STORAGE.AUTH);
 
-    navigation.navigate(_DID_TOKEN_CREATED? 'NewProductIdentity': 'Authentication');
+    navigation.navigate(_DID_TOKEN_CREATED? 'NewFragmentIdentity': 'Authentication');
   },
   _prepareCurrentUserInformation: async (props, pilot) => {
     const _NATIVE_SETTINGS = await Prototypes._getDefaultNativeSettings(),

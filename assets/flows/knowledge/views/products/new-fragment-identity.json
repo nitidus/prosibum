@@ -19,7 +19,7 @@
         "en": "Product Name",
         "fa": "نام محصول"
       },
-      "warnning": {
+      "warning": {
         "first": {
           "en": "Fragment name can not e empty.",
           "fa": "نام تنوع محصول نمی‌تواند خالی باشد."
@@ -43,7 +43,8 @@
           "firstInput": {
             "type": "BUTTON",
             "title": {
-              "en": "Unit Container"
+              "en": "Unit Type",
+              "fa": "نوع واحد اندازه‌گیری"
             }
           },
           "firstCarousel": {
@@ -158,12 +159,102 @@
             "en": "Remove Item",
             "fa": "حذف بخش"
           }
+        }
+      },
+      "warning": {
+        "zeroLevel": {
+          "en": "There's no composition of created fragment.",
+          "fa": "هیچ ترکیبی از نمونه محصول ایجاد شده وجود ندارد."
         },
-        "empty": {
-          "title": {
-            "en": "There's no composition of created fragment.",
-            "fa": "هیچ ترکیبی از نمونه محصول ایجاد شده وجود ندارد."
+        "firstLevel": {
+          "firstPart": {
+            "en": "Unit",
+            "fa": "واحد اندازه‌گیری"
+          },
+          "secondPart": {
+            "en": "Warehouse",
+            "fa": "انبار"
+          },
+          "thirdPart": {
+            "en": "Sales Structure",
+            "fa": "ساختار فروش"
+          },
+          "fourthPart": {
+            "en": "Shipping Method",
+            "fa": "روش حمل و نقل"
+          },
+          "fifthPart": {
+            "en": "Quantity",
+            "fa": "تعداد موجودی‌"
+          },
+          "verbComposition": {
+            "one": {
+              "en": "not defined.",
+              "fa": "تعریف نشده است."
+            },
+            "more": {
+              "en": "not defined.",
+              "fa": "تعریف نشده‌اند."
+            }
           }
+        },
+        "secondLevel": {
+          "en": "Enter the required items for the fragment.",
+          "fa": "موارد خواسته شده نمونه محصول را وارد کنید."
+        },
+        "thirdLevel": {
+          "firstPortion": {
+            "firstPart": {
+              "en": "Minimum Order Quantity",
+              "fa": "حداقل تعداد سفارش"
+            },
+            "secondPart": {
+              "en": "Maximum Order Quantity",
+              "fa": "حداکثر تعداد سفارش"
+            },
+            "thirdPart": {
+              "en": "Product Price",
+              "fa": "قیمت محصول"
+            },
+            "verbComposition": {
+              "one": {
+                "en": "is empty.",
+                "fa": "خالی است."
+              },
+              "more": {
+                "en": "are empty.",
+                "fa": "خالی هستند."
+              }
+            }
+          },
+          "secondPortion": {
+            "firstPart": {
+              "en": "Minimum Detachable Order Quantity",
+              "fa": "حداقل تعداد سفارش بصورت باز"
+            },
+            "secondPart": {
+              "en": "Maximum Detachable Order Quantity",
+              "fa": "حداکثر تعداد سفارش بصورت باز"
+            },
+            "thirdPart": {
+              "en": "Product Detachable Price",
+              "fa": "قیمت محصول بصورت باز"
+            },
+            "verbComposition": {
+              "one": {
+                "en": "is empty.",
+                "fa": "خالی است."
+              },
+              "more": {
+                "en": "are empty.",
+                "fa": "خالی هستند."
+              }
+            }
+          }
+        },
+        "delimiter": {
+          "en": ",",
+          "fa": "،"
         }
       }
     },
@@ -172,8 +263,8 @@
       "state": {
         "normal": {
           "title": {
-            "en": "Append Unit",
-            "fa": "اضافه کردن واحد اندازه‌گیری"
+            "en": "Append Composition of Fragment",
+            "fa": "اضافه‌کردن ترکیبی از نمونه محصول"
           }
         }
       }

@@ -121,12 +121,14 @@ export const Input = (props) => {
           attitude.autoCapitalize = props.autoCapitalize || 'words';
         }
 
-        if (typeof props.maxLength != 'undefined'){
-          otherProps.maxLength = attitude.maxLength = props.maxLength;
-        }
-
         if (typeof props.reference != 'undefined'){
           otherProps.ref = attitude.ref = props.reference;
+        }
+
+        attitude.useCommaSeparator = props.useCommaSeparator || props.commaSeparator || props.useSeparator;
+
+        if (typeof props.maxLength != 'undefined'){
+          otherProps.maxLength = attitude.maxLength = (typeof attitude.useCommaSeparator != 'undefined')? (props.maxLength + (Math.floor(props.maxLength / 3) - 1)): props.maxLength;
         }
 
         attitude.onBlur = props.onBlur || function (){};
@@ -241,12 +243,14 @@ export const Input = (props) => {
           attitude.autoCapitalize = props.autoCapitalize || 'words';
         }
 
-        if (typeof props.maxLength != 'undefined'){
-          otherProps.maxLength = attitude.maxLength = props.maxLength;
-        }
-
         if (typeof props.reference != 'undefined'){
           otherProps.ref = attitude.ref = props.reference;
+        }
+
+        attitude.useCommaSeparator = props.useCommaSeparator || props.commaSeparator || props.useSeparator;
+
+        if (typeof props.maxLength != 'undefined'){
+          otherProps.maxLength = attitude.maxLength = (typeof attitude.useCommaSeparator != 'undefined')? (props.maxLength + (Math.floor(props.maxLength / 3) - 1)): props.maxLength;
         }
 
         attitude.onBlur = props.onBlur || function (){};
@@ -473,7 +477,7 @@ export const Input = (props) => {
         <TextInput
           key={attitude.key}
           name={attitude.name}
-          keyboardType="numeric"
+          keyboardType="decimal-pad"
           style={[
             Styles.ContainerWithoutButton,
             attitude.style
@@ -487,9 +491,21 @@ export const Input = (props) => {
             if (I18nManager.isRTL){
               const _FINILIZED_DIGITS = Functions._convertDigitsToEnglish(currentValue);
 
-              return attitude.onChangeText(_FINILIZED_DIGITS);
+              if (typeof attitude.useCommaSeparator != 'undefined'){
+                const _COMMA_SEPARATED_VALUE = Functions._convertTokenToCommaSeparatedDigits(_FINILIZED_DIGITS);
+
+                return attitude.onChangeText(_COMMA_SEPARATED_VALUE);
+              }else{
+                return attitude.onChangeText(_FINILIZED_DIGITS);
+              }
             }else{
-              return attitude.onChangeText(currentValue);
+              if (typeof attitude.useCommaSeparator != 'undefined'){
+                const _COMMA_SEPARATED_VALUE = Functions._convertTokenToCommaSeparatedDigits(currentValue);
+
+                return attitude.onChangeText(_COMMA_SEPARATED_VALUE);
+              }else{
+                return attitude.onChangeText(currentValue);
+              }
             }
           }}
           onBlur={attitude.onBlur}
@@ -878,9 +894,21 @@ export const Input = (props) => {
                 if (I18nManager.isRTL){
                   const _FINILIZED_DIGITS = Functions._convertDigitsToEnglish(currentValue);
 
-                  return attitude.onChangeText(_FINILIZED_DIGITS);
+                  if (typeof attitude.useCommaSeparator != 'undefined'){
+                    const _COMMA_SEPARATED_VALUE = Functions._convertTokenToCommaSeparatedDigits(_FINILIZED_DIGITS);
+
+                    return attitude.onChangeText(_COMMA_SEPARATED_VALUE);
+                  }else{
+                    return attitude.onChangeText(_FINILIZED_DIGITS);
+                  }
                 }else{
-                  return attitude.onChangeText(currentValue);
+                  if (typeof attitude.useCommaSeparator != 'undefined'){
+                    const _COMMA_SEPARATED_VALUE = Functions._convertTokenToCommaSeparatedDigits(currentValue);
+
+                    return attitude.onChangeText(_COMMA_SEPARATED_VALUE);
+                  }else{
+                    return attitude.onChangeText(currentValue);
+                  }
                 }
               }}
               onBlur={attitude.onBlur}

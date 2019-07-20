@@ -203,9 +203,9 @@ module.exports = {
   },
   _convertTokenToCreditCard: (token) => {
     const _TOKEN = (!isNaN(token)) ? token.toString() : token,
-      _ESCAPED_TOKEN = token.replace(/\s+/g, '').replace(/[^0-9]/gi, ''),
-      _MATCHES = _ESCAPED_TOKEN.match(/\d{4,16}/g),
-      _MATCH = _MATCHES && _MATCHES[0] || '';
+          _ESCAPED_TOKEN = token.replace(/\s+/g, '').replace(/[^0-9]/gi, ''),
+          _MATCHES = _ESCAPED_TOKEN.match(/\d{4,16}/g),
+          _MATCH = _MATCHES && _MATCHES[0] || '';
 
     var _PARTS = [];
 
@@ -218,6 +218,12 @@ module.exports = {
     } else {
       return token;
     }
+  },
+  _convertTokenToCommaSeparatedDigits: (token) => {
+    const _TOKEN = (!isNaN(token)) ? token.toString() : token,
+          _ESCAPED_TOKEN = token.replace(/[,-\._\/`"\*\$]/gi, '');
+
+    return module.exports._convertDigitsToMoneyFormat(_ESCAPED_TOKEN, 0);
   },
   _convertNestedArrayToFlattenDeep: (content) => {
     return Lodash.flattenDeep(content);

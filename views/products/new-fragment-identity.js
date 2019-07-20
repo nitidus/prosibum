@@ -57,7 +57,73 @@ class NewFragmentIdentity extends Component<{}> {
           const _FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX = new RegExp(`\.*${_PROPS.product.name}\.*`, 'gi');
 
           if (_PROPS.name.match(_FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX)){
-            _FORM_FIELDS_VALIDITY = true;
+            if (_PROPS.features.length > 0){
+              const _DOES_TOTAL_FEATURES_VERIFIED = _PROPS.features.every((feature) => {
+                if (
+                  (typeof feature.unit != 'undefined') && (Object.keys(feature.warehouse).length > 0) &&
+                  (Object.keys(feature.sales_structure).length > 0) && (Object.keys(feature.shipping_method).length > 0) &&
+                  (feature.quantity != '')
+                ){
+                  const _SALES_STRUCTURE = feature.sales_structure;
+
+                  if (typeof _SALES_STRUCTURE.regular != 'undefined'){
+                    if (
+                      (typeof _SALES_STRUCTURE.regular.minimum_order_quantity != 'undefined') && (typeof _SALES_STRUCTURE.regular.price != 'undefined')
+                    ){
+                      if (
+                        (_SALES_STRUCTURE.regular.minimum_order_quantity != '') && (_SALES_STRUCTURE.regular.price != '')
+                      ){
+                        if (feature.isInfiniteMaximumOrderQuantity === false){
+                          if (typeof _SALES_STRUCTURE.regular.maximum_order_quantity != 'undefined'){
+                            if (_SALES_STRUCTURE.regular.maximum_order_quantity != ''){
+                              if (feature.isDetachableUnit === true){
+                                if (typeof _SALES_STRUCTURE.detachable != 'undefined'){
+                                  if (
+                                    (typeof _SALES_STRUCTURE.detachable.minimum_order_quantity != 'undefined') && (typeof _SALES_STRUCTURE.detachable.price != 'undefined')
+                                  ){
+                                    if (
+                                      (_SALES_STRUCTURE.detachable.minimum_order_quantity != '') && (_SALES_STRUCTURE.detachable.price != '')
+                                    ){
+                                      if (typeof _SALES_STRUCTURE.detachable.maximum_order_quantity != 'undefined'){
+                                        if (_SALES_STRUCTURE.detachable.maximum_order_quantity != ''){
+                                          return true;
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }else{
+                                return true;
+                              }
+                            }
+                          }
+                        }else{
+                          if (feature.isDetachableUnit === true){
+                            if (typeof _SALES_STRUCTURE.detachable != 'undefined'){
+                              if (
+                                (typeof _SALES_STRUCTURE.detachable.minimum_order_quantity != 'undefined') && (typeof _SALES_STRUCTURE.detachable.price != 'undefined')
+                              ){
+                                if (
+                                  (_SALES_STRUCTURE.detachable.minimum_order_quantity != '') && (_SALES_STRUCTURE.detachable.price != '')
+                                ){
+                                  return true;
+                                }
+                              }
+                            }
+                          }else{
+                            return true;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              });
+
+              if (_DOES_TOTAL_FEATURES_VERIFIED === true){
+                _FORM_FIELDS_VALIDITY = true;
+              }
+            }
           }
         }
       }
@@ -132,6 +198,237 @@ class NewFragmentIdentity extends Component<{}> {
               forcedDisable={_VALIDATED} />
           );
 
+      if (_VALIDATED){
+        var _MESSAGE = '';
+
+        if (props.newFragment.name != ''){
+          if (props.newFragment.name.length > 7){
+            if (Object.keys(props.newFragment.product).length > 0){
+              const _FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX = new RegExp(`\.*${props.newFragment.product.name}\.*`, 'gi');
+
+              if (props.newFragment.name.match(_FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX) === null){
+                _MESSAGE += `${(_MESSAGE != '')? '\n': ''} ${__CONSTANTS.content.firstInput.warning.third[_LANGUAGE]}`;
+              }
+            }
+          }else{
+            _MESSAGE += `${(_MESSAGE != '')? '\n': ''} ${__CONSTANTS.content.firstInput.warning.second[_LANGUAGE]}`;
+          }
+        }else{
+          _MESSAGE += `${(_MESSAGE != '')? '\n': ''} ${__CONSTANTS.content.firstInput.warning.first[_LANGUAGE]}`;
+        }
+
+        if (props.newFragment.features.length > 0){
+          for (var i = 0; i < props.newFragment.features.length; i++) {
+            var feature = props.newFragment.features[i];
+
+            if (
+              (typeof feature.unit != 'undefined') && (typeof feature.warehouse != 'undefined') &&
+              (typeof feature.sales_structure != 'undefined') && (typeof feature.shipping_method != 'undefined') &&
+              (typeof feature.quantity != 'undefined')
+            ){
+              const _SALES_STRUCTURE = feature.sales_structure;
+
+              if (Object.keys(_SALES_STRUCTURE).length > 0){
+                var _ERROR_OCCURED = false;
+
+                if (typeof _SALES_STRUCTURE.regular != 'undefined'){
+                  var _LOCAL_MESSAGE = '',
+                      _MESSAGE_PARAMETER = 0;
+
+                  if (typeof _SALES_STRUCTURE.regular.minimum_order_quantity != 'undefined'){
+                    var _FINAL_PROCESSED_VARIABLE = _SALES_STRUCTURE.regular.minimum_order_quantity.replace(/[,-\._\/`"\*\$]/gi, '');
+
+                    if (
+                      (_FINAL_PROCESSED_VARIABLE == '') ||
+                      ((!isNaN(_FINAL_PROCESSED_VARIABLE))? (parseInt(_FINAL_PROCESSED_VARIABLE) === 0): false)
+                    ){
+                      _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.firstPortion.firstPart[_LANGUAGE]}`;
+
+                      _MESSAGE_PARAMETER++;
+                    }
+                  }else{
+                    _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.firstPortion.firstPart[_LANGUAGE]}`;
+
+                    _MESSAGE_PARAMETER++;
+                  }
+
+                  if (feature.isInfiniteMaximumOrderQuantity === false){
+                    if (typeof _SALES_STRUCTURE.regular.maximum_order_quantity != 'undefined'){
+                      var _FINAL_PROCESSED_VARIABLE = _SALES_STRUCTURE.regular.maximum_order_quantity.replace(/[,-\._\/`"\*\$]/gi, '');
+
+                      if (
+                        (_FINAL_PROCESSED_VARIABLE == '') ||
+                        ((!isNaN(_FINAL_PROCESSED_VARIABLE))? (parseInt(_FINAL_PROCESSED_VARIABLE) === 0): false)
+                      ){
+                        _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.firstPortion.secondPart[_LANGUAGE]}`;
+
+                        _MESSAGE_PARAMETER++;
+                      }
+                    }else{
+                      _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.firstPortion.secondPart[_LANGUAGE]}`;
+
+                      _MESSAGE_PARAMETER++;
+                    }
+                  }
+
+                  if (typeof _SALES_STRUCTURE.regular.price != 'undefined'){
+                    var _FINAL_PROCESSED_VARIABLE = _SALES_STRUCTURE.regular.price[0].value.replace(/[,-\._\/`"\*\$]/gi, '');
+
+                    if (
+                      (_FINAL_PROCESSED_VARIABLE == '') ||
+                      ((!isNaN(_FINAL_PROCESSED_VARIABLE))? (parseInt(_FINAL_PROCESSED_VARIABLE) === 0): false)
+                    ){
+                      _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.firstPortion.thirdPart[_LANGUAGE]}`;
+
+                      _MESSAGE_PARAMETER++;
+                    }
+                  }else{
+                    _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.firstPortion.thirdPart[_LANGUAGE]}`;
+
+                    _MESSAGE_PARAMETER++;
+                  }
+
+                  if (_LOCAL_MESSAGE != ''){
+                    _MESSAGE += `${(_MESSAGE != '')? '\n': ''} ${_LOCAL_MESSAGE} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.firstPortion.verbComposition[((_MESSAGE_PARAMETER > 1)? 'more': 'one')][_LANGUAGE]}`;
+
+                    _ERROR_OCCURED = true;
+                  }
+                }
+
+                if (feature.isDetachableUnit === true){
+                  if (typeof _SALES_STRUCTURE.detachable != 'undefined'){
+                    var _LOCAL_MESSAGE = '',
+                        _MESSAGE_PARAMETER = 0;
+
+                    if (typeof _SALES_STRUCTURE.detachable.minimum_order_quantity != 'undefined'){
+                      var _FINAL_PROCESSED_VARIABLE = _SALES_STRUCTURE.detachable.minimum_order_quantity.replace(/[,-\._\/`"\*\$]/gi, '');
+
+                      if (
+                        (_FINAL_PROCESSED_VARIABLE == '') ||
+                        ((!isNaN(_FINAL_PROCESSED_VARIABLE))? (parseInt(_FINAL_PROCESSED_VARIABLE) === 0): false)
+                      ){
+                        _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.secondPortion.firstPart[_LANGUAGE]}`;
+
+                        _MESSAGE_PARAMETER++;
+                      }
+                    }else{
+                      _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.secondPortion.firstPart[_LANGUAGE]}`;
+
+                      _MESSAGE_PARAMETER++;
+                    }
+
+                    if (feature.isInfiniteMaximumOrderQuantity === false){
+                      if (typeof _SALES_STRUCTURE.detachable.maximum_order_quantity != 'undefined'){
+                        var _FINAL_PROCESSED_VARIABLE = _SALES_STRUCTURE.detachable.maximum_order_quantity.replace(/[,-\._\/`"\*\$]/gi, '');
+
+                        if (
+                          (_FINAL_PROCESSED_VARIABLE == '') ||
+                          ((!isNaN(_FINAL_PROCESSED_VARIABLE))? (parseInt(_FINAL_PROCESSED_VARIABLE) === 0): false)
+                        ){
+                          _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.secondPortion.secondPart[_LANGUAGE]}`;
+
+                          _MESSAGE_PARAMETER++;
+                        }
+                      }else{
+                        _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.secondPortion.secondPart[_LANGUAGE]}`;
+
+                        _MESSAGE_PARAMETER++;
+                      }
+                    }
+
+                    if (typeof _SALES_STRUCTURE.detachable.price != 'undefined'){
+                      var _FINAL_PROCESSED_VARIABLE = _SALES_STRUCTURE.detachable.price[0].value.replace(/[,-\._\/`"\*\$]/gi, '');
+
+                      if (
+                        (_FINAL_PROCESSED_VARIABLE == '') ||
+                        ((!isNaN(_FINAL_PROCESSED_VARIABLE))? (parseInt(_FINAL_PROCESSED_VARIABLE) === 0): false)
+                      ){
+                        _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.secondPortion.thirdPart[_LANGUAGE]}`;
+
+                        _MESSAGE_PARAMETER++;
+                      }
+                    }else{
+                      _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.secondPortion.thirdPart[_LANGUAGE]}`;
+
+                      _MESSAGE_PARAMETER++;
+                    }
+
+                    if (_LOCAL_MESSAGE != ''){
+                      _MESSAGE += `${(_MESSAGE != '')? '\n': ''} ${_LOCAL_MESSAGE} ${__CONSTANTS.content.firstComplex.warning.thirdLevel.secondPortion.verbComposition[((_MESSAGE_PARAMETER > 1)? 'more': 'one')][_LANGUAGE]}`;
+
+                      _ERROR_OCCURED = true;
+                    }
+                  }
+                }
+
+                if (_ERROR_OCCURED === true){
+                  break;
+                }
+              }else{
+                _MESSAGE += `${(_MESSAGE != '')? '\n': ''} ${__CONSTANTS.content.firstComplex.warning.secondLevel[_LANGUAGE]}`;
+
+                break;
+              }
+            }else{
+              var _LOCAL_MESSAGE = '',
+                  _MESSAGE_PARAMETER = 0;
+
+              if (typeof feature.unit == 'undefined'){
+                _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.firstLevel.firstPart[_LANGUAGE]}`;
+
+                _MESSAGE_PARAMETER++;
+              }
+
+              if (typeof feature.warehouse == 'undefined'){
+                _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.firstLevel.secondPart[_LANGUAGE]}`;
+
+                _MESSAGE_PARAMETER++;
+              }
+
+              if (typeof feature.sales_structure == 'undefined'){
+                _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.firstLevel.thirdPart[_LANGUAGE]}`;
+
+                _MESSAGE_PARAMETER++;
+              }
+
+              if (typeof feature.shipping_method == 'undefined'){
+                _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.firstLevel.fourthPart[_LANGUAGE]}`;
+
+                _MESSAGE_PARAMETER++;
+              }
+
+              if (typeof feature.quantity == 'undefined'){
+                _LOCAL_MESSAGE += `${(_LOCAL_MESSAGE != '')? (__CONSTANTS.content.firstComplex.warning.delimiter[_LANGUAGE] + ' '): ''} ${__CONSTANTS.content.firstComplex.warning.firstLevel.fifthPart[_LANGUAGE]}`;
+
+                _MESSAGE_PARAMETER++;
+              }
+
+              _MESSAGE += `${(_MESSAGE != '')? '\n': ''} ${_LOCAL_MESSAGE} ${__CONSTANTS.content.firstComplex.warning.firstLevel.verbComposition[((_MESSAGE_PARAMETER > 1)? 'more': 'one')][_LANGUAGE]}`;
+
+              break;
+            }
+          }
+        }else{
+          _MESSAGE += `${(_MESSAGE != '')? '\n': ''} ${__CONSTANTS.content.firstComplex.warning.zeroLevel[_LANGUAGE]}`;
+        }
+
+        if (_MESSAGE != ''){
+          _FINAL_BUTTON = (
+            <Input
+              type={__CONSTANTS.content.submitButton.type}
+              name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
+              value={_MESSAGE}
+              style={[
+                Styles.WarningContainer,
+                {
+                  marginBottom: Styles.Content.marginVertical
+                }
+              ]}
+              textStyle={Styles.WarningContent} />
+          );
+        }
+      }
+
       if (props.newFragment.features.length > 0){
         _COMPLEX_CONTENT = (
           <React.Fragment>
@@ -150,14 +447,7 @@ class NewFragmentIdentity extends Component<{}> {
                     _SELECTED_SHIPPING_METHOD_INDEX = props.newFragment.shippingMethods.findIndex((shippingMethod, i) => {
                       return shippingMethod._id === feature.shipping_method._id;
                     }),
-                    _MINIMUM_ORDER_QUANTITY = '',
-                    _MAXIMUM_ORDER_QUANTITY = '',
-                    _QUANTITY = (feature.quantity > 0)? feature.quantity.toString(): '',
-                    _MINIMUM_DETACHABLE_ORDER_QUANTITY = '',
-                    _MAXIMUM_DETACHABLE_ORDER_QUANTITY = '',
-                    _PRICE = '',
-                    _DETACHABLE_PRICE = '',
-                    _UNIT_CONTAINER_SUBTITLE, _WAREHOUSE_CONTENT = (
+                    _WAREHOUSE_CONTENT = (
                       <Input
                         type={__CONSTANTS.content.firstComplex.state.normal.firstCarousel.type}
                         style={[
@@ -186,37 +476,46 @@ class NewFragmentIdentity extends Component<{}> {
                         disable={true}>
                           <ActivityIndicator/>
                       </Input>
-                    ), _MAXIMUM_ORDER_QUANTITY_CONTENT, _MAXIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT;
+                    ),
+                    _MINIMUM_ORDER_QUANTITY = '',
+                    _MAXIMUM_ORDER_QUANTITY = '',
+                    _QUANTITY = feature.quantity,
+                    _MINIMUM_DETACHABLE_ORDER_QUANTITY = '',
+                    _MAXIMUM_DETACHABLE_ORDER_QUANTITY = '',
+                    _PRICE = '',
+                    _DETACHABLE_PRICE = '',
+                    _UNIT_CONTAINER_SUBTITLE, _MAXIMUM_ORDER_QUANTITY_CONTENT,
+                    _IS_DETACHABLE_SWITCH_CONTENT, _MINIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT, _MAXIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT, _DETACHABLE_PRODUCT_PRICE_CONTENT;
 
                 if (Object.keys(feature.sales_structure).length > 0){
                   if (typeof feature.sales_structure.regular != 'undefined'){
                     if (typeof feature.sales_structure.regular.minimum_order_quantity != 'undefined'){
-                      _MINIMUM_ORDER_QUANTITY = feature.sales_structure.regular.minimum_order_quantity.toString();
+                      _MINIMUM_ORDER_QUANTITY = feature.sales_structure.regular.minimum_order_quantity;
                     }
 
                     if (typeof feature.sales_structure.regular.maximum_order_quantity != 'undefined'){
-                      _MAXIMUM_ORDER_QUANTITY = feature.sales_structure.regular.maximum_order_quantity.toString();
+                      _MAXIMUM_ORDER_QUANTITY = feature.sales_structure.regular.maximum_order_quantity;
                     }
 
                     if (typeof feature.sales_structure.regular.price != 'undefined'){
                       if (Array.isArray(feature.sales_structure.regular.price) && feature.sales_structure.regular.price.length > 0){
-                        _PRICE = feature.sales_structure.regular.price[0].value.toString();
+                        _PRICE = feature.sales_structure.regular.price[0].value;
                       }
                     }
                   }
 
                   if (typeof feature.sales_structure.detachable != 'undefined'){
                     if (typeof feature.sales_structure.detachable.minimum_order_quantity != 'undefined'){
-                      _MINIMUM_DETACHABLE_ORDER_QUANTITY = feature.sales_structure.detachable.minimum_order_quantity.toString();
+                      _MINIMUM_DETACHABLE_ORDER_QUANTITY = feature.sales_structure.detachable.minimum_order_quantity;
                     }
 
                     if (typeof feature.sales_structure.detachable.maximum_order_quantity != 'undefined'){
-                      _MAXIMUM_DETACHABLE_ORDER_QUANTITY = feature.sales_structure.detachable.maximum_order_quantity.toString();
+                      _MAXIMUM_DETACHABLE_ORDER_QUANTITY = feature.sales_structure.detachable.maximum_order_quantity;
                     }
 
                     if (typeof feature.sales_structure.detachable.price != 'undefined'){
                       if (Array.isArray(feature.sales_structure.detachable.price) && feature.sales_structure.detachable.price.length > 0){
-                        _DETACHABLE_PRICE = feature.sales_structure.detachable.price[0].value.toString();
+                        _DETACHABLE_PRICE = feature.sales_structure.detachable.price[0].value;
                       }
                     }
                   }
@@ -257,6 +556,112 @@ class NewFragmentIdentity extends Component<{}> {
                         {_FINAL_UNIT_COMPLEX.subtitle}
                     </Text>
                   );
+
+                  _IS_DETACHABLE_SWITCH_CONTENT = (
+                    <Switch
+                      value={feature.isDetachableUnit}
+                      title={__CONSTANTS.content.firstComplex.state.normal.secondSwitch.title[_LANGUAGE]}
+                      containerStyle={{
+                        marginHorizontal: Styles.Content.marginHorizontal,
+                        marginBottom: Styles.Content.marginVertical
+                      }}
+                      onChange={() => {
+                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
+                              return (checkingItem.unit._id === feature.unit._id);
+                            }),
+                            _TOTAL_FEATURES = props.newFragment.features;
+
+                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].isDetachableUnit = !_TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].isDetachableUnit;
+
+                        props.setFeatures(_TOTAL_FEATURES);
+                      }}/>
+                  );
+
+                  _MINIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT = (
+                    <Input
+                      type={__CONSTANTS.content.firstComplex.state.normal.sixthInput.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.sixthInput.title.en)}
+                      placeholder={__CONSTANTS.content.firstComplex.state.normal.sixthInput.title[_LANGUAGE]}
+                      value={_MINIMUM_DETACHABLE_ORDER_QUANTITY}
+                      style={Styles.RegularItemContainer}
+                      onChangeText={(currentValue) => {
+                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
+                              return (checkingItem.unit._id === feature.unit._id);
+                            }),
+                            _TOTAL_FEATURES = props.newFragment.features;
+
+                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure = {
+                          ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure,
+                          detachable: {
+                            ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.detachable,
+                            minimum_order_quantity: currentValue
+                          }
+                        };
+
+                        props.setFeatures(_TOTAL_FEATURES);
+                      }}
+                      {...__CONSTANTS.content.firstComplex.state.normal.sixthInput.options}
+                      useCommaSeparator />
+                  );
+
+                  if (feature.isInfiniteMaximumOrderQuantity === false){
+                    _MAXIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT = (
+                      <Input
+                        type={__CONSTANTS.content.firstComplex.state.normal.seventhInput.type}
+                        name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.seventhInput.title.en)}
+                        placeholder={__CONSTANTS.content.firstComplex.state.normal.seventhInput.title[_LANGUAGE]}
+                        value={_MAXIMUM_DETACHABLE_ORDER_QUANTITY}
+                        style={Styles.RegularItemContainer}
+                        onChangeText={(currentValue) => {
+                          let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
+                                return (checkingItem.unit._id === feature.unit._id);
+                              }),
+                              _TOTAL_FEATURES = props.newFragment.features;
+
+                          _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure = {
+                            ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure,
+                            detachable: {
+                              ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.detachable,
+                              maximum_order_quantity: currentValue
+                            }
+                          };
+
+                          props.setFeatures(_TOTAL_FEATURES);
+                        }}
+                        {...__CONSTANTS.content.firstComplex.state.normal.seventhInput.options}
+                        useCommaSeparator />
+                    );
+                  }
+
+                  _DETACHABLE_PRODUCT_PRICE_CONTENT = (
+                    <Input
+                      type={__CONSTANTS.content.firstComplex.state.normal.eighthInput.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.eighthInput.title.en)}
+                      placeholder={__CONSTANTS.content.firstComplex.state.normal.eighthInput.title[_LANGUAGE]}
+                      value={_DETACHABLE_PRICE}
+                      style={Styles.RegularItemContainer}
+                      onChangeText={(currentValue) => {
+                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
+                              return (checkingItem.unit._id === feature.unit._id);
+                            }),
+                            _TOTAL_FEATURES = props.newFragment.features;
+
+                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure = {
+                          ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure,
+                          detachable: {
+                            ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.detachable,
+                            price: [{
+                              value: currentValue,
+                              currency: 'RIR'
+                            }]
+                          }
+                        };
+
+                        props.setFeatures(_TOTAL_FEATURES);
+                      }}
+                      {...__CONSTANTS.content.firstComplex.state.normal.eighthInput.options}
+                      useCommaSeparator />
+                  );
                 }
 
                 if (feature.isInfiniteMaximumOrderQuantity === false){
@@ -277,39 +682,14 @@ class NewFragmentIdentity extends Component<{}> {
                           ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure,
                           regular: {
                             ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.regular,
-                            maximum_order_quantity: (currentValue != '')? parseInt(currentValue): 0
+                            maximum_order_quantity: currentValue
                           }
                         };
 
                         props.setFeatures(_TOTAL_FEATURES);
                       }}
-                      {...__CONSTANTS.content.firstComplex.state.normal.thirdInput.options} />
-                  );
-
-                  _MAXIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT = (
-                    <Input
-                      type={__CONSTANTS.content.firstComplex.state.normal.seventhInput.type}
-                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.seventhInput.title.en)}
-                      placeholder={__CONSTANTS.content.firstComplex.state.normal.seventhInput.title[_LANGUAGE]}
-                      value={_MAXIMUM_DETACHABLE_ORDER_QUANTITY}
-                      style={Styles.RegularItemContainer}
-                      onChangeText={(currentValue) => {
-                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
-                              return (checkingItem.unit._id === feature.unit._id);
-                            }),
-                            _TOTAL_FEATURES = props.newFragment.features;
-
-                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure = {
-                          ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure,
-                          detachable: {
-                            ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.detachable,
-                            maximum_order_quantity: (currentValue != '')? parseInt(currentValue): 0
-                          }
-                        };
-
-                        props.setFeatures(_TOTAL_FEATURES);
-                      }}
-                      {...__CONSTANTS.content.firstComplex.state.normal.seventhInput.options} />
+                      {...__CONSTANTS.content.firstComplex.state.normal.thirdInput.options}
+                      useCommaSeparator />
                   );
                 }
 
@@ -399,7 +779,6 @@ class NewFragmentIdentity extends Component<{}> {
                     );
                   }
                 }
-
 
                 if (!props.newFragment.shippingMethodsLoading){
                   if (!props.newFragment.connected.status){
@@ -496,16 +875,42 @@ class NewFragmentIdentity extends Component<{}> {
                       gradient={Global.colors.pair.tilan}>
                         <View
                           style={Styles.DetailItemMasterInfoContent}>
-                            <Text
-                              style={Styles.BriefDetailTitle}>
-                                {_FINAL_UNIT_COMPLEX.title}
-                            </Text>
+                            <View
+                              style={Styles.BriefDetailTitleContainer}>
+                                <Text
+                                  style={Styles.BriefDetailTitle}>
+                                    {_FINAL_UNIT_COMPLEX.title}
+                                </Text>
+                                <Text
+                                  style={Styles.BriefDetailTitleSuffix}>
+                                    {__CONSTANTS.content.firstComplex.state.normal.firstInput.title[_LANGUAGE]}
+                                </Text>
+                            </View>
 
                             {_UNIT_CONTAINER_SUBTITLE}
                         </View>
                     </Input>
 
                     {_WAREHOUSE_CONTENT}
+
+                    <Input
+                      type={__CONSTANTS.content.firstComplex.state.normal.fourthInput.type}
+                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.fourthInput.title.en)}
+                      placeholder={__CONSTANTS.content.firstComplex.state.normal.fourthInput.title[_LANGUAGE]}
+                      value={_QUANTITY}
+                      style={Styles.RegularItemContainer}
+                      onChangeText={(currentValue) => {
+                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
+                              return (checkingItem.unit._id === feature.unit._id);
+                            }),
+                            _TOTAL_FEATURES = props.newFragment.features;
+
+                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].quantity = currentValue;
+
+                        props.setFeatures(_TOTAL_FEATURES);
+                      }}
+                      {...__CONSTANTS.content.firstComplex.state.normal.fourthInput.options}
+                      useCommaSeparator />
 
                     <Input
                       type={__CONSTANTS.content.firstComplex.state.normal.secondInput.type}
@@ -523,13 +928,14 @@ class NewFragmentIdentity extends Component<{}> {
                           ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure,
                           regular: {
                             ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.regular,
-                            minimum_order_quantity: (currentValue != '')? parseInt(currentValue): 0
+                            minimum_order_quantity: currentValue
                           }
                         };
 
                         props.setFeatures(_TOTAL_FEATURES);
                       }}
-                      {...__CONSTANTS.content.firstComplex.state.normal.secondInput.options} />
+                      {...__CONSTANTS.content.firstComplex.state.normal.secondInput.options}
+                      useCommaSeparator />
 
                     <Switch
                       value={feature.isInfiniteMaximumOrderQuantity}
@@ -552,24 +958,6 @@ class NewFragmentIdentity extends Component<{}> {
                     {_MAXIMUM_ORDER_QUANTITY_CONTENT}
 
                     <Input
-                      type={__CONSTANTS.content.firstComplex.state.normal.fourthInput.type}
-                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.fourthInput.title.en)}
-                      placeholder={__CONSTANTS.content.firstComplex.state.normal.fourthInput.title[_LANGUAGE]}
-                      value={_QUANTITY}
-                      style={Styles.RegularItemContainer}
-                      onChangeText={(currentValue) => {
-                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
-                              return (checkingItem.unit._id === feature.unit._id);
-                            }),
-                            _TOTAL_FEATURES = props.newFragment.features;
-
-                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].quantity = (currentValue != '')? parseInt(currentValue): 0;
-
-                        props.setFeatures(_TOTAL_FEATURES);
-                      }}
-                      {...__CONSTANTS.content.firstComplex.state.normal.fourthInput.options} />
-
-                    <Input
                       type={__CONSTANTS.content.firstComplex.state.normal.fifthInput.type}
                       name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.fifthInput.title.en)}
                       placeholder={__CONSTANTS.content.firstComplex.state.normal.fifthInput.title[_LANGUAGE]}
@@ -586,7 +974,7 @@ class NewFragmentIdentity extends Component<{}> {
                           regular: {
                             ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.regular,
                             price: [{
-                              value: (currentValue != '')? parseInt(currentValue): 0,
+                              value: currentValue,
                               currency: 'RIR'
                             }]
                           }
@@ -594,105 +982,32 @@ class NewFragmentIdentity extends Component<{}> {
 
                         props.setFeatures(_TOTAL_FEATURES);
                       }}
-                      {...__CONSTANTS.content.firstComplex.state.normal.fifthInput.options} />
+                      {...__CONSTANTS.content.firstComplex.state.normal.fifthInput.options}
+                      useCommaSeparator />
 
-                    <Switch
-                      value={feature.isDetachableUnit}
-                      title={__CONSTANTS.content.firstComplex.state.normal.secondSwitch.title[_LANGUAGE]}
-                      containerStyle={{
-                        marginHorizontal: Styles.Content.marginHorizontal,
-                        marginBottom: Styles.Content.marginVertical
-                      }}
-                      onChange={() => {
-                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
-                              return (checkingItem.unit._id === feature.unit._id);
-                            }),
-                            _TOTAL_FEATURES = props.newFragment.features;
+                    {_IS_DETACHABLE_SWITCH_CONTENT}
 
-                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].isDetachableUnit = !_TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].isDetachableUnit;
-
-                        props.setFeatures(_TOTAL_FEATURES);
-                      }}/>
-
-                    <Input
-                      type={__CONSTANTS.content.firstComplex.state.normal.sixthInput.type}
-                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.sixthInput.title.en)}
-                      placeholder={__CONSTANTS.content.firstComplex.state.normal.sixthInput.title[_LANGUAGE]}
-                      value={_MINIMUM_DETACHABLE_ORDER_QUANTITY}
-                      style={Styles.RegularItemContainer}
-                      onChangeText={(currentValue) => {
-                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
-                              return (checkingItem.unit._id === feature.unit._id);
-                            }),
-                            _TOTAL_FEATURES = props.newFragment.features;
-
-                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure = {
-                          ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure,
-                          detachable: {
-                            ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.detachable,
-                            minimum_order_quantity: (currentValue != '')? parseInt(currentValue): 0
-                          }
-                        };
-
-                        props.setFeatures(_TOTAL_FEATURES);
-                      }}
-                      {...__CONSTANTS.content.firstComplex.state.normal.sixthInput.options} />
+                    {_MINIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT}
 
                     {_MAXIMUM_DETACHABLE_ORDER_QUANTITY_CONTENT}
 
-                    <Input
-                      type={__CONSTANTS.content.firstComplex.state.normal.eighthInput.type}
-                      name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstComplex.state.normal.eighthInput.title.en)}
-                      placeholder={__CONSTANTS.content.firstComplex.state.normal.eighthInput.title[_LANGUAGE]}
-                      value={_DETACHABLE_PRICE}
-                      style={Styles.RegularItemContainer}
-                      onChangeText={(currentValue) => {
-                        let _LOCAL_SELECTED_UNIT_INDEX = props.newFragment.features.findIndex((checkingItem, j) => {
-                              return (checkingItem.unit._id === feature.unit._id);
-                            }),
-                            _TOTAL_FEATURES = props.newFragment.features;
-
-                        _TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure = {
-                          ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure,
-                          detachable: {
-                            ..._TOTAL_FEATURES[_LOCAL_SELECTED_UNIT_INDEX].sales_structure.detachable,
-                            price: [{
-                              value: (currentValue != '')? parseInt(currentValue): 0,
-                              currency: 'RIR'
-                            }]
-                          }
-                        };
-
-                        props.setFeatures(_TOTAL_FEATURES);
-                      }}
-                      {...__CONSTANTS.content.firstComplex.state.normal.eighthInput.options} />
+                    {_DETACHABLE_PRODUCT_PRICE_CONTENT}
 
                     {_SHIPPING_METHODS_CONTENT}
 
                     <Separator
-                       style={{
-                         marginBottom: Styles.Content.marginVertical
-                       }}>
-                         <Link
-                           value={__CONSTANTS.content.firstComplex.state.normal.firstSeparator[_LANGUAGE]}
-                           onPress={_UNIT_DELETE_ACTION}/>
-                     </Separator>
+                      style={{
+                        marginBottom: Styles.Content.marginVertical
+                      }}>
+                       <Link
+                         value={__CONSTANTS.content.firstComplex.state.normal.firstSeparator[_LANGUAGE]}
+                         onPress={_UNIT_DELETE_ACTION}/>
+                   </Separator>
                   </React.Fragment>
                 );
               })
             }
           </React.Fragment>
-        );
-      }else{
-        _COMPLEX_CONTENT = (
-          <Link
-            containerStyle={[
-              Styles.EmptyContentLink,
-              {
-                marginBottom: Styles.Content.marginVertical
-              }
-            ]}
-            value={__CONSTANTS.content.firstComplex.state.empty.title[_LANGUAGE]} />
         );
       }
 
@@ -732,46 +1047,6 @@ class NewFragmentIdentity extends Component<{}> {
         </ScrollView>
       );
 
-      if (_VALIDATED){
-        var _MESSAGE = '';
-
-        if (props.newFragment.name != ''){
-          if (props.newFragment.name.length > 7){
-            if (Object.keys(props.newFragment.product).length > 0){
-              const _FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX = new RegExp(`\.*${props.newFragment.product.name}\.*`, 'gi');
-
-              if (props.newFragment.name.match(_FRAGMENT_INTERNAL_NAME_CONTAINS_PRODUCT_NAME_REGEX) === null){
-                _MESSAGE += __CONSTANTS.content.firstInput.warnning.third[_LANGUAGE];
-              }
-            }
-          }else{
-            _MESSAGE += __CONSTANTS.content.firstInput.warnning.second[_LANGUAGE];
-          }
-        }else{
-          _MESSAGE += __CONSTANTS.content.firstInput.warnning.first[_LANGUAGE];
-
-          // if (props.newFragment.units.length === 0){
-          //   _MESSAGE += `\n ${__CONSTANTS.content.firstComplex.warnning[_LANGUAGE]}`;
-          // }
-        }
-
-        if (_MESSAGE != ''){
-          _FINAL_BUTTON = (
-            <Input
-              type={__CONSTANTS.content.submitButton.type}
-              name={Functions._convertTokenToKeyword(__CONSTANTS.content.submitButton.state.normal.title.en)}
-              value={_MESSAGE}
-              style={[
-                Styles.WarningContainer,
-                {
-                  marginBottom: Styles.Content.marginVertical
-                }
-              ]}
-              textStyle={Styles.WarningContent} />
-          );
-        }
-      }
-
       return (
         <Container
           title={Functions._convertKeywordToToken(__CONSTANTS.pilot.title[_LANGUAGE])}
@@ -791,7 +1066,7 @@ class NewFragmentIdentity extends Component<{}> {
                   warehouse: (_WAREHOUSES.length > 0)? _WAREHOUSES[0]: {},
                   sales_structure: {},
                   shipping_method: (_SHIPPING_METHODS.length > 0)? _SHIPPING_METHODS[0]: {},
-                  quantity: 0,
+                  quantity: '',
                   isInfiniteMaximumOrderQuantity: true,
                   isDetachableUnit: false
                 });

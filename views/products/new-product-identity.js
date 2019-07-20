@@ -90,7 +90,8 @@ class NewProductIdentity extends Component<{}> {
 
       if (props.newProduct.inventoryUnits.length > 0){
         let _FIRST_CAROUSEL_OTHER_OPTIONS = {},
-            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newProduct.inventoryUnits.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2);
+            _ITEM_WIDTH_COEFFICIENT = (_Screen.width >= 1000 || _Screen.height >= 1000)? 2: ((props.newProduct.inventoryUnits.length > 1)? ((Platform.OS !== 'ios')? 2: 2): 2),
+            _EXTRA_ITEM_COEFFICIENT = (props.newProduct.inventoryUnits.length > 1)? 1.2: 1;
 
         if (Platform.OS !== 'ios'){
           _FIRST_CAROUSEL_OTHER_OPTIONS.layout = 'default';
@@ -107,16 +108,13 @@ class NewProductIdentity extends Component<{}> {
           <Carousel
             name={Functions._convertTokenToKeyword(__CONSTANTS.content.firstCarousel.state.normal.title.en)}
             data={props.newProduct.inventoryUnits}
-            itemWidth={(_Screen.width / 1.2) - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
+            itemWidth={(_Screen.width / _EXTRA_ITEM_COEFFICIENT) - (Styles.Content.marginHorizontal * _ITEM_WIDTH_COEFFICIENT)}
             style={[
               Styles.DetailContainer,
               {
                 marginTop: Styles.Content.marginVertical
               }
             ]}
-            contentContainerCustomStyle={{
-              flexDirection: 'row-reverse'
-            }}
             onLayout={({ item, index }) => {
               var _UNIT_DELETE_ACTION = () => props.setInventoryUnits(props.newProduct.inventoryUnits.filter((checkingItem, j) => {
                 return (checkingItem._id !== item._id);
@@ -140,10 +138,17 @@ class NewProductIdentity extends Component<{}> {
                   onLongPress={_UNIT_DELETE_ACTION}>
                     <View
                       style={Styles.DetailItemMasterInfoContent}>
-                        <Text
-                          style={Styles.BriefDetailTitle}>
-                            {_FINAL_UNIT_COMPLEX.title}
-                        </Text>
+                        <View
+                          style={Styles.BriefDetailTitleContainer}>
+                            <Text
+                              style={Styles.BriefDetailTitle}>
+                                {_FINAL_UNIT_COMPLEX.title}
+                            </Text>
+                            <Text
+                              style={Styles.BriefDetailTitleSuffix}>
+                                {__CONSTANTS.content.firstCarousel.state.normal.suffix[_LANGUAGE]}
+                            </Text>
+                        </View>
 
                         {_UNIT_CONTAINER_SUBTITLE}
                     </View>
