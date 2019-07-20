@@ -477,7 +477,7 @@ export const Input = (props) => {
         <TextInput
           key={attitude.key}
           name={attitude.name}
-          keyboardType="decimal-pad"
+          keyboardType={(typeof attitude.useCommaSeparator != 'undefined')? "decimal-pad": "numeric"}
           style={[
             Styles.ContainerWithoutButton,
             attitude.style
@@ -884,7 +884,7 @@ export const Input = (props) => {
           ]}>
             <TextInput
               style={Styles.TextInputContainer}
-              keyboardType="numeric"
+              keyboardType={(typeof attitude.useCommaSeparator != 'undefined')? "decimal-pad": "numeric"}
               value={attitude.value}
               placeholder={attitude.placeholder}
               placeholderTextColor={Global.colors.single.mercury}
